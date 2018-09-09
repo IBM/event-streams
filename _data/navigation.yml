@@ -1,0 +1,31 @@
+
+# main links
+main:
+  - title: "Documentation"
+    url: /about/overview/
+  - title: "Support"
+    url: /support/
+# - title: "Sample Posts"
+#   url: /year-archive/
+# - title: "Sample Collections"
+#   url: /collection-archive/
+# - title: "Terms &amp; Privacy Policy"
+#   url: /terms/
+
+
+# documentation links
+docs:
+  - title: About
+    url: /about/overview/
+    children:
+      - title: "Introduction"
+        url: /about/overview/
+      - title: "Key concepts"
+        url: /about/key-concepts/
+  - title: Connecting to other systems
+    children:
+      - title: "Connecting to IBM MQ"
+        url: /connecting/mq/
+      - title: "Reference for IBM MQ source connector"
+        url: /connecting/mq-source-reference/
+ 
