@@ -2,7 +2,7 @@
 title: "Uninstalling"
 permalink: /installing/uninstalling/
 excerpt: "Uninstalling {{site.data.reuse.long_name}}."
-last_modified_at: 2018-07-22T11:22:01-05:00
+last_modified_at: 
 toc: true
 ---
 

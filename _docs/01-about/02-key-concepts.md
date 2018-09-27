@@ -2,7 +2,7 @@
 title: "Key concepts"
 permalink: /about/key-concepts/
 excerpt: "Read about the key concepts of the Apache Kafka technology."
-last_modified_at: 2018-07-19T11:31:38-04:00
+last_modified_at: 
 toc: true
 ---
 

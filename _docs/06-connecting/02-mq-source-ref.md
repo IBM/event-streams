@@ -2,7 +2,7 @@
 title: "Reference for Kafka Connect source connector for IBM MQ"
 permalink: /connecting/mq-source-reference/
 excerpt: "Reference material for Kafka Connect source connector for IBM MQ."
-last_modified_at: 2018-07-19T11:31:38-04:00
+last_modified_at: 
 toc: true
 ---
 

@@ -2,7 +2,7 @@
 title: "Post-installation tasks"
 permalink: /installing/post-installation/
 excerpt: "Post-installation tasks after successfully installing IBM Event Streams."
-last_modified_at: 2018-07-22T11:22:01-05:00
+last_modified_at: 
 toc: true
 ---
 

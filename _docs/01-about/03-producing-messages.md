@@ -3,7 +3,7 @@ title: "Producing messages"
 permalink: /about/producing-messages/
 excerpt: "A producer is an application that publishes streams of messages to Kafka
 topics."
-last_modified_at: 2018-07-19T11:31:38-04:00
+last_modified_at: 
 toc: true
 ---
 

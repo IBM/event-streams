@@ -2,7 +2,7 @@
 title: "Migrating to IBM Event Streams"
 permalink: /installing/migrating/
 excerpt: "Migrate from the Community Edition to IBM Event Streams."
-last_modified_at: 2018-07-22T11:22:01-05:00
+last_modified_at: 
 toc: false
 ---
 

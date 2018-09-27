@@ -3,7 +3,7 @@ title: "Consuming messages"
 permalink: /about/consuming-messages/
 excerpt: "A consumer is an application that consumes streams of messages from
 Kafka topics."
-last_modified_at: 2018-07-19T11:31:38-04:00
+last_modified_at: 
 toc: true
 ---
 

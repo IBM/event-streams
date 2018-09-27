@@ -2,7 +2,7 @@
 title: "Encrypting your data"
 permalink: /security/encrypting-data/
 excerpt: "Encrypt your data to improve security."
-last_modified_at: 2018-07-19T11:31:38-04:00
+last_modified_at: 
 toc: false
 ---
 
