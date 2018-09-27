@@ -11,13 +11,13 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "ES"
+title                    : "IBM Event Streams"
 title_separator          : "-"
 name                     : &name "IBM" # &name is a YAML anchor which can be *referenced later
-description              : &description "Apache Kafka."
-url                      : "https://ibm.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  : "/event-streams" # the subpath of your site, e.g. "/blog"
-repository               : "event-streams"
+description              : &description "IBM Event Streams is an event-streaming platform based on the open-source Apache Kafka project."
+url                      : "https://pages.github.ibm.com" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : "/mhub/qp-docs" # the subpath of your site, e.g. "/blog"
+repository               : "mhub/qp-docs"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -56,7 +56,7 @@ atom_feed:
   path                   : # blank (default) uses feed.xml
 
 search                   : true # true, false (default)
-search_full_content      : false # true, false (default)
+search_full_content      : true # true, false (default)
 search_provider          : lunr # lunr (default), algolia
 # algolia:
 #  application_id         : QB6HVGBSBA # YOUR_APPLICATION_ID

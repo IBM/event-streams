@@ -1,10 +1,12 @@
 {% if include.id %}
   {% assign feature_row = page[include.id] %}
+  {% assign feature_id = include.id %}
 {% else %}
   {% assign feature_row = page.feature_row %}
+  {% assign feature_id = "feature_row" %}
 {% endif %}
 
-<div class="feature__wrapper">
+<div class="feature__wrapper {{ feature_id }}">
 
   {% for f in feature_row %}
 
@@ -33,7 +35,7 @@
 
         <div class="archive__item-body">
           {% if f.title %}
-            <h2 class="archive__item-title">{{ f.title }}</h2>
+            <h4 class="archive__item-title">{{ f.title }}</h4>
           {% endif %}
 
           {% if f.excerpt %}

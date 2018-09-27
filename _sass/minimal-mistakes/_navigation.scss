@@ -491,7 +491,6 @@
 .toc {
   font-family: $sans-serif-narrow;
   color: $gray;
-  text-transform: uppercase;
   letter-spacing: 1px;
   background-color: $background-color;
   border: 1px solid $border-color;
@@ -518,8 +517,7 @@
     display: block;
     padding: 0.5rem 1rem;
     color: $muted-text-color;
-    font-size: $type-size-7;
-    font-weight: bold;
+    font-size: $type-size-8;
     line-height: 1.5;
     border-bottom: 1px solid $border-color;
 
@@ -530,7 +528,7 @@
 
   li ul > li a {
     padding-left: 1.75rem;
-    font-weight: normal;
+    font-weight: lighter;
   }
 
   /* hide sub sub links on small screens*/

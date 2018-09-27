@@ -1,17 +1,12 @@
 
 # main links
 main:
+  - title: "Home"
+    url: /
   - title: "Documentation"
     url: /about/overview/
   - title: "Support"
     url: /support/
-# - title: "Sample Posts"
-#   url: /year-archive/
-# - title: "Sample Collections"
-#   url: /collection-archive/
-# - title: "Terms &amp; Privacy Policy"
-#   url: /terms/
-
 
 # documentation links
 docs:
@@ -22,10 +17,99 @@ docs:
         url: /about/overview/
       - title: "Key concepts"
         url: /about/key-concepts/
+      - title: "Producing messages"
+        url: /about/producing-messages/
+      - title: "Consuming messages"
+        url: /about/consuming-messages/
+      - title: "Partition leadership"
+        url: /about/partition-leadership/
+      - title: "Accessibility"
+        url: /about/accessibility/
+      - title: "Notices"
+        url: /about/notices/
+  - title: Installing
+    children:
+      - title: "Pre-requisites"
+        url: /installing/prerequisites/
+      - title: "Planning for installation"
+        url: /installing/planning/
+      - title: "Downloading"
+        url: /installing/downloading/
+      - title: "Installing"
+        url: /installing/installing/
+      - title: "Configuring"
+        url: /installing/configuring/
+      - title: "Migrating to IBM Event Streams"
+        url: /installing/migrating/
+      - title: "Post-installation tasks"
+        url: /installing/post-installation/
+      - title: "Uninstalling"
+        url: /installing/uninstalling/
+  - title: Getting started
+    children:
+      - title: "Logging in"
+        url: /getting-started/logging-in/
+      - title: "Generating a starter application"
+        url: /getting-started/generating-starter-app/
+      - title: "Creating and testing message loads"
+        url: /getting-started/testing-loads/
+      - title: "Creating Kafka Java client applications"
+        url: /getting-started/client/
+      - title: "Using Apache Kafka console tools"
+        url: /getting-started/using-kafka-console-tools/
+  - title: Security
+    children:
+      - title: "Managing access"
+        url: /security/managing-access/
+      - title: "Encrypting your data"
+        url: /security/encrypting-data/
+      - title: "Considerations for GDPR"
+        url: /security/gdpr-considerations/
+  - title: Geo-replication
+    children:
+      - title: "About geo-replication"
+        url: /georeplication/about/
+      - title: "Planning for geo-replication"
+        url: /georeplication/planning/
+      - title: "Setting up geo-replication"
+        url: /georeplication/setting-up/
+      - title: "Monitoring health of geo-replication"
+        url: /georeplication/health/
   - title: Connecting to other systems
     children:
       - title: "Connecting to IBM MQ"
         url: /connecting/mq/
       - title: "Reference for IBM MQ source connector"
         url: /connecting/mq-source-reference/
- 
+  - title: Administering
+    children:
+      - title: "Monitoring deployment health"
+        url: /administering/deployment-health/
+      - title: "Monitoring Kafka cluster health"
+        url: /administering/cluster-health/
+      - title: "Modifying configuration settings"
+        url: /administering/modifying-configs/
+      - title: "Scaling"
+        url: /administering/scaling/
+  - title: Troubleshooting
+    url: /troubleshooting/intro/
+    children:
+      - title: "Event Streams resources not available"
+        url: /troubleshooting/resources-not-available/
+      - title: "Full cleanup after uninstallation"
+        url: /troubleshooting/cleanup-uninstall/
+      - title: "ConsumerTimeoutException when pods available"
+        url: /troubleshooting/pod-timeout-error/
+      - title: "Error when creating multiple geo-replicators"
+        url: /troubleshooting/georeplication-error/
+      - title: "TimeoutException when using standard Kafka producer"
+        url: /troubleshooting/kafka-producer-error/
+      - title: "Standard Kafka consumer hangs and does not output messages"
+        url: /troubleshooting/kafka-consumer-hangs/
+      - title: "'cloudctl es' command fails with 'not a registered command' error"
+        url: /troubleshooting/cloudctl-es-not-registered/
+      - title: "'cloudctl es' command errors with 'FAILED' message"
+        url: /troubleshooting/cloudctl-es-fails/
+
+  - title: FAQ
+    url: /faq/
