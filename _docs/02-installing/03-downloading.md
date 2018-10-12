@@ -19,5 +19,4 @@ To install {{site.data.reuse.long_name}} (not the {{site.data.reuse.ce_short}}) 
 4. Install the {{site.data.reuse.short_name}} Helm chart by using the compressed image you downloaded from IBM Passport Advantage.\\
    `cloudctl catalog load-archive --archive <PPA-image-name.tar.gz>`\\
    When the image installation completes successfully, the catalog is updated with the {{site.data.reuse.long_name}} local chart, and the internal docker repository is polulated with the Docker images used by {{site.data.reuse.long_name}}.
-5. To provide the Helm installation access to the internal Docker repository, [create an image pull secret](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/imagepullsecret.html) in the target namespace.
-6. [Install {{site.data.reuse.long_name}}](../installing).
+5. [Install {{site.data.reuse.long_name}}](../installing).

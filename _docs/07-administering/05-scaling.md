@@ -18,7 +18,9 @@ To set this at the time of installation, you can use the `--set kafka.brokers=<N
 
 To modify the number of Kafka brokers for an existing {{site.data.reuse.long_name}} installation, use the following command:
 
-`helm upgrade --reuse-values --set kafka.brokers=<NUMBER> <release_name> ibm-eventstreams-prod --tls`
+`helm upgrade --reuse-values --set kafka.brokers=<NUMBER> <release_name> <charts.tgz> --tls`
+
+{{site.data.reuse.helm_charts_note}}
 
 ## Increase the CPU limit available to each Kafka broker
 
@@ -26,7 +28,9 @@ To set this at the time of installation, you can use the `--set kafka.resources.
 
 To modify this for an existing {{site.data.reuse.long_name}} installation, use the following command:
 
-`helm upgrade --reuse-values --set kafka.resources.limits.cpu=<LIMIT> --set kafka.resources.requests.cpu=<LIMIT> <release_name> ibm-eventstreams-prod --tls`
+`helm upgrade --reuse-values --set kafka.resources.limits.cpu=<LIMIT> --set kafka.resources.requests.cpu=<LIMIT> <release_name> <charts.tgz> --tls`
+
+{{site.data.reuse.helm_charts_note}}
 
 A description of the syntax for these values can be found in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu).
 
@@ -42,7 +46,9 @@ The heap size can be specified in megabytes (m) or gigabytes (g). For example: `
 
 To modify this for an existing {{site.data.reuse.long_name}} installation, use the following command:
 
-`helm upgrade --reuse-values --set kafka.resources.limits.memory=<LIMIT> --set kafka.resources.requests.memory=<LIMIT> --set kafka.jvmHeapSize=<HEAPSIZE> <release_name> ibm-eventstreams-prod --tls`
+`helm upgrade --reuse-values --set kafka.resources.limits.memory=<LIMIT> --set kafka.resources.requests.memory=<LIMIT> --set kafka.jvmHeapSize=<HEAPSIZE> <release_name> <charts.tgz> --tls`
+
+{{site.data.reuse.helm_charts_note}}
 
 ## Increase the memory available to supporting systems
 
@@ -72,8 +78,9 @@ The syntax for the container memory limits can be found in the [Kubernetes docum
 
 To modify this for an existing {{site.data.reuse.long_name}} installation, use the following command:
 
-`helm upgrade --reuse-values  --set kafka.metricsReporterResources.limits.memory=<LIMIT> --set kafka.metricsReporterResources.requests.memory=<LIMIT> --set kafka.metricsReporterJvmHeapSize=<HEAPSIZE>  --set messageIndexing.resources.limits.memory=<LIMIT>  <release_name> ibm-eventstreams-prod --tls`
+`helm upgrade --reuse-values  --set kafka.metricsReporterResources.limits.memory=<LIMIT> --set kafka.metricsReporterResources.requests.memory=<LIMIT> --set kafka.metricsReporterJvmHeapSize=<HEAPSIZE>  --set messageIndexing.resources.limits.memory=<LIMIT>  <release_name> <charts.tgz> --tls`
 
+{{site.data.reuse.helm_charts_note}}
 
 ## Custom JVM tuning for Kafka brokers
 
@@ -86,7 +93,9 @@ To provide custom JVM parameters at the time of installation, you can use `--set
 
 To modify this for an existing {{site.data.reuse.long_name}} installation, use the following command:
 
-`helm upgrade --reuse-values --set kafka.heapOpts=<JVMOPTIONS> <release_name> ibm-eventstreams-prod --tls`
+`helm upgrade --reuse-values --set kafka.heapOpts=<JVMOPTIONS> <release_name> <charts.tgz> --tls`
+
+{{site.data.reuse.helm_charts_note}}
 
 ## Use a faster storage class for PVCs used by Kafka brokers
 

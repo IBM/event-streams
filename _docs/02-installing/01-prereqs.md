@@ -84,7 +84,9 @@ If you apply Pod Security Policies to the namespace where {{site.data.reuse.long
 
 ## File systems for storage
 
-If you want to set up [persistent storage](../planning/#persistent-storage), ensure you have physical volumes or other storage methods available.
+If you want to set up [persistent storage](../planning/#persistent-storage), you must have physical volumes available, backed by one of the following file systems:
+- NFS version 4
+- GlusterFS version 3.10.1
 
 ## {{site.data.reuse.long_name}} user interface
 

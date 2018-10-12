@@ -44,8 +44,8 @@ To find which objects need to be manually cleared look for the following string 
 
  `kubectl delete <type> <name> -n <namespace>`
 
-For example, to delete a leftover `rolebinding` called `elh-ibm-eventstreams-secret-copy-crb-ns`, run the following command:
+For example, to delete a leftover `rolebinding` called `eventstreams-ibm-eventstreams-secret-copy-crb-ns`, run the following command:
 
-`kubectl delete rolebinding eventstreams-ibm-es-secret-copy-crb-sys -n es`
+`kubectl delete rolebinding eventstreams-ibm-eventstreams-secret-copy-crb-ns -n es`
 
 Be cautious of deleting persistent volume claims (PVCs) as the data on the disk that is associated with that persistent volume will also be deleted. This includes {{site.data.reuse.short_name}} message data.

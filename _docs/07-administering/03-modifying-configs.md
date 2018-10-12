@@ -49,7 +49,9 @@ You can also update your read-only configuration settings that require a broker 
 
 Use the following command to make the ConfigMap available to your {{site.data.reuse.long_name}} instance if you did not create a ConfigMap during installation:
 
-`helm upgrade --reuse-values --set kafka.configMapName=<configmap_name> <release_name> <full_path>/ibm-eventstreams-prod`
+`helm upgrade --reuse-values --set kafka.configMapName=<configmap_name> <release_name> <charts.tgz>`
+
+{{site.data.reuse.helm_charts_note}}
 
 You can use the {{site.data.reuse.long_name}} CLI to modfiy read-only configuration settings as follows:
 

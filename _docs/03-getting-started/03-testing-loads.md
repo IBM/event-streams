@@ -12,7 +12,7 @@ You can use one of the predefined load sizes, or you can specify your own settin
 
 ## Downloading
 
-You can [download the pre-built producer](https://github.com/IBM/event-streams-sample-producer/blob/master/es-producer.jar?raw=true) application.
+You can [download the latest pre-built producer](https://github.com/IBM/event-streams-sample-producer/releases) application.
 
 Alternatively, you can [clone the project from Github](https://github.com/IBM/event-streams-sample-producer). However, if you clone from Github, you have to [build the producer](#building).
 

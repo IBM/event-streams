@@ -89,6 +89,8 @@ docs:
         url: /administering/cluster-health/
       - title: "Modifying configuration settings"
         url: /administering/modifying-configs/
+      - title: "Running Helm upgrade commands"
+        url: /administering/helm-upgrade-command/
       - title: "Scaling"
         url: /administering/scaling/
   - title: Troubleshooting

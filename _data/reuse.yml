@@ -28,7 +28,7 @@ kafka-connect-mq-source: "Kafka Connect source connector for IBM MQ"
 icp_ui_login: "Log in to your IBM Cloud Private cluster management console from a supported web browser by using the URL `https://<master-ip>:8443`, where `master_ip` is the IP address of the master node for your IBM Cloud Private cluster."
 
 # {{site.data.reuse.icp_cli_login}}
-icp_cli_login: "Using the IBM Cloud Private CLI, log in to your cluster as an administrator:<br /> `cloudctl login -a https://<master-ip>:8443 -u <username> -p <password>`"
+icp_cli_login: "Using the IBM Cloud Private CLI, log in to your cluster as an administrator:<br /> `cloudctl login -a https://<master-ip>:8443 --skip-ssl-validation`"
 
 # {{site.data.reuse.maven_prereq}}
 maven_prereq: "Ensure you have Java version 8. Also, ensure you have [Apache Maven](https://maven.apache.org/) installed on your system."
@@ -48,6 +48,12 @@ geo-rep_note: "**Note:** Geo-replication is only available in IBM Event Streams,
 
 # {{site.data.reuse.kafka_download_link}}
 kafka_download_link: "https://www.apache.org/dyn/closer.cgi?path=/kafka/2.0.0/kafka_2.11-2.0.0.tgz"
+
+# {{site.data.reuse.helm_charts_note}}
+helm_charts_note: "**Note:** Where `<charts.tgz>` is the name of the chart file you used to install IBM Event Streams, including the full path to it if in a different directory. To run `helm upgrade` commands, [ensure you have the original chart file available](../../administering/helm-upgrade-command/)."
+
+# {{site.data.reuse.fsGroupGid}}
+fsGroupGid: "**Important:** If membership of a specific group is required to access the file system used for persistent volumes, ensure you specify in the [**File system group ID**](../configuring#global-install-settings) field the GID of the group that owns the file system."
 
 # Icons
 

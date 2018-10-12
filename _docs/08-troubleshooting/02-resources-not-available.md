@@ -18,13 +18,18 @@ It can take up to 10 minutes before {{site.data.reuse.long_name}} is available t
 
 You can specify the memory and CPU requirements when {{site.data.reuse.long_name}} is installed. If the values set are larger than the resources available, then pods will fail to start.
 
-For example, each Kafka broker is set to require 80GB of memory on a system that only has 16GB available per node. In such case you might see the following error message:
+Common error messages in such cases include the following:
+- `pod has unbound PersistentVolumeClaims`: occurs when there are no Persistent Volumes available that meet the requirements provided at the time of installation.
+- `Insufficient memory`: occurs when there are no nodes with enough available memory to support the limits provided at the time of installation.
+- `Insufficient CPU`: occurs when there are no nodes with enough available CPU to support the limits provided at the time of installation.
+
+For example, if each Kafka broker is set to require 80 GB of memory on a system that only has 16 GB available per node, you might see the following error message:
 
 ![Insufficient resources example](../../images/insufficient-sys-resources.png "Screen capture showing an example of an error message for a system without sufficient resources to run the installation.")
 
-To get detailed information on the cause of the error, check the events for the individual pods, and not the logs at the stateful set level.
+To get detailed information on the cause of the error, check the events for the individual pods (not the logs at the stateful set level).
 
-If a system has 16GB of memory available per node, then the broker memory requirements must be set to be less than 16GB. This allows resources to be available for the other {{site.data.reuse.long_name}} components which may reside on the same node.
+If a system has 16 GB of memory available per node, then the broker memory requirements must be set to be less than 16 GB. This allows resources to be available for the other {{site.data.reuse.long_name}} components which may reside on the same node.
 
 To correct this issue, uninstall {{site.data.reuse.long_name}}. Install again using lower resource requirements, or increase the amount of system resources available to the pod.
 

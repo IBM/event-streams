@@ -11,8 +11,8 @@ toc: true
 Set persistent storage for Kafka and ZooKeeper in your {{site.data.reuse.long_name}} installation.
 
 To enable persistent storage for Kafka:
-1. Go to the [**Kafka persistent storage settings**](#persistent-storage-apache-kafka) section.
-2. Select the **Enable persistent storage for Apache Kafka**” check box.
+1. Go to the [**Kafka persistent storage settings**](#kafka-persistent-storage-settings) section.
+2. Select the **Enable persistent storage for Apache Kafka** check box.
 3. Optional: Select the **Use dynamic provisioning for Apache Kafka** check box and provide a storage class name if the Persistent Volumes will be created dynamically.
 
 To enable persistent storage for ZooKeeper:
@@ -20,17 +20,17 @@ To enable persistent storage for ZooKeeper:
 2. Select the **Enable persistent storage for ZooKeeper servers** check box.
 3. Optional: Select the **Use dynamic provisioning for ZooKeeper servers** check box and provide a storage class name if the Persistent Volumes will be created dynamically.
 
-**Important:** If membership of a specific group is required to access the file system used for persistent volumes, ensure you specify in the [**File system group GID**](#global-installation-settings) field the GID of the group that owns the file system.
+{{site.data.reuse.fsGroupGid}}
 
 ## Specifying a ConfigMap for Kafka configuration
 
-If you have a ConfigMap for Kafka configuration settings, you can provide it to your {{site.data.reuse.long_name}} installation to use. Enter the name in the **Cluster configuration ConfigMap** field of the [**Kafka broker configuration**](#kafka-broker-configuration) section.
+If you have a ConfigMap for Kafka configuration settings, you can provide it to your {{site.data.reuse.long_name}} installation to use. Enter the name in the **Cluster configuration ConfigMap** field of the [**Kafka broker settings**](#kafka-broker-settings) section.
 
 **Important**: The ConfigMap must be in the same namespace as where you intend to install the {{site.data.reuse.long_name}} release.
 
 ## Setting geo-replication nodes
 
-When installing {{site.data.reuse.long_name}} as an instance intended for geo-replication, configure the number of geo-replication worker nodes in the **[Geo-replicator configuration](#geo-replicator-configuration)** section by setting the number of nodes required in the **Geo-replicator nodes** field.
+When installing {{site.data.reuse.long_name}} as an instance intended for geo-replication, configure the number of geo-replication worker nodes in the **[Geo-replication settings](#geo-replication-settings)** section by setting the number of nodes required in the **Geo-replicator workers** field.
 
 **Note:** The geo-replication feature is disabled if the value is set to `0` (default). If you want to use geo-replication, ensure you set a minimum of 2 nodes for high availability reasons.
 
@@ -38,11 +38,11 @@ When installing {{site.data.reuse.long_name}} as an instance intended for geo-re
 
 ## Configuring external access
 
-By default, external Kafka client applications connect to the {{site.data.reuse.icp}} master node directly without any configuration required. You simply leave the **External host name/IP address** field of the [**Kafka external access configuration**](#kafka-external-access-configuration) section blank.
+By default, external Kafka client applications connect to the {{site.data.reuse.icp}} master node directly without any configuration required. You simply leave the **External hostname/IP address** field of the [**External access settings**](#external-access-settings) section blank.
 
 If you want clients to connect through a different route such as a load balancer, use the field to specify the host name or IP address of the endpoint.
 
-Also ensure you configure [security](#secure-connections) for your cluster by setting certificate details in the **Secure connections** section. By default, a self-signed certificate is created during installation and the **Private key**, **TLS certificate**, and **CA certificate** fields can be left blank. If you want to use an existing certificate, select **provided** under **Certificate type**, and provide these additional keys and certificate values as base 64-encoded strings. Alternatively, you can [**generate your own certificates**](#generating-your-own-certificates).
+Also ensure you configure security for your cluster by setting certificate details in the [**Secure connection settings**](#secure-connection-settings) section. By default, a self-signed certificate is created during installation and the **Private key**, **TLS certificate**, and **CA certificate** fields can be left blank. If you want to use an existing certificate, select **provided** under **Certificate type**, and provide these additional keys and certificate values as base 64-encoded strings. Alternatively, you can [**generate your own certificates**](#generating-your-own-certificates).
 
 <!--
 When installing by using the CLI, add the `proxy.externalEndpoint=<external-ip-address-or-hostname>` value to the Helm install command, and set the values for secure connections. For more information, see the README.
@@ -79,7 +79,7 @@ Field  | Description  | Default
 **Memory request for Kafka brokers**  | The base amount of memory allocated for each Kafka broker. The value should be a plain integer using one of these suffixes: Gi, G, Mi, M  | `2Gi`
 **Heap size for Kafka broker JVM**  | This should be set to 75% of the memory limit for Kafka brokers | `1500m`
 **Kafka brokers**  | Number of brokers in the Kafka cluster  | `3`
-**Cluster configuration ConfigMap**  | Provide the name of a ConfigMap containing Kafka configuration to apply changes to Kafka's server.properties. See [how to create a ConfigMap](../../administering/modifying-clusters/#setting-during-installation) for your installation.  | `None`
+**Cluster configuration ConfigMap**  | Provide the name of a ConfigMap containing Kafka configuration to apply changes to Kafka's server.properties. See [how to create a ConfigMap](../planning/#configmap-for-kafka-static-configuration) for your installation.  | `None`
 
 ### Kafka persistent storage settings
 
@@ -150,9 +150,33 @@ You can create your own certificates for configuring external access. When promp
 
 1. Create the certificate to use for the Certificate Authority (CA):\\
    `openssl req -newkey rsa:2048 -nodes -keyout ca.key -x509 -days 365 -out ca.pem`
-  1. Generate a RSA 2048-bit private key:\\
+2. Generate a RSA 2048-bit private key:\\
      `openssl genrsa -out es.key 2048`\\
-     Other key lengths and algorithms are also supported, see [**the Go language documentation**](https://golang.org/pkg/crypto/tls/#pkg-constants)
+     Other key lengths and algorithms are also supported. See the following list for supported cipher suites.\\
+     **Note:** In the following list, the string "TLS" is interchangeable with "SSL" and vice versa. For example, where TLS_RSA_WITH_AES_128_CBC_SHA is specified, SSL_RSA_WITH_AES_128_CBC_SHA also applies. For more information about each cipher suite, go to the  [Internet Assigned Numbers Authority (IANA) site](https://www.iana.org/assignments/tls-parameters/tls-parameters.xml) and search for the selected cipher suite ID.\\
+     - TLS_RSA_WITH_RC4_128_SHA
+     - TLS_RSA_WITH_3DES_EDE_CBC_SHA
+     - TLS_RSA_WITH_AES_128_CBC_SHA
+     - TLS_RSA_WITH_AES_256_CBC_SHA
+     - TLS_RSA_WITH_AES_128_CBC_SHA256
+     - TLS_RSA_WITH_AES_128_GCM_SHA256
+     - TLS_RSA_WITH_AES_256_GCM_SHA384
+     - TLS_ECDHE_ECDSA_WITH_RC4_128_SHA
+     - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+     - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+     - TLS_ECDHE_RSA_WITH_RC4_128_SHA
+     - TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+     - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+     - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+     - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+     - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+     - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+     - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+     - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+     - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+     - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+     - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+
 3. Create a certificate signing request for the key generated in the previous step:\\
    `openssl req -new -key es.key -out es.csr`
 4. Sign the request with the CA certificate created in step 1:\\

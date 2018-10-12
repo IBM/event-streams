@@ -14,11 +14,20 @@ toc: true
 
 ## What is {{site.data.reuse.long_name}}?
 
-{{site.data.reuse.long_name}} is an event-streaming platform based on the open-source Apache Kafka project, providing a high-throughput, fault-tolerant, pub-sub technology for building event-driven applications.
+{{site.data.reuse.long_name}} is an event-streaming platform based on the open-source Apache Kafka project, providing a high-throughput, fault-tolerant, publish–subscribe technology for building event-driven applications.
 
 [Find out more.](../about/overview/)
 
-## What editions are available?
+## What forms of {{site.data.reuse.short_name}} are available?
+
+You can have a fully managed {{site.data.reuse.short_name}} service provided by IBM Cloud, or you can install and manage your own version in {{site.data.reuse.icp}}.
+
+To get started with {{site.data.reuse.long_name}} as a hosted service, see [the {{site.data.reuse.short_name}} for IBM Cloud documentation](https://console.bluemix.net/docs/services/EventStreams/index.html){:target="_blank"}.
+
+To get started with {{site.data.reuse.long_name}} in {{site.data.reuse.icp}}, see [this documentation](../).
+
+
+## What editions are available in {{site.data.reuse.icp}}?
 
 {{site.data.reuse.long_name}} is available in two editions:
 * {{site.data.reuse.ce_long}} is a free version intended for trials and demonstration purposes. It can be installed and used without charge.

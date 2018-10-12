@@ -59,6 +59,8 @@ To modify the number of workers by using the UI:
 To modify the number of workers by using the CLI:
 1. {{site.data.reuse.icp_cli_login}}
 2. Use the following helm command to modify the number of workers:\\
-   `helm upgrade --reuse-values --set replicator.replicas=<number-of-workers> <release_name> ibm-eventstreams-prod --tls`\\
+   `helm upgrade --reuse-values --set replicator.replicas=<number-of-workers> <release_name> <charts.tgz> --tls`\\
+   {{site.data.reuse.helm_charts_note}}\\
+   \\
    For example:\\
-   `helm upgrade --reuse-values --set replicator.replicas=4 destination ibm-eventstreams-prod --tls`
+   `helm upgrade --reuse-values --set replicator.replicas=4 destination ibm-eventstreams-prod-1.0.0.tgz --tls`

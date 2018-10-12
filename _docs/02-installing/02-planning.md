@@ -37,15 +37,16 @@ Persistence is not enabled by default, so no persistent volumes are required. En
 
 If persistence is enabled, each Kafka broker and ZooKeeper server requires one physical volume each. You either need to create a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static) for each Kafka broker and ZooKeeper server, or specify a storage class that supports [dynamic provisioning](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#dynamic). Kafka and ZooKeeper can use different storage classes to control how physical volumes are allocated.
 
-To create Physical Volumes, your user ID must have the {{site.data.reuse.icp}} Cluster administrator role.
+See the {{site.data.reuse.icp}} documentation for information about [creating PersistentVolumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/pv_land.html) and [creating a storage class that supports dynamic provisioning](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/sc_land.html). For both, you must have the {{site.data.reuse.icp}} Cluster administrator role.
 
-If these persistent volumes are to be created manually, this must be done by the system administrator before installing {{site.data.reuse.long_name}}. The administrator will add these to a central pool before the Helm chart can be installed. The installation will then claim the required number of persistent volumes from this pool. For manual creation, “dynamic provisioning” must be disabled in the Helm chart when it is installed. It is up to the administrator to provide appropriate storage to contain these physical volumes.
+More information about persistent volumes and the system administration steps required before installing {{site.data.reuse.long_name}} can be found in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
-If these persistent volumes are to be created automatically at the time of installation, the system administrator must enable support for this prior to installing the Helm chart. For automatic creation, enable “dynamic provisioning” in the Helm chart when it is installed and storage class names provided to define which types of persistent volume get allocated to the deployment.
+If these persistent volumes are to be created manually, this must be done by the system administrator before installing {{site.data.reuse.long_name}}. The administrator will add these to a central pool before the Helm chart can be installed. The installation will then claim the required number of persistent volumes from this pool. For manual creation, **dynamic provisioning** must be disabled when [configuring your installation](../configuring/#enabling-persistent-storage). It is up to the administrator to provide appropriate storage to contain these physical volumes.
 
-For volumes that support onwership management, specify the group ID of the group owning the persistent volumes' file systems using the file system group ID (`global.fsGroupGid`) parameter of the Helm chart.
+If these persistent volumes are to be created automatically at the time of installation, the system administrator must enable support for this prior to installing {{site.data.reuse.long_name}}. For automatic creation, enable **dynamic provisioning** when [configuring your installation](../configuring/#enabling-persistent-storage), and provide the storage class names to define the persistent volumes that get allocated to the deployment.
 
-More information about persistent volumes and the system administration steps required before the Helm chart can be installed can be found in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+{{site.data.reuse.fsGroupGid}}
+
 
 ## ConfigMap for Kafka static configuration
 
@@ -71,7 +72,7 @@ You can deploy multiple instances of {{site.data.reuse.long_name}} and use the i
 
 [Prepare your destination cluster](../configuring/#setting-geo-replication-nodes) by setting the number of geo-replication worker nodes during installation.
 
-## Conecting clients
+## Connecting clients
 
 By default, Kafka client applications connect to the {{site.data.reuse.icp}} master node directly without any configuration required. If you want clients to connect through a different route, [specify the target endpoint](../configuring/#configuring-external-access) host name or IP address when configuring your installation.
 
