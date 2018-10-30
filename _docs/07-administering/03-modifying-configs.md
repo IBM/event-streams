@@ -39,9 +39,12 @@ See the [Dynamic Update Mode](http://kafka.apache.org/documentation.html#brokerc
 
 You can modify per-broker and cluster-wide configuration settings dynamically (without a broker restart) by using the {{site.data.reuse.long_name}} CLI:
 1. {{site.data.reuse.icp_cli_login}}
-2. Run the following command to start the {{site.data.reuse.long_name}} CLI: `cloudctl es init`
-3. To modify a per-broker configuration setting: `cloudctl es broker-config --broker <broker_id> --config <name>=<value>`
-4. To modify a cluster-wide configuration setting: `cloudctl es cluster-config --config <name>=<value>`
+2. Run the following command to start the {{site.data.reuse.long_name}} CLI:\\
+    `cloudctl es init`
+3. To modify a per-broker configuration setting:\\
+    `cloudctl es broker-config --broker <broker_id> --config <name>=<value>`
+4. To modify a cluster-wide configuration setting:\\
+    `cloudctl es cluster-config --config <name>=<value>`
 
 You can also update your read-only configuration settings that require a broker restart by using the {{site.data.reuse.long_name}} CLI.
 

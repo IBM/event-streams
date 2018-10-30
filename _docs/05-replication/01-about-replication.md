@@ -2,7 +2,7 @@
 title: "About geo-replication"
 permalink: /georeplication/about/
 excerpt: "Learn about setting up geo-replication for your clusters."
-last_modified_at: 
+last_modified_at:
 toc: true
 ---
 
@@ -29,7 +29,7 @@ Any of your {{site.data.reuse.long_name}} clusters can become destination for ge
 
 Geo-replication not only copies the messages of a topic, but also copies the topic configuration, the topic's metadata, its partitions, and even preserves the timestamps from the origin topic.
 
-The topics are kept in sync, so if any change happens on the origin topic, it is copied over to the geo-replicated topic on the destination cluster. For example, if you add a new partition to the origin topic, the replicator adds a partition to the copy of the topic on the destination cluster. This is done to maintain the correct message order on the geo-replicated topic.
+After geo-replication starts, the topics are kept in sync. If you add a new partition to the origin topic, the geo-replicator adds a partition to the copy of the topic on the destination cluster to maintain the correct message order on the geo-replicated topic. This behavior continues even when geo-replication is paused.
 
 You can set up geo-replication by using the {{site.data.reuse.long_name}} UI or CLI. When replication is set up and working, you can switch to another cluster when needed.
 

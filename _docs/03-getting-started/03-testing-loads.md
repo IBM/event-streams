@@ -14,7 +14,7 @@ You can use one of the predefined load sizes, or you can specify your own settin
 
 You can [download the latest pre-built producer](https://github.com/IBM/event-streams-sample-producer/releases) application.
 
-Alternatively, you can [clone the project from Github](https://github.com/IBM/event-streams-sample-producer). However, if you clone from Github, you have to [build the producer](#building).
+Alternatively, you can [clone the project from GitHub](https://github.com/IBM/event-streams-sample-producer). However, if you clone from GitHub, you have to [build the producer](#building).
 
 ## Building
 
@@ -42,6 +42,8 @@ Before running the producer to test loads, you must specify the following detail
 | `sasl.jaas.config`                      | An API key is needed to authorize production to your topic, and must be added to the 'password' string. To generate API keys, go to the {{site.data.reuse.long_name}} UI. Click the **Topics** tab, click the name of a topic, and click the **Connection information** tab. Go to the **Credentials and access control** section and follow the instructions.       |
 
 **Important:** To have access to the **Connection information** tab in the UI, you must have at least one topic. For example, if you are just starting out, use the [starter application to generate topics](../generating-starter-app/).
+
+You can secure access to your topics as described in [managing access](../../security/managing-access/).
 
 ## Running
 

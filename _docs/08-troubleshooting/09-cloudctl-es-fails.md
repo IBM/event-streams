@@ -1,5 +1,5 @@
 ---
-title: "'cloudctl es' command errors with 'FAILED' message"
+title: "Command 'cloudctl es' produces 'FAILED' message"
 permalink: /troubleshooting/cloudctl-es-fails/
 excerpt: "Cloudctl es command extension responds with FAILED error"
 last_modified_at:
@@ -17,17 +17,17 @@ FAILED
 
 ## Causes
 
-This can be caused if the correct initialization steps have not been performed to login to the {{site.data.reuse.icp}} cluster and initialize the command line tools.
+This error occurs when you have not logged in to the {{site.data.reuse.icp}} cluster and initialized the command line tool.
 
 ## Resolving the problem
 
-Ensure you have logged into the {{site.data.reuse.icp}} cluster:
+Ensure you log in to the {{site.data.reuse.icp}} cluster as follows:
 
 ```
-cloudctl login -a https://CLUSTER_IP:BOOTSTRAP_PORT -u USER_ID -p PASSWORD
+cloudctl login -a https://<master-ip>:8443 --skip-ssl-validation
 ```
 
-Once logged into {{site.data.reuse.icp}}, initialize the 'es' CLI tool:
+After logging in to {{site.data.reuse.icp}}, initialize the {{site.data.reuse.long_name}} CLI as follows:
 
 ```
 cloudctl es init

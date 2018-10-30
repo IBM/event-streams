@@ -35,9 +35,13 @@ Create namespaces to organize your {{site.data.reuse.long_name}} deployments and
 
 Persistence is not enabled by default, so no persistent volumes are required. Enable persistence if you want messages in topics and configuration settings to be retained in the event of a restart. You should enable persistence for production use and whenever you want your data to survive a restart.
 
+If you plan to have persistent volumes, [consider the disk space capacity](../capacity-planning/) required for storage.
+
 If persistence is enabled, each Kafka broker and ZooKeeper server requires one physical volume each. You either need to create a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static) for each Kafka broker and ZooKeeper server, or specify a storage class that supports [dynamic provisioning](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#dynamic). Kafka and ZooKeeper can use different storage classes to control how physical volumes are allocated.
 
-See the {{site.data.reuse.icp}} documentation for information about [creating PersistentVolumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/pv_land.html) and [creating a storage class that supports dynamic provisioning](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/sc_land.html). For both, you must have the {{site.data.reuse.icp}} Cluster administrator role.
+See the {{site.data.reuse.icp}} documentation for information about [creating persistent volumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/pv_land.html) and [creating a storage class that supports dynamic provisioning](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/sc_land.html). For both, you must have the {{site.data.reuse.icp}} Cluster administrator role.
+
+**Important:** When creating persistent volumes to use with {{site.data.reuse.long_name}}, ensure you set **Access mode** to `ReadWriteOnce`.
 
 More information about persistent volumes and the system administration steps required before installing {{site.data.reuse.long_name}} can be found in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
@@ -106,7 +110,7 @@ You require a license to use {{site.data.reuse.long_name}}. Licensing is based o
 
 An {{site.data.reuse.long_name}} deployment consists of a number of different types of containers, as described in the [components of the helm chart](../prerequisites/#helm-resource-requirements). To use {{site.data.reuse.long_name}} you must have a license for all of the virtual cores that are available to all Kafka and Geo-replicator containers deployed. All other container types are pre-requisite components that are supported as part of {{site.data.reuse.long_name}}, and do not require additional licenses.
 
-The number of virtual cores available to each Kafka and geo-replicator container can be specified [during installation](../configuring/#kafka-broker-configuration) or [modified later](../../administering/modifying-configs/).
+The number of virtual cores available to each Kafka and geo-replicator container can be specified [during installation](../configuring/#kafka-broker-settings) or [modified later](../../administering/modifying-configs/).
 
 To check the number of cores, use the {{site.data.reuse.icp}} metering report as follows:
 

@@ -8,13 +8,15 @@ toc: true
 
 You can secure your {{site.data.reuse.long_name}} resources in a fine-grained manner by managing the access each user and application has to each resource.
 
-## What can I secure?
+## What resource types can I secure?
 
 Within {{site.data.reuse.long_name}}, you can secure access to the following resource types, where the names in parentheses are the resource type names used in policy definitions:
 * Cluster (cluster): you can control which users and applications can connect to the cluster.
 * Topics (topic): you can control the ability of users and applications to create, delete, read, and write to a topic.
 * Consumer groups (group): you can control an application's ability to join a consumer group.
 * Transactional IDs (txnid): you can control the ability to use the transaction capability in Kafka.
+
+## What roles can I assign?
 
 Roles define the levels of access a user or application has to resources. The following table describes the roles you can assign in {{site.data.reuse.icp}}.
 
@@ -57,7 +59,7 @@ The mapping between Kafka operations and service actions is described in the fol
 
 In addition, {{site.data.reuse.long_name}} adds another service action called `cluster.read`. This service action is used to control connection access to the cluster.
 
-**Note:** Where the service action for an operation is shown in the table as a dash `-`, the operation is permitted to all roles.
+**Note:** Where the service action for an operation is shown in the previous table as a dash `-`, the operation is permitted to all roles.
 
 The mapping between service actions and {{site.data.reuse.long_name}} roles is described in the following table.
 
@@ -102,13 +104,13 @@ Each application that connects to {{site.data.reuse.long_name}} provides credent
 5. Select the ServiceID you are interested in or create one.
 
 Each service policy defines the level of access that the service ID has to each resource or set of resources. A policy consists of the following information:
+* The role assigned to the policy. For example, `Viewer`, `Editor`, or `Operator`.
 * The type of service the policy applies to. For example, {{site.data.reuse.long_name}}.
 * The instance of the service to be secured.
 * The type of resource to be secured. The valid values are <code>cluster</code>, <code>topic</code>, <code>group</code>, or <code>txnid</code>. Specifying a type is optional. If you do not specify a type, the policy then applies to all resources in the service instance.
-* The resource instance to be secured. Specify for resources of type <code>topic</code>, <code>group</code> and <code>txnid</code>. If you do not specify the resource, the policy then applies to all resources of the type specified in the service instance.
-* The role assigned to the policy. For example, `Viewer`, `Editor`, or `Operator`.
+* The identifier of the resource to be secured. Specify for resources of type <code>topic</code>, <code>group</code> and <code>txnid</code>. If you do not specify the resource, the policy then applies to all resources of the type specified in the service instance.
 
-You can create a single policy that does not specify either resource type or instance. This kind of policy applies its role to all resources in the {{site.data.reuse.long_name}} instance. If you want more precise access control, you can create a separate policy for each specific resource that the service ID will use.
+You can create a single policy that does not specify either the resource type or the resource identifier. This kind of policy applies its role to all resources in the {{site.data.reuse.long_name}} instance. If you want more precise access control, you can create a separate policy for each specific resource that the service ID will use.
 
 ### Common scenarios for applications
 
@@ -126,10 +128,10 @@ Alternatively, you can assign specific service policies for the individual resou
 | Permission | Policies required |
 |:-----------|:----------------|
 | Connect to the cluster | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher |
-| Produce to a topic | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher <br/> 2. Resource type: `topic` <br/> Resource instance: <var class="keyword varname">name_of_topic</var> <br/>Role: `Editor` or higher |
-| Produce to a topic using a transactional ID | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher <br/> 2. Resource type: `topic` <br/> Resource instance: <var class="keyword varname">name_of_topic</var> <br/>Role: `Editor` or higher <br/> 3. Resource type: `txnid` <br/> Resource instance: <var class="keyword varname">transactional_id</var> <br/>Role: `Editor` or higher |
-| Consume from a topic (no consumer group) | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher <br/> 2. Resource type: `topic` <br/> Resource instance: <var class="keyword varname">name_of_topic</var> <br/>Role: `Viewer` or higher |
-| Consume from a topic in a consumer group | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher <br/> 2. Resource type: `topic` <br/> Resource instance: <var class="keyword varname">name_of_topic</var> <br/>Role: `Viewer` or higher <br/> 3. Resource type: `group` <br/> Resource instance: <var class="keyword varname">name_of_consumer_group</var> <br/>Role: `Viewer` or higher |
+| Produce to a topic | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher <br/> 2. Resource type: `topic` <br/> Resource identifier: <var class="keyword varname">name_of_topic</var> <br/>Role: `Editor` or higher |
+| Produce to a topic using a transactional ID | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher <br/> 2. Resource type: `topic` <br/> Resource identifier: <var class="keyword varname">name_of_topic</var> <br/>Role: `Editor` or higher <br/> 3. Resource type: `txnid` <br/> Resource identifier: <var class="keyword varname">transactional_id</var> <br/>Role: `Editor` or higher |
+| Consume from a topic (no consumer group) | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher <br/> 2. Resource type: `topic` <br/> Resource identifier: <var class="keyword varname">name_of_topic</var> <br/>Role: `Viewer` or higher |
+| Consume from a topic in a consumer group | 1. Resource type: `cluster` <br/>Role: `Viewer` or higher <br/> 2. Resource type: `topic` <br/> Resource identifier: <var class="keyword varname">name_of_topic</var> <br/>Role: `Viewer` or higher <br/> 3. Resource type: `group` <br/> Resource identifier: <var class="keyword varname">name_of_consumer_group</var> <br/>Role: `Viewer` or higher |
 
 
 ## Revoking access for an application

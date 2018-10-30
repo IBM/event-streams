@@ -2,7 +2,7 @@
 title: "Considerations for GDPR"
 permalink: /security/gdpr-considerations/
 excerpt: "Considerations for GDPR."
-last_modified_at: 
+last_modified_at: 2018-07-19T11:31:38-04:00
 toc: true
 ---
 
@@ -42,11 +42,10 @@ GDPR establishes a stronger data protection regulatory framework for processing 
 This document is intended to help you in your preparations for GDPR readiness.
 
 ### Read more about GDPR
-* [EU GDPR Information Portal] (https://www.eugdpr.org/)
-* [ibm.com/GDPR website] (https://www.ibm.com/data-responsibility/gdpr/)
+* [EU GDPR Information Portal](https://www.eugdpr.org/)
+* [IBM GDPR website](https://www.ibm.com/data-responsibility/gdpr/)
 
 ## Product Configuration for GDPR
-### Offering Configuration
 
 #### Configuration to support data handling requirements
 The GDPR legislation requires that personal data is strictly controlled and that the
@@ -142,4 +141,4 @@ Data in motion between pods the IBM Cloud Private deployment should be [encrypte
 
 ## Data Monitoring
 
-{site.data.reuse.long_name}} provides a range of [monitoring](../../administering/cluster-health/) features that users can exploit to gain a better understanding of how applications are performing.
+{{site.data.reuse.long_name}} provides a range of [monitoring](../../administering/cluster-health/) features that users can exploit to gain a better understanding of how applications are performing.

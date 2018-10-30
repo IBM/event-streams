@@ -21,7 +21,7 @@ Ensure you have the following set up for your {{site.data.reuse.icp}} environmen
   * For message indexing capabilities (enabled by default), ensure you set the `vm.max_map_count` property to at least `262144` on all {{site.data.reuse.icp}} nodes in your cluster (not only the master node). Run the following commands on each node: \\
     `sudo sysctl -w vm.max_map_count=262144`\\
     `echo "vm.max_map_count=262144" | tee -a /etc/sysctl.conf`\\
-    **Important:** This property might have already been updated by other workloads to be higher than the minimum required.\\
+    **Important:** This property might have already been updated by other workloads to be higher than the minimum required.
 
 ## Hardware requirements
 
@@ -35,25 +35,88 @@ Ensure you have one {{site.data.reuse.icp}} worker node per Kafka broker, and a 
 
 ## Helm resource requirements
 
-The {{site.data.reuse.long_name}} Helm chart has the following resource requirements:
+The following table lists the resource requirements of the {{site.data.reuse.long_name}} Helm chart. For details about the requirements for each pod and their containers, see the tables in the following sections.
 
-Component  | Number of replicas  | CPU/container  | Memory/container (Gi)
---|---|---|--
-Kafka  | 3*  | 1*  | 2*
-ZooKeeper  | 3  | 0.1*  | 0.25*
-Administration UI  | 1  | 1  | 1
-Administration server  | 1  | 1  | 2
-Network proxy  | 2  | unlimited  | unlimited
-Access controller  | 1  | 0.1  | 0.25
-Index manager  | 1  | unlimited  | unlimited
-Elasticsearch  | 2  | unlimited  | 2
-Geo-replicator  | 0*  | 1  | 1
+| Pod                   | Number of replicas  | Total CPU per pod  | Total memory per pod (Gi)
+| ----------------------|---------------------|--------------------|--------------------------
+| Kafka                 | 3*                  | 6*                 | 12*
+| ZooKeeper             | 3                   | 0.1*               | 0.25*
+| Geo-replicator        | 0*                  | 1.5 per replica    | 1 per replica
+| Administration UI     | 1                   | 1                  | 1
+| Administration server | 1                   | 1.5                | 2.5
+| Network proxy         | 2                   | unlimited          | unlimited
+| Access controller     | 1                   |  0.1               | 0.25
+| Index manager         | 1                   | unlimited          | unlimited
+| Elasticsearch         | 2                   | unlimited          | 4
 
-You can configure the settings marked with an asterisk (*).
+**Important:** You can configure the settings marked with an asterisk (*).
 
 **Note:** Before installing {{site.data.reuse.long_name}} (not {{site.data.reuse.ce_short}}), consider the number of Kafka replicas and geo-replicator nodes you plan to use. Each Kafka replica and geo-replicator node is a separate chargeable unit.
 
 The CPU and memory limits for some components are not limited by the chart, so they inherit the resource limits for the namespace that the chart is being installed into. If there are no resource limits set for the namespace, the containers run with unbounded CPU and memory limits.
+
+### Kafka pod
+
+| Container         | CPU per container  |  Memory per container (Gi)
+| ------------------|--------------------|---------------------------
+| Kafka             | 1*                 | 2*
+| Metrics reporter  | 1*                 | 2*
+| Metrics proxy     | unlimited          | unlimited
+| Healthcheck       | unlimited          | unlimited
+
+### ZooKeeper pod
+
+| Container         | CPU per container  |  Memory per container (Gi)
+| ------------------|--------------------|---------------------------
+| ZooKeeper         | 0.1*               | 0.25*
+
+### Geo-replicator pod
+
+| Container         | CPU per container     |  Memory per container (Gi)
+| ------------------|-----------------------|---------------------------
+| Replicator        | 1 limit               | 1
+| Metrics reporter  | unlimited             | unlimited
+
+### Administration UI pod
+
+| Container  | CPU per container  |  Memory per container (Gi)
+| -----------|------------------------|---------------------------
+| UI         | 1                      | 1
+| Redis      | unlimited              | unlimited
+| Proxy      | unlimited              | unlimited
+
+### Administration server pod
+
+| Container  | CPU per container     |  Memory per container (Gi)
+| -----------|-----------------------|---------------------------
+| Rest       | 1                     | 2
+| Codegen    | 0.5                   | 0.5
+| Proxy      | unlimited             | unlimited
+
+### Network proxy pod
+
+| Container  | CPU per container  |  Memory per container (Gi)
+| -----------|--------------------|---------------------------
+| Proxy      | unlimited          | unlimited
+
+### Access controller pod
+
+| Container          | CPU per container  |  Memory per container (Gi)
+| -------------------|--------------------|---------------------------
+| Access controller  | 0.1                | 0.25
+| Redis              | unlimited          | unlimited
+
+### Index manager pod
+
+| Container     | CPU per container  |  Memory per container (Gi)
+| --------------|--------------------|---------------------------
+| Index manager | unlimited          | unlimited
+
+### Elasticsearch pod
+
+| Container  | CPU per container  |  Memory per container (Gi)
+| -----------|--------------------|---------------------------
+| Elastic    | unlimited          | 2
 
 ## PodSecurityPolicy requirements
 
@@ -107,9 +170,23 @@ The {{site.data.reuse.long_name}} command line interface (CLI) is supported on t
 
 ## Clients
 
+<!--
 {{site.data.reuse.long_name}} is supported for use with clients running Apache Kafka version 2.0 or later.
+-->
 
-The Kafka Java client shipped with {{site.data.reuse.long_name}} is supported for use with the following Java versions:
+The Apache Kafka Java client shipped with {{site.data.reuse.long_name}} is supported for use with the following Java versions:
 
 *   IBM Java 8
 *   Oracle Java 8
+
+You can use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}, but in such cases IBM can only provide support for server-side issues, and not for the clients themselves.
+
+{{site.data.reuse.short_name}} is designed for use with clients based on the `librdkafka` implementation of the Apache Kafka protocol.
+
+## Continuous Delivery (CD) support model
+
+{{site.data.reuse.long_name}} uses the continuous delivery (CD) support model.
+
+Ensure you stay current with the installation of CD update packages, as described in [the continuous delivery life cycle policy](https://www-01.ibm.com/support/docview.wss?uid=ibm10718163). Product defect fixes and security updates are only available for the two most current CD update packages.
+
+{{site.data.reuse.long_name}} offers support for Apache Kafka, and will work with the Apache Kafka open source community to produce open source fixes. Where appropriate, IBM can provide an interim fix for the temporary resolution of Apache Kafka issues.

@@ -2,7 +2,7 @@
 title: "Connecting to IBM MQ"
 permalink: /connecting/mq/
 excerpt: "Connecting to MQ."
-last_modified_at: 
+last_modified_at: 2018-07-19T11:31:38-04:00
 toc: true
 ---
 
@@ -16,7 +16,7 @@ Many organizations use both IBM MQ and Apache Kafka for their messaging needs. A
 
 When connecting Apache Kafka and other systems, the technology of choice is the [Kafka Connect framework](https://kafka.apache.org/documentation/#connect).
 
-Kafka Connect connectors run inside a Java process called a worker. Kafka Connect can run in either standalone or distributed mode. Standalone mode is intended for testing and temporary connections between systems. Distributed mode is more appropriate for production use. These instructions are for standalone mode for ease of understanding.
+Kafka Connect connectors run inside a Java process called a worker. Kafka Connect can run in either standalone or distributed mode. Standalone mode is intended for testing and temporary connections between systems. Distributed mode is more appropriate for production use.
 
 When you run Kafka Connect with a standalone worker, there are two configuration files:
 * The worker configuration file contains the properties needed to connect to Kafka. This is where you provide the details for connecting to Kafka.
@@ -28,28 +28,33 @@ For getting started and problem diagnosis, the simplest setup is to run only one
 
 **Note:** You can use an existing IBM MQ or Kafka installation, either locally or on the cloud. For performance reasons, it is recommended to run the Kafka Connect worker close to the queue manager to minimise the effect of network latency. For example, if you have a queue manager in your datacenter and Kafka in the cloud, it's best to run the Kafka Connect worker in your datacenter.
 
-## Prerequisites
+## Running the connector in standalone mode
+
+This document contains steps for running the connector in standalone mode for development and test purposes.
+
+### Prerequisites
 
 The connector runs inside the Kafka Connect runtime, which is part of the Apache Kafka distribution. {{site.data.reuse.long_name}} does not run connectors as part of its deployment, so you need an Apache Kafka distribution to get the Kafka Connect runtime environment.
 
 Ensure you have the following available:
 
-- [IBM MQ](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_8.0.0/com.ibm.mq.helphome.v80.doc/WelcomePagev8r0.htm) v8 or later installed. **Note:** These instructions are for IBM MQ v9 running on Linux. If you're using a different version or platform, you might have to adjust some steps slightly.
+- [IBM MQ](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_8.0.0/com.ibm.mq.helphome.v80.doc/WelcomePagev8r0.htm) v8 or later installed.\\
+   **Note:** These instructions are for IBM MQ v9 running on Linux. If you're using a different version or platform, you might have to adjust some steps slightly.
 - An [Apache Kafka](http://kafka.apache.org/downloads) distribution for the Kafka Connect runtime environment. These instructions are for Apache Kafka 0.10.2.0 or later.
-- The Kafka Connect source connector JAR you [download from {{site.data.reuse.long_name}} UI](#downloading).
-- Configuration information for connecting to your IBM MQ queue manager. You can use the sample connector properties file that you [download from the {{site.data.reuse.long_name}} UI](#downloading).
+- The Kafka Connect source connector JAR you [download from {{site.data.reuse.long_name}} UI](#downloading-the-connector).
+- Configuration information for connecting to your IBM MQ queue manager. You can use the sample connector properties file that you [download from the {{site.data.reuse.long_name}} UI](#downloading-the-connector).
 - Configuration information for connecting to your {{site.data.reuse.long_name}} or Apache Kafka cluster (IP address and port).
 
-## Downloading the connector
+### Downloading the connector
 
 You can obtain the {{site.data.reuse.kafka-connect-mq-source}} as follows:
 1. Log in to your {{site.data.reuse.long_name}} UI.
 2. Click the **Toolbox** tab, and click **{{site.data.reuse.kafka-connect-mq-source}}**.
 3. Download both the `connector JAR` and the `sample connector properties` files from the page.
 
-Alternatively, you can [clone the project from Github](https://github.com/ibm-messaging/kafka-connect-mq-source). However, if you clone from Github, you have to build the connector yourself as described in the README.
+Alternatively, you can [clone the project from GitHub](https://github.com/ibm-messaging/kafka-connect-mq-source). However, if you clone from GitHub, you have to build the connector yourself as described in the README.
 
-## Setting up the queue manager
+### Setting up the queue manager
 
 These sample instructions set up an IBM MQ queue manager that uses the local operating system to authenticate the user ID and password. The example uses the user ID `alice` and the password `passw0rd`.
 
@@ -81,9 +86,26 @@ These sample instructions set up an IBM MQ queue manager that uses the local ope
 
 The queue manager is now ready to accept connection from the connector and get messages from a queue called `MYQSOURCE`.
 
-## Setting up Apache Kafka
+### Setting up Apache Kafka
 
-If you do not already have {{site.data.reuse.long_name}} or Apache Kafka, you can download it from [here](http://kafka.apache.org/downloads). Ensure you have the prerequisites installed, such as Java.
+To send messages from IBM MQ to {{site.data.reuse.long_name}}, create a topic and obtain security information for your {{site.data.reuse.short_name}} installation as follows. You then use this information later to configure the connection to your {{site.data.reuse.short_name}} instance.
+
+You can also send IBM MQ messages to Apache Kafka running locally on your machine, as described [here](#running-apache-kafka-locally).
+
+1. Log in to your {{site.data.reuse.long_name}} UI.
+2. Click the **Topics** tab.
+3. If you have not previously created the topic to use with the connector, create it now.
+4. Select the topic in the list of topics.
+5. Click the **Connection information** tab.
+6. Copy the **broker URL**. This is the Kafka bootstrap server.
+7. In the **Certificates** section, click **Download Java truststore** and choose a location for the downloaded file that can be accessed by the Kafka Connect worker.
+8. Create an [API key](../../getting-started/client/#securing-the-connection) authorized to connect to the cluster and write to the topic
+
+**Note:** For the distributed worker, the API key will also need to be able to write to the Kafka Connect framework's internal topics.
+
+#### Running Apache Kafka locally
+
+If you do not already have Apache Kafka, you can download it from [here](http://kafka.apache.org/downloads). Ensure you have the prerequisites installed, such as Java.
 
 Download the latest `.tgz` file (for example, `kafka_2.11-2.0.0.tgz`) and extract it. The top-level directory of the extracted `.tgz` file is the Kafka root directory. It contains several directories including `/bin` for the Kafka executables and `/config` for the configuration files.
 
@@ -111,7 +133,17 @@ You now have a basic Kafka cluster setup consisting of a single node with the fo
 
 **NOTE:** This configuration of Kafka writes its data in `/tmp/kafka-logs`, while ZooKeeper uses `/tmp/zookeeper`, and Kafka Connect uses `/tmp/connect.offsets`. To ensure these directories are not being used, clear them out before using Apache Kafka.
 
-## Configuring the connector to connect to MQ
+##### Stopping Apache Kafka
+
+When you completed testing the connector, stop Apache Kafka as follows:
+
+1. Stop any Kafka Connect workers and tools such as the console consumers you were using with the connector.
+2. Change to the Kafka root directory and stop Kafka:\\
+   `bin/kafka-server-stop.sh`
+3. Stop ZooKeeper:\\
+   `bin/zookeeper-server-stop.sh`
+
+### Configuring the connector to connect to MQ
 
 The connector requires details to connect to IBM MQ and to your {{site.data.reuse.long_name}} or Apache Kafka cluster.
 
@@ -136,28 +168,20 @@ mq.password=passw0rd
 topic=TSOURCE
 ```
 
-See the sample properties file for a full list of properties you can configure, and also see the [configuration reference](../mq-source-reference/).
+See the sample properties file for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source) for all available configuration options.
 
-## Configuring the connector to connect to {{site.data.reuse.long_name}} or Apache Kafka
+### Configuring the connector to connect to {{site.data.reuse.long_name}} or Apache Kafka
 
 To provide the connection details for your Kafka cluster, the Kafka distribution includes a file called `connect-standalone.properties` that you can edit to provide the details. Specify the following connection information:
 * A list of one or more Kafka brokers for bootstrapping connections.
 * Whether the cluster requires connections to use SSL/TLS.
 * Authentication credentials if the cluster requires clients to authenticate.
 
-### Configuration for connecting to {{site.data.reuse.long_name}}
+If you are running Apache Kafka locally you can use the default `connect-standalone.properties` file.
 
-To connect to {{site.data.reuse.long_name}}, you will need the broker URL and to configure the worker to establish TLS connections. You will also need to create the target topic.
+#### Configuration for connecting to {{site.data.reuse.long_name}}
 
-1. Log in to your {{site.data.reuse.long_name}} UI.
-2. Click the **Topics** tab.
-3. If you have not previously created the topic to use with the connector, create it now.
-4. Select the topic in the list of topics.
-5. Click the **Connection information** tab.
-6. Copy the **broker URL**. This is the Kafka bootstrap server.
-7. In the **Certificates** section, click **Download Java truststore** and choose a location for the downloaded file that can be accessed by the Kafka Connect worker.
-
-You will also need an API key authorized to connect to the cluster and write to the topic. For the distributed worker, it will also need to be able to write to the Kafka Connect frameworks internal topics.
+To connect to {{site.data.reuse.long_name}}, you will need the broker URL and security details you collected earlier when you [configured {{site.data.reuse.long_name}}](#setting-up-apache-kafka).
 
 The following example shows the required properties for the Kafka Connect standalone properties file:
 
@@ -179,7 +203,7 @@ producer.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModul
 
 You replace `<broker_url>` with your cluster's broker URL, `<certs.jks_file_location>` with the path of your downloaded truststore file, `<truststore_password>` with `"password"`, and `<api_key>` with the API key.
 
-## Running the connector
+### Running the connector
 
 1. Open a terminal window and change to the Kafka root directory. Start the connector worker as follows:\\
    `CLASSPATH=<path-to-connector-jar-file>/kafka-connect-mq-source-1.0-SNAPSHOT-jar-with-dependencies.jar bin/connect-standalone.sh config/connect-standalone.properties ~/mq-source.properties`\\
@@ -194,12 +218,6 @@ You replace `<broker_url>` with your cluster's broker URL, `<certs.jks_file_loca
 
 The messages are printed by the Kafka console consumer, and are transferred from the IBM MQ queue `MYQSOURCE` into the Kafka topic `TSOURCE` using the `MYQM` queue manager.
 
-## Stopping Apache Kafka
+## Advanced configuration
 
-When you completed testing the connector, stop Apache Kafka as follows:
-
-1. Stop any Kafka Connect workers and tools such as the console consumers you were using with the connector.
-2. Change to the Kafka root directory and stop Kafka:\\
-   `bin/kafka-server-stop.sh`
-3. Stop ZooKeeper:\\
-   `bin/zookeeper-server-stop.sh`
+For more details about the connector and to see all configuration options, see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source).

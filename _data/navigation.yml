@@ -33,6 +33,8 @@ docs:
         url: /installing/prerequisites/
       - title: "Planning for installation"
         url: /installing/planning/
+      - title: "Capacity planning"
+        url: /installing/capacity-planning/
       - title: "Downloading"
         url: /installing/downloading/
       - title: "Installing"
@@ -79,8 +81,6 @@ docs:
     children:
       - title: "Connecting to IBM MQ"
         url: /connecting/mq/
-      - title: "Reference for IBM MQ source connector"
-        url: /connecting/mq-source-reference/
   - title: Administering
     children:
       - title: "Monitoring deployment health"
@@ -96,7 +96,7 @@ docs:
   - title: Troubleshooting
     url: /troubleshooting/intro/
     children:
-      - title: "Event Streams resources not available"
+      - title: "Resources not available"
         url: /troubleshooting/resources-not-available/
       - title: "Full cleanup after uninstallation"
         url: /troubleshooting/cleanup-uninstall/
@@ -106,12 +106,23 @@ docs:
         url: /troubleshooting/georeplication-error/
       - title: "TimeoutException when using standard Kafka producer"
         url: /troubleshooting/kafka-producer-error/
-      - title: "Standard Kafka consumer hangs and does not output messages"
+      - title: "Standard Kafka consumer hangs"
         url: /troubleshooting/kafka-consumer-hangs/
-      - title: "'cloudctl es' command fails with 'not a registered command' error"
+      - title: "Command 'cloudctl es' fails with 'not a registered command' error"
         url: /troubleshooting/cloudctl-es-not-registered/
-      - title: "'cloudctl es' command errors with 'FAILED' message"
+      - title: "Command 'cloudctl es' produces 'FAILED' message"
         url: /troubleshooting/cloudctl-es-fails/
+      - title: "UI does not open when using Chrome on Ubuntu"
+        url: /troubleshooting/chrome-ubuntu-issue/
+      - title: "Chart deployment fails with 'no ImagePolicies' error"
+        url: /troubleshooting/no-image-policy/
+      - title: "Chart deployment fails with 'no matching repositories in the ImagePolicies' error"
+        url: /troubleshooting/image-policy-missing-repository/
+      - title: "Chart deployment starts but no helm release is created"
+        url: /troubleshooting/no-helm-release-is-created/
+      - title: "The Messages page is blank"
+        url: /troubleshooting/messages-page-blank/
+
 
   - title: FAQ
     url: /faq/
