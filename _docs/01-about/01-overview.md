@@ -2,7 +2,7 @@
 title: "Introduction"
 permalink: /about/overview/
 excerpt: "IBM Event Streams is an event-streaming platform based on the open-source Apache Kafka® project."
-last_modified_at: 
+ 
 toc: false
 ---
 

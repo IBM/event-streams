@@ -2,7 +2,7 @@
 title: "Resources not available"
 permalink: /troubleshooting/resources-not-available/
 excerpt: "Reasons for IBM Event Streams resources not being available."
-last_modified_at:
+
 toc: true
 ---
 

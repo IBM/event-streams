@@ -2,7 +2,7 @@
 title: "Installing"
 permalink: /installing/installing/
 excerpt: "Installing the Community Edition of IBM Event Streams."
-last_modified_at:
+
 toc: false
 ---
 

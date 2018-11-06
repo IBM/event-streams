@@ -2,7 +2,7 @@
 title: "Full cleanup after uninstallation"
 permalink: /troubleshooting/cleanup-uninstall/
 excerpt: "Learn how to fully clean up after uninstallation"
-last_modified_at:
+
 toc: false
 ---
 

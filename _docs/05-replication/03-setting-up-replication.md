@@ -2,7 +2,7 @@
 title: "Setting up geo-replication"
 permalink: /georeplication/setting-up/
 excerpt: "Set up geo-replication for your clusters."
-last_modified_at:
+
 toc: true
 ---
 

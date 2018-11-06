@@ -2,7 +2,7 @@
 title: "Capacity planning"
 permalink: /installing/capacity-planning/
 excerpt: "Consider the following when planning the capacity requirements of your installation."
-last_modified_at:
+
 toc: true
 ---
 

@@ -2,7 +2,7 @@
 title: "Monitoring Kafka cluster health"
 permalink: /administering/cluster-health/
 excerpt: "Understand the health of your Kafka cluster at a glance."
-last_modified_at:
+
 toc: false
 ---
 

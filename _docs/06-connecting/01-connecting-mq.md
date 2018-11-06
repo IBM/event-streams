@@ -2,7 +2,7 @@
 title: "Connecting to IBM MQ"
 permalink: /connecting/mq/
 excerpt: "Connecting to MQ."
-last_modified_at: 2018-07-19T11:31:38-04:00
+ 
 toc: true
 ---
 
@@ -41,7 +41,7 @@ Ensure you have the following available:
 - [IBM MQ](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_8.0.0/com.ibm.mq.helphome.v80.doc/WelcomePagev8r0.htm) v8 or later installed.\\
    **Note:** These instructions are for IBM MQ v9 running on Linux. If you're using a different version or platform, you might have to adjust some steps slightly.
 - An [Apache Kafka](http://kafka.apache.org/downloads) distribution for the Kafka Connect runtime environment. These instructions are for Apache Kafka 0.10.2.0 or later.
-- The Kafka Connect source connector JAR you [download from {{site.data.reuse.long_name}} UI](#downloading-the-connector).
+- The Kafka Connect source connector JAR you [download from the {{site.data.reuse.long_name}} UI](#downloading-the-connector).
 - Configuration information for connecting to your IBM MQ queue manager. You can use the sample connector properties file that you [download from the {{site.data.reuse.long_name}} UI](#downloading-the-connector).
 - Configuration information for connecting to your {{site.data.reuse.long_name}} or Apache Kafka cluster (IP address and port).
 

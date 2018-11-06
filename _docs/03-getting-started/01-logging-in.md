@@ -2,7 +2,7 @@
 title: "Logging in"
 permalink: /getting-started/logging-in/
 excerpt: "Log in to your IBM Event Streams installation."
-last_modified_at: 
+ 
 toc: false
 ---
 

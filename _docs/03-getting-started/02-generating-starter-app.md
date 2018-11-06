@@ -2,7 +2,7 @@
 title: "Generating a starter application"
 permalink: /getting-started/generating-starter-app/
 excerpt: "Create a starter application to learn more about using ."
-last_modified_at:
+
 toc: true
 ---
 

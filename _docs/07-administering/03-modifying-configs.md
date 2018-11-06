@@ -2,7 +2,7 @@
 title: "Modifying configuration settings"
 permalink: /administering/modifying-configs/
 excerpt: "Modify your Kafka broker configuration settings dynamically using a ConfigMap."
-last_modified_at:
+
 toc: true
 ---
 

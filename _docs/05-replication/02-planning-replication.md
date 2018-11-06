@@ -2,7 +2,7 @@
 title: "Planning for geo-replication"
 permalink: /georeplication/planning/
 excerpt: "Plan geo-replication for your clusters."
-last_modified_at:
+
 toc: true
 ---
 
@@ -43,7 +43,7 @@ You have the option to specify the number of workers during the installation pro
 
 If you decide to use an existing {{site.data.reuse.long_name}} instance as a destination cluster, or want to change the number of workers on an existing instance used as a destination cluster for scaling purposes, you can modify the number of workers by using the UI or CLI as follows.
 
-#### Using the UI (not recommended)
+#### Using the UI <!-- (not recommended) -->
 
 To modify the number of workers by using the UI:
 1. {{site.data.reuse.icp_ui_login}} This is where your destination cluster is installed.

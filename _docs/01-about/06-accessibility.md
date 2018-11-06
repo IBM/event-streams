@@ -2,7 +2,7 @@
 title: "Accessibility"
 permalink: /about/accessibility/
 excerpt: "Accessibility features for IBM Event Streams."
-last_modified_at: 
+ 
 toc: true
 ---
 Accessibility features assist users who have a disability, such as restricted mobility or limited vision, to use information technology content successfully.

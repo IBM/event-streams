@@ -2,7 +2,7 @@
 title: "TimeoutException when using standard Kafka producer"
 permalink: /troubleshooting/kafka-producer-error/
 excerpt: "Standard Kafka producer fails when no security settings provided"
-last_modified_at:
+
 toc: true
 ---
 

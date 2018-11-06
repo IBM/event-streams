@@ -2,7 +2,7 @@
 title: "Monitoring deployment health"
 permalink: /administering/deployment-health/
 excerpt: "Understand the health of your deployment at a glance, and learn how to find information about problems."
-last_modified_at:
+
 toc: true
 ---
 

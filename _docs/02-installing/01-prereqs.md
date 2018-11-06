@@ -2,7 +2,7 @@
 title: "Pre-requisites"
 permalink: /installing/prerequisites/
 excerpt: "Pre-requisites for installing IBM Event Streams."
-last_modified_at:
+
 toc: true
 ---
 

@@ -2,7 +2,7 @@
 title: "FAQ"
 permalink: /faq/
 excerpt: "Frequently asked questions (FAQ)."
-last_modified_at:
+
 # classes: wide
 toc: true
 ---

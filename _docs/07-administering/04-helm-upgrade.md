@@ -2,7 +2,7 @@
 title: "Running Helm upgrade commands"
 permalink: /administering/helm-upgrade-command/
 excerpt: "To run helm upgrade commands, you must have a copy of the original Helm charts file that you used to install IBM Event Streams."
-last_modified_at:
+
 toc: false
 ---
 

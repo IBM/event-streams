@@ -2,7 +2,7 @@
 title: "Notices"
 permalink: /about/notices/
 excerpt: "Legal notices for IBM Event Streams."
-last_modified_at: 
+ 
 toc: true
 ---
 

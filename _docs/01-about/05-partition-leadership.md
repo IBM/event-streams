@@ -3,7 +3,7 @@ title: "Partition leadership"
 permalink: /about/partition-leadership/
 excerpt: "Each partition has one server in the cluster that acts as the
 partition's leader and other servers that act as the followers."
-last_modified_at: 
+ 
 toc: false
 ---
 

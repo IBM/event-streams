@@ -2,7 +2,7 @@
 title: "Configuring"
 permalink: /installing/configuring/
 excerpt: "Configure your IBM Event Streams installation."
-last_modified_at:
+
 toc: true
 ---
 
@@ -144,7 +144,7 @@ Field  | Description  | Default
 --|---|--
 **Geo-replicator workers**  | Number of workers to support geo-replication. | `0` (geo-replication off)
 
-### Generating your own certificates
+## Generating your own certificates
 
 You can create your own certificates for configuring external access. When prompted, answer all questions with the appropriate information.
 
@@ -154,28 +154,16 @@ You can create your own certificates for configuring external access. When promp
      `openssl genrsa -out es.key 2048`\\
      Other key lengths and algorithms are also supported. See the following list for supported cipher suites.\\
      **Note:** In the following list, the string "TLS" is interchangeable with "SSL" and vice versa. For example, where TLS_RSA_WITH_AES_128_CBC_SHA is specified, SSL_RSA_WITH_AES_128_CBC_SHA also applies. For more information about each cipher suite, go to the  [Internet Assigned Numbers Authority (IANA) site](https://www.iana.org/assignments/tls-parameters/tls-parameters.xml) and search for the selected cipher suite ID.\\
-     - TLS_RSA_WITH_RC4_128_SHA
      - TLS_RSA_WITH_3DES_EDE_CBC_SHA
      - TLS_RSA_WITH_AES_128_CBC_SHA
      - TLS_RSA_WITH_AES_256_CBC_SHA
-     - TLS_RSA_WITH_AES_128_CBC_SHA256
      - TLS_RSA_WITH_AES_128_GCM_SHA256
      - TLS_RSA_WITH_AES_256_GCM_SHA384
-     - TLS_ECDHE_ECDSA_WITH_RC4_128_SHA
-     - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
-     - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
-     - TLS_ECDHE_RSA_WITH_RC4_128_SHA
      - TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
      - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
      - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
-     - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
-     - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-     - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-     - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
-     - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
-     - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
 
 3. Create a certificate signing request for the key generated in the previous step:\\
    `openssl req -new -key es.key -out es.csr`

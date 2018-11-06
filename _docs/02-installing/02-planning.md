@@ -2,7 +2,7 @@
 title: "Planning for installation"
 permalink: /installing/planning/
 excerpt: "Planning your installation of {{site.data.reuse.long_name}}."
-last_modified_at:
+
 # classes: wide
 toc: true
 ---

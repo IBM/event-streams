@@ -2,7 +2,7 @@
 title: "Downloading"
 permalink: /installing/downloading/
 excerpt: "Download the IBM Event Streams image and make it available to be installed."
-last_modified_at:
+
 toc: false
 ---
 
@@ -18,5 +18,5 @@ To install {{site.data.reuse.long_name}} (not the {{site.data.reuse.ce_short}}) 
    **Note:** The default value for the `cluster_CA_domain` parameter is `mycluster.icp`. If necessary add an entry to your system's host file to allow it to be resolved. For more information, see [the {{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_entitled_workloads.html).
 4. Install the {{site.data.reuse.short_name}} Helm chart by using the compressed image you downloaded from IBM Passport Advantage.\\
    `cloudctl catalog load-archive --archive <PPA-image-name.tar.gz>`\\
-   When the image installation completes successfully, the catalog is updated with the {{site.data.reuse.long_name}} local chart, and the internal docker repository is polulated with the Docker images used by {{site.data.reuse.long_name}}.
+   When the image installation completes successfully, the catalog is updated with the {{site.data.reuse.long_name}} local chart, and the internal docker repository is populated with the Docker images used by {{site.data.reuse.long_name}}.
 5. [Install {{site.data.reuse.long_name}}](../installing).

@@ -2,7 +2,7 @@
 title: "UI does not open when using Chrome on Ubuntu"
 permalink: /troubleshooting/chrome-ubuntu-issue/
 excerpt: "When using Google Chrome browser on Ubuntu operating systems, the Event Streams UI does not open."
-last_modified_at:
+
 toc: true
 ---
 

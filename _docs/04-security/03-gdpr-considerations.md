@@ -2,7 +2,7 @@
 title: "Considerations for GDPR"
 permalink: /security/gdpr-considerations/
 excerpt: "Considerations for GDPR."
-last_modified_at: 2018-07-19T11:31:38-04:00
+ 
 toc: true
 ---
 

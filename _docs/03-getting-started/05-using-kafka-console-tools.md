@@ -2,7 +2,7 @@
 title: "Using Apache Kafka console tools"
 permalink: /getting-started/using-kafka-console-tools/
 excerpt: "Using Apache Kafka console tools with IBM Event Streams."
-last_modified_at:
+
 toc: true
 ---
 

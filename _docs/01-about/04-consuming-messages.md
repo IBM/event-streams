@@ -3,7 +3,7 @@ title: "Consuming messages"
 permalink: /about/consuming-messages/
 excerpt: "A consumer is an application that consumes streams of messages from
 Kafka topics."
-last_modified_at: 
+ 
 toc: true
 ---
 
@@ -124,7 +124,7 @@ Here\'s a list of exceptions that you should handle in your code:
 
 **[org.apache.kafka.common.errors.NotLeaderForPartitionException]** Thrown as a result of `Producer.send(...)` when the leadership for a partition changes. The client automatically refreshes its metadata to find the up-to-date leader information. Retry the operation, which should succeed with the updated metadata.
 
-**[org.apache.kafka.common.errors.CommitFailedException]** Thrown as a result of `Consumer.commitSync(...)` when an unrecoverable error occurs. In some cases, it is not possible simply to repeat the operation because the partition assignment might have changed and the consumer might no longer be able to commit its offsets. Because `Consumer.commitSync(...)` can be partially successful when used with multiple partitions in a single call, the error recovery can be simplified by using a separate `Consumer.commitSync(...)` call for eachpartition.
+**[org.apache.kafka.common.errors.CommitFailedException]** Thrown as a result of `Consumer.commitSync(...)` when an unrecoverable error occurs. In some cases, it is not possible simply to repeat the operation because the partition assignment might have changed and the consumer might no longer be able to commit its offsets. Because `Consumer.commitSync(...)` can be partially successful when used with multiple partitions in a single call, the error recovery can be simplified by using a separate `Consumer.commitSync(...)` call for each partition.
 
 **[org.apache.kafka.common.errors.TimeoutException]** Thrown by `Producer.send(...),  Consumer.listTopics()` if the metadata cannot be retrieved. The exception is also seen in the send callback (or the returned Future) when the requested acknowledgment does not come back within `request.timeout.ms`. The client can retry the operation, but the effect of a repeated operation depends on the specific operation. For example, if sending a message is retried, the message might be duplicated.
 

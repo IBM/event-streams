@@ -2,7 +2,7 @@
 title: "Creating Kafka client applications"
 permalink: /getting-started/client/
 excerpt: "Create Kafka client applications to use with IBM Event Streams."
-last_modified_at:
+
 toc: true
 ---
 

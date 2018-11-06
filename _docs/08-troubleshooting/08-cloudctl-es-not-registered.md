@@ -2,7 +2,7 @@
 title: "Command 'cloudctl es' fails with 'not a registered command' error"
 permalink: /troubleshooting/cloudctl-es-not-registered/
 excerpt: "Cloudctl es command extension not registered"
-last_modified_at:
+
 toc: true
 ---
 

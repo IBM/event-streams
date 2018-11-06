@@ -2,7 +2,7 @@
 title: "The Messages page is blank"
 permalink: /troubleshooting/messages-page-blank/
 excerpt: "The Messages page in the Event Streams UI is blank for both real and simulated topics."
-last_modified_at:
+
 toc: true
 ---
 

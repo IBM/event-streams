@@ -2,7 +2,7 @@
 title: "Standard Kafka consumer hangs and does not output messages"
 permalink: /troubleshooting/kafka-consumer-hangs/
 excerpt: "Standard Kafka consumer hangs when no security settings provided"
-last_modified_at:
+
 toc: true
 ---
 
