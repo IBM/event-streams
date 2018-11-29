@@ -2,7 +2,6 @@
 title: "Post-installation tasks"
 permalink: /installing/post-installation/
 excerpt: "Post-installation tasks after successfully installing IBM Event Streams."
- 
 toc: true
 ---
 
@@ -24,7 +23,7 @@ To verify that your {{site.data.reuse.long_name}} installation deployed successf
 The {{site.data.reuse.long_name}} CLI is a plugin for the {{site.data.reuse.icp}} CLI. You can use the {{site.data.reuse.long_name}} CLI to manage your {{site.data.reuse.long_name}} instance from the command line, such as creating, deleting, and updating topics.
 
 To install the {{site.data.reuse.long_name}} CLI:
-1. Ensure you have the [{{site.data.reuse.icp}} CLI installed](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli.html).
+1. Ensure you have the [{{site.data.reuse.icp}} CLI installed](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/install_cli.html).
 2. [Log in](../../getting-started/logging-in/) to the {{site.data.reuse.long_name}} as an administrator.
 3. Click the **Toolbox** tab.
 4. Go to the **{{site.data.reuse.long_name}} command-line interface** section and click **Find out more**.
@@ -60,7 +59,7 @@ In your firewall settings, ensure you enable communication for the node ports th
 
 ## Connecting clients
 
-You can [set up external client access](../configuring/#configuring-external-access) during installation. After installation, clients can connect to the Kafka cluster by using the externally visible IP address for the Kubernetes cluster. The port number for the connection is allocated automatically and varies between installations. To look up this port number after the installation is complete:
+You can set up external client access [during installation](../configuring/#configuring-external-access). After installation, clients can connect to the Kafka cluster by using the externally visible IP address for the Kubernetes cluster. The port number for the connection is allocated automatically and varies between installations. To look up this port number after the installation is complete:
 
 1. {{site.data.reuse.icp_ui_login}}
 2. Enter an {{site.data.reuse.icp}} administrator user name and password.
@@ -73,15 +72,21 @@ You can [set up external client access](../configuring/#configuring-external-acc
 8. If no external hostname was specified when {{site.data.reuse.long_name}} was installed, this is the IP address and port number that external clients should connect to.
 9. If an external hostname was specified when {{site.data.reuse.long_name}} was installed, clients should connect to that external hostname using this bootstrap port number.
 
-Before connecting a client, ensure the necessary certificates are configured within your client environment. Use the TLS and CA certificates if you provided them during installation, or export the self-signed public certificate from the browser as follows:
+Before connecting a client, ensure the necessary certificates are configured within your client environment. Use the TLS and CA certificates if you provided them during installation, or export the self-signed public certificate from the browser.
 
+![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, use the following steps:
 1. Log in to your {{site.data.reuse.long_name}} UI.
 2. Click the **Topics** tab to view the topic list.
 3. Click the topic you want to connect the client to.
 4. Click the **Connection information** tab.
 5. Copy the broker information. This gives the bootstrap address for Kafka clients.
-6. From the **Certificates** section, download the server certificate. If you are using a Java client, use the JKS truststore. Otherwise, use the PEM certificate.
+6. From the **Certificates** section, download the server certificate. If you are using a Java client, use the **JKS truststore**. Otherwise, use the **PEM certificate**.
 
+![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, use the following steps:
+1. Log in to your {{site.data.reuse.long_name}} UI.
+2. Click **Connect to this cluster** on the right.
+3. On the **Connect a client** tab, copy the address from the **Bootstrap server** section. This gives the bootstrap address for Kafka clients.
+4. From the **Certificates** section, download the server certificate. If you are using a Java client, use the **Java truststore**. Otherwise, use the **PEM certificate**.
 
 ## Scaling
 

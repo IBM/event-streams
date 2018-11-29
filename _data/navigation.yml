@@ -15,6 +15,8 @@ docs:
     children:
       - title: "Introduction"
         url: /about/overview/
+      - title: "What's new"
+        url: /about/whats-new/
       - title: "Key concepts"
         url: /about/key-concepts/
       - title: "Producing messages"
@@ -29,6 +31,8 @@ docs:
         url: /about/notices/
   - title: Installing
     children:
+      - title: "Trying out"
+        url: /installing/trying-out/
       - title: "Pre-requisites"
         url: /installing/prerequisites/
       - title: "Planning for installation"
@@ -41,12 +45,14 @@ docs:
         url: /installing/installing/
       - title: "Configuring"
         url: /installing/configuring/
-      - title: "Migrating to IBM Event Streams"
+      - title: "Migrating from Community Edition"
         url: /installing/migrating/
       - title: "Post-installation tasks"
         url: /installing/post-installation/
       - title: "Uninstalling"
         url: /installing/uninstalling/
+      - title: "Upgrading"
+        url: /installing/upgrading/
   - title: Getting started
     children:
       - title: "Logging in"
@@ -81,6 +87,10 @@ docs:
     children:
       - title: "Connecting to IBM MQ"
         url: /connecting/mq/
+      - title: "Running the IBM MQ source connector"
+        url: /connecting/mq/source/
+      - title: "Running the IBM MQ sink connector"
+        url: /connecting/mq/sink/
   - title: Administering
     children:
       - title: "Monitoring deployment health"
@@ -93,9 +103,13 @@ docs:
         url: /administering/helm-upgrade-command/
       - title: "Scaling"
         url: /administering/scaling/
+      - title: "Setting client quotas"
+        url: /administering/quotas/
   - title: Troubleshooting
     url: /troubleshooting/intro/
     children:
+      - title: "Diagnosing installation issues"
+        url: /troubleshooting/diagnosing-installation-issues/
       - title: "Resources not available"
         url: /troubleshooting/resources-not-available/
       - title: "Full cleanup after uninstallation"
@@ -122,7 +136,10 @@ docs:
         url: /troubleshooting/no-helm-release-is-created/
       - title: "The Messages page is blank"
         url: /troubleshooting/messages-page-blank/
-
+      - title: "Unable to connect to Kafka cluster"
+        url: /troubleshooting/kafka-connection-issue/
+      - title: "Unable to remove destination cluster"
+        url: /troubleshooting/error-removing-destination/
 
   - title: FAQ
     url: /faq/

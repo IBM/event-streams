@@ -27,7 +27,7 @@ To find out more about the problem:
 
 You can check the health of your {{site.data.reuse.long_name}} environment using the Kubernetes CLI.
 
-1. Ensure you have the [Kubernetes command line tool installed](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html), and configure access to your cluster.
+1. Ensure you have the [Kubernetes command line tool installed](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/cfc_cli.html), and configure access to your cluster.
 2. To check the status and readiness of the pods, run the following command, where `<namespace>` is the space used for your {{site.data.reuse.long_name}} installation:\\
    `kubectl -n <namespace> get pods`\\
    The command lists the pods together with simple status information for each pod.
@@ -40,4 +40,4 @@ For more information about using the `kubectl` command for debugging, see the [K
 
 **Note:** After a component restarts, the `kubectl` command retrieves the logs for the new instance of the container. To retrieve the logs for a previous instance of the container, add the `–previous` option to the `kubectl logs` command.
 
-**Tip:** You can also use the [management logging service, or Elastic Stack](https://www.ibm.com/support/knowledgecenter/sv/SSBS6K_3.1.0/manage_metrics/logging_elk.html), deployed by {{site.data.reuse.icp}} to find more log information. Setting up the built-in Elastic Stack is part of the [installation planning tasks](../../installing/planning/#logging).
+**Tip:** You can also use the [management logging service, or Elastic Stack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_metrics/logging_elk.html), deployed by {{site.data.reuse.icp}} to find more log information. Setting up the built-in Elastic Stack is part of the [installation planning tasks](../../installing/planning/#logging).

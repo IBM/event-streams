@@ -14,6 +14,8 @@ After a successsful installation message is displayed, {{site.data.reuse.long_na
 
 It can take up to 10 minutes before {{site.data.reuse.long_name}} is available to use. The {{site.data.reuse.icp}} installation might return a successful completion message before all {{site.data.reuse.short_name}} services start up.
 
+If the installation continues to be unavailable, [run the installation diognastics scripts](../diagnosing-installation-issues).
+
 ## Insufficient system resources
 
 You can specify the memory and CPU requirements when {{site.data.reuse.long_name}} is installed. If the values set are larger than the resources available, then pods will fail to start.

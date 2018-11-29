@@ -2,11 +2,11 @@
 title: "Introduction"
 permalink: /about/overview/
 excerpt: "IBM Event Streams is an event-streaming platform based on the open-source Apache Kafka® project."
- 
+
 toc: false
 ---
 
-{{site.data.reuse.long_name}} is an event-streaming platform based on the open-source Apache Kafka® project. It uses the most recent Kafka 2.0 release and supports the use of all Kafka interfaces.
+{{site.data.reuse.long_name}} is an event-streaming platform based on the open-source Apache Kafka® project.  {{site.data.reuse.short_name}} release 2018.3.0 uses the Kafka 2.0 release and supports the use of all Kafka interfaces. ![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") {{site.data.reuse.short_name}} 2018.3.1 and later uses the Kafka 2.0.1 release.
 
 {{site.data.reuse.long_name}} builds upon the {{site.data.reuse.icp}} platform to deploy Apache Kafka in a resilient and manageable way. It includes a UI design aimed at application developers getting started with Apache Kafka, as well as users operating a production cluster.
 

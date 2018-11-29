@@ -22,6 +22,9 @@ icp_foundation: "IBM Cloud Private Foundation"
 # {{site.data.reuse.kafka-connect-mq-source}}
 kafka-connect-mq-source: "Kafka Connect source connector for IBM MQ"
 
+# {{site.data.reuse.kafka-connect-mq-sink}}
+kafka-connect-mq-sink: "Kafka Connect sink connector for IBM MQ"
+
 # Task steps
 
 # {{site.data.reuse.icp_ui_login}}
@@ -33,6 +36,7 @@ icp_cli_login: "Using the IBM Cloud Private CLI, log in to your cluster as an ad
 # {{site.data.reuse.maven_prereq}}
 maven_prereq: "Ensure you have Java version 8. Also, ensure you have [Apache Maven](https://maven.apache.org/) installed on your system."
 
+
 # Notes
 # {{site.data.reuse.cli_options_short}}
 cli_options_short: "**Tip:** You can use short options instead of spelling out the long version. For example, use `-d` instead of `--destination`, or `-n` instead of `--name`."
@@ -41,10 +45,10 @@ cli_options_short: "**Tip:** You can use short options instead of spelling out t
 replicator_origin_list: "**Note:** When logged in to the destination cluster, the origin cluster will not show up in the **Origin locations** section until you [define topics to replicate](#specifying-what-and-where-to-replicate), and at least one replicator is created."
 
 # {{site.data.reuse.monitor_metrics_retention}}
-monitor_metrics_retention: "**Important:** By default, metrics data used to provide monitoring information is only stored for a day. [Change the time period for metric retention](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/featured_applications/deploy_monitoring.html#logs-and-metrics-management-for-prometheus) to be able to view monitoring data for longer time periods, such as 1 week or 1 month."
+monitor_metrics_retention: "**Important:** By default, metrics data used to provide monitoring information is only stored for a day. [Change the time period for metric retention](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/featured_applications/deploy_monitoring.html#logs-and-metrics-management-for-prometheus) to be able to view monitoring data for longer time periods, such as 1 week or 1 month."
 
 # {{site.data.reuse.geo-rep_note}}
-geo-rep_note: "**Note:** Geo-replication is only available in IBM Event Streams, not Community Edition."
+geo-rep_note: "**Note:** Geo-replication is only available in the paid-for version of IBM Event Streams (not available in the Community Edition)."
 
 # {{site.data.reuse.kafka_download_link}}
 kafka_download_link: "https://www.apache.org/dyn/closer.cgi?path=/kafka/2.0.0/kafka_2.11-2.0.0.tgz"
@@ -55,7 +59,14 @@ helm_charts_note: "**Note:** Where `<charts.tgz>` is the name of the chart file 
 # {{site.data.reuse.fsGroupGid}}
 fsGroupGid: "**Important:** If membership of a specific group is required to access the file system used for persistent volumes, ensure you specify in the [**File system group ID**](../configuring#global-install-settings) field the GID of the group that owns the file system."
 
+
 # Icons
+
+# Event Streams 2018.3.0 only cueing graphic and text - example:
+#![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0,
+
+# Event Streams 2018.3.1 or Fix Pack 1 and later cueing graphic and text - example:
+# ![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later,
 
 # {{site.data.reuse.more_options}}
 # more_options: "![Three vertical dots for the more options icon at end of each row.](../images/more_options.png){:height="30px" width="15px"}"

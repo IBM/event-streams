@@ -45,13 +45,13 @@ You can deploy multiple instances of {{site.data.reuse.long_name}} and use the i
 
 ## Can I try it for free?
 
-Yes, you can [install the {{site.data.reuse.ce_long}}](../installing/installing), and see what it's like.
+Yes, you can [install](../installing/trying-out/) a basic deployment of {{site.data.reuse.ce_long}}, and see what it's like.
 
 ## What is {{site.data.reuse.icp}}?
 
 {{site.data.reuse.icp}} is an application platform for developing and managing on-premises, containerized applications. It is an integrated environment for managing containers that includes the container orchestrator Kubernetes, a private image registry, a management console, and monitoring frameworks.
 
-[Find out more.](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/getting_started/overview.html)
+[Find out more.](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/getting_started/overview.html)
 
 ## How can I install {{site.data.reuse.long_name}}?
 

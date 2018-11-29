@@ -2,8 +2,7 @@
 title: "Logging in"
 permalink: /getting-started/logging-in/
 excerpt: "Log in to your IBM Event Streams installation."
- 
-toc: false
+toc: true
 ---
 
 Log in to your {{site.data.reuse.long_name}} installation. To determine the {{site.data.reuse.long_name}} UI URL:
@@ -21,3 +20,13 @@ Log in to your {{site.data.reuse.long_name}} installation. To determine the {{si
 From the **Getting started** page, you can learn about the concepts of the underlying techcnology, explore what {{site.data.reuse.long_name}} has to offer, and even [generate starter application code](../generating-starter-app) that lets you learn more about writing applications.
 
 You can also [test message loads](../testing-loads) to determine the best setup for your environment.
+
+## Logging out
+
+Logging out of {{site.data.reuse.short_name}} does not log you out of your session entirely. To log out, you must first log out of your {{site.data.reuse.icp}} session, and then log out of your {{site.data.reuse.short_name}} session.
+
+To log out of {{site.data.reuse.short_name}}:
+
+1. {{site.data.reuse.icp_ui_login}}
+2. Click the user icon in the upper-right corner of the window, and click **Log out**.
+3. Return to your {{site.data.reuse.short_name}} UI and click the user icon in the upper-right corner of the window, and click **Log out**.

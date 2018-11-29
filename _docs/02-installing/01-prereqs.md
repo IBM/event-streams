@@ -6,18 +6,22 @@ excerpt: "Pre-requisites for installing IBM Event Streams."
 toc: true
 ---
 
-Ensure your environment meets the following prerequisites before installing {{site.data.reuse.long_name}} version 2018.3.0.
+Ensure your environment meets the following prerequisites before installing {{site.data.reuse.long_name}}.
 
 ## {{site.data.reuse.icp}} environment
 
-{{site.data.reuse.long_name}} is supported on {{site.data.reuse.icp}} version 3.1.0 running on Linux® 64-bit (x86_64) systems.
+![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") {{site.data.reuse.long_name}} 2018.3.0 is supported on {{site.data.reuse.icp}} version 3.1.0 running on Linux® 64-bit (x86_64) systems only.
+
+![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") {{site.data.reuse.long_name}} 2018.3.1 and later is supported on the following systems:
+- {{site.data.reuse.icp}} version 3.1.0 running on Linux® 64-bit (x86_64) systems.
+- {{site.data.reuse.icp}} version 3.1.1 running on Linux® 64-bit (x86_64) and IBM® Z systems.
 
 Ensure you have the following set up for your {{site.data.reuse.icp}} environment:
-  * Install [{{site.data.reuse.icp}} version 3.1.0](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/installing.html).\\
-    **Note:** {{site.data.reuse.long_name}} includes entitlement for {{site.data.reuse.icp_foundation}} which you can [download](../downloading) from IBM Passport Advantage.
-  * Install the [Kubernetes command line tool](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html), and configure access to your cluster.
-  * Install the [{{site.data.reuse.icp}} Command Line Interface](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/install_cli.html).
-  * Install the [Helm Command Line Interface](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/app_center/create_helm_cli.html) version 2.7.3 or later, and add the {{site.data.reuse.icp}} [internal Helm repository](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/app_center/add_int_helm_repo_to_cli.html) called `local-charts` to the Helm CLI as an external repository.
+  * Install [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install.html). \\
+    **Note:** {{site.data.reuse.long_name}} includes entitlement to {{site.data.reuse.icp_foundation}} which you can [download](../downloading) from IBM Passport Advantage.
+  * Install the [Kubernetes command line tool](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/cfc_cli.html), and configure access to your cluster.
+  * Install the [{{site.data.reuse.icp}} Command Line Interface (CLI)](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.1/manage_cluster/install_cli.html).
+  * Install the [Helm CLI](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.1/app_center/create_helm_cli.html) required for your version of {{site.data.reuse.icp}}, and add the {{site.data.reuse.icp}} [internal Helm repository](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.1/app_center/add_int_helm_repo_to_cli.html) called `local-charts` to the Helm CLI as an external repository.
   * For message indexing capabilities (enabled by default), ensure you set the `vm.max_map_count` property to at least `262144` on all {{site.data.reuse.icp}} nodes in your cluster (not only the master node). Run the following commands on each node: \\
     `sudo sysctl -w vm.max_map_count=262144`\\
     `echo "vm.max_map_count=262144" | tee -a /etc/sysctl.conf`\\
@@ -39,13 +43,13 @@ The following table lists the resource requirements of the {{site.data.reuse.lon
 
 | Pod                   | Number of replicas  | Total CPU per pod  | Total memory per pod (Gi)
 | ----------------------|---------------------|--------------------|--------------------------
-| Kafka                 | 3*                  | 6*                 | 12*
-| ZooKeeper             | 3                   | 0.1*               | 0.25*
-| Geo-replicator        | 0*                  | 1.5 per replica    | 1 per replica
+| Kafka                 | 3*                  | 1*                 | 3.5*
+| ZooKeeper             | 3                   | 0.1*               | 1*
+| Geo-replicator        | 0*                  | 1 per replica      | 1 per replica
 | Administration UI     | 1                   | 1                  | 1
-| Administration server | 1                   | 1.5                | 2.5
+| Administration server | 1                   | 4.5                | 2.5
 | Network proxy         | 2                   | unlimited          | unlimited
-| Access controller     | 1                   |  0.1               | 0.25
+| Access controller     | 1                   | 0.1                | 0.25
 | Index manager         | 1                   | unlimited          | unlimited
 | Elasticsearch         | 2                   | unlimited          | 4
 
@@ -55,12 +59,14 @@ The following table lists the resource requirements of the {{site.data.reuse.lon
 
 The CPU and memory limits for some components are not limited by the chart, so they inherit the resource limits for the namespace that the chart is being installed into. If there are no resource limits set for the namespace, the containers run with unbounded CPU and memory limits.
 
+{{site.data.reuse.geo-rep_note}}
+
 ### Kafka pod
 
 | Container         | CPU per container  |  Memory per container (Gi)
 | ------------------|--------------------|---------------------------
 | Kafka             | 1*                 | 2*
-| Metrics reporter  | 1*                 | 2*
+| Metrics reporter  | unlimited          | 1.5*
 | Metrics proxy     | unlimited          | unlimited
 | Healthcheck       | unlimited          | unlimited
 
@@ -68,13 +74,13 @@ The CPU and memory limits for some components are not limited by the chart, so t
 
 | Container         | CPU per container  |  Memory per container (Gi)
 | ------------------|--------------------|---------------------------
-| ZooKeeper         | 0.1*               | 0.25*
+| ZooKeeper         | 0.1*               | 1*
 
 ### Geo-replicator pod
 
 | Container         | CPU per container     |  Memory per container (Gi)
 | ------------------|-----------------------|---------------------------
-| Replicator        | 1 limit               | 1
+| Replicator        | 1                     | 1
 | Metrics reporter  | unlimited             | unlimited
 
 ### Administration UI pod
@@ -89,7 +95,7 @@ The CPU and memory limits for some components are not limited by the chart, so t
 
 | Container  | CPU per container     |  Memory per container (Gi)
 | -----------|-----------------------|---------------------------
-| Rest       | 1                     | 2
+| Rest       | 4                     | 2
 | Codegen    | 0.5                   | 0.5
 | Proxy      | unlimited             | unlimited
 
@@ -116,30 +122,15 @@ The CPU and memory limits for some components are not limited by the chart, so t
 
 | Container  | CPU per container  |  Memory per container (Gi)
 | -----------|--------------------|---------------------------
-| Elastic    | unlimited          | 2
+| Elastic    | unlimited          | 4
 
 ## PodSecurityPolicy requirements
 
-If you apply Pod Security Policies to the namespace where {{site.data.reuse.long_name}} is installed, ensure you allow the following capabilities. If any of the following capabilities are blocked, {{site.data.reuse.long_name}} will not start or operate correctly.
+To instsall the {{site.data.reuse.short_name}} chart, you must have the `ibm-restricted-psp` PodSecurityPolicy selected for the target namespace.
 
-- Access to the following volume types:
-  - configMapName
-  - emptyDir
-  - persistentVolumeClaim
-  - projected
-- fsGroup support for the following group IDs:
-  - 1000
-  - 1001
-- runAsUser support for the following user IDs:
-  - 1000
-  - 1001
-  - 65534
-- readOnlyRootFilesystem must be `false`
-- Retain default settings for the following capabilities:
-  - SELinux
-  - AppArmor
-  - seccomp
-  - sysctl
+You can define the PodSecurityPolicy when creating the [namespace](../planning/#namespaces) for your installation.
+
+For more information about PodSecurityPolicy definitions, see [here](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/security.html).
 
 ## Network requirements
 
@@ -160,7 +151,7 @@ The {{site.data.reuse.long_name}} user interface (UI) is supported on the follow
 *   Microsoft Edge version 16 or later
 *   Safari version 11.1 or later
 
-## {{site.data.reuse.long_name}} command line interface
+## {{site.data.reuse.long_name}} CLI
 
 The {{site.data.reuse.long_name}} command line interface (CLI) is supported on the following systems:
 
@@ -187,6 +178,6 @@ You can use other Kafka version 2.0 or later clients when connecting to {{site.d
 
 {{site.data.reuse.long_name}} uses the continuous delivery (CD) support model.
 
-Ensure you stay current with the installation of CD update packages, as described in [the continuous delivery life cycle policy](https://www-01.ibm.com/support/docview.wss?uid=ibm10718163). Product defect fixes and security updates are only available for the two most current CD update packages.
+Ensure you stay current with the installation of CD update packages, as described in [the continuous delivery life cycle policy](https://www.ibm.com/support/docview.wss?uid=ibm10718163). Product defect fixes and security updates are only available for the two most current CD update packages.
 
 {{site.data.reuse.long_name}} offers support for Apache Kafka, and will work with the Apache Kafka open source community to produce open source fixes. Where appropriate, IBM can provide an interim fix for the temporary resolution of Apache Kafka issues.

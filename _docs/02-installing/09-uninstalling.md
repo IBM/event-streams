@@ -2,7 +2,7 @@
 title: "Uninstalling"
 permalink: /installing/uninstalling/
 excerpt: "Uninstalling {{site.data.reuse.long_name}}."
- 
+
 toc: true
 ---
 
@@ -14,8 +14,8 @@ To delete the {{site.data.reuse.short_name}} installation by using the UI:
 
 1. Log in to the {{site.data.reuse.short_name}} UI as an administrator.
 2. Click **Workloads > Helm Releases** from the navigation menu.
-3. Locate the release name of your installation in the **Name** column, and click **Menu overflow > Delete** in the corresponding row.
-4. Optional: If you enabled persistence during installation, you also need to manually remove  [PersistentVolumes](https://www-03preprod.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/delete_volume.html) and [PersistentVolumeClaims](https://www-03preprod.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/delete_app_volume.html).
+3. Locate the release name of your installation in the **Name** column, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Delete** in the corresponding row.
+4. Optional: If you enabled persistence during installation, you also need to manually remove  [PersistentVolumes](https://www-03preprod.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/delete_volume.html) and [PersistentVolumeClaims](https://www-03preprod.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/delete_app_volume.html).
 
 
 ## Using the CLI

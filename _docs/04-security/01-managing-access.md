@@ -76,11 +76,13 @@ The mapping between service actions and {{site.data.reuse.long_name}} roles is d
 
 ## Assigning access to users
 
-If you have not set up [{{site.data.reuse.icp}} teams](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/user_management/teams.html), the admin user has the ClusterAdministrator role. This role has unlimited access to all resources.
+If you have not set up [{{site.data.reuse.icp}} teams](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/user_management/teams.html), the admin user has the ClusterAdministrator role. This role has unlimited access to all resources.
 
 If you are using {{site.data.reuse.icp}} teams, you must associate the team with the {{site.data.reuse.long_name}} instance to apply the team members' roles to the resources within the instance. You can do this using the `cloudctl es iam-add-release-to-team` command.
 
 This command creates policies that grant access to resources based on the roles in the team. It is possible to refine user access to specific resources further and limit actions they can take against resources by using the {{site.data.reuse.icp}} APIs. If you require such granular settings for security, [contact us](../../support).
+
+**Note:** It can take up to 10 minutes after assigning access before users can perform tasks associated with their permissions.
 
 ### Common scenarios for users
 
@@ -111,6 +113,8 @@ Each service policy defines the level of access that the service ID has to each 
 * The identifier of the resource to be secured. Specify for resources of type <code>topic</code>, <code>group</code> and <code>txnid</code>. If you do not specify the resource, the policy then applies to all resources of the type specified in the service instance.
 
 You can create a single policy that does not specify either the resource type or the resource identifier. This kind of policy applies its role to all resources in the {{site.data.reuse.long_name}} instance. If you want more precise access control, you can create a separate policy for each specific resource that the service ID will use.
+
+**Note:** It can take up to 10 minutes after assigning access before applications can perform tasks associated with their permissions.
 
 ### Common scenarios for applications
 

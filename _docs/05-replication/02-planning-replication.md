@@ -21,7 +21,7 @@ The number of workers depend on the number of topics you want to replicate, and 
 
 For example, you can create a small number of workers at the time of installation. You can then increase the number later if you find that your geo-replication performance is not able to keep up with making copies of all the selected topics as required. Alternatively, you can start with a high number of workers, and then decrease the number if you find that the workers underperform.
 
-**Important:** For high availability reasons, ensure you have at least 2 workers in case one of the workers encounters problems.
+**Important:** For high availability reasons, ensure you have at least 2 workers on your destination cluster in case one of the workers encounters problems.
 
 You can configure the number of workers at the time of installing {{site.data.reuse.long_name}}, or you can modify an existing installation, even if you already have geo-replication set up and running on that installation.
 
@@ -43,16 +43,18 @@ You have the option to specify the number of workers during the installation pro
 
 If you decide to use an existing {{site.data.reuse.long_name}} instance as a destination cluster, or want to change the number of workers on an existing instance used as a destination cluster for scaling purposes, you can modify the number of workers by using the UI or CLI as follows.
 
-#### Using the UI <!-- (not recommended) -->
+#### Using the UI
 
 To modify the number of workers by using the UI:
 1. {{site.data.reuse.icp_ui_login}} This is where your destination cluster is installed.
 2. From the navigation menu, click **Workloads > Helm Releases**.
-3. Locate the release name of your existing {{site.data.reuse.long_name}} cluster in the **NAME** column.
-4. Click the release name and then click **Upgrade**.
-5. Click **All parameters** in order to access all the release-related paramaters
-6. Go to the **Geo-replication settings** section and modify the **Geo-replicator workers** field to the required number of workers.
-7. Click **Upgrade**.
+3. Locate the release name of your existing {{site.data.reuse.long_name}} cluster in the **NAME** column, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Upgrade** in the corresponding row.
+4. Select the installed chart version from the **Version** drop-down list.
+5. Ensure you set **Using previous configured values** to **Reuse Values**.
+6. Click **All parameters** in order to access all the release-related paramaters.
+7. Go to the **Geo-replication settings** section and modify the **Geo-replicator workers** field to the required number of workers.\\
+   **Important:** For high availability reasons, ensure you have at least 2 workers on your destination cluster in case one of the workers encounters problems.
+8. Click **Upgrade**.
 
 #### Using the CLI
 
@@ -63,4 +65,4 @@ To modify the number of workers by using the CLI:
    {{site.data.reuse.helm_charts_note}}\\
    \\
    For example:\\
-   `helm upgrade --reuse-values --set replicator.replicas=4 destination ibm-eventstreams-prod-1.0.0.tgz --tls`
+   `helm upgrade --reuse-values --set replicator.replicas=4 destination ibm-eventstreams-prod-1.1.0.tgz --tls`

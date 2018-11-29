@@ -83,7 +83,7 @@ To view this information on the origin cluster by using the CLI:
 2. Run the following command to start the {{site.data.reuse.long_name}} CLI: `cloudctl es init`
 3. Retrieve destination cluster IDs by using the following command:\\
    `cloudctl es geo-clusters`
-4. Retrieve information about a destination cluster by running the folowing command and copying the required destination cluster ID from the previous step:\\
+4. Retrieve information about a destination cluster by running the following command and copying the required destination cluster ID from the previous step:\\
    `cloudctl es geo-cluster --destination <destination-cluster-id>`\\
    For example:\\
    `cloudctl es geo-cluster --destination siliconvalley_es_byl6x`\\
@@ -109,4 +109,8 @@ To manage geo-replication on the origin cluster by using the CLI:
   - `cloudctl es geo-replicator-resume --destination <destination-cluster-id> --name <replicator-name>`
   - `cloudctl es geo-replicator-restart --destination <destination-cluster-id> --name <replicator-name>`
   - `cloudctl es geo-replicator-delete --destination <destination-cluster-id> --name <replicator-name>`
-  - {{site.data.reuse.cli_options_short}}
+  - You can also remove a cluster as a destination using the following command:\\
+     `cloudctl es geo-cluster-remove --destination <destination-cluster-id>`\\
+     **Note:** If you are unable to remove a destination cluster due to technical issues, you can use the `--force` option with the `geo-cluster-remove` command to remove the cluster.
+
+{{site.data.reuse.cli_options_short}}

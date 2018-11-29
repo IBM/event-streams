@@ -32,9 +32,11 @@ If you have a ConfigMap for Kafka configuration settings, you can provide it to 
 
 When installing {{site.data.reuse.long_name}} as an instance intended for geo-replication, configure the number of geo-replication worker nodes in the **[Geo-replication settings](#geo-replication-settings)** section by setting the number of nodes required in the **Geo-replicator workers** field.
 
-**Note:** The geo-replication feature is disabled if the value is set to `0` (default). If you want to use geo-replication, ensure you set a minimum of 2 nodes for high availability reasons.
+**Note:** If you want to set up a cluster as a destination for geo-replication, ensure you set a minimum of 2 nodes for high availability reasons.
 
 [Consider the number of geo-replication nodes](../../georeplication/planning/#preparing-destination-clusters) to run on a destination cluster. You can also set up destination clusters and configure the number of geo-replication worker nodes for an existing installation later.
+
+{{site.data.reuse.geo-rep_note}}
 
 ## Configuring external access
 
@@ -61,10 +63,20 @@ The following table describes the parameters for setting global installation opt
 Field  | Description   | Default
 --|---|--
 **Docker image registry**  | Docker images are fetched from this registry. The format is `<cluster_name>:<port>/<namespace>`.<br />**Note:** Ensure the **Docker image registry** value does not have a trailing slash, for example: `mycluster.icp:8500/ibmcom`  |`ibmcom`
-**Image pull secret**  | If using a registry that requires authentication, the name of the secret containing credentials  |`None`
-**Image pull policy** | Controls when Docker images are fetched from the registry  | `IfNotPresent`
+**Image pull secret**  | If using a registry that requires authentication, the name of the secret containing credentials.  |`None`
+**Image pull policy** | Controls when Docker images are fetched from the registry.  | `IfNotPresent`
 **File system group ID**   | Specify the ID of the group that owns the file system intended to be used for persistent volumes. Volumes that support ownership management must be owned and writable by this group ID.  |  `None`
-**Insights - help us improve our product**  | Select to enable product usage analytics to be transmitted to IBM for business reporting and product usage understanding.<br /> **Note:** The data gathered helps IBM understand how {{site.data.reuse.long_name}} is used, and can help build knowledge about typical deployment scenarios and common user preferences. The aim is to improve the overall user experience, and the data could influence decisions about future enhancements. For example, information about the configuration options used the most often could help IBM provide better default values for making the installation process easier. The data is only used by IBM and is not shared outside of IBM.<br />If you enable analytics, but want to opt out later, or want more information, [contact us](mailto:eventstreams@uk.ibm.com). | `Not selected (false)`
+**Architecture scheduling preferences**  | Select the platform you want to install {{site.data.reuse.short_name}} on. | `AMD64 platforms`
+
+### Insights - help us improve our product
+
+The following table describes the options for product improvement analytics.
+
+Field  | Description  | Default
+--|---|--
+**Share my product usage data**  | Select to enable product usage analytics to be transmitted to IBM for business reporting and product usage understanding.  |  `Not selected (false)`
+
+**Note:** The data gathered helps IBM understand how {{site.data.reuse.long_name}} is used, and can help build knowledge about typical deployment scenarios and common user preferences. The aim is to improve the overall user experience, and the data could influence decisions about future enhancements. For example, information about the configuration options used the most often could help IBM provide better default values for making the installation process easier. The data is only used by IBM and is not shared outside of IBM.<br />If you enable analytics, but want to opt out later, or want more information, [contact us](mailto:eventstreams@uk.ibm.com).
 
 
 ### Kafka broker settings
@@ -73,12 +85,11 @@ The following table describes the options for configuring Kafka brokers.
 
 Field  | Description  | Default
 --|---|--
-**CPU limit for Kafka brokers**  | The maximum CPU resource that is allowed for each Kafka broker when the broker is heavily loaded expressed in CPU units  |  `1000m`
-**Memory limit for Kafka brokers**  | The maximum amount of memory that will be allocated for each Kafka broker when the broker is heavily loaded. The value should be a plain integer using one of these suffixes: Gi, G, Mi, M  | `2Gi`
-**CPU request for Kafka brokers**  | The expected CPU resource that will be required for each Kafka broker expressed in CPU units  | `1000m`
-**Memory request for Kafka brokers**  | The base amount of memory allocated for each Kafka broker. The value should be a plain integer using one of these suffixes: Gi, G, Mi, M  | `2Gi`
-**Heap size for Kafka broker JVM**  | This should be set to 75% of the memory limit for Kafka brokers | `1500m`
-**Kafka brokers**  | Number of brokers in the Kafka cluster  | `3`
+**CPU limit for Kafka brokers**  | The maximum CPU resource that is allowed for each Kafka broker when the broker is heavily loaded expressed in CPU units.  |  `1000m`
+**Memory limit for Kafka brokers**  | The maximum amount of memory that will be allocated for each Kafka broker when the broker is heavily loaded. The value should be a plain integer using one of these suffixes: Gi, G, Mi, M.  | `2Gi`
+**CPU request for Kafka brokers**  | The expected CPU resource that will be required for each Kafka broker expressed in CPU units.  | `1000m`
+**Memory request for Kafka brokers**  | The base amount of memory allocated for each Kafka broker. The value should be a plain integer using one of these suffixes: Gi, G, Mi, M.  | `2Gi`
+**Kafka brokers**  | Number of brokers in the Kafka cluster.  | `3`
 **Cluster configuration ConfigMap**  | Provide the name of a ConfigMap containing Kafka configuration to apply changes to Kafka's server.properties. See [how to create a ConfigMap](../planning/#configmap-for-kafka-static-configuration) for your installation.  | `None`
 
 ### Kafka persistent storage settings
@@ -142,7 +153,9 @@ The following table describes the options for configuring geo-replicating topics
 
 Field  | Description  | Default
 --|---|--
-**Geo-replicator workers**  | Number of workers to support geo-replication. | `0` (geo-replication off)
+**Geo-replicator workers**  | Number of workers to support geo-replication. | `0`
+
+{{site.data.reuse.geo-rep_note}}
 
 ## Generating your own certificates
 
@@ -152,8 +165,10 @@ You can create your own certificates for configuring external access. When promp
    `openssl req -newkey rsa:2048 -nodes -keyout ca.key -x509 -days 365 -out ca.pem`
 2. Generate a RSA 2048-bit private key:\\
      `openssl genrsa -out es.key 2048`\\
-     Other key lengths and algorithms are also supported. See the following list for supported cipher suites.\\
-     **Note:** In the following list, the string "TLS" is interchangeable with "SSL" and vice versa. For example, where TLS_RSA_WITH_AES_128_CBC_SHA is specified, SSL_RSA_WITH_AES_128_CBC_SHA also applies. For more information about each cipher suite, go to the  [Internet Assigned Numbers Authority (IANA) site](https://www.iana.org/assignments/tls-parameters/tls-parameters.xml) and search for the selected cipher suite ID.\\
+     Other key lengths and algorithms are also supported. See the following lists for supported cipher suites.\\
+     **Note:** In the following lists, the string "TLS" is interchangeable with "SSL" and vice versa. For example, where TLS_RSA_WITH_AES_128_CBC_SHA is specified, SSL_RSA_WITH_AES_128_CBC_SHA also applies. For more information about each cipher suite, go to the  [Internet Assigned Numbers Authority (IANA) site](https://www.iana.org/assignments/tls-parameters/tls-parameters.xml) and search for the selected cipher suite ID.\\
+     
+     ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, the following cipher suites are supported:
      - TLS_RSA_WITH_3DES_EDE_CBC_SHA
      - TLS_RSA_WITH_AES_128_CBC_SHA
      - TLS_RSA_WITH_AES_256_CBC_SHA
@@ -165,6 +180,11 @@ You can create your own certificates for configuring external access. When promp
      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 
+     ![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, the following cipher suites are supported, using TLS 1.2 and later only:
+    - TLS_RSA_WITH_AES_128_GCM_SHA256
+    - TLS_RSA_WITH_AES_256_GCM_SHA384
+    - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+    - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 3. Create a certificate signing request for the key generated in the previous step:\\
    `openssl req -new -key es.key -out es.csr`
 4. Sign the request with the CA certificate created in step 1:\\

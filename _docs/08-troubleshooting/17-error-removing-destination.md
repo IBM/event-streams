@@ -1,0 +1,29 @@
+---
+title: "Unable to remove destination cluster"
+permalink: /troubleshooting/error-removing-destination/
+excerpt: "Error is displayed when trying to remove a destination cluster."
+
+toc: true
+---
+
+## Symptoms
+
+When trying to remove an offline destination cluster, the following error message is displayed in the UI:
+
+```
+Failed to retrieve data for this destination cluster.
+```
+
+## Causes
+
+There could be several reasons, for example, the cluster might be offline, or the service ID of the cluster might have been revoked.
+
+## Resolving the problem
+
+1. Go to your origin cluster. {{site.data.reuse.icp_cli_login}}
+2. Run the following command to start the {{site.data.reuse.long_name}} CLI: `cloudctl es init`
+3. Retrieve destination cluster IDs by using the following command:\\
+   `cloudctl es geo-clusters`\\
+   Look for the destination cluster ID that you want to remove.
+4. Run the following command:\\
+   `cloudctl es geo-cluster-remove --destination <destination-cluster-id> --force`

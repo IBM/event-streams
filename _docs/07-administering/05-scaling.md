@@ -2,7 +2,7 @@
 title: "Scaling"
 permalink: /administering/scaling/
 excerpt: "Scaling"
- 
+
 toc: true
 ---
 
@@ -36,17 +36,13 @@ A description of the syntax for these values can be found in the [Kubernetes doc
 
 ## Increase the amount of memory available to each Kafka broker
 
-To set this at the time of installation, you can use the `--set kafka.resources.limits.memory=<LIMIT> --set kafka.resources.requests.memory=<LIMIT> --set kafka.jvmHeapSize=<HEAPSIZE>` options in your `helm install` command if using the CLI, or enter the values into the **Memory request for Kafka brokers**, **Memory limit for Kafka brokers**, and **Heap size for Kafka broker JVM** fields of the **Configure** page if using the UI.
+To set this at the time of installation, you can use the `--set kafka.resources.limits.memory=<LIMIT> --set kafka.resources.requests.memory=<LIMIT>` options in your `helm install` command if using the CLI, or enter the values into the **Memory request for Kafka brokers** and **Memory limit for Kafka brokers** fields of the **Configure** page if using the UI.
 
-The first two `LIMIT` values apply to the containers that the Kafka brokers run in. The third `HEAPSIZE` value is used by the JVM running the Kafka broker. Set this to be less than the memory available to the container overall. Ensure you set the heap size to approximately 75% of the memory limit for the containers.
-
-**Note:** The syntax for these values is different.
-The syntax for the container memory limits can be found in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory).
-The heap size can be specified in megabytes (m) or gigabytes (g). For example: `2g` sets a maximum heap size of 2GB.
+The syntax for these values can be found in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory).
 
 To modify this for an existing {{site.data.reuse.long_name}} installation, use the following command:
 
-`helm upgrade --reuse-values --set kafka.resources.limits.memory=<LIMIT> --set kafka.resources.requests.memory=<LIMIT> --set kafka.jvmHeapSize=<HEAPSIZE> <release_name> <charts.tgz> --tls`
+`helm upgrade --reuse-values --set kafka.resources.limits.memory=<LIMIT> --set kafka.resources.requests.memory=<LIMIT> <release_name> <charts.tgz> --tls`
 
 {{site.data.reuse.helm_charts_note}}
 
@@ -60,15 +56,9 @@ The **metrics reporter** component captures the monitoring statistics for cluste
 
 To set this at the time of installation, you can use the following options:\\
 `--set kafka.metricsReporterResources.limits.memory=<LIMIT>`\\
-`--set kafka.metricsReporterResources.requests.memory=<LIMIT>`\\
-`--set kafka.metricsReporterJvmHeapSize=<HEAPSIZE>`
+`--set kafka.metricsReporterResources.requests.memory=<LIMIT>`
 
-The first two `LIMIT` values apply to the containers that the metrics reporters run in. The third `HEAPSIZE` value is used by the JVM running the metrics reporter. Set this to be less than the memory available to the container overall. Ensure you set the heap size to approximately 75% of the memory limit for the containers.
-
-**Note:** The syntax for these values is different.
-The syntax for the container memory limits can be found in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory).
-
-The heap size can be specified in megabytes (m) or gigabytes (g). For example: `2g` sets a maximum heap size of 2GB.
+A description of the syntax for these values can be found in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory).
 
 The **message indexer** indexes the messages on topics to allow them to be searched in the {{site.data.reuse.long_name}} UI. The memory requirements for this component will increase with the cluster message throughput.
 
@@ -78,7 +68,7 @@ The syntax for the container memory limits can be found in the [Kubernetes docum
 
 To modify this for an existing {{site.data.reuse.long_name}} installation, use the following command:
 
-`helm upgrade --reuse-values  --set kafka.metricsReporterResources.limits.memory=<LIMIT> --set kafka.metricsReporterResources.requests.memory=<LIMIT> --set kafka.metricsReporterJvmHeapSize=<HEAPSIZE>  --set messageIndexing.resources.limits.memory=<LIMIT>  <release_name> <charts.tgz> --tls`
+`helm upgrade --reuse-values  --set kafka.metricsReporterResources.limits.memory=<LIMIT> --set kafka.metricsReporterResources.requests.memory=<LIMIT> --set messageIndexing.resources.limits.memory=<LIMIT>  <release_name> <charts.tgz> --tls`
 
 {{site.data.reuse.helm_charts_note}}
 
@@ -104,7 +94,7 @@ The speed of the storage available to Kafka brokers will impact performance.
 Set this at the time of installation with the `--set kafka.persistence.dataPVC.storageClassName=<STORAGE_CLASS>` option in your `helm install` command if using the CLI, or by entering the desired storage class into the **Storage class name** field of the **Kafka persistent storage settings** section of the **Configure** page if using the UI.
 
 
-For more information about available storage classes, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/create_storage_class.html).
+For more information about available storage classes, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/create_storage_class.html).
 
 ## Increase the disk space available to each Kafka broker
 

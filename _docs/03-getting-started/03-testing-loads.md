@@ -2,7 +2,6 @@
 title: "Creating and testing message loads "
 permalink: /getting-started/testing-loads/
 excerpt: "."
-
 toc: true
 ---
 
@@ -37,11 +36,31 @@ Before running the producer to test loads, you must specify the following detail
 
 | Attribute                             | Description                                                                                                            |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `bootstrap.servers`                     | The URL used for bootstrapping knowledge about the rest of the cluster. You can find this address in the {{site.data.reuse.long_name}} UI. Click the **Topics** tab, click the name of a topic, and click the **Connection information** tab. You can find the address in the **Broker URL** field. |                                              |
-| `ssl.truststore.location`               | The location of the JKS keystore used to securley communicate with your {{site.data.reuse.long_name}} instance. You can downloaded the JKS keystore file from the {{site.data.reuse.long_name}} UI. Click the **Topics** tab, click the name of a topic, and click the **Connection information** tab. Then go to the **Certificates** section and click **Download Java truststore**. Set the `ssl.truststore.location` to the full path and name of the downloaded file.       |
-| `sasl.jaas.config`                      | An API key is needed to authorize production to your topic, and must be added to the 'password' string. To generate API keys, go to the {{site.data.reuse.long_name}} UI. Click the **Topics** tab, click the name of a topic, and click the **Connection information** tab. Go to the **Credentials and access control** section and follow the instructions.       |
+| `bootstrap.servers`                     | The URL used for bootstrapping knowledge about the rest of the cluster. You can find this address in the {{site.data.reuse.short_name}} UI as described [later](#obtaining-configuration-details).  |                                              |
+| `ssl.truststore.location`               | The location of the JKS keystore used to securley communicate with your {{site.data.reuse.long_name}} instance. You can downloaded the JKS keystore file from the {{site.data.reuse.short_name}} UI as described [later](#obtaining-configuration-details).        |
+| `sasl.jaas.config`                      | An API key is needed to authorize production to your topic, and must be added to the 'password' string. To generate API keys, go to the {{site.data.reuse.short_name}} UI as described [later](#obtaining-configuration-details).        |
+
+### Obtaining configuration details
+
+![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, obtain the required configuration details as follows:
+1. Log in to your {{site.data.reuse.long_name}} UI.
+2. Click the **Topics** tab to view the topic list, click the name of a topic.
+3. Click the **Connection information** tab.
+4. Locate the details:\\
+    - For the `bootstrap.servers`, copy the address from the **Broker URL** field.
+    - To downloaded the JKS keystore file, go to the **Certificates** section and click **Download Java truststore**. Set the `ssl.truststore.location` to the full path and name of the downloaded file.
+    - To generate API keys, go to the **Credentials and access control** section and follow the instructions.
 
 **Important:** To have access to the **Connection information** tab in the UI, you must have at least one topic. For example, if you are just starting out, use the [starter application to generate topics](../generating-starter-app/).
+
+![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, obtain the required configuration details as follows:
+1. Log in to your {{site.data.reuse.long_name}} UI.
+2. Click **Connect to this cluster** on the right.
+3. Go to the **Connect a client** tab.
+4. Locate the details:\\
+   - For the `bootstrap.servers`, copy the address from the **Bootstrap server** section.
+   - To downloaded the JKS keystore file, go to the **Certificates** section, and download the server certificate from the **Java truststore** section. Set the `ssl.truststore.location` to the full path and name of the downloaded file.
+   - To generate API keys, go to the **API key** section and follow the instructions.
 
 You can secure access to your topics as described in [managing access](../../security/managing-access/).
 

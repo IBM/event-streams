@@ -13,15 +13,15 @@ Consider the following when planning your installation.
 
 The {{site.data.reuse.ce_long}} is a free version intended for trial and demonstration purposes. It can be installed and used without charge.
 
-You can [install the {{site.data.reuse.ce_short}}](../installing) from the catalog included with {{site.data.reuse.icp}}.
+You can [install the {{site.data.reuse.ce_short}}](../installing/#trying-out-event-streams) from the catalog included with {{site.data.reuse.icp}}.
 
 ## {{site.data.reuse.long_name}}
 
 {{site.data.reuse.long_name}} is the paid-for version intended for enterprise use, and includes full IBM support and additional features such as geo-replication.
 
-You can [install {{site.data.reuse.long_name}}](../installing) by downloading the image from IBM Passport Advantage, and making it available in the {{site.data.reuse.icp}} catalog.
+You can [install {{site.data.reuse.long_name}}](../installing/#installing-ibm-event-streams) by downloading the image from IBM Passport Advantage, and making it available in the {{site.data.reuse.icp}} catalog.
 
-**Note:** If you do not have {{site.data.reuse.icp}} already, {{site.data.reuse.long_name}} includes entitlement for {{site.data.reuse.icp_foundation}} which you can download from IBM Passport Advantage as well, and [install as a prerequisite](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers.html). {{site.data.reuse.icp_foundation}} can only be used to deploy {{site.data.reuse.long_name}}. No other service can be deployed without [upgrading {{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/getting_started/bundles.html).
+**Note:** If you do not have {{site.data.reuse.icp}} already, {{site.data.reuse.long_name}} includes entitlement to {{site.data.reuse.icp_foundation}} which you can download from IBM Passport Advantage as well, and [install as a prerequisite](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install_containers.html). {{site.data.reuse.icp_foundation}} can only be used to deploy {{site.data.reuse.long_name}}. No other service can be deployed without [upgrading {{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/getting_started/bundles.html).
 
 <!--
 **Note:** {{site.data.reuse.long_name}} Foundation is also available for embedding in IBM products.
@@ -29,7 +29,7 @@ You can [install {{site.data.reuse.long_name}}](../installing) by downloading th
 
 ## Namespaces
 
-Create namespaces to organize your {{site.data.reuse.long_name}} deployments and control user access to them. When you deploy {{site.data.reuse.long_name}}, you should choose a namespace which is dedicated to {{site.data.reuse.long_name}}. This is because {{site.data.reuse.long_name}} uses network security policies to restrict network connections between its internal components. In {{site.data.reuse.icp}}, applications are created under namespaces in the deployed {{site.data.reuse.icp}} clusters. For more information, see [how to create namespaces](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/user_management/create_project.html).
+Create namespaces to organize your {{site.data.reuse.long_name}} deployments and control user access to them. When you deploy {{site.data.reuse.long_name}}, you should choose a namespace which is dedicated to {{site.data.reuse.long_name}}. This is because {{site.data.reuse.long_name}} uses network security policies to restrict network connections between its internal components. In {{site.data.reuse.icp}}, applications are created under namespaces in the deployed {{site.data.reuse.icp}} clusters. For more information, see [how to create namespaces](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/user_management/create_project.html).
 
 ## Persistent storage
 
@@ -39,7 +39,7 @@ If you plan to have persistent volumes, [consider the disk space capacity](../ca
 
 If persistence is enabled, each Kafka broker and ZooKeeper server requires one physical volume each. You either need to create a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static) for each Kafka broker and ZooKeeper server, or specify a storage class that supports [dynamic provisioning](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#dynamic). Kafka and ZooKeeper can use different storage classes to control how physical volumes are allocated.
 
-See the {{site.data.reuse.icp}} documentation for information about [creating persistent volumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/pv_land.html) and [creating a storage class that supports dynamic provisioning](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/sc_land.html). For both, you must have the {{site.data.reuse.icp}} Cluster administrator role.
+See the {{site.data.reuse.icp}} documentation for information about [creating persistent volumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/pv_land.html) and [creating a storage class that supports dynamic provisioning](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/sc_land.html). For both, you must have the {{site.data.reuse.icp}} Cluster administrator role.
 
 **Important:** When creating persistent volumes to use with {{site.data.reuse.long_name}}, ensure you set **Access mode** to `ReadWriteOnce`.
 
@@ -76,6 +76,8 @@ You can deploy multiple instances of {{site.data.reuse.long_name}} and use the i
 
 [Prepare your destination cluster](../configuring/#setting-geo-replication-nodes) by setting the number of geo-replication worker nodes during installation.
 
+{{site.data.reuse.geo-rep_note}}
+
 ## Connecting clients
 
 By default, Kafka client applications connect to the {{site.data.reuse.icp}} master node directly without any configuration required. If you want clients to connect through a different route, [specify the target endpoint](../configuring/#configuring-external-access) host name or IP address when configuring your installation.
@@ -88,11 +90,11 @@ Consider the capacity requirements of your deployment before installing {{site.d
 
 {{site.data.reuse.icp}} uses the Elastic Stack for managing logs (Elasticsearch, Logstash, and Kibana products). {{site.data.reuse.long_name}} logs are written to `stdout` and are picked up by the default Elastic Stack setup.
 
-Consider setting up the {{site.data.reuse.icp}} logging for your environment to help resolve problems with your deployment and aid general troubleshooting. See the [{{site.data.reuse.icp}} documentation about logging](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_metrics/logging_elk.html) for information about the built-in Elastic Stack.
+Consider setting up the {{site.data.reuse.icp}} logging for your environment to help resolve problems with your deployment and aid general troubleshooting. See the [{{site.data.reuse.icp}} documentation about logging](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_metrics/logging_elk.html) for information about the built-in Elastic Stack.
 
 As part of setting up the {{site.data.reuse.icp}} logging for {{site.data.reuse.long_name}}, ensure you consider the following:
-* [Capacity planning guidance](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_metrics/capacity_planning.html): set up your system to have sufficient resources towards the capture, storage, and management of logs.
-* [Log retention](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_metrics/logging_elk.html#curator-usage-in-ibm-cloud-private): The logs captured using the Elastic Stack persist during restarts. However, logs older than a day are deleted at midnight by default to prevent log data from filling up available storage space. Consider changing the log data retention in line with your capacity planning. Longer retention of logs provides access to older data that might help troubleshoot problems.
+* [Capacity planning guidance](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_metrics/capacity_planning.html): set up your system to have sufficient resources towards the capture, storage, and management of logs.
+* [Log retention](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_metrics/logging_elk.html#curator-usage-in-ibm-cloud-private): The logs captured using the Elastic Stack persist during restarts. However, logs older than a day are deleted at midnight by default to prevent log data from filling up available storage space. Consider changing the log data retention in line with your capacity planning. Longer retention of logs provides access to older data that might help troubleshoot problems.
 
 You can use log data to investigate any problems affecting your [system health](../../administering/deployment-health/).
 
