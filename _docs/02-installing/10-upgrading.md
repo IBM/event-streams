@@ -14,8 +14,8 @@ Use the CLI to upgrade {{site.data.reuse.short_name}}. You cannot use the UI to 
 <!--## Using the CLI-->
 
 1. Ensure you have the latest helm chart version available on your local file system.\\
-   - To download the charts using the UI, follow the instructions [here](../../administering/helm-upgrade-command/).
-   - If you [downloaded](../../installing/downloading/) the archive from IBM Passport Advantage, the chart file is included in the archive. Ensure it is available to your {{site.data.reuse.icp}} instance.
+   - You can [retrieve](../../administering/helm-upgrade-command/) the charts from the UI.
+   - Alternatively, if you [downloaded](../../installing/downloading/) the archive from IBM Passport Advantage, the chart file is included in the archive. Ensure it is available to your {{site.data.reuse.icp}} instance.
 2. {{site.data.reuse.icp_cli_login}}\\
    **Important:** You must have the Cluster Administrator role to install the chart.
 3. Optional: Due to a known defect in the Kafka health check, the upgrade process creates a short outage period whilst the upgrade takes place where messages cannot be sent to topics. If you want to avoid an outage, follow these steps to upgrade the health check before upgrading {{site.data.reuse.short_name}}:\\
@@ -23,13 +23,23 @@ Use the CLI to upgrade {{site.data.reuse.short_name}}. You cannot use the UI to 
       `kubectl edit sts <release-name>-ibm-es-kafka-sts`\\
       This command opens the stateful set configuration in the default editor (for example, the vi editor).
    2. There are four `image:` tags in the statefulset definition, search for the tag containing the word `healthcheck`.\\
-      An example of the string for a {{site.data.reuse.ce_short}} installation is as follows - if you installed from an image downloaded from IBM Passport Advantage, your {{site.data.reuse.icp}} docker registry name would be displayed instead of `ibmcom`:\\
+      An example of the string for a {{site.data.reuse.ce_short}} installation is as follows:\\
       ```
       image: ibmcom/eventstreams-healthcheck-ce:2018-09-18-11.23.15-1a8f35a71d2b2edc91bf1eccf664d821e04f8420
       ```
+      If you installed from an image downloaded from IBM Passport Advantage, your {{site.data.reuse.icp}} docker registry name would be displayed instead of `ibmcom`, and the string would not have `ce` included.
    3. Update the tag with the unique identifier after `ibmcom/`.\\
       **Note:** The `ibmcom/` can also be `docker/` or a different `<repository-name>/`.\\
-      The following example shows the changing of the tag after `ibmcom/`:\\
+      - For {{site.data.reuse.ce_short}} installations, the unique identifier is as follows:\\
+         ```
+         eventstreams-healthcheck-ce-icp-linux-amd64:2018-11-21-16.21.30-9947d87
+         ```
+      - For {{site.data.reuse.short_name}} downloaded from IBM Passport Advantage, the unique identifier is as follows:\\
+         ```
+         eventstreams-healthcheck-icp-linux-amd64:2018-11-21-16.21.30-9947d87
+         ```
+         \\
+         The following example shows the changing of the tag for a {{site.data.reuse.ce_short}} installation after `ibmcom/`:\\
       From
       ```
       ibmcom/eventstreams-healthcheck-ce:2018-09-18-11.23.15-1a8f35a71d2b2edc91bf1eccf664d821e04f8420

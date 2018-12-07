@@ -1,10 +1,12 @@
 ---
-title: "Running the IBM MQ sink connector"
+title: "Running the MQ sink connector"
 permalink: /connecting/mq/sink/
 excerpt: "Running MQ sink connector"
 
 toc: true
 ---
+
+You can use the {{site.data.reuse.kafka-connect-mq-sink-short}} to copy data from {{site.data.reuse.long_name}} or Apache Kafka into IBM MQ. The connector copies messages from a Kafka topic into a target MQ queue.
 
 This document contains steps for running the connector in standalone mode for development and test purposes.
 

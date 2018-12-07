@@ -22,8 +22,14 @@ icp_foundation: "IBM Cloud Private Foundation"
 # {{site.data.reuse.kafka-connect-mq-source}}
 kafka-connect-mq-source: "Kafka Connect source connector for IBM MQ"
 
+# {{site.data.reuse.kafka-connect-mq-source-short}}
+kafka-connect-mq-source-short: "MQ source connector"
+
 # {{site.data.reuse.kafka-connect-mq-sink}}
 kafka-connect-mq-sink: "Kafka Connect sink connector for IBM MQ"
+
+# {{site.data.reuse.kafka-connect-mq-sink-short}}
+kafka-connect-mq-sink-short: "MQ sink connector"
 
 # Task steps
 

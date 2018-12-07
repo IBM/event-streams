@@ -87,10 +87,12 @@ docs:
     children:
       - title: "Connecting to IBM MQ"
         url: /connecting/mq/
-      - title: "Running the IBM MQ source connector"
+      - title: "Running the MQ source connector"
         url: /connecting/mq/source/
-      - title: "Running the IBM MQ sink connector"
+      - title: "Running the MQ sink connector"
         url: /connecting/mq/sink/
+      - title: "Running connectors on IBM z/OS"
+        url: /connecting/mq/zos/
   - title: Administering
     children:
       - title: "Monitoring deployment health"
@@ -140,6 +142,8 @@ docs:
         url: /troubleshooting/kafka-connection-issue/
       - title: "Unable to remove destination cluster"
         url: /troubleshooting/error-removing-destination/
+      - title: "Geo-replication fails to start"
+        url: /troubleshooting/georeplication-connect-error/
 
   - title: FAQ
     url: /faq/

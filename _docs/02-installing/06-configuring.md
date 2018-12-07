@@ -166,8 +166,8 @@ You can create your own certificates for configuring external access. When promp
 2. Generate a RSA 2048-bit private key:\\
      `openssl genrsa -out es.key 2048`\\
      Other key lengths and algorithms are also supported. See the following lists for supported cipher suites.\\
-     **Note:** In the following lists, the string "TLS" is interchangeable with "SSL" and vice versa. For example, where TLS_RSA_WITH_AES_128_CBC_SHA is specified, SSL_RSA_WITH_AES_128_CBC_SHA also applies. For more information about each cipher suite, go to the  [Internet Assigned Numbers Authority (IANA) site](https://www.iana.org/assignments/tls-parameters/tls-parameters.xml) and search for the selected cipher suite ID.\\
-     
+     **Note:** In the following lists, the string "TLS" is interchangeable with "SSL" and vice versa. For example, where TLS_RSA_WITH_AES_128_CBC_SHA is specified, SSL_RSA_WITH_AES_128_CBC_SHA also applies. For more information about each cipher suite, go to the  [Internet Assigned Numbers Authority (IANA) site](https://www.iana.org/assignments/tls-parameters/tls-parameters.xml) and search for the selected cipher suite ID.
+
      ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, the following cipher suites are supported:
      - TLS_RSA_WITH_3DES_EDE_CBC_SHA
      - TLS_RSA_WITH_AES_128_CBC_SHA

@@ -1,10 +1,12 @@
 ---
-title: "Running the IBM MQ source connector"
+title: "Running the MQ source connector"
 permalink: /connecting/mq/source/
 excerpt: "Running MQ source connector"
 
 toc: true
 ---
+
+You can use the {{site.data.reuse.kafka-connect-mq-source-short}} to copy data from IBM MQ into {{site.data.reuse.long_name}} or Apache Kafka. The connector copies messages from a source MQ queue to a target Kafka topic.
 
 This document contains steps for running the connector in standalone mode for development and test purposes.
 
@@ -73,7 +75,7 @@ You can also send IBM MQ messages to Apache Kafka running locally on your machin
 5. Click the **Connection information** tab.
 6. Copy the **Broker URL**. This is the Kafka bootstrap server.
 7. In the **Certificates** section, click **Download Java truststore**, and choose a location for the downloaded file that can be accessed by the Kafka Connect worker.
-8. Generate an API key authorized to connect to the cluster and produce to the topic, as described [here](../../../getting-started/client/#securing-the-connection).
+8. Generate an API key authorized to connect to the cluster and produce to the topic, as described in [Securing the connection](../../../getting-started/client/#securing-the-connection).
 
 ![Event Streams 2018.3.1 and later icon](../../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, use the following steps:
 1. Log in to your {{site.data.reuse.long_name}} UI.

@@ -2,11 +2,21 @@
 title: "Connecting to IBM MQ"
 permalink: /connecting/mq/
 excerpt: "Connecting to MQ."
-
 toc: true
 ---
 
-You can use the {{site.data.reuse.kafka-connect-mq-source}} to copy data from IBM MQ into {{site.data.reuse.long_name}} or Apache Kafka. The connector copies messages from a source MQ queue to a target Kafka topic.
+You can set up connections between IBM MQ and Apache Kafka or {{site.data.reuse.long_name}} systems.
+
+Connectors are available for copying data in both directions.
+
+## Available connectors
+
+ - [{{site.data.reuse.kafka-connect-mq-source}}](../mq/source/):\\
+    You can use the {{site.data.reuse.kafka-connect-mq-source-short}} to copy data from IBM MQ into {{site.data.reuse.long_name}} or Apache Kafka. The connector copies messages from a source MQ queue to a target Kafka topic.
+ - [{{site.data.reuse.kafka-connect-mq-sink}}](../mq/sink/):\\
+    You can use the {{site.data.reuse.kafka-connect-mq-sink-short}} to copy data from {{site.data.reuse.long_name}} or Apache Kafka into IBM MQ. The connector copies messages from a Kafka topic into a MQ queue.
+
+ **Important:** If you want to use IBM MQ connectors on IBM z/OS, you must [prepare your setup first](../mq/zos/).
 
 ## When to use
 
@@ -27,8 +37,3 @@ When you run Kafka Connect with the distributed worker, you still use a worker c
 For getting started and problem diagnosis, the simplest setup is to run only one connector in each standalone worker. Kafka Connect workers print a lot of information and it's easier to understand if the messages from multiple connectors are not interleaved.
 
 **Note:** You can use an existing IBM MQ or Kafka installation, either locally or on the cloud. For performance reasons, it is recommended to run the Kafka Connect worker close to the queue manager to minimise the effect of network latency. For example, if you have a queue manager in your datacenter and Kafka in the cloud, it's best to run the Kafka Connect worker in your datacenter.
-
-## Available Connectors
-
- - [IBM MQ source connector](../mq/source/)
- - [IBM MQ sink connector](../mq/sink/)

@@ -11,7 +11,7 @@ toc: false
 
 To run the script:
 
-1. The script is included in the {{site.data.reuse.long_name}} chart file. You can retrieve the chart file as described [here](../../administering/helm-upgrade-command/).\\
+1. The script is included in the {{site.data.reuse.long_name}} chart file, which you can [retrieve](../../administering/helm-upgrade-command/) from the UI or the downloaded package.\\
    Alternatively, you can download the script from [GitHub](https://github.com/IBM/charts/tree/master/stable/ibm-eventstreams-dev/additionalFiles).
 2. Ensure you have installed the Kubernetes command line tool and the {{site.data.reuse.icp}} CLI as noted in the [installation prerequisites](../../installing/prerequisites/).
 3. {{site.data.reuse.icp_cli_login}}

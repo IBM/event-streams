@@ -14,7 +14,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") {{site.data.reuse.long_name}} 2018.3.1 and later is supported on the following systems:
 - {{site.data.reuse.icp}} version 3.1.0 running on Linux® 64-bit (x86_64) systems.
-- {{site.data.reuse.icp}} version 3.1.1 running on Linux® 64-bit (x86_64) and IBM® Z systems.
+- {{site.data.reuse.icp}} version 3.1.1 running on Linux® 64-bit (x86_64) systems and Linux on IBM® Z systems.
 
 Ensure you have the following set up for your {{site.data.reuse.icp}} environment:
   * Install [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install.html). \\
@@ -126,11 +126,11 @@ The CPU and memory limits for some components are not limited by the chart, so t
 
 ## PodSecurityPolicy requirements
 
-To instsall the {{site.data.reuse.short_name}} chart, you must have the `ibm-restricted-psp` PodSecurityPolicy selected for the target namespace.
+To install the {{site.data.reuse.short_name}} chart, you must have the `ibm-restricted-psp` PodSecurityPolicy selected for the target namespace.
 
 You can define the PodSecurityPolicy when creating the [namespace](../planning/#namespaces) for your installation.
 
-For more information about PodSecurityPolicy definitions, see [here](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/security.html).
+For more information about PodSecurityPolicy definitions, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/security.html).
 
 ## Network requirements
 
