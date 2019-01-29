@@ -99,6 +99,8 @@ docs:
         url: /administering/deployment-health/
       - title: "Monitoring Kafka cluster health"
         url: /administering/cluster-health/
+      - title: "Monitoring health with external tools"
+        url: /administering/external-monitoring/
       - title: "Modifying configuration settings"
         url: /administering/modifying-configs/
       - title: "Running Helm upgrade commands"
