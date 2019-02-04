@@ -12,6 +12,7 @@ about: Did something go wrong? We are here to help.
 * Describe the application flow or what steps were being taken when the problem occurred
 * If the issue is reproducible provide a set of instructions describing how to reproduce it, including screenshots if they might assist
 * Include any error messages, stack traces and logs associated with the error, in full, in text format (ie not a screenshot)
+* Run the log collection script available at https://github.com/IBM/charts/blob/master/stable/ibm-eventstreams-dev/additionalFiles/get-logs.sh and attach the output to this issue
 * Describe the expected behaviour
 * Did this used to work? If so what has changed, for example was any maintenance of the system performed?
 
