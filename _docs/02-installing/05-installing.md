@@ -12,7 +12,7 @@ You can also install a basic deployment of {{site.data.reuse.short_name}} to [tr
 ## Before you begin
 
 - Ensure you have set up your environment [according to the prerequisites](../prerequisites).
-- Ensure you have [planned for your installation](../planning), including setting up a namespace, and planning for persistent volumes if required, or creating a ConfigMap for Kafka static configuration.
+- Ensure you have [planned for your installation](../planning), such as setting up a namespace, planning for persistent volumes if required, and creating a ConfigMap for Kafka static configuration.
 - Ensure you have [downloaded](../downloading) the installation image and made it available in the {{site.data.reuse.icp}} catalog.
 
 ## Preparing the repository
@@ -28,7 +28,7 @@ Create an image pull secret for the [namespace](../planning/#namespaces) where y
 
 To create a secret, use the following command:
 
-`kubectl create secret docker-registry regcred --docker-server=<cluster_CA_domain>:8500 --docker-username=<user-name> --docker-password=<password> --docker-email=<your-email> -n <namespace>`
+`kubectl create secret docker-registry regcred --docker-server=<cluster_CA_domain>:8500 --docker-username=<user-name> --docker-password=<password> --docker-email=<your-email> -n <namespace_for_event_streams>`
 
 For example:
 
@@ -41,20 +41,20 @@ For more information about creating image pull secrets, see the [{{site.data.reu
 Create an image policy for the internal docker repository. The policy enables images to be retrieved during installation.\\
 To create an image policy:
 
-1. Create a `.yaml` file with the following content, then change `<cluster_CA_domain>` to the correct value for your {{site.data.reuse.icp}} environment, and change the `namespace` value to where you intend to install {{site.data.reuse.long_name}}:
+1. Create a `.yaml` file with the following content, then replace `<cluster_CA_domain>` with the correct value for your {{site.data.reuse.icp}} environment, and replace the `<namespace_for_event_streams>` value with the name where you intend to install {{site.data.reuse.long_name}} (set as `-n event-streams` in the previous example):
 ```
- apiVersion: securityenforcement.admission.cloud.ibm.com/v1beta1
- kind: ImagePolicy
- metadata:
+apiVersion: securityenforcement.admission.cloud.ibm.com/v1beta1
+kind: ImagePolicy
+metadata:
   name: image-policy
-  namespace: event-streams
- spec:
+  namespace: <namespace_for_event_streams>
+spec:
   repositories:
   - name: docker.io/*
-        policy: null
+    policy: null
   - name: <cluster_CA_domain>:8500/*
-        policy: null
- ```
+    policy: null
+```
 2. Run the following command: `kubectl apply -f <filename>.yaml`
 
 For more information about container image security, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_images/image_security.html).

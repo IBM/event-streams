@@ -46,8 +46,8 @@ See the updated tables for the {{site.data.reuse.short_name}} [resource requirem
 
 Any difference in features or behaviour between {{site.data.reuse.short_name}} releases is highlighted in the documentation using the following graphics:
 
-- ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") Applicable to {{site.data.reuse.long_name}} 2018.3.0 only.
 - ![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") Applicable to {{site.data.reuse.long_name}} 2018.3.1 and later.
+- ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") Applicable to {{site.data.reuse.long_name}} 2018.3.0 only.
 
 ## 2018.3.0 release
 

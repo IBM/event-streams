@@ -42,6 +42,16 @@ Before running the producer to test loads, you must specify the following detail
 
 ### Obtaining configuration details
 
+![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, obtain the required configuration details as follows:
+1. Log in to your {{site.data.reuse.long_name}} UI.
+2. Click **Connect to this cluster** on the right.
+3. Go to the **Connect a client** tab.
+4. Locate the details:\\
+   - For the `bootstrap.servers`, copy the address from the **Bootstrap server** section.
+   - To downloaded the JKS keystore file, go to the **Certificates** section, and download the server certificate from the **Java truststore** section. Set the `ssl.truststore.location` to the full path and name of the downloaded file.
+   - To generate API keys, go to the **API key** section and follow the instructions.
+
+
 ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, obtain the required configuration details as follows:
 1. Log in to your {{site.data.reuse.long_name}} UI.
 2. Click the **Topics** tab to view the topic list, click the name of a topic.
@@ -52,15 +62,6 @@ Before running the producer to test loads, you must specify the following detail
     - To generate API keys, go to the **Credentials and access control** section and follow the instructions.
 
 **Important:** To have access to the **Connection information** tab in the UI, you must have at least one topic. For example, if you are just starting out, use the [starter application to generate topics](../generating-starter-app/).
-
-![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, obtain the required configuration details as follows:
-1. Log in to your {{site.data.reuse.long_name}} UI.
-2. Click **Connect to this cluster** on the right.
-3. Go to the **Connect a client** tab.
-4. Locate the details:\\
-   - For the `bootstrap.servers`, copy the address from the **Bootstrap server** section.
-   - To downloaded the JKS keystore file, go to the **Certificates** section, and download the server certificate from the **Java truststore** section. Set the `ssl.truststore.location` to the full path and name of the downloaded file.
-   - To generate API keys, go to the **API key** section and follow the instructions.
 
 You can secure access to your topics as described in [managing access](../../security/managing-access/).
 

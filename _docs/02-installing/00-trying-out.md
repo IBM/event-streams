@@ -1,11 +1,11 @@
 ---
-title: "Trying out"
+title: "Trying out Event Streams"
 permalink: /installing/trying-out/
 excerpt: "Install a basic deployment to try out IBM Event Streams."
 toc: false
 ---
 
-To try {{site.data.reuse.short_name}}, you can install a basic deployment of the {{site.data.reuse.ce_short}}.
+To try out {{site.data.reuse.short_name}}, you can install a basic deployment of the {{site.data.reuse.ce_short}}.
 
 {{site.data.reuse.ce_long}} is a free version intended for trial and demonstration purposes. It can be installed and used without charge.
 

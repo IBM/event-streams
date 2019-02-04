@@ -10,11 +10,17 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ## {{site.data.reuse.icp}} environment
 
-![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") {{site.data.reuse.long_name}} 2018.3.0 is supported on {{site.data.reuse.icp}} version 3.1.0 running on Linux® 64-bit (x86_64) systems only.
+![Event Streams 2019.1.1 and later icon](../../images/2019.1.1.svg "Event Streams 2019.1.1.") {{site.data.reuse.long_name}} 2019.1.1 is supported on the following systems:
+- {{site.data.reuse.icp}} version 3.1.1 and 3.1.2 running on Linux® 64-bit (x86_64) systems and Linux on IBM® Z systems.
+- {{site.data.reuse.icp}} version 3.1.1 and 3.1.2 running on Red Hat OpenShift Container Platform versions 3.9, 3.10, and 3.11.
 
-![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") {{site.data.reuse.long_name}} 2018.3.1 and later is supported on the following systems:
-- {{site.data.reuse.icp}} version 3.1.0 running on Linux® 64-bit (x86_64) systems.
+**Note:** {{site.data.reuse.long_name}} 2019.1.1 is planned to be released on 29 March 2019.
+
+![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Event Streams 2018.3.1.") {{site.data.reuse.long_name}} 2018.3.1  is supported on the following systems:
 - {{site.data.reuse.icp}} version 3.1.1 running on Linux® 64-bit (x86_64) systems and Linux on IBM® Z systems.
+- {{site.data.reuse.icp}} version 3.1.0 running on Linux® 64-bit (x86_64) systems.
+
+![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Event Streams 2018.3.0.") {{site.data.reuse.long_name}} 2018.3.0 is supported on {{site.data.reuse.icp}} version 3.1.0 running on Linux® 64-bit (x86_64) systems only.
 
 Ensure you have the following set up for your {{site.data.reuse.icp}} environment:
   * Install [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install.html). \\

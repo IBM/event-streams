@@ -17,9 +17,9 @@ Log in to your {{site.data.reuse.long_name}} installation. To determine the {{si
    **Note:** You can also determine the {{site.data.reuse.long_name}} UI URL by using the CLI. Click the release name and scroll to the **Notes** section at the bottom of the page and follow the instructions. You can then use the URL to log in.
 5. Use your {{site.data.reuse.icp}} administrator user name and password to access the UI. Use the same username and password as you use to log in to {{site.data.reuse.icp}}.
 
-From the **Getting started** page, you can learn about the concepts of the underlying techcnology, explore what {{site.data.reuse.long_name}} has to offer, and even [generate starter application code](../generating-starter-app) that lets you learn more about writing applications.
+From the **Getting started** page, you can start exploring {{site.data.reuse.short_name}} through a simulated topic, or through learning about the concepts of the underlying technology. You can also [generate a starter application](../generating-starter-app) that lets you learn more about writing applications.
 
-You can also [test message loads](../testing-loads) to determine the best setup for your environment.
+For more useful applications, tools, and connectors, go to the **Toolbox** tab.
 
 ## Logging out
 

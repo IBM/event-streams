@@ -30,16 +30,16 @@ Create a properties file with the following content:
 ```
 security.protocol=SASL_SSL
 ssl.protocol=TLSv1.2
-ssl.truststore.location=TRUSTSTORE_FILE
-ssl.truststore.password=TRUSTSTORE_PASSWORD
+ssl.truststore.location=<certs.jks_file_location>
+ssl.truststore.password=<truststore_password>
 sasl.mechanism=PLAIN
-sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="token" password="APIKEY";
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="token" password="<api_key>";
 ```
 
-Replace `TRUSTSTORE_FILE` with the location of a trust store file containing the server certificate (for example, `certs.jks`), `TRUSTSTORE_PASSWORD` with the password for the trust store and `APIKEY` with an API key able to access the {{site.data.reuse.long_name}} deployment.
+Replace `<certs.jks_file_location>` with the location of a trust store file containing the server certificate (for example, `certs.jks`), `<truststore_password>` with the password for the trust store and `<api_key>` with an API key able to access the {{site.data.reuse.long_name}} deployment.
 
-When running the `kafka-console-producer.sh` command include the `--producer.config PRODUCER_PROPERTIES` option, replacing the `PRODUCER_PROPERTIES` with the name of the property file. For example:
+When running the `kafka-console-producer.sh` command, include the `--producer.config <properties_file>` option, replacing `<properties_file>` with the name of the property file and the path to it. For example:
 
 ```
-kafka-console-producer.sh --broker-list <brokerIP>:<bootstrapPort> --topic <topic> --producer.config producer.properties
+kafka-console-producer.sh --broker-list <brokerIP>:<bootstrapPort> --topic <topic> --producer.config <properties_file>
 ```

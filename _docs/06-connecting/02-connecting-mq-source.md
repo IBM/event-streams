@@ -67,16 +67,6 @@ To send messages from IBM MQ to {{site.data.reuse.long_name}}, create a topic an
 
 You can also send IBM MQ messages to Apache Kafka running locally on your machine, see the [public GitHub repository](https://github.com/ibm-messaging/kafka-connect-mq-source/blob/master/UsingMQwithKafkaConnect.md) for more details.
 
-![Event Streams 2018.3.0 only icon](../../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, use the following steps:
-1. Log in to your {{site.data.reuse.long_name}} UI.
-2. Click the **Topics** tab.
-3. If you have not previously created the topic to use with the connector, create it now.
-4. Select the topic in the list of topics.
-5. Click the **Connection information** tab.
-6. Copy the **Broker URL**. This is the Kafka bootstrap server.
-7. In the **Certificates** section, click **Download Java truststore**, and choose a location for the downloaded file that can be accessed by the Kafka Connect worker.
-8. Generate an API key authorized to connect to the cluster and produce to the topic, as described in [Securing the connection](../../../getting-started/client/#securing-the-connection).
-
 ![Event Streams 2018.3.1 and later icon](../../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, use the following steps:
 1. Log in to your {{site.data.reuse.long_name}} UI.
 2. Click the **Topics** tab.
@@ -86,6 +76,16 @@ You can also send IBM MQ messages to Apache Kafka running locally on your machin
 6. On the **Connect a client** tab, copy the address from the **Bootstrap server** section. This gives the bootstrap address for Kafka clients.
 7. From the **Certificates** section, download the server certificate from the **Java truststore** section, and choose a location for the downloaded file that can be accessed by the Kafka Connect worker.
 8. Go to the **API key** section, and follow the instructions to generate an API key authorized to connect to the cluster and produce to the topic.
+
+![Event Streams 2018.3.0 only icon](../../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, use the following steps:
+1. Log in to your {{site.data.reuse.long_name}} UI.
+2. Click the **Topics** tab.
+3. If you have not previously created the topic to use with the connector, create it now.
+4. Select the topic in the list of topics.
+5. Click the **Connection information** tab.
+6. Copy the **Broker URL**. This is the Kafka bootstrap server.
+7. In the **Certificates** section, click **Download Java truststore**, and choose a location for the downloaded file that can be accessed by the Kafka Connect worker.
+8. Generate an API key authorized to connect to the cluster and produce to the topic, as described in [Securing the connection](../../../getting-started/client/#securing-the-connection).
 
 **Note:** For the distributed worker, the API key will also need to be able to write to the Kafka Connect framework's internal topics.
 

@@ -168,6 +168,12 @@ You can create your own certificates for configuring external access. When promp
      Other key lengths and algorithms are also supported. See the following lists for supported cipher suites.\\
      **Note:** In the following lists, the string "TLS" is interchangeable with "SSL" and vice versa. For example, where TLS_RSA_WITH_AES_128_CBC_SHA is specified, SSL_RSA_WITH_AES_128_CBC_SHA also applies. For more information about each cipher suite, go to the  [Internet Assigned Numbers Authority (IANA) site](https://www.iana.org/assignments/tls-parameters/tls-parameters.xml) and search for the selected cipher suite ID.
 
+     ![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, the following cipher suites are supported, using TLS 1.2 and later only:
+     - TLS_RSA_WITH_AES_128_GCM_SHA256
+     - TLS_RSA_WITH_AES_256_GCM_SHA384
+     - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+     - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+
      ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, the following cipher suites are supported:
      - TLS_RSA_WITH_3DES_EDE_CBC_SHA
      - TLS_RSA_WITH_AES_128_CBC_SHA
@@ -180,11 +186,6 @@ You can create your own certificates for configuring external access. When promp
      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 
-     ![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, the following cipher suites are supported, using TLS 1.2 and later only:
-    - TLS_RSA_WITH_AES_128_GCM_SHA256
-    - TLS_RSA_WITH_AES_256_GCM_SHA384
-    - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-    - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 3. Create a certificate signing request for the key generated in the previous step:\\
    `openssl req -new -key es.key -out es.csr`
 4. Sign the request with the CA certificate created in step 1:\\

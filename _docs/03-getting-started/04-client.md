@@ -30,13 +30,22 @@ You must secure the connection from your client applications to {{site.data.reus
 
 Before connecting an external client, ensure the necessary certificates are configured within your client environment. Use the TLS and CA certificates if you provided them during installation, or use the following instructions to retrieve a copy.
 
+![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, copy the server-side public certificate and generate an API key as follows:
+1. Log in to your {{site.data.reuse.long_name}} UI.
+2. Click **Connect to this cluster** on the right.
+3. On the **Connect a client** tab, copy the address from the **Bootstrap server** section. This gives the bootstrap address for Kafka clients.
+4. From the **Certificates** section, download the server certificate. If you are using a Java client, use the **Java truststore**. Otherwise, use the **PEM certificate**.
+5. To generate API keys, go to the **API key** section and follow the instructions.
+
 ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, copy the server-side public certificate and generate an API key as follows:
+
+To copy the certificate and related details:
 1. Log in to your {{site.data.reuse.long_name}} UI.
 2. Click the **Topics** tab.
 3. Select any topic in the list of topics.
 5. Click the **Connection information** tab.
 6. Copy the **Broker URL**. This is the Kafka bootstrap server.
-7. In the **Certificates** section, download the Java trustore or PEM certificate and provide it to your client application.
+7. In the **Certificates** section, download the Java truststore or PEM certificate and provide it to your client application.
 
 To generate an API key:
 1. {{site.data.reuse.icp_ui_login}}
@@ -55,16 +64,9 @@ To generate an API key:
 
 **Important:** To have access to the **Connection information** tab in the UI, you must have at least one topic. For example, if you are just starting out, use the [starter application to generate topics](../generating-starter-app/).
 
-![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, copy the server-side public certificate and generate an API key as follows:
-1. Log in to your {{site.data.reuse.long_name}} UI.
-2. Click **Connect to this cluster** on the right.
-3. On the **Connect a client** tab, copy the address from the **Bootstrap server** section. This gives the bootstrap address for Kafka clients.
-4. From the **Certificates** section, download the server certificate. If you are using a Java client, use the **Java truststore**. Otherwise, use the **PEM certificate**.
-5. To generate API keys, go to the **API key** section and follow the instructions.
-
 ### Configuring your client
 
-Add the certificate details and the API key to your Kafka client application, for example, for Java:
+Add the certificate details and the API key to your Kafka client application to set up a secure connection from your application to your {{site.data.reuse.short_name}} instance. For example, for Java:
 
 ```
 Properties properties = new Properties();
@@ -80,3 +82,5 @@ properties.put(SaslConfigs.SASL_JAAS_CONFIG, "org.apache.kafka.common.security.p
 
 
 Replace `<broker_url>` with your cluster's broker URL, `<certs.jks_file_location>` with the path to your truststore file, `<truststore_password>` with `"password"`, and `<api_key>` with the API key copied from its file.
+
+**Note:** ![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, you can copy the connection code snippet from the UI with the broker URL already filled in for you. After logging in, click **Connect to this cluster** on the right, and click the **Sample code** tab. Copy the snippet from the **Sample connection code** section into your Kafka client application.

@@ -31,7 +31,7 @@ docs:
         url: /about/notices/
   - title: Installing
     children:
-      - title: "Trying out"
+      - title: "Trying out Event Streams"
         url: /installing/trying-out/
       - title: "Pre-requisites"
         url: /installing/prerequisites/

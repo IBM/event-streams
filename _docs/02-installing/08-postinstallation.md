@@ -18,9 +18,9 @@ To verify that your {{site.data.reuse.long_name}} installation deployed successf
 5. Optional: Click the name of your installation to check further details of your {{site.data.reuse.long_name}} installation. For example, you can check the ConfigMaps used, or check the logs for your pods.
 6. [Log in](../../getting-started/logging-in) to your {{site.data.reuse.long_name}} UI to get started.
 
-## Installing the CLI
+## Installing the command-line interface
 
-The {{site.data.reuse.long_name}} CLI is a plugin for the {{site.data.reuse.icp}} CLI. You can use the {{site.data.reuse.long_name}} CLI to manage your {{site.data.reuse.long_name}} instance from the command line, such as creating, deleting, and updating topics.
+The {{site.data.reuse.long_name}} command-line interface (CLI) is a plugin for the {{site.data.reuse.icp}} CLI. You can use the {{site.data.reuse.long_name}} CLI to manage your {{site.data.reuse.long_name}} instance from the command line, such as creating, deleting, and updating topics.
 
 To install the {{site.data.reuse.long_name}} CLI:
 1. Ensure you have the [{{site.data.reuse.icp}} CLI installed](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/install_cli.html).
@@ -74,6 +74,12 @@ You can set up external client access [during installation](../configuring/#conf
 
 Before connecting a client, ensure the necessary certificates are configured within your client environment. Use the TLS and CA certificates if you provided them during installation, or export the self-signed public certificate from the browser.
 
+![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, use the following steps:
+1. Log in to your {{site.data.reuse.long_name}} UI.
+2. Click **Connect to this cluster** on the right.
+3. On the **Connect a client** tab, copy the address from the **Bootstrap server** section. This gives the bootstrap address for Kafka clients.
+4. From the **Certificates** section, download the server certificate. If you are using a Java client, use the **Java truststore**. Otherwise, use the **PEM certificate**.
+
 ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, use the following steps:
 1. Log in to your {{site.data.reuse.long_name}} UI.
 2. Click the **Topics** tab to view the topic list.
@@ -81,12 +87,6 @@ Before connecting a client, ensure the necessary certificates are configured wit
 4. Click the **Connection information** tab.
 5. Copy the broker information. This gives the bootstrap address for Kafka clients.
 6. From the **Certificates** section, download the server certificate. If you are using a Java client, use the **JKS truststore**. Otherwise, use the **PEM certificate**.
-
-![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, use the following steps:
-1. Log in to your {{site.data.reuse.long_name}} UI.
-2. Click **Connect to this cluster** on the right.
-3. On the **Connect a client** tab, copy the address from the **Bootstrap server** section. This gives the bootstrap address for Kafka clients.
-4. From the **Certificates** section, download the server certificate. If you are using a Java client, use the **Java truststore**. Otherwise, use the **PEM certificate**.
 
 ## Scaling
 

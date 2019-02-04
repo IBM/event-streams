@@ -8,7 +8,7 @@ toc: true
 
 ## Symptoms
 
-When trying to remove an offline destination cluster, the following error message is displayed in the UI:
+When trying to remove an offline geo-replication destination cluster, the following error message is displayed in the UI:
 
 ```
 Failed to retrieve data for this destination cluster.

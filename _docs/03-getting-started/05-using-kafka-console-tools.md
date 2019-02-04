@@ -8,7 +8,7 @@ toc: true
 
 Apache Kafka comes with a variety of console tools for simple administration and messaging operations. You can find these console tools in the `bin` directory of your [Apache Kafka download]({{site.data.reuse.kafka_download_link}}).
 
-You can use many of them with {{site.data.reuse.long_name}}, although {{site.data.reuse.long_name}} does not permit connection to its ZooKeeper cluster. As Kafka has developed, many of the tools that previously required connection to ZooKeeper no longer have that requirement. {{site.data.reuse.long_name}} has its own command-line interface (CLI) and this offers many of the same capabilities as the Kafka tools in a simpler form.
+You can use many of them with {{site.data.reuse.long_name}}, although {{site.data.reuse.long_name}} does not permit connection to its ZooKeeper cluster. As Kafka has developed, many of the tools that previously required connection to ZooKeeper no longer have that requirement. {{site.data.reuse.long_name}} has its own [command-line interface (CLI)](../../installing/post-installation/#installing-the-cli) and this offers many of the same capabilities as the Kafka tools in a simpler form.
 
 The following table shows which Apache Kafka (release 2.0 or later) console tools work with {{site.data.reuse.long_name}} and whether there are CLI equivalents.
 
@@ -46,10 +46,10 @@ The following table shows which Apache Kafka (release 2.0 or later) console tool
 
 The console tools are Kafka client applications and connect in the same way as regular applications.
 
-Follow the [instructions for securing a connection](../../getting-started/client/) to obtain:
-* the broker URL 
-* the truststore
-* an API key
+Follow the [instructions for securing a connection](../../getting-started/client/#securing-the-connection) to obtain:
+* Your cluster’s broker URL
+* The truststore certificate
+* An API key
 
 Many of these tools perform administrative tasks and will need to be authorized accordingly.
 
@@ -65,9 +65,10 @@ sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule require
 ```
 
 Replace:
-* `<certs.jks_file_location>` with the path of your truststore file
+* `<certs.jks_file_location>` with the path to your truststore file
 * `<truststore_password>` with `"password"`
 * `<api_key>` with your API key
+
 
 ### Example - console producer
 
@@ -75,14 +76,15 @@ You can use the Kafka console producer tool with {{site.data.reuse.long_name}}.
 
 After you've created the properties file as described previously, you can run the console producer in a terminal as follows:
 
-``` 
-./kafka-console-producer.sh --broker-list <broker_url> --producer.config <properties_file_location> --topic <topic_name>
+```
+./kafka-console-producer.sh --broker-list <broker_url> --topic <topic_name> --producer.config <properties_file>
 ```
 
 Replace:
 * `<broker_url>` with your cluster's broker URL
-* `<properties_file_location>` with the path of your properties file
-* `<topic_name>`with the name of your topic.
+* `<topic_name>` with the name of your topic
+* `<properties_file>` with the name of your properties file including full path to it
+
 
 ### Example - console consumer
 
@@ -90,11 +92,11 @@ You can use the Kafka console consumer tool with {{site.data.reuse.long_name}}.
 
 After you've created the properties file as described previously, you can run the console consumer in a terminal as follows:
 
-``` 
-./kafka-console-consumer.sh --bootstrap-server <broker_url> --consumer.config <properties_file_location>  --topic <topic_name> --from-beginning
+```
+./kafka-console-consumer.sh --bootstrap-server <broker_url> --topic <topic_name> --from-beginning --consumer.config <properties_file>
 ```
 
 Replace:
 * `<broker_url>` with your cluster's broker URL
-* `<properties_file_location>` with the path of your properties file
-* `<topic_name>`with the name of your topic.
+* `<topic_name>` with the name of your topic
+* `<properties_file>` with the name of your properties file including full path to it

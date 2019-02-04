@@ -1,7 +1,7 @@
 ---
 title: "Planning for installation"
 permalink: /installing/planning/
-excerpt: "Planning your installation of {{site.data.reuse.long_name}}."
+excerpt: "Planning your installation of Event Streams."
 
 # classes: wide
 toc: true
@@ -29,17 +29,23 @@ You can [install {{site.data.reuse.long_name}}](../installing/#installing-ibm-ev
 
 ## Namespaces
 
-Create namespaces to organize your {{site.data.reuse.long_name}} deployments and control user access to them. When you deploy {{site.data.reuse.long_name}}, you should choose a namespace which is dedicated to {{site.data.reuse.long_name}}. This is because {{site.data.reuse.long_name}} uses network security policies to restrict network connections between its internal components. In {{site.data.reuse.icp}}, applications are created under namespaces in the deployed {{site.data.reuse.icp}} clusters. For more information, see [how to create namespaces](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/user_management/create_project.html).
+You must use a namespace that is dedicated to your {{site.data.reuse.short_name}} deployment. This is required because {{site.data.reuse.short_name}} uses network security policies to restrict network connections between its internal components.
+
+If you plan to have multiple {{site.data.reuse.short_name}} instances, create namespaces to organize your {{site.data.reuse.long_name}} deployments into, and control user access to them.
+
+You must have the `ibm-restricted-psp` PodSecurityPolicy selected for the target namespace.
+
+To create a namespace, you must have the Cluster administrator role. See the {{site.data.reuse.icp}} documentation for more information about [creating namespaces](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/user_management/create_project.html).
 
 ## Persistent storage
 
 Persistence is not enabled by default, so no persistent volumes are required. Enable persistence if you want messages in topics and configuration settings to be retained in the event of a restart. You should enable persistence for production use and whenever you want your data to survive a restart.
 
-If you plan to have persistent volumes, [consider the disk space capacity](../capacity-planning/) required for storage.
+If you plan to have persistent volumes, [consider the disk space](../capacity-planning/) required for storage.
 
 If persistence is enabled, each Kafka broker and ZooKeeper server requires one physical volume each. You either need to create a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static) for each Kafka broker and ZooKeeper server, or specify a storage class that supports [dynamic provisioning](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#dynamic). Kafka and ZooKeeper can use different storage classes to control how physical volumes are allocated.
 
-See the {{site.data.reuse.icp}} documentation for information about [creating persistent volumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/pv_land.html) and [creating a storage class that supports dynamic provisioning](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/sc_land.html). For both, you must have the {{site.data.reuse.icp}} Cluster administrator role.
+See the {{site.data.reuse.icp}} documentation for information about [creating persistent volumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/pv_land.html) and [creating a storage class](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/sc_land.html) that supports dynamic provisioning. For both, you must have the {{site.data.reuse.icp}} Cluster administrator role.
 
 **Important:** When creating persistent volumes to use with {{site.data.reuse.long_name}}, ensure you set **Access mode** to `ReadWriteOnce`.
 
@@ -90,7 +96,7 @@ Consider the capacity requirements of your deployment before installing {{site.d
 
 {{site.data.reuse.icp}} uses the Elastic Stack for managing logs (Elasticsearch, Logstash, and Kibana products). {{site.data.reuse.long_name}} logs are written to `stdout` and are picked up by the default Elastic Stack setup.
 
-Consider setting up the {{site.data.reuse.icp}} logging for your environment to help resolve problems with your deployment and aid general troubleshooting. See the [{{site.data.reuse.icp}} documentation about logging](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_metrics/logging_elk.html) for information about the built-in Elastic Stack.
+Consider setting up the {{site.data.reuse.icp}} logging for your environment to help resolve problems with your deployment and aid general troubleshooting. See the {{site.data.reuse.icp}} documentation [about logging](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_metrics/logging_elk.html) for information about the built-in Elastic Stack.
 
 As part of setting up the {{site.data.reuse.icp}} logging for {{site.data.reuse.long_name}}, ensure you consider the following:
 * [Capacity planning guidance](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_metrics/capacity_planning.html): set up your system to have sufficient resources towards the capture, storage, and management of logs.

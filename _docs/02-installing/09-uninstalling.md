@@ -1,7 +1,7 @@
 ---
 title: "Uninstalling"
 permalink: /installing/uninstalling/
-excerpt: "Uninstalling {{site.data.reuse.long_name}}."
+excerpt: "Uninstalling Event Streams."
 
 toc: true
 ---

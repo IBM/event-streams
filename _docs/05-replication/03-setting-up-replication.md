@@ -108,6 +108,16 @@ When one of your origin {{site.data.reuse.long_name}} clusters experiences probl
 
 You can switch your applications over to use the geo-replicated topics on the destination cluster as follows.
 
+![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, use the following steps:
+1. Log in to your destination {{site.data.reuse.long_name}} cluster as an administrator.
+2. Click **Connect to this cluster** on the right.
+3. Go to the **Connect a client** tab, and use the information on the page to change your client application settings to use the geo-replicated topic on the destination cluster. You need the following information to do this:\\
+   * **Bootstrap server**: Copy the Broker URL to connect an application to this topic.
+   * **Certificates**: Download a certificate that is required by your Kafka clients to connect securely to this cluster.
+   * **API key**: To connect securely to {{site.data.reuse.long_name}}, your application needs an API key with permission to access the cluster and resources such as topics. Follow the instructions to generate an API key authorized to connect to the cluster, and select what level of access you want it to grant to your resources (topics). You can then select which topics you want included or to include all topics, and set consumer groups as well.
+
+
+
 ![Event Streams 2018.3.0 only icon](../../images/2018.3.0.svg "Only in Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, use the following steps:
 1. Log in to your destination {{site.data.reuse.long_name}} cluster as an administrator.
 2. Click the **Topics** tab, and click the name of the topic you want your application to use.
@@ -116,13 +126,6 @@ You can switch your applications over to use the geo-replicated topics on the de
    * **Certificates**: Download a certificate that is required by your Kafka clients to connect securely to this cluster.
    * **Credentials and access control**: To connect securely to {{site.data.reuse.long_name}}, your application needs an API key with permission to access the cluster and resources such as topics. Follow the link on the UI to [generate an API key](../../getting-started/client/#securing-the-connection).
 
-![Event Streams 2018.3.1 and later icon](../../images/2018.3.1.svg "Only in Event Streams 2018.3.1 and later.") In {{site.data.reuse.long_name}} 2018.3.1 and later, use the following steps:
-1. Log in to your destination {{site.data.reuse.long_name}} cluster as an administrator.
-2. Click **Connect to this cluster** on the right.
-3. Go to the **Connect a client** tab, and use the information on the page to change your client application settings to use the geo-replicated topic on the destination cluster. You need the following information to do this:\\
-   * **Bootstrap server**: Copy the Broker URL to connect an application to this topic.
-   * **Certificates**: Download a certificate that is required by your Kafka clients to connect securely to this cluster.
-   * **API key**: To connect securely to {{site.data.reuse.long_name}}, your application needs an API key with permission to access the cluster and resources such as topics. Follow the instructions to generate an API key authorized to connect to the cluster, and select what level of access you want it to grant to your resources (topics). You can then select which topics you want included or to include all topics, and set consumer groups as well.
 
 After the connection is configured, your client application can continue to operate using the geo-replicated topics on the destination cluster.
 
