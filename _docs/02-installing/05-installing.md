@@ -51,9 +51,9 @@ metadata:
 spec:
   repositories:
   - name: docker.io/*
-    policy: null
+       policy: null
   - name: <cluster_CA_domain>:8500/*
-    policy: null
+       policy: null
 ```
 2. Run the following command: `kubectl apply -f <filename>.yaml`
 
