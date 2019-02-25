@@ -25,3 +25,14 @@ We would love to hear what you would like to see in future versions of IBM Event
 We’d love to know how we’re doing and how IBM Event Streams is helping you to solve problems in your business.\\
 [![Give feedback](../images/give_feedback.png "Give feedback"){:height="50%" width="50%"}](mailto:eventstreams@uk.ibm.com?Subject=Feedback%20for%20IBM%20Event%20Streams)\\
 [![Slack chat](../images/slack_chat.png "Slack chat"){:height="50%" width="50%"}](https://slack-invite-ibm-cloud-tech.mybluemix.net/){:target="_blank"}
+
+## Support matrix
+
+{{site.data.reuse.short_name}} version | Helm chart version | Kafka version shipped | {{site.data.reuse.icp}} versions supported | Platforms supported
+----------------------|--------------------|-----------------------|-------------|--------------------
+2019.1.1              | 1.2.0              | 2.1.1                 | 3.1.2       |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems <br/>- Red Hat OpenShift Container Platform version 3.9 and 3.10
+  |   |   | 3.1.1  | - Linux® 64-bit (x86_64) systems <br/> - Linux on IBM® Z systems
+2018.3.1  | 1.1.0  | 2.0.1  | 3.1.2  | - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+  |   |   | 3.1.1  | - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+  |   |   | 3.1.0  | Linux® 64-bit (x86_64) systems
+2018.3.0  | 1.0.0  | 2.0  | 3.1.0  | Linux® 64-bit (x86_64) systems
