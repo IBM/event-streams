@@ -5,9 +5,9 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # `jekyll serve`. If you change this file, please restart the server process.
 
-remote_theme             : "mmistakes/minimal-mistakes"
+# remote_theme             : "mmistakes/minimal-mistakes"
 
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+# minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
@@ -18,6 +18,7 @@ description              : &description "IBM Event Streams is an event-streaming
 url                      : "https://ibm.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/event-streams" # the subpath of your site, e.g. "/blog"
 repository               : "event-streams"
+relative_permalinks      : false
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -186,18 +187,22 @@ kramdown:
 
 # Collections
 collections:
-  docs:
+  "2018.3.1":
+    output: true
+    version: true
+    permalink: /:collection/:categories/:slug/
+  "2019.1.1":
+    output: true
+    version: true
+    tag: Latest
+    permalink: /:categories/:slug/
+  tutorials:
     output: true
     permalink: /:collection/:path/
-  recipes:
+  support:
     output: false
     permalink: /:collection/:path/
-  pets:
-    output: false
-    permalink: /:collection/:path/
-  portfolio:
-    output: false
-    permalink: /:collection/:path/
+
 
 
 # Defaults
@@ -220,45 +225,52 @@ defaults:
     values:
       layout: single
       author_profile: false
-  # _docs
+  # _tutorials
   - scope:
       path: ""
-      type: docs
+      type: tutorials
+    values:
+      layout: single
+      author_profile: false
+      share: false
+      comments: false
+      mastheadNavItem: Tutorials
+  # Support
+  - scope:
+      path: ""
+      type: support
+    values:
+      layout: single
+      author_profile: false
+      share: false
+      comments: false
+      mastheadNavItem: Support
+  # _2018.3.1
+  - scope:
+      path: ""
+      type: 2018.3.1
     values:
       layout: single
       read_time: false
       author_profile: false
       share: false
-      comments: false
+      comment: false
+      mastheadNavItem: Documentation
       sidebar:
-        nav: "docs"
-  # _recipes
+        nav: "201831docs"
   - scope:
       path: ""
-      type: recipes
+      type: 2019.1.1
     values:
       layout: single
+      read_time: false
       author_profile: false
-      share: true
-      comments: false
-  # _pets
-  - scope:
-      path: ""
-      type: pets
-    values:
-      layout: single
-      author_profile: false
-      share: true
-      comment: true
-  # _portfolio
-  - scope:
-      path: ""
-      type: portfolio
-    values:
-      layout: single
-      author_profile: false
-      share: true
-
+      share: false
+      comment: false
+      latest: true
+      mastheadNavItem: Documentation
+      sidebar:
+        nav: "latestdocs"
 
 # Sass/SCSS
 sass:
@@ -280,6 +292,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jemoji
+  - jekyll-contentblocks
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -288,6 +301,7 @@ whitelist:
   - jekyll-gist
   - jekyll-feed
   - jemoji
+  - jekyll-contentblocks
 
 
 # Archives

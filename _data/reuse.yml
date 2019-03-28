@@ -16,8 +16,18 @@ ce_short: "Community Edition"
 # {{site.data.reuse.icp}}
 icp: "IBM Cloud Private"
 
+# {{site.data.reuse.icp_master_host}}
+
+icp_master_host: on the IBM Cloud Private [master host](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/cluster_endpoints.html#master)
+
 # {{site.data.reuse.icp_foundation}}
 icp_foundation: "IBM Cloud Private Foundation"
+
+# {{site.data.reuse.openshift}}
+openshift: "Red Hat OpenShift Container Platform"
+
+# {{site.data.reuse.openshift_short}}
+openshift_short: "OpenShift Container Platform"
 
 # {{site.data.reuse.kafka-connect-mq-source}}
 kafka-connect-mq-source: "Kafka Connect source connector for IBM MQ"
@@ -31,13 +41,16 @@ kafka-connect-mq-sink: "Kafka Connect sink connector for IBM MQ"
 # {{site.data.reuse.kafka-connect-mq-sink-short}}
 kafka-connect-mq-sink-short: "MQ sink connector"
 
+# {{site.data.reuse.jmx-secret}}
+jmx-secret: <releasename>ibm-es-jmx-secret
+
 # Task steps
 
 # {{site.data.reuse.icp_ui_login}}
-icp_ui_login: "Log in to your IBM Cloud Private cluster management console from a supported web browser by using the URL `https://<master-ip>:8443`, where `master_ip` is the IP address of the master node for your IBM Cloud Private cluster."
+icp_ui_login: "Log in to your IBM Cloud Private cluster management console from a supported web browser by using the URL `https://<Cluster Master Host>:<Cluster Master API Port>`. For more information, see the IBM Cloud Private [documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/cfc_gui.html)."
 
 # {{site.data.reuse.icp_cli_login}}
-icp_cli_login: "Using the IBM Cloud Private CLI, log in to your cluster as an administrator:<br /> `cloudctl login -a https://<master-ip>:8443 --skip-ssl-validation`"
+icp_cli_login: "Log in to your cluster as an administrator by using the IBM Cloud Private CLI:<br /> `cloudctl login -a https://<Cluster Master Host>:<Cluster Master API Port>`<br/>The master host and port for your IBM Cloud Private cluster are set during the installation of IBM Cloud Private."
 
 # {{site.data.reuse.maven_prereq}}
 maven_prereq: "Ensure you have Java version 8. Also, ensure you have [Apache Maven](https://maven.apache.org/) installed on your system."
@@ -51,7 +64,7 @@ cli_options_short: "**Tip:** You can use short options instead of spelling out t
 replicator_origin_list: "**Note:** When logged in to the destination cluster, the origin cluster will not show up in the **Origin locations** section until you [define topics to replicate](#specifying-what-and-where-to-replicate), and at least one replicator is created."
 
 # {{site.data.reuse.monitor_metrics_retention}}
-monitor_metrics_retention: "**Important:** By default, metrics data used to provide monitoring information is only stored for a day. [Change the time period for metric retention](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/featured_applications/deploy_monitoring.html#logs-and-metrics-management-for-prometheus) to be able to view monitoring data for longer time periods, such as 1 week or 1 month."
+monitor_metrics_retention: "**Important:** By default, the metrics data used to provide monitoring information is only stored for a day. Modify the [time period](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_metrics/monitoring_service.html?view=kc#promlogs) for metric retention to be able to view monitoring data for longer time periods, such as 1 week or 1 month."
 
 # {{site.data.reuse.geo-rep_note}}
 geo-rep_note: "**Note:** Geo-replication is only available in the paid-for version of IBM Event Streams (not available in the Community Edition)."

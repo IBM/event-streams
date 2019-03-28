@@ -1,38 +1,22 @@
 ---
-permalink: /support/
+layout: collection
 title: "Support"
-toc: true
+collection: support
+permalink: /support/
+author_profile: false
+mastheadNavItem: Support
+sort_by: title
+# toc: true
+sections:
+  - name: Open an Issue
+    description: Choose where to report your issue
 ---
-
-
-
-This is your opportunity to let us know what you think about {{site.data.reuse.long_name}}.
-
-## Open an issue
-<div style ="display:flex">
-<a href="https://github.com/IBM/event-streams/issues/new?template=issue.md&labels=bug" target="_blank"><img src="../images/community_support.png" alt="IBM community support" height="50%" width="100%"/></a>
-<a href="https://www.ibm.com/support/home/" target="_blank"><img src="../images/ibm_support.png" alt="IBM Support" height="50%" width="100%" /></a>
-</div>
-[![Exisiting issues](../images/existing_issues.png "Exisiting issues"){:height="50%" width="50%"}](https://github.com/IBM/event-streams/issues?q=label%3Abug){:target="_blank"}\\
-*Please do not share confidential information on public GitHub.*
-
-## Suggest a feature
-We would love to hear what you would like to see in future versions of IBM Event Streams.\\
-[![Suggest feature](../images/suggest_feature.png "Suggest feature"){:height="50%" width="50%"}](https://github.com/IBM/event-streams/issues/new?template=feature_request.md&labels=featureRequest){:target="_blank"}\\
-[![Existing feature requests](../images/existing_feature_request.png "Existing feature requests"){:height="50%" width="50%"}](https://github.com/IBM/event-streams/issues?q=label%3AfeatureRequest){:target="_blank"}\\
-*Please do not share confidential information.*
-## Give us feedback
-We’d love to know how we’re doing and how IBM Event Streams is helping you to solve problems in your business.\\
-[![Give feedback](../images/give_feedback.png "Give feedback"){:height="50%" width="50%"}](mailto:eventstreams@uk.ibm.com?Subject=Feedback%20for%20IBM%20Event%20Streams)\\
-[![Slack chat](../images/slack_chat.png "Slack chat"){:height="50%" width="50%"}](https://slack-invite-ibm-cloud-tech.mybluemix.net/){:target="_blank"}
 
 ## Support matrix
 
-{{site.data.reuse.short_name}} version | Helm chart version | Kafka version shipped | {{site.data.reuse.icp}} versions supported | Platforms supported
-----------------------|--------------------|-----------------------|-------------|--------------------
-2019.1.1              | 1.2.0              | 2.1.1                 | 3.1.2       |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems <br/>- Red Hat OpenShift Container Platform version 3.9 and 3.10
-  |   |   | 3.1.1  | - Linux® 64-bit (x86_64) systems <br/> - Linux on IBM® Z systems
-2018.3.1  | 1.1.0  | 2.0.1  | 3.1.2  | - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
-  |   |   | 3.1.1  | - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
-  |   |   | 3.1.0  | Linux® 64-bit (x86_64) systems
-2018.3.0  | 1.0.0  | 2.0  | 3.1.0  | Linux® 64-bit (x86_64) systems
+{{site.data.reuse.short_name}} version | Helm chart version | Kafka version shipped | Container platform               | Systems
+---------------------------------------|--------------------|-----------------------|----------------------------------|--------------------
+2019.1.1                               | 1.2.0              | 2.1.1                 | - {{site.data.reuse.icp}} 3.1.1 and 3.1.2 <br/>- {{site.data.reuse.openshift}} 3.9 and 3.10 (with {{site.data.reuse.icp}} 3.1.2)     |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+2018.3.1  | 1.1.0  | 2.0.1  | {{site.data.reuse.icp}} 3.1.1 and 3.1.2  | - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+  |   |   | {{site.data.reuse.icp}} 3.1.0  | - Linux® 64-bit (x86_64) systems
+2018.3.0  | 1.0.0  | 2.0  | {{site.data.reuse.icp}} 3.1.0  | - Linux® 64-bit (x86_64) systems

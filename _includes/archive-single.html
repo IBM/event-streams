@@ -10,29 +10,36 @@
   {% assign title = post.title %}
 {% endif %}
 
-<div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    {% if include.type == "grid" and teaser %}
-      <div class="archive__item-teaser">
-        <img src=
-          {% if teaser contains "://" %}
-            "{{ teaser }}"
-          {% else %}
-            "{{ teaser | relative_url }}"
-          {% endif %}
-          alt="">
-      </div>
+
+
+  {% if post.externalURL %}
+    {% assign postURL = post.externalURL %}
+    {% assign external = true %}
+  {% else %}
+    {% if post.link %}
+      {% assign postURL = post.link %}
+      {% assign external = false %}
+    {% else %}
+      {% assign postURL = post.url | relative_url %}
+      {% assign external = false %}
     {% endif %}
-    <h2 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ post.url | relative_url }}" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
+  {% endif %}
+
+  
+  
+
+
+  
+  <div class="content" onclick="openCardWindow(event,'{{ postURL }}','{% if external %}_blank{% else %}_self{% endif %}')">
+      <h2 class="archive__item-title" itemprop="headline">
+          <a data-ignoreparent="true" href="{{ postURL }}" target="{% if external %}_blank{% else %}_self{% endif %}">{{ title }}</a>
+      </h2>
+      {% if post.description %}
+          <p>{{ post.description }}</p>
       {% endif %}
-    </h2>
-    {% if post.read_time %}
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
-    {% endif %}
-    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
-  </article>
+      <div class="cta">
+        <div class="icon">
+          <svg alt="" role="presentation" class='icon'><use xlink:href='{{ site.url }}{{ site.baseurl }}/assets/images/icons/{% if external %}externalLink.svg{% else %}next.svg{% endif %}#icon'/></svg>
+        </div>
+      </div>
 </div>

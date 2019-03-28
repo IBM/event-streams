@@ -4,18 +4,26 @@
 
 .masthead {
   position: relative;
-  border-bottom: 1px solid $border-color;
-  -webkit-animation: $intro-transition;
-  animation: $intro-transition;
-  -webkit-animation-delay: 0.15s;
-  animation-delay: 0.15s;
+  // border-bottom: 1px solid $border-color;
+  // -webkit-animation: $intro-transition;
+  // animation: $intro-transition;
+  // -webkit-animation-delay: 0.15s;
+  // animation-delay: 0.15s;
   z-index: 20;
-
+  min-height: $mastheadHeight;
+  background-color: $text-01;
+  background-color: #152935;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0.5rem - 3.5rem;
   &__inner-wrap {
-    @include clearfix;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1em;
     max-width: 100%;
     display: -webkit-box;
     display: flex;
@@ -23,8 +31,12 @@
     justify-content: space-between;
     font-family: $sans-serif-narrow;
 
-    @include breakpoint($x-large) {
-      max-width: $x-large;
+    // @include breakpoint($x-large) {
+    //   max-width: $x-large;
+    // }
+
+    * {
+      color: white;
     }
 
     nav {
@@ -33,6 +45,9 @@
 
     a {
       text-decoration: none;
+      &:visited {
+        color: white;
+      }
     }
   }
 }
@@ -40,34 +55,73 @@
 .site-title {
   display: -webkit-box;
   display: flex;
-  padding: 0.5rem 0;
   align-self: stretch;
   -webkit-box-align: center;
   align-items: center;
-  font-weight: bold;
+  font-weight: 600;
   z-index: 20;
+  line-height: 1em;
 }
 
 .masthead__menu {
-  float: left;
   margin-left: 0;
   margin-right: 0;
   width: 100%;
-  clear: both;
 
   .site-nav {
     margin-left: 0;
 
-    @include breakpoint($small) {
-      float: right;
-    }
   }
 
-  ul {
-    margin: 0;
-    padding: 0;
-    clear: both;
-    list-style-type: none;
+  .mastheadNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .mastheadTitle {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    flex-grow: 999;
+    padding-left: 1.5rem;
+    // padding-top: 0.25rem;
+    align-items: center;
+  }
+  .mastheadControls {
+    .menuScrollContainer {
+      display: flex;
+      justify-content: space-between;
+      overflow: auto;
+      height: 3.5rem;
+      padding-right: 1.5rem;
+    }
+    .visible-links {
+      margin: 0;
+      padding: 0;
+      clear: both;
+      list-style-type: none;
+      display: flex;
+      li {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.viewOnIBMcom {
+  margin-left: 1rem;
+  a {
+    font-size: 0.75rem;
+    color: #93a2af;
+    &:visited {
+      color: #93a2af;
+    }
   }
 }
 
@@ -75,9 +129,100 @@
   display: block;
   list-style-type: none;
   white-space: nowrap;
-
+  margin-left: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  &:first-of-type {
+    margin-left: 1.5rem;
+  }
+  &:last-of-type {
+    margin-left: 0;
+    margin-right: 0;
+  }
   &--lg {
     padding-right: 2em;
     font-weight: 700;
+  }
+  &.active {
+    border-bottom: 0.25rem solid $brand-01;
+    padding-top: .25rem;
+    a {
+      font-weight: 600;
+    }
+  }
+}
+
+@media only screen and (max-width: $large) {
+  .masthead {
+    // position: fixed;
+    // top: 0;
+    min-height: 3rem;
+    top: -2.5rem;
+    // .mastheadControls,.mastheadTitle {
+    //   height: 3rem;
+    // }
+    // .mastheadTitle {
+    //   padding-left: 0.75rem;
+    // }
+    .mastheadControls {
+      li {
+        &:first-of-type {
+          margin-left: 0.75rem;
+        }
+      }
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: 880px) {
+  .masthead {
+    top: -4.5rem;
+    .masthead__menu {
+      .mastheadTitle {
+        height: 2.5rem;
+        height: 4.5rem;
+        padding-top: 0.5rem;
+        padding-left: 1.25rem;
+      }
+      .mastheadNav {
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .mastheadControls {
+        .menuScrollContainer {
+          height: 3rem;
+        }
+      }
+    }
+    .mastheadControls {
+      width: 100%;
+      overflow: scroll;
+      height: 3rem;
+      .visible-links {
+        height: 3rem;
+        padding-left: 0.5rem;
+      }
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: 640px) {
+  .masthead {
+    .masthead__menu {
+      .mastheadNav {
+        flex-direction: column;
+      }
+    }
+    .mastheadTitle {
+      height: 2.5rem;
+      // padding-top: 0.5rem;
+      .site-title {
+        padding-bottom: 0;
+      }
+    }
   }
 }

@@ -3,32 +3,23 @@
    ========================================================================== */
 
 .page__footer {
-  @include clearfix;
-  float: left;
   margin-left: 0;
   margin-right: 0;
   width: 100%;
-  clear: both;
-  /* sticky footer fix start */
-  position: absolute;
   bottom: 0;
   height: auto;
-  /* sticky footer fix end */
-  margin-top: 3em;
-  color: $muted-text-color;
-  -webkit-animation: $intro-transition;
-  animation: $intro-transition;
-  -webkit-animation-delay: 0.45s;
-  animation-delay: 0.45s;
+  color: $text-02;
+  color: #626c74;
   background-color: $footer-background-color;
+  display: grid;
+    grid-template-columns: 1fr 20rem 20rem 1fr 20rem;
 
   footer {
-    @include clearfix;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2em;
-    max-width: 100%;
-    padding: 0 1em 2em;
+    grid-column-start: 2;
+    height: $mastheadHeight;
+    display: flex;
+    align-items: center;
+    grid-column-end: 4;
 
     @include breakpoint($x-large) {
       max-width: $x-large;

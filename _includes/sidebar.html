@@ -1,5 +1,73 @@
 {% if page.author_profile or layout.author_profile or page.sidebar %}
-  <div class="sidebar sticky">
+  <div id="sidebarMask" class="sidebarMask">
+    
+  </div>
+  <div id="sidebar" class="sidebar sticky">
+      <div aria-label="Change Version" role="button" aria-expanded="false" class="versionsBar" id="versionDropdown" tabindex="0">
+          <div class="selectedVersion" id="selectedVersion">
+            <div class="versionContainer" >
+                <a id="versionPillCurrent" class="versionPill">{{ page.collection }}</a>
+                <a class="versionChange">Change Version</a>
+            </div>
+          </div>
+          {% capture url_path %}{{site.url}}{{site.baseurl}}{{page.url}}{% endcapture %}
+        
+          <!-- {{url_path}} -->
+
+
+          
+<!-- {{ page.collection }} -->
+
+          <div class="allVersions" id="allVersions">
+            <ul>
+
+                {% assign version1Pages = site.collections | where: "version", "true" %}
+
+
+                {% for collection in version1Pages reversed %}
+                    
+                        {% assign collectionJson = collection | json %}
+                    
+                
+                    {% assign name = collection.label %}
+                
+                    <!-- {% capture target_url_path %}{{ url_path | replace: page.collection, collection.label }}{% endcapture %} -->
+
+                    {% capture collection_target %}
+                      {% if collection.tag != "Latest" }} %}
+                        /{{ collection.label }}
+                      {% endif %}
+                    {% endcapture %}
+
+                    {% capture target_url_path %}{{site.url | strip }}{{site.baseurl | strip }}{{collection_target | strip }}{{page.url | replace: page.collection | replace: "//", "/" }}{% endcapture %}
+                    
+    
+                    <li class="version" data-url="{{ target_url_path | strip }}" onclick="openVersion('{{ target_url_path | strip }}','{{ collection.label | strip }}')">
+
+                        <div class="pillContainer">
+                          {% if collection.label == page.collection }} %}
+                            {% assign activeCollection = "active" %}
+                          {% else %}
+                            {% assign activeCollection = "inactive" %}
+                          {% endif %}
+                          <a tabindex="-1" href="{{ target_url_path | strip }}" class="versionPill {{ activeCollection }}">{{ collection.label }}</a>
+                        </div>
+                        <div class="activeContainer">
+                            {% if collection.label == page.collection }} %}
+                            <img alt="" src="{{site.url}}/mhub/qp-docs/images/checkbox.svg" />
+                            {% endif %}
+                        </div>
+                        <div class="latest">
+                            {{ collection.tag }}
+                        </div>
+                      </li>
+                
+                {% endfor %}
+                
+            </ul>
+          </div>
+        </div>
+      
   {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
   {% if page.sidebar %}
     {% for s in page.sidebar %}

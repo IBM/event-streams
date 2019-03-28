@@ -1,0 +1,279 @@
+/* ==========================================================================
+   SPLASH PAGE ON DOCS
+   ========================================================================== */
+
+/*
+   Default
+   ========================================================================== */
+
+.splash {
+  .splashcontent {
+    .section {
+      grid-template-columns: 1fr minmax(auto, 50rem) 1fr 30% 1fr;
+      display: grid;
+      .sectionContent {
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
+    }
+  }
+  h1 {
+    margin-left: 0;
+  }
+  p {
+    margin-left: 0;
+  }
+  .sidebar__right  {
+    display: none;
+  }
+    .heroContainer {
+      // padding-left: 6rem;
+      // padding-right: 4rem;
+      height: 16rem;
+      display: flex;
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+      grid-template-columns: 1fr minmax(auto, 50rem) 1fr 30% 1fr;
+      display: grid;
+        .intro {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 2rem;
+            padding-right: 4rem;
+            grid-column-start: 2;
+            grid-column-end: 4;
+            * {
+              margin-left: 0;
+            }
+            p {
+              margin-top: 0.5rem;
+              font-size: 1rem;
+            }
+            .pillContainer {
+              display: flex;
+              margin-top: .5rem;
+              margin-bottom: .5rem;
+              p {
+                margin: 0;
+                padding: 0;
+                flex-grow: 0;
+              }
+              .versionPill {
+                margin-left: .25rem;
+                font-size: 0.9rem;
+              }
+            }
+        }
+        .keyTasks {
+            flex-basis: 30%;
+            flex-shrink: 1;
+            display: flex;
+            flex-direction: column;
+            .task {
+                border: 1px solid #dde8f4;
+                flex-grow: 1;
+                flex-basis: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding-left: 1rem;
+                border-top: 0;
+                padding-right: 1rem;
+                border-left: 0;
+                border-right: 0;
+                cursor: pointer;
+                &:hover {
+                  background-color: rgba(255, 255, 255, 0.5);
+                  background: white;
+                }
+                &:last-of-type {
+                    border-bottom: none;
+                }
+                .title {
+                    flex-grow: 1;
+                    h2 {
+                        margin: 0;
+                        padding: 0;
+                        font-size: 1rem;
+                    }
+                }
+                .progressIcon {
+                    justify-self: flex-end;
+                    .icon {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+    .section {
+        background-color: white;
+        padding-bottom: 4rem;
+        // padding-left: 4rem;
+        // padding-right: 4rem;
+        &:first-of-type {
+          padding-top: 4rem;
+        }
+        .title {
+          padding-left: 2rem;
+          padding-right: 2rem;
+          h2 {
+            margin: 0;
+          }
+        }
+    }
+    .splashGridContainer {
+        display: flex; // margin-left: -.25rem;
+        margin-right: -.25rem;
+        margin-left: -.25rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        .card {
+            // padding: 1rem;
+            box-sizing: border-box;
+            flex-basis: 50%;
+            margin-bottom: .5rem;
+            padding-left: .25rem;
+            padding-right: .25rem;
+            .cardContent {
+              padding: 2rem;
+              border: 1px solid #f3f3f3; // margin: .25rem;
+              cursor: pointer;
+              height: 100%;
+              &:hover {
+                background-color: #f3f7fb;
+              }
+              .icon {
+                margin-bottom: 0.5rem;
+                width: 2rem;
+                height: 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                img {
+                  width: 1.5rem;
+                  height: 1.5rem;
+                }
+              }
+              h3 {
+                margin: 0;
+                padding: 0;
+              }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 2000px) {
+  .splash .splashcontent .section {
+    display: grid;
+    .sectionContent {
+      grid-column-end: 5;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .splash {
+    .heroContainer {
+      .intro {
+        .pillContainer {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .splash {
+    .heroContainer {
+      flex-direction: column;
+      height: auto;
+      display: flex;
+      .intro {
+        margin-left: 0;
+        padding-left: 0rem;
+        padding-right: 0rem;
+        .pillContainer {
+          display: none;
+        }
+      }
+      .keyTasks {
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin-left: -.5rem;
+        margin-right: -.5rem;
+        flex-shrink: 0;
+        flex-basis: auto;
+        .task {
+          flex-basis: 40%;
+          margin-left: .5rem;
+          margin-right: .5rem;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+          &:last-of-type {
+            border-bottom: 1px solid #dde8f4;
+          }
+        }
+      }
+    }
+    .splashcontent {
+      .section {
+        // padding-left: .75rem;
+        // padding-right: .75rem;
+        .title {
+          // padding-left: .75rem;
+          // padding-right: .75rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .splash {
+    .heroContainer {
+      // padding-left: 0;
+      // padding-right: 0;
+      .intro {
+        // padding-left: .75rem;
+        // padding-right: .75rem;
+        p {
+          margin-top: 1rem;
+        }
+      }
+      .keyTasks {
+        flex-direction: unset;
+        .task {
+          flex-basis: 100%;
+        }
+      }
+    }
+    .splashcontent {
+      .section {
+        display: flex;
+        // padding-left: .75rem;
+        // padding-right: .75rem;
+        .sectionContent {
+          flex-grow: 1;
+          .title {
+           padding-left: 0; 
+          }
+        }
+      }
+    }
+    .splashGridContainer {
+      flex-direction: column;
+      .card {
+        padding-left: 0;
+        padding-right: 0;
+        .cardContent {
+          padding: 1rem;
+        }
+      }
+    }
+  }
+}

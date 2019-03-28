@@ -475,7 +475,7 @@ var idx = lunr(function () {
   }
 });
 
-console.log( jQuery.type(idx) );
+// console.log( jQuery.type(idx) );
 
 $(document).ready(function() {
   $('input#search').on('keyup', function () {
@@ -494,12 +494,12 @@ $(document).ready(function() {
         })
       });
     resultdiv.empty();
-    resultdiv.prepend('<p class="results__found">'+result.length+' {{ site.data.ui-text[site.locale].results_found | default: "Result(s) found" }}</p>');
+    resultdiv.prepend('<p class="results__found secondary">'+result.length+' {{ site.data.ui-text[site.locale].results_found | default: "Result(s) found" }}</p>');
     for (var item in result) {
       var ref = result[item].ref;
       if(store[ref].teaser){
         var searchitem =
-          '<div class="list__item">'+
+          store[item] + '<div class="list__item">'+
             '<article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">'+
               '<h2 class="archive__item-title" itemprop="headline">'+
                 '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
@@ -512,8 +512,8 @@ $(document).ready(function() {
           '</div>';
       }
       else{
-    	  var searchitem =
-          '<div class="list__item">'+
+        var searchitem =
+        store[item] + '<div class="list__item">'+
             '<article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">'+
               '<h2 class="archive__item-title" itemprop="headline">'+
                 '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+

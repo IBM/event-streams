@@ -5,7 +5,7 @@
 $(document).ready(function() {
   // Sticky footer
   var bumpIt = function() {
-      $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
+      // $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
     },
     didResize = false;
 
@@ -51,18 +51,10 @@ $(document).ready(function() {
     $(".author__urls-wrapper button").toggleClass("open");
   });
 
-  // Search toggle
-  $(".search__toggle").on("click", function() {
-    $(".search-content").toggleClass("is--visible");
-    $(".initial-content").toggleClass("is--hidden");
-    // set focus on input
-    setTimeout(function() {
-      $(".search-content input").focus();
-    }, 400);
-  });
 
-  // init smooth scroll
-  $("a").smoothScroll({ offset: -20 });
+
+  // // init smooth scroll
+  // $("a").smoothScroll({ offset: 20 });
 
   // add lightbox class to all image links
   $(
@@ -104,3 +96,4 @@ $(document).ready(function() {
     midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
   });
 });
+

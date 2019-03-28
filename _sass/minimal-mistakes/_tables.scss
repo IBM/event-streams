@@ -15,23 +15,43 @@ table {
 }
 
 thead {
-  background-color: $border-color;
-  border-bottom: 2px solid mix(#000, $border-color, 25%);
+  background-color: #f4f7fb;
+  border: 1px solid #dfe3e6;
 }
 
 th {
   padding: 0.5em;
   font-weight: bold;
   text-align: left;
+  height: 3rem;
 }
 
 td {
   padding: 0.5em;
-  border-bottom: 1px solid mix(#000, $border-color, 25%);
+  border-bottom: 1px solid $keyline;
 }
 
 tr,
 td,
 th {
   vertical-align: middle;
+}
+
+tr {
+  border-left: 1px solid $keyline;
+  border-right: 1px solid $keyline;
+  td,th {
+    &:first-of-type {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    &:last-of-type {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+}
+
+tbody {
+  background-color: white;
 }

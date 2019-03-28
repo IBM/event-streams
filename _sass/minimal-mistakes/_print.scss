@@ -23,9 +23,9 @@
 
   body {
     margin: 0 auto;
-    background: #fff !important;
+    background: #f4f7fb !important;
     color: #000 !important;
-    font-size: 1rem;
+    font-size: 0.875rem;
     line-height: 1.5;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -70,9 +70,9 @@
 
   a,
   a:visited {
-    color: #000;
-    text-decoration: underline;
-    word-wrap: break-word;
+    // color: #000;
+    // text-decoration: underline;
+    // word-wrap: break-word;
   }
 
   table {

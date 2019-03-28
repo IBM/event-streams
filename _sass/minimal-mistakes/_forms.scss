@@ -3,9 +3,9 @@
    ========================================================================== */
 
 form {
-  margin: 0 0 5px 0;
-  padding: 1em;
-  background-color: $form-background-color;
+  // margin: 0 0 5px 0;
+  // padding: 1em;
+  // background-color: $form-background-color;
 
   fieldset {
     margin-bottom: 5px;
@@ -73,19 +73,7 @@ label {
   }
 }
 
-input,
-textarea,
-select {
-  display: inline-block;
-  width: 100%;
-  padding: 0.25em;
-  margin-bottom: 0.5em;
-  color: $text-color;
-  background-color: $background-color;
-  border: $border-color;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-}
+
 
 .input-mini {
   width: 60px;

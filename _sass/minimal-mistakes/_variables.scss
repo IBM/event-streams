@@ -54,9 +54,9 @@ $light-gray: mix(#fff, $gray, 50%) !default;
 $lighter-gray: mix(#fff, $gray, 90%) !default;
 
 $background-color: #fff !default;
-$code-background-color: #fafafa !default;
+$code-background-color: #ffffff !default;
 $code-background-color-dark: $light-gray !default;
-$text-color: $dark-gray !default;
+$text-color: #152935 !default;
 $muted-text-color: mix(#fff, $text-color, 35%) !default;
 $border-color: $lighter-gray !default;
 $form-background-color: $lighter-gray !default;
@@ -150,5 +150,52 @@ $border-radius: 4px !default;
 $box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125) !default;
 $navicon-width: 1.5rem !default;
 $navicon-height: 0.25rem !default;
-$global-transition: all 0.2s ease-in-out !default;
-$intro-transition: intro 0.3s both !default;
+$global-transition: all 0s ease-in-out !default;
+$intro-transition: intro 0s both !default;
+
+
+
+
+
+
+
+$versionsHeight: 3rem;
+$basicSpacing: 3.5rem;
+$contentMaxWidth: 40rem;
+$mastheadHeight: 3.5rem;
+$keyline: #f3f3f3;
+$brand-01: #3d70b2;
+$text-01: #1D364D;
+$text-02: #68737c;
+$hover-outline: #8897a2;
+$hover-primary-text: #294c86;
+
+
+$menuTransition: 0.4s cubic-bezier(0.43, 0.01, 0.01, 0.99);
+
+@keyframes slideup {
+   0% {
+      transform: translateY(1.5rem);
+   }
+   100% {
+      transform: translateY(0rem);
+   }
+}
+
+@keyframes fadein {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+
+
+
+
+@mixin contentWidth {
+   max-width: $contentMaxWidth;
+   margin-left: auto;
+   margin-right: auto;
+}

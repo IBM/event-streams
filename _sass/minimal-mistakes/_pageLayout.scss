@@ -1,0 +1,27 @@
+/* ==========================================================================
+   PAGE LAYOUT
+   ========================================================================== */
+
+$largeSpacing: 4rem;
+$mediumSpacing: 2rem;
+$smallSpacing: .75rem;
+
+.pageSpacing {
+  padding-left: $largeSpacing;
+  padding-right: $largeSpacing;
+}
+
+@media only screen and (max-width: 1200px) {
+  .pageSpacing {
+    padding-left: $smallSpacing;
+    padding-right: $smallSpacing;
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .pageSpacing {
+    padding-left: $smallSpacing;
+    padding-right: $smallSpacing;
+  }
+}

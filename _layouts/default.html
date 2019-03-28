@@ -13,42 +13,51 @@
     {% include head.html %}
     {% include head/custom.html %}
     <link rel="shortcut icon" type="image/x-icon" href="{{ "/assets/favicon.ico" | prepend: site.baseurl }}" >
-  </head>
+    {% if page.url == '/404.html' %}
+      <script src="{{ '/assets/js/404.js' | relative_url }}"></script>
+    {% endif %}
+    <base target="_parent">
 
-  <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
+  </head>
+  {% if page.mastheadNavItem == "Documentation" %}
+    {% assign checkURL = 'urlChecker()' %}
+  {% else %}
+    {% assign checkURL = '' %}
+  {% endif %}
+  <body onload="{{ checkURL }}" class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 
     <div class="initial-content">
+        
       {{ content }}
-      <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <div align="center" style="margin: 1em 0;">
-        <ins class="adsbygoogle"
-             style="display:block; border-bottom: initial;"
-             data-ad-client="ca-pub-7328585512091257"
-             data-ad-slot="3049671934"
-             data-ad-format="auto"></ins>
-        </div>
-        <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script> -->
+
     </div>
 
-    {% if site.search == true %}
-      <div class="search-content">
-        {% include search/search_form.html %}
-      </div>
-    {% endif %}
+
 
     <div class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include footer.html %}
-      </footer>
+        <footer>
+          {% include footer/custom.html %}
+          {% include footer.html %}
+        </footer>
     </div>
 
     {% include scripts.html %}
-
+    {% if page.mastheadNavItem == "Search" %}
+      <script>
+        window.addEventListener("load", function load(event){
+          document.getElementById("search").focus();
+          var urlParams = new URLSearchParams(window.location.search);
+          if ( urlParams.has('q') ) {
+            var query = urlParams.get('q');
+            var input = document.getElementById('search');
+            input.value = query;
+            searchResults('input#search');
+          }
+        });
+      </script>
+    {% endif %}
   </body>
 </html>

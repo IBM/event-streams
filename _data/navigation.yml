@@ -1,17 +1,23 @@
 
 # main links
 main:
-  - title: "Home"
-    url: /
   - title: "Documentation"
-    url: /about/overview/
+    url: /
+  - title: "Tutorials"
+    url: /tutorials/
+  - title: FAQ
+    url: /faq/
+  - title: API
+    url: /api/
   - title: "Support"
     url: /support/
+  - title: "Search"
+    url: /search/
 
-# documentation links
-docs:
+# Sidebar navigation for latest version documentation.
+
+latestdocs:
   - title: About
-    url: /about/overview/
     children:
       - title: "Introduction"
         url: /about/overview/
@@ -39,8 +45,167 @@ docs:
         url: /installing/planning/
       - title: "Capacity planning"
         url: /installing/capacity-planning/
-      - title: "Downloading"
-        url: /installing/downloading/
+      - title: "Installing on IBM Cloud Private"
+        url: /installing/installing/
+      - title: "Installing on OpenShift"
+        url: /installing/installing-openshift/
+      - title: "Configuring"
+        url: /installing/configuring/
+      - title: "Migrating from Community Edition"
+        url: /installing/migrating/
+      - title: "Post-installation tasks"
+        url: /installing/post-installation/
+      - title: "Uninstalling"
+        url: /installing/uninstalling/
+      - title: "Upgrading"
+        url: /installing/upgrading/
+      - title: "Rolling back"
+        url: /installing/rolling-back/
+  - title: Getting started
+    children:
+      - title: "Logging in"
+        url: /getting-started/logging-in/
+      - title: "Generating a starter application"
+        url: /getting-started/generating-starter-app/
+      - title: "Creating and testing message loads"
+        url: /getting-started/testing-loads/
+      - title: "Creating Kafka Java client applications"
+        url: /getting-started/client/
+      - title: "Using Apache Kafka console tools"
+        url: /getting-started/using-kafka-console-tools/
+  - title: Security
+    children:
+      - title: "Managing access"
+        url: /security/managing-access/
+      - title: "Encrypting your data"
+        url: /security/encrypting-data/
+      - title: "Configuring secure JMX connections"
+        url: /security/secure-jmx-connections/
+      - title: "Network policies"
+        url: /security/network-policies/
+      - title: "Considerations for GDPR"
+        url: /security/gdpr-considerations/
+  - title: Geo-replication
+    children:
+      - title: "About geo-replication"
+        url: /georeplication/about/
+      - title: "Planning for geo-replication"
+        url: /georeplication/planning/
+      - title: "Setting up geo-replication"
+        url: /georeplication/setting-up/
+      - title: "Monitoring and managing geo-replication"
+        url: /georeplication/health/
+  - title: Connecting other systems
+    children:
+      - title: "Producing messages using REST"
+        url: /connecting/rest-api/
+      - title: "Connecting to IBM MQ"
+        url: /connecting/mq/
+      - title: "Running the MQ source connector"
+        url: /connecting/mq/source/
+      - title: "Running the MQ sink connector"
+        url: /connecting/mq/sink/
+      - title: "Running connectors on IBM z/OS"
+        url: /connecting/mq/zos/
+  - title: Administering
+    children:
+      - title: "Monitoring deployment health"
+        url: /administering/deployment-health/
+      - title: "Monitoring Kafka cluster health"
+        url: /administering/cluster-health/
+      - title: "Monitoring topic health"
+        url: /administering/topic-health/
+      - title: "Monitoring with external tools"
+        url: /administering/external-monitoring/
+      - title: "Modifying Kafka broker configurations"
+        url: /administering/modifying-configs/
+      - title: "Modifying installation settings"
+        url: /administering/modifying-installation/
+      - title: "Running Helm upgrade commands"
+        url: /administering/helm-upgrade-command/
+      - title: "Scaling"
+        url: /administering/scaling/
+      - title: "Setting client quotas"
+        url: /administering/quotas/
+  - title: Troubleshooting
+    children:
+      - title: "Troubleshooting overview"
+        url: /troubleshooting/intro/
+      - title: "Diagnosing installation issues"
+        url: /troubleshooting/diagnosing-installation-issues/
+      - title: "Resources not available"
+        url: /troubleshooting/resources-not-available/
+      - title: "Full cleanup after uninstallation"
+        url: /troubleshooting/cleanup-uninstall/
+      - title: "ConsumerTimeoutException when pods available"
+        url: /troubleshooting/pod-timeout-error/
+      - title: "Error when creating multiple geo-replicators"
+        url: /troubleshooting/georeplication-error/
+      - title: "TimeoutException when using standard Kafka producer"
+        url: /troubleshooting/kafka-producer-error/
+      - title: "Standard Kafka consumer hangs"
+        url: /troubleshooting/kafka-consumer-hangs/
+      - title: "Command 'cloudctl es' fails with 'not a registered command' error"
+        url: /troubleshooting/cloudctl-es-not-registered/
+      - title: "Command 'cloudctl es' produces 'FAILED' message"
+        url: /troubleshooting/cloudctl-es-fails/
+      - title: "UI does not open when using Chrome on Ubuntu"
+        url: /troubleshooting/chrome-ubuntu-issue/
+      - title: "Chart deployment fails with 'no ImagePolicies' error"
+        url: /troubleshooting/no-image-policy/
+      - title: "Chart deployment fails with 'no matching repositories in the ImagePolicies' error"
+        url: /troubleshooting/image-policy-missing-repository/
+      - title: "Chart deployment starts but no helm release is created"
+        url: /troubleshooting/no-helm-release-is-created/
+      - title: "The Messages page is blank"
+        url: /troubleshooting/messages-page-blank/
+      - title: "Unable to connect to Kafka cluster"
+        url: /troubleshooting/kafka-connection-issue/
+      - title: "Unable to remove destination cluster"
+        url: /troubleshooting/error-removing-destination/
+      - title: "Geo-replication fails to start"
+        url: /troubleshooting/georeplication-connect-error/
+      - title: "403 error when signing in"
+        url: /troubleshooting/ui-403-error/
+      - title: "Pods fail to start, status is blocked"
+        url: /troubleshooting/pods-apparmor-blocked/
+      - title: "Kafka client apps unable to connect to cluster"
+        url: /troubleshooting/client-connect-error/
+      - title: "Rollback fails"
+        url: /troubleshooting/rollback-fails/
+
+
+# Sidebar navigation for version 2018.3.1 documentation.
+
+201831docs:
+  - title: About
+    children:
+      - title: "Introduction"
+        url: /about/overview/
+      - title: "What's new"
+        url: /about/whats-new/
+      - title: "Key concepts"
+        url: /about/key-concepts/
+      - title: "Producing messages"
+        url: /about/producing-messages/
+      - title: "Consuming messages"
+        url: /about/consuming-messages/
+      - title: "Partition leadership"
+        url: /about/partition-leadership/
+      - title: "Accessibility"
+        url: /about/accessibility/
+      - title: "Notices"
+        url: /about/notices/
+  - title: Installing
+    children:
+      - title: "Trying out Event Streams"
+        url: /installing/trying-out/
+      - title: "Pre-requisites"
+        url: /installing/prerequisites/
+      - title: "Planning for installation"
+        url: /installing/planning/
+      - title: "Capacity planning"
+        url: /installing/capacity-planning/
       - title: "Installing"
         url: /installing/installing/
       - title: "Configuring"
@@ -81,9 +246,9 @@ docs:
         url: /georeplication/planning/
       - title: "Setting up geo-replication"
         url: /georeplication/setting-up/
-      - title: "Monitoring health of geo-replication"
+      - title: "Monitoring and managing of geo-replication"
         url: /georeplication/health/
-  - title: Connecting to other systems
+  - title: Connecting other systems
     children:
       - title: "Connecting to IBM MQ"
         url: /connecting/mq/
@@ -99,8 +264,6 @@ docs:
         url: /administering/deployment-health/
       - title: "Monitoring Kafka cluster health"
         url: /administering/cluster-health/
-      - title: "Monitoring health with external tools"
-        url: /administering/external-monitoring/
       - title: "Modifying configuration settings"
         url: /administering/modifying-configs/
       - title: "Running Helm upgrade commands"
@@ -110,8 +273,9 @@ docs:
       - title: "Setting client quotas"
         url: /administering/quotas/
   - title: Troubleshooting
-    url: /troubleshooting/intro/
     children:
+      - title: "Troubleshooting overview"
+        url: /troubleshooting/intro/
       - title: "Diagnosing installation issues"
         url: /troubleshooting/diagnosing-installation-issues/
       - title: "Resources not available"
@@ -146,6 +310,9 @@ docs:
         url: /troubleshooting/error-removing-destination/
       - title: "Geo-replication fails to start"
         url: /troubleshooting/georeplication-connect-error/
-
-  - title: FAQ
-    url: /faq/
+      - title: "403 error when signing in"
+        url: /troubleshooting/ui-403-error/
+      - title: "Pods fail to start, status is blocked"
+        url: /troubleshooting/pods-apparmor-blocked/
+      - title: "Kafka client apps unable to connect to cluster"
+        url: /troubleshooting/client-connect-error/
