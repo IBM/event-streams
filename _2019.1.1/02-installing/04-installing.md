@@ -114,7 +114,7 @@ Install the {{site.data.reuse.short_name}} chart as follows.
 2. Search for `ibm-eventstreams-prod` and select it from the result. The {{site.data.reuse.long_name}} README is displayed.
 3. If you are installing {{site.data.reuse.short_name}} on {{site.data.reuse.icp}} 3.1.1 running on Red Hat Enterprise Linux, [remove AppArmor settings](../../troubleshooting/pods-apparmor-blocked/) in the PodSecurityPolicy to avoid installation issues.
 3. Click **Configure**.\\
-   **Note:** The README includes information about how to install {{site.data.reuse.long_name}} by using the the CLI. To use the CLI, follow the instructions in the README instead of clicking **Configure**.
+   **Note:** The README includes information about how to install {{site.data.reuse.long_name}} by using the CLI. To use the CLI, follow the instructions in the README instead of clicking **Configure**.
 4. Enter a release name that identifies your {{site.data.reuse.short_name}} installation, select the target namespace you created previously, and accept the terms of the license agreement.
 5. Expand the **All parameters** section to configure the settings for your installation as described in [configuring](../configuring). Configuration options to consider include setting up persistent storage, external access, and preparing for geo-replication.\\
    **Important:** As part of the configuration process, enter the name of the [secret](#preparing-the-repository) you created previously in the [**Image pull secret**](../configuring/#global-install-settings) field.

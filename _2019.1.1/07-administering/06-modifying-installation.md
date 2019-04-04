@@ -19,7 +19,7 @@ To modify configuration settings by using the UI:
 4. Select the installed chart version from the **Version** drop-down list.
 5. Ensure you set **Using previous configured values** to **Reuse Values**.
 6. Click **All parameters** in order to access all the release-related parameters.
-7. Modify the values for the the configuration settings you want to change.\\
+7. Modify the values for the configuration settings you want to change.\\
    For example, to set the number of geo-replication workers to 4, go to the **Geo-replication settings** section and set the **Geo-replicator workers** field to 4.
 8. Click **Upgrade**.
 

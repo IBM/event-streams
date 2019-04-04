@@ -8,8 +8,8 @@ mastheadNavItem: Support
 sort_by: title
 # toc: true
 sections:
-  - name: Open an Issue
-    description: Choose where to report your issue
+  - name: IBM Event Streams support
+    description: Let us know what you think about IBM Event Streams.
 ---
 
 ## Support matrix

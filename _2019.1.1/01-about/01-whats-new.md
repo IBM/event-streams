@@ -23,7 +23,7 @@ In addition to {{site.data.reuse.icp}} 3.1.1, {{site.data.reuse.short_name}} 201
 
 ## Connect external monitoring tools to {{site.data.reuse.short_name}}
 
-You can use third party monitoring tools to monitor the deployed {{site.data.reuse.short_name}} Kafka cluster. Find out more about monitoring with [external tools](../../administering/external-monitoring/).
+You can use third-party monitoring tools to monitor the deployed {{site.data.reuse.short_name}} Kafka cluster. Find out more about monitoring with [external tools](../../administering/external-monitoring/).
 
 ## New Producer dashboard
 

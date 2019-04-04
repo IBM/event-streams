@@ -193,7 +193,7 @@ Install the {{site.data.reuse.short_name}} chart as follows.
 2. Click **Catalog** in the top navigation menu.
 2. Search for `ibm-eventstreams-rhel-prod` and select it from the result. The {{site.data.reuse.long_name}} README is displayed.
 3. Click **Configure**.\\
-   **Note:** The README includes information about how to install {{site.data.reuse.long_name}} by using the the CLI. To use the CLI, follow the instructions in the README instead of clicking **Configure**.\\
+   **Note:** The README includes information about how to install {{site.data.reuse.long_name}} by using the CLI. To use the CLI, follow the instructions in the README instead of clicking **Configure**.\\
    **Important**: You might see the following warnings on this page. These warnings are harmless and can be safely ignored as the {{site.data.reuse.openshift_short}} does not use PodSecurityPolicy settings.\\
    ![Pod Security Warning](../../images/openshift_podsecurity_warning.png "Screen capture showing harmless Pod Security warning messages on the configuration page.")
 4. Enter a release name that identifies your {{site.data.reuse.short_name}} installation, select the target namespace you created previously, and accept the terms of the license agreement.

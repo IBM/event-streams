@@ -56,12 +56,12 @@ These sample instructions set up an IBM MQ queue manager that uses its local ope
 9. Create a queue for the Kafka Connect connector to use:
    ```DEFINE QLOCAL(<queue_name>)```
 10. Authorize the IBM MQ user ID to connect to and inquire the queue manager:
-   ```SET AUTHREC OBJTYPE(<queue_manager_name>) PRINCIPAL('<user_id>') AUTHADD(CONNECT,INQ)```
+   ```SET AUTHREC OBJTYPE(QMGR) PRINCIPAL('<user_id>') AUTHADD(CONNECT,INQ)```
 11. Authorize the IBM MQ user ID to use the queue:
    ```SET AUTHREC PROFILE(<queue_name>) OBJTYPE(QUEUE) PRINCIPAL('<user_id>') AUTHADD(ALLMQI)```
 12. Stop the `runmqsc` tool by typing `END`.
 
-For example, for a queue manager called `QM1`, with user ID `alice`, creating a server-connection channel called `MYSVRCONN` and a queue called `MYQSOURCE` you should have run the following commands in `runmqsc`:
+For example, for a queue manager called `QM1`, with user ID `alice`, creating a server-connection channel called `MYSVRCONN` and a queue called `MYQSOURCE`, you run the following commands in `runmqsc`:
 ```
 DEFINE CHANNEL(MYSVRCONN) CHLTYPE(SVRCONN)
 SET CHLAUTH(MYSVRCONN) TYPE(BLOCKUSER) USERLIST('nobody')
@@ -70,7 +70,7 @@ SET CHLAUTH(MYSVRCONN) TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(CHANNEL) CHCKCLNT(R
 ALTER AUTHINFO(SYSTEM.DEFAULT.AUTHINFO.IDPWOS) AUTHTYPE(IDPWOS) ADOPTCTX(YES)
 REFRESH SECURITY TYPE(CONNAUTH)
 DEFINE QLOCAL(MYQSOURCE)
-SET AUTHREC OBJTYPE(QM1) PRINCIPAL('alice') AUTHADD(CONNECT,INQ)
+SET AUTHREC OBJTYPE(QMGR) PRINCIPAL('alice') AUTHADD(CONNECT,INQ)
 SET AUTHREC PROFILE(MYQSOURCE) OBJTYPE(QUEUE) PRINCIPAL('alice') AUTHADD(ALLMQI)
 END
 ```
@@ -124,7 +124,7 @@ See the sample properties file for a full list of properties you can configure, 
 
 ## Configuring the connector to connect to {{site.data.reuse.long_name}} or Apache Kafka
 
-To provide the connection details for your Kafka cluster, the Kafka distribution includes a file called `connect-standalone.properties` that you can edit to provide the details. It should include the following connection information:
+To provide the connection details for your Kafka cluster, the Kafka distribution includes a file called `connect-standalone.properties`. Edit the file to include the following connection information:
 * A list of one or more Kafka brokers for bootstrapping connections.
 * Whether the cluster requires connections to use SSL/TLS.
 * Authentication credentials if the cluster requires clients to authenticate.
@@ -177,9 +177,9 @@ To test the connector you will need an application to consume events from the yo
     INFO Created connector mq-source
     INFO Connection to MQ established
     ```
-1. Navigate to the UI of the [sample application](#generate-a-consumer-application) you generated earlier and start consuming messages from {{site.data.reuse.long_name}}.
-1. To add messages to the IBM MQ queue, run the `amqsput` sample and type in some messages:
-    ```/opt/mqm/samp/bin/amqsput <queue_manager_name> <queue_name>```
+2. Navigate to the UI of the [sample application](#generate-a-consumer-application) you generated earlier and start consuming messages from {{site.data.reuse.long_name}}.
+3. To add messages to the IBM MQ queue, run the `amqsput` sample and type in some messages:\\
+   `/opt/mqm/samp/bin/amqsput <queue_name> <queue_manager_name>`
 
 The messages are printed by the Kafka console consumer, and are transferred from the IBM MQ queue into the Kafka topic using the queue manager you configured.
 

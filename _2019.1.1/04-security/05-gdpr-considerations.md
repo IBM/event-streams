@@ -61,7 +61,7 @@ Areas for consideration to address these aspects of the GDPR legislation include
 ## Data Life Cycle
 
 {{site.data.reuse.long_name}} is a general purpose pub-sub technology built on [Apache Kafka®](https://kafka.apache.org/){:target="_blank"} which can
-be used for the purpose of connecting applications. Some of these applications may be IBM-owned but others my by third party products
+be used for the purpose of connecting applications. Some of these applications may be IBM-owned but others may be third-party products
 provided by other technology suppliers. As a result, {{site.data.reuse.long_name}} can be used to exchange many forms of data,
 some of which could potentially be subject to GDPR.
 

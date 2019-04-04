@@ -154,7 +154,7 @@ To install the {{site.data.reuse.short_name}} chart, you must have the `ibm-rest
 
 You can define the PodSecurityPolicy when creating the [namespace](../installing/#create-a-namespace) for your installation.
 
-{{site.data.reuse.short_name}} applies network policies to control the traffic within the namespace where it is deployed, limiting the traffic to that required by {{site.data.reuse.short_name}}. For more information about the network policies and the the traffic they permit, see [network policies](../../security/network-policies/).
+{{site.data.reuse.short_name}} applies network policies to control the traffic within the namespace where it is deployed, limiting the traffic to that required by {{site.data.reuse.short_name}}. For more information about the network policies and the traffic they permit, see [network policies](../../security/network-policies/).
 
 For more information about PodSecurityPolicy definitions, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/security.html){:target="_blank"}.
 

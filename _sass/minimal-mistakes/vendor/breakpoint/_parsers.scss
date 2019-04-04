@@ -194,7 +194,7 @@ $Memo-Exists: function-exists(memo-get) and function-exists(memo-set);
     $query-print: breakpoint-build-resolution($query-print, $query-resolution, $empty-media, $first);
   }
 
-  // Loop through each feature that's been detected so far and append 'false' to the the value list to increment their counters
+  // Loop through each feature that's been detected so far and append 'false' to the value list to increment their counters
   @each $f, $v in $private-breakpoint-context-holder {
     $v-holder: $v;
     $length: length($v-holder);

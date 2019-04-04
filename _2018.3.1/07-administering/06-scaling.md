@@ -91,7 +91,7 @@ To modify this for an existing {{site.data.reuse.long_name}} installation, use t
 
 The speed of the storage available to Kafka brokers will impact performance.
 
-Set this at the time of installation with the `--set kafka.persistence.dataPVC.storageClassName=<STORAGE_CLASS>` option in your `helm install` command if using the CLI, or by entering the desired storage class into the **Storage class name** field of the **Kafka persistent storage settings** section of the **Configure** page if using the UI.
+Set this at the time of installation with the `--set kafka.persistence.dataPVC.storageClassName=<STORAGE_CLASS>` option in your `helm install` command if using the CLI, or by entering the required storage class into the **Storage class name** field of the **Kafka persistent storage settings** section of the **Configure** page if using the UI.
 
 
 For more information about available storage classes, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/create_storage_class.html).
@@ -100,4 +100,4 @@ For more information about available storage classes, see the [{{site.data.reuse
 
 The Kafka brokers will require sufficient storage to meet the retention requirements for all of the topics in the cluster. Disk space requirements grow with longer retention periods or sizes, and more topic partitions.
 
-Set this at the time of installation with the `--set kafka.persistence.dataPVC.size=<SIZE>` option in your `helm install` command if using the CLI, or by entering the desired persistence size into the **Size** field of the **Kafka persistent storage settings** section of the **Configure** page if using the UI.
+Set this at the time of installation with the `--set kafka.persistence.dataPVC.size=<SIZE>` option in your `helm install` command if using the CLI, or by entering the required persistence size into the **Size** field of the **Kafka persistent storage settings** section of the **Configure** page if using the UI.

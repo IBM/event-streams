@@ -22,9 +22,9 @@ When installing the agent, ensure the following settings:
 
 ## Configuring {{site.reuse.short_name}} for Autodiscovery
 
-When installing {{site.data.reuse.short_name}}, firsly ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../installing/configuring/#kafka-broker-settings). This is required to ensure the Kafka brokers' JMX ports are accessible to the Datadog Agent.
+When installing {{site.data.reuse.short_name}}, firstly ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../installing/configuring/#kafka-broker-settings). This is required to ensure the Kafka brokers' JMX ports are accessible to the Datadog Agent.
 
-Then supply the YAML object containing the required Check Templates for configuring [Kafka JMX monitoring](https://docs.datadoghq.com/integrations/kafka/){:target="_blank"}. The [example configuration supplied](https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example){:target="_blank"} provides an overview of the required fields. You can set set the YAML object on the **Configuration** page by using the [configuration option](../../installing/configuring/#external-monitoring) **External monitoring > Datadog - Autodiscovery annotation check templates for Kafka brokers**.
+Then supply the YAML object containing the required Check Templates for configuring [Kafka JMX monitoring](https://docs.datadoghq.com/integrations/kafka/){:target="_blank"}. The [example configuration supplied](https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example){:target="_blank"} provides an overview of the required fields. You can set the YAML object on the **Configuration** page by using the [configuration option](../../installing/configuring/#external-monitoring) **External monitoring > Datadog - Autodiscovery annotation check templates for Kafka brokers**.
 
 The YAML object is then applied to the Kafka pods as annotations to enable the pods to be recognized by the Datadog agent AutoDiscovery service.
 

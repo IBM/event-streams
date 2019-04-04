@@ -64,7 +64,7 @@ To convert the files:
 
 The IBM MQ connectors use the JMS API to connect to MQ. You must set the environment variables required for JMS applications before running the connectors on IBM z/OS.
 
-Ensure you set `CLASSPATH` to include `com.ibm.mq.allclient.jar`, and also set the the JAR file for the connector you are using - this is the connector JAR file you downloaded from the {{site.data.reuse.short_name}} UI or built after cloning the GitHub project, for example, `kafka-connect-mq-source-1.0.1-jar-with-dependencies.jar`.
+Ensure you set `CLASSPATH` to include `com.ibm.mq.allclient.jar`, and also set the JAR file for the connector you are using - this is the connector JAR file you downloaded from the {{site.data.reuse.short_name}} UI or built after cloning the GitHub project, for example, `kafka-connect-mq-source-1.0.1-jar-with-dependencies.jar`.
 
 If you are using the bindings connection mode for the connector to connect to the queue manager, also set the following environment variables:
 

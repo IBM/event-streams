@@ -54,9 +54,9 @@ After installation, [set up external access](../post-installation/#connecting-cl
 
 ## Configuring external monitoring tools
 
-You can use third party monitoring tools to monitor the deployed {{site.data.reuse.short_name}} Kafka cluster by connecting to the JMX port on the Kafka brokers and reading Kafka metrics. To set this up, you need to:
+You can use third-party monitoring tools to monitor the deployed {{site.data.reuse.short_name}} Kafka cluster by connecting to the JMX port on the Kafka brokers and reading Kafka metrics. To set this up, you need to:
 
-- Have a third party monitoring tool set up to be used within your {{site.data.reuse.icp}} cluster.
+- Have a third-party monitoring tool set up to be used within your {{site.data.reuse.icp}} cluster.
 - Enable access to the broker JMX port by selecting the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../installing/configuring/#kafka-broker-settings) section.
 - Provide any [configuration settings](#external-monitoring) required by your monitoring tool to be applied to {{site.data.reuse.short_name}}. For example, Datadog requires you to deploy an agent on your {{site.data.reuse.icp}} system that requires configuration settings to work with {{site.data.reuse.short_name}}.
 - Configure your applications to [connect to a secure JMX port](../../security/secure-jmx-connections/).
