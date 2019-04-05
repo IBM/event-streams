@@ -154,7 +154,7 @@ The {{site.data.reuse.long_name}} user interface (UI) is supported on the follow
 
 *   Google Chrome version 65 or later
 *   Mozilla Firefox version 59 or later
-*   Microsoft Edge version 16 or later
+*   Microsoft Edge version 44.17763.1.0 (Microsoft EdgeHTML 18.17763) or later
 *   Safari version 11.1 or later
 
 ## {{site.data.reuse.long_name}} CLI
