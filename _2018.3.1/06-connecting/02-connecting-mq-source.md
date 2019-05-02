@@ -83,7 +83,7 @@ To send messages from IBM MQ to {{site.data.reuse.long_name}}, create a topic an
 
 You can also send IBM MQ messages to Apache Kafka running locally on your machine, see the [public GitHub repository](https://github.com/ibm-messaging/kafka-connect-mq-source/blob/master/UsingMQwithKafkaConnect.md) for more details.
 
-![Event Streams 2018.3.1 icon](../../../images/2018.3.1.svg "In Event Streams 2018.3.1.") In {{site.data.reuse.long_name}} 2018.3.1, use the following steps:
+![Event Streams 2018.3.1 icon](../../../../images/2018.3.1.svg "In Event Streams 2018.3.1.") In {{site.data.reuse.long_name}} 2018.3.1, use the following steps:
 1. Log in to your {{site.data.reuse.long_name}} UI.
 2. Click the **Topics** tab.
 3. If you have not previously created the topic to use with the connector, create it now by clicking **Create topic**.
@@ -93,7 +93,7 @@ You can also send IBM MQ messages to Apache Kafka running locally on your machin
 7. From the **Certificates** section, download the server certificate from the **Java truststore** section, and choose a location for the downloaded file that can be accessed by the Kafka Connect worker.
 8. Go to the **API key** section, and follow the instructions to generate an API key authorized to connect to the cluster and produce to the topic.
 
-![Event Streams 2018.3.0 icon](../../../images/2018.3.0.svg "In Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, use the following steps:
+![Event Streams 2018.3.0 icon](../../../../images/2018.3.0.svg "In Event Streams 2018.3.0.") In {{site.data.reuse.long_name}} 2018.3.0, use the following steps:
 1. Log in to your {{site.data.reuse.long_name}} UI.
 2. Click the **Topics** tab.
 3. If you have not previously created the topic to use with the connector, create it now.

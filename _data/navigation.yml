@@ -264,7 +264,7 @@ latestdocs:
         url: /administering/deployment-health/
       - title: "Monitoring Kafka cluster health"
         url: /administering/cluster-health/
-      - title: "Modifying configuration settings"
+      - title: "Modifying Kafka broker configurations"
         url: /administering/modifying-configs/
       - title: "Running Helm upgrade commands"
         url: /administering/helm-upgrade-command/

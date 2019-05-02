@@ -14,7 +14,8 @@ To try out {{site.data.reuse.short_name}}, you can install a basic deployment of
 
 For more features and full IBM suppport, [install {{site.data.reuse.long_name}}](../installing).
 
-1. If you do not have {{site.data.reuse.icp}} installed already, you can download and [install IBM Cloud Private-CE](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/install_containers.html){:target="_blank"}.
+1. If you do not have {{site.data.reuse.icp}} installed already, you can download and [install IBM Cloud Private-CE](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/install_containers.html){:target="_blank"}.\\
+   **Note:** {{site.data.reuse.ce_long}} is not supported on {{site.data.reuse.openshift}}.
 2. {{site.data.reuse.icp_ui_login}}\\
    The default user name is `admin`, and the default password is `admin`.
 3. Create a namespace where you will install your {{site.data.reuse.short_name}} instance:\\

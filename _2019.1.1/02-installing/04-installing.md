@@ -18,7 +18,8 @@ You can also install a basic deployment of {{site.data.reuse.short_name}} {{site
    - The master host and port for your {{site.data.reuse.icp}} cluster. These values are set during the installation of {{site.data.reuse.icp}}. The default port is 8443.
       Make a note of these values, and enter them in the steps that have `https://<Cluster Master Host>:<Cluster Master API Port>`
    - The SSH password if you are connecting remotely to the master host of your {{site.data.reuse.icp}} cluster.
-
+- Ensure your proxy address uses lowercase characters. This is a setting that often needs to be checked when installing {{site.data.reuse.short_name}} on an {{site.data.reuse.icp}} cluster [deployed on Amazon Web Services (AWS)](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/supported_environments/aws/overview.html){:target="_blank"}. If the address is in uppercase, edit the `ibmcloud-cluster-info` ConfigMap in the `kube-public` namespace, and change the uppercase characters to lowercase for the `proxy_address` parameter:\\
+   `kubectl edit configmap -n ibmcloud-cluster-info -n kube-public`
 
 ## Preparing the platform
 

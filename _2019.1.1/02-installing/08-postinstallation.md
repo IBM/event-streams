@@ -40,22 +40,58 @@ cloudctl login -a https://<master_ip_address>:<master_port_number> -c <my_cluste
 cloudctl es init
 ```
 
-## Firewall settings
+## Firewall and load balancer settings
 
-In your firewall settings, ensure you enable communication for the node ports that {{site.data.reuse.long_name}} services use. To find out what ports need to be opened, follow these steps:
+In your firewall settings, ensure you enable communication for the node ports that {{site.data.reuse.long_name}} services use.
+
+If you are using an external load balancer for your master or proxy nodes in a high availability environment, ensure that the external ports are forwarded to the appropriate master and proxy nodes.
+
+To find the node ports to expose by using the UI:
 
 1. {{site.data.reuse.icp_ui_login}}
 2. From the navigation menu, click **Workloads > Helm Releases**.\\
    ![Menu > Workloads > Helm releases](../../images/icp_menu_helmreleases.png "Screen capture showing how to select Workloads > Helm releases from navigation menu"){:height="30%" width="30%"}
 3. Locate the release name of your {{site.data.reuse.long_name}} installation in the **NAME** column, and click the name.
-4. Scroll down to the **Service** table. The table lists information about the {{site.data.reuse.long_name}} services.
+4. Scroll down to the **Service** table. The table lists information about your {{site.data.reuse.short_name}} services.
 5. In the **Service** table, look for `NodePort` in the **TYPE** column.\\
    In each row that has `NodePort` as type, look in the **PORT(S)** column to find the port numbers you need to ensure are open to communication.\\
-   The port numbers are paired as `<internal_number:external_number>` (for example, `32000:30553`). For your firewall settings, ensure the external numbers are open.\\
+   The port numbers are paired as `<internal_number:external_number>`, where you need the second (external) numbers to be open (for example, `30314` in `32000:30314`).\\
    The following image provides an example of the table:\\
    ![Service table](../../images/service_nodeports.png "Screen capture showing service table with the NodePort types highlighted.")
 
+To find the node ports to expose by using the CLI:
 
+1. {{site.data.reuse.icp_cli_login}}
+2. Run the following command to list information about your {{site.data.reuse.short_name}} services:\\
+   `kubectl get services -n <namespace>`\\
+   The following is an example of the output (this is the same result as shown in the UI example previously):
+   ```
+   NAME                                              TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                                                           AGE
+my-eventstreams-ibm-es-access-controller-svc      ClusterIP   None         <none>        8443/TCP                                                          111d
+my-eventstreams-ibm-es-elastic-svc                ClusterIP   None         <none>        9200/TCP,9300/TCP                                                 111d
+my-eventstreams-ibm-es-indexmgr-svc               ClusterIP   None         <none>        9080/TCP,8080/TCP                                                 111d
+my-eventstreams-ibm-es-kafka-broker-svc-0         ClusterIP   None         <none>        9092/TCP,8093/TCP,9094/TCP,7070/TCP                               111d
+my-eventstreams-ibm-es-kafka-broker-svc-1         ClusterIP   None         <none>        9092/TCP,8093/TCP,9094/TCP,7070/TCP                               111d
+my-eventstreams-ibm-es-kafka-broker-svc-2         ClusterIP   None         <none>        9092/TCP,8093/TCP,9094/TCP,7070/TCP                               111d
+my-eventstreams-ibm-es-kafka-headless-svc         ClusterIP   None         <none>        9092/TCP,8093/TCP,9094/TCP,8081/TCP                               111d
+my-eventstreams-ibm-es-proxy-svc                  NodePort    10.0.0.118   <none>        30000:32417/TCP,30001:31557/TCP,30051:32712/TCP,30101:32340/TCP   111d
+my-eventstreams-ibm-es-replicator-svc             ClusterIP   None         <none>        8083/TCP                                                          111d
+my-eventstreams-ibm-es-rest-proxy-svc             NodePort    10.0.0.86    <none>        32000:30314/TCP                                                   111d
+my-eventstreams-ibm-es-rest-svc                   ClusterIP   10.0.0.224   <none>        9080/TCP                                                          111d
+my-eventstreams-ibm-es-ui-svc                     NodePort    10.0.0.192   <none>        32000:30634/TCP                                                   111d
+my-eventstreams-ibm-es-zookeeper-fixed-ip-svc-0   ClusterIP   10.0.0.236   <none>        2181/TCP,2888/TCP,3888/TCP                                        111d
+my-eventstreams-ibm-es-zookeeper-fixed-ip-svc-1   ClusterIP   10.0.0.125   <none>        2181/TCP,2888/TCP,3888/TCP                                        111d
+my-eventstreams-ibm-es-zookeeper-fixed-ip-svc-2   ClusterIP   10.0.0.87    <none>        2181/TCP,2888/TCP,3888/TCP                                        111d
+my-eventstreams-ibm-es-zookeeper-headless-svc     ClusterIP   None         <none>        2181/TCP,2888/TCP,3888/TCP                                        111d
+
+   ```
+
+For your firewall settings, ensure the external ports are open. For example, in the previous UI example, it is the second number for the highlighted `NodePort` rows: `30314`, `30634`, `32417`, `31557`, `32712`, and `32340`.
+
+For your load balancer settings, you need to expose the following ports:
+- For the CLI, ensure you forward the external port to both the master and the proxy nodes. This is the second port listed in the `<release_name>-<namespace>-rest-proxy-svc` row. In the previous example, the port is the second number in the **PORT(S)** column of the `my-eventstreams-ibm-es-rest-proxy-svc` row: `30314`.
+- For the UI, ensure you forward the external port to both the master and the proxy nodes. This is the second port listed in the `<release_name>-<namespace>-ui-svc` row. In the previous example, the port is the second number in the **PORT(S)** column of the `my-eventstreams-ibm-es-ui-svc` row: `30634`.
+- For Kafka, ensure you forward the external port to the proxy node. This is the second port listed in the `<release_name>-<namespace>-proxy-svc` row. In the previous example, the ports are the second numbers in the **PORT(S)** column of the `my-eventstreams-ibm-es-proxy-svc` row: `32417`, `31557`, `32712`, and `32340`.
 
 ## Connecting clients
 

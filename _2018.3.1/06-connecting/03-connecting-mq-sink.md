@@ -11,7 +11,7 @@ You can use the {{site.data.reuse.kafka-connect-mq-sink-short}} to copy data fro
 
 This document contains steps for running the connector in standalone mode for development and test purposes.
 
-![Event Streams 2018.3.1 icon](../../../images/2018.3.1.svg "In Event Streams 2018.3.1 and later.") The {{site.data.reuse.kafka-connect-mq-sink}} is supported in {{site.data.reuse.long_name}} 2018.3.1 and later.
+![Event Streams 2018.3.1 icon](../../../../images/2018.3.1.svg "In Event Streams 2018.3.1 and later.") The {{site.data.reuse.kafka-connect-mq-sink}} is supported in {{site.data.reuse.long_name}} 2018.3.1 and later.
 
 ## Prerequisites
 

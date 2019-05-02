@@ -33,6 +33,8 @@ Persistence is not enabled by default, so no persistent volumes are required. En
 
 If you plan to have persistent volumes, [consider the disk space](../capacity-planning/) required for storage.
 
+Also, as both Kafka and ZooKeeper rely on fast write access to disks, ensure you use separate dedicated disks for storing Kafka and ZooKeeper data. For more information, see the disks and filesystems guidance in the [Kafka documentation](https://kafka.apache.org/documentation/#diskandfs){:target="_blank"}, and the deployment guidance in the [ZooKeeper documentation](https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html#sc_designing){:target="_blank"}.
+
 If persistence is enabled, each Kafka broker and ZooKeeper server requires one physical volume each. You either need to create a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static) for each Kafka broker and ZooKeeper server, or specify a storage class that supports [dynamic provisioning](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#dynamic). Kafka and ZooKeeper can use different storage classes to control how physical volumes are allocated.
 
 See the {{site.data.reuse.icp}} documentation for information about [creating persistent volumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/pv_land.html) and [creating a storage class](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_cluster/sc_land.html) that supports dynamic provisioning. For both, you must have the {{site.data.reuse.icp}} Cluster administrator role.

@@ -14,8 +14,6 @@ The {{site.data.reuse.ce_long}} is a free version intended for trial and demonst
 
 You can [install the {{site.data.reuse.ce_short}}](../trying-out/) from the catalog included with {{site.data.reuse.icp}}.
 
-**Note:** {{site.data.reuse.ce_long}} is not supported on {{site.data.reuse.openshift}}.
-
 ## {{site.data.reuse.long_name}}
 
 {{site.data.reuse.long_name}} is the paid-for version intended for enterprise use, and includes full IBM support and additional features such as geo-replication.
@@ -33,6 +31,8 @@ You can install {{site.data.reuse.long_name}} by downloading the image from IBM 
 Persistence is not enabled by default, so no persistent volumes are required. Enable persistence if you want messages in topics and configuration settings to be retained in the event of a restart. You should enable persistence for production use and whenever you want your data to survive a restart.
 
 If you plan to have persistent volumes, [consider the disk space](../capacity-planning/) required for storage.
+
+Also, as both Kafka and ZooKeeper rely on fast write access to disks, ensure you use separate dedicated disks for storing Kafka and ZooKeeper data. For more information, see the disks and filesystems guidance in the [Kafka documentation](https://kafka.apache.org/documentation/#diskandfs){:target="_blank"}, and the deployment guidance in the [ZooKeeper documentation](https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html#sc_designing){:target="_blank"}.
 
 If persistence is enabled, each Kafka broker and ZooKeeper server requires one physical volume each. The number of Kafka brokers and ZooKeeper servers depends on your setup, for default requirements, see the [resource requirements table](../prerequisites/#helm-resource-requirements). You either need to create a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static){:target="_blank"} for each Kafka broker and ZooKeeper server, or specify a storage class that supports [dynamic provisioning](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#dynamic){:target="_blank"}. Kafka and ZooKeeper can use different storage classes to control how physical volumes are allocated.
 
