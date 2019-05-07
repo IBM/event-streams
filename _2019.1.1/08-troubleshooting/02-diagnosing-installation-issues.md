@@ -13,7 +13,7 @@ To help troubleshoot and resolve installation issues, you can run a diagnostic s
 To run the script:
 
 1. The script is included in the {{site.data.reuse.long_name}} chart file, which you can [retrieve](../../administering/helm-upgrade-command/) from the UI or the downloaded package.\\
-   Alternatively, you can download the script from [GitHub](https://github.com/IBM/charts/tree/master/stable/ibm-eventstreams-dev/additionalFiles){:target="_blank"}.
+   Alternatively, you can download the script from [GitHub](https://github.com/IBM/charts/blob/master/stable/ibm-eventstreams-dev/ibm_cloud_pak/pak_extensions/support/installation-diagnostic-script.sh){:target="_blank"}.
 2. Ensure you have installed the Kubernetes command line tool and the {{site.data.reuse.icp}} CLI as noted in the [installation prerequisites](../../installing/prerequisites/).
 3. {{site.data.reuse.icp_cli_login}}
 4. Run the script as follows:\\
