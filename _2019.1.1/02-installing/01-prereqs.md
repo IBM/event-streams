@@ -10,11 +10,14 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ## Container environment
 
-{{site.data.reuse.long_name}} 2019.1.1 is supported on the following systems:
+{{site.data.reuse.long_name}} 2019.1.1 is supported on the following platforms and systems:
 
-{{site.data.reuse.short_name}} version | Container platform | Systems
-----------------------|--------------------|-----------------------|-------------|--------------------
-2019.1.1              |  - {{site.data.reuse.icp}} 3.1.1 and 3.1.2 <br/>- {{site.data.reuse.openshift}} 3.9 and 3.10 (with {{site.data.reuse.icp}} 3.1.2) <br/>- Amazon Web Services (AWS)      |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+| Container platform | Systems
+|--------------------|-----------------------|-------------|--------------------
+|  {{site.data.reuse.icp}} 3.1.1 and 3.1.2 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+|  {{site.data.reuse.openshift}} 3.9 and 3.10 with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
+|  Amazon Web Services (AWS) with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
+
 
 {{site.data.reuse.short_name}} 2019.1.1 has Helm chart version 1.2.0 and includes Kafka version 2.1.1. For an overview of supported component and platform versions, see the [support matrix](../../support/#support-matrix).
 

@@ -13,8 +13,8 @@ Ensure your environment meets the following prerequisites before installing {{si
 {{site.data.reuse.short_name}} version | Container platform | Systems
 ----------------------|--------------------|-----------------------|-------------|--------------------
 ![Event Streams 2018.3.1 icon](../../../images/2018.3.1.svg "Event Streams 2018.3.1.") | {{site.data.reuse.icp}} 3.1.1 and 3.1.2  | - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
-  | {{site.data.reuse.icp}} 3.1.0  | - Linux® 64-bit (x86_64) systems
-![Event Streams 2018.3.0 icon](../../../images/2018.3.0.svg "Event Streams 2018.3.0.") | {{site.data.reuse.icp}} 3.1.0  | - Linux® 64-bit (x86_64) systems
+  | {{site.data.reuse.icp}} 3.1.0  | Linux® 64-bit (x86_64) systems
+![Event Streams 2018.3.0 icon](../../../images/2018.3.0.svg "Event Streams 2018.3.0.") | {{site.data.reuse.icp}} 3.1.0  | Linux® 64-bit (x86_64) systems
 
 ![Event Streams 2018.3.1 icon](../../../images/2018.3.1.svg "Event Streams 2018.3.1.") has Helm chart version 1.1.0 and includes Kafka version 2.0.1.
 
