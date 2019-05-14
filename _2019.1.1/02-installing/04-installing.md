@@ -13,6 +13,7 @@ You can also install a basic deployment of {{site.data.reuse.short_name}} {{site
 ## Before you begin
 
 - Ensure you have set up your environment [according to the prerequisites](../prerequisites), including your {{site.data.reuse.icp}} environment.
+- The {{site.data.reuse.short_name}} installation process creates and runs jobs in the target namsepace (the namespace where you are installing {{site.data.reuse.short_name}}) and in the `kube-system` namespace. If you are using host groups with [namespace isolation](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_network/isolate_env.html){:target="_blank"} configured in your {{site.data.reuse.icp}} cluster, ensure you have sufficient worker nodes available to the `kube-system` namespace to perform the installation (at least one worker node, or more, depending on your setup). Otherwise,  the namespace isolation causes the installation process to hang with jobs in pending state.
 - Ensure you have [planned for your installation](../planning), such as planning for persistent volumes if required, and creating a ConfigMap for Kafka static configuration.
 - Gather the following information from your administrator:\\
    - The master host and port for your {{site.data.reuse.icp}} cluster. These values are set during the installation of {{site.data.reuse.icp}}. The default port is 8443.
@@ -20,6 +21,8 @@ You can also install a basic deployment of {{site.data.reuse.short_name}} {{site
    - The SSH password if you are connecting remotely to the master host of your {{site.data.reuse.icp}} cluster.
 - Ensure your proxy address uses lowercase characters. This is a setting that often needs to be checked when installing {{site.data.reuse.short_name}} on an {{site.data.reuse.icp}} cluster [deployed on Amazon Web Services (AWS)](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/supported_environments/aws/overview.html){:target="_blank"}. If the address is in uppercase, edit the `ibmcloud-cluster-info` ConfigMap in the `kube-public` namespace, and change the uppercase characters to lowercase for the `proxy_address` parameter:\\
    `kubectl edit configmap -n ibmcloud-cluster-info -n kube-public`
+- Ensure you have the {{site.data.reuse.icp}} monitoring service installed. Usually monitoring is installed by default. However, some deployment methods might not install it. For example, monitoring might not be part of the default deployment when installing {{site.data.reuse.icp}} on Azure [by using Terraform](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/supported_environments/azure_overview.html){:target="_blank"}. Without this service, parts of the {{site.data.reuse.short_name}} UI [do not work](../../troubleshooting/problem-with-piping/). You can install the monitoring service from the [Catalog or CLI](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_metrics/monitoring_service.html#install_monitsrv){:target="_blank"} for existing  deployments.
+
 
 ## Preparing the platform
 

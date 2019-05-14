@@ -173,6 +173,8 @@ latestdocs:
         url: /troubleshooting/client-connect-error/
       - title: "Rollback fails"
         url: /troubleshooting/rollback-fails/
+      - title: "The UI cannot load data"
+        url: /troubleshooting/problem-with-piping/
 
 
 # Sidebar navigation for version 2018.3.1 documentation.

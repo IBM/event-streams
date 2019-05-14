@@ -17,6 +17,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 |  {{site.data.reuse.icp}} 3.1.1 and 3.1.2 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
 |  {{site.data.reuse.openshift}} 3.9 and 3.10 with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 |  Amazon Web Services (AWS) with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
+|  Microsoft Azure with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems 
 
 
 {{site.data.reuse.short_name}} 2019.1.1 has Helm chart version 1.2.0 and includes Kafka version 2.1.1. For an overview of supported component and platform versions, see the [support matrix](../../support/#support-matrix).

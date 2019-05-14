@@ -31,6 +31,7 @@ Certain aspects of managing your {{site.data.reuse.short_name}} installation req
 ## Before you begin
 
 - Ensure you have set up your environment [according to the prerequisites](../prerequisites), including setting up your {{site.data.reuse.openshift_short}} and your {{site.data.reuse.icp}} integration.
+- The {{site.data.reuse.short_name}} installation process creates and runs jobs in the target namsepace (the namespace where you are installing {{site.data.reuse.short_name}}) and in the `kube-system` namespace. If you are using host groups with [namespace isolation](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_network/isolate_env.html){:target="_blank"} configured in your {{site.data.reuse.icp}} cluster, ensure you have sufficient worker nodes available to the `kube-system` namespace to perform the installation (at least one worker node, or more, depending on your setup). Otherwise,  the namespace isolation causes the installation process to hang with jobs in pending state.
 - Ensure you have [planned for your installation](../planning), such as planning for persistent volumes if required, and creating a ConfigMap for Kafka static configuration.
 - Gather the following information from your administrator:\\
    - The master host and port for your {{site.data.reuse.icp}} cluster. These values are set during the installation of {{site.data.reuse.icp}}. The default port is 5443.\\
