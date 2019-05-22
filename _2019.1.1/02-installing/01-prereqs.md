@@ -17,14 +17,15 @@ Ensure your environment meets the following prerequisites before installing {{si
 |  {{site.data.reuse.icp}} 3.1.1 and 3.1.2 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
 |  {{site.data.reuse.openshift}} 3.9 and 3.10 with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 |  Amazon Web Services (AWS) with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
-|  Microsoft Azure with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems 
+|  Microsoft Azure with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 
 
 {{site.data.reuse.short_name}} 2019.1.1 has Helm chart version 1.2.0 and includes Kafka version 2.1.1. For an overview of supported component and platform versions, see the [support matrix](../../support/#support-matrix).
 
 Ensure you have the following set up for your {{site.data.reuse.icp}} environment:
   * Install [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/install.html){:target="_blank"}.\\
-     **Note:** {{site.data.reuse.long_name}} includes entitlement to {{site.data.reuse.icp_foundation}} which you can download from IBM Passport Advantage.
+    **Important:** In high throughput environments, ensure you [configure an external load balancer](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/set_loadbalancer.html){:target="_blank"} for your {{site.data.reuse.icp}} cluster to take full advantage of {{site.data.reuse.short_name}} [scaling](../../administering/scaling/), and avoid potential bottlenecks.\\
+    **Note:** {{site.data.reuse.long_name}} includes entitlement to {{site.data.reuse.icp_foundation}} which you can download from IBM Passport Advantage.
   * If you are installing {{site.data.reuse.short_name}} on the {{site.data.reuse.openshift_short}}, ensure you have OpenShift [installed](https://docs.openshift.com/container-platform/3.10/getting_started/install_openshift.html){:target="_blank"}, and also ensure you [install and integrate](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/supported_environments/openshift/overview.html){:target="_blank"} {{site.data.reuse.icp}} version 3.1.2.\\
      **Note:** {{site.data.reuse.ce_long}} is not supported on {{site.data.reuse.openshift}}.
   * If you are installing {{site.data.reuse.short_name}} on an {{site.data.reuse.icp}} cluster [deployed on Amazon Web Services (AWS)](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/supported_environments/aws/overview.html){:target="_blank"}, ensure your proxy address uses [lowercase characters](../installing/#before-you-begin).

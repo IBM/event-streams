@@ -8,9 +8,11 @@ toc: true
 
 You can modify the capacity of your {{site.data.reuse.long_name}} system in a number of ways. See the following sections for details about the different methods, and their impact on your installation.
 
-You can start with the [default installation parameters](../../installing/installing/) when deploying {{site.data.reuse.long_name}}, and test the system with a workload that is representative of your requirements. For this purpose, {{site.data.reuse.long_name}} provides a [workload generator application](../../getting-started/testing-loads/) to test message loads.
+You can start with the [default installation parameters](../../installing/installing/) when deploying {{site.data.reuse.short_name}}, and test the system with a workload that is representative of your requirements. For this purpose, {{site.data.reuse.long_name}} provides a [workload generator application](../../getting-started/testing-loads/) to test message loads.
 
 If this testing shows that your system does not have the capacity needed for the workload, whether this results in excessive lag or delays, or more extreme errors such as `OutOfMemory` errors, then you can incrementally make the increases detailed in the following sections, re-testing after each change to identify a configuration that meets your specific requirements.
+
+**Important:** To take full advantage of the scaling capabilities described in this topic, and avoid potential bottlenecks in high throughput environments, your {{site.data.reuse.icp}} cluster requires [an external load balancer](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/set_loadbalancer.html){:target="_blank"} configured (as mentioned in the [prerequisites](../../installing/prerequisites/)).
 
 ## Increase the number of Kafka brokers in the cluster
 
