@@ -16,7 +16,7 @@ sections:
 
 {{site.data.reuse.short_name}} version | Helm chart version | Kafka version shipped | Container platform               | Systems
 ---------------------------------------|--------------------|-----------------------|----------------------------------|--------------------
-2019.1.1                             | 1.2.0          | 2.1.1      | {{site.data.reuse.icp}} 3.1.1 and 3.1.2 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+2019.1.1                             | 1.2.0          | 2.1.1      | {{site.data.reuse.icp}} 3.1.1, 3.1.2, and 3.2.0 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
  &nbsp;             |         |       | {{site.data.reuse.openshift}} 3.9 and 3.10 with {{site.data.reuse.icp}} 3.1.2  | Linux® 64-bit (x86_64) systems |
  &nbsp;             |         |       | Amazon Web Services (AWS) with {{site.data.reuse.icp}} 3.1.2                   | Linux® 64-bit (x86_64) systems |
  &nbsp;             |         |       | Microsoft Azure with {{site.data.reuse.icp}} 3.1.2                             | Linux® 64-bit (x86_64) systems |
