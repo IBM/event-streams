@@ -32,6 +32,12 @@ openshift_short: "OpenShift Container Platform"
 # {{site.data.reuse.kafka-connect-mq-source}}
 kafka-connect-mq-source: "Kafka Connect source connector for IBM MQ"
 
+# {{site.data.reuse.kafka-connect-connecting-to-mq}}
+kafka-connect-connecting-to-mq: "Connecting to IBM MQ?"
+
+# {{site.data.reuse.kafka-connect-add-connectors-to-kafka-connect}}
+kafka-connect-add-connectors-to-kafka-connect: "Add connectors to your Kafka Connect environment"
+
 # {{site.data.reuse.kafka-connect-mq-source-short}}
 kafka-connect-mq-source-short: "MQ source connector"
 
@@ -52,6 +58,9 @@ icp_ui_login: "Log in to your IBM Cloud Private cluster management console from 
 # {{site.data.reuse.icp_cli_login}}
 icp_cli_login: "Log in to your cluster as an administrator by using the IBM Cloud Private CLI:<br /> `cloudctl login -a https://<Cluster Master Host>:<Cluster Master API Port>`<br/>The master host and port for your cluster are set during the installation of IBM Cloud Private."
 
+# {{site.data.reuse.es_ui_login}}
+es_ui_login: "Log in to your Event Streams cluster as an administrator from a supported web browser (see how to determine the [login URL](../../getting-started/logging-in/) for your Event Streams UI)."
+
 # {{site.data.reuse.maven_prereq}}
 maven_prereq: "Ensure you have Java version 8. Also, ensure you have [Apache Maven](https://maven.apache.org/) installed on your system."
 
@@ -69,14 +78,24 @@ monitor_metrics_retention: "**Important:** By default, the metrics data used to 
 # {{site.data.reuse.geo-rep_note}}
 geo-rep_note: "**Note:** Geo-replication is only available in the paid-for version of IBM Event Streams (not available in the Community Edition)."
 
-# {{site.data.reuse.kafka_download_link}}
-kafka_download_link: "https://www.apache.org/dyn/closer.cgi?path=/kafka/2.0.0/kafka_2.11-2.0.0.tgz"
 
 # {{site.data.reuse.helm_charts_note}}
 helm_charts_note: "**Note:** Where `<charts.tgz>` is the name of the chart file you used to install IBM Event Streams, including the full path to it if in a different directory. To run `helm upgrade` commands, [ensure you have the original chart file available](../../administering/helm-upgrade-command/)."
 
 # {{site.data.reuse.fsGroupGid}}
 fsGroupGid: "**Important:** If membership of a specific group is required to access the file system used for persistent volumes, ensure you specify in the [**File system group ID**](../configuring#global-install-settings) field the GID of the group that owns the file system."
+
+# {{site.data.reuse.kafkaConnectStep2_title}}
+kafkaConnectStep2_title: "Add the connector plugin to your Kafka Connect environment."
+
+# {{site.data.reuse.kafkaConnectStep2_content_1}}
+kafkaConnectStep2_content_1: "To add a connector, ensure you have your connector plugin directory or JAR files in the location specified in the `plugin.path` property of your Kafka Connect worker configuration (for example, `<kafka>/config/connect-distributed.properties`). The `plugin.path` property is a comma-separated list of paths to directories that contain connector plugins.\n\n"
+
+# {{site.data.reuse.kafkaConnectStep2_content1_example}}
+kafkaConnectStep2_content1_example: "For example:\n```\n plugin.path=/usr/local/share/java,/usr/local/share/kafka/plugins,/opt/connectors\n```\n\n"
+
+# {{site.data.reuse.kafkaConnectStep3_title}}
+kafkaConnectStep3_title: "Restart Kafka Connect to make the new connector available in the environment. <br> <br> For more information about how to set up a Kafka Connect environment, add connectors to it, and start the connectors, see how to [set up and run connectors](../../connecting/setting-up-connectors/)."
 
 
 # Icons

@@ -40,7 +40,7 @@ layout: single
 
   <div class="keyTasks">
   {% for item in page.quickLinks %}
-    <div class="task" onclick="window.open('{{ item.link[1].url }}','_self')">
+    <div class="task" role="link" tabindex="0" onclick="window.open('{{ item.link[1].url }}','_self')">
         <div class="title">
             <h2><a href="{{ item.link[1].url }}">{{ item.link[0].title }}</a></h2>
         </div>
@@ -51,7 +51,7 @@ layout: single
         </div>
     </div>
   {% endfor %}
-    <div class="task" onclick="window.open('{{ site.baseurl }}/faq','_self')">
+    <div class="task" role="link" tabindex="0" onclick="window.open('{{ site.baseurl }}/faq','_self')">
         <div class="title">
             <h2><a href="{{ site.baseurl }}/faq">FAQ</a></h2>
         </div>
@@ -77,11 +77,16 @@ layout: single
                   {% for item in page.gettingStarted %}
                     {% if item.link[0] != blank %}
                     <div class="card">
-                        <div class="cardContent" onclick="window.open('{{ item.link[1].url }}','_self')">
+                        {% if item.link[3].external == true %}
+                          {% assign target = "_blank" %}
+                        {% else %}
+                          {% assign target = "_self" %}
+                        {% endif %}
+                        <div class="cardContent" onclick="window.open('{{ item.link[1].url }}','{{ target }}')">
                           <div class="icon">
                             <img alt="" role="presentation" src="{{ site.url }}{{ site.baseurl }}/assets/images/icons/{{ item.link[2].icon }}" />
                           </div>
-                          <h3><a href="{{ item.link[1].url }}">{{ item.link[0].title }}</a></h3>
+                          <h4><a href="{{ item.link[1].url }}">{{ item.link[0].title }}</a></h4>
                         </div>
                     </div>
                     {% endif %}
@@ -100,13 +105,18 @@ layout: single
                     {% for item in page.commonTasks %}
                       {% if item.link[0] != blank %}
                         <div class="card">
-                            <div class="cardContent" onclick="window.open('{{ item.link[1].url }}','_self')">
+                          {% if item.link[3].external == true %}
+                            {% assign target = "_blank" %}
+                          {% else %}
+                            {% assign target = "_self" %}
+                          {% endif %}
+                          <div class="cardContent" onclick="window.open('{{ item.link[1].url }}','{{ target }}')">
                             <div class="icon">
                                 <div class="icon">
                                   <img alt="" role="presentation" src="{{ site.url }}{{ site.baseurl }}/assets/images/icons/{{ item.link[2].icon }}" />
                                 </div>
                             </div>
-                            <h3><a href="{{ item.link[1].url }}">{{ item.link[0].title }}</a></h3>
+                            <h4><a href="{{ item.link[1].url }}">{{ item.link[0].title }}</a></h4>
                           </div>
                         </div>
                       {% endif %}

@@ -10,7 +10,7 @@ toc: true
 
 When using the {{site.data.reuse.long_name}} UI, the **Monitor** and the **Topics > Producers** tabs do not load, displaying the following message:
 
-![Problem with piping message.](../../images/pipe_broken.png "Screen capture showing message Uh oh. There's a problem with the piping. We can't load this data.")
+![Problem with piping message.](../../../images/pipe_broken.png "Screen capture showing message Uh oh. There's a problem with the piping. We can't load this data.")
 
 ## Causes
 

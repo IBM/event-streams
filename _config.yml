@@ -169,7 +169,7 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 markdown: kramdown
 highlighter: rouge
 lsi: false
-excerpt_separator: "\n\n"
+excerpt_separator: "<!--more-->"
 incremental: false
 
 
@@ -194,16 +194,21 @@ collections:
   "2019.1.1":
     output: true
     version: true
+    permalink: /:collection/:categories/:slug/
+  "2019.2.1":
+    output: true
+    version: true
     tag: Latest
     permalink: /:categories/:slug/
-  tutorials:
+  "tutorials":
     output: true
     permalink: /:collection/:path/
-  support:
+  "support":
     output: false
     permalink: /:collection/:path/
-
-
+  "connectors":
+    output: true
+    permalink: /:collection/:path/
 
 # Defaults
 defaults:
@@ -235,6 +240,22 @@ defaults:
       share: false
       comments: false
       mastheadNavItem: Tutorials
+  # _connectors
+  - scope:
+      path: ""
+      type: connectors
+    values:
+      layout: connectorHome
+      permalink: /:collection/:path
+      mastheadNavItem: Connectors
+  # - scope:
+  #     path: "_connectors/*/index.md"
+  #     type: connectors
+  #   values:
+  #     permalink: /:collection/:path:output_ext
+  #     mastheadNavItem: Connectors
+
+
   # Support
   - scope:
       path: ""
@@ -258,9 +279,23 @@ defaults:
       mastheadNavItem: Documentation
       sidebar:
         nav: "201831docs"
+  # _2019.1.1
   - scope:
       path: ""
       type: 2019.1.1
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comment: false
+      mastheadNavItem: Documentation
+      sidebar:
+        nav: "201911docs"
+  # _2019.2.1
+  - scope:
+      path: ""
+      type: 2019.2.1
     values:
       layout: single
       read_time: false

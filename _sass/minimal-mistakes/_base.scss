@@ -6,7 +6,7 @@ html {
   /* sticky footer fix */
   position: relative;
   min-height: 100%;
-  background-color: #f4f7fb;
+  background-color: $background;
 }
 
 body {
@@ -16,8 +16,20 @@ body {
   color: #152935;
   font-family: $global-font-family;
   line-height: 1.5;
-  background: #f4f7fb;
+  background: $background;
   font-size: 0.875rem;
+  background: $background;
+  &.layout {
+    &--splash {
+      
+    }
+    &--connectorsAll {
+      
+    }
+    &--single {
+      background-color: white;
+    }
+  }
 
   &.overflow--hidden {
     /* when primary navigation is visible, the content in the background won't scroll */

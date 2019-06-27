@@ -44,7 +44,11 @@
     p {
       &.secondary {
         color: $text-02;
+        color: #646e76; // temporary adjustment to pass accessibility
         font-size: 0.75rem;
+      }
+      &.large {
+        font-size: 1rem;
       }
     }
 
@@ -64,3 +68,28 @@
         }
       }
     }
+
+
+
+.pill { // default is blue
+  display: flex;
+  padding: 0 .5rem;
+  align-items: center;
+  border-radius: 10rem;
+  height: 1.25rem;
+  font-size: .75rem;
+  color: #325c80;
+  background-color: #c0e6ff;
+  font-size: 0.75rem;
+  p {
+    font-size: 0.75rem;
+    color: #325c80;
+  }
+  &.grey {
+    color: #68737c;
+    background-color: #f3f3f3;
+    p {
+      color: #68737c;
+    }
+  }
+}

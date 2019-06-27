@@ -1,4 +1,6 @@
-<div class="masthead">
+{% assign pageTitle = page.title %}
+
+<div id="masthead" class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="mastheadNav">
@@ -22,10 +24,11 @@
 
 
         {% assign mastheadNavTitle = page.mastheadNavItem %}
+        
 
         <div class="mastheadControls">
           <div class="menuScrollContainer">
-            <ul class="visible-links">
+            <ul id="visible-links" class="visible-links">
               {% for link in site.data.navigation.main %}
               {% if link.url contains 'http' %}
                 {% assign domain = '' %}
@@ -42,12 +45,10 @@
                 {% assign active = "" %}
               {% endif %}
 
-              {% if link.title != "Search" %}
-                <li class="masthead__menu-item {{ active }}" onclick="window.open('{{ domain }}{{ link.url }}','_self')">
-                  <a href="{{ domain }}{{ link.url }}" {% if link.description %}title="{{ link.description }}"
-                    {% endif %}>{{ link.title }}</a>
-                </li>
-              {% else %}
+
+
+
+              {% if link.title == "Search" %}
                 <li class="masthead__menu-item {{ active }}" onclick="window.open('{{ domain }}{{ link.url }}','_self')">
                   <button aria-label="Search Button" role="button" id="searchButton" class="search__toggle {{ active }}" type="button" name="search Button">
                     <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -56,6 +57,34 @@
                         transform="translate(-.01)"></path>
                     </svg>
                   </button>
+                </li>
+              {% elsif link.title == "APIs" %}              
+                
+                  <li tabindex="-1" class="masthead__menu-item {{ active }} dropdownMastheadItem" id="{{ link.title }}Dropdown">
+                      {% if page.mastheadNavItem == "APIs" %}
+                        <button onclick="toggleMastheadDropdown('',event)">{{ pageTitle }}</button>
+                      {% else %}
+                        <button onclick="toggleMastheadDropdown('',event)">{{ link.title }}</button>
+                      {% endif %}
+                      
+                      <div class="chevron">
+                          <img role="presentation" src="{{ site.url }}{{ site.baseurl }}/assets/images/icons/chevronDown.svg" />
+                      </div>
+                      <div class="mastheadGroup">
+                        {% for item in link.dropdown %}
+                          <div class="item" onclick="window.open('{{ domain }}{{ item.url }}','_self')">
+                            <a href="{{ domain }}{{ item.url }}">
+                              {{ item.title }}
+                            </a>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </li>
+                
+              {% else %}
+                <li class="masthead__menu-item {{ active }}" onclick="window.open('{{ domain }}{{ link.url }}','_self')">
+                  <a href="{{ domain }}{{ link.url }}" {% if link.description %}title="{{ link.description }}"
+                    {% endif %}>{{ link.title }}</a>
                 </li>
               {% endif %}
 
@@ -67,3 +96,6 @@
     </div>
   </div>
 </div>
+
+
+

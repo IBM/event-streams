@@ -88,6 +88,12 @@ Before connecting a client, ensure the necessary certificates are configured wit
 5. Copy the broker information. This gives the bootstrap address for Kafka clients.
 6. From the **Certificates** section, download the server certificate. If you are using a Java client, use the **JKS truststore**. Otherwise, use the **PEM certificate**.
 
+## Setting up access
+
+Secure your installation by [managing the access](../../security/managing-access/) your users and applications have to your {{site.data.reuse.short_name}} resources.
+
+For example, associate your {{site.data.reuse.icp}} teams with your {{site.data.reuse.short_name}} instance to grant access to resources based on roles. 
+
 ## Scaling
 
 Depending on the size of the environment that you are installing, consider scaling and sizing options. You might also need to change scale and size settings for your services over time. For example, you might need to add additional Kafka brokers over time.

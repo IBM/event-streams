@@ -165,17 +165,41 @@ $contentMaxWidth: 40rem;
 $mastheadHeight: 3.5rem;
 $keyline: #f3f3f3;
 $brand-01: #3d70b2;
+// $brand-01: #0062ff;
 $text-01: #1D364D;
 $text-02: #68737c;
+// $text-02: #50565b;
 $hover-outline: #8897a2;
 $hover-primary-text: #294c86;
-
+$whiteKeyline: #dde8f4;
+$background: #f4f7fb;
+$background: #f2f4f8;
+$background: #f3f3f3;
 
 $menuTransition: 0.4s cubic-bezier(0.43, 0.01, 0.01, 0.99);
+$easing: cubic-bezier(0.43, 0.01, 0.01, 0.99);
 
 @keyframes slideup {
    0% {
       transform: translateY(1.5rem);
+   }
+   100% {
+      transform: translateY(0rem);
+   }
+}
+
+@keyframes slideDown {
+   0% {
+      transform: translateY(-4rem);
+   }
+   100% {
+      transform: translateY(0rem);
+   }
+}
+
+@keyframes slideFromRight {
+   0% {
+      transform: translateX(4rem);
    }
    100% {
       transform: translateY(0rem);
@@ -194,8 +218,47 @@ $menuTransition: 0.4s cubic-bezier(0.43, 0.01, 0.01, 0.99);
 
 
 
-@mixin contentWidth {
-   max-width: $contentMaxWidth;
-   margin-left: auto;
-   margin-right: auto;
+@mixin contentWidth( $maxW: $contentMaxWidth ) {
+   header {
+      max-width: $maxW;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 1rem;
+   }
+   .page__content {
+      .content {
+         > *:not(table) {
+            max-width: $maxW;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 1rem;
+         }
+       }
+   }
+   .page__inner-wrap.splash {
+      .page__content {
+         padding-left: 0;
+         padding-right: 0;
+         .content {
+            >* {
+               max-width: none;
+            }
+         }
+      }
+   }
+}
+
+
+@mixin footerGrid( $contentWidth: 60rem, $gridStructure: 1fr $contentWidth/2 $contentWidth/2 1fr 20rem ) {
+   .pagination {
+      grid-template-columns: $gridStructure;
+      .previous,.next {
+         .container {
+            flex-basis: $contentWidth/2;
+         }
+      }
+   }
+   .page__footer {
+      grid-template-columns: $gridStructure;
+   }
 }

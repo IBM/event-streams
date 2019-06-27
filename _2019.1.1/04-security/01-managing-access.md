@@ -76,9 +76,9 @@ The mapping between service actions and {{site.data.reuse.long_name}} roles is d
 
 ## Assigning access to users
 
-If you have not set up [{{site.data.reuse.icp}} teams](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/user_management/teams.html){:target="_blank"}, the admin user has the ClusterAdministrator role. This role has unlimited access to all resources.
+If you have not set up {{site.data.reuse.icp}} teams, the default  `admin` user has unlimited access to all resources. The default `admin` user is defined at the time of installation in the {{site.data.reuse.icp}} `config.yaml` file by using the `default_admin_user` [parameter](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/config_yaml.html#adv_setting){:target="_blank"}.
 
-If you are using {{site.data.reuse.icp}} teams, you must associate the team with the {{site.data.reuse.long_name}} instance to apply the team members' roles to the resources within the instance. You can do this using the `cloudctl es iam-add-release-to-team` command.
+If you are using [{{site.data.reuse.icp}} teams](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/user_management/teams.html){:target="_blank"}, you must associate the team with the {{site.data.reuse.long_name}} instance to apply the team members' roles to the resources within the instance, including any users that have the Cluster Administrator role. You can do this by using the `cloudctl es iam-add-release-to-team` command.
 
 This command creates policies that grant access to resources based on the roles in the team. It is possible to refine user access to specific resources further and limit actions they can take against resources by using the {{site.data.reuse.icp}} APIs. If you require such granular settings for security, [contact us](../../support).
 
@@ -151,8 +151,8 @@ You can revoke access to {{site.data.reuse.long_name}} by deleting the {{site.da
 6. Remove either the service ID or the API key that the application is using. Removing the service ID also removes all API keys that are owned by the service ID.\\
    **Warning:** Do not remove the internal {{site.data.reuse.short_name}} service ID `eventstreams-<release name>-service-id`. Removing this service ID corrupts your deployment, which can only be resolved by reinstalling {{site.data.reuse.short_name}}.
 
-  - Remove the service ID by clicking ![Menu overflow icon](../../images/menu_overflow.png "Three horizontal dots for the menu overflow options icon at end of each row.") **Menu overflow > Remove** in the row of the service ID. Click **Remove Service ID** on the confirmation dialog.
-  - Remove the API key by clicking the service ID. On the service ID page, click **API keys**. Locate the API key being used by the application in the API keys list. CLick ![Menu overflow icon](../../images/menu_overflow.png "Three horizontal dots for the menu overflow options icon at end of each row.") **Menu overflow > Remove** in the row of the API key. Click **Remove API key** on the confirmation dialog.
+  - Remove the service ID by clicking ![Menu overflow icon](../../../images/menu_overflow.png "Three horizontal dots for the menu overflow options icon at end of each row.") **Menu overflow > Remove** in the row of the service ID. Click **Remove Service ID** on the confirmation dialog.
+  - Remove the API key by clicking the service ID. On the service ID page, click **API keys**. Locate the API key being used by the application in the API keys list. CLick ![Menu overflow icon](../../../images/menu_overflow.png "Three horizontal dots for the menu overflow options icon at end of each row.") **Menu overflow > Remove** in the row of the API key. Click **Remove API key** on the confirmation dialog.
 
 **Note:** Revoking a service ID or API key in use by any Kafka client might not disable access for the application immediately. The API key is stored in a token cache in Kafka which has a 23 hour expiration period. When the token cache expires, it is refreshed from {{site.data.reuse.icp}} and any revoked service IDs or API keys are reflected in the new token cache, causing application access be be disabled.
 

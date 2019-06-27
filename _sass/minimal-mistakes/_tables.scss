@@ -15,8 +15,8 @@ table {
 }
 
 thead {
-  background-color: #f4f7fb;
-  border: 1px solid #dfe3e6;
+  background-color: $background;
+  
 }
 
 th {
@@ -38,8 +38,10 @@ th {
 }
 
 tr {
-  border-left: 1px solid $keyline;
-  border-right: 1px solid $keyline;
+  border: 1px solid #dfe3e6;
+  // border-right: 1px solid #dfe3e6;
+  // border-right: 1px solid #dfe3e6;
+  // border-right: 1px solid #dfe3e6;
   td,th {
     &:first-of-type {
       padding-left: 1rem;

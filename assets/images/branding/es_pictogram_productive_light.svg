@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 4px;
+      }
+
+      .cls-1 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>es</title>
+  <g id="icons_Dark">
+    <circle class="cls-1" cx="72" cy="72" r="12"/>
+    <line class="cls-1" x1="72" y1="36.08" x2="72" y2="19"/>
+    <line class="cls-1" x1="36" y1="72.07" x2="18" y2="72.07"/>
+    <path class="cls-2" d="M72,108v16c18.59-15.46,36-32.48,36-51.92a36,36,0,1,0-36,36Z"/>
+    <circle class="cls-1" cx="72" cy="12" r="6"/>
+    <circle class="cls-1" cx="12" cy="72" r="6"/>
+    <line class="cls-1" x1="46.13" y1="45.87" x2="28.63" y2="28.37"/>
+    <circle class="cls-1" cx="25" cy="24" r="6"/>
+  </g>
+</svg>

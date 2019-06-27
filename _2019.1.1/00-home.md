@@ -1,7 +1,7 @@
 ---
 title: "Home"
 layout: splash
-permalink: /
+permalink: /:collection/
 mastheadNavItem: Documentation
 collection: 2019.1.1
 quickLinks:
@@ -17,7 +17,7 @@ quickLinks:
 gettingStarted:
   - mainTitle: How to get going
   - link:
-    - title: Installing on IBM Cloud Private
+    - title: Installing on IBM Cloud Private (including AWS and Azure)
     - url: installing/installing/
     - icon: ICP.svg
   - link:

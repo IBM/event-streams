@@ -120,9 +120,9 @@ To check the number of cores, use the {{site.data.reuse.icp}} metering report as
 5. Go to the **Containers** section on the right, and ensure you select the **Usage** tab.
 6. Select **Capped Processors** from the first drop-down list, and select **1 Month** from the second drop-down list.\\
    A page similar to the following is displayed:\\
-   ![Chargeable containers page](../../images/download_report_example.png "Screen capture of page showing information about chargeable containers for the selected {{site.data.reuse.long_name}} deployment. The page is displayed to provide an example from where you can download a metrics report.")
+   ![Chargeable containers page](../../../images/download_report_example.png "Screen capture of page showing information about chargeable containers for the selected {{site.data.reuse.long_name}} deployment. The page is displayed to provide an example from where you can download a metrics report.")
 7. Click **Download Report**, and save the CSV file to a location of your choice.
 8. Open the downloaded report file.
 9. Look for the month in **Period**, for example, **2018/9**, then in the rows underneath look for **{{site.data.reuse.long_name}} (Chargeable)**, and check the **CCores/max Cores** column. The value is the maximum aggregate number of cores provided to all Kafka and geo-replicator containers. You are charged based on this number.\\
    For example, the following excerpt from a downloaded report shows that for the period 2018/9 the chargeable {{site.data.reuse.long_name}} containers had a total of 4 cores available (see the highlighted fields):\\
-   ![Report example](../../images/csv_example.png "Excerpt from a downloaded report showing through highlighting that for the period 2018/9 the chargeable {{site.data.reuse.long_name}} containers had a total of 4 cores available.")
+   ![Report example](../../../images/csv_example.png "Excerpt from a downloaded report showing through highlighting that for the period 2018/9 the chargeable {{site.data.reuse.long_name}} containers had a total of 4 cores available.")

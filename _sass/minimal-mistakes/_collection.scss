@@ -3,7 +3,7 @@
   ========================================================================== */
 
   .collectionPageContent {
-    padding-top: 1.5rem;
+    padding-top: 4rem;
     overflow: hidden;
     flex-grow: 1;
     padding-bottom: 5rem;
@@ -26,6 +26,10 @@
       justify-content: flex-end;
       margin-top: 0.5rem;
       padding-right: 0.25rem;
+      margin-top: auto;
+      padding: 0;
+      margin-bottom: -0.5rem;
+      margin-right: -0.5rem;
       .icon {
         width: 1.5rem;
         height: 1.5rem;
@@ -88,7 +92,7 @@
           height: 100%;
           display: flex;
           flex-direction: column;
-          justify-content: flex-end;
+          justify-content: flex-start;
           h1 {
             margin-bottom: 0.5rem;
           }
@@ -131,41 +135,72 @@
       }
     }
     @media (max-width: 880px) {
+        margin-top: 0rem;
+        margin-bottom: 1rem;
+        display: block;
+        padding-top: 2rem;
       .card {
         flex-basis: 50%;
-      }
-    }
-    @media (max-width: 768px) {
-      .gridContainer {
-        @include contentWidth;
-      }
-      .card {
+        height: auto;
         &.blank {
-          flex-basis: 100%;
+          margin-bottom: 2rem;
           height: auto;
-          margin-bottom: 3rem;
-          p {
-            min-height: auto;
-          }
-          .largeCard {
-            position: relative;
-          }
-          &:after {
-            display: none;
-          }
-          .content {
-            padding: 0;
-          }
         }
       }
     }
+    @media (max-width: 768px) {
+      // .gridContainer {
+      //   @include contentWidth;
+      // }
+      // .contentContainer {
+      //   .gridContainer {
+      //     display: block;
+      //     .card {
+      //       margin-bottom: 1px;
+      //       &.blank {
+      //         // flex-basis: 100%;
+      //         // height: auto;
+      //         margin-bottom: 3rem;
+      //         p {
+      //           min-height: auto;
+      //         }
+      //         .largeCard {
+      //           position: relative;
+      //         }
+      //         &:after {
+      //           display: none;
+      //         }
+      //         .content {
+      //           padding: 0;
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
+    }
     @media (max-width: 600px) {
+      .splash .heroContainer {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+      }
+      .card {
+        height: auto;
+        flex-basis: auto;
+        margin-bottom: 1px;
+        &.blank {
+          margin-bottom: 2rem;
+        }
+      }
       .card .content {
         padding: 1.5rem;
       }
       .gridContainer {
         flex-direction: column;
+        display: block;
         .card {
+          .content {
+            height: auto;
+          }
           .largeCard {
             position: relative;
           }

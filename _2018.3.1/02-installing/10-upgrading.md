@@ -1,5 +1,5 @@
 ---
-title: "Upgrading"
+title: "Upgrading to 2018.3.1"
 excerpt: "Upgrade your installation to the latest version."
 categories: installing
 slug: upgrading
@@ -7,8 +7,6 @@ toc: true
 ---
 
 Upgrade your installation to the latest version of {{site.data.reuse.long_name}} as follows.
-
-## Upgrading to 2018.3.1
 
 Use the CLI to upgrade {{site.data.reuse.short_name}}. You cannot use the UI to upgrade to {{site.data.reuse.short_name}} 2018.3.1.
 
@@ -73,11 +71,11 @@ The upgrade process begins and restarts your pods. During the process, the UI sh
 
 Depending on your set-up, consider completing the post-upgrade tasks.
 
-### Post-upgrade tasks
+## Post-upgrade tasks
 
 Depending on your set-up, you might need to complete additional steps as described in the following sections.
 
-#### Access management
+### Access management
 
 If you have {{site.data.reuse.icp}} teams set up for [access management](../../security/managing-access/#assigning-access-to-users), you must associate the teams again with your {{site.data.reuse.long_name}} instance after successfully completing the upgrade.
 
@@ -93,7 +91,7 @@ To use your upgraded {{site.data.reuse.short_name}} instance with existing {{sit
 
 <!--Without this rerun of the command, customers will find that creating service IDs in the UI will fail unless you're running as cluster administrator.-->
 
-#### Browser certificates
+### Browser certificates
 
    If you trusted certificates in your browser for using the {{site.data.reuse.short_name}} UI, you might not be able to access the UI after upgrading.
 

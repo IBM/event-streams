@@ -50,14 +50,14 @@ To find the node ports to expose by using the UI:
 
 1. {{site.data.reuse.icp_ui_login}}
 2. From the navigation menu, click **Workloads > Helm Releases**.\\
-   ![Menu > Workloads > Helm releases](../../images/icp_menu_helmreleases.png "Screen capture showing how to select Workloads > Helm releases from navigation menu"){:height="30%" width="30%"}
+   ![Menu > Workloads > Helm releases](../../../images/icp_menu_helmreleases.png "Screen capture showing how to select Workloads > Helm releases from navigation menu"){:height="30%" width="30%"}
 3. Locate the release name of your {{site.data.reuse.long_name}} installation in the **NAME** column, and click the name.
 4. Scroll down to the **Service** table. The table lists information about your {{site.data.reuse.short_name}} services.
 5. In the **Service** table, look for `NodePort` in the **TYPE** column.\\
    In each row that has `NodePort` as type, look in the **PORT(S)** column to find the port numbers you need to ensure are open to communication.\\
    The port numbers are paired as `<internal_number:external_number>`, where you need the second (external) numbers to be open (for example, `30314` in `32000:30314`).\\
    The following image provides an example of the table:\\
-   ![Service table](../../images/service_nodeports.png "Screen capture showing service table with the NodePort types highlighted.")
+   ![Service table](../../../images/service_nodeports.png "Screen capture showing service table with the NodePort types highlighted.")
 
 To find the node ports to expose by using the CLI:
 
@@ -128,6 +128,11 @@ As a temporary fix, you can run the following command after running `cloudctl lo
 
 To permanently resolve this issue, edit the existing `cluster-ca-cert` system secret to add an additional certificate as described in the  {{site.data.reuse.icp}} [documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/supported_environments/openshift/known_issues_openshift.html#cert){:target="_blank"}.
 
+## Setting up access
+
+Secure your installation by [managing the access](../../security/managing-access/) your users and applications have to your {{site.data.reuse.short_name}} resources.
+
+For example, associate your {{site.data.reuse.icp}} teams with your {{site.data.reuse.short_name}} instance to grant access to resources based on roles.
 
 ## Scaling
 

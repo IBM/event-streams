@@ -26,7 +26,6 @@
 @import "minimal-mistakes/buttons";
 @import "minimal-mistakes/notices";
 @import "minimal-mistakes/masthead";
-@import "minimal-mistakes/navigation";
 @import "minimal-mistakes/footer";
 @import "minimal-mistakes/search";
 @import "minimal-mistakes/syntax";
@@ -37,7 +36,6 @@
 /* Layout specific */
 @import "minimal-mistakes/page";
 @import "minimal-mistakes/archive";
-@import "minimal-mistakes/sidebar";
 @import "minimal-mistakes/print";
 
 @import "minimal-mistakes/404";
@@ -47,3 +45,10 @@
 @import "minimal-mistakes/apiFrame.scss";
 @import "minimal-mistakes/pageLayout.scss";
 @import "minimal-mistakes/typography";
+
+@import "minimal-mistakes/connectors";
+
+@import "minimal-mistakes/svgLoader";
+
+@import "minimal-mistakes/sidebarLeft";
+@import "minimal-mistakes/toc";

@@ -10,8 +10,6 @@ var expandedHeight;
 var dropdownTimer;
 
 
-
-
 if (dropdownElement) {
     dropdownElement.addEventListener('click', function () {
         toggleDropdown();
@@ -115,30 +113,34 @@ function openVersion(url, collection) {
 
 let menuIcon = document.getElementById('menuIcon');
 
-menuIcon.addEventListener('click', function () {
-    toggleSidebarMenu();
-});
-
-menuIcon.addEventListener('keyup',function(e){
-    if (e.keyCode === 13) {
+if ( menuIcon ) {
+    menuIcon.addEventListener('click', function () {
         toggleSidebarMenu();
-  }  
-});
+    });
+
+
+    menuIcon.addEventListener('keyup',function(e){
+        if (e.keyCode === 13) {
+            toggleSidebarMenu();
+    }  
+    });
+}
 
 let mobileVersionShortcut = document.getElementById('mobileVersionShortcut');
 
-mobileVersionShortcut.addEventListener('click', function () {
-    toggleSidebarMenu();
-    toggleDropdown();
-});
-
-mobileVersionShortcut.addEventListener('keyup',function(e){
-    if (e.keyCode === 13) {
+if ( mobileVersionShortcut ) {
+    mobileVersionShortcut.addEventListener('click', function () {
         toggleSidebarMenu();
         toggleDropdown();
-  }  
-});
+    });
 
+    mobileVersionShortcut.addEventListener('keyup',function(e){
+        if (e.keyCode === 13) {
+            toggleSidebarMenu();
+            toggleDropdown();
+    }  
+    });
+}
 
 function toggleSidebarMenu(override) {
     sidebarOpen = body.getAttribute('data-sidebarisopen');
@@ -251,11 +253,12 @@ function loadApiStyle(cssLocation,theFrame) {
     var iframe = theFrame
     iframeDoc = iframe.contentWindow.document;
     var frameHead = iframeDoc.getElementsByTagName("head")[0];
-    
+
     var css = document.createElement("link");
     css.type = "text/css";
     css.rel = "stylesheet";
     css.href = cssLocation;
+    frameHead.appendChild(css);
 
     var headBase = document.createElement("BASE");
     headBase.setAttribute("target", "_parent");
@@ -263,9 +266,13 @@ function loadApiStyle(cssLocation,theFrame) {
 
     
     
-    // frameHead.appendChild(css);
 
     theFrame.style.opacity=1;
+}
+
+
+function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 }
 
 
@@ -274,4 +281,52 @@ document.onkeydown = function(evt) {
     if (evt.keyCode == 27) {
         closeSidebar();
     }
+};
+
+
+
+
+
+
+function getWidth() {
+    return Math.max(
+      document.body.scrollWidth,
+      document.documentElement.scrollWidth,
+      document.body.offsetWidth,
+      document.documentElement.offsetWidth,
+      document.documentElement.clientWidth
+    );
+  }
+  
+  function getHeight() {
+    return Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.documentElement.clientHeight
+    );
+  }
+  
+
+  function toggleMastheadDropdown(override,e) {
+    var object = document.getElementById('APIsDropdown')
+    var menuUL = document.getElementById('visible-links')
+
+    if (override == "show") {
+        object.classList.add('hover');
+        menuUL.classList.add('dropdownActive');
+    } else if (override == "hide") {
+        object.classList.remove('hover');
+        menuUL.classList.remove('dropdownActive');
+    } else {
+        object.classList.toggle('hover');
+        menuUL.classList.toggle('dropdownActive');
+    }
+}
+
+
+
+window.onscroll = function() {
+    toggleMastheadDropdown('hide');
 };

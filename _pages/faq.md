@@ -33,6 +33,8 @@ To get started with {{site.data.reuse.long_name}} in {{site.data.reuse.icp}}, se
 * {{site.data.reuse.ce_long}} is a free version intended for trials and demonstration purposes. It can be installed and used without charge.
 * {{site.data.reuse.long_name}} is a paid-for version intended for enterprise use, and includes additional features such as geo-replication.
 
+[Find out more.](../installing/planning/#available-editions)
+
 ## What are the main features?
 
 [Find out more](../about/overview/) about the main features.

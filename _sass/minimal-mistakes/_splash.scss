@@ -28,10 +28,11 @@
   }
     .heroContainer {
       // padding-left: 6rem;
+      // padding-right: 6rem;
       // padding-right: 4rem;
-      height: 16rem;
+      height: auto;
       display: flex;
-      margin-top: 4rem;
+      margin-top: 8rem;
       margin-bottom: 4rem;
       grid-template-columns: 1fr minmax(auto, 50rem) 1fr 30% 1fr;
       display: grid;
@@ -73,7 +74,7 @@
             .task {
                 border: 1px solid #dde8f4;
                 flex-grow: 1;
-                flex-basis: 100%;
+                flex-basis: 4rem;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -111,8 +112,6 @@
     .section {
         background-color: white;
         padding-bottom: 4rem;
-        // padding-left: 4rem;
-        // padding-right: 4rem;
         &:first-of-type {
           padding-top: 4rem;
         }
@@ -130,18 +129,24 @@
         margin-left: -.25rem;
         flex-wrap: wrap;
         margin-top: 2rem;
+        border-left: 1px solid $keyline;
+        border-top: 1px solid $keyline;
         .card {
             // padding: 1rem;
             box-sizing: border-box;
             flex-basis: 50%;
-            margin-bottom: .5rem;
-            padding-left: .25rem;
-            padding-right: .25rem;
+            display: flex;
+            // margin-bottom: .5rem;
+            // padding-left: .25rem;
+            // padding-right: .25rem;
             .cardContent {
               padding: 2rem;
-              border: 1px solid #f3f3f3; // margin: .25rem;
+              border-bottom: 1px solid $keyline;
+              border-right: 1px solid $keyline;
               cursor: pointer;
               height: 100%;
+              transition: 0.1s;
+              flex-grow: 1;
               &:hover {
                 background-color: #f3f7fb;
               }
@@ -157,7 +162,7 @@
                   height: 1.5rem;
                 }
               }
-              h3 {
+              h4 {
                 margin: 0;
                 padding: 0;
               }
@@ -175,6 +180,17 @@
   }
 }
 
+@media only screen and (max-width: 1148px) {
+  .splash {
+    .heroContainer {
+      margin-top: 5rem;
+      margin-bottom: 4rem;
+      max-width: 50rem;
+    }
+  }
+}
+
+
 @media only screen and (max-width: 1024px) {
   .splash {
     .heroContainer {
@@ -188,11 +204,19 @@
 }
 
 @media only screen and (max-width: 960px) {
+  .page__inner-wrap {
+    overflow: visible;
+    &.splash {
+      .page__content {
+        padding-top: 1rem;
+      }
+    }
+  }
   .splash {
     .heroContainer {
-      flex-direction: column;
       height: auto;
-      display: flex;
+      display: block;
+      overflow: visible;
       .intro {
         margin-left: 0;
         padding-left: 0rem;
@@ -210,6 +234,7 @@
         flex-basis: auto;
         .task {
           flex-basis: 40%;
+          flex-grow: 1;
           margin-left: .5rem;
           margin-right: .5rem;
           padding-top: 1rem;
@@ -229,6 +254,29 @@
           // padding-right: .75rem;
         }
       }
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: 680px) {
+  .splash {
+    .heroContainer {
+      &.pageSpacing {
+        padding-left: 1rem;
+        padding-right: 1rem; 
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .splash {
+    .heroContainer {
+      margin-top: 3rem;
+      margin-bottom: 1rem;
     }
   }
 }
@@ -267,11 +315,13 @@
     }
     .splashGridContainer {
       flex-direction: column;
+      display: block;
       .card {
         padding-left: 0;
         padding-right: 0;
         .cardContent {
           padding: 1rem;
+          height: auto;
         }
       }
     }
