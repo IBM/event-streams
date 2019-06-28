@@ -384,7 +384,7 @@ function loadSinkSourceAnimation() {
         animType: 'svg',
         loop: true,
         autoplay: true,
-        path: '/mhub/qp-docs/assets/animation/sinkSourceArrow.json'
+        path: '../../assets/animation/sinkSourceArrow.json'
       });
       sinkSourceArrowAnimation.setSpeed(1.5);
       svgContainer.innerHTML = '';

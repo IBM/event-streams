@@ -2,6 +2,13 @@
 //    FOOTER
 //    ========================================================================== */
 
+.connectorsAll,.connectorHome {
+  .page__footer {
+    background-color: transparent;
+    font-size: 0.75rem;
+    z-index: 13;
+  }
+}
 
 .page__footer {
   width: 100%;
@@ -11,8 +18,6 @@
   padding: 1rem 2rem;
   background-color: $footer-background-color;
   font-size: 0.75rem;
-  z-index: 30;
-  color: #5e6871;//temp accessibility tweak
   footer {
     display: flex;
     align-items: center;

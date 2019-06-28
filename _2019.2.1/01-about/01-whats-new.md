@@ -27,7 +27,7 @@ You now have the option to encrypt inter-pod communication by using [TLS](../../
 
 ## Red Hat Universal Base Image (UBI)
 
-All {{site.data.reuse.lomng_name}} images are now based on [Red Hat Universal Base Image (UBI) 8](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image){:target="_blank"}.
+All {{site.data.reuse.long_name}} images are now based on [Red Hat Universal Base Image (UBI) 8](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image){:target="_blank"}.
 
 ## Kafka version upgraded to 2.2.0
 

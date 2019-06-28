@@ -51,9 +51,9 @@ active
       <div class="diagram {{ connector.direction }}">
         {% if connector.icon %}
           <div class="image">
-            <object tabindex="-1" aria-label="{{ connector.title }} icon" alt="{{ connector.title }} icon"
-              data="{{ site.url }}{{ site.baseurl }}/assets/images/icons/{{ connector.icon }}"
-              type="image/svg+xml">{{ connector.title }} icon</object>
+            <img tabindex="-1" aria-label="{{ connector.title }} icon" alt="{{ connector.title }} icon"
+              src="{{ site.url }}{{ site.baseurl }}/assets/images/icons/{{ connector.icon }}"
+              type="image/svg+xml"/>
           </div>
         {% else %}
           <div class="image placeholder">
