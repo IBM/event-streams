@@ -88,7 +88,7 @@ function searchResults(theSearchInput) {
     if (uniqueTitles.indexOf(documentID) !== -1) {
        // This documentation exists, add it to the existing array
         searchJson[documentID].push(obj);
-       
+
     } else {
       // This didnt exist before, adding a new one
       searchJson[documentID] = [obj];
@@ -100,7 +100,7 @@ function searchResults(theSearchInput) {
 
   var structure = "";
 
-      
+
   let result_keys = Object.keys(searchJson);
 
   result_keys.forEach((documentTopic) => {
@@ -148,7 +148,7 @@ function searchResults(theSearchInput) {
             structure += '</div>'
           }
         });
-        structure += '<div class="ctaArea"><img alt="" role="presentation" src="/mhub/qp-docs/assets/images/icons/next.svg" /></div>'
+        structure += '<div class="ctaArea"><img alt="" role="presentation" src="{{site.url}}{{ site.baseurl }}/assets/images/icons/next.svg" /></div>'
         structure += '</div>'
         structure += '</div>'
       }
@@ -168,8 +168,8 @@ function pillHover(currentPill) {
     var ctaContainer = versionContainer.querySelectorAll('.ctaArea')
     for (var i = 0; i < children.length; i++) {
       if ( currentPill != children[i] ) {
-        children[i].classList.add("inactive"); 
-        ctaContainer[0].classList.add("hide"); 
+        children[i].classList.add("inactive");
+        ctaContainer[0].classList.add("hide");
       }
     }
 }
@@ -181,13 +181,13 @@ function pillBlur(currentPill) {
   var ctaContainer = versionContainer.querySelectorAll('.ctaArea')
   for (var i = 0; i < children.length; i++) {
     children[i].classList.remove("inactive");
-    ctaContainer[0].classList.remove("hide"); 
+    ctaContainer[0].classList.remove("hide");
   }
 }
 
 
 function pushHistoryState(theSearchInput) {
   var query = document.getElementById('search').value.toLowerCase();
-  var stateObj = { foo: "bar" }; 
+  var stateObj = { foo: "bar" };
   history.pushState(stateObj, "Search Documentation", "?q="+query);
 }
