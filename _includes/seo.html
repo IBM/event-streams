@@ -65,10 +65,13 @@
 <meta property="og:title" content="{{ page.title | default: site.title | markdownify | strip_html | strip_newlines | escape_once }}">
 <meta property="og:url" content="{{ canonical_url }}">
 
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ page.title | default: site.title | markdownify | strip_html | strip_newlines | escape_once }}">
-<meta name="twitter:description" content="{{ seo_description }}">
-<meta name="twitter:url" content="{{ canonical_url }}">
+<meta name="twitter:card" content="summary" />
+<meta property="og:url" content="{{ canonical_url }}" />
+<meta property="og:title" content="{{ page.title | default: site.title | markdownify | strip_html | strip_newlines | escape_once }}" />
+<meta property="og:description" content="{{ seo_description }}" />
+
+
+
 
 {% if page.excerpt %}
   <meta property="og:description" content="{{ seo_description }}">
