@@ -60,8 +60,12 @@
 {% endif %}
 
 
+{%- capture littleSiteTitle -%}
+  {{ page.mastheadNavItem }} | {{ page.title | default: site.title | markdownify | strip_html | strip_newlines | escape_once }}
+{%- endcapture -%}
 
-{%- capture siteTitle -%}
+
+{%- capture bigSiteTitle -%}
   {{ site.title }} {{ page.mastheadNavItem }} | {{ page.title | default: site.title | markdownify | strip_html | strip_newlines | escape_once }}
 {%- endcapture -%}
 
@@ -70,11 +74,11 @@
 <meta property="og:locale" content="{{ site.locale | replace: "-", "_" | default: "en_US" }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:url" content="{{ canonical_url }}" />
-<meta property="og:title" content="{{ siteTitle | strip }}" />
+<meta property="og:title" content="{{ littleSiteTitle | strip }}" />
 <meta property="og:description" content="{{ seo_description }}" />
 
 <meta name="twitter:card" content="summary" />
-
+<meta name="twitter:title" content="{{ bigSiteTitle | strip  }}" />
 
 
 
@@ -82,16 +86,9 @@
   <meta property="og:description" content="{{ seo_description }}">
 {% endif %}
 
-{% if page_large_image %}
-  <meta name="og:image" content="{{ page_large_image }}">
-  <meta property="og:image" content="{{ page_large_image }}">
-  <meta property="twitter:image" content="{{ page_large_image }}">
-{% elsif page_teaser_image %}
-  <meta name="og:image" content="{{ page_teaser_image }}">
-  <meta property="og:image" content="{{ page_teaser_image }}">
-  <meta property="twitter:image" content="{{ page_teaser_image }}">
-{% endif %}
 
+  <meta property="og:image" content="{{ site.og_image }}">
+  <meta property="twitter:image" content="{{ site.twitter_image }}">
 
 
 {% if page.date %}
@@ -102,15 +99,7 @@
   <meta property="article:modified_time" content="{{ page.last_modified_at | date_to_xmlschema }}">
 {% endif %}
 
-{% if site.facebook %}
-  {% if site.facebook.publisher %}
-    <meta property="article:publisher" content="{{ site.facebook.publisher }}">
-  {% endif %}
 
-  {% if site.facebook.app_id %}
-    <meta property="fb:app_id" content="{{ site.facebook.app_id }}">
-  {% endif %}
-{% endif %}
 
 <link rel="canonical" href="{{ canonical_url }}">
 
