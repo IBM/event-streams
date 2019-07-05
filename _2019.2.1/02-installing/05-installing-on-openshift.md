@@ -88,7 +88,7 @@ You perform this step by using the {{site.data.reuse.icp}} CLI.
 You must run the following setup script to prepare the platform.
 
 1. Go to the {{site.data.reuse.short_name}} archive you downloaded from IBM Passport Advantage, and locate the file called `ibm-eventstreams-rhel-prod-<version>.tgz`.
-3. Extract the PPA `tar.gz` archive, go to the `/charts` directory, and extract the chart `.tgz` archive
+3. Extract the PPA `tar.gz` archive, go to the `/charts` directory, and extract the chart `.tgz` archive.
 4. In your terminal window, change to the following directory: `/pak_extensions/pre-install`
 4. Run the setup script as follows:\\
     `./scc.sh <namespace>`\\

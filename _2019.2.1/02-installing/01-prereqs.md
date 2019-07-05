@@ -26,7 +26,8 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 Ensure you have the following set up for your {{site.data.reuse.icp}} environment:
   * Install [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/install.html){:target="_blank"}.\\
-    **Important:** In high throughput environments, ensure you configure your {{site.data.reuse.icp}} cluster to include an external load balancer and an internal network. These configuration options help take full advantage of {{site.data.reuse.short_name}} scaling and Kafka settings, and avoid potential performance bottlenecks. For more information, see the [performance planning topic](../capacity-planning).\\
+    **Important:** In high throughput environments, ensure you configure your {{site.data.reuse.icp}} cluster to include an external load balancer and an internal network. These configuration options help take full advantage of {{site.data.reuse.short_name}} scaling and Kafka settings, and avoid potential performance bottlenecks. For more information, see the [performance planning topic](../capacity-planning).
+
     **Note:** {{site.data.reuse.long_name}} includes entitlement to {{site.data.reuse.icp_foundation}} which you can download from IBM Passport Advantage.
   * If you are installing {{site.data.reuse.short_name}} on the {{site.data.reuse.openshift_short}}, ensure you have the right version of OpenShift installed and integrated with the right version of {{site.data.reuse.icp}}. See previous table for supported versions. For example,  [install](https://docs.openshift.com/container-platform/3.11/getting_started/install_openshift.html){:target="_blank"} OpenShift 3.11, and [integrate](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/supported_environments/openshift/overview.html){:target="_blank"} it with {{site.data.reuse.icp}} 3.2.0.
   * If you are installing {{site.data.reuse.short_name}} on an {{site.data.reuse.icp}} cluster [deployed on Amazon Web Services (AWS)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/supported_environments/aws/overview.html){:target="_blank"}, ensure your proxy address uses [lowercase characters](../installing/#before-you-begin).
@@ -37,7 +38,8 @@ Ensure you have the following set up for your {{site.data.reuse.icp}} environmen
   * Install the [Helm CLI](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/app_center/create_helm_cli.html){:target="_blank"} required for your version of {{site.data.reuse.icp}}, and add the {{site.data.reuse.icp}} [internal Helm repository](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/app_center/add_int_helm_repo_to_cli.html){:target="_blank"} called `local-charts` to the Helm CLI as an external repository.
   * For message indexing capabilities (enabled by default), ensure you set the `vm.max_map_count` property to at least `262144` on all {{site.data.reuse.icp}} nodes in your cluster (not only the master node). Run the following commands on each node: \\
     `sudo sysctl -w vm.max_map_count=262144`\\
-    `echo "vm.max_map_count=262144" | tee -a /etc/sysctl.conf`\\
+    `echo "vm.max_map_count=262144" | tee -a /etc/sysctl.conf`
+
     **Important:** This property might have already been updated by other workloads to be higher than the minimum required.
 
 ## Hardware requirements
@@ -54,52 +56,73 @@ Ensure you have one {{site.data.reuse.icp}} worker node per Kafka broker, and a 
 
 The following table lists the resource requirements of the {{site.data.reuse.long_name}} Helm chart. For details about the requirements for each pod and their containers, see the tables in the following sections.
 
-| Pods                   | Number of replicas | Minimum total CPU | Minimum total memory (Gi) |
+| Pod group             | Configurable replicas | Minimum total CPU | Minimum total memory (Gi) |
 | --------------------- | ------------------ | ----------------- | ------------------------- |
-| Kafka pod      | 3*                 | 2.2*                | 4.7*                      |
-| Event Streams core pods | 12 if no persistence enabled  | 13 if no persistence enabled   | 10 if no persistence enabled   |
-| &nbsp;            |  13 if persistence enabled  |  14 if persistence enabled  |  10.5 if persistence enabled|
-| Message indexing pods  | 3  | 1.5  | 4.1  |
-| Geo-replication pod  | 0*                  | 0.9 per replica  | 2.5 per replica
+| [Kafka](#kafka-group)      | 3*                 | 9.6* (3.2 per broker)    | 14.4* (4.8 per broker)  |
+| [Event Streams core](#event-streams-core-group) |  | 5.1 without persistence  | 7.7 without persistence  |
+| &nbsp;                                          |  | 6.1 with persistence enabled | 8.2 with persistence enabled |
+| [Message indexing](#message-indexing-group)  |   | 2.5  | 8.4  |
+| [Geo-replication](#geo-replicator-group)  | 0*                  | 0.9 per replica  | 2.5 per replica
 
-**Important:** You can configure the settings marked with an asterisk (*).
+**Important:** The settings marked with an asterisk (*) are configurable. The values in the table are the default minimum values.
 
-**Note:** Before installing {{site.data.reuse.long_name}} (not {{site.data.reuse.ce_short}}), consider the number of Kafka replicas and geo-replicator nodes you plan to use. Each Kafka replica and geo-replicator node is a separate chargeable unit.
+Before installing {{site.data.reuse.long_name}} (not {{site.data.reuse.ce_short}}), consider the number of Kafka replicas and geo-replicator nodes you plan to use. Each Kafka replica and geo-replicator node is a separate chargeable unit.
 
 {{site.data.reuse.geo-rep_note}}
 
-### Kafka pod
+### Kafka group
+
+The following pods and their containers are part of this group.
+
+**Important:** The settings marked with an asterisk (*) are configurable. The values in the table are the default minimum values.
+
+#### Kafka pod
+
+Number of replicas: 3*
 
 | Container         | CPU per container  |  Memory per container (Gi)
-| ------------------|--------------------|---------------------------
-| Kafka             | 1*                 | 2*
-| Metrics reporter  | 0.4                | 1.5*
-| Metrics proxy     | 0.5                | 1
-| Healthcheck       | 0.2                | 0.1
-| TLS proxy         | 0.1                | 0.1
+| ------------------|--------------------|---------------------------|---------------------------
+| Kafka             |   1*               | 2*
+| Metrics reporter  |  0.4               | 1.5*
+| Metrics proxy     |  0.5               | 1
+| Healthcheck       |  0.2               | 0.1
+| TLS proxy         |  0.1               | 0.1
 
-### ZooKeeper pod
+#### Network proxy pod
+
+Number of replicas: 3 (matches the number of Kafka replicas)
+
+| Container  | CPU per container |  Memory per container (Gi)
+| -----------|-------------------|--------------------|---------------------------
+| Proxy      |         1         | 0.1
+
+### Event Streams core group
+
+The following pods and their containers are part of this group.
+
+**Important:** The settings marked with an asterisk (*) are configurable. The values in the table are the default minimum values.
+
+#### ZooKeeper pod
+
+Number of replicas: 3
 
 | Container         | CPU per container  |  Memory per container (Gi)
 | ------------------|--------------------|---------------------------
 | ZooKeeper         | 0.1*               | 0.75*
 | TLS proxy         | 0.1                | 0.1
 
-### Geo-replicator pod
+#### Administration UI pod
 
-| Container         | CPU per container     |  Memory per container (Gi)
-| ------------------|-----------------------|---------------------------
-| Replicator        | 0.5                     | 1
-| Metrics reporter  | 0.4                   | 1.5
-
-### Administration UI pod
+Number of replicas: 1
 
 | Container  | CPU per container  |  Memory per container (Gi)
 | -----------|------------------------|---------------------------
 | UI         | 1                      | 1
 | Redis      | 0.1                    | 0.1
 
-### Administration server pod
+#### Administration server pod
+
+Number of replicas: 1
 
 | Container  | CPU per container     |  Memory per container (Gi)
 | -----------|-----------------------|---------------------------
@@ -107,59 +130,88 @@ The following table lists the resource requirements of the {{site.data.reuse.lon
 | Codegen    | 0.2                   | 0.3
 | TLS proxy  | 0.1                   | 0.1
 
-### REST producer server pod
+#### REST producer server pod
+
+Number of replicas: 1
 
 | Container     | CPU per container  |  Memory per container (Gi)
 | --------------|--------------------|---------------------------
 | Rest-producer | 0.5                | 1
 
-### REST proxy pod
+#### REST proxy pod
+
+Number of replicas: 1
 
 | Container  | CPU per container  |  Memory per container (Gi)
 | -----------|--------------------|---------------------------
 | Rest-proxy | 0.5                | 0.25
 
-### Collector pod
+#### Collector pod
+
+Number of replicas: 1
 
 | Container  | CPU per container  |  Memory per container (Gi)
 | -----------|--------------------|---------------------------
 | Collector  | 0.1                | 0.05
 | TLS proxy  | 0.1                | 0.1
 
-### Network proxy pod
 
-| Container  | CPU per container  |  Memory per container (Gi)
-| -----------|--------------------|---------------------------
-| Proxy      | 1                  | 0.1
+#### Access controller pod
 
-### Access controller pod
+Number of replicas: 2
 
 | Container          | CPU per container  |  Memory per container (Gi)
 | -------------------|--------------------|---------------------------
 | Access controller  | 0.1                | 0.25
 | Redis              | 0.1                | 0.1
 
-### Index manager pod
+#### Schema Registry pod
+
+Number of replicas:
+- 1 without persistence
+- 2 with persistence enabled
+
+| Container  | CPU per container  |  Memory per container (Gi)
+| -----------|--------------------|---------------------------
+| Schema Registry | 0.5           | 0.25
+| Avro service    | 0.5           |  0.25 |
+
+### Message indexing group
+
+The following pods and their containers are part of this group.
+
+#### Index manager pod
+
+Number of replicas: 1
 
 | Container     | CPU per container  |  Memory per container (Gi)
 | --------------|--------------------|---------------------------
 | Index manager | 0.2                | 0.1
 | TLS proxy     | 0.1                | 0.1
 
-### Elasticsearch pod
+#### Elasticsearch pod
+
+Number of replicas: 2
 
 | Container  | CPU per container  |  Memory per container (Gi)
 | -----------|--------------------|---------------------------
 | Elastic    | 1                  | 4
 | TLS proxy  | 0.1                | 0.1
 
+<!-- **DRAFT COMMENT:** _Are the Elastic CPU and memory values configurable?_ -->
 
-### Schema Registry pod
+### Geo-replicator group
 
-| Container  | CPU per container  |  Memory per container (Gi)
-| -----------|--------------------|---------------------------
-| Schema Registry | 0.5           | 0.25
-| Avro service    | 0.5           |  0.25 |
+This group only contains the geo-replicator pod.
+
+Number of replicas: 0*
+
+**Note:** This means no geo-replication is enabled by default. The values in the table are the default minimum values for 1 replica.
+
+| Container         | CPU per container     |  Memory per container (Gi)
+| ------------------|-----------------------|---------------------------
+| Replicator        | 0.5                   | 1
+| Metrics reporter  | 0.4                   | 1.5
 
 
 ## PodSecurityPolicy requirements

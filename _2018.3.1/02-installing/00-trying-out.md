@@ -12,7 +12,7 @@ To try out {{site.data.reuse.short_name}}, you can install a basic deployment of
 
 **Note:** These instructions do not include setting up persistent storage, so your data and configuration settings are not retained in the event of a restart.
 
-For more features and full IBM suppport, [install {{site.data.reuse.long_name}}](../installing).
+For more features and full IBM support, [install {{site.data.reuse.long_name}}](../installing).
 
 1. If you do not have {{site.data.reuse.icp}} installed already, you can download and [install IBM Cloud Private-CE](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install_containers.html).
 2. {{site.data.reuse.icp_ui_login}}\\
