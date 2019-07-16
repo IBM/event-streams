@@ -21,7 +21,7 @@ Some of the broker configuration settings can be updated without restarting the 
 
 See the [Dynamic Update Mode](http://kafka.apache.org/documentation.html#brokerconfigs) column in the Kafka documentation for the update mode of each broker configuration.
 
-**Note:** You cannot modfiy the following properties.
+**Note:** You cannot modify the following properties.
 * `broker.id`
 * `listeners`
 * `zookeeper.connect`
@@ -56,6 +56,6 @@ Use the following command to make the ConfigMap available to your {{site.data.re
 
 {{site.data.reuse.helm_charts_note}}
 
-You can use the {{site.data.reuse.long_name}} CLI to modfiy read-only configuration settings as follows:
+You can use the {{site.data.reuse.long_name}} CLI to modify read-only configuration settings as follows:
 
 `cloudctl es cluster-config --config <name>=<value> --static-config-all-brokers`

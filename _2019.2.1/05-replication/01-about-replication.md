@@ -9,7 +9,7 @@ toc: true
 You can deploy multiple instances of {{site.data.reuse.long_name}} and use the included geo-replication feature to synchronize data between your clusters that are typically located in different geographical locations. The geo-replication feature creates copies of your selected topics to help with disaster recovery.
 
 Geo-replication can help with various service availability scenarios, for example:
-* Supporting your high availability and disaster recovery plans: you can set up geo-replication to support your high availability and disaster recovery architecture, enabling the switching to other clusters if your primary ones experience a problem.
+* Supporting your disaster recovery plans: you can set up geo-replication to support your disaster recovery architecture, enabling the switching to other clusters if your primary ones experience a problem.
 * Making mission-critical data safe: you might have mission-critical data that your applications depend on to provide services. Using the geo-replication feature, you can back up your topics to several destinations to ensure their safety and availability.
 * Migrating data: you can ensure your topic data can be moved to another deployment, for example, when switching from a test to a production environment.
 
@@ -37,6 +37,6 @@ You can set up geo-replication by using the {{site.data.reuse.long_name}} UI or 
 
 What topics you choose to replicate and how depend on the topic data, whether it is critical to your operations, and how you want to use it.
 
-For example, you might have transaction data for your customers in topics. Such information is critical to your operations to run reliably, so you want to ensure they have back-up copies to switch to when needed. For such critical data, you might consider setting up several copies to ensure high availability. One way to do this is to set up geo-replication of 5 topics to one destination cluster, and the next 5 to another destination cluster, assuming you have 10 topics to replicate. Alternatively, you can replicate the same topics to two different destination clusters.
+For example, you might have transaction data for your customers in topics. Such information is critical to your operations to run reliably, so you want to ensure they have back-up copies to switch to when needed. For such critical data, you might consider setting up several copies to ensure availability. One way to do this is to set up geo-replication of 5 topics to one destination cluster, and the next 5 to another destination cluster, assuming you have 10 topics to replicate. Alternatively, you can replicate the same topics to two different destination clusters.
 
-Another example would be storing of website analytics information, such as where users clicked and how many times they did so. Such information is likely to be less important than maintaining high availability for your operations, and you might choose not to replicate such topics, or only replicate them to one destination cluster.
+Another example would be storing of website analytics information, such as where users clicked and how many times they did so. Such information is likely to be less important than maintaining availability for your operations, and you might choose not to replicate such topics, or only replicate them to one destination cluster.

@@ -105,10 +105,10 @@ The following table describes the options for configuring Kafka brokers.
 
 Field  | Description  | Default
 --|---|--
-**CPU request for Kafka brokers**  | The expected CPU resource that will be required for each Kafka broker expressed in CPU units.  | `1000m`
-**Memory request for Kafka brokers**  | The base amount of memory allocated for each Kafka broker. The value should be a plain integer using one of these suffixes: Gi, G, Mi, M.  | `2Gi`
-**CPU limit for Kafka brokers**  | The maximum CPU resource that is allowed for each Kafka broker when the broker is heavily loaded expressed in CPU units.  |  `1000m`
-**Memory limit for Kafka brokers**  | The maximum amount of memory that will be allocated for each Kafka broker when the broker is heavily loaded. The value should be a plain integer using one of these suffixes: Gi, G, Mi, M.  | `2Gi`
+**CPU request for Kafka brokers**  | The minimum required CPU core for each Kafka broker. Specify integers, fractions (for example, 0.5), or millicore values (for example, 100m, where 100m is equivalent to .1 core).  | `1000m`
+**CPU limit for Kafka brokers**  | The maximum amount of CPU core allocated to each Kafka broker when the broker is heavily loaded. Specify integers, fractions (for example, 0.5), or millicores values (for example, 100m, where 100m is equivalent to .1 core).  |  `1000m`
+**Memory request for Kafka brokers**  | The minimum amount of memory required for each Kafka broker in bytes. Specify integers with one of these suffixes: E, P, T, G, M, K, or power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki. | `2Gi`
+**Memory limit for Kafka brokers**  | The maximum amount of memory in bytes allocated to each Kafka broker when the broker is heavily loaded. Specify integers with suffixes: E, P, T, G, M, K, or power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki.  | `2Gi`
 **Kafka brokers**  | Number of brokers in the Kafka cluster.  | `3`
 **Cluster configuration ConfigMap**  | Provide the name of a ConfigMap containing Kafka configuration to apply changes to Kafka's server.properties. See [how to create a ConfigMap](../planning/#configmap-for-kafka-static-configuration) for your installation.  | `None`
 **Enable secure JMX connections** | Select to make each Kafka broker’s JMX port accessible to secure connections from applications running inside the {{site.data.reuse.icp}} cluster. When access is enabled, you can configure your applications to [connect to a secure JMX port](../../security/secure-jmx-connections/) and read Kafka metrics. Also, see [**External monitoring settings**](#external-monitoring) for application-specific configuration requirements. | `Not selected (false)`
@@ -131,8 +131,8 @@ The following table describes the options for configuring ZooKeeper.
 
 Field  | Description  | Default
 --|---|--
-**CPU request for ZooKeeper servers**  | The expected CPU resource that will be required for each ZooKeeeper server, expressed in CPU units.  | `100m`
-**CPU limit for ZooKeeper servers**   | The maximum CPU resource that is allowed for each ZooKeeper server when the server is heavily loaded, expressed in CPU units.  | `100m`
+**CPU request for ZooKeeper servers**  | The minimum required CPU core for each ZooKeeeper server. Specify integers, fractions (for example, 0.5), or millicore values (for example, 100m, where 100m is equivalent to .1 core).  | `100m`
+**CPU limit for ZooKeeper servers**   | The maximum amount of CPU core allocated to each ZooKeeper server when the server is heavily loaded. Specify integers, fractions (for example, 0.5), or millicores values (for example, 100m, where 100m is equivalent to .1 core).  | `100m`
 **Enable persistent storage for ZooKeeper servers**  | Set whether to store Apache ZooKeeper data on a persistent volume. Enabling storage ensures the data is preserved if the pod is stopped.  | `Not selected (false)`
 **Use dynamic provisioning for ZooKeeper servers**  | Set whether to use a Storage Class when provisioning Persistent Volumes for Apache ZooKeeper. Selecting will dynamically create Persistent Volume Claims for the ZooKeeper servers. | `Not selected (false)`
 **Name**  | Prefix for the name of the Persistent Volume Claims used for Apache ZooKeeper.  | `datadir`
@@ -166,10 +166,10 @@ The following table describes the options for configuring message indexing.
 Field  | Description  | Default
 --|---|--
 **Enable message indexing**  | Set whether to enable message indexing to enhance browsing the messages on topics. | `Selected (true)`
-**CPU request for Elastic Search nodes** | The minimum required CPU core for each Elastic Search node. Specify integers, fractions (for example, 0.5), or millicore values(for example, 100m, where 100m is equivalent to .1 core).  | `500m`
-**Memory request for Elastic Search nodes**  | The minimum memory for each Elastic Search node in bytes. Specify integers with one of these suffixes: E, P, T, G, M, K, or power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki.  | `2Gi`
-**CPU limit for Elastic Search nodes**  | The maximum amount of CPU core allocated for each Elastic Search node. Specify integers, fractions (for example, 0.5), or millicores values(for example, 100m, where 100m is equivalent to .1 core).  |  `1000m`
-**Memory limits for Elastic Search nodes**  | The maximum amount of memory allocated for each Elastic Search node in bytes. Specify integers with suffixes: E, P, T, G, M, K, or power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki.  | `4Gi`
+**CPU request for Elastic Search nodes** | The minimum required CPU core for each Elastic Search node. Specify integers, fractions (for example, 0.5), or millicore values (for example, 100m, where 100m is equivalent to .1 core).  | `500m`
+**CPU limit for Elastic Search nodes**  | The maximum amount of CPU core allocated to each Elastic Search node. Specify integers, fractions (for example, 0.5), or millicores values (for example, 100m, where 100m is equivalent to .1 core).  |  `1000m`
+**Memory request for Elastic Search nodes**  | The minimum amount of memory required for each Elastic Search node in bytes. Specify integers with one of these suffixes: E, P, T, G, M, K, or power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki.  | `2Gi`
+**Memory limits for Elastic Search nodes**  | The maximum amount of memory allocated to each Elastic Search node in bytes. Specify integers with suffixes: E, P, T, G, M, K, or power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki.  | `4Gi`
 
 ### Geo-replication settings
 

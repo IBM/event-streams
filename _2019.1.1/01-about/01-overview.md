@@ -18,7 +18,7 @@ toc: false
 
 * Apache Kafka deployment that maximizes the spread of Kafka brokers across the nodes of the {{site.data.reuse.icp}} cluster. This creates a highly-available configuration making the deployment resilient to many classes of failure with automatic restart of brokers included.
 * Health check information and options to resolve issues with your clusters and brokers.
-* Geo-replication of your topics between clusters to enable high availability and scalability.\\
+* Geo-replication of your topics between clusters to enable disaster recovery and scalability.\\
   {{site.data.reuse.geo-rep_note}}
 * UI for browsing messages to help view and filter hundreds of thousands of messages, including options to drill in and see message details from a set time.
 * Encrypted communication between internal components and encrypted storage by using features available in {{site.data.reuse.icp}}.
