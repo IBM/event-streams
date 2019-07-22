@@ -52,18 +52,22 @@ If you are using {{site.data.reuse.openshift_short}}, you can set up an integrat
    2. Log in using the user name and password provided to you by your administrator.
    3. Create an OpenShift project for your {{site.data.reuse.short_name}} installation.\\
       For example, log into the {{site.data.reuse.openshift_short}} web console in your browser, click the **Create project** button, and type a unique name, display name, and description for the new project. This creates a project and a namespace.
-3. {{site.data.reuse.icp_ui_login}}\\
+3. Download and run the setup script as follows:\\
+   **Important:** You must perform the following steps by using a terminal opened on the host where the {{site.data.reuse.icp}} master cluster is installed. If you are on a different host, you must first connect to the host machine by using SSH before logging in.
+   1. {{site.data.reuse.icp_cli_login}}
+
+      The default port is `5443` in {{site.data.reuse.icp}} 3.1.2, while it is `443` if you are using {{site.data.reuse.icp}} 3.2.0.
+   2. Run the following command to avoid certificate errors when running `kubectl` and `oc` commands later:\\
+      `kubectl config set-cluster mycluster --insecure-skip-tls-verify=true`
+   3. Download the files from [GitHub](https://github.com/IBM/charts/tree/master/stable/ibm-eventstreams-rhel-dev/ibm_cloud_pak/pak_extensions/pre-install){:target="_blank"}.
+   4. Change to the location where you downloaded the files, and run the setup script as follows:\\
+       `./scc.sh <namespace>`\\
+       Where `<namespace>` is the namespace (project) you created for your {{site.data.reuse.short_name}} installation earlier.
+4. {{site.data.reuse.icp_ui_login}}\\
    The default user name is `admin`, and the default password is `admin`.
 4. Click **Catalog** in the top navigation menu.
 5. Search for `ibm-eventstreams-rhel-dev` and select it from the result. This is the Helm chart for the {{site.data.reuse.ce_long}}. The README is displayed.
-6. Download the chart, extract it, and run the setup script included in the chart as follows:\\
-   1. Ensure the latest version number is selected from the drop-down list on the left.
-   2. Download the file: go to the **SOURCE & TAR FILES** section on the left and click the link. Save the `ibm-eventstreams-rhel-dev-<version>.tgz` file to a preferred location.
-   3. Use a terminal to extract the archive and change to the `/ibm_cloud_pak/pak_extensions/pre-install` directory.
-   4. Run the setup script as follows:\\
-       `./scc.sh <namespace>`\\
-       Where `<namespace>` is the namespace (project) you created for your {{site.data.reuse.short_name}} installation earlier.
-7. Go back to the {{site.data.reuse.icp}} console and click **Configure**.
+6. Go back to the {{site.data.reuse.icp}} console and click **Configure**.
 7. Enter a release name, select the target namespace you created previously, and accept the terms of the license agreement.\\
    You can leave all other settings at their default values.
 8. Click **Install**.

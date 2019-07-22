@@ -12,12 +12,11 @@ To help troubleshoot and resolve installation issues, you can run a diagnostic s
 
 To run the script:
 
-1. The script is included in the {{site.data.reuse.long_name}} chart file, which you can [retrieve](../../administering/helm-upgrade-command/) from the UI or the downloaded package.\\
-   Alternatively, you can download the script from [GitHub](https://github.com/IBM/charts/blob/master/stable/ibm-eventstreams-dev/ibm_cloud_pak/pak_extensions/support/installation-diagnostic-script.sh){:target="_blank"}.
+1. Download the `installation-diagnostic-script.sh` script from [GitHub](https://github.com/IBM/event-streams/tree/master/support){:target="_blank"}.
 2. Ensure you have installed the Kubernetes command line tool and the {{site.data.reuse.icp}} CLI as noted in the [installation prerequisites](../../installing/prerequisites/).
 3. {{site.data.reuse.icp_cli_login}}
 4. Run the script as follows:\\
-    `./<ibm-eventstreams-chart-name>/ibm_cloud_pak/pak_extensions/support/installation-diagnostic-script.sh -n <namespace> -r <release-name>`
+    `./installation-diagnostic-script.sh -n <namespace> -r <release-name>`
 
 If you have been waiting for more than an hour, add the `--restartoldpods` option to recreate lost events (by default, events are deleted after an hour). This option restarts **Failed** or **Pending** pods that are an hour old or more.
 

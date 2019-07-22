@@ -179,6 +179,8 @@ latestdocs:
         url: /troubleshooting/intro/
       - title: "Diagnosing installation issues"
         url: /troubleshooting/diagnosing-installation-issues/
+      - title: "Gathering logs"
+        url: /troubleshooting/gathering-logs/
       - title: "Resources not available"
         url: /troubleshooting/resources-not-available/
       - title: "Full cleanup after uninstallation"
