@@ -57,26 +57,40 @@ while [ "$#" -gt 0 ]; do
     shift
 done
 
-command="kubectl get pods __namespace__ -l component=__component____release__ --no-headers -o custom-columns=":metadata.name""
+command='kubectl get pods __namespace__ -l component=__component____release__ --no-headers -o custom-columns=":metadata.name"'
+netpolcommand='kubectl get netpol __namespace__ __release__ --no-headers -o custom-columns=":metadata.name"'
+servicecommand='kubectl get svc __namespace__ __release__ --no-headers -o custom-columns=":metadata.name"'
 
 # Substitute in namespace if given
 if [ -n "${NAMESPACE}" ]; then
     command="${command//__namespace__/-n ${NAMESPACE}}"
+    netpolcommand="${netpolcommand//__namespace__/-n ${NAMESPACE}}"
+    servicecommand="${servicecommand//__namespace__/-n ${NAMESPACE}}"
 else
     command="${command//__namespace__/}"
+    netpolcommand="${netpolcommand//__namespace__/}"
+    servicecommand="${servicecommand//__namespace__/}"
 fi
 
 # Substitute in release if given
 if [ -n "${RELEASE}" ]; then
     command="${command//__release__/,release=${RELEASE}}"
+    netpolcommand="${netpolcommand//__release__/-l release=${RELEASE}}"
+    servicecommand="${servicecommand//__release__/-l release=${RELEASE}}"
 else
     command="${command//__release__/}"
+    netpolcommand="${netpolcommand//__release__/}"
+    servicecommand="${servicecommand//__release__/}"
 fi
 
 
 logdir="tmpLogs"
+netpollogdir="netpolLogs"
+servicelogdir="serviceLogs"
 rm -rf $logdir
 mkdir -p $logdir
+mkdir -p $logdir/$netpollogdir
+mkdir -p $logdir/$servicelogdir
 
 # Extract host information
 echo -n -e "Extracting host information"
@@ -97,8 +111,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod access-controller > $logdir/$pod/accesscontroller.log
-    kubectl logs $pod redis > $logdir/$pod/kubectl-redis.log
+    containers=($(${accesscontrollercommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -109,8 +127,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod collector > $logdir/$pod/collector.log
-    kubectl logs $pod tls-proxy > $logdir/$pod/collector-tls-proxy.log
+    containers=($(${collectorcommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -121,8 +143,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod elastic > $logdir/$pod/elastic.log
-    kubectl logs $pod tls-proxy > $logdir/$pod/elastic-tls-proxy.log
+    containers=($(${elasticcommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -133,8 +159,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod index-manager > $logdir/$pod/indexmgr.log
-    kubectl logs $pod tls-proxy > $logdir/$pod/indexmgr-tls-proxy.log
+    containers=($(${indexmgrcommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -145,22 +175,28 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod kafka > $logdir/$pod/kafka.log
-    kubectl logs $pod metrics-reporter > $logdir/$pod/metrics-reporter.log
-    kubectl logs $pod metrics-proxy > $logdir/$pod/metrics-proxy.log
-    kubectl logs $pod healthcheck > $logdir/$pod/healthcheck.log
-    kubectl logs $pod tls-proxy > $logdir/$pod/kafka-tls-proxy.log
+    containers=($(${kafkacommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
 # PROXY pods
-kafkacommand="${command//__component__/${proxy_component_name}}"
-pods=$(eval $kafkacommand)
+proxycommand="${command//__component__/${proxy_component_name}}"
+pods=$(eval $proxycommand)
 for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod > $logdir/$pod/proxy.log
+    containers=($(${proxycommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -171,9 +207,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod rest > $logdir/$pod/rest.log
-    kubectl logs $pod codegen > $logdir/$pod/codegen.log
-    kubectl logs $pod tls-proxy > $logdir/$pod/proxy.log
+    containers=($(${restcommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -184,7 +223,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod > $logdir/$pod/rest.log
+    containers=($(${restproducercommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -195,7 +239,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod > $logdir/$pod/rest-proxy.log
+    containers=($(${restproxycommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -206,8 +255,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod schemaregistry > $logdir/$pod/schemaregistry.log
-    kubectl logs $pod avroservice > $logdir/$pod/avroservice.log
+    containers=($(${schemaregistrycommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -218,8 +271,12 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod ui > $logdir/$pod/ui.log
-    kubectl logs $pod redis > $logdir/$pod/redis.log
+    containers=($(${uicommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
@@ -230,8 +287,46 @@ for pod in $pods; do
     echo -n -e $pod
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl logs $pod zookeeper > $logdir/$pod/zookeeper.log
-    kubectl logs $pod proxy > $logdir/$pod/zookeeper-proxy.log
+    containers=($(${zkcommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
+    echo -e "\033[0;32m [DONE]\033[0m"
+done
+
+# OAUTH LOGS
+if [ -n "${NAMESPACE}" ]; then
+    command="${command//-n ${NAMESPACE}/-n kube-system}"
+else
+    command="${command} -n kube-system"
+fi
+
+oauthcommand="${command//__component__/${ui_component_name}}"
+pods=$(eval $oauthcommand)
+for pod in $pods; do
+    echo -n -e $pod
+    mkdir -p $logdir/$pod
+    kubectl -nkube-system describe pod $pod > $logdir/$pod/pod-describe.log
+    kubectl -nkube-system logs $pod > $logdir/$pod/oauth.log
+    echo -e "\033[0;32m [DONE]\033[0m"
+done
+
+# NETWORK POLICIES
+netpols=$(eval $netpolcommand)
+for netpol in $netpols; do
+    echo -n -e $netpol
+    kubectl describe netpol $netpol > $logdir/$netpollogdir/$netpol-describe.log
+    echo -e "\033[0;32m [DONE]\033[0m"
+done
+
+# SERVICES
+services=$(eval $servicecommand)
+for service in $services; do
+echo -n -e $service
+    kubectl describe svc $service > $logdir/$servicelogdir/$service-describe.log
+    kubectl describe svc $service
     echo -e "\033[0;32m [DONE]\033[0m"
 done
 
