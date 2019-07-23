@@ -34,13 +34,19 @@ Certain aspects of managing your {{site.data.reuse.short_name}} installation req
 - The {{site.data.reuse.short_name}} installation process creates and runs jobs in the target namsepace (the namespace where you are installing {{site.data.reuse.short_name}}) and in the `kube-system` namespace. If you are using host groups with [namespace isolation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_network/isolate_env.html){:target="_blank"} configured in your {{site.data.reuse.icp}} cluster, ensure you have sufficient worker nodes available to the `kube-system` namespace to perform the installation (at least one worker node, or more, depending on your setup). Otherwise,  the namespace isolation causes the installation process to hang with jobs in pending state.
 - Ensure you have [planned for your installation](../planning), such as planning for persistent volumes if required, and creating a ConfigMap for Kafka static configuration.
 - Gather the following information from your administrator:\\
-   - The master host and port for your {{site.data.reuse.icp}} cluster. These values are set during the installation of {{site.data.reuse.icp}}. The default port is `5443` in {{site.data.reuse.icp}} 3.1.2, while it is `443` if you are using {{site.data.reuse.icp}} 3.2.0.\\
-   Make a note of these values, and enter them in the steps that have `https://<Cluster Master Host>:<Cluster Master API Port>`\\
-   **Note:** An administrator can retrieve the {{site.data.reuse.icp}} cluster master address and port number from the ConfigMap in `kube-public` as follows: \\
-      `kubectl get cm ibmcloud-cluster-info -n kube-public -o yaml`\\
+   - The master host and port for your {{site.data.reuse.icp}} cluster. These values are set during the installation of {{site.data.reuse.icp}}. The default port is `5443` in {{site.data.reuse.icp}} 3.1.2, while it is `443` if you are using {{site.data.reuse.icp}} 3.2.0.
+
+      Make a note of these values, and enter them in the steps that have `https://<Cluster Master Host>:<Cluster Master API Port>`
+
+      **Note:** An administrator can retrieve the {{site.data.reuse.icp}} cluster master address and port number from the ConfigMap in `kube-public` as follows:
+
+      `kubectl get cm ibmcloud-cluster-info -n kube-public -o yaml`
+
       See the `cluster_address` value for the master address, and the `cluster_router_https_port` for the port number.
-   - The master port for your {{site.data.reuse.openshift_short}} web console. The default port is `7443`. If you are using {{site.data.reuse.icp}} 3.1.2, the master host address is the same as the address for your {{site.data.reuse.icp}} cluster. If you are using {{site.data.reuse.icp}} 3.2.0, the master host address is different.\\
-   Make a note of the port value, and enter that port together with the {{site.data.reuse.icp}} master host in the steps that have `https://<OpenShift Cluster Address>:<OpenShift Cluster API Port>`
+
+   - The master port for your {{site.data.reuse.openshift_short}} web console. The default port is `7443`. If you are using {{site.data.reuse.icp}} 3.1.2, the master host address is the same as the address for your {{site.data.reuse.icp}} cluster. If you are using {{site.data.reuse.icp}} 3.2.0, the master host address is different.
+
+      Make a note of the port value, and enter that port together with the {{site.data.reuse.icp}} master host in the steps that have `https://<OpenShift Cluster Address>:<OpenShift Cluster API Port>`
    - The SSH password if you are connecting remotely to the master host of your {{site.data.reuse.icp}} cluster.
 
 **Note:** The installation process involves steps in both the web consoles and command lines of {{site.data.reuse.icp}} and {{site.data.reuse.openshift_short}}.
