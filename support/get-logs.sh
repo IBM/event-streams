@@ -60,16 +60,34 @@ done
 command='kubectl get pods __namespace__ -l component=__component____release__ --no-headers -o custom-columns=":metadata.name"'
 netpolcommand='kubectl get netpol __namespace__ __release__ --no-headers -o custom-columns=":metadata.name"'
 servicecommand='kubectl get svc __namespace__ __release__ --no-headers -o custom-columns=":metadata.name"'
+configmapcommand='kubectl get configmap __namespace__ __release__ --no-headers -o custom-columns=":metadata.name"'
+secretcommand='kubectl get secrets __namespace__ __release__ --no-headers -o custom-columns=":metadata.name"'
+nodecommand='kubectl get nodes --no-headers -o custom-columns=":metadata.name"'
+icpconfigmapcommand='kubectl get configmap -n kube-public --no-headers -o custom-columns=":metadata.name"'
+pvcommand='kubectl get pv --no-headers -o custom-columns=":metadata.name"'
+pvccommand='kubectl get pvc --no-headers -o custom-columns=":metadata.name"'
+kubesystemcommand='kubectl get pods -n kube-system --no-headers -o custom-columns=":metadata.name"'
+certgennamespacecommand='kubectl get pods __namespace__ --no-headers -o custom-columns=":metadata.name" | grep cert-gen'
+oauthcommand='kubectl get pods -n kube-system -l component=ui --no-headers -o custom-columns=":metadata.name"'
+oauthnamespacecommand='kubectl get pods __namespace__ -l component=ui --no-headers -o custom-columns=":metadata.name"'
 
 # Substitute in namespace if given
 if [ -n "${NAMESPACE}" ]; then
     command="${command//__namespace__/-n ${NAMESPACE}}"
     netpolcommand="${netpolcommand//__namespace__/-n ${NAMESPACE}}"
     servicecommand="${servicecommand//__namespace__/-n ${NAMESPACE}}"
+    configmapcommand="${configmapcommand//__namespace__/-n ${NAMESPACE}}"
+    secretcommand="${secretcommand//__namespace__/-n ${NAMESPACE}}"
+    certgennamespacecommand="${secretcommand//__namespace__/-n ${NAMESPACE}}"
+    oauthnamespacecommand="${secretcommand//__namespace__/-n ${NAMESPACE}}"
 else
     command="${command//__namespace__/}"
     netpolcommand="${netpolcommand//__namespace__/}"
     servicecommand="${servicecommand//__namespace__/}"
+    configmapcommand="${configmapcommand//__namespace__/}"
+    secretcommand="${secretcommand//__namespace__/}"
+    certgennamespacecommand="${secretcommand//__namespace__/}"
+    oauthnamespacecommand="${secretcommand//__namespace__/}"
 fi
 
 # Substitute in release if given
@@ -77,31 +95,54 @@ if [ -n "${RELEASE}" ]; then
     command="${command//__release__/,release=${RELEASE}}"
     netpolcommand="${netpolcommand//__release__/-l release=${RELEASE}}"
     servicecommand="${servicecommand//__release__/-l release=${RELEASE}}"
+    configmapcommand="${configmapcommand//__release__/-l release=${RELEASE}}"
+    secretcommand="${secretcommand//__release__/-l release=${RELEASE}}"
+    certgennamespacecommand="${secretcommand//__release__/-l release=${RELEASE}}"
 else
     command="${command//__release__/}"
     netpolcommand="${netpolcommand//__release__/}"
     servicecommand="${servicecommand//__release__/}"
+    configmapcommand="${configmapcommand//__release__/}"
+    secretcommand="${secretcommand//__release__/}"
+    certgennamespacecommand="${certgennamespacecommand//__release__/}"
 fi
 
 
 logdir="tmpLogs"
 netpollogdir="netpolLogs"
 servicelogdir="serviceLogs"
+tillerlogdir="tillerLogs"
+nodelogdir="nodeLogs"
+helmlogdir="helmLogs"
+pvlogdir="pvLogs"
+pvclogdir="pvcLogs"
+kubednslogdir="kube-dnsLogs"
+certificatelogdir="certificateLogs"
+certgenlogdir="certgenLogs"
+oauthlogdir="oauthLogs"
 rm -rf $logdir
 mkdir -p $logdir
 mkdir -p $logdir/$netpollogdir
 mkdir -p $logdir/$servicelogdir
+mkdir -p $logdir/$tillerlogdir
+mkdir -p $logdir/$nodelogdir
+mkdir -p $logdir/$helmlogdir
+mkdir -p $logdir/$pvlogdir
+mkdir -p $logdir/$pvclogdir
+mkdir -p $logdir/$kubednslogdir
+mkdir -p $logdir/$certificatelogdir
+mkdir -p $logdir/$certgenlogdir
+mkdir -p $logdir/$oauthlogdir
+
 
 # Extract host information
 echo -n -e "Extracting host information"
 kubectl get namespaces > $logdir/namespaces.log
-kubectl get nodes > $logdir/nodes.log
+kubectl get nodes -o wide > $logdir/nodes.log
 kubectl get deployment > $logdir/deployment.log
-kubectl get pods > $logdir/pods.log
+kubectl get pods -o wide > $logdir/pods.log
 kubectl -n kube-system get pods > $logdir/kube-system.log
 kubectl get pods -o yaml > $logdir/yaml.log
-kubectl get pv > $logdir/pv.log
-kubectl get pvc > $logdir/pvc.log
 echo -e "\033[0;32m [DONE]\033[0m"
 
 # ACCESS-CONTROLLER pods
@@ -146,6 +187,10 @@ for pod in $pods; do
     containers=($(${elasticcommand} -o jsonpath={.items[*].spec.containers[*].name}))
     for container in ${containers[@]}; do
         kubectl logs $pod -c $container > $logdir/$pod/$container.log
+        kubectl logs $pod -c $container --previous > $logdir/$pod/$container-previous.log
+        if [ $(eval echo $?) == 1 ]; then
+            rm $logdir/$pod/$container-previous.log
+        fi
     done
     kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
     kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
@@ -178,6 +223,10 @@ for pod in $pods; do
     containers=($(${kafkacommand} -o jsonpath={.items[*].spec.containers[*].name}))
     for container in ${containers[@]}; do
         kubectl logs $pod -c $container > $logdir/$pod/$container.log
+        kubectl logs $pod -c $container --previous > $logdir/$pod/$container-previous.log
+        if [ $(eval echo $?) == 1 ]; then
+            rm $logdir/$pod/$container-previous.log
+        fi
     done
     kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
     kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
@@ -290,6 +339,10 @@ for pod in $pods; do
     containers=($(${zkcommand} -o jsonpath={.items[*].spec.containers[*].name}))
     for container in ${containers[@]}; do
         kubectl logs $pod -c $container > $logdir/$pod/$container.log
+        kubectl logs $pod -c $container --previous > $logdir/$pod/$container-previous.log
+        if [ $(eval echo $?) == 1 ]; then
+            rm $logdir/$pod/$container-previous.log
+        fi
     done
     kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
     kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
@@ -297,21 +350,25 @@ for pod in $pods; do
 done
 
 # OAUTH LOGS
-if [ -n "${NAMESPACE}" ]; then
-    command="${command//-n ${NAMESPACE}/-n kube-system}"
-else
-    command="${command} -n kube-system"
-fi
-
-oauthcommand="${command//__component__/${ui_component_name}}"
+mkdir $logdir/$oauthlogdir/kube-system
 pods=$(eval $oauthcommand)
 for pod in $pods; do
     echo -n -e $pod
-    mkdir -p $logdir/$pod
-    kubectl -nkube-system describe pod $pod > $logdir/$pod/pod-describe.log
-    kubectl -nkube-system logs $pod > $logdir/$pod/oauth.log
+    mkdir -p $logdir/$oauthlogdir/kube-system/$pod
+    kubectl -n kube-system describe pod $pod > $logdir/$oauthlogdir/kube-system/$pod/pod-describe.log
+    kubectl -n kube-system logs $pod > $logdir/$oauthlogdir/kube-system/$pod/oauth.log
     echo -e "\033[0;32m [DONE]\033[0m"
 done
+if [ ! -z "${NAMESPACE}" ]; then
+    mkdir $logdir/$oauthlogdir/${NAMESPACE}
+    oauthnspods=$(eval $oauthnamespacecommand)
+    for pod in $oauthnspods; do
+        echo -n -e $pod
+        kubectl -n ${NAMESPACE} describe pod $pod > $logdir/$oauthlogdir/${NAMESPACE}/$pod/pod-describe.log
+        kubectl -n ${NAMESPACE} logs $pod > $logdir/$oauthlogdir/${NAMESPACE}/$pod/oauth.log
+        echo -e "\033[0;32m [DONE]\033[0m"
+    done
+fi
 
 # NETWORK POLICIES
 netpols=$(eval $netpolcommand)
@@ -324,11 +381,128 @@ done
 # SERVICES
 services=$(eval $servicecommand)
 for service in $services; do
-echo -n -e $service
+    echo -n -e $service
     kubectl describe svc $service > $logdir/$servicelogdir/$service-describe.log
-    kubectl describe svc $service
     echo -e "\033[0;32m [DONE]\033[0m"
 done
+
+# NODE
+nodes=$(eval $nodecommand)
+for node in $nodes; do
+    echo -n -e $node
+    kubectl describe nodes $node > $logdir/$nodelogdir/$node-describe.log
+    echo -e "\033[0;32m [DONE]\033[0m"
+done
+
+# CONFIGMAP
+echo -n -e "configmap log"
+$(eval $configmapcommand > $logdir/configmap-list.log)
+echo -e "\033[0;32m [DONE]\033[0m"
+
+# SECRET
+echo -n -e "secret log"
+$(eval $secretcommand > $logdir/secret-list.log)
+echo -e "\033[0;32m [DONE]\033[0m"
+
+# TILLER
+echo -n -e "tiller logs"
+kubectl get pods -n kube-system | grep tiller > $logdir/$tillerlogdir/kube-system-tiller.log
+tillercommand="$kubesystemcommand | grep tiller"
+tillerpod=$(eval $tillercommand)
+kubectl logs ${tillerpod} -n kube-system | grep es > $logdir/$tillerlogdir/tiller.log
+echo -e "\033[0;32m [DONE]\033[0m"
+
+# HELM
+if [ -z "${RELEASE}" ]; then
+    echo "Please provide the release name to retrieve the helm logs"
+else
+    echo -n -e "helm logs"
+    helm history ${RELEASE} --tls > $logdir/$helmlogdir/helm_hist.log
+    helm get values ${RELEASE} --tls > $logdir/$helmlogdir/helm_values.log
+    linecert=$(eval grep -n -w "cert:" $logdir/$helmlogdir/helm_values.log | cut -f1 -d:)
+    linekey=$(eval grep -n -w "key:" $logdir/$helmlogdir/helm_values.log | cut -f1 -d:)
+    sed -i '' -e "${linecert}s/.*/  cert: REDACTED/" $logdir/$helmlogdir/helm_values.log
+    sed -i '' -e "${linekey}s/.*/  key: REDACTED/" $logdir/$helmlogdir/helm_values.log
+    echo -e "\033[0;32m [DONE]\033[0m"
+fi
+
+# ICP CONFIGMAP
+echo -n -e "ICP configmap log"
+icpconfigmap=$(eval $icpconfigmapcommand)
+kubectl describe configmap ${icpconfigmap} -n kube-public > $logdir/$icpconfigmap-configmap.log
+echo -e "\033[0;32m [DONE]\033[0m"
+
+# PV
+echo -n -e "pv logs"
+kubectl get pv > $logdir/$pvlogdir/pv.log
+pvs=$(eval $pvcommand)
+for pv in $pvs; do
+    echo -n -e $pv
+    kubectl describe pv $pv > $logdir/$pvlogdir/$pv-describe.log
+    echo -e "\033[0;32m [DONE]\033[0m"
+done
+
+# PVC
+pvcs=$(eval $pvccommand)
+if [ -z "${pvcs}" ]; then
+    echo -n -e "No pvcs to gather logs for"
+    echo -e "\033[0;32m [DONE]\033[0m"
+else
+    echo -n -e "pvc logs"
+    kubectl get pvc > $logdir/$pvclogdir/pvc.log
+    for pvc in $pvcs; do
+        echo -n -e $pvc
+        kubectl describe pvc $pvc > $logdir/$pvclogdir/$pvc-describe.log
+        echo -e "\033[0;32m [DONE]\033[0m"
+    done
+fi
+
+# KUBE-DNS
+echo -n -e "kube-dns logs"
+kubednscommand="$kubesystemcommand  | grep kube-dns"
+kubednspods=$(eval $kubednscommand)
+for pod in $kubednspods; do
+    echo -n -e $pod
+    kubectl logs $pod -n kube-system > $logdir/$kubednslogdir/$pod.log
+    kubectl describe pod $pod -n kube-system > $logdir/$kubednslogdir/$pod-describe.log
+    echo -e "\033[0;32m [DONE]\033[0m"
+done
+
+# CERTIFICATE VALUES
+echo -n -e "certificates"
+proxysecret=$(eval $secretcommand | grep proxy-secret)
+secretjsoncommand='kubectl get secret -o json $proxysecret'
+certificatefields=(https.cert podtls.cert tls.cert tls.cluster)
+for field in ${certificatefields[@]}; do
+    echo -n -e $field
+    $(eval $secretjsoncommand | jq '.data | ."'$field'"' | sed 's/\"//g'| base64 --decode | openssl x509 -text > $logdir/$certificatelogdir/$field.log)
+    echo -e "\033[0;32m [DONE]\033[0m"
+done
+
+# CERT-GEN
+certgencommand="$kubesystemcommand | grep cert-gen"
+certgenpods=$(eval $certgencommand)
+if [ -z "${certgenpods}"]; then
+    echo -n -e "No cert-gens to gather logs for"
+    echo -e "\033[0;32m [DONE]\033[0m"
+else
+    echo -n -e "cert-gen logs"
+    mkdir $logdir/$certgenlogdir/kube-system
+    for pod in $certgenpods; do
+        echo -n -e $pod
+        kubectl logs $pod -n kube-system > $logdir/$certgenlogdir/kube-system/$pod.log
+        echo -e "\033[0;32m [DONE]\033[0m"
+    done
+    if [ ! -z "${NAMESPACE}" ]; then
+        mkdir $logdir/$certgenlogdir/${NAMESPACE}
+        certgennspods=$(eval $certgennamespacecommand)
+        for pod in $certgennspods; do
+            echo -n -e $pod
+            kubectl logs $pod -n ${NAMESPACE} > logdir/$certgenlogdir/${NAMESPACE}/$pod.log
+            echo -e "\033[0;32m [DONE]\033[0m"
+        done
+    fi
+fi
 
 # Tar the results
 tar czf logs-$DATE.tar.gz $logdir
