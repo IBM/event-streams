@@ -16,6 +16,8 @@ sections:
 
 {{site.data.reuse.short_name}} version | Helm chart version | Kafka version shipped | Container platform               | Systems
 ---------------------------------------|--------------------|-----------------------|----------------------------------|--------------------
+2019.2.2 <br> **Note:** Only available in <br>[IBM Cloud Pak for Integration](../about/whats-new/#release-201922).  | 1.3.1          | 2.2.0      | {{site.data.reuse.icp}} 3.2.0.1906 [(fix pack)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"} |  - Linux® 64-bit (x86_64) system <br/>- Linux on IBM® Z systems
+ &nbsp;             |         |       | {{site.data.reuse.openshift}} 3.11 with {{site.data.reuse.icp}} 3.2.0  | Linux® 64-bit (x86_64) systems |
 2019.2.1                               | 1.3.0          | 2.2.0      | {{site.data.reuse.icp}} 3.1.2 and 3.2.0 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
  &nbsp;             |         |       | {{site.data.reuse.openshift}} 3.11 with {{site.data.reuse.icp}} 3.2.0  | Linux® 64-bit (x86_64) systems |
  &nbsp;             |         |       | {{site.data.reuse.openshift}} 3.10 with {{site.data.reuse.icp}} 3.1.2  | Linux® 64-bit (x86_64) systems |

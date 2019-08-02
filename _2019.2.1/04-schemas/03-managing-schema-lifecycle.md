@@ -108,7 +108,7 @@ If a schema is no longer available in the registry, Java applications that want 
 For example, the message and stack trace when producing a message with a missing schema named `Test_Schema` would look like this:
 
 ```
-com.ibm.eventstreams.serdes.exceptions.SchemaNotFoundException: Schema book not found
+com.ibm.eventstreams.serdes.exceptions.SchemaNotFoundException: Schema "Test_Schema" not found
     at com.ibm.eventstreams.serdes.SchemaRegistryRestAPIClient.handleErrorResponse(SchemaRegistryRestAPIClient.java:145)
     at com.ibm.eventstreams.serdes.SchemaRegistryRestAPIClient.get(SchemaRegistryRestAPIClient.java:120)
     at com.ibm.eventstreams.serdes.SchemaRegistry.downloadSchema(SchemaRegistry.java:253)
