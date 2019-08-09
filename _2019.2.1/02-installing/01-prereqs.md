@@ -14,13 +14,11 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 | Container platform | Systems
 |--------------------|-----------------------|-------------|--------------------
-|  {{site.data.reuse.icp}} 3.1.2 and 3.2.0 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® z13 or later systems
-|  {{site.data.reuse.openshift}} 3.11 with {{site.data.reuse.icp}} 3.2.0   |  Linux® 64-bit (x86_64) systems |
+|  {{site.data.reuse.icp}} 3.1.2 and 3.2.0.1907 [(fix pack)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"} |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® z13 or later systems
+|  {{site.data.reuse.openshift}} 3.11 with {{site.data.reuse.icp}} 3.2.0.1907 [(fix pack)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"}   |  Linux® 64-bit (x86_64) systems |
 |  {{site.data.reuse.openshift}} 3.10 with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 |  Amazon Web Services (AWS) with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 |  Microsoft Azure with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
-
-**Important:** {{site.data.reuse.icp}} 3.2.0 requires a fix for issue 26931. Contact {{site.data.reuse.icp}} [support](https://www.ibm.com/mysupport/s/){:target="_blank"} for the required fix.
 
 {{site.data.reuse.short_name}} 2019.2.1 has Helm chart version 1.3.0 and includes Kafka version 2.2.0. For an overview of supported component and platform versions, see the [support matrix](../../support/#support-matrix).
 

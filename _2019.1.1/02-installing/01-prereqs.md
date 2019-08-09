@@ -14,7 +14,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 | Container platform | Systems
 |--------------------|-----------------------|-------------|--------------------
-|  {{site.data.reuse.icp}} 3.1.1, 3.1.2, and 3.2.0 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+|  {{site.data.reuse.icp}} 3.1.1, 3.1.2, and 3.2.0.1907 [(fix pack)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"} |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
 |  {{site.data.reuse.openshift}} 3.9 and 3.10 with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 |  Amazon Web Services (AWS) with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 |  Microsoft Azure with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
