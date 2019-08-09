@@ -14,7 +14,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 | Container platform | Systems
 |--------------------|-----------------------|-------------|--------------------
-|  {{site.data.reuse.icp}} 3.1.2 and 3.2.0 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+|  {{site.data.reuse.icp}} 3.1.2 and 3.2.0 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® z13 or later systems
 |  {{site.data.reuse.openshift}} 3.11 with {{site.data.reuse.icp}} 3.2.0   |  Linux® 64-bit (x86_64) systems |
 |  {{site.data.reuse.openshift}} 3.10 with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 |  Amazon Web Services (AWS) with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
@@ -50,19 +50,33 @@ See the [following table](#helm-resource-requirements) for memory requirements o
 
 Kubernetes manages the allocation of containers within your cluster. This allows resources to be available for other {{site.data.reuse.long_name}} components which might be required to reside on the same node.
 
-Ensure you have one {{site.data.reuse.icp}} worker node per Kafka broker, and a minimum of 3 worker nodes available for use by {{site.data.reuse.long_name}}.
+Ensure you have one {{site.data.reuse.icp}} worker node per Kafka broker, and a minimum of 3 worker nodes available for use by {{site.data.reuse.long_name}}. Ensure each worker node runs on a separate physical server. See the guidance about [Kafka high availability](../planning/#kafka-high-availability) for more information.
+
 
 ## Helm resource requirements
 
-The following table lists the resource requirements of the {{site.data.reuse.long_name}} Helm chart. For details about the requirements for each pod and their containers, see the tables in the following sections.
+The {{site.data.reuse.short_name}} helm chart has the following resource requirements based on resource request and limit settings. Requests and limits are Kubernetes concepts for controlling resource types such as CPU and memory.
 
-| Pod group             | Configurable replicas | Minimum total CPU | Minimum total memory (Gi) |
-| --------------------- | ------------------ | ----------------- | ------------------------- |
-| [Kafka](#kafka-group)      | 3*                 | 9.6* (3.2 per broker)    | 14.4* (4.8 per broker)  |
-| [Event Streams core](#event-streams-core-group) |  | 5.1 without persistence  | 7.7 without persistence  |
-| &nbsp;                                          |  | 6.1 with persistence enabled | 8.2 with persistence enabled |
-| [Message indexing](#message-indexing-group)  |   | 2.5  | 8.4  |
-| [Geo-replication](#geo-replicator-group)  | 0*                  | 0.9 per replica  | 2.5 per replica
+- Requests set the minimum requirements a container requires to be scheduled. If your system does not have the required request value, then your services will not start up.
+- Limits set the value beyond which a container cannot consume the resource. It is the upper limit within your system for the service.
+
+For more information about resource requests and limits, see the Kubernetes [documentation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/){:target="_blank"}.
+
+The following table lists the aggregate resource requirements of the {{site.data.reuse.short_name}} helm chart. The table includes totals for both request and limit values of all pods and their containers. Each container in a pod has its own request and limit values, but as pods run as a group, these values need to be added together to understand the total requirements for a pod. For details about the requirements for each  container within individual pods, see the tables in the following sections.
+
+These are the minimum requirements for an {{site.data.reuse.short_name}} installation, and will be used unless you change them when [configuring](../configuring) your installation. They are based on the default resource request and limit settings of the chart. Installing with these settings is suitable for a starter deployment intended for testing purposes and trying out {{site.data.reuse.short_name}}.
+
+For a production setup, ensure you set higher values, and also consider important configuration options for {{site.data.reuse.icp}} such as setting up a load balancer and an internal network. For more information about planning for a production setup, including requirements for a baseline production environment, see the [performance planning topic](../capacity-planning).
+
+| Pod group             | Configurable replicas | Total CPU request per pod group (cores)| Total CPU limit per pod group (cores)| Total memory request per pod group (Gi)| Total memory limit per pod group (Gi)|
+| --------------------- | --------------------- | --------------------------|-------------------------|---------------------------|--------------------|
+| [Kafka](#kafka-group)      | 3*               | 9.6* (3.2 per broker) | 11.4* (3.8 per broker) | 14.4* (4.8 per broker)    | 14.4* (4.8 per broker)
+| [Event Streams core](#event-streams-core-group) | | 5.1 without persistence | 12.4 without persistence | 7.7 without persistence   | 10.6 without persistence
+| &nbsp;                                        | | 6.1 with persistence enabled | 13.4 with persistence enabled | 8.2 with persistence enabled | 11.1 with persistence enabled
+| [Message indexing](#message-indexing-group)  |   | 1.5                | 2.5                   | 4.4                       | 8.4
+| [Geo-replication](#geo-replicator-group)  | 0*   | 0.9 per replica    | 1.6 per replica       | 2.5 per replica           | 2.5 per replica
+| **TOTAL FOR EVENT STREAMS**  |   | **17.1 without persistence**       | **27.9 without persistence**      | **29 without persistence**    | **35.9 without persistence** |
+| &nbsp;                       |   | **18.1 with persistence enabled**  | **28.9 with persistence enabled** | **29.5 with persistence enabled** | **36.4 with persistence enabled** |
 
 **Important:** The settings marked with an asterisk (*) are configurable. The values in the table are the default minimum values.
 
@@ -80,21 +94,21 @@ The following pods and their containers are part of this group.
 
 Number of replicas: 3*
 
-| Container         | CPU per container  |  Memory per container (Gi)
-| ------------------|--------------------|---------------------------|---------------------------
-| Kafka             |   1*               | 2*
-| Metrics reporter  |  0.4               | 1.5*
-| Metrics proxy     |  0.5               | 1
-| Healthcheck       |  0.2               | 0.1
-| TLS proxy         |  0.1               | 0.1
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Kafka             |   1*                              | 1*                              | 2*                                 | 2*
+| Metrics reporter  |  0.4                              | 0.6                             | 1.5                                | 1.5
+| Metrics proxy     |  0.5                              | 0.5                             | 1                                  | 1
+| Healthcheck       |  0.2                              | 0.2                             | 0.1                                | 0.1
+| TLS proxy         |  0.1                              | 0.5                             | 0.1                                | 0.1
 
 #### Network proxy pod
 
 Number of replicas: 3 (matches the number of Kafka replicas)
 
-| Container  | CPU per container |  Memory per container (Gi)
-| -----------|-------------------|--------------------|---------------------------
-| Proxy      |         1         | 0.1
+| Container  | CPU request per container (cores) |  CPU limit per container (cores) | Memory request per container (Gi) | Memory limit per container (Gi)
+| -----------|-----------------------------------|----------------------------------|-----------------------------------|--------------------------------
+| Proxy      |         1                         |  1                               | 0.1                               | 0.1
 
 ### Event Streams core group
 
@@ -106,64 +120,64 @@ The following pods and their containers are part of this group.
 
 Number of replicas: 3
 
-| Container         | CPU per container  |  Memory per container (Gi)
-| ------------------|--------------------|---------------------------
-| ZooKeeper         | 0.1*               | 0.75*
-| TLS proxy         | 0.1                | 0.1
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| ZooKeeper         | 0.1*                              | 0.1*                            | 0.75                               | 1
+| TLS proxy         | 0.1                               | 0.1                             | 0.1                                | 0.1
 
 #### Administration UI pod
 
 Number of replicas: 1
 
-| Container  | CPU per container  |  Memory per container (Gi)
-| -----------|------------------------|---------------------------
-| UI         | 1                      | 1
-| Redis      | 0.1                    | 0.1
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| UI                | 1                                 | 1                               | 1                                  | 1
+| Redis             | 0.1                               | 0.1                             | 0.1                                | 0.1
 
 #### Administration server pod
 
 Number of replicas: 1
 
-| Container  | CPU per container     |  Memory per container (Gi)
-| -----------|-----------------------|---------------------------
-| Rest       | 0.5                   | 1
-| Codegen    | 0.2                   | 0.3
-| TLS proxy  | 0.1                   | 0.1
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Rest              | 0.5                               | 4                               | 1                                  | 2
+| Codegen           | 0.2                               | 0.5                             | 0.3                                | 0.5
+| TLS proxy         | 0.1                               | 0.1                             | 0.1                                | 0.1
 
 #### REST producer server pod
 
 Number of replicas: 1
 
-| Container     | CPU per container  |  Memory per container (Gi)
-| --------------|--------------------|---------------------------
-| Rest-producer | 0.5                | 1
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Rest-producer     | 0.5                               | 4                               | 1                                  | 2
 
 #### REST proxy pod
 
 Number of replicas: 1
 
-| Container  | CPU per container  |  Memory per container (Gi)
-| -----------|--------------------|---------------------------
-| Rest-proxy | 0.5                | 0.25
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Rest-proxy        | 0.5                               | 0.5                             | 0.25                               | 0.25
 
 #### Collector pod
 
 Number of replicas: 1
 
-| Container  | CPU per container  |  Memory per container (Gi)
-| -----------|--------------------|---------------------------
-| Collector  | 0.1                | 0.05
-| TLS proxy  | 0.1                | 0.1
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Collector         | 0.1                               | 0.1                             | 0.05                               | 0.05
+| TLS proxy         | 0.1                               | 0.1                             | 0.1                                | 0.1
 
 
 #### Access controller pod
 
 Number of replicas: 2
 
-| Container          | CPU per container  |  Memory per container (Gi)
-| -------------------|--------------------|---------------------------
-| Access controller  | 0.1                | 0.25
-| Redis              | 0.1                | 0.1
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Access controller | 0.1                               | 0.1                             | 0.25                               | 0.25
+| Redis             | 0.1                               | 0.1                             | 0.1                                | 0.1
 
 #### Schema Registry pod
 
@@ -171,10 +185,10 @@ Number of replicas:
 - 1 without persistence
 - 2 with persistence enabled
 
-| Container  | CPU per container  |  Memory per container (Gi)
-| -----------|--------------------|---------------------------
-| Schema Registry | 0.5           | 0.25
-| Avro service    | 0.5           |  0.25 |
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Schema Registry   | 0.5                               | 0.5                             | 0.25                               | 0.25
+| Avro service      | 0.5                               | 0.5                             | 0.25                               | 0.25
 
 ### Message indexing group
 
@@ -184,21 +198,19 @@ The following pods and their containers are part of this group.
 
 Number of replicas: 1
 
-| Container     | CPU per container  |  Memory per container (Gi)
-| --------------|--------------------|---------------------------
-| Index manager | 0.2                | 0.1
-| TLS proxy     | 0.1                | 0.1
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Index manager     | 0.2                               | 0.2                             | 0.1                                | 0.1
+| TLS proxy         | 0.1                               | 0.1                             | 0.1                                | 0.1
 
 #### Elasticsearch pod
 
 Number of replicas: 2
 
-| Container  | CPU per container  |  Memory per container (Gi)
-| -----------|--------------------|---------------------------
-| Elastic    | 1                  | 4
-| TLS proxy  | 0.1                | 0.1
-
-<!-- **DRAFT COMMENT:** _Are the Elastic CPU and memory values configurable?_ -->
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Elastic           | 0.5*                              | 1*                              | 2*                                 | 4*
+| TLS proxy         | 0.1                               | 0.1                             | 0.1                                | 0.1
 
 ### Geo-replicator group
 
@@ -206,12 +218,12 @@ This group only contains the geo-replicator pod.
 
 Number of replicas: 0*
 
-**Note:** This means no geo-replication is enabled by default. The values in the table are the default minimum values for 1 replica.
+**Note:** This means there is no geo-replication enabled by default. The values in the table are the default minimum values for 1 replica.
 
-| Container         | CPU per container     |  Memory per container (Gi)
-| ------------------|-----------------------|---------------------------
-| Replicator        | 0.5                   | 1
-| Metrics reporter  | 0.4                   | 1.5
+| Container         | CPU request per container (cores) | CPU limit per container (cores) |  Memory request per container (Gi) | Memory limit per container (Gi)
+| ------------------|-----------------------------------|---------------------------------|------------------------------------|--------------------------------
+| Replicator        | 0.5                               | 1                               | 1                                  | 1
+| Metrics reporter  | 0.4                               | 0.6                             | 1.5                                | 1.5
 
 
 ## PodSecurityPolicy requirements
@@ -270,7 +282,7 @@ The Apache Kafka Java client shipped with {{site.data.reuse.long_name}} is suppo
 *   IBM Java 8
 *   Oracle Java 8
 
-You can use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}, but in such cases IBM can only provide support for server-side issues, and not for the clients themselves.
+You can also use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}. If you encounter any issues with such clients when using them with {{site.data.reuse.short_name}}, IBM can assist you in working with the open source community to resolve those issues.
 
 {{site.data.reuse.short_name}} is designed for use with clients based on the `librdkafka` implementation of the Apache Kafka protocol.
 

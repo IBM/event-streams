@@ -12,88 +12,32 @@ When preparing for your {{site.data.reuse.long_name}} installation, consider the
 
 <!--It's important to understand your requirements so that you set up your deployment to handle the intended workload. In addition,  [licensing](../planning/#licensing) is based on the number of virtual cores available to all Kafka and Geo-replicator containers deployed.-->
 
-## Guidance for high throughput environments
+## Guidance for production environments
 
-{{site.data.reuse.short_name}} offers a set of configuration parameters to help scale and fine tune your deployment. Together with the {{site.data.reuse.icp}} configuration options, you can set up your deployment to handle the required throughput.
+The [prerequisites](../prerequisites/#helm-resource-requirements) for {{site.data.reuse.short_name}} provide information about the minimum resources requirements for a test environment. For a baseline production deployment of {{site.data.reuse.short_name}}, increase the following values.
 
-In high throughput environments, ensure you configure your {{site.data.reuse.icp}} instance at the time of installing with the following options:
-- Set up an external load balancer for your {{site.data.reuse.icp}} cluster to provide a dedicated external access point for the cluster that provides intelligent routing algorithms.
-- Set up an a dedicated internal network for inter-broker traffic to avoid contention between internal processes and external traffic.
+- Set the CPU request and limit values for Kafka brokers to `4000m`.\\
+   You can use the `kafka.resources.requests.cpu` and `kafka.resources.limits.cpu` options if you are using the command line, or enter the values in the **CPU request for Kafka brokers** and **CPU limit for Kafka brokers** fields of the **Configure** page if using the UI.
+- Set the memory request and limit values for Kafka brokers to at least `6Gi`.\\
+   You can use the `kafka.resources.requests.memory` and `kafka.resources.limits.memory` options if you are using the command line, or enter the values in the **Memory request for Kafka brokers** and **Memory limit for Kafka brokers** fields of the **Configure** page if using the UI.
 
-For more information about configuring {{site.data.reuse.icp}} for high throughput scenarios, see the section about [performance considerations for {{site.data.reuse.icp}}](#performance-considerations-for-ibm-cloud-private) later.
+You can set higher values when [configuring](../configuring) your installation, or set them [later](../../administering/scaling/).
 
-When installing {{site.data.reuse.short_name}} for high throughput scenarios, consider the following scaling and tuning options:
-- Increase the the CPU and memory limits for your Kafka and Metrics proxy container within the Kafka Pod, and the Collector container in the Collector pod.
-- Fine-tune the performance settings of your {{site.data.reuse.short_name}} Kafka brokers to suit your requirements. For example, modify the `num.replica.fetchers` setting to match the number of brokers deployed in the system to allow more seamless background message replication to occur. Increase the `num.io.threads` and `num.network.threads` parameter values from their defaults. These parameters control the number of threads available for processing requests and handling network traffic within the brokers.
+**Note:** This guidance sets the requests and limits to the same values. You might need to set the limits to higher values depending on your intended workload. Remember to add the increases to the minimum [resource requirement values](../prerequisites/#helm-resource-requirements), and ensure the increased settings can be served by your system.
 
-For more information about configuring {{site.data.reuse.short_name}} for high throughput scenarios, see the section about [performance considerations for {{site.data.reuse.short_name}}](#performance-considerations-for-event-streams) later.
+**Important:** For high throughput environments, also ensure you [prepare](#performance-considerations-for-ibm-cloud-private) your {{site.data.reuse.icp}} installation beforehand.
 
-## Performance considerations for {{site.data.reuse.icp}}
-
-Depending on the workload planned, consider the following configuration options when setting up your {{site.data.reuse.icp}} environment.
-
-**Important:** You must consider and set these {{site.data.reuse.icp}} configuration options before installing {{site.data.reuse.short_name}}.
-
-### Configuring a load balancer
-
-In high throughput environments, [configure an external load balancer](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/set_loadbalancer.html){:target="_blank"} for your {{site.data.reuse.icp}} cluster.
-
-Without a load balancer, a typical {{site.data.reuse.short_name}} installation includes a master node for allowing external traffic into the cluster. There are also worker nodes that host Kafka brokers. Each broker has an advertised listener that consists of the master node's IP address and a unique node port within the cluster. This means the worker nodes can be identified without being exposed externally.
-
-When a producer connects to the {{site.data.reuse.short_name}} master node through the bootstrap port, they are sent metadata that identifies partition leaders for the topics hosted by the brokers. So, access to the cluster is based on the address `<master_node:bootstrap_port>`, and identification is based on the advertised listener addresses within the cluster, which has a node port to uniquely identify the specific broker.
-
-For example, the connection is made to the `<master_node:bootstrap_port>` address, for example: `192.0.2.24:30724`
-
-The advertised listener is then made up of the `<master_node:unique_port>` address, for example: `192.0.2.24:88945`
-
-The producer then sends messages to the advertised listener for a partition leader of a topic. These requests go through the master node and are passed to the right worker node in {{site.data.reuse.short_name}} based on the internal IP address for that specific advertised listener that identifies the broker.
-
-This means all traffic is routed through the master node before being distributed across the cluster. If the master node is overloaded by service requests, network traffic, or system operations, it becomes a bottleneck for incoming requests.
-
-![Schemas: Setup without a load balancer diagram.](../../images/No_Load_Balancer.svg "Diagram representing flow of message data through the master node where there is no load balancer.")
-
-A load balancer replaces the master node as the entry point into the cluster, providing a dedicated service that typically runs on a separate node. In this case the bootstrap address points to the load balancer instead of the master node. The load balancer passes incoming requests to any of the available worker nodes. The worker node then forwards the request onto the correct broker within the cluster based on its advertised listener address.
-
-Configuring a load balancer provides more control over how requests are forwarded into the cluster (for example, round-robin, least congested, and so on), and frees up the master node for system operations.
-
-![Schemas: Setup with a load balancer diagram.](../../images/Load_Balancer.svg "Diagram representing flow of message data when a load balancer is set up.")
-
-For more information about configuring an external load balancer for your cluster, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/set_loadbalancer.html){:target="_blank"}.
-
-**Important:** When using a load balancer for {{site.data.reuse.icp}}, ensure you set the address for your endpoint in the [External hostname/IP address field](../configuring/#configuring-external-access) field when installing your {{site.data.reuse.short_name}} instance.
-
-### Configuring an internal network
-
-Communication between brokers can generate significant network traffic in high usage scenarios. Topic configuration such as replication factor settings can also impact traffic volume. For high performance setups, enable an internal network to handle workload traffic within the cluster.
-
-To configure an internal network for inter-broker workload traffic, enable a second network interface on each node, and configure the `config.yaml` before installing {{site.data.reuse.icp}}. For example, use the `calico_ip_autodetection_method` setting to configure the master node IP address on the second network as follows:
-
-`calico_ip_autodetection_method: can-reach=<internal_ip_address_for_master_node>`
-
-For more information about setting up a second network, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/config_yaml.html){:target="_blank"}.
-
-## Performance considerations for {{site.data.reuse.short_name}}
-
-For high throughput environments, consider the following options to configure {{site.data.reuse.short_name}} to accommodate the required workload.
+Depending on your workload, you can further scale {{site.data.reuse.short_name}} and fine tune Kafka performance to accommodate the increased requirements.
 
 ### Scaling {{site.data.reuse.short_name}}
 
-The [prerequisites](../prerequisites/#helm-resource-requirements) for {{site.data.reuse.short_name}} provides guidance about minimum resources requirements. For high throughput environments, increase these settings at the time of installation or later.
+If required by your planned workload, you can further increase the number of Kafka brokers, and the amount of CPU and memory available to them. For changing other values, see the guidance about [scaling](../../administering/scaling/) {{site.data.reuse.short_name}}.
 
-You can set a higher a CPU and memory limit when [configuring](../configuring) your installation or later as described in [scaling](../../administering/scaling/).
-
-Increase the settings for the following parameter values for more performance:
-
-- `kafka.resources.limits.cpu`
-- `kafka.resources.limits.memory`
-- `kafka.metricsProxyResources.limits.cpu`
-- `kafka.metricsProxyResources.limits.memory`
-- `global.resources.collector.limits.cpu`
-- `global.resources.collector.limits.memory`
+A [performance report](../../../pdfs/Performance Report 2019.2.1 v1.0.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
 
 ### Tuning {{site.data.reuse.short_name}} Kafka performance
 
-You can fine-tune the performance settings of your {{site.data.reuse.short_name}} Kafka brokers to suit your requirements. Kafka provides a range of parameters to set, but consider the following ones when reviewing performance requirements. You can set these parameters when installing {{site.data.reuse.short_name}}, or you can modify them later.
+You can further fine-tune the performance settings of your {{site.data.reuse.short_name}} Kafka brokers to suit your requirements. Kafka provides a range of parameters to set, but consider the following ones when reviewing performance requirements. You can set these parameters when installing {{site.data.reuse.short_name}}, or you can modify them later.
 
 - The `num.replica.fetchers` parameter sets the number of threads available on each broker to replicate messages from topic leaders. Increasing this setting increases
 I/O parallelism in the follower broker, and can help reduce bottlenecks and message latency. You can start by setting this value to match the number of brokers deployed in the system.\\
@@ -141,6 +85,53 @@ cloudctl es cluster-config --config num.replica.fetchers=4
 cloudctl es cluster-config --config num.replica.fetchers=8
 cloudctl es cluster-config --config num.replica.fetchers=9
 ```
+
+## Performance considerations for {{site.data.reuse.icp}}
+
+For high throughput environments, consider the following configuration options when setting up your {{site.data.reuse.icp}} environment.
+- Set up an external load balancer for your {{site.data.reuse.icp}} cluster to provide a dedicated external access point for the cluster that provides intelligent routing algorithms.
+- Set up a dedicated internal network for inter-broker traffic to avoid contention between internal processes and external traffic.
+
+**Important:** You must consider and set these {{site.data.reuse.icp}} configuration options before installing {{site.data.reuse.short_name}}.
+
+### Setting up a load balancer
+
+In high throughput environments, [configure an external load balancer](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/set_loadbalancer.html){:target="_blank"} for your {{site.data.reuse.icp}} cluster.
+
+Without a load balancer, a typical {{site.data.reuse.short_name}} installation includes a master node for allowing external traffic into the cluster. There are also worker nodes that host Kafka brokers. Each broker has an advertised listener that consists of the master node's IP address and a unique node port within the cluster. This means the worker nodes can be identified without being exposed externally.
+
+When a producer connects to the {{site.data.reuse.short_name}} master node through the bootstrap port, they are sent metadata that identifies partition leaders for the topics hosted by the brokers. So, access to the cluster is based on the address `<master_node:bootstrap_port>`, and identification is based on the advertised listener addresses within the cluster, which has a node port to uniquely identify the specific broker.
+
+For example, the connection is made to the `<master_node:bootstrap_port>` address, for example: `192.0.2.24:30724`
+
+The advertised listener is then made up of the `<master_node:unique_port>` address, for example: `192.0.2.24:88945`
+
+The producer then sends messages to the advertised listener for a partition leader of a topic. These requests go through the master node and are passed to the right worker node in {{site.data.reuse.short_name}} based on the internal IP address for that specific advertised listener that identifies the broker.
+
+This means all traffic is routed through the master node before being distributed across the cluster. If the master node is overloaded by service requests, network traffic, or system operations, it becomes a bottleneck for incoming requests.
+
+![Schemas: Setup without a load balancer diagram.](../../images/No_Load_Balancer.svg "Diagram representing flow of message data through the master node where there is no load balancer.")
+
+A load balancer replaces the master node as the entry point into the cluster, providing a dedicated service that typically runs on a separate node. In this case the bootstrap address points to the load balancer instead of the master node. The load balancer passes incoming requests to any of the available worker nodes. The worker node then forwards the request onto the correct broker within the cluster based on its advertised listener address.
+
+Setting up a load balancer provides more control over how requests are forwarded into the cluster (for example, round-robin, least congested, and so on), and frees up the master node for system operations.
+
+![Schemas: Setup with a load balancer diagram.](../../images/Load_Balancer.svg "Diagram representing flow of message data when a load balancer is set up.")
+
+For more information about configuring an external load balancer for your cluster, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/set_loadbalancer.html){:target="_blank"}.
+
+**Important:** When using a load balancer for {{site.data.reuse.icp}}, ensure you set the address for your endpoint in the [External hostname/IP address field](../configuring/#configuring-external-access) field when installing your {{site.data.reuse.short_name}} instance.
+
+### Setting up an internal network
+
+Communication between brokers can generate significant network traffic in high usage scenarios. Topic configuration such as replication factor settings can also impact traffic volume. For high performance setups, enable an internal network to handle workload traffic within the cluster.
+
+To configure an internal network for inter-broker workload traffic, enable a second network interface on each node, and configure the `config.yaml` before installing {{site.data.reuse.icp}}. For example, use the `calico_ip_autodetection_method` setting to configure the master node IP address on the second network as follows:
+
+`calico_ip_autodetection_method: can-reach=<internal_ip_address_for_master_node>`
+
+For more information about setting up a second network, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/config_yaml.html){:target="_blank"}.
+
 
 
 ## Disk space for persistent volumes

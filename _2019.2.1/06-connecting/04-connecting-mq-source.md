@@ -9,7 +9,7 @@ toc: true
 
 You can use the {{site.data.reuse.kafka-connect-mq-source-short}} to copy data from IBM MQ into {{site.data.reuse.long_name}} or Apache Kafka. The connector copies messages from a source MQ queue to a target Kafka topic.
 
-Kafka Connect can be run in standalone or distributed mode. This document contains steps for running the connector in distributed mode in a Docker container. In this mode, work balancing is automatic, scaling is dynamic, and tasks and data are fault-tolerant. For more details on the difference between standalone and distributed mode see the [explanation of Kafka Connect workers](../connectors/#workers).
+Kafka Connect can be run in standalone or distributed mode. This document contains steps for running the connector in distributed mode in a Docker container. In this mode, work balancing is automatic, scaling is dynamic, and tasks and data are fault-tolerant. For more details on the difference between standalone and distributed mode see the [explanation of Kafka Connect workers](../../connectors/#workers).
 
 ## Prerequisites
 
@@ -88,7 +88,7 @@ Use the UI to download a `.json` file which can be used in distributed mode.
 3. Go to the **{{site.data.reuse.kafka-connect-connecting-to-mq}}** tile, and click **Add connectors**.
 4. Click the **IBM MQ connectors** link.
 5. Ensure the `MQ Source` tab is selected and click on the **Download MQ Source Configuration**, this will display another window.
-6. Use the relevant fields to alter the configuration of the `MQ Source` connector. 
+6. Use the relevant fields to alter the configuration of the `MQ Source` connector.
 7. Click **Download** to generate and download the configuration file with the supplied fields.
 8. Open the downloaded configuration file and change the values of `mq.user.name` and `mq.password` to the username and password that you used to configure your instance of MQ.
 

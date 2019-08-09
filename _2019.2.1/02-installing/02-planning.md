@@ -26,6 +26,18 @@ Consider the following when planning your installation.
 
 When preparing for your {{site.data.reuse.short_name}} installation, review your workload requirements and consider the configuration options available for performance tuning both your {{site.data.reuse.icp}} and {{site.data.reuse.short_name}} installations. For more information, see the [performance planning topic](../capacity-planning).
 
+## Kafka high availability
+
+Kafka is designed for high availability and fault tolerance.
+
+To reduce the impact of {{site.data.reuse.short_name}} Kafka broker failures, spread your [brokers](../configuring/#kafka-broker-settings) across several {{site.data.reuse.icp}} [worker nodes](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.2.0/installing/add_node.html){:target="_blank"} by ensuring you have at least as many worker nodes as  brokers. For example, for 3 Kafka brokers, ensure you have at least 3 worker nodes running on separate physical servers.
+
+Kafka ensures that topic-partition replicas are spread across available brokers up to the replication factor specified. Usually, all of the replicas will be in-sync, meaning that they are all fully up-to-date, although some replicas can temporarily be out-of-sync, for example, when a broker has just been restarted.
+
+The replication factor controls how many replicas there are, and the minimum in-sync configuration controls how many of the replicas need to be in-sync for applications to produce and consume messages with no loss of function. For example, a typical configuration has a replication factor of 3 and minimum in-sync replicas set to 2. This configuration can tolerate 1 out-of-sync replica, or 1 worker node or broker outage with no loss of function, and 2 out-of-sync replicas, or 2 worker node or broker outages with loss of function but no loss of data.
+
+The combination of brokers spread across nodes together with the replication feature make a single {{site.data.reuse.short_name}} cluster highly available.
+
 ## Persistent storage
 
 Persistence is not enabled by default, so no persistent volumes are required. Enable persistence if you want your data, such as messages in topics, schemas, and configuration settings to be retained in the event of a restart. You should enable persistence for production use and whenever you want your data to survive a restart.

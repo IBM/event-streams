@@ -58,7 +58,7 @@ To make the Kafka Connect container available on {{site.data.reuse.icp}} it need
 To enable updates to the Kafka Connect configuration the running container will need access to a Kubernetes resource containing the contents of connect-distributed.properties. The file is included in the extracted ZIP for Kafka Connect from the {{site.data.reuse.short_name}} UI. This file includes API keys so create a Secret:
 
 ```
-kubectl -n <namespace> create secret connect-distributed-config --from-file=<extracted_zip>/config/connect-distributed.properties
+kubectl -n <namespace> create secret generic connect-distributed-config --from-file=<extracted_zip>/config/connect-distributed.properties
 ```
 
 ## Creating a ConfigMap resource for the Kafka Connect log4j configuration

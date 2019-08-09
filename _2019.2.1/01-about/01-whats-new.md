@@ -36,6 +36,9 @@ You now have the option to encrypt inter-pod communication by using [TLS](../../
 
 All {{site.data.reuse.long_name}} images are now based on [Red Hat Universal Base Image (UBI) 8](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image){:target="_blank"}.
 
+### Support for IBM Z has changed
+Red Hat Universal Base Image (UBI) 8 runs on z13 or later IBM mainframe systems.
+
 ### Kafka version upgraded to 2.2.0
 
 {{site.data.reuse.short_name}} version 2019.2.1 includes Kafka release 2.2.0, and supports the use of all Kafka interfaces.
