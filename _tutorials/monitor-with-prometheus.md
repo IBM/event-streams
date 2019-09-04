@@ -78,8 +78,8 @@ Build the Docker image as follows.
 2. Verify that your cluster IP is mapped to the `mycluster.icp` parameter by checking your system's host file: `cat /etc/hosts`\\
    If it is not, change the value to your cluster by editing your system’s host file: `sudo vi /etc/hosts`
 3. Create a local directory, and copy the certificates file from the {{site.data.reuse.icp}} master node to the local machine:\\
-  `sudo mkdir -pv cat/mycluster.icp\:8500/`\\
-  `sudo scp root@<Cluster Master Host>:/etc/docker/certs.d/mycluster.icp\:8500/ca.crt /etc/docker/certs.d/mycluster.icp\:8500/.`
+  `sudo mkdir -pv /etc/docker/certs.d/mycluster.icp\:8500/`\\
+  `sudo scp root@<Cluster Master Host>:/etc/docker/certs.d/mycluster.icp\:8500/ca.crt /etc/docker/certs.d/mycluster.icp\:8500/`
 4. On macOS only, run the following command:\\
    `sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /etc/docker/certs.d/mycluster.icp\:8500/ca.crt`
 5. Restart Docker.
