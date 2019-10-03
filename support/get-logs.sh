@@ -40,6 +40,7 @@ proxy_component_name="proxy"
 rest_component_name="rest"
 rest_producer_component_name="rest-producer"
 rest_proxy_component_name="rest-proxy"
+replicator_component_name="replicator"
 schema_registry_component_name="schemaregistry"
 ui_component_name="ui"
 zookeeper_component_name="zookeeper"
@@ -289,6 +290,22 @@ for pod in $pods; do
     mkdir -p $logdir/$pod
     kubectl describe pod $pod > $logdir/$pod/pod-describe.log
     containers=($(${restproxycommand} -o jsonpath={.items[*].spec.containers[*].name}))
+    for container in ${containers[@]}; do
+        kubectl logs $pod -c $container > $logdir/$pod/$container.log
+    done
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/hosts" > $logdir/$pod/${containers[0]}-host-description.log
+    kubectl exec $pod -c ${containers[0]} -it -- bash -c "cat /etc/resolv.conf" > $logdir/$pod/${containers[0]}-resolv-description.log
+    echo -e "\033[0;32m [DONE]\033[0m"
+done
+
+# REPLICATOR pod
+replicatorcommand="${command//__component__/${replicator_component_name}}"
+pods=$(eval $replicatorcommand)
+for pod in $pods; do
+    echo -n -e $pod
+    mkdir -p $logdir/$pod
+    kubectl describe pod $pod > $logdir/$pod/pod-describe.log
+    containers=($(${replicatorcommand} -o jsonpath={.items[*].spec.containers[*].name}))
     for container in ${containers[@]}; do
         kubectl logs $pod -c $container > $logdir/$pod/$container.log
     done
