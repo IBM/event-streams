@@ -6,11 +6,11 @@ slug: whats-new
 toc: true
 ---
 
-## Release 2019.2.2
+## Releases 2019.2.2 and 2019.2.3
 
-{{site.data.reuse.long_name}} 2019.2.2 introduces support for the [IBM Cloud Pak for Integration](https://www.ibm.com/support/knowledgecenter/en/SSGT7J/welcome.html){:target="_blank"} solution. For information about installing {{site.data.reuse.short_name}} as a capability, see the IBM Cloud Pak for Integration [documentation](https://www.ibm.com/support/knowledgecenter/en/SSGT7J/install/install_event_streams.html){:target="_blank"}.
+{{site.data.reuse.long_name}} 2019.2.2 and 2019.2.3 introduce support for the [IBM Cloud Pak for Integration](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.3/welcome.html){:target="_blank"} solution. For information about installing {{site.data.reuse.short_name}} as a capability, see the IBM Cloud Pak for Integration [documentation](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.3/install/install_event_streams.html){:target="_blank"}.
 
-**Important:** {{site.data.reuse.short_name}} 2019.2.2 is only available as part of the IBM Cloud Pak for Integration solution. {{site.data.reuse.short_name}} 2019.2.2 has the same features as the 2019.2.1 release.
+**Important:** {{site.data.reuse.short_name}} 2019.2.2 and 2019.2.3 are only available as part of the IBM Cloud Pak for Integration solution. {{site.data.reuse.short_name}} 2019.2.2 and 2019.2.3 have the same features as the 2019.2.1 release.
 
 ## Release 2019.2.1
 
@@ -22,7 +22,7 @@ Find out what is new in {{site.data.reuse.long_name}} version 2019.2.1.
 
 ### Connector catalog
 
-{{site.data.reuse.short_name}} includes a [connector catalog](../../connectors/){:target="_blank"} listing all connectors that have been verified with {{site.data.reuse.short_name}}, including  community-provided connectors and connectors supported by IBM.
+{{site.data.reuse.short_name}} includes a [connector catalog](../../../connectors/){:target="_blank"} listing all connectors that have been verified with {{site.data.reuse.short_name}}, including  community-provided connectors and connectors supported by IBM.
 
 ### Enhanced support for Kafka Connect
 

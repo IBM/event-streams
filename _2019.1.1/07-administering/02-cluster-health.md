@@ -13,7 +13,7 @@ You can use the metrics as follows:
 - Create dashboards in the Grafana service that is provided in {{site.data.reuse.icp}}. You can download example Grafana dashboards for {{site.data.reuse.short_name}} from [GitHub](https://github.com/IBM/charts/tree/master/stable/ibm-eventstreams-dev/ibm_cloud_pak/pak_extensions/dashboards){:target="_blank"}.
 
    For more information about the monitoring capabilities provided in {{site.data.reuse.icp}}, including Grafana, see the {{site.data.reuse.icp}} [documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_metrics/monitoring_service.html){:target="_blank"}.
-- Create alerts so that metrics that meet predefined criteria are used to send notifications to emails, Slack, PagerDuty, and so on. For an example of how to use the metrics to trigger alert notifications, see how you can set up [notifications to Slack](../../tutorials/monitoring-alerts/).
+- Create alerts so that metrics that meet predefined criteria are used to send notifications to emails, Slack, PagerDuty, and so on. For an example of how to use the metrics to trigger alert notifications, see how you can set up [notifications to Slack](../../../tutorials/monitoring-alerts/).
 
 You can also use [external monitoring tools](../external-monitoring/) to monitor the deployed {{site.data.reuse.short_name}} Kafka cluster.
 

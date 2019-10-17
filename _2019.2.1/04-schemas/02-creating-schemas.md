@@ -83,7 +83,7 @@ For example, the following Avro schema defines a new version of the `Book` recor
                     "symbols": ["HARDBACK", "PAPERBACK"]
                  }
         },
-        {"name": "PageCount",  "type": "int", "default": 0},
+        {"name": "PageCount",  "type": "int", "default": 0}
     ]
 }
 ```

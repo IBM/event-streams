@@ -1,5 +1,14 @@
 {% assign pageTitle = page.title %}
 
+
+{% if site.baseurl contains "mhub/qp-docs" %}
+  <div class="draftBar">
+    <p>
+      ***DRAFT preview – intended for internal IBM use only***
+    </p>
+  </div>  
+{% endif %}
+
 <div id="masthead" class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
@@ -24,7 +33,7 @@
 
 
         {% assign mastheadNavTitle = page.mastheadNavItem %}
-        
+
 
         <div class="mastheadControls">
           <div class="menuScrollContainer">
@@ -58,15 +67,15 @@
                     </svg>
                   </button>
                 </li>
-              {% elsif link.title == "APIs" %}              
-                
+              {% elsif link.title == "APIs" %}
+
                   <li tabindex="-1" class="masthead__menu-item {{ active }} dropdownMastheadItem" id="{{ link.title }}Dropdown">
                       {% if page.mastheadNavItem == "APIs" %}
                         <button onclick="toggleMastheadDropdown('',event)">{{ pageTitle }}</button>
                       {% else %}
                         <button onclick="toggleMastheadDropdown('',event)">{{ link.title }}</button>
                       {% endif %}
-                      
+
                       <div class="chevron">
                           <img role="presentation" src="{{ site.url }}{{ site.baseurl }}/assets/images/icons/chevronDown.svg" />
                       </div>
@@ -80,7 +89,7 @@
                         {% endfor %}
                       </div>
                     </li>
-                
+
               {% else %}
                 <li class="masthead__menu-item {{ active }}" onclick="window.open('{{ domain }}{{ link.url }}','_self')">
                   <a href="{{ domain }}{{ link.url }}" {% if link.description %}title="{{ link.description }}"
@@ -96,6 +105,3 @@
     </div>
   </div>
 </div>
-
-
-

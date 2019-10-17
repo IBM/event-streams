@@ -50,7 +50,7 @@ Where:
 - `<api_endpoint>` is the full URL copied from the `Event Streams API endpoint` field earlier (format `https://<host>:<port>`)
 - `<topic_name>` is the name of the topic you want to produce messages to.
 
-For full details of the API, see the [API reference](../../api/){:target="_blank"}.
+For full details of the API, see the [API reference](../../../api/){:target="_blank"}.
 
 
 <!--

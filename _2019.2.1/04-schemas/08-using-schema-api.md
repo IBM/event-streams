@@ -12,4 +12,4 @@ Schemas downloaded by the schema registry serdes library API are cached in memor
 
 For more details, including code snippets that use the schema registry serdes API, see [setting Java applications to use schemas](../setting-java-apps).
 
-For full details of the {{site.data.reuse.short_name}} schema registry serdes API, see the [Schema API Javadoc](../../schema-api/){:target="_blank"}.
+For full details of the {{site.data.reuse.short_name}} schema registry serdes API, see the [Schema API Javadoc](../../../schema-api/){:target="_blank"}.

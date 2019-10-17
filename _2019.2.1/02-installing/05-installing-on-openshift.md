@@ -6,13 +6,13 @@ slug: installing-openshift
 toc: true
 ---
 
-{{site.data.reuse.long_name}} makes using Apache Kafka in the enterprise easy and intuitive, and is now fully supported on the  {{site.data.reuse.openshift}}.
+{{site.data.reuse.long_name}} makes using Apache Kafka in the enterprise easy and intuitive, and is now fully supported on the {{site.data.reuse.openshift}}.
 
 ## Overview
 
 You can install {{site.data.reuse.short_name}} on the {{site.data.reuse.openshift}}. The solution includes key IBM cloud foundational services such as installation, security, monitoring, and lifecycle management. These services help manage your {{site.data.reuse.short_name}} installation, and are provided by {{site.data.reuse.icp}}.
 
-![Event Streams in OpenShift and IBM Cloud Private](../../images/OpenShiftDiagram.png "Diagram showing the schematic overview of {{site.data.reuse.short_name}} installed on the {{site.data.reuse.openshift_short}}.")
+![Event Streams in OpenShift and IBM Cloud Private](../../../images/OpenShiftDiagram.png "Diagram showing the schematic overview of {{site.data.reuse.short_name}} installed on the {{site.data.reuse.openshift_short}}.")
 
 The benefits of the solution mean you have a container platform from which you can perform administrative tasks in Red Hat OpenShift while taking some foundational services {{site.data.reuse.short_name}} relies on from {{site.data.reuse.icp}}.
 
@@ -133,7 +133,7 @@ Make the downloaded archive available in your catalog by using the {{site.data.r
    `cloudctl catalog load-ppa-archive --archive <PPA-image-name.tar.gz> --registry <OpenShift Docker registry address>/<namespace-to-install-into>`
 
    For example:\\
-   `cloudctl catalog load-ppa-archive --archive eventstreams.rhel.2019.1.1.x86.pak.tar.gz --registry 198.51.100.24:5000/event-streams`
+   `cloudctl catalog load-ppa-archive --archive eventstreams.rhel.2019.2.1.x86.pak.tar.gz --registry 198.51.100.24:5000/event-streams`
 
    When the image installation completes successfully, the catalog is updated with the {{site.data.reuse.long_name}} local chart, and the internal Docker repository is populated with the Docker images used by {{site.data.reuse.long_name}}.
 
@@ -205,7 +205,7 @@ Install the {{site.data.reuse.short_name}} chart as follows.
 3. Click **Configure**.\\
    **Note:** The README includes information about how to install {{site.data.reuse.long_name}} by using the CLI. To use the CLI, follow the instructions in the README instead of clicking **Configure**.\\
    **Important**: You might see the following warnings on this page. These warnings are harmless and can be safely ignored as the {{site.data.reuse.openshift_short}} does not use PodSecurityPolicy settings.\\
-   ![Pod Security Warning](../../images/openshift_podsecurity_warning.png "Screen capture showing harmless Pod Security warning messages on the configuration page.")
+   ![Pod Security Warning](../../../images/openshift_podsecurity_warning.png "Screen capture showing harmless Pod Security warning messages on the configuration page.")
 4. Enter a release name that identifies your {{site.data.reuse.short_name}} installation, select the target namespace you created previously, and accept the terms of the license agreement.
 5. Expand the **All parameters** section to configure the settings for your installation as described in [configuring](../configuring). Configuration options to consider include setting up persistent storage, external access, and preparing for geo-replication.\\
    **Important:** As part of the configuration process, enter the name of the [secret](#preparing-the-repository) you created previously in the [**Image pull secret**](../configuring/#global-install-settings) field.\\
