@@ -3,10 +3,19 @@ title: "Full cleanup after uninstallation"
 excerpt: "Learn how to fully clean up after uninstallation."
 categories: troubleshooting
 slug: cleanup-uninstall
-toc: false
+toc: true
 ---
 
 The uninstallation process might leave behind artifacts that you have to clear manually.
+
+## Security resources
+
+A service ID is created as part of installing {{site.data.reuse.short_name}}, which defines the identity for securing communication between internal components. To delete this service ID after uninstalling {{site.data.reuse.short_name}}, run the following command:
+
+`cloudctl iam service-id-delete eventstreams-<release>-service-id -f`
+
+
+## Kubernetes resources
 
 Use the following command to find the list of {{site.data.reuse.long_name}} objects associated with the release’s namespace:
 

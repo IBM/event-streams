@@ -27,7 +27,7 @@ Common error messages in such cases include the following:
 
 For example, if each Kafka broker is set to require 80 GB of memory on a system that only has 16 GB available per node, you might see the following error message:
 
-![Insufficient resources example](../../images/insufficient-sys-resources.png "Screen capture showing an example of an error message for a system without sufficient resources to run the installation.")
+![Insufficient resources example](../../../images/insufficient-sys-resources.png "Screen capture showing an example of an error message for a system without sufficient resources to run the installation.")
 
 To get detailed information on the cause of the error, check the events for the individual pods (not the logs at the stateful set level).
 
@@ -41,7 +41,7 @@ When using a non-default Docker registry, you might need to provide a secret whi
 
 If there are issues with the secret that holds the user ID and password used to access the Docker registry, the events for a pod will show an error similar to the following.
 
-![Docker registry secret error](../../images/docker-reg-secret-error.png "Screen capture showing an example of an error message for Docker registry secret error.")
+![Docker registry secret error](../../../images/docker-reg-secret-error.png "Screen capture showing an example of an error message for Docker registry secret error.")
 
 To resolve this issue correct the secret and install {{site.data.reuse.long_name}} again.
 

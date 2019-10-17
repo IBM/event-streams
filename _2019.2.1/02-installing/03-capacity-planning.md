@@ -33,7 +33,7 @@ Depending on your workload, you can further scale {{site.data.reuse.short_name}}
 
 If required by your planned workload, you can further increase the number of Kafka brokers, and the amount of CPU and memory available to them. For changing other values, see the guidance about [scaling](../../administering/scaling/) {{site.data.reuse.short_name}}.
 
-A [performance report](../../pdfs/Performance Report 2019.2.1 v1.0.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
+A [performance report](../../../pdfs/Performance Report 2019.2.1 v1.0.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
 
 ### Tuning {{site.data.reuse.short_name}} Kafka performance
 
@@ -110,13 +110,13 @@ The producer then sends messages to the advertised listener for a partition lead
 
 This means all traffic is routed through the master node before being distributed across the cluster. If the master node is overloaded by service requests, network traffic, or system operations, it becomes a bottleneck for incoming requests.
 
-![Schemas: Setup without a load balancer diagram.](../../images/No_Load_Balancer.svg "Diagram representing flow of message data through the master node where there is no load balancer.")
+![Schemas: Setup without a load balancer diagram.](../../../images/No_Load_Balancer.svg "Diagram representing flow of message data through the master node where there is no load balancer.")
 
 A load balancer replaces the master node as the entry point into the cluster, providing a dedicated service that typically runs on a separate node. In this case the bootstrap address points to the load balancer instead of the master node. The load balancer passes incoming requests to any of the available worker nodes. The worker node then forwards the request onto the correct broker within the cluster based on its advertised listener address.
 
 Setting up a load balancer provides more control over how requests are forwarded into the cluster (for example, round-robin, least congested, and so on), and frees up the master node for system operations.
 
-![Schemas: Setup with a load balancer diagram.](../../images/Load_Balancer.svg "Diagram representing flow of message data when a load balancer is set up.")
+![Schemas: Setup with a load balancer diagram.](../../../images/Load_Balancer.svg "Diagram representing flow of message data when a load balancer is set up.")
 
 For more information about configuring an external load balancer for your cluster, see the [{{site.data.reuse.icp}} documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/set_loadbalancer.html){:target="_blank"}.
 

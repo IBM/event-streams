@@ -20,8 +20,10 @@ By default, TLS encryption for communication between pods is disabled. You can e
 To enable TLS encryption for your existing {{site.data.reuse.short_name}} installation, use the UI or the command line.
 
 - To enable TLS by using the UI, follow the instructions in [modifying installation settings](../../administering/modifying-installation/#using-the-ui), and set the **Pod to pod encryption** field of the **Global install settings** section to **Enabled**.
-- To enable TlS by using the command line, follow the instructions in [modifying installation settings](../../administering/modifying-installation/#using-the-cli), and set the `global.security.tlsInternal` parameter to `enabled` as follows:\\
-   `helm upgrade --reuse-values --set global.security.tlsInternal=enabled <release_name> <charts.tgz> --tls`\\
+- To enable TLS by using the command line, follow the instructions in [modifying installation settings](../../administering/modifying-installation/#using-the-cli), and set the `global.security.tlsInternal` parameter to `enabled` as follows:
+
+   `helm upgrade --reuse-values --set global.security.tlsInternal=enabled <release_name> <charts.tgz> --tls`
+
    For example:\\
    `helm upgrade --reuse-values --set global.security.tlsInternal=enabled eventstreams ibm-eventstreams-prod-1.3.0.tgz --tls`
 

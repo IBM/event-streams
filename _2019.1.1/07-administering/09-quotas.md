@@ -39,8 +39,8 @@ Decide what you want to limit by using a **quota type**, and set it with the `--
 Decide whether you want to apply the quota to **users or client IDs**.
 
 To apply to users, use the `--user <user>` option. {{site.data.reuse.short_name}} supports 2 types of users: actual user principal names, or application service IDs.
-- A quota defined for a user principal name is only applied to that specific user name. To specify a principal name, you must prefix the value for the `--user` parameter with `u-`, for example, `--user "u-testuser1"`.
-- A quota defined for a service ID is applied to all applications that are using API keys that have been bound to the specific service ID. To specify a service ID, you must prefix the value for the `--user` parameter with `s-`, for example, `--user "s-consumer_service_id"`.
+- A quota defined for a user principal name is only applied to that specific user name. To specify a principal name, you must prefix the value for the `--user` parameter with `u-`, for example, `--user "u-testuser1"`
+- A quota defined for a service ID is applied to all applications that are using API keys that have been bound to the specific service ID. To specify a service ID, you must prefix the value for the `--user` parameter with `s-`, for example, `--user "s-consumer_service_id"`
 
 To apply to client IDs, use the `--client <client id>` option. Client IDs are defined in the application using the `client.id` property. A client ID identifies an application making a request.
 

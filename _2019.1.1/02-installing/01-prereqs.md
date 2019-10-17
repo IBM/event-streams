@@ -15,12 +15,11 @@ Ensure your environment meets the following prerequisites before installing {{si
 | Container platform | Systems
 |--------------------|-----------------------|-------------|--------------------
 |  {{site.data.reuse.icp}} 3.1.1, 3.1.2, and 3.2.0.1907 [(fix pack)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"} |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® Z systems
+| {{site.data.reuse.icp}} 3.1.2     | - Microsoft Azure <br> - Amazon Web Services (AWS)  |
 |  {{site.data.reuse.openshift}} 3.9 and 3.10 with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
-|  Amazon Web Services (AWS) with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
-|  Microsoft Azure with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
 
 
-{{site.data.reuse.short_name}} 2019.1.1 has Helm chart version 1.2.0 and includes Kafka version 2.1.1. For an overview of supported component and platform versions, see the [support matrix](../../support/#support-matrix).
+{{site.data.reuse.short_name}} 2019.1.1 has Helm chart version 1.2.0 and includes Kafka version 2.1.1. For an overview of supported component and platform versions, see the [support matrix](../../../support/#support-matrix).
 
 Ensure you have the following set up for your {{site.data.reuse.icp}} environment:
   * Install [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/install.html){:target="_blank"}.\\
@@ -189,7 +188,6 @@ The {{site.data.reuse.long_name}} user interface (UI) is supported on the follow
 
 *   Google Chrome version 65 or later
 *   Mozilla Firefox version 59 or later
-*   Microsoft Edge version 44.17763.1.0 (Microsoft EdgeHTML 18.17763) or later
 *   Safari version 11.1 or later
 
 ## {{site.data.reuse.long_name}} CLI
@@ -202,23 +200,11 @@ The {{site.data.reuse.long_name}} command line interface (CLI) is supported on t
 
 ## Clients
 
-<!--
-{{site.data.reuse.long_name}} is supported for use with clients running Apache Kafka version 2.0 or later.
--->
-
-The Apache Kafka Java client shipped with {{site.data.reuse.long_name}} is supported for use with the following Java versions:
+The Apache Kafka Java client included with {{site.data.reuse.long_name}} is supported for use with the following Java versions:
 
 *   IBM Java 8
 *   Oracle Java 8
 
-You can use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}, but in such cases IBM can only provide support for server-side issues, and not for the clients themselves.
+You can also use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}. If you encounter client-side issues, IBM can assist you to resolve those issues (see our [support policy](../../../support#support-policy)).
 
 {{site.data.reuse.short_name}} is designed for use with clients based on the `librdkafka` implementation of the Apache Kafka protocol.
-
-## Continuous Delivery (CD) support model
-
-{{site.data.reuse.long_name}} uses the continuous delivery (CD) support model.
-
-Ensure you stay current with the installation of CD update packages, as described in [the continuous delivery life cycle policy](https://www.ibm.com/support/docview.wss?uid=ibm10718163){:target="_blank"}. Product defect fixes and security updates are only available for the two most current CD update packages.
-
-{{site.data.reuse.long_name}} offers support for Apache Kafka, and will work with the Apache Kafka open source community to produce open source fixes. Where appropriate, IBM can provide an interim fix for the temporary resolution of Apache Kafka issues.

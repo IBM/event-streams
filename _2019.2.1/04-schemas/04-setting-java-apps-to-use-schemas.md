@@ -101,7 +101,7 @@ props.put(SchemaRegistryConfig.PROPERTY_API_SKIP_SSL_VALIDATION, true);
 
 The values are filled in as part of the process of preparing for the setup, setting the correct Kafka configuration properties, including settings such as the API endpoint of your {{site.data.reuse.short_name}} installation `PROPERTY_API_URL`.
 
-For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../schema-api/){:target="_blank"}.
+For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../../schema-api/){:target="_blank"}.
 
 The code snippet from the **Producer code** section defines properties for the producer application that set it to use the schema registry and the correct schema, for example:
 
@@ -149,7 +149,7 @@ The Kafka configuration property `value.serializer` is set to `com.ibm.eventstre
 
 Other values are filled in based on the selected configuration, setting the correct Kafka configuration properties, including settings such as the message encoding behavior `SchemaRegistryConfig.PROPERTY_ENCODING_TYPE`.
 
-For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../schema-api/){:target="_blank"}.
+For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../../schema-api/){:target="_blank"}.
 
 **Note:** Use the generic or generated schema-specific Java classes to set the field values in your message.
   - Specific Java classes that are generated from the schema definition will have `set<field-name>` methods that can be used to easily set the field values. For example, if the schema has a field named `Author` with type `string`, the generated schema-specific Java class will have a method named `setAuthor` which takes a string argument value.
@@ -206,7 +206,7 @@ props.put(SchemaRegistryConfig.PROPERTY_API_SKIP_SSL_VALIDATION, true);
 
 The values are filled in as part of the process of preparing for the setup, setting the correct Kafka configuration properties, including settings such as the API endpoint of your {{site.data.reuse.short_name}} installation `PROPERTY_API_URL`.
 
-For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../schema-api/){:target="_blank"}.
+For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../../schema-api/){:target="_blank"}.
 
 The code snippet from the **Consumer code** section defines properties for the consumer application that set it to use the schema registry and the correct schema, for example:
 
@@ -245,7 +245,7 @@ The Kafka configuration property `value.serializer` is set to `com.ibm.eventstre
 
 Other values are filled in based on the selected configuration, setting the correct Kafka configuration properties, including settings such as the message deserialization behavior `SchemaRegistryConfig.PROPERTY_BEHAVIOR_TYPE`.
 
-For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../schema-api/){:target="_blank"}.
+For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../../schema-api/){:target="_blank"}.
 
 **Note:** Use the generic or generated schema-specific Java classes to read the field values from your message.
   - Specific Java classes that are generated from the schema definition will have `get<field-name>` methods that can be used to easily retrieve the field values. For example, if the schema has a field named `Author` with type `string`, the generated schema-specific Java class will have a method named `getAuthor` which returns a string argument value.
@@ -325,6 +325,6 @@ In this example, the Kafka StreamsBuilder is configured to use the `com.ibm.even
 
 **Note:** The Kafka Streams `org.apache.kafka.streams.kstream` API does not provide access to message headers, so to produce messages with the {{site.data.reuse.short_name}} schema registry headers, use the `SchemaRegistryConfig.PROPERTY_SCHEMA_ID_OVERRIDE` and `SchemaRegistryConfig.PROPERTY_SCHEMA_VERSION_OVERRIDE` configuration properties. Setting these configuration properties will mean produced messages are serialized using the provided schema version and the {{site.data.reuse.short_name}} schema registry message headers will be set.
 
-For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../schema-api/){:target="_blank"}.
+For more information about the {{site.data.reuse.short_name}} schema registry configuration keys and values, see the `SchemaRegistryConfig` class in the [schema API reference](../../../schema-api/){:target="_blank"}.
 
 **Note:** To re-use this example, replace the `<Java_truststore_file_location>` with the path to the Java truststore file you downloaded earlier, `<api_key>` with an API key which has read permissions for your {{site.data.reuse.short_name}} deployment, `<my_source_topic>` with the name of the topic to consume messages from and `<my_destination_topic>` with the name of the topic to produce messages to.
