@@ -230,6 +230,8 @@ latestdocs:
         url: /troubleshooting/problem-with-piping/
       - title: "Helm commands fail when running as Team Administrator"
         url: /troubleshooting/helm-cli-team-administrator/
+      - title: "UI does not open when using Chrome on macOS Catalina"
+        url: /troubleshooting/chrome-macos-issue/
 
 # Sidebar navigation for 2019.2.1 version documentation.
 
