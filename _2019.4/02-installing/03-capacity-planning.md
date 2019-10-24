@@ -33,7 +33,7 @@ Depending on your workload, you can further scale {{site.data.reuse.short_name}}
 
 If required by your planned workload, you can further increase the number of Kafka brokers, and the amount of CPU and memory available to them. For changing other values, see the guidance about [scaling](../../administering/scaling/) {{site.data.reuse.short_name}}.
 
-A [performance report](../../pdfs/Performance Report 2019.2.1 v1.0.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
+A [performance report](../../pdfs/Performance Report 2019.4.1 v1.0.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
 
 ### Tuning {{site.data.reuse.short_name}} Kafka performance
 

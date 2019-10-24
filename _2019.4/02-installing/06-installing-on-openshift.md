@@ -56,7 +56,7 @@ You can create a project by using the web console or the CLI. For example, to cr
 
 ```
 oc login -u=<username> -p=<password> --server=<your-openshift-server> --insecure-skip-tls-verify
-oc new-project <project_name> --description="<description>" --display-name="<display_name>"`
+oc new-project <project_name> --description="<description>" --display-name="<display_name>"
 ```
 
 ## Download the archive
@@ -116,7 +116,7 @@ Make the downloaded archive available in your catalog by using the {{site.data.r
    `cloudctl catalog load-ppa-archive --archive <PPA-image-name.tar.gz> --registry <OpenShift Docker registry address>/<namespace-to-install-into>`
 
    For example:\\
-   `cloudctl catalog load-ppa-archive --archive eventstreams.2019.4.1.x86.pak.tar.gz --registry docker-registry-default.apps.cluster-abc.my-domain.com/event-streams`
+   `cloudctl catalog load-ppa-archive --archive eventstreams.2019.4.1.z_x86.pak.tar.gz --registry docker-registry-default.apps.cluster-abc.my-domain.com/event-streams`
 
    When the image installation completes successfully, the catalog is updated with the {{site.data.reuse.long_name}} local chart, and the internal Docker repository is populated with the Docker images used by {{site.data.reuse.long_name}}.
 

@@ -103,7 +103,6 @@ Install the {{site.data.reuse.short_name}} chart as follows.
    Ensure you log in as a user that has the Team Administrator or Cluster Administrator role.
 2. Click **Catalog** in the top navigation menu.
 2. Search for `ibm-eventstreams-prod` and select it from the result. The {{site.data.reuse.long_name}} README is displayed.
-3. If you are installing {{site.data.reuse.short_name}} on {{site.data.reuse.icp}} 3.1.1 running on Red Hat Enterprise Linux, [remove AppArmor settings](../../troubleshooting/pods-apparmor-blocked/) in the PodSecurityPolicy to avoid installation issues.
 3. Click **Configure**.\\
    **Note:** The README includes information about how to install {{site.data.reuse.long_name}} by using the CLI. To use the CLI, follow the instructions in the README instead of clicking **Configure**.
 4. {{site.data.reuse.enter_install_details}}
