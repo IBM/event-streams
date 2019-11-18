@@ -14,18 +14,20 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 | Container platform | Systems
 |--------------------|-----------------------|-------------|--------------------
-|  {{site.data.reuse.icp}} 3.1.2 and 3.2.0.1907 [(fix pack)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"} |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® z13 or later systems <br> - Microsoft Azure <br> - Amazon Web Services (AWS)
-|  {{site.data.reuse.openshift}} 3.11 with {{site.data.reuse.icp}} 3.2.0.1907 [(fix pack)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"}   |  Linux® 64-bit (x86_64) systems |
-|  {{site.data.reuse.openshift}} 3.10 with {{site.data.reuse.icp}} 3.1.2 |  Linux® 64-bit (x86_64) systems
+|  {{site.data.reuse.openshift}} 3.11 with IBM cloud foundational services 3.2.0.1907* (or later [fix pack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"}) and 3.2.1 *  |  - Linux® 64-bit (x86_64) systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS) |
+|  {{site.data.reuse.openshift}} 3.10 with {{site.data.reuse.icp}} 3.1.2* |  - Linux® 64-bit (x86_64) systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS)
+| {{site.data.reuse.icp}} 3.1.2, 3.2.0.1907 (or later [fix pack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"}), and 3.2.1 |  - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® z13 or later systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS)|
+
+*Provided by {{site.data.reuse.icp}}
 
 {{site.data.reuse.short_name}} 2019.2.1 has Helm chart version 1.3.0 and includes Kafka version 2.2.0. For an overview of supported component and platform versions, see the [support matrix](../../../support/#support-matrix).
 
-Ensure you have the following set up for your {{site.data.reuse.icp}} environment:
-  * Install [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/install.html){:target="_blank"}.\\
+Ensure you have the following set up for your environment:
+  * If you are installing {{site.data.reuse.short_name}} on the {{site.data.reuse.openshift_short}}, ensure you have the right version of OpenShift installed and integrated with the right version of {{site.data.reuse.icp}}. See previous table for supported versions. For example,  [install](https://docs.openshift.com/container-platform/3.11/getting_started/install_openshift.html){:target="_blank"} OpenShift 3.11, and [integrate](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/supported_environments/openshift/overview.html){:target="_blank"} it with {{site.data.reuse.icp}} 3.2.0.
+  * Install and configure [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/installing/install.html){:target="_blank"}.\\
     **Important:** In high throughput environments, ensure you configure your {{site.data.reuse.icp}} cluster to include an external load balancer and an internal network. These configuration options help take full advantage of {{site.data.reuse.short_name}} scaling and Kafka settings, and avoid potential performance bottlenecks. For more information, see the [performance planning topic](../capacity-planning).
 
     **Note:** {{site.data.reuse.long_name}} includes entitlement to {{site.data.reuse.icp_foundation}} which you can download from IBM Passport Advantage.
-  * If you are installing {{site.data.reuse.short_name}} on the {{site.data.reuse.openshift_short}}, ensure you have the right version of OpenShift installed and integrated with the right version of {{site.data.reuse.icp}}. See previous table for supported versions. For example,  [install](https://docs.openshift.com/container-platform/3.11/getting_started/install_openshift.html){:target="_blank"} OpenShift 3.11, and [integrate](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/supported_environments/openshift/overview.html){:target="_blank"} it with {{site.data.reuse.icp}} 3.2.0.
   * If you are installing {{site.data.reuse.short_name}} on an {{site.data.reuse.icp}} cluster [deployed on Amazon Web Services (AWS)](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/supported_environments/aws/overview.html){:target="_blank"}, ensure your proxy address uses [lowercase characters](../installing/#before-you-begin).
   * If you are installing {{site.data.reuse.short_name}} on an {{site.data.reuse.icp}} cluster [deployed on Microsoft Azure](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/supported_environments/azure_overview.html){:target="_blank"}, ensure you first register a Service Principal (an application in the Azure Active Directory). For information about creating a Service Principal, see the [terraform documentation](https://www.terraform.io/docs/providers/azurerm/auth/service_principal_client_secret.html){:target="_blank"}.
   * Install the [Kubernetes command line tool](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/cfc_cli.html){:target="_blank"}, and configure access to your cluster.
