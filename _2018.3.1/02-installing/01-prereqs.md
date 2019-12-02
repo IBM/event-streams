@@ -35,7 +35,7 @@ Ensure you have the following set up for your {{site.data.reuse.icp}} environmen
 
 ## Hardware requirements
 
-The Helm chart for {{site.data.reuse.long_name}} specifies default values for the CPU and memory usage of the Apache Kafka brokers and Apache ZooKeeper servers. While {{site.data.reuse.long_name}} can run successfully if lower memory and CPU values are specified, these defaults are the minimum values tested.
+The Helm chart for {{site.data.reuse.long_name}} specifies default values for the CPU and memory usage of the Apache Kafka brokers and Apache ZooKeeper servers.
 
 See the [following table](#helm-resource-requirements) for memory requirements of each Helm chart component. Ensure you have sufficient physical memory to service these requirements.
 

@@ -114,3 +114,15 @@ To manage geo-replication on the origin cluster by using the CLI:
      **Note:** If you are unable to remove a destination cluster due to technical issues, you can use the `--force` option with the `geo-cluster-remove` command to remove the cluster.
 
 {{site.data.reuse.cli_options_short}}
+
+## Restarting a geo-replicator with Error status
+
+Running geo-replicators constantly consume from origin clusters and produce to destination clusters. If the geo-replicator receives an error from Kafka that prevents it from continuing to produce or consume, such as an authentication error or all brokers being unavailable, it will stop replicating and report a status of **Error**.
+
+To restart a geo-replicator that has an **Error** status from the UI:
+1. Log in to your origin {{site.data.reuse.long_name}} cluster as an administrator.
+2. Click the **Topics** tab and then click **Geo-replication**.
+3. Locate the name of the destination cluster for the geo-replicator that has an **Error** status.
+4. Locate the reason for the **Error** status under the entry for the geo-replicator.
+5. Either fix the reported problem with the system or verify that the problem is no longer present.
+6. Select ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Restart failed replicator** to restart the geo-replicator.

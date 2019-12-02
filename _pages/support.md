@@ -14,18 +14,21 @@ sections:
 
 ## Support matrix
 
+### Red Hat OpenShift platforms
+
 {{site.data.reuse.short_name}} version | Helm chart version | Kafka version shipped | Container platform               | Systems
 ---------------------------------------|--------------------|-----------------------|----------------------------------|--------------------
-2019.4.1                               | 1.4.0              | 2.3.0                 |  {{site.data.reuse.openshift}} 3.11 with IBM cloud foundational services 3.2.1* | - Linux® 64-bit (x86_64) systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS)
-2019.2.3 <br> **Note:** Only available in <br>[IBM Cloud Pak for Integration](../2019.2.1/about/whats-new/).  | 1.3.2   | 2.2.0 | {{site.data.reuse.openshift}} 3.11 with IBM cloud foundational services 3.2.0.1907* (or later [fix pack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"})  | &nbsp;
- 2019.2.2 <br> **Note:** Only available in <br>[IBM Cloud Pak for Integration](../2019.2.1/about/whats-new/).  | 1.3.1  | 2.2.0 | {{site.data.reuse.openshift}} 3.11 with IBM cloud foundational services 3.2.0.1907* (or later [fix pack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"})  | &nbsp;
-2019.2.1                               | 1.3.0          | 2.2.0      | {{site.data.reuse.openshift}} 3.11 with IBM cloud foundational services 3.2.0.1907* (or later [fix pack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"}) and 3.2.1 *  | &nbsp; |
- &nbsp;             |         |       | {{site.data.reuse.openshift}} 3.10 with IBM cloud foundational services 3.1.2* | &nbsp; |
-2019.1.1                              |  1.2.0          | 2.1.1      | {{site.data.reuse.openshift}} 3.9 and 3.10 with IBM cloud foundational services 3.1.2*  | &nbsp; |
+2019.4.1 in [IBM Cloud Pak for Integration](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.4/install/sysreqs.html){:target="_blank"} | 1.4.0  | 2.3.0  | {{site.data.reuse.openshift}} 4.2  |  - Linux® 64-bit (x86_64) systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS)
+2019.4.1                               | 1.4.0              | 2.3.0                 |  {{site.data.reuse.openshift}} 3.11 with IBM [cloud foundational services](../installing/installing-openshift/) 3.2.1 | &nbsp;
+2019.2.3 <br> **Note:** Only available in <br>[IBM Cloud Pak for Integration](../2019.2.1/about/whats-new/).  | 1.3.2   | 2.2.0 | {{site.data.reuse.openshift}} 3.11 with IBM [cloud foundational services](../installing/installing-openshift/) 3.2.0.1907 (or later [fix pack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"})  | &nbsp;
+ 2019.2.2 <br> **Note:** Only available in <br>[IBM Cloud Pak for Integration](../2019.2.1/about/whats-new/).  | 1.3.1  | 2.2.0 | {{site.data.reuse.openshift}} 3.11 with IBM [cloud foundational services](../installing/installing-openshift/) 3.2.0.1907 (or later [fix pack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"})  | &nbsp;
+2019.2.1                               | 1.3.0          | 2.2.0      | {{site.data.reuse.openshift}} 3.11 with IBM [cloud foundational services](../installing/installing-openshift/) 3.2.0.1907 (or later [fix pack](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/manage_cluster/patching_cluster.html){:target="_blank"}) and 3.2.1  | &nbsp; |
+ &nbsp;             |         |       | {{site.data.reuse.openshift}} 3.10 with IBM [cloud foundational services](../installing/installing-openshift/) 3.1.2 | &nbsp; |
+2019.1.1                              |  1.2.0          | 2.1.1      | {{site.data.reuse.openshift}} 3.9 and 3.10 with IBM [cloud foundational services](../installing/installing-openshift/) 3.1.2  | &nbsp; |
 
- *Provided by {{site.data.reuse.icp}}
 
-## Historically supported Kubernetes platforms
+
+### Other Kubernetes platforms
 
 {{site.data.reuse.short_name}} version | Helm chart version | Kafka version shipped | Container platform               | Systems
 ---------------------------------------|--------------------|-----------------------|----------------------------------|--------------------

@@ -1,14 +1,14 @@
 ---
 title: "Schemas overview"
-excerpt: "Understand the why using a schema for your data is important Apache Kafka technology."
+excerpt: "Learn about schemas and the schema registry, and understand how schemas can help manage your data more efficiently."
 categories: schemas
 slug: overview
 toc: true
 ---
 
-Apache Kafka can handle any data, but it does not validate the information in the messages. However, efficient handling of data often requires that it includes specific information in a certain format. Using schemas, you can define the structure of the data in a message, making it easier to ensure that both producers and consumers use the correct structure.
+Apache Kafka can handle any data, but it does not validate the information in the messages. However, efficient handling of data often requires that it includes specific information in a certain format. Using schemas, you can define the structure of the data in a message, ensuring that both producers and consumers use the correct structure.
 
-Schemas help producers create data that conforms to a predefined structure, defining what fields need to be present together with the type of each field. This definition then helps consumers parse that data and interpret it correctly. {{site.data.reuse.short_name}} supports schemas and includes a schema registry for using and managing schemas.
+Schemas help producers create data that conforms to a predefined structure, defining the fields that need to be present together with the type of each field. This definition then helps consumers parse that data and interpret it correctly. {{site.data.reuse.short_name}} supports schemas and includes a schema registry for using and managing schemas.
 
 It is common for all of the messages on a topic to use the same schema. The key and value of a message can each be described by a schema.
 

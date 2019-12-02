@@ -85,11 +85,20 @@ You must run the following setup script to prepare the platform.
 
 ### Look up the registry address
 
-You perform this step by using the {{site.data.reuse.openshift_short}} command line.
+You perform this step by using the Kubernetes and OpenShift CLIs.
+
+You will require two addresses for the OpenShift Docker registry:
+- The `<external_OpenShift_Docker_registry_address>` is required to access the OpenShift docker registry externally to load the PPA archive in a later step.
+- The `<internal_OpenShift_Docker_registry_address>` is required when installing the {{site.data.reuse.short_name}} chart later, and also required to [prepare the repository](#preparing-the-repository) if you have the `image-security-enforcement`service enabled.
+
+#### Retrieve the external address
+
+To retrieve the external address:
 
 Look up the internal OpenShift Docker registry address by using the following command:
 
 `kubectl get routes docker-registry -n default`
+
 
 The following is an example output:
 
@@ -98,22 +107,46 @@ NAME              HOST/PORT                                               PATH  
 docker-registry   docker-registry-default.apps.cluster-abc.my-domain.com        docker-registry   <all>   passthrough   None
 ```
 
-The `<OpenShift_Docker_registry_address>` is the values of the `HOST/PORT` field.
+The `<external_OpenShift_Docker_registry_address>` is the values of the `HOST/PORT` field.
 
 **Note:** You can only retrieve the address if your docker registry is [exposed](https://docs.openshift.com/container-platform/3.11/install_config/registry/securing_and_exposing_registry.html){:target="_blank"}.
+
+#### Retrieve the internal address
+
+To retrieve the internal address:
+
+The `<internal_OpenShift_Docker_registry_address>` is a value in the following format:
+
+`docker-registry.default.svc:<port>`
+
+
+
+Look up the internal OpenShift Docker registry port number by using the following command:
+
+`oc get svc docker-registry -n default`
+
+The following is an example output:
+
+```
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+docker-registry   ClusterIP   198.51.100.24   <none>        5000/TCP   2d
+```
+
+In this example, where the namespace is `default` and the port is `5000`, the `<internal_OpenShift_Docker_registry_address>` is `docker-registry.default.svc:5000`
+
 
 ### Load the archive into the catalog
 
 Make the downloaded archive available in your catalog by using the {{site.data.reuse.icp}} CLI.
 
 1. Log in to the Docker private image registry:\\
-   `docker login -u any_value -p $(oc whoami -t) <OpenShift_Docker_registry_address>`
+   `docker login -u any_value -p $(oc whoami -t) <external_OpenShift_Docker_registry_address>`
 
-   Where the `<OpenShift_Docker_registry_address>` is the internal OpenShift Docker registry address you [looked up](#look-up-the-registry-address) earlier.
+   Where the `<external_OpenShift_Docker_registry_address>` is the internal OpenShift Docker registry address you [looked up](#look-up-the-registry-address) earlier.
 
    **Note:** The `docker login` command uses a session token (`oc whoami -t`) in the password field to perform authentication. This means the `-u` user name field is required, but not used by Docker.
 2. Make the {{site.data.reuse.short_name}} Helm chart available in the catalog by using the compressed image you downloaded from IBM Passport Advantage.\\
-   `cloudctl catalog load-ppa-archive --archive <PPA-image-name.tar.gz> --registry <OpenShift Docker registry address>/<namespace-to-install-into>`
+   `cloudctl catalog load-ppa-archive --archive <PPA-image-name.tar.gz> --registry <external_OpenShift_Docker_registry_address>/<namespace-to-install-into>`
 
    For example:\\
    `cloudctl catalog load-ppa-archive --archive eventstreams.2019.4.1.z_x86.pak.tar.gz --registry docker-registry-default.apps.cluster-abc.my-domain.com/event-streams`
@@ -133,7 +166,7 @@ Create an image policy for the internal Docker repository. The policy enables im
 
 To create an image policy:
 
-1. Create a `.yaml` file with the following content, then replace `<OpenShift_Docker_registry_address>` with the address you [looked up](#look-up-the-registry-address) earlier, and replace the `<namespace_for_event_streams>` value with the [project](#create-a-project-namespace) name where you intend to install {{site.data.reuse.long_name}} (set as `-n event-streams` in the previous example):
+1. Create a `.yaml` file with the following content, then replace `<internal_OpenShift_Docker_registry_address>` with the address you [looked up](#look-up-the-registry-address) earlier, and replace the `<namespace_for_event_streams>` value with the [project](#create-a-project-namespace) name where you intend to install {{site.data.reuse.long_name}} (set as `-n event-streams` in the previous example):
 ```
 apiVersion: securityenforcement.admission.cloud.ibm.com/v1beta1
 kind: ImagePolicy
@@ -144,7 +177,7 @@ spec:
   repositories:
   - name: docker.io/*
        policy: null
-  - name: <OpenShift_Docker_registry_address>/*
+  - name: <internal_OpenShift_Docker_registry_address>/*
        policy: null
 ```
 2. Run the following command: `kubectl apply -f <filename>.yaml`
@@ -168,6 +201,6 @@ Install the {{site.data.reuse.short_name}} chart as follows.
    ![Pod Security Warning](../../images/openshift_podsecurity_warning.png "Screen capture showing harmless Pod Security warning messages on the configuration page.")
 4. {{site.data.reuse.enter_install_details}}
 5. Expand the **All parameters** section to configure the settings for your installation as described in [configuring](../configuring). Configuration options to consider include setting up persistent storage, external access, and preparing for geo-replication.\\
-     **Note:** Ensure the [**Docker image registry**](../configuring/#global-install-settings) field value includes the internal OpenShift Docker registry address and the namespace, for example: `docker-registry.default.svc:5000/event-streams`
+     **Note:** Ensure the [**Docker image registry**](../configuring/#global-install-settings) field value includes the `<internal_OpenShift_Docker_registry_address>` you [looked up](#look-up-the-registry-address) earlier, and the namespace where you are installing {{site.data.reuse.short_name}}, for example: `docker-registry.default.svc:5000/event-streams`
 6. Click **Install**.
 7. [Verify your installation](../post-installation/#verifying-your-installation) and consider other post-installation tasks.
