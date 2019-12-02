@@ -30,8 +30,10 @@ Use one of the following workarounds to avoid this problem:
 
 - Install {{site.data.reuse.short_name}} with provided certificates, or [change](../../security/updating-certificates/) them to provided instead of using generated (self-signed) certificates.
 - Use a different browser, such as Mozilla Firefox.
-- Launch Google Chrome with the following option: `--ignore-certificate-errors`
+- Launch Google Chrome with the following option: `--ignore-certificate-errors`\\
+   For example, launch a terminal and run the following command:\\
+   `/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors &> /dev/null &`
 - Install the {{site.data.reuse.icp}} root CA in your macOS keychain. Obtain the certificate by using the following command:\\
    `kubectl get secret cluster-ca-cert -n kube-system -o jsonpath="{.data['tls\.crt']}" | base64 -D > cluster-ca-cert.pem`
 
-   Use the Keychain Access app in macOS to add the certificate and mark it as trusted.
+   Use the [Keychain Access app](https://support.apple.com/guide/keychain-access/kyca1083/mac){:target="_blank"} in macOS to add the certificate and mark it as trusted.

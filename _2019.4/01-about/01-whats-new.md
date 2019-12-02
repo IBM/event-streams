@@ -8,6 +8,10 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}} version 2019.4.1.
 
+### Support for {{site.data.reuse.openshift}} 4.2
+
+{{site.data.reuse.long_name}} 2019.4.1 installed in [IBM Cloud Pak for Integration](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.4/welcome.html){:target="_blank"} 2019.4.1 introduces support for {{site.data.reuse.openshift}} 4.2.
+
 ### Support for multiple availability zones
 
 {{site.data.reuse.short_name}} now supports running a single cluster that spans [multiple zones](../../installing/planning/#multizone-support).

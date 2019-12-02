@@ -91,7 +91,7 @@ You must run the following setup script to prepare the platform.
 
 ### Look up the registry address
 
-You perform this step by using the {{site.data.reuse.icp}} CLI.
+You perform this step by using the OpenShift CLI.
 
 Look up the internal OpenShift Docker registry address by using the following command:
 
@@ -122,7 +122,7 @@ Make the downloaded archive available in your catalog by using the {{site.data.r
 
    **Note:** The `docker login` command uses a session token (`oc whoami -t`) in the password field to perform authentication. This means the `-u` user name field is required, but not used by Docker.
 2. Make the {{site.data.reuse.short_name}} Helm chart available in the catalog by using the compressed image you downloaded from IBM Passport Advantage.\\
-   `cloudctl catalog load-ppa-archive --archive <PPA-image-name.tar.gz> --registry <OpenShift Docker registry address/namespace>`
+   `cloudctl catalog load-ppa-archive --archive <PPA-image-name.tar.gz> --registry <OpenShift_Docker_registry_address/namespace>`
 
    For example:\\
    `cloudctl catalog load-ppa-archive --archive eventstreams.rhel.2019.1.1.x86.pak.tar.gz --registry 198.51.100.24:5000/event-streams`
