@@ -95,7 +95,7 @@ You will require two addresses for the OpenShift Docker registry:
 
 To retrieve the external address:
 
-Look up the internal OpenShift Docker registry address by using the following command:
+Look up the external OpenShift Docker registry address by using the following command:
 
 `kubectl get routes docker-registry -n default`
 
@@ -142,7 +142,7 @@ Make the downloaded archive available in your catalog by using the {{site.data.r
 1. Log in to the Docker private image registry:\\
    `docker login -u any_value -p $(oc whoami -t) <external_OpenShift_Docker_registry_address>`
 
-   Where the `<external_OpenShift_Docker_registry_address>` is the internal OpenShift Docker registry address you [looked up](#look-up-the-registry-address) earlier.
+   Where the `<external_OpenShift_Docker_registry_address>` is the external OpenShift Docker registry address you [looked up](#look-up-the-registry-address) earlier.
 
    **Note:** The `docker login` command uses a session token (`oc whoami -t`) in the password field to perform authentication. This means the `-u` user name field is required, but not used by Docker.
 2. Make the {{site.data.reuse.short_name}} Helm chart available in the catalog by using the compressed image you downloaded from IBM Passport Advantage.\\
