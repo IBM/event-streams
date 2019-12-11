@@ -215,12 +215,12 @@ collections:
   "support":
     output: false
     permalink: /:collection/:path/
-  "connectors":
-    output: true
-    permalink: /:collection/:path/
   "keyFeatures":
     output: true
     permalink: /:path/
+  "connectors":
+    output: true
+    permalink: /:collection/:path/
 
 # Defaults
 defaults:
