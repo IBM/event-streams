@@ -1,27 +1,40 @@
+{% assign version1Pages = site.collections | where: "version", "true" %}
+
 {% if page.author_profile or layout.author_profile or page.sidebar %}
   <div id="sidebarMask" class="sidebarMask">
 
   </div>
   <div id="sidebar" class="sidebar sticky">
-      <div aria-label="Change Version" role="button" aria-expanded="false" class="versionsBar" id="versionDropdown" tabindex="0">
+      <div aria-label="Change Version" role="button" aria-expanded="false"
+      {% if page.version %}
+        id="versionDropdown"
+        tabindex="0"
+        class="versionsBar"
+      {% else %}
+        tabindex="-1"
+        class="versionsBar disabled"
+      {% endif %} >
           <div class="selectedVersion" id="selectedVersion">
             <div class="versionContainer" >
+              {% if page.version %}
                 <a id="versionPillCurrent" class="versionPill">{{ page.collection }}</a>
                 <a class="versionChange">Change Version</a>
+              {% elsif page.latest %}
+                {% for collection in version1Pages reversed %}
+                  {% if collection.tag == "Latest" }} %}
+                    <a id="versionPillCurrent" class="disabled versionPill">{{ collection.label }}</a>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
             </div>
           </div>
           {% capture url_path %}{{site.url}}{{site.baseurl}}{{page.url}}{% endcapture %}
 
-          <!-- {{url_path}} -->
-
-
-
-<!-- {{ page.collection }} -->
 
           <div class="allVersions" id="allVersions">
             <ul>
 
-                {% assign version1Pages = site.collections | where: "version", "true" %}
+                
 
 
                 {% for collection in version1Pages reversed %}
@@ -68,7 +81,6 @@
           </div>
         </div>
 
-  {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
   {% if page.sidebar %}
     {% for s in page.sidebar %}
       {% if s.image %}
@@ -84,7 +96,7 @@
       {% if s.text %}{{ s.text | markdownify }}{% endif %}
     {% endfor %}
     {% if page.sidebar.nav %}
-      {% include nav_list nav=page.sidebar.nav %}
+      {% include nav_list.html nav=page.sidebar.nav %}
     {% endif %}
   {% endif %}
   </div>

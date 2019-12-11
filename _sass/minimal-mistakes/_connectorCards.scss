@@ -248,7 +248,7 @@ $cardSpacing: 1.5rem;
   &.active {
     .card {
       box-shadow: 4px 0px 0px $brand-01 inset;
-      background-color: #f3f7fb;
+      background-color: #e5e5e5;
     }
 
     .button {
@@ -259,7 +259,7 @@ $cardSpacing: 1.5rem;
 
   &:hover {
     .card {
-      background-color: #f3f7fb;
+      background-color: #e5e5e5;
     }
     .button {
       opacity: 1 !important;

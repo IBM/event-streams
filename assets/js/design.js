@@ -309,24 +309,143 @@ function getWidth() {
   }
   
 
-  function toggleMastheadDropdown(override,e) {
-    var object = document.getElementById('APIsDropdown')
-    var menuUL = document.getElementById('visible-links')
+let transitioning = false
 
-    if (override == "show") {
-        object.classList.add('hover');
-        menuUL.classList.add('dropdownActive');
-    } else if (override == "hide") {
-        object.classList.remove('hover');
-        menuUL.classList.remove('dropdownActive');
+function openFeatureHeroDrilldown(url,remoteContainer,localContainer) {
+    if(transitioning) {
+        // console.log("ALREADY TRANSITIONING")
     } else {
-        object.classList.toggle('hover');
-        menuUL.classList.toggle('dropdownActive');
+                        
+    transitioning = true
+
+    var headerContent = document.getElementById('splashHeaderContent');
+    var remotePanel = document.getElementById('remotePanel');
+    var homePanelHeight = document.getElementById('homePanel').clientHeight;
+
+    headerContent.classList.toggle('drilldown');
+    headerContent.style.height = homePanelHeight
+
+
+    // window.open('http://localhost:4000/mhub/qp-docs/multizone','_self')
+    genericMakeRequest(url, (response, err, responseTime)  => {
+        if(err) { throw err }
+    
+        let loadedContent = response.getElementById(remoteContainer).innerHTML;
+
+        // alert(response.getElementById(remoteContainer).clientHeight)
+                
+        if (responseTime < 400) {
+          setTimeout(() => {            
+            getById(localContainer).innerHTML = loadedContent
+            var remoteContent = document.getElementById('videoContainerContent');
+            headerContent.classList.add('loaded');
+            remoteContent.classList.add('visible');
+            headerContent.style.height = remotePanel.clientHeight
+            setTimeout(() => {
+                headerContent.removeAttribute('style');
+            }, 400)
+            transitioning = false
+            //   alert("TRANSITIONING IS FALSE")
+          }, 400)
+        } else {
+            setTimeout(() => {            
+                getById(localContainer).innerHTML = loadedContent
+                var remoteContent = document.getElementById('videoContainerContent');
+                headerContent.classList.add('loaded');
+                remoteContent.classList.add('visible');
+                headerContent.style.height = remotePanel.clientHeight
+                setTimeout(() => {
+                    headerContent.removeAttribute('style');
+                }, 400)
+                transitioning = false
+                //   alert("TRANSITIONING IS FALSE")
+              }, 400)
+        //   alert("TRANSITIONING IS FALSE")
+        }
+        // history.pushState(null, null, url);
+    
+        // setActiveCategory(sessionStorage.connectorCategory);
+    },remoteContainer);
+
+
+
+
     }
+    
 }
 
 
+function heroBackToHome(homePageURL) {
 
-window.onscroll = function() {
-    toggleMastheadDropdown('hide');
-};
+    if(transitioning) {
+        // console.log("ALREADY TRANSITIONING")
+    } else {
+                        
+        transitioning = true
+
+        var isOnHomePage;
+
+        if( document.getElementById('homePanel') ) {
+            isOnHomePage = true
+        } else {
+            isOnHomePage = false
+        }
+        
+        if (isOnHomePage) {
+            var headerContent = document.getElementById('splashHeaderContent');
+            var remotePanelHeight = document.getElementById('remotePanel').clientHeight
+            var homePanelHeight = document.getElementById('homePanel').clientHeight
+            headerContent.style.height = remotePanelHeight
+            // history.pushState(null, null, homePageURL);
+    
+            setTimeout(() => {
+                headerContent.style.height = homePanelHeight    
+            }, 10)
+            
+            document.getElementById('splashHeaderContent').classList.remove('drilldown');
+            setTimeout(() => {
+                document.getElementById('remotePanel').innerHTML = " "
+                transitioning = false
+                headerContent.classList.remove('loaded');
+                // alert("TRANSITIONING IS FALSE")
+            }, 400)
+        } else {
+            window.open(homePageURL,'_self')
+        }
+        // getById(localContainer).innerHTML = "<div class='loading'><p class='loadingText'>Loading...</p></div>"
+
+
+    }
+
+}
+
+function genericMakeRequest(url, callback, remoteContainer) {
+
+                if (request) {
+                    request.abort()
+                }
+
+                request = new XMLHttpRequest();
+                request.open('GET', url, true);
+
+                let timeOfStartingRequest;
+
+                request.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        request = null
+                        let responseTime = Date.now() - timeOfStartingRequest;
+                            if (this.status >= 200 && this.status < 400) {
+                                let parser = new DOMParser();
+                                let doc = parser.parseFromString(this.responseText, 'text/html');
+                                loadedContent = doc.getElementById(remoteContainer).innerHTML;
+                                callback(doc, null, responseTime)
+                            } else {
+                                callback(null, new Error('Request failed'), responseTime);
+                        }
+                    }
+                };
+
+                timeOfStartingRequest = Date.now();
+                request.send();
+
+    }

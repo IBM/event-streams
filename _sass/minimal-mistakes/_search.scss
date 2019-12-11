@@ -110,7 +110,7 @@
   cursor: pointer;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-
+  overflow: hidden;
   &:hover {
     color: $text-color;
   }

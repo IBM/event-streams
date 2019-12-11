@@ -47,6 +47,9 @@ a.button {
     }
   &.primary {
     background: $brand-01;
+    &:hover {
+      background-color: #0353e9;
+    }
   }
   &.secondary {
     background-color: #171717;

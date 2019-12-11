@@ -8,7 +8,8 @@ main:
     url: /tutorials/
   - title: FAQ
     url: /faq/
-  - title: APIs
+  - title: APIs...
+    url: /api/
     dropdown:
       - title: REST Producer
         url: /api/
@@ -33,7 +34,7 @@ connectorCategories:
 connectorQuickLinks:
   - link:
       - title: Find out more about Kafka Connect
-      - url: ../connecting/connectors/
+      - url: /connecting/connectors/
 
 # Sidebar navigation for latest version documentation.
 

@@ -24,22 +24,21 @@
   .nav__list {
     padding-bottom: 16rem;
     padding-top: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
     overflow: scroll;
     a {
       font-size: .875rem;
       color: inherit;
-      line-height: 1.5rem;
+      line-height: 1.25rem;
       padding: 0.25rem 0;
       display: flex;
       position: relative;
-  
       &:hover,
       &.active {
         &:before {
           position: absolute;
-          left: -2rem;
+          left: -1.5rem;
           display: block;
           content: " ";
           width: 0.25rem;

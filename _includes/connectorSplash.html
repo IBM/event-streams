@@ -10,7 +10,7 @@
         <h1 class="hero small">
           Welcome to the IBM Event Streams
         </h1>
-        <h1 class="hero">
+        <h1 class="hero connectorTitle">
           Connector catalog
         </h1>
         <p>Kafka Connect is a framework for connecting Kafka to external systems. It uses source connectors to move data into Kafka, and sink connectors to move data out of Kafka.</p>
@@ -18,9 +18,9 @@
       </div>
       <div class="keyTasks">
         {% for item in site.data.navigation.connectorQuickLinks %}
-          <div class="task" role="link" tabindex="0" onclick="window.open('{{ item.link[1].url }}','_self')">
+          <div class="task" role="link" tabindex="0" onclick="window.open('{{ site.url }}{{ site.baseurl }}{{ item.link[1].url }}','_self')">
             <div class="title">
-              <h2><a tabindex="-1" href="{{ item.link[1].url }}">{{ item.link[0].title }}</a></h2>
+              <h3><a tabindex="-1" href="{{ site.url }}{{ site.baseurl }}{{ item.link[1].url }}">{{ item.link[0].title }}</a></h3>
             </div>
             <div class="progressIcon">
               <svg alt="Progress icon" class='icon'>
