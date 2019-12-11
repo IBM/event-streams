@@ -54,9 +54,10 @@ h1 {
   margin-top: 0;
   font-size: $type-size-3;
   &.hero {
-    font-size: 3rem;
     margin-bottom: 0;
     padding-top: 0;
+    line-height: 117%;
+    font-size: 2.75rem;
     &.small {
       font-size: 1.2rem;
     }
@@ -67,6 +68,7 @@ h1 {
 small,
 .small {
   font-size: $type-size-6;
+  line-height: 1rem;
 }
 
 u,
@@ -374,8 +376,8 @@ button.bx--btn {
 
 .bx--btn--secondary {
   background-color: transparent;
-  border: 2px solid #3d70b2;
-  color: #3d70b2;
+  border: 2px solid #0f62fe;
+  color: #0f62fe;
 }
 .bx--btn {
   letter-spacing: 0;
@@ -402,14 +404,14 @@ button.bx--btn {
     vertical-align: -5px;
     margin-left: 0.25rem !important;
     rect,path {
-      fill: #3d70b2;
+      fill: #0f62fe;
       transition-duration: .1s;
     }
   }
 }
 
 .bx--btn--secondary:focus, .bx--btn--secondary:hover {
-  background-color: #3d70b2;
+  background-color: #0f62fe;
   color: white;
   svg {
     rect,path {
@@ -423,13 +425,3 @@ button.bx--btn .bx--btn__icon {
   vertical-align: middle;
   top: -1px;
 }
-// .bx--btn--secondary .bx--btn__icon {
-//   fill: #3d70b2;
-// }
-// .bx--btn .bx--btn__icon {
-//   width: 1rem;
-//   height: 1rem;
-//   margin-left: .5rem;
-//   transition-duration: .25s;
-//   transition-timing-function: ease-in;
-// }

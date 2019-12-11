@@ -189,18 +189,22 @@ kramdown:
 # Collections
 collections:
   "2018.3.1":
+    label: "2018.3.1"
     output: true
     version: true
     permalink: /:collection/:categories/:slug/
   "2019.1.1":
+    label: "2019.1.1"
     output: true
     version: true
     permalink: /:collection/:categories/:slug/
   "2019.2.1":
+    label: "2019.2.1"
     output: true
     version: true
     permalink: /:collection/:categories/:slug/
   "2019.4":
+    label: "2019.4"
     output: true
     version: true
     tag: Latest
@@ -214,6 +218,9 @@ collections:
   "connectors":
     output: true
     permalink: /:collection/:path/
+  "keyFeatures":
+    output: true
+    permalink: /:path/
 
 # Defaults
 defaults:
@@ -261,6 +268,18 @@ defaults:
   #     mastheadNavItem: Connectors
 
 
+  # _keyFeatures
+  - scope:
+      path: ""
+      type: "keyFeatures"
+    values:
+      permalink: /:path
+      layout: featureHeroContent
+      mastheadNavItem: Documentation
+      latest: true
+      sidebar:
+        nav: "latestdocs"
+
   # Support
   - scope:
       path: ""
@@ -281,6 +300,7 @@ defaults:
       author_profile: false
       share: false
       comment: false
+      version: true
       mastheadNavItem: Documentation
       sidebar:
         nav: "201831docs"
@@ -294,6 +314,7 @@ defaults:
       author_profile: false
       share: false
       comment: false
+      version: true
       mastheadNavItem: Documentation
       sidebar:
         nav: "201911docs"
@@ -307,6 +328,7 @@ defaults:
       author_profile: false
       share: false
       comment: false
+      version: true
       mastheadNavItem: Documentation
       sidebar:
         nav: "201921docs"
@@ -320,6 +342,7 @@ defaults:
       author_profile: false
       share: false
       comment: false
+      version: true
       latest: true
       mastheadNavItem: Documentation
       sidebar:

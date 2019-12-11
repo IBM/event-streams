@@ -98,9 +98,53 @@ $paddingSides: 3rem;
       .intro {
         padding-left: 0;
       }
-
+      .connectorTitle {
+        margin-bottom: 1rem;
+      }
       .keyTasks {
         max-width: 40rem;
+        flex-wrap: wrap;
+        flex-direction: row;
+        flex-shrink: 0;
+        flex-basis: auto;
+        margin-top: 1rem;
+        .task {
+          // border: 1px solid #dde8f4;
+          flex-grow: 1;
+          flex-basis: 4rem;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding-left: 1rem;
+          border-top: 0;
+          padding-right: 1rem;
+          border-left: 0;
+          border-right: 0;
+          padding-bottom: 1rem;
+          padding-top: 1rem;
+          font-weight: 400;
+          &:hover {
+            background-color: white;
+          }
+          cursor: pointer;
+          .title {
+            flex-grow: 1;
+            h3 {
+              margin: 0;
+              padding: 0;
+            }
+          }
+          &:last-of-type {
+            // border-bottom: 1px solid #dde8f4;
+          }
+          .progressIcon {
+            justify-self: flex-end;
+            .icon {
+              height: 1.5rem;
+              width: 1.5rem;
+            }
+          }
+        }
       }
     }
   }
@@ -243,9 +287,10 @@ $paddingSides: 3rem;
                   font-weight: 900;
                   background-color: $keyline;
                   background-color: $brand-01;
-
                   color: white;
-
+                  &:hover {
+                    background: #0353e9;
+                  }
                   .heading-four {
                     color: white;
                   }
@@ -330,7 +375,7 @@ $paddingSides: 3rem;
                 border: none;
                 border-right: 1px solid $keyline;
                 padding-bottom: 0;
-
+                align-items: center;
                 p {
                   font-weight: 400;
                   margin: 0;
@@ -513,7 +558,7 @@ $paddingSides: 3rem;
         }
 
         .initialHeroArea {
-          background: #242a2e;
+          background: #000000;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -534,8 +579,7 @@ $paddingSides: 3rem;
           }
 
           .heroArea {
-            background: #242a2e;
-            background: #1c2328;
+            background: #000000;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -1083,9 +1127,8 @@ $paddingSides: 3rem;
     border: none;
     cursor: pointer;
     margin-right: 1px;
-
     &:hover {
-      background-color: #30588c;
+      background: #0353e9;
     }
 
     .image {
@@ -1100,11 +1143,13 @@ $paddingSides: 3rem;
     .content {
       h4 {
         margin-bottom: 0;
+        font-weight: 400;
       }
 
       p {
         margin: 0;
         color: white;
+        font-weight: 400;
       }
     }
   }
@@ -1114,11 +1159,9 @@ $paddingSides: 3rem;
 .supportLevel {
   align-self: center;
   white-space: nowrap;
-  border-radius: 0;
   height: 1.25rem;
   background: #373d42;
-  border-radius: 12rem;
-
+  border-radius: 0.2rem;
   p.secondary {
     color: #cacaca;
     font-size: .875rem;
@@ -1159,12 +1202,12 @@ $paddingSides: 3rem;
   }
 
   &.ibm {
-    background-color: #9deeb2;
-    color: #10642a;
-    fill: #10642a;
+    background-color: #42be65;
+    color: #071908;
+    fill: #071908;
 
     p.secondary {
-      color: #10642a;
+      color: #071908;
     }
   }
 }

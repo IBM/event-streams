@@ -12,8 +12,8 @@
   z-index: 20;
   min-height: $mastheadHeight;
   background-color: $text-01;
-  background-color: #152935;
-  background-color: #13171a;
+  background-color: #161616;
+  border-bottom: 1px solid #3d3d3d;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,10 +55,20 @@
       color: inherit;
     }
   }
+  .divider {
+    border-right: 1px solid #3d3d3d;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: 100%;
+  }
+  .apiTitle {
+    font-size: .75rem;
+    opacity: .8;
+    align-self: center;
+  }
 }
 
 .site-title {
-  display: -webkit-box;
   display: flex;
   align-self: stretch;
   -webkit-box-align: center;
@@ -66,6 +76,9 @@
   font-weight: 600;
   z-index: 20;
   line-height: 1em;
+  span {
+    font-weight: 400;
+  }
 }
 
 .masthead__menu {
@@ -85,7 +98,7 @@
     flex-wrap: wrap;
   }
   .mastheadTitle {
-    height: 3.5rem;
+    height: $mastheadHeight;
     display: flex;
     align-items: center;
     flex-grow: 999;
@@ -97,10 +110,7 @@
     .menuScrollContainer {
       display: flex;
       justify-content: space-between;
-      // overflow: auto;
-      height: 3.5rem;
-      // padding-right: 1.5rem;
-      // position: relative;
+      height: $mastheadHeight;
     }
     .visible-links {
       margin: 0;
@@ -109,9 +119,11 @@
       list-style-type: none;
       display: flex;
       overflow-x: scroll;
+      overflow-x: auto;
       overflow-y: hidden;
-      &.dropdownActive {
-
+      padding-right: .5rem;
+      &.apiMenu {
+        padding-right: 2rem;
       }
       li {
         display: flex;
@@ -136,6 +148,7 @@
     }
   }
 }
+
 
 .masthead__menu-item {
   display: block;

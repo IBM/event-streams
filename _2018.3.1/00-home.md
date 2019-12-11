@@ -9,10 +9,10 @@ quickLinks:
     - title: Introduction
     - url: about/overview/
   - link:
-    - title: What's New?
+    - title: What's new?
     - url: about/whats-new/
   - link:
-    - title: Key Concepts
+    - title: Key concepts
     - url: about/key-concepts/
 gettingStarted:
   - mainTitle: How to get going
@@ -49,7 +49,7 @@ gettingStarted:
     - url: getting-started/client/
     - icon: clientApps.svg
 commonTasks:
-  - mainTitle: Common Tasks
+  - mainTitle: Common tasks
   - link:
     - title: Managing access
     - url: security/managing-access/

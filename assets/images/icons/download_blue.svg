@@ -8,10 +8,10 @@
     </defs>
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="icon/file/download/20" transform="translate(-2.000000, -1.000000)">
-            <mask id="mask-2" fill="#3d70b2">
+            <mask id="mask-2" fill="#0f62fe">
                 <use xlink:href="#path-1"></use>
             </mask>
-            <use id="icon-color" fill="#3d70b2" fill-rule="evenodd" xlink:href="#path-1"></use>
+            <use id="icon-color" fill="#0f62fe" fill-rule="evenodd" xlink:href="#path-1"></use>
         </g>
     </g>
 </svg>

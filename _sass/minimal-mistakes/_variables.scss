@@ -162,9 +162,9 @@ $intro-transition: intro 0s both !default;
 $versionsHeight: 3rem;
 $basicSpacing: 3.5rem;
 $contentMaxWidth: 40rem;
-$mastheadHeight: 3.5rem;
+$mastheadHeight: 3rem;
 $keyline: #f3f3f3;
-$brand-01: #3d70b2;
+$brand-01: #0f62fe;
 // $brand-01: #0062ff;
 $text-01: #1D364D;
 $text-02: #68737c;
@@ -178,6 +178,8 @@ $background: #f3f3f3;
 
 $menuTransition: 0.4s cubic-bezier(0.43, 0.01, 0.01, 0.99);
 $easing: cubic-bezier(0.43, 0.01, 0.01, 0.99);
+
+$standard-grid-layout: 1fr minmax(auto, 30rem) minmax(auto, 30rem) minmax(auto, 30rem) 1fr;
 
 @keyframes slideup {
    0% {
@@ -225,15 +227,24 @@ $easing: cubic-bezier(0.43, 0.01, 0.01, 0.99);
       margin-right: auto;
       margin-top: 1rem;
    }
-   .page__content {
-      .content {
-         > *:not(table) {
-            max-width: $maxW;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 1rem;
+   .page__inner-wrap {
+      &:not(.splash) {
+         .page__content {
+            .content {
+               > *:not(table) {
+                  max-width: $maxW;
+                  margin-left: auto;
+                  margin-right: auto;
+                  margin-top: 1rem;
+               }
+               table {
+                  max-width: $maxW*1.5;
+                  margin-left: auto;
+                  margin-right: auto;
+               }
+             }
          }
-       }
+      }
    }
    .page__inner-wrap.splash {
       .page__content {
