@@ -1,6 +1,9 @@
 ---
 name: Suggest a feature
 about: What would you love to see us add next?
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
