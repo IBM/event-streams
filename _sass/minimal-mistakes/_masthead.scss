@@ -23,7 +23,32 @@
   // top: 0;
   position: -webkit-sticky;
   position: sticky;
-  top: 0.5rem - 3.5rem;
+  top: 0.5rem - 5.5rem;
+  &__goToIBMCloud {
+    background: $brand-01;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding-left: 1.5rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    font-size: .75rem;
+    .link {
+      color: white;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      &:hover {
+        color: inherit;
+        background-color: #0043ce;
+      }
+    }
+  }
   &__inner-wrap {
     max-width: 100%;
     display: -webkit-box;
