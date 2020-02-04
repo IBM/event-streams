@@ -6,17 +6,23 @@
     <p>
       ***DRAFT preview – intended for internal IBM use only***
     </p>
-  </div>  
+  </div>
 {% endif %}
 
 <div id="masthead" class="masthead">
+  <div class="masthead__goToIBMCloud">
+  <div>
+    You are viewing the documentation for the container-native version of IBM Event Streams.
+  </div>
+    <a class="link" target="_self" href="https://cloud.ibm.com/docs/services/EventStreams?topic=eventstreams-getting_started#getting_started">Looking for the managed service on IBM Cloud? Click here.</a>
+</div>
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="mastheadNav">
 
       {% assign mastheadNavTitle = page.mastheadNavItem %}
 
-        
+
         <div class="mastheadTitle">
           {% if page.latest %}
             {%- assign collectionURL = "" -%}
@@ -31,13 +37,13 @@
           </div>
         </div>
 
-      
 
 
 
 
 
-        
+
+
 
         <div class="mastheadControls">
             <div class="menuScrollContainer">
@@ -57,7 +63,7 @@
 
                   {% if link.title == "APIs..." %}
                     <a href="{{ site.baseurl }}/{{ collectionURL }}" target="_self" class="apiTitle">...APIs (go back)</a>
-                    {% for link in link.dropdown %} 
+                    {% for link in link.dropdown %}
 
                       {% if page.url == link.url %}
                         {% assign activeClass = "active" %}
@@ -73,7 +79,7 @@
                   {% endif %}
                 {% endfor %}
             </ul>
-              
+
           {% else %}
 
                 <ul id="visible-links" class="visible-links">
@@ -84,18 +90,18 @@
                     {% assign domain = site.url | append: site.baseurl %}
                   {% endif %}
                   {% unless (page.url == '/' and link.url == '/') %}
-    
+
                   {% endunless %}
-    
+
                   {% if mastheadNavTitle == link.title %}
                     {% assign active = "active" %}
                   {% else %}
                     {% assign active = "" %}
                   {% endif %}
-    
-    
-    
-    
+
+
+
+
                   {% if link.title == "Search" %}
                     <li class="masthead__menu-item {{ active }}" onclick="window.open('{{ domain }}{{ link.url }}','_self')">
                       <button aria-label="Search Button" role="button" id="searchButton" class="search__toggle {{ active }}" type="button" name="search Button">
@@ -112,7 +118,7 @@
                         {% endif %}>{{ link.title }}</a>
                     </li>
                   {% endif %}
-    
+
                   {% endfor %}
                 </ul>
         {% endif %}

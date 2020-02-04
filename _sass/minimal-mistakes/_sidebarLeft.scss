@@ -17,9 +17,9 @@
   &.sticky {
     height: 100vh;
     min-height: calc(100vh - #{$mastheadHeight});
-    top: 0.5rem;
+    top: 0rem;
   }
-  
+
 
   .nav__list {
     padding-bottom: 16rem;
@@ -47,13 +47,13 @@
           bottom: 0;
         }
       }
-  
+
       &:hover {
         &:before {
           background: $text-02;
         }
       }
-  
+
       &.active {
         font-weight: 600;
       }
