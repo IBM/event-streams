@@ -10,12 +10,10 @@
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 #
 
-set -e
-
 PROGRAM_NAME=$0
 VERSION="2020.1.0"
 DATE=`date +%d-%m-%y`
-TIME=`date +%H:%M:%S`
+TIME=`date +%H-%M-%S`
 
 usage() {
     printf "$PROGRAM_NAME v${VERSION}\n\n"
@@ -101,7 +99,7 @@ if [ -z "$NAMESPACE" ] || [ -z "$RELEASE" ]; then
     exit 1
 fi
 
-LOGDIR="es-diagnostics"
+LOGDIR="es-diagnostics-${DATE}_${TIME}"
 INVOCATION_DIR=$(pwd)
 if [ -d ${INVOCATION_DIR}/${LOGDIR} ]; then
     tput setaf 3; 
@@ -144,8 +142,7 @@ tput sgr0
 mkdir $LOGDIR
 printf "Diagnostics collection v${VERSION} started at ${DATE}_${TIME} for release: $RELEASE in namespace: ${NAMESPACE}\n" | tee -a $LOGDIR/output.log
 
-command -v helm > /dev/null
-HELM_PRESENCE=$(echo $?)
+HELM_PRESENCE=$(command -v helm > /dev/null; echo $?)
 if [ "${HELM_PRESENCE}" -ne 0 ]; then
     tput setaf 3; printf '\n  Helm is desirable for diagnostics but absent on this system - continuing...\t[SKIP]\n' | tee -a $LOGDIR/output.log; tput sgr0 
 else
@@ -257,56 +254,52 @@ done
 tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
 
 ############
-printf "Gather tiller diagnostics if applicable"
+printf "Gather tiller diagnostics if applicable" | tee -a $LOGDIR/output.log; tput sgr0
 TILLER_POD_NAMES=$($EXE get pods -n kube-system -l app=helm --no-headers -o custom-columns=":metadata.name")
 for TILLER_POD_NAME in $TILLER_POD_NAMES; do
     get_container_logs kube-system ${TILLER_POD_NAME[@]}
 done
-tput setaf 2; printf '\t[DONE]\n'; tput sgr0
 
-printf "Gather kube dns diagnostics if applicable"
+printf "Gather kube dns diagnostics if applicable" | tee -a $LOGDIR/output.log; tput sgr0
 KUBE_DNS_POD_NAMES=$($EXE get pods -n kube-system -l app=kube-dns --no-headers -o custom-columns=":metadata.name")
 for KUBE_DNS_POD_NAME in $KUBE_DNS_POD_NAMES; do
     get_container_logs kube-system ${KUBE_DNS_POD_NAME[@]}
 done
-tput setaf 2; printf '\t[DONE]\n'; tput sgr0
 
-printf "Gather kube etcd diagnostics if applicable"
+printf "Gather kube etcd diagnostics if applicable" | tee -a $LOGDIR/output.log; tput sgr0
 KUBE_ETCD_POD_NAMES=$($EXE get pods -n kube-system --no-headers -o custom-columns=":metadata.name" | grep "k8s-etcd-" || true )
 for KUBE_ETCD_POD_NAME in $KUBE_ETCD_POD_NAMES; do
     get_container_logs kube-system ${KUBE_ETCD_POD_NAME[@]}
 done
-tput setaf 2; printf '\t[DONE]\n'; tput sgr0
 ############
 
 # Legacy
-printf "Gather legacy certgen diagnostics if applicable"
+printf "Gather legacy certgen diagnostics if applicable\n" | tee -a $LOGDIR/output.log; tput sgr0
 LEGACY_CERT_GEN_POD_NAMES=$($EXE get pods -n kube-system -l component=essential -l release=$RELEASE --no-headers -o custom-columns=":metadata.name")
 for LEGACY_CERT_GEN_POD_NAME in $LEGACY_CERT_GEN_POD_NAMES; do
     get_container_logs kube-system ${LEGACY_CERT_GEN_POD_NAME[@]}
 done
-tput setaf 2; printf '\t[DONE]\n'; tput sgr0
 
 # Legacy
-printf "Gather legacy oauth diagnostics if applicable"
+printf "Gather legacy oauth diagnostics if applicable\n" | tee -a $LOGDIR/output.log; tput sgr0
 LEGACY_OAUTH_POD_NAMES=$($EXE get pods -n kube-system -l component=ui -l release=$RELEASE --no-headers -o custom-columns=":metadata.name")
 for LEGACY_OAUTH_POD_NAME in $LEGACY_OAUTH_POD_NAMES; do
     get_container_logs kube-system ${LEGACY_OAUTH_POD_NAME[@]}
 done
-tput setaf 2; printf '\t[DONE]\n'; tput sgr0
 
-printf "Checking for presence of openssl"
+printf "Checking for presence of openssl" | tee -a $LOGDIR/output.log; tput sgr0
 command -v openssl > /dev/null
 OPENSSL_PRESENCE=$(echo $?)
 if [ "${OPENSSL_PRESENCE}" -ne 0 ]; then
     tput setaf 3; printf '\n  openssl is desirable for diagnostics but absent on this system - continuing...\t[SKIP]\n' | tee -a $LOGDIR/output.log; tput sgr0
 else
-    tput setaf 2; printf '\t[DONE]\n'; tput sgr0
+    tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
 fi
 
 printf "Gathering proxy certificates\n" | tee -a $LOGDIR/output.log
 PROXY_SECRET_IDENT="ibm-es-proxy-secret"
 PROXY_SECRET_NAME=$($EXE get secrets -n $NAMESPACE -l release=$RELEASE --no-headers -o custom-columns=":metadata.name" | grep $PROXY_SECRET_IDENT | head -n1 )
+
 declare -a CERTIFICATES=(
     "https\.cert"
     "podtls\.cert"
@@ -315,6 +308,7 @@ declare -a CERTIFICATES=(
     "tls\.cluster"
     "tls\.cacert"
 )
+
 CERT_DIR=${LOGDIR}/proxy-certificates
 mkdir -p $CERT_DIR
 for CERTIFICATE in ${CERTIFICATES[@]}; do
@@ -374,10 +368,15 @@ else
     tput setaf 3; printf 'openssl not available on this system - skipping endpoint certificate discovery... \t[SKIP]\n' | tee -a $LOGDIR/output.log; tput sgr0
 fi
 
-printf "--- END OF GATHER ---" | tee -a $LOGDIR/output.log
+printf "\n--- END OF GATHER ---\n" | tee -a $LOGDIR/output.log
 
 # Sanitise and archive diagnostics
 find $LOGDIR -type f -empty -delete
-tar czf ${LOGDIR}-${DATE}_${TIME}.tar.gz $LOGDIR
-tput setaf 2; printf "\nCOMPLETE - Results are in ${LOGDIR}-${DATE}_${TIME}.tar.gz\n" | tee -a $LOGDIR/output.log; tput sgr0
-rm -rf $LOGDIR
+TARBALL=${LOGDIR}.tar.gz
+tar czf $TARBALL $LOGDIR
+if [ -s $TARBALL ]; then
+    tput setaf 2; printf "\nCOMPLETE - Results are in ${LOGDIR}.tar.gz\n" | tee -a $LOGDIR/output.log; tput sgr0
+    rm -rf $LOGDIR
+else
+    tput setaf 1; printf "\nThere was an issue creating \"${LOGDIR}.tar.gz\"\n" | tee -a $LOGDIR/output.log; tput sgr0
+fi
