@@ -11,7 +11,7 @@
 #
 
 PROGRAM_NAME=$0
-VERSION="2020.1.0"
+VERSION="2020.1.1"
 DATE=`date +%d-%m-%y`
 TIME=`date +%H-%M-%S`
 
@@ -28,7 +28,6 @@ usage() {
     printf "  2) (preferred) helm & openssl installed\n"
     printf "  3) User must be logged into host as cluster-admin\n"
     printf "  4) User must know the namespace that Event Streams is deployed in, and the name of that release\n\n"
-    exit 1
 }
 
 declare -a ES_COMPONENTS=(
@@ -72,6 +71,17 @@ declare -a EXTERNAL_ENDPOINTS=(
     "ibm-es-admin-api"
     "ibm-es-admin-ui"
     "ibm-es-admin-proxy"
+)
+
+declare -a KUBE_SYSTEM_COMPONENTS=(
+    "auth-idp"
+    "auth-pap"
+    "auth-pdp"
+)
+
+declare -a KUBE_SYSTEM_APPS=(
+    "helm"
+    "kube-dns"
 )
 
 unset NAMESPACE
@@ -171,12 +181,12 @@ get_container_logs () {
     NS=$1
     POD=$2
     printf "Gathering diagnostics for pod: ${POD}\n" | tee -a $LOGDIR/output.log
-    POD=$(tr -cd "[:print:]" <<< $POD )
+    POD=$(tr -cd '\11\12\15\40-\176' <<< $POD )
     POD_DIR=$LOGDIR/$POD
     mkdir -p $POD_DIR
     $EXE describe pod $POD -n $NS > $POD_DIR/pod-describe.log
     CONTAINERS=$($EXE get po $POD -n $NS -o jsonpath="{.spec.containers[*].name}")
-    JOB_NAME=$($EXE get pod $POD -n $NS -o jsonpath="{.metadata.ownerReferences[?(@.kind == 'Job')].name}" | tr -cd "[:print:]")
+    JOB_NAME=$($EXE get pod $POD -n $NS -o jsonpath="{.metadata.ownerReferences[?(@.kind == 'Job')].name}" | tr -cd '\11\12\15\40-\176')
     if [ $JOB_NAME ]; then
         printf "  Gathering Job logs" | tee -a $LOGDIR/output.log
         $EXE logs $POD -n $NS > $POD_DIR/$JOB_NAME.log
@@ -184,8 +194,8 @@ get_container_logs () {
     else
         for CONTAINER in ${CONTAINERS[@]}; do
             printf "  Gathering diagnostics for container: ${CONTAINER}\n" | tee -a $LOGDIR/output.log
-            CONTAINER=$(tr -cd "[:print:]" <<< $CONTAINER)
-            PHASE=$($EXE get po $POD -n $NS -o jsonpath="{.status.phase}" | tr -cd "[:print:]")
+            CONTAINER=$(tr -cd '\11\12\15\40-\176' <<< $CONTAINER)
+            PHASE=$($EXE get po $POD -n $NS -o jsonpath="{.status.phase}" | tr -cd '\11\12\15\40-\176')
             if [ "${PHASE}" == "Running" ]; then
                 if [ ! -s $POD_DIR/etc_hosts.log ]; then
                     printf "    Retrieving hosts file" | tee -a $LOGDIR/output.log
@@ -201,7 +211,7 @@ get_container_logs () {
             printf "    Gathering container logs" | tee -a $LOGDIR/output.log
             $EXE logs $POD -n $NS -c $CONTAINER > $POD_DIR/container_log-$CONTAINER.log
             tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
-            RESTART_COUNT=$($EXE get po $POD -n $NS -o jsonpath="{.status.containerStatuses[?(@.name == \"$CONTAINER\")].restartCount}" | tr -cd "[:print:]")
+            RESTART_COUNT=$($EXE get po $POD -n $NS -o jsonpath="{.status.containerStatuses[?(@.name == \"$CONTAINER\")].restartCount}" | tr -cd '\11\12\15\40-\176')
             if [ $RESTART_COUNT -ne 0 ]; then
                 printf "    Gathering previous container logs" | tee -a $LOGDIR/output.log
                 $EXE logs $POD -n $NS -c $CONTAINER --previous > $POD_DIR/previous_container_log-$CONTAINER.log
@@ -234,7 +244,7 @@ for RESOURCE in "${RESOURCES[@]}"; do
     fi
     for ITEM_NAME in $ITEM_NAMES; do
         printf "Gathering diagnostics for $RESOURCE: $ITEM_NAME" | tee -a $LOGDIR/output.log
-        ITEM_NAME=$(tr -cd "[:print:]" <<< $ITEM_NAME)
+        ITEM_NAME=$(tr -cd '\11\12\15\40-\176' <<< $ITEM_NAME)
         $EXE describe $RESOURCE $ITEM_NAME -n $NAMESPACE > $RESOURCE_DIR/$ITEM_NAME-describe.log
         if [ "$RESOURCE" != "secrets" ]; then
             $EXE get $RESOURCE $ITEM_NAME -n $NAMESPACE -o json > $RESOURCE_DIR/$ITEM_NAME-json.json
@@ -248,30 +258,38 @@ done
 printf "Gathering ICP kube-public configmap(s)" | tee -a $LOGDIR/output.log
 ICP_CONFIGMAP_NAMES=$($EXE get configmaps -n kube-public --no-headers -o custom-columns=":metadata.name")
 for CONFIGMAP_NAME in $ICP_CONFIGMAP_NAMES; do
-    CONFIGMAP_NAME=$(tr -cd "[:print:]" <<< $CONFIGMAP_NAME)
+    CONFIGMAP_NAME=$(tr -cd '\11\12\15\40-\176' <<< $CONFIGMAP_NAME)
     $EXE describe configmap $CONFIGMAP_NAME -n kube-public > $LOGDIR/$CONFIGMAP_NAME-describe.log
 done
 tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
 
 ############
-printf "Gather tiller diagnostics if applicable" | tee -a $LOGDIR/output.log; tput sgr0
-TILLER_POD_NAMES=$($EXE get pods -n kube-system -l app=helm --no-headers -o custom-columns=":metadata.name")
-for TILLER_POD_NAME in $TILLER_POD_NAMES; do
-    get_container_logs kube-system ${TILLER_POD_NAME[@]}
-done
-
-printf "Gather kube dns diagnostics if applicable" | tee -a $LOGDIR/output.log; tput sgr0
-KUBE_DNS_POD_NAMES=$($EXE get pods -n kube-system -l app=kube-dns --no-headers -o custom-columns=":metadata.name")
-for KUBE_DNS_POD_NAME in $KUBE_DNS_POD_NAMES; do
-    get_container_logs kube-system ${KUBE_DNS_POD_NAME[@]}
-done
-
-printf "Gather kube etcd diagnostics if applicable" | tee -a $LOGDIR/output.log; tput sgr0
+printf "Gather kube etcd diagnostics if applicable\n" | tee -a $LOGDIR/output.log; tput sgr0
 KUBE_ETCD_POD_NAMES=$($EXE get pods -n kube-system --no-headers -o custom-columns=":metadata.name" | grep "k8s-etcd-" || true )
 for KUBE_ETCD_POD_NAME in $KUBE_ETCD_POD_NAMES; do
-    get_container_logs kube-system ${KUBE_ETCD_POD_NAME[@]}
+    get_container_logs kube-system "${KUBE_ETCD_POD_NAME[@]}"
+done
+
+printf "Gather kube system dependency logs if applicable\n" | tee -a $LOGDIR/output.log; tput sgr0
+for COMPONENT in "${KUBE_SYSTEM_COMPONENTS[@]}"; do
+    KUBE_SYSTEM_POD_NAMES=$($EXE get pods -n kube-system -l component="${COMPONENT}" --no-headers -o custom-columns=":metadata.name")
+    for POD in $KUBE_SYSTEM_POD_NAMES; do
+        get_container_logs kube-system "${POD[@]}"
+    done 
+done
+for APP in "${KUBE_SYSTEM_APPS[@]}"; do
+    KUBE_SYSTEM_POD_NAMES=$($EXE get pods -n kube-system -l app="${APP}" --no-headers -o custom-columns=":metadata.name")
+    for POD in $KUBE_SYSTEM_POD_NAMES; do
+        get_container_logs kube-system "${POD[@]}"
+    done 
 done
 ############
+
+printf "Gather kubectl top diagnostics" | tee -a $LOGDIR/output.log; tput sgr0
+[ "$EXE" == "oc" ] && TOP_COMMAND="adm"
+$EXE ${TOP_COMMAND} top pods -n kube-system -l app=icp-mongodb > $LOGDIR/mongodb-resource-usage.log
+$EXE ${TOP_COMMAND} top nodes > $LOGDIR/nodes-resource-usage.log
+tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
 
 # Legacy
 printf "Gather legacy certgen diagnostics if applicable\n" | tee -a $LOGDIR/output.log; tput sgr0
@@ -313,7 +331,7 @@ CERT_DIR=${LOGDIR}/proxy-certificates
 mkdir -p $CERT_DIR
 for CERTIFICATE in ${CERTIFICATES[@]}; do
     NAME=$(echo "$CERTIFICATE" | tr -d \\)
-    CERTIFICATE=$(tr -cd "[:print:]" <<< $CERTIFICATE)
+    CERTIFICATE=$(tr -cd '\11\12\15\40-\176' <<< $CERTIFICATE)
     printf "  Get encoded certificate: $NAME" | tee -a $LOGDIR/output.log
     $EXE get secret -n $NAMESPACE $PROXY_SECRET_NAME -o=jsonpath="{.data.${CERTIFICATE}}" > $CERT_DIR/$NAME
     tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
@@ -341,19 +359,19 @@ if [ "${OPENSSL_PRESENCE}" -eq 0 ]; then
     mkdir -p $EXTERNAL_PRESENTED_CERTS_DIR
     printf "Gathering external host address" | tee -a $LOGDIR/output.log
     PROXY_CM_MAP=$($EXE get cm -n $NAMESPACE -l release=$RELEASE -l component=proxy --no-headers -o custom-columns=":metadata.name")
-    PROXY_CM_MAP=$(tr -cd "[:print:]" <<< $PROXY_CM_MAP)
+    PROXY_CM_MAP=$(tr -cd '\11\12\15\40-\176' <<< $PROXY_CM_MAP)
     HOST=$($EXE get cm -n $NAMESPACE $PROXY_CM_MAP -o jsonpath="{.data.externalHostOrIP}")
     tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
     for ENDPOINT in "${EXTERNAL_ENDPOINTS[@]}"; do
         printf "Gathering connection details for endpoint: $ENDPOINT\n" | tee -a $LOGDIR/output.log
         SVC_NAMES=$($EXE get svc -n $NAMESPACE -l release=$RELEASE --no-headers -o custom-columns=":metadata.name" | grep "${ENDPOINT}" || true )
         for SVC_NAME in $SVC_NAMES; do
-            SVC_NAME=$(tr -cd "[:print:]" <<< $SVC_NAME)
+            SVC_NAME=$(tr -cd '\11\12\15\40-\176' <<< $SVC_NAME)
             NODEPORTS=$($EXE get svc -n $NAMESPACE $SVC_NAME -o jsonpath="{.spec.ports[*].nodePort}")
             for NODEPORT in $NODEPORTS; do
                 printf "  Get presented certificate at endpoint: ${HOST}:${NODEPORT}" | tee -a $LOGDIR/output.log
-                HOST=$(tr -cd "[:print:]" <<< $HOST)
-                NODEPORT=$(tr -cd "[:print:]" <<< $NODEPORT)
+                HOST=$(tr -cd '\11\12\15\40-\176' <<< $HOST)
+                NODEPORT=$(tr -cd '\11\12\15\40-\176' <<< $NODEPORT)
                 CONNECT_RC=$(echo -n | openssl s_client -connect ${HOST}:${NODEPORT} &> /dev/null; echo $?)
                 if [ "${CONNECT_RC}" -eq 0 ]; then
                     echo -n | openssl s_client -connect ${HOST}:${NODEPORT} &> $EXTERNAL_PRESENTED_CERTS_DIR/${ENDPOINT}-${HOST}-${NODEPORT}.log
