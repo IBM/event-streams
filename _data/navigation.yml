@@ -233,6 +233,8 @@ latestdocs:
         url: /troubleshooting/helm-cli-team-administrator/
       - title: "UI does not open when using Chrome on macOS Catalina"
         url: /troubleshooting/chrome-macos-issue/
+      - title: "Error when geo-replicating to an earlier version of Event Streams"
+        url: /troubleshooting/georeplication-version-error/
 
 # Sidebar navigation for 2019.2.1 version documentation.
 
