@@ -11,7 +11,7 @@
 #
 
 PROGRAM_NAME=$0
-VERSION="2020.1.1"
+VERSION="2020.1.2"
 DATE=`date +%d-%m-%y`
 TIME=`date +%H-%M-%S`
 
@@ -39,7 +39,7 @@ declare -a ES_COMPONENTS=(
     "proxy"
     "rest"
     "rest-producer"
-    "rest-proxy"
+    "restproxy"
     "replicator"
     "schemaregistry"
     "ui"
