@@ -70,7 +70,7 @@ If these persistent volumes are to be created automatically at the time of insta
 
 ### Using IBM Spectrum Scale
 
-If you are using IBM Scpectrum Scale for persistence, see the IBM Storage Enabler for Containers with IBM Spectrum Scale documentation for more information about [creating storage classes](https://www.ibm.com/support/knowledgecenter/en/SSCKLT_2.1.0/UG/sec_ug_config_storage_class_pvc_file.html){:target="_blank"}.
+If you are using IBM Spectrum Scale for persistence, see the IBM Storage Enabler for Containers with IBM Spectrum Scale documentation for more information about [creating storage classes](https://www.ibm.com/support/knowledgecenter/en/SSCKLT_2.1.0/UG/sec_ug_config_storage_class_pvc_file.html){:target="_blank"}.
 
 The system administrator must enable support for the automatic creation of persistent volumes prior to installing {{site.data.reuse.short_name}}. To do this, enable **dynamic provisioning** when [configuring your installation](../configuring/#enabling-persistent-storage), and provide the storage class names to define the persistent volumes that get allocated to the deployment.
 
