@@ -110,7 +110,7 @@ To use your upgraded {{site.data.reuse.short_name}} instance with existing {{sit
 1. Check the teams you use:\\
    1. {{site.data.reuse.icp_ui_login321}}
    3. From the navigation menu, click **Manage > Identity & Access > Teams**. Look for the teams you use with your {{site.data.reuse.short_name}} instance.
-2. Ensure you have [installed](../../installing/post-installation/#installing-the-command-line-interface) the latest version of the {{site.data.reuse.short_name}} CLI.
+2. Ensure you have [installed](../../installing/post-installation/#installing-the-command-line-interface-cli) the latest version of the {{site.data.reuse.short_name}} CLI.
 3. Run the following command for each team that references your instance of {{site.data.reuse.short_name}}:\\
   `cloudctl es iam-add-release-to-team --namespace <namespace> --helm-release <helm-release> --team <team-name>`
 

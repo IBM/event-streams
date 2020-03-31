@@ -250,6 +250,20 @@ Field | Description | Default
 ---|---|---
 **Datadog - Autodiscovery annotation check templates for Kafka brokers** | YAML object that contains the Datadog Autodiscovery annotations for configuring the Kafka JMX checks. The Datadog prefix and container identifier is applied automatically to the annotation, so only use the template name as the object’s keys (for example, `check_names`). For more information about setting up monitoring with Datadog, see the [Datadog tutorial](../../tutorials/monitor-with-datadog/).  | `None`
 
+### ![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") REST Producer API settings
+
+The following table describes the options for configuring configuration values for the REST producer API.
+
+Field | Description | Default
+---|---|---
+**Maximum key size**      | Set the maximum event key size that the REST producer API will accept in bytes.      | `4096`
+**Maximum message size**  | Set the maximum event message size that the REST producer API will accept in bytes.  |  `65536`
+
+**Important:** Do not set the **Maximum message size** to a higher value than the maximum message size that can be received by the Kafka broker or the individual topic (`max.message.bytes`). By default, the maximum message size for Kafka brokers is `1000012` bytes. If the limit is set for an individual topic, then that setting overrides the broker setting. Any message larger than the maximum limit will be rejected by Kafka.
+
+**Note:** Sending large requests to the REST producer increases latency, as it will take the REST producer longer to process the requests.
+
+
 ## Generating your own certificates
 
 You can create your own certificates for configuring external access. When prompted, answer all questions with the appropriate information.

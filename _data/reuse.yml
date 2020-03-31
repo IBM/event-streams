@@ -16,6 +16,9 @@ ce_short: "Community Edition"
 # {{site.data.reuse.icp}}
 icp: "IBM Cloud Private"
 
+# {{site.data.reuse.cp4i}}
+cp4i: "IBM Cloud Pak for Integration"
+
 # {{site.data.reuse.icp_master_host}}
 
 icp_master_host: on the IBM Cloud Private [master host](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/cluster_endpoints.html#master)

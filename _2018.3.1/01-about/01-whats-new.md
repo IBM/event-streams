@@ -8,7 +8,7 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}}.
 
-## 2018.3.1 release
+## Release 2018.3.1
 
 ### Support for IBM Cloud Private on Linux on IBM Z
 
@@ -49,6 +49,6 @@ Any difference in features or behaviour between {{site.data.reuse.short_name}} r
 - ![Event Streams 2018.3.1 icon](../../../images/2018.3.1.svg "In Event Streams 2018.3.1.") Applicable to {{site.data.reuse.long_name}} 2018.3.1.
 - ![Event Streams 2018.3.0 icon](../../../images/2018.3.0.svg "In Event Streams 2018.3.0.") Applicable to {{site.data.reuse.long_name}} 2018.3.0.
 
-## 2018.3.0 release
+## Release 2018.3.0
 
 First GA release.

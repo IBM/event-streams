@@ -23,7 +23,7 @@ Use the producer API to write messages to topics. To be able to produce to a top
 - The {{site.data.reuse.short_name}} certificate.
 
 To retrieve the full URL for the {{site.data.reuse.short_name}} API endpoint:
-1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-command-line-interface).
+1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-command-line-interface-cli).
 2. {{site.data.reuse.icp_cli_login}}
 3. Run the following command to initialize the {{site.data.reuse.short_name}} CLI: `cloudctl es init`.\\
    If you have more than one {{site.data.reuse.short_name}} instance installed, select the one where the topic you want to produce to is.\\

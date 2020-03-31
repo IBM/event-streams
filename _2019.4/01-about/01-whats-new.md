@@ -6,11 +6,37 @@ slug: whats-new
 toc: true
 ---
 
+## Release 2019.4.2
+
+Find out what is new in {{site.data.reuse.long_name}} version 2019.4.2.
+
+**Important:** {{site.data.reuse.short_name}} 2019.4.2 is only available in [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_20.1/welcome.html){:target="_blank"} 2020.1.1.
+
+### Support for {{site.data.reuse.openshift}} 4.3
+
+{{site.data.reuse.short_name}} 2019.4.2 introduces support for {{site.data.reuse.openshift}} 4.3.
+
+{{site.data.reuse.openshift_short}} 4.2 is also supported in this version, continuing the support introduced as part of {{site.data.reuse.short_name}} 2019.4.1 in {{site.data.reuse.cp4i}}.
+
+### Kafka version upgraded to 2.3.1
+
+{{site.data.reuse.short_name}} version 2019.4.2 includes Kafka release 2.3.1, and supports the use of all Kafka interfaces.
+
+### Documentation: Highlighting differences between versions
+
+Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 2019.4.2 compared to 2019.4.1 is highlighted in this documentation using the following graphic: ![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.")
+
+### {{site.data.reuse.ce_short}} is deprecated
+
+The {{site.data.reuse.ce_long}} has been removed from version 2019.4.2.
+
+## Release 2019.4.1
+
 Find out what is new in {{site.data.reuse.long_name}} version 2019.4.1.
 
 ### Support for {{site.data.reuse.openshift}} 4.2
 
-{{site.data.reuse.long_name}} 2019.4.1 installed in [IBM Cloud Pak for Integration](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.4/welcome.html){:target="_blank"} 2019.4.1 introduces support for {{site.data.reuse.openshift}} 4.2.
+{{site.data.reuse.long_name}} 2019.4.1 installed in [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.4/welcome.html){:target="_blank"} 2019.4.1 introduces support for {{site.data.reuse.openshift}} 4.2.
 
 ### Support for multiple availability zones
 

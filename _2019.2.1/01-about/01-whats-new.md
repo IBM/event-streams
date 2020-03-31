@@ -8,9 +8,9 @@ toc: true
 
 ## Releases 2019.2.2 and 2019.2.3
 
-{{site.data.reuse.long_name}} 2019.2.2 and 2019.2.3 introduce support for the [IBM Cloud Pak for Integration](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.3/welcome.html){:target="_blank"} solution. For information about installing {{site.data.reuse.short_name}} as a capability, see the IBM Cloud Pak for Integration [documentation](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.3/install/install_event_streams.html){:target="_blank"}.
+{{site.data.reuse.long_name}} 2019.2.2 and 2019.2.3 introduce support for the [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.3/welcome.html){:target="_blank"} solution. For information about installing {{site.data.reuse.short_name}} as a capability, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.3/install/install_event_streams.html){:target="_blank"}.
 
-**Important:** {{site.data.reuse.short_name}} 2019.2.2 and 2019.2.3 are only available as part of the IBM Cloud Pak for Integration solution. {{site.data.reuse.short_name}} 2019.2.2 and 2019.2.3 have the same features as the 2019.2.1 release.
+**Important:** {{site.data.reuse.short_name}} 2019.2.2 and 2019.2.3 are only available as part of the {{site.data.reuse.cp4i}} solution. {{site.data.reuse.short_name}} 2019.2.2 and 2019.2.3 have the same features as the 2019.2.1 release.
 
 ## Release 2019.2.1
 

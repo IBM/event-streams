@@ -10,6 +10,8 @@ toc: true
 
 You can also install a basic deployment of {{site.data.reuse.short_name}} {{site.data.reuse.ce_short}} to [try it out](../trying-out).
 
+![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
+
 ## Before you begin
 
 - Ensure you have set up your environment [according to the prerequisites](../prerequisites), including your {{site.data.reuse.icp}} environment.
