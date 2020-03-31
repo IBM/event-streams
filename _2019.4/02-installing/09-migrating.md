@@ -8,6 +8,8 @@ toc: false
 
 You can migrate from the {{site.data.reuse.ce_long}} to {{site.data.reuse.long_name}}.
 
+![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
+
 Migrating involves removing your previous {{site.data.reuse.ce_short}} installation and installing {{site.data.reuse.long_name}} in the same namespace and using the same release name. Using this procedure,
 your settings and data are also migrated to the new installation if you had persistent volumes enabled previously.
 

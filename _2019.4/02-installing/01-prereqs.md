@@ -10,7 +10,21 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ## Container environment
 
+![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2."){{site.data.reuse.long_name}} 2019.4.2 is supported on the following platforms and systems:
+
+| Container platform | Systems
+|--------------------|-----------------------|-------------|--------------------
+| {{site.data.reuse.openshift}} 4.2 and 4.3 <br> <br> **Note:** {{site.data.reuse.short_name}} 2019.4.2 is only available in [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_20.1/install/sysreqs.html){:target="_blank"}. | - Linux® 64-bit (x86_64) systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS) |
+
 {{site.data.reuse.long_name}} 2019.4.1 is supported on the following platforms and systems:
+
+- 2019.4.1 in [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.4/install/sysreqs.html){:target="_blank"}:
+
+| Container platform | Systems
+|--------------------|-----------------------|-------------|--------------------
+| {{site.data.reuse.openshift}} 4.2 | - Linux® 64-bit (x86_64) systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS) |
+
+- 2019.4.1 standalone:
 
 | Container platform | Systems
 |--------------------|-----------------------|-------------|--------------------

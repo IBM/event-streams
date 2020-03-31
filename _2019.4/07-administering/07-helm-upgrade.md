@@ -11,7 +11,8 @@ You can use the `helm upgrade` command to [upgrade](../../installing/upgrading/)
 To retrieve the charts file using the UI:
 1. {{site.data.reuse.icp_ui_login321}}
 2. Click **Catalog** in the top navigation menu.
-3. If you are using the {{site.data.reuse.ce_short}}, search for `ibm-eventstreams-dev` and select it from the result. If you are using {{site.data.reuse.short_name}}, search for `ibm-eventstreams-prod` and select it from the result.
+3. If you are using the {{site.data.reuse.ce_short}}, search for `ibm-eventstreams-dev` and select it from the result. If you are using {{site.data.reuse.short_name}}, search for `ibm-eventstreams-prod` and select it from the result.\\
+   ![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
 4. Select the latest version number from the drop-down list on the left.
 5. To download the file, go to the **SOURCE & TAR FILES** section on the left and click the link. \\
    The `ibm-eventstreams-dev-<version>.tgz` file is downloaded.

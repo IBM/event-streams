@@ -21,4 +21,4 @@ This error occurs when you attempt to use the {{site.data.reuse.long_name}} CLI 
 
 ## Resolving the problem
 
-Log in to the {{site.data.reuse.long_name}} UI, and [install the CLI](../../installing/post-installation/#installing-the-command-line-interface).
+Log in to the {{site.data.reuse.long_name}} UI, and [install the CLI](../../installing/post-installation/#installing-the-command-line-interface-cli).

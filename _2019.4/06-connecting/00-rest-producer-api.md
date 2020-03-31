@@ -36,7 +36,7 @@ To be able to produce to a topic, ensure you have the following available:
 To retrieve the full URL for the {{site.data.reuse.short_name}} API endpoint, you can use the {{site.data.reuse.short_name}} CLI or UI.
 
 Using the CLI:
-1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-command-line-interface).
+1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-command-line-interface-cli).
 2. {{site.data.reuse.icp_cli_login321}}
 3. Run the following command to initialize the {{site.data.reuse.short_name}} CLI: `cloudctl es init`.\\
    If you have more than one {{site.data.reuse.short_name}} instance installed, select the one where the topic you want to produce to is.\\
@@ -60,6 +60,33 @@ To create a topic and generate an API key with produce permissions, and to downl
 4. Download the server certificate for {{site.data.reuse.short_name}}:\\
    `cloudctl es certificates --format pem` \\
    By default, the certificate is written to a file called `es-cert.pem`.
+
+### Key and message size limits
+
+The REST producer API has a configured limit for the key size (default is `4096` bytes) and the message size (default is `65536` bytes). If the request sent has a larger key or message size than the limits set, the request will be rejected.
+
+![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Important:** In {{site.data.reuse.short_name}} 2019.4.2, you can configure the key and message size limits at the time of [installation](../../installing/configuring/#-rest-producer-api-settings) or later as described in [modifying](../../administering/modifying-installation/) installation settings. You can set the limit values in the **REST producer API settings** section if using the UI, or use the `rest-producer.maxKeySize` and `rest-producer.maxMessageSize` parameters if using the CLI.
+
+In {{site.data.reuse.short_name}} 2019.4.1 and earlier versions, you can update the limits as follows:
+
+1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-command-line-interface-cli).
+2. {{site.data.reuse.icp_cli_login321}}
+3. List the {{site.data.reuse.short_name}} deployments: `kubectl get deployments`
+4. Identify the REST producer deployment in the list.\\
+   It will be similar to `<deployment_name>-ibm-es-rest-producer-deploy`.
+5. Edit the REST producer deployment:\\
+   `kubectl edit deployment <deployment_name>-ibm-es-rest-producer-deploy`
+6. In the `.yaml` file Locate the `env` section for the REST producer container under `spec.template.spec.containers`.
+7. Add the following environment variables as required:\\
+   - `MAX_KEY_SIZE`: Sets the maximum key size in bytes (default is `4096`).
+   - `MAX_MESSAGE_SIZE`: Sets the maximum message size in bytes (default is `65536`).
+
+   **Important:** Do not set the `MAX_MESSAGE_SIZE` to a higher value than the maximum message size that can be received by the Kafka broker or the individual topic (`max.message.bytes`). By default, the maximum message size for Kafka brokers is `1000012` bytes. If the limit is set for an individual topic, then that setting overrides the broker setting. Any message larger than the maximum limit will be rejected by Kafka.
+
+   **Note:** Sending large requests to the REST producer increases latency, as it will take the REST producer longer to process the requests.
+
+8. Save your changes and wait for the REST producer pod to be updated.\\
+   **Note:** If you upgrade your {{site.data.reuse.short_name}} version, you will have to apply these environment variables again.
 
 ## Producing messages using REST with HTTP authorization
 

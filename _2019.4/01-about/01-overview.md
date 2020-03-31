@@ -11,7 +11,8 @@ toc: false
 {{site.data.reuse.long_name}} builds upon the {{site.data.reuse.icp}} platform to deploy Apache Kafka in a resilient and manageable way. It includes a UI design aimed at application developers getting started with Apache Kafka, as well as users operating a production cluster.
 
 {{site.data.reuse.long_name}} is available in two editions:
-* {{site.data.reuse.ce_long}} is a free version intended for trials and demonstration purposes. It can be installed and used without charge.
+* {{site.data.reuse.ce_long}} is a free version intended for trials and demonstration purposes. It can be installed and used without charge.\\
+   ![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
 * {{site.data.reuse.long_name}} is a paid-for version intended for enterprise use, and includes additional features such as geo-replication.
 
 {{site.data.reuse.long_name}} features include:

@@ -12,7 +12,8 @@ Consider the following when planning your installation.
 
 {{site.data.reuse.long_name}} is available in two editions:
 
-- **{{site.data.reuse.ce_long}}** is a free version intended for trial and demonstration purposes. It can be installed and used without charge. You can [install the {{site.data.reuse.ce_short}}](../trying-out/) from the catalog included with {{site.data.reuse.icp}}.
+- **{{site.data.reuse.ce_long}}** is a free version intended for trial and demonstration purposes. It can be installed and used without charge. You can [install the {{site.data.reuse.ce_short}}](../trying-out/) from the catalog included with {{site.data.reuse.icp}}.\\
+   ![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
 
 - **{{site.data.reuse.long_name}}** is the paid-for version intended for enterprise use, and includes full IBM support and additional features such as geo-replication. You can install {{site.data.reuse.long_name}} by downloading the image from IBM Passport Advantage, and making it available in the {{site.data.reuse.icp}} catalog.
 
