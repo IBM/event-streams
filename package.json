@@ -32,6 +32,7 @@
     "build:js": "npm run uglify && npm run add-banner"
   },
   "dependencies": {
+    "kind-of": "^6.0.3",
     "lunr": "^2.3.6",
     "node-sass": "^4.13.1"
   }
