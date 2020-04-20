@@ -57,11 +57,13 @@ declare -a RESOURCES=(
     "statefulsets"
     "deployments"
     "secrets"
+    "storageclasses"
 )
 
 declare -a GLOBAL_RESOURCES=(
     "nodes"
     "persistentvolumes"
+    "storageclasses"
 )
 
 declare -a EXTERNAL_ENDPOINTS=(
@@ -165,6 +167,14 @@ else
         HELM_DIR=${LOGDIR}/helm
         mkdir -p $HELM_DIR
         helm history ${RELEASE} --tls > $HELM_DIR/helm_history.log
+        tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
+
+        printf "  Gathering Helm values" | tee -a $LOGDIR/output.log
+        helm get values ${RELEASE} --tls > $HELM_DIR/helm_values.log
+        linecert=$(eval grep -n -w "cert:" $HELM_DIR/helm_values.log | cut -f1 -d:)
+        linekey=$(eval grep -n -w "key:" $HELM_DIR/helm_values.log | cut -f1 -d:)
+        [ ! -z "$linecert" ] && (sed -i '' -e "${linecert}s/.*/  cert: REDACTED/" $HELM_DIR/helm_values.log || echo "sed command failed, continue gathering diagnostics")
+        [ ! -z "$linekey" ] && (sed -i '' -e "${linekey}s/.*/  key: REDACTED/" $HELM_DIR/helm_values.log || echo "sed command failed, continue gathering diagnostics")
         tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
     fi
 fi
