@@ -38,7 +38,7 @@ declare -a ES_COMPONENTS=(
     "kafka"
     "proxy"
     "rest"
-    "rest-producer"
+    "restproducer"
     "restproxy"
     "replicator"
     "schemaregistry"
