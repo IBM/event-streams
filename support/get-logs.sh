@@ -173,8 +173,8 @@ else
         helm get values ${RELEASE} --tls > $HELM_DIR/helm_values.log
         linecert=$(eval grep -n -w "cert:" $HELM_DIR/helm_values.log | cut -f1 -d:)
         linekey=$(eval grep -n -w "key:" $HELM_DIR/helm_values.log | cut -f1 -d:)
-        [ ! -z "$linecert" ] && (sed -i '' -e "${linecert}s/.*/  cert: REDACTED/" $HELM_DIR/helm_values.log || echo "sed command failed, continue gathering diagnostics")
-        [ ! -z "$linekey" ] && (sed -i '' -e "${linekey}s/.*/  key: REDACTED/" $HELM_DIR/helm_values.log || echo "sed command failed, continue gathering diagnostics")
+        [ ! -z "$linecert" ] && (sed -i '' -e "${linecert}s/.*/  cert: REDACTED/" $HELM_DIR/helm_values.log || true )
+        [ ! -z "$linekey" ] && (sed -i '' -e "${linekey}s/.*/  key: REDACTED/" $HELM_DIR/helm_values.log || true )
         tput setaf 2; printf '\t[DONE]\n' | tee -a $LOGDIR/output.log; tput sgr0
     fi
 fi
