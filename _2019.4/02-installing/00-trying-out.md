@@ -14,7 +14,7 @@ To try out {{site.data.reuse.short_name}}, you can install a basic deployment of
 
 For more features and full IBM support, [install {{site.data.reuse.long_name}}](../installing).
 
-![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
+![Event Streams 2019.4.2 icon](../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
 
 
 ## On {{site.data.reuse.icp}}
