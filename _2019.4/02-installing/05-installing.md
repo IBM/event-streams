@@ -6,11 +6,7 @@ slug: installing
 toc: true
 ---
 
-{{site.data.reuse.long_name}} is the paid-for version intended for enterprise use, and includes full IBM support and additional features such as geo-replication.
-
-You can also install a basic deployment of {{site.data.reuse.short_name}} {{site.data.reuse.ce_short}} to [try it out](../trying-out).
-
-![Event Streams 2019.4.2 icon](../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
+Install {{site.data.reuse.long_name}} on {{site.data.reuse.icp}} as follows. 
 
 ## Before you begin
 

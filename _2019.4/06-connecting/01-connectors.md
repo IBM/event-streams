@@ -43,7 +43,7 @@ For getting started and problem diagnosis, the simplest setup is to run only one
 
 The connector catalog contains a list of connectors that have been verified with {{site.data.reuse.short_name}}.
 
-Connectors are either supported by the community or IBM. Community support means the connectors are supported through the community by the people that created them. IBM supported connectors are fully supported as part of the official {{site.data.reuse.short_name}} support entitlement if you are using the paid-for version of {{site.data.reuse.short_name}} (not {{site.data.reuse.ce_short}}).
+Connectors are either supported by the community or IBM. Community support means the connectors are supported through the community by the people that created them. IBM supported connectors are fully supported as part of the official {{site.data.reuse.short_name}} support entitlement.
 
 See the [connector catalog](../../connectors/){:target="_blank"} for a list of connectors that work with {{site.data.reuse.short_name}}.
 

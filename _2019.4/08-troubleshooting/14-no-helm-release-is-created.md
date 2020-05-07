@@ -8,7 +8,7 @@ toc: true
 
 ## Symptoms
 
-When the {{site.data.reuse.long_name}} (not the {{site.data.reuse.ce_short}}) chart is deployed, the process appears to start successfully but the helm release and set of expected pods are not created. You can confirm the helm release has not been created by running the following command:
+When the {{site.data.reuse.long_name}} chart is deployed, the process appears to start successfully but the helm release and set of expected pods are not created. You can confirm the helm release has not been created by running the following command:
 
 ```
 helm list
