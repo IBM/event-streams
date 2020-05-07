@@ -33,6 +33,8 @@ If you are using {{site.data.reuse.ce_short}}, you need access to the following 
 
 * docker.io
 
+**Note:** {{site.data.reuse.ce_deprecated}}
+
 To apply an image policy, create a new yaml file with the following content, replacing the namespace with the namespace into which the chart will be deployed and the name with a name of your choice. The following is an example where we are adding both repositories:
 
 ```

@@ -22,19 +22,9 @@ collection: faq
 
 You can have a fully managed {{site.data.reuse.short_name}} service provided by IBM Cloud, or you can install and manage your own version in {{site.data.reuse.icp}}.
 
-To get started with {{site.data.reuse.long_name}} as a hosted service, see [the {{site.data.reuse.short_name}} for IBM Cloud documentation](https://cloud.ibm.com/docs/services/EventStreams?topic=eventstreams-getting_started#getting_started){:target="_blank"}.
+  To get started with {{site.data.reuse.long_name}} as a hosted service, see [the {{site.data.reuse.short_name}} for IBM Cloud documentation](https://cloud.ibm.com/docs/services/EventStreams?topic=eventstreams-getting_started#getting_started){:target="_blank"}.
 
 To get started with {{site.data.reuse.long_name}} in {{site.data.reuse.icp}}, see [this documentation](../).
-
-
-## What editions are available in {{site.data.reuse.icp}}?
-
-{{site.data.reuse.long_name}} is available in two editions:
-* {{site.data.reuse.ce_long}} is a free version intended for trials and demonstration purposes. It can be installed and used without charge.\\
-   ![Event Streams 2019.4.2 icon](../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
-* {{site.data.reuse.long_name}} is a paid-for version intended for enterprise use, and includes additional features such as geo-replication.
-
-[Find out more.](../installing/planning/#available-editions)
 
 ## What are the main features?
 
@@ -48,9 +38,7 @@ You can deploy multiple instances of {{site.data.reuse.long_name}} and use the i
 
 ## Can I try it for free?
 
-Yes, you can [install](../installing/trying-out/) a basic deployment of {{site.data.reuse.ce_long}}, and see what it's like.
-
-![Event Streams 2019.4.2 icon](../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
+{{site.data.reuse.ce_deprecated}}
 
 ## What is {{site.data.reuse.icp}}?
 

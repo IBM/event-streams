@@ -13,8 +13,6 @@ Geo-replication can help with various service availability scenarios, for exampl
 * Making mission-critical data safe: you might have mission-critical data that your applications depend on to provide services. Using the geo-replication feature, you can back up your topics to several destinations to ensure their safety and availability.
 * Migrating data: you can ensure your topic data can be moved to another deployment, for example, when switching from a test to a production environment.
 
-{{site.data.reuse.geo-rep_note}}
-
 ## How it works
 
 The Kafka cluster where you have the topics that you want to make copies of is called the "origin cluster".

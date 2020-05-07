@@ -10,7 +10,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ## Container environment
 
-![Event Streams 2019.4.2 icon](../../images/2019.4.2.svg "In Event Streams 2019.4.2."){{site.data.reuse.long_name}} 2019.4.2 is supported on the following platforms and systems:
+![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2."){{site.data.reuse.long_name}} 2019.4.2 is supported on the following platforms and systems:
 
 | Container platform | Systems
 |--------------------|-----------------------|-------------|--------------------
@@ -101,9 +101,9 @@ For a production setup, ensure you set higher values, and also consider importan
 
 **Important:** The settings marked with an asterisk (*) are configurable. The values in the table are the default minimum values.
 
-Before installing {{site.data.reuse.long_name}} (not {{site.data.reuse.ce_short}}), consider the number of Kafka replicas and geo-replicator nodes you plan to use. Each Kafka replica and geo-replicator node is a separate chargeable unit.
+Before installing {{site.data.reuse.long_name}}, consider the number of Kafka replicas and geo-replicator nodes you plan to use. Each Kafka replica and geo-replicator node is a separate chargeable unit.
 
-{{site.data.reuse.geo-rep_note}} The geo-replication numbers are included in the previous table as an indication to show per replica requirements, but not included in the **TOTAL** rows.
+The geo-replication numbers are included in the previous table as an indication to show per replica requirements, but not included in the **TOTAL** rows.
 
 ### Kafka group
 

@@ -79,8 +79,6 @@ When installing {{site.data.reuse.long_name}} as an instance intended for geo-re
 
 [Consider the number of geo-replication nodes](../../georeplication/planning/#preparing-destination-clusters) to run on a destination cluster. You can also set up destination clusters and configure the number of geo-replication worker nodes for an existing installation later.
 
-{{site.data.reuse.geo-rep_note}}
-
 ## Configuring external access
 
 By default, external Kafka client applications connect to the {{site.data.reuse.icp}} master node directly without any configuration required. You simply leave the **External hostname/IP address** field of the [**External access settings**](#external-access-settings) section blank.
@@ -229,8 +227,6 @@ Field  | Description  | Default
 --|---|--
 **Geo-replicator workers**  | Number of workers to support geo-replication. | `0`
 
-{{site.data.reuse.geo-rep_note}}
-
 ### Schema Registry settings
 
 Field  | Description  | Default
@@ -250,7 +246,7 @@ Field | Description | Default
 ---|---|---
 **Datadog - Autodiscovery annotation check templates for Kafka brokers** | YAML object that contains the Datadog Autodiscovery annotations for configuring the Kafka JMX checks. The Datadog prefix and container identifier is applied automatically to the annotation, so only use the template name as the object’s keys (for example, `check_names`). For more information about setting up monitoring with Datadog, see the [Datadog tutorial](../../tutorials/monitor-with-datadog/).  | `None`
 
-### ![Event Streams 2019.4.2 icon](../../images/2019.4.2.svg "In Event Streams 2019.4.2.") REST Producer API settings
+### ![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") REST Producer API settings
 
 The following table describes the options for configuring configuration values for the REST producer API.
 

@@ -16,7 +16,7 @@ You can upgrade to {{site.data.reuse.short_name}} version 2019.4.1 from version 
 
 - Ensure you have {{site.data.reuse.icp}} version 3.2.1. If you are using the {{site.data.reuse.openshift_short}}, ensure you have version 3.11 or later. See the [prerequisites](../prerequisites/#container-environment) for supported container environments.
 - The minimum resource requirements have changed. Ensure you have the required [resources](../prerequisites/#helm-resource-requirements) available.
-- If you are upgrading {{site.data.reuse.long_name}} (not {{site.data.reuse.ce_short}}), download the package for the version you want to upgrade to, and make it [available](../installing/#download-the-archive) to your {{site.data.reuse.icp}} instance.
+- Download the package for the version you want to upgrade to, and make it [available](../installing/#download-the-archive) to your {{site.data.reuse.icp}} instance.
 - If you have [encryption between pods](../planning/#securing-communication-between-pods) enabled, then ensure you disable it before starting the upgrade. After the upgrade completes successfully, you can [enable](../../security/encrypting-data/#enabling-encryption-between-pods) the encryption again.
 
 ## Upgrading on {{site.data.reuse.icp}}
@@ -48,9 +48,6 @@ If you are using {{site.data.reuse.icp}}, you can  upgrade by using the UI or th
 3. Run the helm upgrade command as follows, referencing the Helm chart you want to upgrade to:\\
    `helm upgrade <release-name> <latest-chart-version>`
 
-   For example, to upgrade the {{site.data.reuse.ce_short}}:\\
-   `helm upgrade eventstreams1 /Users/admin/upgrade/ibm-eventstreams-dev-1.4.0.tgz`
-
    For example, to upgrade by using a chart downloaded in the PPA archive:\\
    `helm upgrade eventstreams1 /Users/admin/upgrade/ibm-eventstreams-prod-1.4.0.tgz`
 
@@ -66,7 +63,7 @@ If you are using the {{site.data.reuse.openshift_short}}, you can only  upgrade 
 
 1. Ensure you have the latest Helm chart version available on your local file system.
 
-   **Note:** The {{site.data.reuse.short_name}} chart name no longer includes `rhel` in the name. For example, the {{site.data.reuse.ce_short}} chart name is now `ibm-eventstreams-dev` (not `ibm-eventstreams-rhel-dev`), and similarly the paid-for version chart name is now  `ibm-eventstreams-prod` (`ibm-eventstreams-rhel-prod`).
+   **Note:** The {{site.data.reuse.short_name}} chart name no longer includes `rhel` in the name. For example, the chart name is now `ibm-eventstreams-prod` (not `ibm-eventstreams-rhel-prod`).
 
    - You can [retrieve](../../administering/helm-upgrade-command/) the charts from the UI.
    - Alternatively, if you downloaded the archive from IBM Passport Advantage, the chart file is included in the archive. Extract the PPA archive, and locate the chart file in the `/charts` directory, for example: `ibm-eventstreams-prod-1.4.0.tgz`
@@ -83,9 +80,6 @@ If you are using the {{site.data.reuse.openshift_short}}, you can only  upgrade 
 
 4. Run the helm upgrade command as follows, referencing the Helm chart you want to upgrade to:\\
    `helm upgrade <release-name> <latest-chart-version>`
-
-   For example, to upgrade the {{site.data.reuse.ce_short}}:\\
-   `helm upgrade eventstreams1 /Users/admin/upgrade/ibm-eventstreams-dev-1.4.0.tgz`
 
    For example, to upgrade by using a chart downloaded in the PPA archive:\\
    `helm upgrade eventstreams1 /Users/admin/upgrade/ibm-eventstreams-prod-1.4.0.tgz`

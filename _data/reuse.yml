@@ -19,6 +19,12 @@ icp: "IBM Cloud Private"
 # {{site.data.reuse.cp4i}}
 cp4i: "IBM Cloud Pak for Integration"
 
+# {{site.data.reuse.icpcs}}
+icpcs: "IBM Cloud Platform Common Services"
+
+# {{site.data.reuse.cs}}
+cs: "Common Services"
+
 # {{site.data.reuse.icp_master_host}}
 
 icp_master_host: on the IBM Cloud Private [master host](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/cluster_endpoints.html#master)
@@ -112,6 +118,9 @@ kafkaConnectStep2_content1_example: "For example:\n```\n plugin.path=/usr/local/
 # {{site.data.reuse.kafkaConnectStep3_title}}
 kafkaConnectStep3_title: "Restart Kafka Connect to make the new connector available in the environment. <br> <br> For more information about how to set up a Kafka Connect environment, add connectors to it, and start the connectors, see how to [set up and run connectors](../../connecting/setting-up-connectors/)."
 
+# Notes
+# {{site.data.reuse.ce_deprecated}}
+ce_deprecated: "IBM Event Streams Community Edition is no longer available from 1 May 2020. For information about trying out Kafka and Event Streams for free, see the [product pages](https://www.ibm.com/cloud/event-streams/get-started)."
 
 # Icons
 

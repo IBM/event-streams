@@ -8,21 +8,6 @@ toc: true
 
 Consider the following when planning your installation.
 
-## Available editions
-
-{{site.data.reuse.long_name}} is available in two editions:
-
-- **{{site.data.reuse.ce_long}}** is a free version intended for trial and demonstration purposes. It can be installed and used without charge. You can [install the {{site.data.reuse.ce_short}}](../trying-out/) from the catalog included with {{site.data.reuse.icp}}.\\
-   ![Event Streams 2019.4.2 icon](../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Restriction:** The {{site.data.reuse.ce_short}} is not available in {{site.data.reuse.short_name}} version 2019.4.2.
-
-- **{{site.data.reuse.long_name}}** is the paid-for version intended for enterprise use, and includes full IBM support and additional features such as geo-replication. You can install {{site.data.reuse.long_name}} by downloading the image from IBM Passport Advantage, and making it available in the {{site.data.reuse.icp}} catalog.
-
-**Note:** If you do not have {{site.data.reuse.icp}} already, {{site.data.reuse.long_name}} includes entitlement to {{site.data.reuse.icp_foundation}} which you can download from IBM Passport Advantage as well, and [install as a prerequisite](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/installing/install_containers.html){:target="_blank"}. {{site.data.reuse.icp_foundation}} can only be used to deploy {{site.data.reuse.long_name}}. No other service can be deployed without [upgrading {{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/getting_started/bundles.html){:target="_blank"}.
-
-<!--
-**Note:** {{site.data.reuse.long_name}} Foundation is also available for embedding in IBM products.
--->
-
 ## Performance considerations
 
 When preparing for your {{site.data.reuse.short_name}} installation, review your workload requirements and consider the configuration options available for performance tuning both your {{site.data.reuse.icp}} and {{site.data.reuse.short_name}} installations. For more information, see the [performance planning topic](../capacity-planning).
@@ -104,7 +89,7 @@ You can enable encryption between pods when [configuring](../configuring/#enabli
 
 You can also enable TLS encryption between pods for [existing](../../security/encrypting-data/#enabling-encryption-between-pods) {{site.data.reuse.short_name}} installations.
 
-**Important:** If you are using the paid-for version of {{site.data.reuse.short_name}} (not {{site.data.reuse.ce_short}}), all message data is encrypted using TLS, but communication between the geo-replicator and administration server pods is not encrypted (see tables in [resource requirements](../prerequisites/#helm-resource-requirements)).
+**Important:** All message data is encrypted using TLS, but communication between the geo-replicator and administration server pods is not encrypted (see tables in [resource requirements](../prerequisites/#helm-resource-requirements)).
 
 ## ConfigMap for Kafka static configuration
 
@@ -129,8 +114,6 @@ You can deploy multiple instances of {{site.data.reuse.long_name}} and use the i
 [Find out more](../../georeplication/about/) about geo-replication.
 
 [Prepare your destination cluster](../configuring/#setting-geo-replication-nodes) by setting the number of geo-replication worker nodes during installation.
-
-{{site.data.reuse.geo-rep_note}}
 
 ## Connecting clients
 
