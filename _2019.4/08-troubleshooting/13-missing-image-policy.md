@@ -39,7 +39,11 @@ If you are using {{site.data.reuse.ce_short}}, you need access to the following 
 
 ## Resolving the problem
 
-To apply an image policy, create a new yaml file with the following content, replacing the namespace with the namespace into which the chart will be deployed and the name with a name of your choice. The following is an example where we are adding both repositories:
+To apply an image policy, create a new yaml file with the following content, replacing the namespace with the namespace into which the chart will be deployed and the name with a name of your choice.
+
+**Important:** Always ensure you install {{site.data.reuse.short_name}} in a dedicated namespace. Do not use any of the default namespaces (`default`, `kube-system`, `kube-public`, and so on).
+
+The following is an example where we are adding both repositories:
 
 ```
 apiVersion: securityenforcement.admission.cloud.ibm.com/v1beta1
