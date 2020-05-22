@@ -10,7 +10,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ## Container environment
 
-![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2."){{site.data.reuse.long_name}} 2019.4.2 is supported on the following platforms and systems:
+![Event Streams 2019.4.2 icon](../../images/2019.4.2.svg "In Event Streams 2019.4.2."){{site.data.reuse.long_name}} 2019.4.2 is supported on the following platforms and systems:
 
 | Container platform | Systems
 |--------------------|-----------------------|-------------|--------------------
