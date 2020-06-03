@@ -8,7 +8,7 @@ The following Kibana dashboards can be used to help monitor problems with the un
 
 - **Authentication and Authorization Dashboard:** This dashboard monitors Access Controller and Kafka to determine whether it can communicate with IBM Cloud Private’s authorization service
 - **File System Dashboard:** This dashboard monitors the logs in Kafka and Zookeeper for various file system related exceptions.
-- **Kubernetes Infrastructure Dashboard:** This dashboard monitors  various Kubernetes containers for problems that may suggest an unhealthy infrastructure and Kafka to see how many times the Broker is unavailable.
+- **Kubernetes Infrastructure Dashboard:** This dashboard monitors  various Kubernetes containers for problems that may suggest an unhealthy infrastructure.
 - **Network Dashboard:** This dashboard monitors Kafka and Zookeeper for various network related exceptions. It will also check the Kafka logs to see if it can communicate with Zookeeper. The dashboard also monitors for Event Streams related errors in the Kubernetes DNS pod.
 
 **To Install**
