@@ -10,6 +10,7 @@ The following Kibana dashboards can be used to help monitor problems with the un
 - **File System Dashboard:** This dashboard monitors the logs in Kafka and Zookeeper for various file system related exceptions.
 - **Kubernetes Infrastructure Dashboard:** This dashboard monitors  various Kubernetes containers for problems that may suggest an unhealthy infrastructure.
 - **Network Dashboard:** This dashboard monitors Kafka and Zookeeper for various network related exceptions. It will also check the Kafka logs to see if it can communicate with Zookeeper. The dashboard also monitors for Event Streams related errors in the Kubernetes DNS pod.
+- **Kafka Dashboard**: This dashboard helps determine whether or not the Kafka Brokers are able to synchronize with one another.
 
 **To Install**
 ---
