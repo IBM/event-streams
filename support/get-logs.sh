@@ -488,7 +488,7 @@ if [ "${HELM_PRESENCE}" -ne 0 ]; then
     printYellowAndLog '\n  Helm is desirable for diagnostics but absent on this system - continuing...\t[SKIP]\n'
 else
     printf "Checking Helm client capability\n" | printAndLog
-    HELM_OK=$(helm history ${RELEASE} --tls > /dev/null; echo $?)
+    HELM_OK=$(helm history ${RELEASE} --tls > /dev/null; echo ${?})
     if [ "${HELM_OK}" -ne 0 ]; then
         printRedAndLog 'Helm client is not able to comminicate with the cluster - continuing...\t[ERR]\n'
     else
