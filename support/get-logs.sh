@@ -45,46 +45,48 @@ cleanOutput () {
     tr -cd '\11\12\15\40-\176'
 }
 
+TPUT_PRESENCE=$(command -v tput > /dev/null; echo ${?})
+
 # print the supplied text in red by setting the forground colour to red then unsetting it
 printRed () {
-    tput setaf 1
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput setaf 1
     printf "${@}"
-    tput sgr0
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput sgr0
 }
 
 # print the supplied text in green
 printGreen () {
-    tput setaf 2
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput setaf 2
     printf "${@}"
-    tput sgr0
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput sgr0
 }
 
 # print the supplied text in yellow
 printYellow () {
-    tput setaf 3
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput setaf 3
     printf "${@}"
-    tput sgr0
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput sgr0
 }
 
 # print the supplied text in red and write it to the log, note `printRed blah | printAndLog` will give formatting problems in the log
 printRedAndLog () {
-    tput setaf 1
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput setaf 1
     printf "${@}" | printAndLog
-    tput sgr0
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput sgr0
 }
 
 # print the supplied text in green and write it to the log
 printGreenAndLog () {
-    tput setaf 2
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput setaf 2
     printf "${@}" | printAndLog
-    tput sgr0
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput sgr0
 }
 
 # print the supplied text in yellow and write it to the log
 printYellowAndLog () {
-    tput setaf 3
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput setaf 3
     printf "${@}" | printAndLog
-    tput sgr0
+    [ "${TPUT_PRESENCE}" -eq 0 ] && tput sgr0
 }
 
 # print the standard green done message
