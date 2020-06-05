@@ -436,7 +436,7 @@ for SECRET in ${CERT_SECRETS[@]}; do
     CERT_DIR="${LOGDIR}/${SECRET_NAME}-certificates"
     mkdir -p "${CERT_DIR}"
     for CERTIFICATE_KEY in ${CERTIFICATES_KEYS[@]}; do
-        NAME=$(echo ${CERTIFICATE_KEY} | tr -d \\)
+        NAME=$(echo ${CERTIFICATE_KEY} | tr -d '\\')
         printf "  Get encoded certificate: ${NAME}" | printAndLog
         ${EXE} get secret -n "${NAMESPACE}" "${SECRET_NAME}" -o=jsonpath="{.data.${CERTIFICATE_KEY}}" > "${CERT_DIR}/${NAME}"
         printDoneAndLog
