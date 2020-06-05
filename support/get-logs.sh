@@ -27,6 +27,7 @@ usage() {
     printf "  -h                       display help\n"
     printf "  -n | -ns  | -namespace   specify the required NAMESPACE\n"
     printf "  -r | -rel | -release     specify the required RELEASE\n\n"
+    printf "  -s | -since              specify how many hours back the logs should go (default 120)n"
     printf "\nPre-conditions:\n"
     printf "  1) kubectl/oc must be installed\n"
     printf "  2) (preferred) helm & openssl installed\n"
@@ -172,6 +173,8 @@ declare -a CERTIFICATES_KEYS=(
 
 unset NAMESPACE
 unset RELEASE
+unset SINCE
+SINCE=120
 
 # Read in the required parameters. the releases name and namespace
 while [ "${#}" -gt 0 ]; do
@@ -180,6 +183,7 @@ while [ "${#}" -gt 0 ]; do
         -*"="*) shift; set - "${arg%%=*}" "${arg#*=}" "${@}"; continue;;
         -n|-ns|-namespace) shift; NAMESPACE="${1}";;
         -r|-rel|-release) shift; RELEASE="${1}";;
+        -s|-since) shift; SINCE="${1}";;
         -h) usage;;
         *) break;;
     esac
@@ -271,6 +275,7 @@ printf "Diagnostics collection v${VERSION} started at ${DATE}_${TIME} for releas
 get_pod_logs () {
     NS="${1}"
     POD="${2}"
+    PARAMS="${3}"
     POD_DIR="${LOGDIR}/${POD}"
     printf "Gathering diagnostics for pod: ${POD}\n" | printAndLog
     mkdir -p "${POD_DIR}"
@@ -279,12 +284,12 @@ get_pod_logs () {
     JOB_NAME=$(${EXE} get pod ${POD} -n ${NS} -o jsonpath="{.metadata.ownerReferences[?(@.kind == 'Job')].name}" | cleanOutput)
     if [ "${JOB_NAME}" ]; then
         printf "  Gathering Job logs" | printAndLog
-        ${EXE} logs "${POD}" -n "${NS}" > "${POD_DIR}/${JOB_NAME}.log"
+        ${EXE} logs "${POD}" -n "${NS}" --since="${SINCE}h" ${PARAMS} > "${POD_DIR}/${JOB_NAME}.log"
         printDoneAndLog
     else
         for CONTAINER in ${CONTAINERS[@]}; do
             get_container_diagnostics "${NS}" "${POD}" "${CONTAINER}" "${POD_DIR}"
-            get_container_logs "${NS}" "${POD}" "${CONTAINER}" "${POD_DIR}"
+            get_container_logs "${NS}" "${POD}" "${CONTAINER}" "${POD_DIR}" "${PARAMS}"
         done
     fi
 }
@@ -315,13 +320,14 @@ get_container_logs () {
     POD="${2}"
     CONTAINER="${3}"
     DIR="${4}"
+    PARAMS="${5}"
     printf "    Gathering container logs" | printAndLog
-    ${EXE} logs "${POD}" -n "${NS}" -c "${CONTAINER}" > "${DIR}/container_log-${CONTAINER}.log"
+    ${EXE} logs "${POD}" -n "${NS}" -c "${CONTAINER}" --since="${SINCE}h" ${PARAMS} > "${DIR}/container_log-${CONTAINER}.log"
     printDoneAndLog
     RESTART_COUNT=$(${EXE} get pod ${POD} -n ${NS} -o jsonpath="{.status.containerStatuses[?(@.name == \"${CONTAINER}\")].restartCount}" | cleanOutput)
     if [ "${RESTART_COUNT}" -ne 0 ]; then
         printf "    Gathering previous container logs" | printAndLog
-        ${EXE} logs "${POD}" -n "${NS}" -c "${CONTAINER}" --previous > "${DIR}/previous_container_log-${CONTAINER}.log"
+        ${EXE} logs "${POD}" -n "${NS}" -c "${CONTAINER}" --previous --limit-bytes=10000000 ${PARAMS} > "${DIR}/previous_container_log-${CONTAINER}.log"
         printDoneAndLog
     fi
 }
@@ -383,6 +389,7 @@ printDoneAndLog
 for COMPONENT_LABEL in ${COMPONENT_LABELS[@]}; do
     PODS=$(${EXE} get pods -n ${NAMESPACE} -l ${RELEASE_LABEL} -l ${COMPONENT_LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
     for POD in ${PODS[@]}; do
+        echo "${NAMESPACE} ${POD}"
         get_pod_logs "${NAMESPACE}" "${POD}"
     done 
 done
@@ -518,13 +525,13 @@ printDoneAndLog
 printf "Gather etcd diagnostics if applicable\n" | printAndLog
 ETCD_POD_NAMES=$(${EXE} get pods -n openshift-etcd --no-headers -o custom-columns=":metadata.name" | cleanOutput)
 for ETCD_POD_NAME in ${ETCD_POD_NAMES[@]}; do
-    get_pod_logs openshift-etcd "${ETCD_POD_NAME}"
+    get_pod_logs openshift-etcd "${ETCD_POD_NAME}" "--timestamps"
 done
 
 printf "Gather openshift-dns logs if applicable\n" | printAndLog
 DNS_PODS=$(${EXE} get pods -n openshift-dns --no-headers -o custom-columns=":metadata.name" | cleanOutput)
 for POD in ${DNS_PODS[@]}; do
-    get_pod_logs openshift-dns "${POD}"
+    get_pod_logs openshift-dns "${POD}" "--timestamps"
 done
 
 # NOTE: bellow need to be moved to legacy and new versions added when adding operator pieces
@@ -532,13 +539,13 @@ printf "Gather kube system dependency logs if applicable\n" | printAndLog
 for COMPONENT in ${KUBE_SYSTEM_COMPONENTS[@]}; do
     KUBE_SYSTEM_POD_NAMES=$(${EXE} get pods -n kube-system -l component=${COMPONENT} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
     for POD in ${KUBE_SYSTEM_POD_NAMES[@]}; do
-        get_pod_logs kube-system "${POD}"
+        get_pod_logs kube-system "${POD}" "--timestamps"
     done 
 done
 for APP in ${KUBE_SYSTEM_APPS[@]}; do
     KUBE_SYSTEM_POD_NAMES=$(${EXE} get pods -n kube-system -l app=${APP} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
     for POD in ${KUBE_SYSTEM_POD_NAMES[@]}; do
-        get_pod_logs kube-system "${POD}"
+        get_pod_logs kube-system "${POD}" "--timestamps"
     done 
 done
 
@@ -555,7 +562,7 @@ printDoneAndLog
 printf "Gather kube etcd diagnostics if applicable\n" | printAndLog
 KUBE_ETCD_POD_NAMES=$(${EXE} get pods -n kube-system --no-headers -o custom-columns=":metadata.name" | cleanOutput | grep "k8s-etcd-" || true )
 for POD_NAME in ${KUBE_ETCD_POD_NAMES[@]}; do
-    get_pod_logs kube-system "${POD_NAME}"
+    get_pod_logs kube-system "${POD_NAME}" "--timestamps"
 done
 
 printf "Gather legacy certgen diagnostics if applicable\n" | printAndLog
