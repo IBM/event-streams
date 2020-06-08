@@ -18,11 +18,12 @@ The following Kibana dashboards can be used to help monitor problems with the un
 Follow the following steps to install the Event Streams Kibana Dashboards:
 
 1. Download `Event Streams Kibana Dashboard.json` from the repo.
-2. Navigate to the IBM Cloud Private console homepage.
-3. Click the sandwich icon on the top left of the screen to bring up the drop down menu.
-4. Click the `Platform` tile in the dropdown menu to bring up another dropdown menu.
-5. Click the `Logging` tile from the inner dropdown menu to navigate you to the Kibana homepage.
-6. Click the `Management` tab on the left hand side menu.
-7. Click on the `Saved Objects`.
-8. Click the `Import` icon and navigate the `Event Streams Kibana Dashboard.json` that you have downloaded.
-9. Click on the `Dashboard` tab on the left hand side menu and you should see the downloaded dashboards.
+2. Log into the IBM Cloud Private UI.
+3. Navigate to the IBM Cloud Private console homepage.
+4. Click the sandwich icon on the top left of the screen to bring up the drop down menu.
+5. Expand the `Platform` tile in the dropdown menu.
+6. Click the `Logging` tile from the inner dropdown menu to navigate you to the Kibana homepage.
+7. Click the `Management` tab on the left hand side menu.
+8. Click on the `Saved Objects`.
+9. Click the `Import` icon and navigate the `Event Streams Kibana Dashboard.json` that you have downloaded.
+10. Click on the `Dashboard` tab on the left hand side menu and you should see the downloaded dashboards.
