@@ -448,7 +448,7 @@ for POD in ${NAMESPACE_OPERATOR_PODS[@]}; do
     get_pod_logs "${NAMESPACE}" "${POD}"
 done 
 for POD in ${GLOBAL_OPERATOR_PODS[@]}; do
-    get_pod_logs "${NAMESPACE}" "${POD}"
+    get_pod_logs "openshift-operators" "${POD}"
 done 
 
 # Gather container logs/descriptions/manifests for ES components
