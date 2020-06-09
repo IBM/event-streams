@@ -11,7 +11,7 @@
 #
 
 PROGRAM_NAME="${0}"
-VERSION="2020.1.4"
+VERSION="2020.2.1"
 DATE=`date +%d-%m-%y`
 TIME=`date +%H-%M-%S`
 
@@ -100,10 +100,75 @@ printDoneAndLog () {
 }
 
 ####################################################################################################
-# Configuration
+# Operator Configuration
 ####################################################################################################
 
-declare -a ES_HELM_COMPONENT_LABELS=(
+declare -a OPERATOR_RESOURCES=(
+    "networkpolicies"
+    "services"
+    "persistentvolumeclaims"
+    "configmaps"
+    "statefulsets"
+    "deployments"
+    "secrets"
+    "routes"
+)
+
+declare -a OPERATOR_GLOBAL_RESOURCES=(
+    "nodes"
+    "persistentvolumes"
+    "storageclasses"
+)
+
+declare -a OPERATOR_COMPONENT_LABELS=(
+    "app.kubernetes.io/name=admin-api"
+    "app.kubernetes.io/name=admin-ui"
+    "app.kubernetes.io/name=entity-operator"
+    "app.kubernetes.io/name=kafka"
+    "app.kubernetes.io/name=kafka-mirror-maker-2"
+    "app.kubernetes.io/name=metrics"
+    "app.kubernetes.io/name=rest-producer"
+    "app.kubernetes.io/name=schema-registry"
+    "app.kubernetes.io/name=zookeeper"
+)
+
+declare -a OPERATOR_SUPPORTING_COMPONENTS_LABELS=(
+    "component=auth-idp"
+    "component=auth-pap"
+    "component=auth-pdp"
+)
+
+declare -a OPERATOR_CERT_SECRETS=(
+    "ibm-es-admapi-cert"
+    "ibm-es-recapi-cert"
+    "ibm-es-schema-cert"
+    "ibm-es-metrics-cert"
+    "cluster-ca-cert"
+    "kafka-brokers"
+)
+
+####################################################################################################
+# Helm Configuration
+####################################################################################################
+
+declare -a HELM_RESOURCES=(
+    "networkpolicies"
+    "services"
+    "persistentvolumeclaims"
+    "configmaps"
+    "statefulsets"
+    "deployments"
+    "secrets"
+    "routes"
+)
+
+declare -a HELM_GLOBAL_RESOURCES=(
+    "nodes"
+    "persistentvolumes"
+    "storageclasses"
+)
+
+declare -a HELM_COMPONENT_LABELS=(
     "component=collector"
     "component=elastic"
     "component=essential"
@@ -120,53 +185,22 @@ declare -a ES_HELM_COMPONENT_LABELS=(
     "component=zookeeper"
 )
 
-declare -a RESOURCES=(
-    "networkpolicies"
-    "services"
-    "persistentvolumeclaims"
-    "configmaps"
-    "statefulsets"
-    "deployments"
-    "secrets"
-    "routes"
-)
-
-declare -a GLOBAL_RESOURCES=(
-    "nodes"
-    "persistentvolumes"
-    "storageclasses"
-)
-
-
-declare -a EXTERNAL_ENDPOINTS_SERVICES=(
+declare -a HELM_EXTERNAL_ENDPOINTS_SERVICES=(
     "ibm-es-ui-svc"
     "ibm-es-rest-proxy-external-svc"
     "ibm-es-proxy-svc"
 )
 
-
-declare -a KUBE_SYSTEM_COMPONENTS=(
-    "auth-idp"
-    "auth-pap"
-    "auth-pdp"
+declare -a HELM_SUPPORTING_COMPONENTS_LABELS=(
+    "component=auth-idp"
+    "component=auth-pap"
+    "component=auth-pdp"
+    "app=helm"
+    "app=kube-dns"
 )
 
-declare -a KUBE_SYSTEM_APPS=(
-    "helm"
-    "kube-dns"
-)
-
-declare -a CERT_SECRETS=(
+declare -a HELM_CERT_SECRETS=(
     "ibm-es-proxy-secret"
-)
-
-declare -a CERTIFICATES_KEYS=(
-    "https\.cert"
-    "podtls\.cert"
-    "podtls\.cacert"
-    "tls\.cert"
-    "tls\.cluster"
-    "tls\.cacert"
 )
 
 ####################################################################################################
@@ -200,8 +234,6 @@ if [ -z "${NAMESPACE}" ] || [ -z "${RELEASE}" ]; then
     usage
     exit 1
 fi
-
-ES_HELM_RELEASE_LABEL="release=${RELEASE}"
 
 # Check to see if the log output directory can be created
 LOGDIR="es-diagnostics-${DATE}_${TIME}"
@@ -255,6 +287,30 @@ else
     printDoneAndLog
 fi
 
+# Check to see if referenced release is operator or helm and setting up accordingly
+printf "Checking if release is from operator" | printAndLog
+IS_OPERATOR_RELEASE=$(${EXE} get es ${RELEASE} &> /dev/null; echo ${?})
+if [ "${IS_OPERATOR_RELEASE}" -eq 0 ]; then
+    RELEASE_LABEL="eventstreams.ibm.com/cluster=${RELEASE}"
+    SUPPORTING_COMPONENTS_NAMESPACE="ibm-common-services"
+    RESOURCES=("${OPERATOR_RESOURCES[@]}")
+    GLOBAL_RESOURCES=("${OPERATOR_GLOBAL_RESOURCES[@]}")
+    COMPONENT_LABELS=("${OPERATOR_COMPONENT_LABELS[@]}")
+    EXTERNAL_ENDPOINTS_SERVICES=("${OPERATOR_EXTERNAL_ENDPOINTS_SERVICES[@]}")
+    CERT_SECRETS=("${OPERATOR_CERT_SECRETS[@]}")
+    SUPPORTING_COMPONENTS_LABELS=("${OPERATOR_SUPPORTING_COMPONENTS_LABELS[@]}")
+else
+    RELEASE_LABEL="release=${RELEASE}"
+    SUPPORTING_COMPONENTS_NAMESPACE="kube-system"
+    RESOURCES=("${HELM_RESOURCES[@]}")
+    GLOBAL_RESOURCES=("${HELM_GLOBAL_RESOURCES[@]}")
+    COMPONENT_LABELS=("${HELM_COMPONENT_LABELS[@]}")
+    EXTERNAL_ENDPOINTS_SERVICES=("${HELM_EXTERNAL_ENDPOINTS_SERVICES[@]}")
+    CERT_SECRETS=("${HELM_CERT_SECRETS[@]}")
+    SUPPORTING_COMPONENTS_LABELS=("${HELM_SUPPORTING_COMPONENTS_LABELS[@]}")
+fi
+printDoneAndLog
+
 ####################################################################################################
 # Final steps before starting
 ####################################################################################################
@@ -266,8 +322,6 @@ printYellow "this script a second time if the final message 'COMPLETE' is not sh
 printYellow "***********************************************************************\n\n"
 
 # Perpare and begin diasnostics collection
-RELEASE_LABEL="${ES_HELM_RELEASE_LABEL}"
-COMPONENT_LABELS=("${ES_HELM_COMPONENT_LABELS[@]}")
 printf "Diagnostics collection v${VERSION} started at ${DATE}_${TIME} for release: ${RELEASE} in namespace: ${NAMESPACE}\n" | printAndLog
 
 ####################################################################################################
@@ -377,8 +431,8 @@ get_external_endpoint_cert () {
 # Gather logs/descriptions/manifests for the namespace
 ####################################################################################################
 
-# Gather information about the release as a whole - namespaces, nodes, pods etc.
-printf "Gathering overview information" | printAndLog
+# Gather information about the namespaces as a whole - pods etc.
+printf "Gathering namespace overview information" | printAndLog
 ${EXE} get pods -n "${NAMESPACE}" -o wide -L zone > "${LOGDIR}/es-pods.log"
 ${EXE} get pods -n "${NAMESPACE}" -o json > "${LOGDIR}/es-pods-json.json"
 printDoneAndLog
@@ -387,11 +441,20 @@ printDoneAndLog
 # Gather logs/descriptions/manifests for the desired release
 ####################################################################################################
 
+printf "Gathering operator pod logs" | printAndLog
+NAMESPACE_OPERATOR_PODS=$(${EXE} get pods -n ${NAMESPACE} -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+GLOBAL_OPERATOR_PODS=$(${EXE} get pods -n openshift-operators -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+for POD in ${NAMESPACE_OPERATOR_PODS[@]}; do
+    get_pod_logs "${NAMESPACE}" "${POD}"
+done 
+for POD in ${GLOBAL_OPERATOR_PODS[@]}; do
+    get_pod_logs "openshift-operators" "${POD}"
+done 
+
 # Gather container logs/descriptions/manifests for ES components
 for COMPONENT_LABEL in ${COMPONENT_LABELS[@]}; do
     PODS=$(${EXE} get pods -n ${NAMESPACE} -l ${RELEASE_LABEL} -l ${COMPONENT_LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
     for POD in ${PODS[@]}; do
-        echo "${NAMESPACE} ${POD}"
         get_pod_logs "${NAMESPACE}" "${POD}"
     done 
 done
@@ -437,20 +500,31 @@ for SECRET in ${CERT_SECRETS[@]}; do
     SECRET_NAME="${RELEASE}-${SECRET}"
     CERT_DIR="${LOGDIR}/${SECRET_NAME}-certificates"
     mkdir -p "${CERT_DIR}"
-    for CERTIFICATE_KEY in ${CERTIFICATES_KEYS[@]}; do
-        NAME=$(echo ${CERTIFICATE_KEY} | tr -d '\\')
-        printf "  Get encoded certificate: ${NAME}" | printAndLog
-        ${EXE} get secret -n "${NAMESPACE}" "${SECRET_NAME}" -o=jsonpath="{.data.${CERTIFICATE_KEY}}" > "${CERT_DIR}/${NAME}"
-        printDoneAndLog
-        analyse_cert "${CERT_DIR}" "${NAME}"
+    DATA_MAP=($(oc get secret ${SECRET_NAME} -o=jsonpath="{.data}" | cut -d '[' -f2 | tr -d '[]' | cleanOutput))
+    for DATUM in ${DATA_MAP[@]}; do
+        NAME=$(cut -d ':' -f1 <<< ${DATUM})
+        VALUE=$(cut -d ':' -f2 <<< ${DATUM})
+        case ${NAME} in
+            *.crt|*.cert|*.cacert)
+                printf "  Got encoded certificate: ${NAME}" | printAndLog
+                printf "${VALUE}" > "${CERT_DIR}/${NAME}"
+                printDoneAndLog
+                analyse_cert "${CERT_DIR}" "${NAME}"
+                ;;
+            *)
+                ;;
+        esac
     done
 done
 
-## NOTE: this make no sense in operator
-printf "Gathering external host address" | printAndLog
-PROXY_CM_MAP=$(${EXE} get cm -n ${NAMESPACE} -l ${RELEASE_LABEL} -l component=proxy --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-HOST=$(${EXE} get cm -n ${NAMESPACE} ${PROXY_CM_MAP} -o jsonpath="{.data.externalHostOrIP}" | cleanOutput)
-printDoneAndLog
+HOST="localhost"
+# determine the external hostname of cluster. Currently only routes for operator so doesn't matter
+if [ "${IS_OPERATOR_RELEASE}" -ne 0 ]; then
+    printf "Gathering external host address" | printAndLog
+    PROXY_CM_MAP=$(${EXE} get cm -n ${NAMESPACE} -l ${RELEASE_LABEL} -l component=proxy --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    HOST=$(${EXE} get cm -n ${NAMESPACE} ${PROXY_CM_MAP} -o jsonpath="{.data.externalHostOrIP}" | cleanOutput)
+    printDoneAndLog
+fi
 
 printf "Gathering certs from external services\n" | printAndLog
 EXTERNAL_PRESENTED_CERTS_DIR="${LOGDIR}/presented-certificates-external"
@@ -478,9 +552,6 @@ if [ "${HAS_ROUTES}" -eq 0 ]; then
         get_external_endpoint_cert "${ADDRESS}:443" "${EXTERNAL_PRESENTED_CERTS_DIR}/${ROUTE}.log"
     fi
     done
-    printDoneAndLog
-else
-    printDoneAndLog
 fi
 
 # ####################################################################################################
@@ -489,33 +560,15 @@ fi
 
 ${EXE} get namespaces > "${LOGDIR}/namespaces.log"
 ${EXE} get nodes --show-labels -o wide > "${LOGDIR}/nodes.log"
-${EXE} get pods -n kube-system  > "${LOGDIR}/kube-system-pods.log"
+${EXE} get pods -n ${SUPPORTING_COMPONENTS_NAMESPACE}  > "${LOGDIR}/${SUPPORTING_COMPONENTS_NAMESPACE}-pods.log"
 
-# If Helm is present collect the helm history and values for the release. If it is not continue to the next step
-HELM_PRESENCE=$(command -v helm > /dev/null; echo ${?})
-if [ "${HELM_PRESENCE}" -ne 0 ]; then
-    printYellowAndLog '\n  Helm is desirable for diagnostics but absent on this system - continuing...\t[SKIP]\n'
-else
-    printf "Checking Helm client capability\n" | printAndLog
-    HELM_OK=$(helm history ${RELEASE} --tls > /dev/null; echo ${?})
-    if [ "${HELM_OK}" -ne 0 ]; then
-        printRedAndLog 'Helm client is not able to comminicate with the cluster - continuing...\t[ERR]\n'
-    else
-        printf "  Gathering Helm history" | printAndLog
-        HELM_DIR="${LOGDIR}/helm"
-        mkdir -p "${HELM_DIR}"
-        helm history "${RELEASE}" --tls > "${HELM_DIR}/helm_history.log"
-        printDoneAndLog
-
-        printf "  Gathering Helm values" | printAndLog
-        helm get values "${RELEASE}" --tls > "${HELM_DIR}/helm_values.log"
-        CERT_VALUE_LINE=$(eval grep -n -w "cert:" ${HELM_DIR}/helm_values.log | cut -f1 -d:)
-        KEY_VALUE_LINE=$(eval grep -n -w "key:" ${HELM_DIR}/helm_values.log | cut -f1 -d:)
-        [ ! -z "${CERT_VALUE_LINE}" ] && (sed -i '' -e "${CERT_VALUE_LINE}s/.*/  cert: REDACTED/" "${HELM_DIR}/helm_values.log" || true )
-        [ ! -z "${KEY_VALUE_LINE}" ] && (sed -i '' -e "${KEY_VALUE_LINE}s/.*/  key: REDACTED/" "${HELM_DIR}/helm_values.log" || true )
-        printDoneAndLog
-    fi
-fi
+printf "Gathering common services operator pod logs" | printAndLog
+CS_OPERATOR_PODS_NAMESPACES=$(${EXE} get pods --all-namespaces -l app.kubernetes.io/name=ibm-common-service-operator --no-headers -o custom-columns=":metadata.namespace" | cleanOutput)
+CS_OPERATOR_PODS_NAMES=$(${EXE} get pods --all-namespaces -l app.kubernetes.io/name=ibm-common-service-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+LENGTH=${#CS_OPERATOR_PODS_NAMES[@]}
+for (( i=0; i<${LENGTH}; i++ )); do
+   get_pod_logs "${CS_OPERATOR_PODS_NAMESPACES[${i}]}" "${CS_OPERATOR_PODS_NAMES[${i}]}"
+done
 
 printf "Gathering kube-public configmap(s)" | printAndLog
 CONFIGMAP_NAMES=$(${EXE} get configmaps -n kube-public --no-headers -o custom-columns=":metadata.name" | cleanOutput)
@@ -536,48 +589,70 @@ for POD in ${DNS_PODS[@]}; do
     get_pod_logs openshift-dns "${POD}" "--timestamps"
 done
 
-# NOTE: bellow need to be moved to legacy and new versions added when adding operator pieces
-printf "Gather kube system dependency logs if applicable\n" | printAndLog
-for COMPONENT in ${KUBE_SYSTEM_COMPONENTS[@]}; do
-    KUBE_SYSTEM_POD_NAMES=$(${EXE} get pods -n kube-system -l component=${COMPONENT} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-    for POD in ${KUBE_SYSTEM_POD_NAMES[@]}; do
-        get_pod_logs kube-system "${POD}" "--timestamps"
-    done 
-done
-for APP in ${KUBE_SYSTEM_APPS[@]}; do
-    KUBE_SYSTEM_POD_NAMES=$(${EXE} get pods -n kube-system -l app=${APP} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-    for POD in ${KUBE_SYSTEM_POD_NAMES[@]}; do
-        get_pod_logs kube-system "${POD}" "--timestamps"
+printf "Gather supporting component logs if applicable\n" | printAndLog
+for COMPONENT_LABEL in ${SUPPORTING_COMPONENTS_LABELS[@]}; do
+    SUPPORTING_POD_NAMES=$(${EXE} get pods -n ${SUPPORTING_COMPONENTS_NAMESPACE} -l ${COMPONENT_LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    for POD in ${SUPPORTING_POD_NAMES[@]}; do
+        get_pod_logs ${SUPPORTING_COMPONENTS_NAMESPACE} "${POD}" "--timestamps"
     done 
 done
 
 printf "Gather kubectl top diagnostics" | printAndLog
 [ "${EXE}" == "oc" ] && TOP_COMMAND_DELTA="adm"
-${EXE} ${TOP_COMMAND_DELTA} top pods -n kube-system -l app=icp-mongodb > "${LOGDIR}/mongodb-resource-usage.log"
 ${EXE} ${TOP_COMMAND_DELTA} top nodes > "${LOGDIR}/nodes-resource-usage.log"
+${EXE} ${TOP_COMMAND_DELTA} top pods -n ${SUPPORTING_COMPONENTS_NAMESPACE} -l app=icp-mongodb > "${LOGDIR}/mongodb-resource-usage.log"
 printDoneAndLog
 
 ####################################################################################################
 # Legacy gathering. Move legacy gathering under here
 ####################################################################################################
 
-printf "Gather kube etcd diagnostics if applicable\n" | printAndLog
-KUBE_ETCD_POD_NAMES=$(${EXE} get pods -n kube-system --no-headers -o custom-columns=":metadata.name" | cleanOutput | grep "k8s-etcd-" || true )
-for POD_NAME in ${KUBE_ETCD_POD_NAMES[@]}; do
-    get_pod_logs kube-system "${POD_NAME}" "--timestamps"
-done
+if [ "${IS_OPERATOR_RELEASE}" -ne 0 ]; then
 
-printf "Gather legacy certgen diagnostics if applicable\n" | printAndLog
-LEGACY_CERT_GEN_POD_NAMES=$(${EXE} get pods -n kube-system -l component=essential -l ${RELEASE_LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-for POD_NAME in ${LEGACY_CERT_GEN_POD_NAMES[@]}; do
-    get_pod_logs kube-system "${POD_NAME}"
-done
+    # If Helm is present collect the helm history and values for the release. If it is not continue to the next step
+    HELM_PRESENCE=$(command -v helm > /dev/null; echo ${?})
+    if [ "${HELM_PRESENCE}" -ne 0 ]; then
+        printYellowAndLog '\n  Helm is desirable for diagnostics but absent on this system - continuing...\t[SKIP]\n'
+    else
+        printf "Checking Helm client capability\n" | printAndLog
+        HELM_OK=$(helm history ${RELEASE} --tls > /dev/null; echo ${?})
+        if [ "${HELM_OK}" -ne 0 ]; then
+            printRedAndLog 'Helm client is not able to comminicate with the cluster - continuing...\t[ERR]\n'
+        else
+            printf "  Gathering Helm history" | printAndLog
+            HELM_DIR="${LOGDIR}/helm"
+            mkdir -p "${HELM_DIR}"
+            helm history "${RELEASE}" --tls > "${HELM_DIR}/helm_history.log"
+            printDoneAndLog
 
-printf "Gather legacy oauth diagnostics if applicable\n" | printAndLog
-LEGACY_OAUTH_POD_NAMES=$(${EXE} get pods -n kube-system -l component=ui -l ${RELEASE_LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-for POD_NAME in ${LEGACY_OAUTH_POD_NAMES[@]}; do
-    get_pod_logs kube-system "${POD_NAME}"
-done
+            printf "  Gathering Helm values" | printAndLog
+            helm get values "${RELEASE}" --tls > "${HELM_DIR}/helm_values.log"
+            CERT_VALUE_LINE=$(eval grep -n -w "cert:" ${HELM_DIR}/helm_values.log | cut -f1 -d:)
+            KEY_VALUE_LINE=$(eval grep -n -w "key:" ${HELM_DIR}/helm_values.log | cut -f1 -d:)
+            [ ! -z "${CERT_VALUE_LINE}" ] && (sed -i '' -e "${CERT_VALUE_LINE}s/.*/  cert: REDACTED/" "${HELM_DIR}/helm_values.log" || true )
+            [ ! -z "${KEY_VALUE_LINE}" ] && (sed -i '' -e "${KEY_VALUE_LINE}s/.*/  key: REDACTED/" "${HELM_DIR}/helm_values.log" || true )
+            printDoneAndLog
+        fi
+    fi
+
+    printf "Gather kube etcd diagnostics if applicable\n" | printAndLog
+    KUBE_ETCD_POD_NAMES=$(${EXE} get pods -n kube-system --no-headers -o custom-columns=":metadata.name" | cleanOutput | grep "k8s-etcd-" || true )
+    for POD_NAME in ${KUBE_ETCD_POD_NAMES[@]}; do
+        get_pod_logs kube-system "${POD_NAME}" "--timestamps"
+    done
+
+    printf "Gather legacy certgen diagnostics if applicable\n" | printAndLog
+    LEGACY_CERT_GEN_POD_NAMES=$(${EXE} get pods -n kube-system -l component=essential -l ${RELEASE_LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    for POD_NAME in ${LEGACY_CERT_GEN_POD_NAMES[@]}; do
+        get_pod_logs kube-system "${POD_NAME}"
+    done
+
+    printf "Gather legacy oauth diagnostics if applicable\n" | printAndLog
+    LEGACY_OAUTH_POD_NAMES=$(${EXE} get pods -n kube-system -l component=ui -l ${RELEASE_LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    for POD_NAME in ${LEGACY_OAUTH_POD_NAMES[@]}; do
+        get_pod_logs kube-system "${POD_NAME}"
+    done
+fi
 
 ####################################################################################################
 # Gathering finished package and finish
