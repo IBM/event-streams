@@ -11,7 +11,7 @@
 #
 
 PROGRAM_NAME="${0}"
-VERSION="2020.2.3"
+VERSION="2020.2.4"
 DATE=`date +%d-%m-%y`
 TIME=`date +%H-%M-%S`
 
@@ -615,10 +615,6 @@ if [ "${HAS_ROUTES}" -eq 0 ]; then
     done
 fi
 
-printf "Gathering events in the namespace" | printAndLog
-oc get events -n "${NAMESPACE}" -o wide --sort-by='{.lastTimestamp}' > "${LOGDIR}/${NAMESPACE}-events.log"
-printDoneAndLog
-
 # ####################################################################################################
 # # Gather logs/descriptions/manifests for supporting elements. Helm, ICP, CS etc.
 # ####################################################################################################
@@ -662,8 +658,8 @@ for COMPONENT_LABEL in ${SUPPORTING_COMPONENTS_LABELS[@]}; do
     done 
 done
 
-printf "Gathering events in the ${SUPPORTING_COMPONENTS_NAMESPACE} namespace" | printAndLog
-oc get events -n "${SUPPORTING_COMPONENTS_NAMESPACE}" -o wide --sort-by='{.lastTimestamp}' > "${LOGDIR}/${SUPPORTING_COMPONENTS_NAMESPACE}-events.log"
+printf "Gathering events in all namespaces" | printAndLog
+oc get events --all-namespaces -o wide > "${LOGDIR}/all-events.log"
 printDoneAndLog
 
 printf "Gather node logs if applicable\n" | printAndLog
