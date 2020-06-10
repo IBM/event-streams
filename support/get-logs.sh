@@ -133,6 +133,12 @@ declare -a OPERATOR_COMPONENT_LABELS=(
     "app.kubernetes.io/name=zookeeper"
 )
 
+declare -a OPERATOR_PERSISTENT_COMPONENT_LABELS=(
+    "app.kubernetes.io/name=kafka"
+    "app.kubernetes.io/name=schema-registry"
+    "app.kubernetes.io/name=zookeeper"
+)
+
 declare -a OPERATOR_SUPPORTING_COMPONENTS_LABELS=(
     "component=auth-idp"
     "component=auth-pap"
@@ -183,6 +189,12 @@ declare -a HELM_COMPONENT_LABELS=(
     "component=schemaregistry"
     "component=security"
     "component=ui"
+    "component=zookeeper"
+)
+
+declare -a HELM_PERSISTENT_COMPONENT_LABELS=(
+    "component=kafka"
+    "component=schemaregistry"
     "component=zookeeper"
 )
 
@@ -288,13 +300,14 @@ fi
 
 # Check to see if referenced release is operator or helm and setting up accordingly
 printf "Checking if release is from operator" | printAndLog
-IS_OPERATOR_RELEASE=$(${EXE} get es ${RELEASE} &> /dev/null; echo ${?})
+IS_OPERATOR_RELEASE=$(${EXE} get es -n ${NAMESPACE} ${RELEASE} &> /dev/null; echo ${?})
 if [ "${IS_OPERATOR_RELEASE}" -eq 0 ]; then
     RELEASE_LABEL="eventstreams.ibm.com/cluster=${RELEASE}"
     SUPPORTING_COMPONENTS_NAMESPACE="ibm-common-services"
     RESOURCES=("${OPERATOR_RESOURCES[@]}")
     GLOBAL_RESOURCES=("${OPERATOR_GLOBAL_RESOURCES[@]}")
     COMPONENT_LABELS=("${OPERATOR_COMPONENT_LABELS[@]}")
+    PERSISTENT_COMPONENT_LABELS=("${OPERATOR_PERSISTENT_COMPONENT_LABELS[@]}")
     EXTERNAL_ENDPOINTS_SERVICES=("${OPERATOR_EXTERNAL_ENDPOINTS_SERVICES[@]}")
     CERT_SECRETS=("${OPERATOR_CERT_SECRETS[@]}")
     SUPPORTING_COMPONENTS_LABELS=("${OPERATOR_SUPPORTING_COMPONENTS_LABELS[@]}")
@@ -304,6 +317,7 @@ else
     RESOURCES=("${HELM_RESOURCES[@]}")
     GLOBAL_RESOURCES=("${HELM_GLOBAL_RESOURCES[@]}")
     COMPONENT_LABELS=("${HELM_COMPONENT_LABELS[@]}")
+    PERSISTENT_COMPONENT_LABELS=("${HELM_PERSISTENT_COMPONENT_LABELS[@]}")
     EXTERNAL_ENDPOINTS_SERVICES=("${HELM_EXTERNAL_ENDPOINTS_SERVICES[@]}")
     CERT_SECRETS=("${HELM_CERT_SECRETS[@]}")
     SUPPORTING_COMPONENTS_LABELS=("${HELM_SUPPORTING_COMPONENTS_LABELS[@]}")
@@ -426,6 +440,21 @@ get_external_endpoint_cert () {
     fi
 }
 
+check_pvc () {
+    NS="${1}"
+    PVC="${2}"
+    PHASE=$(${EXE} get pvc -n ${NS} ${PVC} --no-headers -o=jsonpath="{.status.phase}" | cleanOutput)
+    VOLUME=$(${EXE} get pvc -n ${NS} ${PVC} --no-headers -o=jsonpath="{.spec.volumeName}" | cleanOutput)
+    VOLUME_EXISTS=$(${EXE} get pv ${VOLUME} --no-headers &> /dev/null; echo ${?})
+    if [ "${PHASE}" != "Bound" ]; then
+        printRedAndLog "  Persistence problem for pvc: ${PVC} phase is not Bound, is: ${PHASE}\n"
+    elif [ "${VOLUME_EXISTS}" -ne 0 ]; then
+        printRedAndLog "  Persistence problem for pvc: ${PVC} bound to volume ${VOLUME} which does not exist\n"
+    else 
+        printGreenAndLog "  Persistence is okay for pvc: ${PVC}\n"
+    fi
+}
+
 ####################################################################################################
 # Gather logs/descriptions/manifests for the namespace
 ####################################################################################################
@@ -440,7 +469,7 @@ printDoneAndLog
 # Gather logs/descriptions/manifests for the desired release
 ####################################################################################################
 
-printf "Gathering operator pod logs" | printAndLog
+printf "Gathering operator pod logs\n" | printAndLog
 NAMESPACE_OPERATOR_PODS=$(${EXE} get pods -n ${NAMESPACE} -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
 for POD in ${NAMESPACE_OPERATOR_PODS[@]}; do
     get_pod_logs "${NAMESPACE}" "${POD}"
@@ -450,6 +479,34 @@ GLOBAL_OPERATOR_PODS=$(${EXE} get pods -n openshift-operators -l app.kubernetes.
 for POD in ${GLOBAL_OPERATOR_PODS[@]}; do
     get_pod_logs "openshift-operators" "${POD}"
 done 
+
+for LABEL in ${PERSISTENT_COMPONENT_LABELS[@]}; do
+    printf "Checking for persistence for ${LABEL}\n" | printAndLog
+    PODS=$(${EXE} get pods -n ${NAMESPACE} -l ${RELEASE_LABEL} -l ${LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    TEMP_ARR=(${PODS[@]})
+    NUM_PODS=${#TEMP_ARR[@]}
+    PVCS=$(${EXE} get pvc -n ${NAMESPACE} -l ${RELEASE_LABEL} -l ${LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    TEMP_ARR=(${PVCS[@]})
+    NUM_PVCS=${#TEMP_ARR[@]}
+    if [ "${NUM_PVCS}" -eq 0 ]; then
+        printYellowAndLog "Persistence not enabled for ${LABEL}\n"
+    elif [ "${NUM_PODS}" -eq "${NUM_PVCS}" ]; then
+        for PVC in ${PVCS[@]}; do
+            printf "  Checking pvc ${PVC} for ${LABEL}\n" | printAndLog
+            check_pvc "${NAMESPACE}" "${PVC}"
+        done 
+    elif [ "${NUM_PVCS}" -eq 1 ]; then
+        ACCESS_MODE=$(${EXE} get pvc -n ${NAMESPACE} ${PVCS[0]} --no-headers -o=jsonpath="{.spec.accessModes}" | cleanOutput)
+        if [ "${ACCESS_MODE}" == "[ReadWriteMany]" ]; then
+            printf "  Checking pvc ${PVCS[0]} for ${LABEL}\n" | printAndLog
+            check_pvc "${NAMESPACE}" "${PVCS[0]}"
+        else
+            printRedAndLog "Persistence problem for ${LABEL}, there are ${NUM_PODS} pods with 1 ${ACCESS_MODE} pvc\n"
+        fi
+    else
+        printRedAndLog "Persistence problem for ${LABEL}, there are ${NUM_PODS} pods and ${NUM_PVCS} pvcs\n"
+    fi
+done
 
 # Gather container logs/descriptions/manifests for ES components
 for COMPONENT_LABEL in ${COMPONENT_LABELS[@]}; do
@@ -500,7 +557,7 @@ for SECRET in ${CERT_SECRETS[@]}; do
     SECRET_NAME="${RELEASE}-${SECRET}"
     CERT_DIR="${LOGDIR}/${SECRET_NAME}-certificates"
     mkdir -p "${CERT_DIR}"
-    DATA_MAP=($(oc get secret ${SECRET_NAME} -o=jsonpath="{.data}" | cut -d '[' -f2 | tr -d '[]' | cleanOutput))
+    DATA_MAP=($(oc get secret -n ${NAMESPACE} ${SECRET_NAME} -o=jsonpath="{.data}" | cut -d '[' -f2 | tr -d '[]' | cleanOutput))
     for DATUM in ${DATA_MAP[@]}; do
         NAME=$(cut -d ':' -f1 <<< ${DATUM})
         VALUE=$(cut -d ':' -f2 <<< ${DATUM})
@@ -568,7 +625,8 @@ ${EXE} get pods -n ${SUPPORTING_COMPONENTS_NAMESPACE}  > "${LOGDIR}/${SUPPORTING
 printf "Gathering common services operator pod logs" | printAndLog
 CS_OPERATOR_PODS_NAMESPACES=$(${EXE} get pods --all-namespaces -l app.kubernetes.io/name=ibm-common-service-operator --no-headers -o custom-columns=":metadata.namespace" | cleanOutput)
 CS_OPERATOR_PODS_NAMES=$(${EXE} get pods --all-namespaces -l app.kubernetes.io/name=ibm-common-service-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-LENGTH=${#CS_OPERATOR_PODS_NAMES[@]}
+TEMP_ARR=(${CS_OPERATOR_PODS_NAMES[@]})
+LENGTH=${#TEMP_ARR[@]}
 for (( i=0; i<${LENGTH}; i++ )); do
    get_pod_logs "${CS_OPERATOR_PODS_NAMESPACES[${i}]}" "${CS_OPERATOR_PODS_NAMES[${i}]}"
 done
