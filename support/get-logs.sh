@@ -112,6 +112,7 @@ declare -a OPERATOR_RESOURCES=(
     "deployments"
     "secrets"
     "routes"
+    "client"
 )
 
 declare -a OPERATOR_GLOBAL_RESOURCES=(
@@ -244,16 +245,14 @@ if [ -d "${INVOCATION_DIR}/${LOGDIR}" ]; then
     exit 1
 fi
 
-# Check to see if kubectl or oc is available, prefers kubectl over oc
-EXE=kubectl
+# Check to see if kubectl or oc is available, prefer oc over kubectl
+EXE=oc
 printf "Checking for presence of kubectl or oc"
-command -v "${EXE}" > /dev/null
-KUBECTL_PRESENCE=$(echo ${?})
-if [ "${KUBECTL_PRESENCE}" -ne 0 ]; then
-    EXE=oc
-    command -v "${EXE}" > /dev/null
-    OC_PRESENCE=$(echo ${?})
-    if [ "${OC_PRESENCE}" -ne 0 ]; then
+OC_PRESENCE=$(command -v "${EXE}" > /dev/null; echo ${?})
+if [ "${OC_PRESENCE}" -ne 0 ]; then
+    EXE=kubectl
+    KUBECTL_PRESENCE=$(command -v "${EXE}" > /dev/null; echo ${?})
+    if [ "${KUBECTL_PRESENCE}" -ne 0 ]; then
         printRed 'You must have kubectl or oc installed to run diagnostics\n'
         exit 1
     fi
@@ -443,10 +442,11 @@ printDoneAndLog
 
 printf "Gathering operator pod logs" | printAndLog
 NAMESPACE_OPERATOR_PODS=$(${EXE} get pods -n ${NAMESPACE} -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-GLOBAL_OPERATOR_PODS=$(${EXE} get pods -n openshift-operators -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
 for POD in ${NAMESPACE_OPERATOR_PODS[@]}; do
     get_pod_logs "${NAMESPACE}" "${POD}"
 done 
+
+GLOBAL_OPERATOR_PODS=$(${EXE} get pods -n openshift-operators -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
 for POD in ${GLOBAL_OPERATOR_PODS[@]}; do
     get_pod_logs "openshift-operators" "${POD}"
 done 
@@ -554,12 +554,15 @@ if [ "${HAS_ROUTES}" -eq 0 ]; then
     done
 fi
 
+printf "Gathering events in the namespace" | printAndLog
+oc get events -n "${NAMESPACE}" -o wide --sort-by='{.lastTimestamp}' > "${LOGDIR}/${NAMESPACE}-events.log"
+printDoneAndLog
+
 # ####################################################################################################
 # # Gather logs/descriptions/manifests for supporting elements. Helm, ICP, CS etc.
 # ####################################################################################################
 
 ${EXE} get namespaces > "${LOGDIR}/namespaces.log"
-${EXE} get nodes --show-labels -o wide > "${LOGDIR}/nodes.log"
 ${EXE} get pods -n ${SUPPORTING_COMPONENTS_NAMESPACE}  > "${LOGDIR}/${SUPPORTING_COMPONENTS_NAMESPACE}-pods.log"
 
 printf "Gathering common services operator pod logs" | printAndLog
@@ -596,6 +599,24 @@ for COMPONENT_LABEL in ${SUPPORTING_COMPONENTS_LABELS[@]}; do
         get_pod_logs ${SUPPORTING_COMPONENTS_NAMESPACE} "${POD}" "--timestamps"
     done 
 done
+
+printf "Gathering events in the ${SUPPORTING_COMPONENTS_NAMESPACE} namespace" | printAndLog
+oc get events -n "${SUPPORTING_COMPONENTS_NAMESPACE}" -o wide --sort-by='{.lastTimestamp}' > "${LOGDIR}/${SUPPORTING_COMPONENTS_NAMESPACE}-events.log"
+printDoneAndLog
+
+printf "Gather node logs if applicable\n" | printAndLog
+if [ "${EXE}" == "oc" ]; then
+    RESOURCE_DIR="${LOGDIR}/node-logs"
+    mkdir -p "${RESOURCE_DIR}"
+    ITEM_NAMES=$(${EXE} get nodes --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    for ITEM_NAME in ${ITEM_NAMES[@]}; do
+        printf "Gathering logs for node: ${ITEM_NAME}" | printAndLog
+        # Only get last 12 hours. oc adm node-logs is strange. If you specify too much time or no time. It will just cut out at somepoint
+        # causing it to miss the most recent and arguably relevant logs. 12h is arbitrary but I have seen it complete with a healthy system
+        oc adm node-logs "${ITEM_NAME}" --since=-12h > "${RESOURCE_DIR}/${ITEM_NAME}.log"
+        printDoneAndLog
+    done
+fi
 
 printf "Gather kubectl top diagnostics" | printAndLog
 [ "${EXE}" == "oc" ] && TOP_COMMAND_DELTA="adm"
