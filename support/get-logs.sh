@@ -466,19 +466,8 @@ ${EXE} get pods -n "${NAMESPACE}" -o json > "${LOGDIR}/es-pods-json.json"
 printDoneAndLog
 
 ####################################################################################################
-# Gather logs/descriptions/manifests for the desired release
+# Run simple diagnostics against the release
 ####################################################################################################
-
-printf "Gathering operator pod logs\n" | printAndLog
-NAMESPACE_OPERATOR_PODS=$(${EXE} get pods -n ${NAMESPACE} -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-for POD in ${NAMESPACE_OPERATOR_PODS[@]}; do
-    get_pod_logs "${NAMESPACE}" "${POD}"
-done 
-
-GLOBAL_OPERATOR_PODS=$(${EXE} get pods -n openshift-operators -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
-for POD in ${GLOBAL_OPERATOR_PODS[@]}; do
-    get_pod_logs "openshift-operators" "${POD}"
-done 
 
 for LABEL in ${PERSISTENT_COMPONENT_LABELS[@]}; do
     printf "Checking for persistence for ${LABEL}\n" | printAndLog
@@ -507,6 +496,21 @@ for LABEL in ${PERSISTENT_COMPONENT_LABELS[@]}; do
         printRedAndLog "Persistence problem for ${LABEL}, there are ${NUM_PODS} pods and ${NUM_PVCS} pvcs\n"
     fi
 done
+
+####################################################################################################
+# Gather logs/descriptions/manifests for the desired release
+####################################################################################################
+
+printf "Gathering operator pod logs\n" | printAndLog
+NAMESPACE_OPERATOR_PODS=$(${EXE} get pods -n ${NAMESPACE} -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+for POD in ${NAMESPACE_OPERATOR_PODS[@]}; do
+    get_pod_logs "${NAMESPACE}" "${POD}"
+done 
+
+GLOBAL_OPERATOR_PODS=$(${EXE} get pods -n openshift-operators -l app.kubernetes.io/name=eventstreams-operator -l eventstreams.ibm.com/kind=cluster-operator --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+for POD in ${GLOBAL_OPERATOR_PODS[@]}; do
+    get_pod_logs "openshift-operators" "${POD}"
+done 
 
 # Gather container logs/descriptions/manifests for ES components
 for COMPONENT_LABEL in ${COMPONENT_LABELS[@]}; do
