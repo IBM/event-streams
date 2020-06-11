@@ -210,9 +210,9 @@ declare -a HELM_COMPONENT_LABELS=(
 )
 
 declare -a HELM_PERSISTENT_COMPONENT_LABELS=(
-    "component=kafka"
-    "component=schemaregistry"
-    "component=zookeeper"
+    "serviceSelector=kafka-sts"
+    "serviceSelector=schemaregistry-sts"
+    "serviceSelector=zookeeper-sts"
 )
 
 declare -a HELM_EXTERNAL_ENDPOINTS_SERVICES=(
