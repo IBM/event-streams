@@ -11,7 +11,7 @@
 #
 
 PROGRAM_NAME="${0}"
-VERSION="2020.2.4"
+VERSION="2020.2.5"
 DATE=`date +%d-%m-%y`
 TIME=`date +%H-%M-%S`
 
@@ -104,15 +104,19 @@ printDoneAndLog () {
 ####################################################################################################
 
 declare -a OPERATOR_RESOURCES=(
-    "networkpolicies"
-    "services"
-    "persistentvolumeclaims"
-    "configmaps"
-    "statefulsets"
-    "deployments"
-    "secrets"
-    "routes"
     "client"
+    "configmaps"
+    "deployments"
+    "networkpolicies"
+    "persistentvolumeclaims"
+    "poddisruptionbudgets"
+    "replicasets"
+    "rolebindings"
+	"roles"
+    "routes"
+    "secrets"
+    "services"
+    "statefulsets"
 )
 
 declare -a OPERATOR_GLOBAL_RESOURCES=(
@@ -152,6 +156,19 @@ declare -a OPERATOR_CERT_SECRETS=(
     "ibm-es-metrics-cert"
     "cluster-ca-cert"
     "kafka-brokers"
+)
+
+declare -a OPERATOR_CRDS=(
+    "eventstreams.eventstreams.ibm.com"
+    "eventstreamsgeoreplicators.eventstreams.ibm.com"
+    "kafkaconnectors.eventstreams.ibm.com"
+    "kafkaconnects.eventstreams.ibm.com"
+    "kafkaconnects2is.eventstreams.ibm.com"
+    "kafkamirrormaker2s.eventstreams.ibm.com"
+    "kafkarebalances.eventstreams.ibm.com"
+    "kafkas.eventstreams.ibm.com"
+    "kafkatopics.eventstreams.ibm.com"
+    "kafkausers.eventstreams.ibm.com"
 )
 
 ####################################################################################################
@@ -311,6 +328,7 @@ if [ "${IS_OPERATOR_RELEASE}" -eq 0 ]; then
     EXTERNAL_ENDPOINTS_SERVICES=("${OPERATOR_EXTERNAL_ENDPOINTS_SERVICES[@]}")
     CERT_SECRETS=("${OPERATOR_CERT_SECRETS[@]}")
     SUPPORTING_COMPONENTS_LABELS=("${OPERATOR_SUPPORTING_COMPONENTS_LABELS[@]}")
+    CRDS=("${OPERATOR_CRDS[@]}")
 else
     RELEASE_LABEL="release=${RELEASE}"
     SUPPORTING_COMPONENTS_NAMESPACE="kube-system"
@@ -321,6 +339,7 @@ else
     EXTERNAL_ENDPOINTS_SERVICES=("${HELM_EXTERNAL_ENDPOINTS_SERVICES[@]}")
     CERT_SECRETS=("${HELM_CERT_SECRETS[@]}")
     SUPPORTING_COMPONENTS_LABELS=("${HELM_SUPPORTING_COMPONENTS_LABELS[@]}")
+    CRDS=()
 fi
 printDoneAndLog
 
@@ -349,7 +368,8 @@ get_pod_logs () {
     printf "Gathering diagnostics for pod: ${POD}\n" | printAndLog
     mkdir -p "${POD_DIR}"
     ${EXE} describe pod "${POD}" -n "${NS}" > "${POD_DIR}/pod-describe.log"
-    CONTAINERS=$(${EXE} get pod ${POD} -n ${NS} -o jsonpath="{.spec.containers[*].name}" | cleanOutput )
+    CONTAINERS=$(${EXE} get pod ${POD} -n ${NS} -o jsonpath="{.spec.containers[*].name}" | cleanOutput)
+    INIT_CONTAINERS=$(${EXE} get pod ${POD} -n ${NS} -o jsonpath="{.spec.initContainers[*].name}" | cleanOutput)
     JOB_NAME=$(${EXE} get pod ${POD} -n ${NS} -o jsonpath="{.metadata.ownerReferences[?(@.kind == 'Job')].name}" | cleanOutput)
     if [ "${JOB_NAME}" ]; then
         printf "  Gathering Job logs" | printAndLog
@@ -357,8 +377,13 @@ get_pod_logs () {
         printDoneAndLog
     else
         for CONTAINER in ${CONTAINERS[@]}; do
+            printf "  Gathering diagnostics for container: ${CONTAINER}\n" | printAndLog
             get_container_diagnostics "${NS}" "${POD}" "${CONTAINER}" "${POD_DIR}"
             get_container_logs "${NS}" "${POD}" "${CONTAINER}" "${POD_DIR}" "${PARAMS}"
+        done
+        for CONTAINER in ${INIT_CONTAINERS[@]}; do
+            printf "  Gathering diagnostics for init container: ${CONTAINER}\n" | printAndLog
+            get_init_container_logs "${NS}" "${POD}" "${CONTAINER}" "${POD_DIR}" "${PARAMS}"
         done
     fi
 }
@@ -368,9 +393,14 @@ get_container_diagnostics () {
     POD="${2}"
     CONTAINER="${3}"
     DIR="${4}"
-    printf "  Gathering diagnostics for container: ${CONTAINER}\n" | printAndLog
     PHASE=$(${EXE} get pod ${POD} -n ${NS} -o jsonpath="{.status.phase}" | cleanOutput )
     if [ "${PHASE}" == "Running" ]; then
+        if [ "${IS_OPERATOR_RELEASE}" -eq 0 ]; then
+            printf "    Retrieving image name" | printAndLog
+            IMAGE=$(${EXE} exec ${POD} -n ${NS} -c ${CONTAINER} -it -- sh -c "if [ -s \"/image.txt\" ]; then cat \"/image.txt\"; else echo -n notPresent; fi" | cleanOutput)
+            printf "Pod: ${POD}, Container: ${CONTAINER}, Image: ${IMAGE}\n" >> "${DIR}/images.log"
+            printDoneAndLog
+        fi
         if [ ! -s "${DIR}/etc_hosts.log" ]; then
             printf "    Retrieving hosts file" | printAndLog
             ${EXE} exec "${POD}" -n "${NS}" -c "${CONTAINER}" -it -- sh -c "cat /etc/hosts" > "${DIR}/etc_hosts.log"
@@ -397,6 +427,23 @@ get_container_logs () {
     if [ "${RESTART_COUNT}" -ne 0 ]; then
         printf "    Gathering previous container logs" | printAndLog
         ${EXE} logs "${POD}" -n "${NS}" -c "${CONTAINER}" --previous --limit-bytes=10000000 ${PARAMS} > "${DIR}/previous_container_log-${CONTAINER}.log"
+        printDoneAndLog
+    fi
+}
+
+get_init_container_logs () {
+    NS="${1}"
+    POD="${2}"
+    CONTAINER="${3}"
+    DIR="${4}"
+    PARAMS="${5}"
+    printf "    Gathering init container logs" | printAndLog
+    ${EXE} logs "${POD}" -n "${NS}" -c "${CONTAINER}" --since="${SINCE}h" ${PARAMS} > "${DIR}/init_container_log-${CONTAINER}.log"
+    printDoneAndLog
+    RESTART_COUNT=$(${EXE} get pod ${POD} -n ${NS} -o jsonpath="{.status.initContainerStatuses[?(@.name == \"${CONTAINER}\")].restartCount}" | cleanOutput)
+    if [ "${RESTART_COUNT}" -ne 0 ]; then
+        printf "    Gathering previous init container logs" | printAndLog
+        ${EXE} logs "${POD}" -n "${NS}" -c "${CONTAINER}" --previous --limit-bytes=10000000 ${PARAMS} > "${DIR}/previous_init_container_log-${CONTAINER}.log"
         printDoneAndLog
     fi
 }
@@ -469,6 +516,7 @@ printDoneAndLog
 # Run simple diagnostics against the release
 ####################################################################################################
 
+# Check to see if persistence is enabled and if it is (pvcs exist) that they are bound to an existing pv
 for LABEL in ${PERSISTENT_COMPONENT_LABELS[@]}; do
     printf "Checking for persistence for ${LABEL}\n" | printAndLog
     PODS=$(${EXE} get pods -n ${NAMESPACE} -l ${RELEASE_LABEL} -l ${LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
@@ -497,6 +545,18 @@ for LABEL in ${PERSISTENT_COMPONENT_LABELS[@]}; do
     fi
 done
 
+# Check to see if zookeepers can communicate (this is a sucky diff between Op and Helm)
+ZK_PODS=$(${EXE} get pods -n ${NAMESPACE} -l ${RELEASE_LABEL} -l "app.kubernetes.io/name=zookeeper" --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+for POD in ${ZK_PODS[@]}; do
+    printf "Checking zookeeper pod ${POD}\n" | printAndLog
+    OKAY=$(${EXE} exec "${POD}" -n "${NAMESPACE}" -c "zookeeper" -it -- sh -c "echo ruok | nc localhost 12181" | cleanOutput)
+    MODE=$(${EXE} exec "${POD}" -n "${NAMESPACE}" -c "zookeeper" -it -- sh -c "echo srvr | nc localhost 12181 | grep Mode" | cleanOutput)
+    if [ "${OKAY}" != "imok" ]; then
+        printRedAndLog "  zookeeper pod ${POD} is not okay, state ${OKAY}\n"
+    fi
+    printYellowAndLog "  zookeeper pod ${POD} is in ${MODE}\n"
+done 
+
 ####################################################################################################
 # Gather logs/descriptions/manifests for the desired release
 ####################################################################################################
@@ -518,6 +578,24 @@ for COMPONENT_LABEL in ${COMPONENT_LABELS[@]}; do
     for POD in ${PODS[@]}; do
         get_pod_logs "${NAMESPACE}" "${POD}"
     done 
+done
+
+# Gather CRDs and CRs for ES components
+CRD_DIR="${LOGDIR}/crds"
+CR_DIR="${LOGDIR}/crs"
+mkdir -p "${CRD_DIR}"
+mkdir -p "${CR_DIR}"
+printf "Gathering crds and crs\n" | printAndLog
+for CRD in ${CRDS[@]}; do
+    printf "Gathering crd ${CRD}" | printAndLog
+    ${EXE} get crd ${CRD} -o yaml > "${CRD_DIR}/${CRD}.yaml"
+    printDoneAndLog
+    CRS=$(${EXE} get ${CRD} -n ${NAMESPACE} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    for CR in ${CRS[@]}; do
+        printf "Gathering ${CRD} instance - ${CR}" | printAndLog
+        ${EXE} get ${CRD} ${CR} -n ${NAMESPACE} -o yaml > "${CR_DIR}/${CRD}-${CR}.yaml"
+        printDoneAndLog
+    done
 done
 
 # Gather descriptions and manifests for non-pod resources
