@@ -11,7 +11,7 @@
 #
 
 PROGRAM_NAME="${0}"
-VERSION="2020.2.5"
+VERSION="2020.2.4"
 DATE=`date +%d-%m-%y`
 TIME=`date +%H-%M-%S`
 
