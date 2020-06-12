@@ -545,7 +545,7 @@ for LABEL in ${PERSISTENT_COMPONENT_LABELS[@]}; do
     fi
 done
 
-# Check to see if zookeepers can communicate (this is a sucky diff between Op and Helm)
+# Check to see if zookeepers are okay and which is the leader
 ZK_PODS=$(${EXE} get pods -n ${NAMESPACE} -l ${RELEASE_LABEL} -l "app.kubernetes.io/name=zookeeper" --no-headers -o custom-columns=":metadata.name" | cleanOutput)
 for POD in ${ZK_PODS[@]}; do
     printf "Checking zookeeper pod ${POD}\n" | printAndLog
