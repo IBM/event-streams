@@ -11,7 +11,7 @@
 #
 
 PROGRAM_NAME="${0}"
-VERSION="2020.2.4"
+VERSION="2020.2.5"
 DATE=`date +%d-%m-%y`
 TIME=`date +%H-%M-%S`
 
@@ -494,9 +494,9 @@ check_pvc () {
     VOLUME=$(${EXE} get pvc -n ${NS} ${PVC} --no-headers -o=jsonpath="{.spec.volumeName}" | cleanOutput)
     VOLUME_EXISTS=$(${EXE} get pv ${VOLUME} --no-headers &> /dev/null; echo ${?})
     if [ "${PHASE}" != "Bound" ]; then
-        printRedAndLog "  Persistence problem for pvc: ${PVC} phase is not Bound, is: ${PHASE}\n"
+        printRedAndLog "  Persistence problem for pvc: ${PVC} phase is not Bound, is: ${PHASE}...\t[ERR]\n"
     elif [ "${VOLUME_EXISTS}" -ne 0 ]; then
-        printRedAndLog "  Persistence problem for pvc: ${PVC} bound to volume ${VOLUME} which does not exist\n"
+        printRedAndLog "  Persistence problem for pvc: ${PVC} bound to volume ${VOLUME} which does not exist...\t[ERR]\n"
     else 
         printGreenAndLog "  Persistence is okay for pvc: ${PVC}\n"
     fi
@@ -538,24 +538,90 @@ for LABEL in ${PERSISTENT_COMPONENT_LABELS[@]}; do
             printf "  Checking pvc ${PVCS[0]} for ${LABEL}\n" | printAndLog
             check_pvc "${NAMESPACE}" "${PVCS[0]}"
         else
-            printRedAndLog "Persistence problem for ${LABEL}, there are ${NUM_PODS} pods with 1 ${ACCESS_MODE} pvc\n"
+            printRedAndLog "Persistence problem for ${LABEL}, there are ${NUM_PODS} pods with 1 ${ACCESS_MODE} pvc...\t[ERR]\n"
         fi
     else
-        printRedAndLog "Persistence problem for ${LABEL}, there are ${NUM_PODS} pods and ${NUM_PVCS} pvcs\n"
+        printRedAndLog "Persistence problem for ${LABEL}, there are ${NUM_PODS} pods and ${NUM_PVCS} pvcs...\t[ERR]\n"
     fi
 done
 
-# Check to see if zookeepers are okay and which is the leader
+# Check to see if zookeepers are okay, which is the leader, and that they can communicate (operator only!)
 ZK_PODS=$(${EXE} get pods -n ${NAMESPACE} -l ${RELEASE_LABEL} -l "app.kubernetes.io/name=zookeeper" --no-headers -o custom-columns=":metadata.name" | cleanOutput)
 for POD in ${ZK_PODS[@]}; do
-    printf "Checking zookeeper pod ${POD}\n" | printAndLog
+    printf "Checking zookeeper pod ${POD} status\n" | printAndLog
     OKAY=$(${EXE} exec "${POD}" -n "${NAMESPACE}" -c "zookeeper" -it -- sh -c "echo ruok | nc localhost 12181" | cleanOutput)
     MODE=$(${EXE} exec "${POD}" -n "${NAMESPACE}" -c "zookeeper" -it -- sh -c "echo srvr | nc localhost 12181 | grep Mode" | cleanOutput)
-    if [ "${OKAY}" != "imok" ]; then
+    if [ "${OKAY}" == "imok" ]; then
+        printYellowAndLog "  zookeeper pod ${POD} is in ${MODE}\n"
+    else
         printRedAndLog "  zookeeper pod ${POD} is not okay, state ${OKAY}\n"
     fi
-    printYellowAndLog "  zookeeper pod ${POD} is in ${MODE}\n"
-done 
+    
+    printf "  checking zookeeper to zookeeper connections\n" | printAndLog
+    for TEST_POD in ${ZK_PODS[@]}; do
+        printf "    connection test from ${POD} to ${TEST_POD}" | printAndLog
+        # This is not the ideal but it's the only thing that worked
+        CMD="
+        echo -n \"Run \"
+        OUT=\$(curl -Ss -k --cert /opt/kafka/zookeeper-node-certs/${POD}.crt --key /opt/kafka/zookeeper-node-certs/${POD}.key https://${TEST_POD}.${RELEASE}-zookeeper-nodes.${NAMESPACE}.svc:3888 2>&1) 
+        if [ \"\${OUT}\" == \"curl: (52) Empty reply from server\" ]; then 
+            echo -n \"Succeeded\"
+        elif [ \"\${OUT}\" == \"curl: (35) SSL peer had some unspecified issue with the certificate it received.\" ]; then 
+            echo -n \"Intermittent\"
+        else 
+            echo -n \"Failed: \${OUT}\"
+        fi
+        "
+        RESPONSE=$(${EXE} exec "${POD}" -n "${NAMESPACE}" -c "zookeeper" -it -- sh -c "${CMD}" | cleanOutput)
+        if [ "${RESPONSE}" == "Run Succeeded" ]; then
+            printDoneAndLog
+        elif [ "${RESPONSE}" == "Run Intermittent" ]; then
+            # This is an intermittent error that was seen during testing. logs of the failure can be seen in the addressed ZK's logs. They
+            # indicate the failure was due to a random DNS resoltion blip
+            printDoneAndLog
+            printYellowAndLog "    saw intermittent error: 'curl: (35) SSL peer had some unspecified issue with the certificate it received.'\n"
+            printYellowAndLog "    this will produce a stack trace in the addressed zookeepers logs indicating an ssl failure due to hostname'\n"
+            printYellowAndLog "    verification'\n"
+        elif [ "${RESPONSE}" == "Run " ]; then
+            # This is an intermittent error that was seen during testing. It occurs when the curl command fails to run for some unknown
+            # reason and causes the command to exit prematurely. It does not indicate a connection failure
+            printDoneAndLog
+            printYellowAndLog "    saw an intermittent error indicating curl failed to run abd the connection was not tested'\n"
+        else
+            printRedAndLog "\t[ERR]\n"
+            printRedAndLog "    connection test from ${POD} to ${TEST_POD} failed with response: ${RESPONSE}\n"
+        fi
+    done
+done
+
+# Check to see if the kafka pods can reach the zookeepers (operator only!)
+KAFKA_PODS=$(${EXE} get pods -n ${NAMESPACE} -l ${RELEASE_LABEL} -l "app.kubernetes.io/name=kafka" --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+for KAFKA_POD in ${KAFKA_PODS[@]}; do
+    printf "Checking ${KAFKA_POD} to zookeeper connections\n" | printAndLog
+    # Kafka connects to ZK via the tls-sidecar on localhost 2181. This connects it to a random ZK so re-rerun a couple of times
+    # to look for interesting behaviour
+    for i in 1 2 3; do
+        printf "  checking random connection run ${i}" | printAndLog
+        OKAY=$(${EXE} exec "${KAFKA_POD}" -n "${NAMESPACE}" -c "kafka" -it -- sh -c "echo ruok | nc localhost 2181" | cleanOutput)
+        if [ "${OKAY}" == "imok" ]; then
+            printDoneAndLog
+        else
+            printRedAndLog "\t[ERR]\n"
+            printRedAndLog "  connection to ${ZK_POD} failed, response: ${OKAY}\n"
+        fi
+    done
+    printf "  checking Kafka tls sidecar to zookeeper connections\n" | printAndLog
+    for ZK_POD in ${ZK_PODS[@]}; do
+        printf "    connection test from ${KAFKA_POD} sidecar to ${ZK_POD}" | printAndLog
+        OKAY=$(${EXE} exec "${KAFKA_POD}" -n "${NAMESPACE}" -c "tls-sidecar" -it -- sh -c "echo ruok | nc --ssl-cert /etc/tls-sidecar/kafka-brokers/${KAFKA_POD}.crt --ssl-key /etc/tls-sidecar/kafka-brokers/${KAFKA_POD}.key ${ZK_POD}.${RELEASE}-zookeeper-nodes.${NAMESPACE}.svc 2181" | cleanOutput)
+        if [ "${OKAY}" == "imok" ]; then
+            printDoneAndLog
+        else
+            printRedAndLog "\t[ERR]\n"
+            printRedAndLog "  connection to ${ZK_POD} failed, response: ${OKAY}\n"
+        fi
+    done 
+done
 
 ####################################################################################################
 # Gather logs/descriptions/manifests for the desired release
