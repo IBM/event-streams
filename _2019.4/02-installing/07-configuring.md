@@ -246,7 +246,7 @@ Field | Description | Default
 ---|---|---
 **Datadog - Autodiscovery annotation check templates for Kafka brokers** | YAML object that contains the Datadog Autodiscovery annotations for configuring the Kafka JMX checks. The Datadog prefix and container identifier is applied automatically to the annotation, so only use the template name as the object’s keys (for example, `check_names`). For more information about setting up monitoring with Datadog, see the [Datadog tutorial](../../tutorials/monitor-with-datadog/).  | `None`
 
-### ![Event Streams 2019.4.2 icon](../../images/2019.4.2.svg "In Event Streams 2019.4.2.") REST Producer API settings
+### ![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") REST Producer API settings
 
 The following table describes the options for configuring configuration values for the REST producer API.
 

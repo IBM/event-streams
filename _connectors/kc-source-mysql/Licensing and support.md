@@ -15,8 +15,8 @@ sections:
       - { text: 'View the license', url: 'https://github.com/debezium/debezium/blob/master/LICENSE.txt' }
   - section:
     title: "Support"
-    type: "Community"
-    description: "Support is provided by the community."
+    type: "IBM Support"
+    description: "Commercial support for this connector is available for customers with a support entitlement for IBM Cloud Pak for Integration."
     buttons:
-      - { text: 'Get support', url: 'https://issues.jboss.org/projects/DBZ/issues' }
+      - { text: 'Get support', url: '../../support/' }
 ---

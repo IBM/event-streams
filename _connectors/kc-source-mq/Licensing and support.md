@@ -16,7 +16,7 @@ sections:
   - section:
     title: "Support"
     type: "IBM Support"
-    description: "A commercially supported version of this connector is available for customers with a support entitlement for IBM Event Streams."
+    description: "Commercial support for this connector is available for customers with a support entitlement for IBM Cloud Pak for Integration."
     buttons:
       - { text: 'Get support', url: '../../support/' }
 ---

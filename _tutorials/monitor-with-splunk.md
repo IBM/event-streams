@@ -12,7 +12,7 @@ You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export
 ## Prequisites
 
 - Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 2019.1.1.
-- When installing {{site.data.reuse.short_name}}, ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../installing/configuring/#kafka-broker-settings). This is required to ensure that each Kafka broker’s JMX port is accessible to jmxtrans.
+- When installing {{site.data.reuse.short_name}}, ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../2019.1.1/installing/configuring/#kafka-broker-settings). This is required to ensure that each Kafka broker’s JMX port is accessible to jmxtrans.
 - Ensure you have a [Splunk](https://www.splunk.com/){:target="_blank"} Enterprise server installed or a Splunk Universal Forwarder that has network access to your {{site.data.resuse.icp}} cluster.
 - Ensure that you have an index to receive the data and a TCP Data input configured on Splunk. Details can be found in the [Splunk documentation](https://docs.splunk.com/Documentation){:target="_blank"}.
 - Ensure you have [configured access to the Docker registry](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_images/using_docker_cli.html){:target="_blank"} from the machine you will be using to deploy jmxtrans.
@@ -21,7 +21,7 @@ You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export
 
 Jmxtrans is a connector that reads JMX metrics and outputs a number of formats supporting a wide variety of logging, monitoring, and graphing applications. To deploy to your {{site.data.resuse.icp}} cluster, you must package jmxtrans into a Kubernetes solution.
 
-Release-specific credentials for establishing the connection between jmxtrans and the Kafka brokers are generated when {{site.data.reuse.short_name}} is installed with the **Enable secure JMX connections** selected. The credentials are stored in a Kubernetes secret inside the release namespace. See [secure JMX connections](../../security/secure-jmx-connections/#providing-configuration-values) for information about the secret contents.
+Release-specific credentials for establishing the connection between jmxtrans and the Kafka brokers are generated when {{site.data.reuse.short_name}} is installed with the **Enable secure JMX connections** selected. The credentials are stored in a Kubernetes secret inside the release namespace. See [secure JMX connections](../../2019.1.1/security/secure-jmx-connections/#providing-configuration-values) for information about the secret contents.
 
 If you are deploying jmxtrans in a different namespace to your {{site.data.reuse.short_name}} installation, copy the secret to the required namespace with the following command:
 

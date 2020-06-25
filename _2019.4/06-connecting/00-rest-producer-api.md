@@ -65,7 +65,7 @@ To create a topic and generate an API key with produce permissions, and to downl
 
 The REST producer API has a configured limit for the key size (default is `4096` bytes) and the message size (default is `65536` bytes). If the request sent has a larger key or message size than the limits set, the request will be rejected.
 
-![Event Streams 2019.4.2 icon](../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Important:** In {{site.data.reuse.short_name}} 2019.4.2, you can configure the key and message size limits at the time of [installation](../../installing/configuring/#-rest-producer-api-settings) or later as described in [modifying](../../administering/modifying-installation/) installation settings. You can set the limit values in the **REST producer API settings** section if using the UI, or use the `rest-producer.maxKeySize` and `rest-producer.maxMessageSize` parameters if using the CLI.
+![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2.") **Important:** In {{site.data.reuse.short_name}} 2019.4.2, you can configure the key and message size limits at the time of [installation](../../installing/configuring/#-rest-producer-api-settings) or later as described in [modifying](../../administering/modifying-installation/) installation settings. You can set the limit values in the **REST producer API settings** section if using the UI, or use the `rest-producer.maxKeySize` and `rest-producer.maxMessageSize` parameters if using the CLI.
 
 In {{site.data.reuse.short_name}} 2019.4.1 and earlier versions, you can update the limits as follows:
 

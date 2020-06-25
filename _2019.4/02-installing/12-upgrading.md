@@ -1,5 +1,5 @@
 ---
-title: "Upgrading to 2019.4.1"
+title: "Upgrading"
 excerpt: "Upgrade your installation to the latest version."
 categories: installing
 slug: upgrading
@@ -8,39 +8,49 @@ toc: true
 
 Upgrade your installation to the latest version of {{site.data.reuse.long_name}} as follows.
 
-You can upgrade to {{site.data.reuse.short_name}} version 2019.4.1 from version 2019.2.1. If you have an earlier version, you must first upgrade your {{site.data.reuse.short_name}} version [to 2019.2.1](../../2019.2.1/installing/upgrading/), before following these steps to upgrade to version 2019.4.1.
+## Upgrade paths
 
-**Important:** {{site.data.reuse.short_name}} only supports upgrading to a newer chart version. Do not select an earlier chart version when upgrading. If you want to revert to an earlier version of {{site.data.reuse.short_name}}, see the instructions for [rolling back](../rolling-back/).
+Complete the steps in the following sections to upgrade your {{site.data.reuse.short_name}} version to 2019.4.x. The following upgrade paths are available:
+
+- You can upgrade to {{site.data.reuse.short_name}} version 2019.4.2 directly from version 2019.4.1 or 2019.2.1.
+- You can upgrade to {{site.data.reuse.short_name}} version 2019.4.1 directly from version 2019.2.1.
+- If you have an earlier version than 2019.2.1, you must first upgrade your {{site.data.reuse.short_name}} version [to 2019.2.1](../../../2019.2.1/installing/upgrading/), before upgrading to 2019.4.1 or 2019.4.2.
 
 ## Prerequisites
 
 - Ensure you have {{site.data.reuse.icp}} version 3.2.1. If you are using the {{site.data.reuse.openshift_short}}, ensure you have version 3.11 or later. See the [prerequisites](../prerequisites/#container-environment) for supported container environments.
 - The minimum resource requirements have changed. Ensure you have the required [resources](../prerequisites/#helm-resource-requirements) available.
-- Download the package for the version you want to upgrade to, and make it [available](../installing/#download-the-archive) to your {{site.data.reuse.icp}} instance.
+- If upgrading to version 2019.4.2, download the fix pack from [Fix Central](https://www.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm%7EOther%20software&product=ibm/Other+software/IBM+Event+Streams&release=2019.4.1&platform=All&function=all){:target="_blank"}.
+- If upgrading to version 2019.4.1, download the package from [IBM Passport Advantage](https://www.ibm.com/software/passportadvantage/pao_customer.html){:target="_blank"} by searching for "{{site.data.reuse.long_name}}" and 2019.4.1. Download the images related to the part numbers for your platform.
+- Make the packages available to your {{site.data.reuse.icp}} instance as described in steps 2 to 4 of the [download task](../installing/#download-the-archive).
 - If you have [encryption between pods](../planning/#securing-communication-between-pods) enabled, then ensure you disable it before starting the upgrade. After the upgrade completes successfully, you can [enable](../../security/encrypting-data/#enabling-encryption-between-pods) the encryption again.
+- If upgrading from version 2019.2.1, follow the [post-upgrade tasks](#post-upgrade-tasks) after the upgrade completes.
+
+**Important:** {{site.data.reuse.short_name}} only supports upgrading to a newer chart version. Do not select an earlier chart version when upgrading. If you want to revert to an earlier version of {{site.data.reuse.short_name}}, see the instructions for [rolling back](../rolling-back/).
 
 ## Upgrading on {{site.data.reuse.icp}}
 
-If you are using {{site.data.reuse.icp}}, you can  upgrade by using the UI or the command line.
+You can upgrade your {{site.data.reuse.short_name}} version by using the {{site.data.reuse.icp}} UI or CLI.
+
+**Important:** {{site.data.reuse.short_name}} only supports upgrading to a newer chart version. Do not select an earlier chart version when upgrading. If you want to revert to an earlier version of {{site.data.reuse.short_name}}, see the instructions for [rolling back](../rolling-back/).
 
 ### Using the UI
 
 1. {{site.data.reuse.icp_ui_login321}}
-4. Click **Workloads > Helm Releases** from the navigation menu.
-5. Locate the release name of your installation in the **Name** column, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Upgrade** in the corresponding row.
-6. Select the chart version to upgrade to from the **Version** drop-down list.
-7. Ensure you have **Using previous configured values** set to **Reuse Values**.\\
+2. Click **Workloads > Helm Releases** from the navigation menu.
+3. Locate the release name of your installation in the **Name** column, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Upgrade** in the corresponding row.
+4. Select the chart version to upgrade to from the **Version** drop-down list.
+5. Ensure you have **Using previous configured values** set to **Reuse Values**.\\
    **Note:** Do not change any of the settings in the **Parameters** section. You can modify configuration settings after upgrade, for example, [enable encryption](#enable-encryption-between-pods) between pods.
-8. Click **Upgrade**.\\
+6. Click **Upgrade**.\\
    The upgrade process begins and restarts your pods. During the process, the UI shows pods as unavailable and restarting.
-9. After the upgrade completes, [perform the post-upgrade](#post-upgrade-tasks) tasks.
-
+7. If upgrading from version 2019.2.1, follow the [post-upgrade tasks](#post-upgrade-tasks) after the upgrade completes.
 
 ### Using the CLI
 
 1. Ensure you have the latest Helm chart version available on your local file system.\\
    - You can [retrieve](../../administering/helm-upgrade-command/) the charts from the UI.
-   - Alternatively, if you downloaded the archive from IBM Passport Advantage, the chart file is included in the archive. Extract the PPA archive, and locate the chart file in the `/charts` directory, for example: `ibm-eventstreams-prod-1.4.0.tgz`
+   - Alternatively, if you downloaded the archive from IBM Passport Advantage or fix pack from FixCentral, the chart file is included in the archive or fix pack. Extract the PPA archive or fix pack, and locate the chart file in the `/charts` directory, for example: `ibm-eventstreams-prod-1.4.0.tgz`
 2. {{site.data.reuse.icp_cli_login321}}
 
    **Important:** You must have the Team Administrator or Cluster Administrator role to upgrade the chart.
@@ -48,18 +58,18 @@ If you are using {{site.data.reuse.icp}}, you can  upgrade by using the UI or th
 3. Run the helm upgrade command as follows, referencing the Helm chart you want to upgrade to:\\
    `helm upgrade <release-name> <latest-chart-version>`
 
-   For example, to upgrade by using a chart downloaded in the PPA archive:\\
+   For example, to upgrade by using a chart downloaded in the PPA archive or fix pack:\\
    `helm upgrade eventstreams1 /Users/admin/upgrade/ibm-eventstreams-prod-1.4.0.tgz`
 
    **Note:** Do not set any parameter value during the upgrade, for example, `helm upgrade --set <parameter>=<value> <release_name> <charts.tgz> --tls`. You can modify configuration settings after upgrade, for example, [enable encryption](#enable-encryption-between-pods) between pods.
 
    The upgrade process begins and restarts your pods. During the process, the UI shows pods as unavailable and restarting.
 
-4. After the upgrade completes, [perform the post-upgrade](#post-upgrade-tasks) tasks.
+4. If upgrading from version 2019.2.1, follow the [post-upgrade tasks](#post-upgrade-tasks) after the upgrade completes.
 
 ## Upgrading on {{site.data.reuse.openshift_short}}
 
-If you are using the {{site.data.reuse.openshift_short}}, you can only  upgrade by using the command line.
+If you are using the {{site.data.reuse.openshift_short}}, you can only upgrade by using the command line.
 
 1. Ensure you have the latest Helm chart version available on your local file system.
 
@@ -88,7 +98,7 @@ If you are using the {{site.data.reuse.openshift_short}}, you can only  upgrade 
 
    The upgrade process begins and restarts your pods. During the process, the UI shows pods as unavailable and restarting.
 
-5. After the upgrade completes, [perform the post-upgrade](#post-upgrade-tasks) tasks.
+5. If upgrading from version 2019.2.1, follow the [post-upgrade tasks](#post-upgrade-tasks) after the upgrade completes.
 
 
 ## Post-upgrade tasks
@@ -103,7 +113,7 @@ To use your upgraded {{site.data.reuse.short_name}} instance with existing {{sit
 
 1. Check the teams you use:\\
    1. {{site.data.reuse.icp_ui_login321}}
-   3. From the navigation menu, click **Manage > Identity & Access > Teams**. Look for the teams you use with your {{site.data.reuse.short_name}} instance.
+   2. From the navigation menu, click **Manage > Identity & Access > Teams**. Look for the teams you use with your {{site.data.reuse.short_name}} instance.
 2. Ensure you have [installed](../../installing/post-installation/#installing-the-command-line-interface-cli) the latest version of the {{site.data.reuse.short_name}} CLI.
 3. Run the following command for each team that references your instance of {{site.data.reuse.short_name}}:\\
   `cloudctl es iam-add-release-to-team --namespace <namespace> --helm-release <helm-release> --team <team-name>`

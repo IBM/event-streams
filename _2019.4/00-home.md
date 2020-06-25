@@ -1,7 +1,7 @@
 ---
 title: "Home"
 layout: splash
-permalink: /
+permalink: /:collection/
 mastheadNavItem: Documentation
 collection: 2019.4
 quickLinks:
@@ -31,10 +31,6 @@ gettingStarted:
   - link:
     - title: Connecting other systems using Kafka Connect
     - url: connecting/connectors/
-    - icon: migrate.svg
-  - link:
-    - title: Migrating from Community Edition
-    - url: installing/migrating/
     - icon: migrate.svg
   - link:
     - title: Getting started with Event Streams as a hosted service

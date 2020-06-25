@@ -3,7 +3,7 @@ title: "PostgreSQL (Debezium)"
 sortTitle: "PostgreSQL"
 connectorID: kc-source-postgresql
 direction: source
-support: community
+support: IBM
 type: kafkaConnect
 iconInitial: P
 iconGradient: 3
