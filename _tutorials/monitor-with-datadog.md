@@ -22,9 +22,9 @@ When installing the agent, ensure the following settings:
 
 ## Configuring {{site.reuse.short_name}} for Autodiscovery
 
-When installing {{site.data.reuse.short_name}}, firstly ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../installing/configuring/#kafka-broker-settings). This is required to ensure the Kafka brokers' JMX ports are accessible to the Datadog Agent.
+When installing {{site.data.reuse.short_name}}, firstly ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../2019.1.1/installing/configuring/#kafka-broker-settings). This is required to ensure the Kafka brokers' JMX ports are accessible to the Datadog Agent.
 
-Then supply the YAML object containing the required Check Templates for configuring [Kafka JMX monitoring](https://docs.datadoghq.com/integrations/kafka/){:target="_blank"}. The [example configuration supplied](https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example){:target="_blank"} provides an overview of the required fields. You can set the YAML object on the **Configuration** page by using the [configuration option](../../installing/configuring/#external-monitoring) **External monitoring > Datadog - Autodiscovery annotation check templates for Kafka brokers**.
+Then supply the YAML object containing the required Check Templates for configuring [Kafka JMX monitoring](https://docs.datadoghq.com/integrations/kafka/){:target="_blank"}. The [example configuration supplied](https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example){:target="_blank"} provides an overview of the required fields. You can set the YAML object on the **Configuration** page by using the [configuration option](../../2019.1.1/installing/configuring/#external-monitoring) **External monitoring > Datadog - Autodiscovery annotation check templates for Kafka brokers**.
 
 The YAML object is then applied to the Kafka pods as annotations to enable the pods to be recognized by the Datadog agent AutoDiscovery service.
 
@@ -53,7 +53,7 @@ As part of the Kafka `instances` Check Template, provide values to ensure the Da
   - `user=<username for authenticating JMX connection>`
   - `password=<password for user>`
 
-Release-specific credentials for establishing the connection are generated when {{site.data.reuse.short_name}} is installed with the **Enable secure JMX connections** selected. The credentials are stored in a Kubernetes secret inside the release namespace. See [secure JMX connections](../../security/secure-jmx-connections/#providing-configuration-values) for information about the secret contents.
+Release-specific credentials for establishing the connection are generated when {{site.data.reuse.short_name}} is installed with the **Enable secure JMX connections** selected. The credentials are stored in a Kubernetes secret inside the release namespace. See [secure JMX connections](../../2019.1.1/security/secure-jmx-connections/#providing-configuration-values) for information about the secret contents.
 
 Because these values are not known at install time, they cannot be supplied explictly as part of the check templates configuration. [Template variables](https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#supported-template-variables){:target="_blank"} should be used to reference environment variables that will be supplied to each Datadog Agent pod after installing {{site.data.reuse.short_name}}. In addition, files contained inside the release-specific secret should be mounted into the Datadog Agent pod using the paths supplied in the configuration.
 

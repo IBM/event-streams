@@ -6,15 +6,11 @@ categories: [source]
 
 {{site.data.reuse.long_name}} provides additional help for setting up a Kafka Connect environment and starting the MQ source connector. Log in to the {{site.data.reuse.short_name}} UI, click the **Toolbox** tab and scroll to the **Connectors** section.
 
-Alternatively, you can build the MQ source connector from GitHub:
+Alternatively, you can download the MQ source connector from GitHub:
 
-1. Clone the Git repository and build the connector plugin JAR files:
+1. Download the connector plugin JAR file:
 
-    ```
-    git clone https://github.com/ibm-messaging/kafka-connect-mq-source.git
-    cd kafka-connect-mq-source
-    mvn package
-    ```
+    Go to the connector [releases page](https://github.com/ibm-messaging/kafka-connect-mq-source/releases){:target="_blank"} and download the JAR file for the latest release.
 
 2. {{site.data.reuse.kafkaConnectStep2_title}}
 

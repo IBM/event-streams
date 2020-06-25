@@ -7,7 +7,7 @@ section: "Tutorials for IBM Event Streams"
 cardType: "large"
 ---
 
-The following tutorial explains how to set up a [multizone](../../installing/planning/#multizone-support) {{site.data.reuse.short_name}} cluster in a non-zone-aware cluster.
+The following tutorial explains how to set up a [multizone](../../2019.4/installing/planning/#multizone-support) {{site.data.reuse.short_name}} cluster in a non-zone-aware cluster.
 
 The example used in this tutorial is for installing a 3 zone cluster.
 
@@ -97,13 +97,13 @@ You can check that your nodes are labelled as required by using the following co
 
 ## Installing {{site.data.reuse.short_name}}
 
-When [installing](../../installing/installing/) {{site.data.reuse.short_name}}, configure the Kafka broker and multizone options as follows.
+When [installing](../../2019.4/installing/installing/) {{site.data.reuse.short_name}}, configure the Kafka broker and multizone options as follows.
 
 If you are installing by using the UI, set the following options for the example in this tutorial:
 
-- Set the number of Kafka brokers to 6 in the [**Kafka brokers**](../../installing/configuring/#kafka-broker-settings) field.
-- Set the  [**Number of zones**](../../installing/configuring/#installing-into-a-multizone-cluster) field to 3.
-- Enter the zone label names for each zone in the [**Zone labels**](../../installing/configuring/#installing-into-a-multizone-cluster) field:
+- Set the number of Kafka brokers to 6 in the [**Kafka brokers**](../../2019.4/installing/configuring/#kafka-broker-settings) field.
+- Set the  [**Number of zones**](../../2019.4/installing/configuring/#installing-into-a-multizone-cluster) field to 3.
+- Enter the zone label names for each zone in the [**Zone labels**](../../2019.4/installing/configuring/#installing-into-a-multizone-cluster) field:
    ```
    es-zone-0
    es-zone-1
@@ -129,7 +129,7 @@ ibm-eventstreams-prod
 
 ## Creating topics for multizone setup
 
-It is important that you do not [configure topics](../../administering/managing-multizone/#topic-configuration) where the minimum in-sync replicas setting cannot be met in the event of a zone failure.
+It is important that you do not [configure topics](../../2019.4/administering/managing-multizone/#topic-configuration) where the minimum in-sync replicas setting cannot be met in the event of a zone failure.
 
 **Warning:** Do not create a topic with 1 replica. Setting 1 replica means the topic will become unavailable during an outage and will lose data.
 

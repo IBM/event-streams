@@ -193,22 +193,32 @@ collections:
     output: true
     version: true
     permalink: /:collection/:categories/:slug/
+    order: 1
   "2019.1.1":
     label: "2019.1.1"
     output: true
     version: true
     permalink: /:collection/:categories/:slug/
+    order: 2
   "2019.2.1":
     label: "2019.2.1"
     output: true
     version: true
     permalink: /:collection/:categories/:slug/
+    order: 3
   "2019.4":
     label: "2019.4"
     output: true
     version: true
+    permalink: /:collection/:categories/:slug/
+    order: 4
+  "10.0":
+    label: "10.0"
+    output: true
+    version: true
     tag: Latest
     permalink: /:categories/:slug/
+    order: 5
   "tutorials":
     output: true
     permalink: /:collection/:path/
@@ -336,6 +346,21 @@ defaults:
   - scope:
       path: ""
       type: "2019.4"
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comment: false
+      version: true
+      latest: true
+      mastheadNavItem: Documentation
+      sidebar:
+        nav: "20194docs"
+  # _10.0
+  - scope:
+      path: ""
+      type: "10.0"
     values:
       layout: single
       read_time: false

@@ -1,6 +1,6 @@
 ---
 layout: search
-title: "Search Documenation"
+title: "Search Documentation"
 permalink: /search/
 author_profile: false
 mastheadNavItem: Search

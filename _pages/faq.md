@@ -6,6 +6,7 @@ toc: true
 mastheadNavItem: FAQ
 collection: faq
 ---
+
 ## What is Apache Kafka?
 
 [Apache Kafka](https://kafka.apache.org/intro){:target="_blank"} is an open-source stream-processing software platform developed by the Apache Software Foundation.
@@ -17,14 +18,6 @@ collection: faq
 {{site.data.reuse.long_name}} is an event-streaming platform based on the open-source Apache Kafka project, providing a high-throughput, fault-tolerant, publish–subscribe technology for building event-driven applications.
 
 [Find out more.](../about/overview/)
-
-## What forms of {{site.data.reuse.short_name}} are available?
-
-You can have a fully managed {{site.data.reuse.short_name}} service provided by IBM Cloud, or you can install and manage your own version in {{site.data.reuse.icp}}.
-
-  To get started with {{site.data.reuse.long_name}} as a hosted service, see [the {{site.data.reuse.short_name}} for IBM Cloud documentation](https://cloud.ibm.com/docs/services/EventStreams?topic=eventstreams-getting_started#getting_started){:target="_blank"}.
-
-To get started with {{site.data.reuse.long_name}} in {{site.data.reuse.icp}}, see [this documentation](../).
 
 ## What are the main features?
 
@@ -40,11 +33,19 @@ You can deploy multiple instances of {{site.data.reuse.long_name}} and use the i
 
 {{site.data.reuse.ce_deprecated}}
 
-## What is {{site.data.reuse.icp}}?
+You can have a fully managed {{site.data.reuse.short_name}} service provided by IBM Cloud, or you can install and manage your own version in the {{site.data.reuse.openshift}}.
 
-{{site.data.reuse.icp}} is an application platform for developing and managing on-premises, containerized applications. It is an integrated environment for managing containers that includes the container orchestrator Kubernetes, a private image registry, a management console, and monitoring frameworks.
+To get started with {{site.data.reuse.long_name}} as a hosted service, see [the {{site.data.reuse.short_name}} for IBM Cloud documentation](https://cloud.ibm.com/docs/services/EventStreams?topic=eventstreams-getting_started#getting_started){:target="_blank"}.
 
-[Find out more.](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/getting_started/overview.html){:target="_blank"}
+To get started with {{site.data.reuse.long_name}} in the {{site.data.reuse.openshift_short}}, see [this documentation](../).
+
+{{site.data.reuse.short_name}} is also available as part of {{site.data.reuse.cp4i}} as a capability. For more information, see [the {{site.data.reuse.cp4i}} documentation](https://www.ibm.com/support/knowledgecenter/en/SSGT7J_20.2/install/install_event_streams.html){:target="_blank"}.
+
+## What is the {{site.data.reuse.openshift}}?
+
+The {{site.data.reuse.openshift}} is a hybrid cloud, enterprise Kubernetes platform for building, scaling, and managing containerized applications.
+
+[Find out more.](https://docs.openshift.com/container-platform/4.4/welcome/index.html){:target="_blank"}
 
 ## How can I install {{site.data.reuse.long_name}}?
 

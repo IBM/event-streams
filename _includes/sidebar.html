@@ -1,4 +1,4 @@
-{% assign version1Pages = site.collections | where: "version", "true" %}
+{% assign version1Pages = site.collections | where: "version", "true" | sort: 'order' | reverse %}
 
 {% if page.author_profile or layout.author_profile or page.sidebar %}
   <div id="sidebarMask" class="sidebarMask">
@@ -34,10 +34,7 @@
           <div class="allVersions" id="allVersions">
             <ul>
 
-                
-
-
-                {% for collection in version1Pages reversed %}
+                {% for collection in version1Pages %}
 
                         {% assign collectionJson = collection | json %}
 

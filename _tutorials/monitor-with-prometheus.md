@@ -12,7 +12,7 @@ You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export
 ## Prequisites
 
 - Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 2019.1.1.
-- When installing {{site.data.reuse.short_name}}, firstly ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../installing/configuring/#kafka-broker-settings). This is required to ensure the Kafka brokers' JMX ports are accessible to the Prometheus Exporter.
+- When installing {{site.data.reuse.short_name}}, firstly ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../2019.1.1/installing/configuring/#kafka-broker-settings). This is required to ensure the Kafka brokers' JMX ports are accessible to the Prometheus Exporter.
 - Ensure you have a [Prometheus](https://prometheus.io/){:target="_blank"} server installed that has network access to your {{site.data.resuse.icp}} cluster.
 - Ensure you have [configured access to the Docker registry](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_images/using_docker_cli.html){:target="_blank"} from the machine you will be using to deploy the JMX exporter.
 - Ensure you have downloaded the [Prometheus JMX exporter httpserver jar file](https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_httpserver/){:target="_blank"} to the machine you will be using to deploy the JMX exporter.
@@ -21,7 +21,7 @@ You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export
 
 The [Prometheus JMX exporter](https://github.com/prometheus/jmx_exporter){:target="_blank"} can be run as a HTTP server which will provide an endpoint for the external Prometheus server to query for metrics data. In order to deploy to your {{site.data.resuse.icp}} cluster, the JMX exporter needs to be packaged into a Kubernetes solution.
 
-Release-specific credentials for establishing the connection between the JMX exporter and the Kafka brokers are generated when {{site.data.reuse.short_name}} is installed with the **Enable secure JMX connections** selected. The credentials are stored in a Kubernetes secret inside the release namespace. See [secure JMX connections](../../security/secure-jmx-connections/#providing-configuration-values) for information about the secret contents.
+Release-specific credentials for establishing the connection between the JMX exporter and the Kafka brokers are generated when {{site.data.reuse.short_name}} is installed with the **Enable secure JMX connections** selected. The credentials are stored in a Kubernetes secret inside the release namespace. See [secure JMX connections](../../2019.1.1/security/secure-jmx-connections/#providing-configuration-values) for information about the secret contents.
 
 If you are deploying the JMX exporter in a different namesapce to your {{site.data.reuse.short_name}} installation, the secret must be copied to the required namespace.
 
@@ -104,7 +104,7 @@ Create and expose a JMX exporter for each Kafka broker. However, the configurati
        startDelaySeconds: 10
        lowercaseOutputName: true
        rules:
-         # Rules below match the Kafka MBeans in the jconsole order
+         # The following rules match the Kafka MBeans in the jconsole order
          # Broker metrics
        - pattern : kafka.server<type=BrokerTopicMetrics, name=(BytesInPerSec|BytesOutPerSec)><>(Count)
          name: kafka_server_BrokerTopicMetrics_$1_$2

@@ -3,7 +3,7 @@ title: "MySQL (Debezium)"
 sortTitle: "MySQL"
 connectorID: kc-source-mysql
 direction: source
-support: community
+support: IBM
 type: kafkaConnect
 iconInitial: S
 iconGradient: 2

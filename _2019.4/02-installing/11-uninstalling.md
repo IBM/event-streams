@@ -15,7 +15,7 @@ To delete the {{site.data.reuse.short_name}} installation by using the UI:
 1. {{site.data.reuse.es_ui_login}}
 2. Click **Workloads > Helm Releases** from the navigation menu.
 3. Locate the release name of your installation in the **Name** column, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Delete** in the corresponding row.
-4. Optional: If you enabled persistence during installation, you also need to manually remove  [PersistentVolumes](https://www-03preprod.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/delete_volume.html){:target="_blank"} and [PersistentVolumeClaims](https://www-03preprod.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/delete_app_volume.html){:target="_blank"}.
+4. Optional: If you enabled persistence during installation, you also need to manually remove  [PersistentVolumes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/delete_volume.html){:target="_blank"} and [PersistentVolumeClaims](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/delete_app_volume.html){:target="_blank"}.
 
 
 ## Using the CLI

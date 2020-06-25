@@ -1523,12 +1523,7 @@ var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduc
 	  	<ul class="toc-list-h1">
         
           <li>
-            <a href="#ibm-event-streams-rest-producer" class="toc-h1 toc-link" data-title="IBM Event Streams REST Producer v1.0.0">IBM Event Streams REST Producer v1.0.0</a>
-            
-          </li>
-        
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#ibm-event-streams-rest-producer" class="toc-h1 toc-link" data-title="IBM Event Streams REST Producer v1.1.0">IBM Event Streams REST Producer v1.1.0</a>
             
           </li>
         
@@ -1562,7 +1557,7 @@ var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduc
                   </li>
                 
                   <li>
-                    <a href="#tocserrorresponse" class="toc-h2 toc-link" data-title="errorresponse">errorresponse</a>
+                    <a href="#tocserror_response" class="toc-h2 toc-link" data-title="error_response">error_response</a>
                     
                   </li>
                 
@@ -1581,20 +1576,11 @@ var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduc
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="ibm-event-streams-rest-producer">IBM Event Streams REST Producer v1.0.0</h1>
+        <h1 id="ibm-event-streams-rest-producer">IBM Event Streams REST Producer v1.1.0</h1>
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
-<p>REST API for producing messages to IBM Event Streams.<br /> <strong>Note:</strong> For IBM Event Streams on IBM Cloud Private you must have version 2019.1.1 or later to use the REST API.<br /> <br /> <strong>Getting started</strong><br /> For an introduction to the REST Producer, see the <a href="../connecting/rest-api/">producer API</a>.<br /> To retrieve the base url, run the following command: <code>cloudctl es init</code><br /> <br /> <strong>Authentication details</strong><br /> If using Bearer authentication, the token required is your IBM Event Streams application API key. If using Basic Authentication, use <code>token</code> as the user id, and use your IBM Event Streams application API key as the password.</p>
-<h1 id="authentication">Authentication</h1>
-<ul>
-<li>
-<p>HTTP Authentication, scheme: bearer</p>
-</li>
-<li>
-<p>HTTP Authentication, scheme: basic</p>
-</li>
-</ul>
+<p>REST API for producing messages to IBM Event Streams.<br /> <strong>Note:</strong> You must have IBM Event Streams version 2019.1.1 or later to use the REST API.<br /> <br /> <strong>Getting started</strong> <br /> For an introduction to the REST Producer, including authentication for the version of Event Streams you are using, see the <a href="../connecting/rest-api/">producer API</a>. <br /> To retrieve the base url, run the following command: <code>cloudctl es init</code><br /> <br /> <strong>Notes</strong><br /> The total length of the URI must not exceed 10Kb.</p>
 <h1 id="ibm-event-streams-rest-producer-default">Default</h1>
 <h2 id="producemessage">produceMessage</h2>
 <p><a id="opIdproduceMessage"></a></p>
@@ -1604,8 +1590,7 @@ var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduc
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X POST /topics/{topic_name}/records \
   -H <span class="hljs-string">'Content-Type: application/json'</span> \
-  -H <span class="hljs-string">'Accept: application/json'</span> \
-  -H <span class="hljs-string">'Authorization: Bearer {access-token}'</span>
+  -H <span class="hljs-string">'Accept: application/json'</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">/topics/{topic_name}/records</span> HTTP/1.1
@@ -1616,8 +1601,7 @@ curl -X POST /topics/{topic_name}/records \
 <span class="undefined"></span></span></code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">var</span> headers = {
   <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Authorization'</span>:<span class="hljs-string">'Bearer {access-token}'</span>
+  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
 
 };
 
@@ -1636,8 +1620,7 @@ $.ajax({
 <span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">'{}'</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Authorization'</span>:<span class="hljs-string">'Bearer {access-token}'</span>
+  <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json'</span>
 
 };
 
@@ -1659,8 +1642,7 @@ fetch(<span class="hljs-string">'/topics/{topic_name}/records'</span>,
 
 headers = {
   <span class="hljs-string">'Content-Type'</span> =&gt; <span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Authorization'</span> =&gt; <span class="hljs-string">'Bearer {access-token}'</span>
+  <span class="hljs-string">'Accept'</span> =&gt; <span class="hljs-string">'application/json'</span>
 }
 
 result = RestClient.post <span class="hljs-string">'/topics/{topic_name}/records'</span>,
@@ -1673,8 +1655,7 @@ p JSON.parse(result)
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
   <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>,
-  <span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Bearer {access-token}'</span>
+  <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json'</span>
 }
 
 r = requests.post(<span class="hljs-string">'/topics/{topic_name}/records'</span>, params={
@@ -1711,7 +1692,6 @@ System.out.println(response.toString());
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
         <span class="hljs-string">"Content-Type"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
         <span class="hljs-string">"Accept"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"application/json"</span>},
-        <span class="hljs-string">"Authorization"</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">"Bearer {access-token}"</span>},
         
     }
 
@@ -1735,6 +1715,8 @@ System.out.println(response.toString());
 </code></pre>
 <pre class="highlight tab tab-yaml"><code><span class="hljs-string">{}</span>
 
+</code></pre>
+<pre class="highlight tab tab-xml"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span> <span class="hljs-meta">?&gt;</span></span>
 </code></pre>
 <h3 id="producemessage-parameters">Parameters</h3>
 <table>
@@ -1767,7 +1749,7 @@ System.out.println(response.toString());
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>The type of the key, either text or binary.</td>
+<td>The type of the key, either text or binary. Binary supplied data must be base16 encoded</td>
 </tr>
 <tr>
 <td>headers</td>
@@ -1775,6 +1757,27 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>Comma separated list of key:value pairs to be set as message properties. The value must be expressed in base16 encoding, for example: <code>/records?headers=colour:726463,size:666f726d696461626c65</code></td>
+</tr>
+<tr>
+<td>schemaname</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>The name of the schema you want to use when producing messages.</td>
+</tr>
+<tr>
+<td>schemaversion</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>The schema version you want to use when producing messages.</td>
+</tr>
+<tr>
+<td>schemavalidation</td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>Set to 'true' to enable validation of your message body against the provided schema (keys cannot be schema validated)</td>
 </tr>
 <tr>
 <td>body</td>
@@ -1816,7 +1819,8 @@ System.out.println(response.toString());
     <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"string"</span>,
     <span class="hljs-attr">"partition"</span>: <span class="hljs-number">0</span>,
     <span class="hljs-attr">"offset"</span>: <span class="hljs-number">0</span>
-  }
+  },
+  <span class="hljs-attr">"Comment"</span>: <span class="hljs-string">"string"</span>
 }
 </code></pre>
 <h3 id="producemessage-responses">Responses</h3>
@@ -1840,43 +1844,48 @@ System.out.println(response.toString());
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
 <td>Not a valid request.</td>
-<td><a href="#schemaerrorresponse">errorresponse</a></td>
+<td><a href="#schemaerror_response">error_response</a></td>
 </tr>
 <tr>
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Unauthorized to produce to this topic.</td>
-<td><a href="#schemaerrorresponse">errorresponse</a></td>
+<td><a href="#schemaerror_response">error_response</a></td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>The topic does not exist. If Kafka setting <code>auto.create.topics.enable</code> is set to <code>true</code> (default), Kafka automatically creates the topic with the default replication factor and number of partitions. If Kafka setting <code>auto.create.topics.enable</code> is set to <code>false</code>, this error message is displayed when attempting to produce to a topic that does not exist.</td>
-<td><a href="#schemaerrorresponse">errorresponse</a></td>
+<td>The topic or specified schema does not exist. If Kafka setting <code>auto.create.topics.enable</code> is set to <code>true</code> (default), Kafka automatically creates the topic with the default replication factor and number of partitions. If Kafka setting <code>auto.create.topics.enable</code> is set to <code>false</code>, this error message is displayed when attempting to produce to a topic that does not exist.</td>
+<td><a href="#schemaerror_response">error_response</a></td>
 </tr>
 <tr>
 <td>408</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.7">Request Timeout</a></td>
 <td>The request timed out producing to IBM Event Streams.</td>
-<td><a href="#schemaerrorresponse">errorresponse</a></td>
+<td><a href="#schemaerror_response">error_response</a></td>
+</tr>
+<tr>
+<td>411</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.10">Length Required</a></td>
+<td>The request did not contain any data.</td>
+<td><a href="#schemaerror_response">error_response</a></td>
 </tr>
 <tr>
 <td>500</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
 <td>The request failed due to an internal server error.</td>
-<td><a href="#schemaerrorresponse">errorresponse</a></td>
+<td><a href="#schemaerror_response">error_response</a></td>
 </tr>
 <tr>
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>The request failed due to IBM Event Streams brokers being unavailable.</td>
-<td><a href="#schemaerrorresponse">errorresponse</a></td>
+<td><a href="#schemaerror_response">error_response</a></td>
 </tr>
 </tbody>
 </table>
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-BearerAuth, BasicAuth
+<aside class="success">
+This operation does not require authentication
 </aside>
 <h1 id="schemas">Schemas</h1>
 <h2 id="tocssuccessresponse">successresponse</h2>
@@ -1887,7 +1896,8 @@ BearerAuth, BasicAuth
     <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"string"</span>,
     <span class="hljs-attr">"partition"</span>: <span class="hljs-number">0</span>,
     <span class="hljs-attr">"offset"</span>: <span class="hljs-number">0</span>
-  }
+  },
+  <span class="hljs-attr">"Comment"</span>: <span class="hljs-string">"string"</span>
 }
 
 </code></pre>
@@ -1910,6 +1920,13 @@ BearerAuth, BasicAuth
 <td>true</td>
 <td>none</td>
 <td>The RecordMetadata object returned from IBM Event Streams.</td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>User-provided string to explain why a schema is deprecated. Ignored if not using schemas or schema used is active.</td>
 </tr>
 </tbody>
 </table>
@@ -1966,15 +1983,18 @@ BearerAuth, BasicAuth
 </tr>
 </tbody>
 </table>
-<h2 id="tocserrorresponse">errorresponse</h2>
-<p><a id="schemaerrorresponse"></a></p>
+<h2 id="tocserror_response">error_response</h2>
+<p><a id="schemaerror_response"></a></p>
 <pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"error_code"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"error"</span>: {
     <span class="hljs-attr">"error_code"</span>: <span class="hljs-number">0</span>,
     <span class="hljs-attr">"message"</span>: <span class="hljs-string">"string"</span>,
     <span class="hljs-attr">"kafka_error_code"</span>: <span class="hljs-number">0</span>,
     <span class="hljs-attr">"topic"</span>: <span class="hljs-string">"string"</span>,
-    <span class="hljs-attr">"incident"</span>: <span class="hljs-string">"string"</span>
+    <span class="hljs-attr">"incident"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"schema"</span>: <span class="hljs-string">"string"</span>
   }
 }
 
@@ -1992,6 +2012,20 @@ BearerAuth, BasicAuth
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>error_code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>HTTP Status code of the response.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Error message.</td>
+</tr>
 <tr>
 <td>error</td>
 <td>object</td>
@@ -2033,6 +2067,13 @@ BearerAuth, BasicAuth
 <td>false</td>
 <td>none</td>
 <td>Optional incident ID.</td>
+</tr>
+<tr>
+<td>» schema</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The name of the schema that the request was performed against (if any).</td>
 </tr>
 </tbody>
 </table>

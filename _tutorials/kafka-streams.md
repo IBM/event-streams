@@ -76,7 +76,7 @@ kafka_2.12-1.1.0 $ ./bin/kafka-console-producer.sh \
 >The words in these messages will be counted by the Streams app
 ```
 
-Another method to produce messages to the topic is by using the [{{site.data.reuse.short_name}} producer API](../../connecting/rest-api/#producing-messages-using-rest).
+Another method to produce messages to the topic is by using the [{{site.data.reuse.short_name}} producer API](../../2019.1.1/connecting/rest-api/#producing-messages-using-rest).
 
 ## Running the application
 
@@ -112,7 +112,7 @@ import org.apache.kafka.common.config.SslConfigs;
        + "username=\"token\" password=\"<api_key>\";";
    properties.put(SaslConfigs.SASL_JAAS_CONFIG, saslJaasConfig);
    ```
-8. Ensure you [download](../../getting-started/client/#creating-an-apache-kafka-java-client-application) the JAR files for SLF4J and add them to your classpath.
+8. Ensure you [download](../../2019.1.1/getting-started/client/#creating-an-apache-kafka-java-client-application) the JAR files for SLF4J and add them to your classpath.
 
 
 Run your Kafka Streams application. To view the topics, log in to your {{site.data.reuse.short_name}} UI and click the **Topics** tab.
