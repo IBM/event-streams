@@ -44,8 +44,8 @@ The bootstrap servers address can be obtained from the {{site.data.reuse.short_n
 
 1. {{site.data.reuse.es_ui_login_nonadmin}}
 2. Click **Connect to this cluster** on the right.
-3. Go to the **Resources** tab.
-4. Scroll down to the **Kafka listener and credentials.
+3. Click the **Resources** tab.
+4. Go to the **Kafka listener and credentials** section.
 5. Copy the address from one of the **External** listeners.
 
 The producer application might require credentials for the listener chosen in the previous step. For more information about these credentials, see the information about [managing access](../../security/managing-access/).

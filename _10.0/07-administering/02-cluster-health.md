@@ -64,19 +64,20 @@ Ensure you select your namespace, cluster name, and other filters at the top of 
 
 Create dashboards in the Kibana service that is provided by the {{site.data.reuse.openshift_short}} [cluster logging](https://docs.openshift.com/container-platform/4.4/logging/cluster-logging.html){:target="_blank"}, and use the dashboards to monitor for specific errors in the logs and set up alerts for when a number of errors occur over a period of time in your {{site.data.reuse.short_name}} instance.
 
-To install the {{site.data.reuse.short_name}} Grafana dashboards, follow these steps:
+To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these steps:
 
-1. Download the JSON file that includes the example Kibana dashboards for {{site.data.reuse.short_name}} from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/kibana-dashboards){:target="_blank"}.
+1. Ensure you have [cluster logging](https://docs.openshift.com/container-platform/4.4/logging/cluster-logging-deploying.html){:target="_blank"} installed.
+2. Download the JSON file that includes the example Kibana dashboards for {{site.data.reuse.short_name}} from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/kibana-dashboards){:target="_blank"}.
 
 2. Navigate to the Kibana homepage on your cluster.
 
    **For {{site.data.reuse.icpcs}}**: {{site.reuse.data.icpcs_ui_login}} Click the hamburger icon in the top left and then expand **Monitor Health**. Then click **Logging** to open the Kibana homepage.
 
    **For {{site.data.reuse.openshift_short}} cluster logging stack**: {{site.data.reuse.openshift_ui_login}} Then follow the instructions to navigate to [cluster logging's Kibana homepage](https://docs.openshift.com/container-platform/4.4/logging/cluster-logging-kibana-interface.html){:target="_blank"}.
-3. Click the **Management** tab on the left side.
+3. Click the **Management** tab on the left.
 4. Click the **Saved Objects**.
 5. Click the **Import** icon and navigate to the JSON file that includes the example Kibana dashboards for {{site.data.reuse.short_name}} you have downloaded.
-6. Click the **Dashboard** tab on the left and see the downloaded dashboards.
+6. Click the **Dashboard** tab on the left to view the downloaded dashboards.
 
 ## Other Monitoring Tools
 

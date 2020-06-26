@@ -209,6 +209,8 @@ latestdocs:
         url: /troubleshooting/firefox-black-images/
       - title: "Event Streams not installing due to Security Context Constraint (SCC) issues"
         url: /troubleshooting/default-scc-issues/
+      - title: "Not authorized error when building maven schema registry project"
+        url: /troubleshooting/schema-registry-not-authorized-error/
 
 # Sidebar navigation for 2019.4 version documentation.
 
