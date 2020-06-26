@@ -220,7 +220,7 @@ To modify the number of geo-replicator workers run the following using the oc to
 
 To install {{site.data.reuse.short_name}} Grafana dashboards that will persist, use the following steps:
 
-1. Download the geo-replication `MonitoringDashboard` custom resource from [github](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/grafana-dashboards).
+1. Download the geo-replication `MonitoringDashboard` custom resource from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/grafana-dashboards).
 2. {{site.data.reuse.openshift_cli_login}}
 3. Apply the `MonitoringDashboard` custom resource as follows:
 

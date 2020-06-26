@@ -72,7 +72,7 @@ cp_cli_login: "Log in to your cluster as an administrator by using the IBM Cloud
 es_cli_init: "Run the following command to initialize the IBM Event Streams CLI: `cloudctl es init`"
 
 # {{site.data.reuse.openshift_cli_login}}
-openshift_cli_login: "Log in to your Red Hat OpenShift Container Platform as a cluster administrator using the [`oc` CLI](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands)."
+openshift_cli_login: "Log in to your Red Hat OpenShift Container Platform as a cluster administrator by using the [`oc` CLI](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands)."
 
 # {{site.data.reuse.openshift_ui_login}}
 openshift_ui_login: "Log in to the OpenShift Container Platform [web console](https://docs.openshift.com/container-platform/4.4/web_console/web-console.html) using your login credentials."
