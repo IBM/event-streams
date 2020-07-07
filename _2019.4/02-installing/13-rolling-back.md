@@ -24,7 +24,7 @@ Rolling back your {{site.data.reuse.short_name}} 2019.4.1 installation to an ear
 
 1. {{site.data.reuse.icp_ui_login321}}
 3. Click **Workloads > Helm Releases** from the navigation menu.
-4. Locate the release name of your installation in the **Name** column, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Rollback** in the corresponding row.
+4. Locate the release name of your installation in the **Name** column, and click ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Rollback** in the corresponding row.
 5. Select the chart version to roll back to (1.3.0).
 6. Click **Rollback**.
 

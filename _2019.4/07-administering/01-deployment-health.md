@@ -17,10 +17,10 @@ If any of the {{site.data.reuse.long_name}} resources experience problems, the m
 To find out more about the problem:
 
 1. Click the message to expand it, and then expand the section for the component that does not have a green tick next to it.\\
-   ![Example system health](../../images/component-not-ready_201941.png "Example screen capture showing when a component is not ready, stating "Pod 2 is not ready" as a link."){:height="50%" width="50%"}
+   ![Example system health](../../../images/component-not-ready_201941.png "Example screen capture showing when a component is not ready, stating "Pod 2 is not ready" as a link."){:height="50%" width="50%"}
 2. Click the **Pod is not ready** link to open more details about the problem. The link opens the {{site.data.reuse.icp}} UI. Log in as an administrator.
 3. To understand why the {{site.data.reuse.long_name}} resource is not available, click the **Events** tab to view details about the cause of the problem.
-4. For more detailed information about the problem, click the **Overview** tab, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > View logs** on the right in the **Pod details** panel.
+4. For more detailed information about the problem, click the **Overview** tab, and click ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > View logs** on the right in the **Pod details** panel.
 5. For guidance on resolving common problems that might occur, see the [troubleshooting section](../../troubleshooting/intro/).
 
 ## Using the CLI
