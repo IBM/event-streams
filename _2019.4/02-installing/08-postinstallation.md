@@ -59,14 +59,14 @@ To find the node ports to expose by using the UI:
 
 1. {{site.data.reuse.icp_ui_login321}}
 2. From the navigation menu, click **Workloads > Helm Releases**.\\
-   ![Menu > Workloads > Helm releases](../../images/icp_menu_helmreleases.png "Screen capture showing how to select Workloads > Helm releases from navigation menu"){:height="30%" width="30%"}
+   ![Menu > Workloads > Helm releases](../../../images/icp_menu_helmreleases.png "Screen capture showing how to select Workloads > Helm releases from navigation menu"){:height="30%" width="30%"}
 3. Locate the release name of your {{site.data.reuse.short_name}} installation in the **NAME** column, and click the name.
 4. Scroll down to the **Service** table. The table lists information about your {{site.data.reuse.short_name}} services.
 5. In the **Service** table, look for `NodePort` in the **TYPE** column.\\
    In each row that has `NodePort` as type, look in the **PORT(S)** column to find the port numbers you need to ensure are open to communication.\\
    The port numbers are paired as `<internal_number:external_number>`, where you need the second (external) numbers to be open (for example, `30314` in `32000:30314`).\\
    The following image provides an example of the table:\\
-   ![Service table](../../images/service_nodeports201941.png "Screen capture showing service table with the NodePort types highlighted.")
+   ![Service table](../../../images/service_nodeports201941.png "Screen capture showing service table with the NodePort types highlighted.")
 
    For your firewall settings, ensure the external ports are open. For example, in the previous screen capture, it is the second number for the highlighted `NodePort` rows in the table: `32292`, `31212`, `30429`, `32618`, `30477`, `30015`, and `30594`.
 

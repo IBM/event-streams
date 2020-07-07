@@ -38,7 +38,7 @@ You can upgrade your {{site.data.reuse.short_name}} version by using the {{site.
 
 1. {{site.data.reuse.icp_ui_login321}}
 2. Click **Workloads > Helm Releases** from the navigation menu.
-3. Locate the release name of your installation in the **Name** column, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Upgrade** in the corresponding row.
+3. Locate the release name of your installation in the **Name** column, and click ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Upgrade** in the corresponding row.
 4. Select the chart version to upgrade to from the **Version** drop-down list.
 5. Ensure you have **Using previous configured values** set to **Reuse Values**.\\
    **Note:** Do not change any of the settings in the **Parameters** section. You can modify configuration settings after upgrade, for example, [enable encryption](#enable-encryption-between-pods) between pods.

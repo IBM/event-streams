@@ -33,10 +33,10 @@ To manage geo-replication on the destination cluster by using the UI:
 1. Log in to your destination {{site.data.reuse.long_name}} cluster as an administrator.
 2. Click **Topics** in the primary navigation and then click **Geo-replication**.
 3. Locate the name of the origin cluster for which you want to manage geo-replication for, and choose from one of the following options:
-    - ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Pause running replicators**: To pause geo-replication and suspend copying of data from the origin cluster.
-    - ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Resume paused replicators**: To resume geo-replication from the origin cluster.
-    - ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Restart failed replicators**: To restart geo-replication from the origin cluster for geo-replicators that experienced problems.
-    - ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Stop replication**: To stop geo-replication from the origin cluster.\\
+    - ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Pause running replicators**: To pause geo-replication and suspend copying of data from the origin cluster.
+    - ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Resume paused replicators**: To resume geo-replication from the origin cluster.
+    - ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Restart failed replicators**: To restart geo-replication from the origin cluster for geo-replicators that experienced problems.
+    - ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Stop replication**: To stop geo-replication from the origin cluster.\\
       **Important:** Stopping replication also removes the origin cluster from the list.
 
 **Note**: You cannot perform these actions on the destination cluster by using the CLI.
@@ -69,12 +69,12 @@ To manage geo-replication on the origin cluster by using the UI:
 1. Log in to your origin {{site.data.reuse.long_name}} cluster as an administrator.
 2. Click **Topics** in the primary navigation and then click **Geo-replication**.
 3. Locate the name of the destination cluster for which you want to manage geo-replication, and choose from one of the following options:
-    - ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Pause running replicator**: To pause a geo-replicator and suspend copying of data to the destination cluster.
+    - ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Pause running replicator**: To pause a geo-replicator and suspend copying of data to the destination cluster.
     - **Resume** button: To resume a geo-replicator for the destination cluster.
-    - ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Restart failed replicator**: To restart a geo-replicator that experienced problems.
-    - ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Remove replicator**: To remove a geo-replicator from the destination cluster.
+    - ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Restart failed replicator**: To restart a geo-replicator that experienced problems.
+    - ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Remove replicator**: To remove a geo-replicator from the destination cluster.
 
-You can take the same actions for all of the geo-replicators in a destination cluster using the ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options** menu in the top right when browsing  destination cluster details (for example, pausing all geo-replicators or removing the whole cluster as a destination).
+You can take the same actions for all of the geo-replicators in a destination cluster using the ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options** menu in the top right when browsing  destination cluster details (for example, pausing all geo-replicators or removing the whole cluster as a destination).
 
 ### Using the CLI
 
@@ -125,4 +125,4 @@ To restart a geo-replicator that has an **Error** status from the UI:
 3. Locate the name of the destination cluster for the geo-replicator that has an **Error** status.
 4. Locate the reason for the **Error** status under the entry for the geo-replicator.
 5. Either fix the reported problem with the system or verify that the problem is no longer present.
-6. Select ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Restart failed replicator** to restart the geo-replicator.
+6. Select ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Restart failed replicator** to restart the geo-replicator.

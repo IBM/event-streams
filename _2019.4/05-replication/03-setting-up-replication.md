@@ -65,7 +65,7 @@ To select the topics you want to replicate and set the destination cluster to re
 2. Click **Topics** in the primary navigation and then click **Geo-replication**.
 3. Choose a destination cluster to replicate to by clicking the name of the cluster from the **Destination locations** list.
 4. Choose the topics you want to replicate by selecting the checkbox next to each, and click **Geo-replicate to destination**.\\
-   **Tip:** You can also click the ![Add topic to geo-replication icon](../../images/add_to_georeplication_icon.png "Add to geo-replication icon that is displayed in each topic row.") icon in the topic's row to add it to the destination cluster. The icon turns into a **Remove** button, and the topic is added to the list of topics that are geo-replicated to the destination cluster.
+   **Tip:** You can also click the ![Add topic to geo-replication icon](../../../images/add_to_georeplication_icon.png "Add to geo-replication icon that is displayed in each topic row.") icon in the topic's row to add it to the destination cluster. The icon turns into a **Remove** button, and the topic is added to the list of topics that are geo-replicated to the destination cluster.
 5. Optional: Select whether to add a prefix to the name of the new replicated topic that is created on the destination cluster. Click **Add prefix to destination topic names** to add the release name of the origin cluster as a prefix to the replicated topics.
 6. Optional: Select whether you want to include the message history in the replication, or if you only want to copy the messages from the time of setting up geo-replication. Click **Include message history** if you want to include history.
 7. Click **Create** to create geo-replicators for the selected topics on the chosen destination cluster. Geo-replication starts automatically when the geo-replicators for the selected topics are set up successfully.\\
@@ -73,7 +73,7 @@ To select the topics you want to replicate and set the destination cluster to re
 
 For each topic that has geo-replication set up, a visual indicator is shown in the topic's row as follows:
 * If topics are being replicated from the cluster you are logged in to, the **Geo-replication** column displays the number of clusters the topic is being replicated to. Clicking the column for the topic expands the row to show details about the geo-replication for the topic. You can then click **View** to see more details about the geo-replicated topic in the side panel:\\
-  ![Geo-replication for topic on origin](../../images/georeplication_onorigin_detail_201941.png "Screen capture showing geo-replication detail after expanding row by clicking icon for topics that have geo-replication set up from the cluster you are logged into.")
+  ![Geo-replication for topic on origin](../../../images/georeplication_onorigin_detail_201941.png "Screen capture showing geo-replication detail after expanding row by clicking icon for topics that have geo-replication set up from the cluster you are logged into.")
 
 * If topics are being replicated to the cluster you are logged in to, the **Geo-replication** column displays the number of clusters the topic is being replicated from.
 

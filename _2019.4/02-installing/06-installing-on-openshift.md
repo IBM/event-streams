@@ -12,7 +12,7 @@ toc: true
 
 You can install {{site.data.reuse.short_name}} on the {{site.data.reuse.openshift}}. The solution includes key IBM cloud foundational services such as installation, security, monitoring, and lifecycle management. These services help manage your {{site.data.reuse.short_name}} installation, and are provided by {{site.data.reuse.icp}}.
 
-![Event Streams in OpenShift and IBM Cloud Private](../../images/OpenShiftDiagram.png "Diagram showing the schematic overview of {{site.data.reuse.short_name}} installed on the {{site.data.reuse.openshift_short}}.")
+![Event Streams in OpenShift and IBM Cloud Private](../../../images/OpenShiftDiagram.png "Diagram showing the schematic overview of {{site.data.reuse.short_name}} installed on the {{site.data.reuse.openshift_short}}.")
 
 The benefits of the solution mean you have a container platform from which you can perform administrative tasks in Red Hat OpenShift while taking some foundational services {{site.data.reuse.short_name}} relies on from {{site.data.reuse.icp}}.
 
@@ -198,7 +198,7 @@ Install the {{site.data.reuse.short_name}} chart as follows.
 3. Click **Configure**.\\
    **Note:** The README includes information about how to install {{site.data.reuse.long_name}} by using the CLI. To use the CLI, follow the instructions in the README instead of clicking **Configure**.\\
    **Important**: You might see the following warnings on this page. These warnings are harmless and can be safely ignored as the {{site.data.reuse.openshift_short}} does not use PodSecurityPolicy settings.\\
-   ![Pod Security Warning](../../images/openshift_podsecurity_warning.png "Screen capture showing harmless Pod Security warning messages on the configuration page.")
+   ![Pod Security Warning](../../../images/openshift_podsecurity_warning.png "Screen capture showing harmless Pod Security warning messages on the configuration page.")
 4. {{site.data.reuse.enter_install_details}}
 5. Expand the **All parameters** section to configure the settings for your installation as described in [configuring](../configuring). Configuration options to consider include setting up persistent storage, external access, and preparing for geo-replication.\\
      **Note:** Ensure the [**Docker image registry**](../configuring/#global-install-settings) field value includes the `<internal_OpenShift_Docker_registry_address>` you [looked up](#look-up-the-registry-address) earlier, and the namespace where you are installing {{site.data.reuse.short_name}}, for example: `docker-registry.default.svc:5000/event-streams`

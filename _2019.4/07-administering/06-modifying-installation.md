@@ -15,7 +15,7 @@ You can modify any of the [configuration settings](../../installing/configuring/
 To modify configuration settings by using the UI:
 1. {{site.data.reuse.icp_ui_login321}}
 2. From the navigation menu, click **Workloads > Helm Releases**.
-3. Locate the release name of your existing {{site.data.reuse.short_name}} cluster in the **NAME** column, and click ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Upgrade** in the corresponding row.
+3. Locate the release name of your existing {{site.data.reuse.short_name}} cluster in the **NAME** column, and click ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options > Upgrade** in the corresponding row.
 4. Select the installed chart version from the **Version** drop-down list.
 5. Ensure you set **Using previous configured values** to **Reuse Values**.
 6. Click **All parameters** in order to access all the release-related parameters.
