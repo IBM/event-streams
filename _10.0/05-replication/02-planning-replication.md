@@ -9,6 +9,7 @@ toc: true
 Consider the following when planning for geo-replication:
 - If you want to use the CLI to set up geo-replication, ensure you have the [{{site.data.reuse.long_name}} CLI installed](../../installing/post-installation/#installing-the-event-streams-command-line-interface).
 - Geo-replication requires both the origin and destination {{site.data.reuse.long_name}} instances to have client authentication enabled on the external route listener and the internal TLS listener.
+- If you are using geo-replication for disaster-recovery scenarios, see the guidance about [configuring your clusters and applications](../failover/#preparing-clusters-and-applications-for-switching) to ensure you can switch clusters if one becomes unavailable.
 -	[Prepare your destination cluster](#preparing-a-destination-cluster) by creating an EventStreamsGeoReplicator instance and defining the number of geo-replication workers.
 - [Identify the topics](../about/#what-to-replicate) you want to create copies of. This depends on the data stored in the topics, its use, and how critical it is to your operations.
 -	Message history is included in geo-replication. The amount of history is determined by the message retention option set when the topics were created on the origin cluster.
