@@ -8,13 +8,15 @@ toc: true
 
 ## Symptoms
 
-One of the following symptoms could result in issues with the default Security Context Constraint (SCC).
+{{site.data.reuse.short_name}} components report that an action is forbidden, stating that it is `unable to validate against any security context constraint`.
+
+This could result in symptoms such as:
 
 - Installation of the operator is pending and eventually times out.
 
     - Navigating to the **Conditions** section for the specific operator deployment under **Workloads > Deployment** will display a message similar to the following example:
  ```
- pods "eventstreams-cluster-operator-55d6f4cdf7-" is forbidden: unable to validate against any security context constraint: [spec.initContainers[0].securityContext.readOnlyRootFilesystem: Invalid value: false: ReadOnlyRootFilesystem must be set to true spec.containers[0].securityContext.readOnlyRootFilesystem: Invalid value: false: ReadOnlyRootFilesystem must be set to true]
+ pods "eventstreams-cluster-operator-55d6f4cdf7-" is forbidden: unable to validate against any security context constraint: [spec.volumes[0]: Invalid value: "secret": secret volumes are not allowed to be used spec.volumes[1]: Invalid value: "secret": secret volumes are not allowed to be used]
  ```
 
 - Creating an instance of {{site.data.reuse.short_name}} is pending and eventually times out.
@@ -33,11 +35,13 @@ is forbidden: unable to validate against any security context constraint: [spec.
 
 ## Causes
 
-{{site.data.reuse.long_name}} uses the default `restricted` Security Context Constraint (SCC) provided by {{site.data.reuse.openshift_short}}. If this SCC has been updated by the user or any other operator then this will cause issues in functioning of {{site.data.reuse.short_name}}.
+{{site.data.reuse.short_name}} has been tested with the default `restricted` Security Context Constraint (SCC) provided by the {{site.data.reuse.openshift_short}}.
+
+If a user or any other operator applies a custom SCC that removes permissions required by {{site.data.reuse.short_name}}, then this will cause issues.
 
 ## Resolving the problem
 
-Apply the custom Security Context Constraint (SCC) provided by [{{site.data.reuse.short_name}}](https://github.com/ibm-messaging/event-streams-operator-resources/){:target="_blank"} to set the required configuration for the product.
+Apply the custom Security Context Constraint (SCC) provided by [{{site.data.reuse.short_name}}](https://github.com/ibm-messaging/event-streams-operator-resources/){:target="_blank"} to enable permissions required by the product.
 
 To do this, edit the `eventstreams-scc.yaml` file to add your namespace and apply it using `oc` tool as follows:
 

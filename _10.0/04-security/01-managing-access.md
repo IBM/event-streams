@@ -212,13 +212,13 @@ When a `KafkaUser` custom resource is created, the Entity Operator within {{site
 You can retrieve the credentials later in the {{site.data.reuse.openshift_short}} by using the name of the KafkaUser. For example, to retrieve the credentials by using the {{site.data.reuse.openshift_short}} CLI:
 
 1. {{site.data.reuse.openshift_cli_login}}
-2. Use the following command retrieve the reqiured `KafkaUser` data, adding the `KafkaUser` name and your chosen namespace:\\
+2. Use the following command retrieve the required `KafkaUser` data, adding the `KafkaUser` name and your chosen namespace:\\
   \\
-  `oc get kafkauser <name> --namespace <namespace> -o jsonpath='{"username: "}{.status.username}{"\nsecret-name: "}{.status.secret}'`\\
+  `oc get kafkauser <name> --namespace <namespace> -o jsonpath='{"username: "}{.status.username}{"\nsecret-name: "}{.status.secret}{"\n"}'`\\
   \\
-  The command results in two lines of output, containing:
-  - the principal username
-  - the namespaced-name of the Kubernetes `Secret` containing the SCRAM password or the TLS certificates.
+  The command provides the following output:
+  - The principal username
+  - The name of the Kubernetes `Secret`, which includes the namespace, containing the SCRAM password or the TLS certificates.
 3. Decode the credentials.\\
    \\
    For SCRAM, use the `secret-name` from step 2 to get the password and decode it:\\
