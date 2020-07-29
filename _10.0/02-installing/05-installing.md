@@ -140,6 +140,25 @@ To add the IBM Common Services Catalog:
 
 The IBM Common Services Catalog source is added to the OperatorHub catalog, making the {{site.data.reuse.icpcs}} items available to install for {{site.data.reuse.short_name}}.
 
+## OpenShift 4.4.8 to 4.4.12 only: manually install the {{site.data.reuse.cs}} operator
+
+{{site.data.reuse.openshift_short}} version 4.4.8 introduced a regression where the default channels are not selected when a dependency is installed by the Operator Lifecycle Manager. This results in the wrong version of some operators, including {{site.data.reuse.icpcs}}, to be installed by default.
+
+If you are installing {{site.data.reuse.short_name}} on {{site.data.reuse.openshift_short}} 4.4.8 to 4.4.12, manually install the {{site.data.reuse.cs}} operator on the `stable-v1` channel first, or upgrade the {{site.data.reuse.openshift_short}} to 4.4.13 before installing the {{site.data.reuse.short_name}} operator.
+
+For other OpenShift versions, the {{site.data.reuse.short_name}} operator will automatically deploy the required {{site.data.reuse.icpcs}} if not present.
+
+To install the {{site.data.reuse.cs}} operator on the `stable-v1` channel when using {{site.data.reuse.openshift_short}} 4.4.8 to 4.4.12:
+1. {{site.data.reuse.openshift_ui_login}}
+2. Expand the **Operators** dropdown and select **OperatorHub** to open the **OperatorHub** dashboard.
+3. Select the project you want to deploy the operator in.
+4. In the **All Items** search box enter `{{site.data.reuse.cs}}` to locate the operator title.
+5. Click the **{{site.data.reuse.icpcs}}** tile to open the install side panel.
+6. Click the **Install** button to open the **Create Operator Subscription** dashboard, and select the `stable-v1` channel.
+7. Select the chosen [installation mode](#choosing-operator-installation-mode) that suits your requirements.
+   If the installation mode is **A specific namespace on the cluster**, select the target namespace you created previously.
+8. Click **Subscribe** to begin the installation.
+
 ## Install the {{site.data.reuse.short_name}} operator
 
 ### Choosing operator installation mode
