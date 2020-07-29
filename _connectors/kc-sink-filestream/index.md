@@ -3,7 +3,7 @@ title: "FileStream"
 sortTitle: "FileStream"
 connectorID: kc-sink-filestream
 direction: sink
-support: community
+support: IBM
 type: kafkaConnect
 iconInitial: Fs
 documentationURL: https://kafka.apache.org/quickstart#quickstart_kafkaconnect
