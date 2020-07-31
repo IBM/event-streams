@@ -46,7 +46,7 @@ This example provides a starter deployment that can be used if you simply want t
 
 Resource requirements for this deployment:
 
-| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs |
+| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing)) |
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
 | 2.9                 | 8.8               | 6.3                 | 9.1               | 0.5  |
 
@@ -67,7 +67,7 @@ This example provides a starter deployment that can be used if you want to try {
 
 Resource requirements for this deployment:
 
-| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs |
+| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
 | 3.3                 | 13.0              | 7.1                 | 15.3              | 1.5  |
 
@@ -112,7 +112,7 @@ If a storage solution has been configured, the following characteristics make th
 
 Resource requirements for this deployment:
 
-| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs |
+| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
 | 9.7                 | 13.0              | 15.3                | 15.3              | 3.0  |
 
@@ -132,7 +132,7 @@ This example installs a production-ready {{site.data.reuse.short_name}} instance
 
 Resource requirements for this deployment:
 
-| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs |
+| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
 | 15.0                | 22.0              | 30.7                | 33.3              | 12.0 |
 
@@ -152,7 +152,7 @@ This sample configuration is similar to the [**Production 3 brokers**](#example-
 
 Resource requirements for this deployment:
 
-| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs |
+| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
 | 27.1                | 34.3              | 55.1                | 57.7              | 24.0 |
 
@@ -175,7 +175,7 @@ This sample configuration is similar to the [**Production 6 brokers**](#example-
 
 Resource requirements for this deployment:
 
-| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs |
+| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
 | 39.1                | 46.6              | 79.4                | 82.1              | 36.0 |
 
@@ -324,9 +324,29 @@ For more information about keeping an eye on the health of your Kafka cluster, s
 
 ## Licensing
 
+### Licensing considerations
+
+Licensing is based on a Virtual Processing Cores (VPC) metric. To use {{site.data.reuse.short_name}} you must have a license for all of the virtual cores that are available to all of the following {{site.data.reuse.short_name}} components:
+- Kafka brokers
+- Geo-Replicator nodes
+- MirrorMaker2 nodes
+- Kafka Connect nodes hosted by {{site.data.reuse.short_name}}
+
+All other container types are pre-requisite components that are supported as part of {{site.data.reuse.short_name}}, and do not require additional licenses.
+
+If you are using one of the samples provided, see the [sample deployments section](#sample-deployments) for information about the number of VPCs required. The number of VPCs indicate the licenses required.
+
+**Note:** For a production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 1 VPC being used. For a non-production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 2 VPCs being used.
+
+To flag an installation of {{site.data.reuse.short_name}} as production or non-production, set the `spec.license.use` correctly during installation. See [license usage](#license-usage) for more information about selecting the correct value.
+
+If you add more Kafka replicas, geo-replicator nodes, MirrorMaker2 nodes, or Kafka Connect nodes, each one is an additional, separate chargeable unit. See [license usage](#license-usage) to learn how you can find out more about the number of virtual cores used by your deployment.
+
+### License usage
+
 The license usage of {{site.data.reuse.long_name}} is collected by the {{site.data.reuse.icpcs}} License Service which is automatically deployed with {{site.data.reuse.long_name}}. This provides the service that tracks the licensed containers and their resource usage based on the product use.
 
-While creating an instance of {{site.data.reuse.short_name}}, ensure that you select the correct value for `spec.license.use` in the custom resource. This value is used for metering purposes and could result in inaccurate charging and auditing if set incorrectly. Select one of the following values based on the purpose of your deployment:
+When [creating an instance](../installing/#install-an-event-streams-instance) of {{site.data.reuse.short_name}}, ensure that you select the correct value for `spec.license.use` in the custom resource. This value is used for metering purposes and could result in inaccurate charging and auditing if set incorrectly. Select one of the following values based on the purpose of your deployment:
 
 - **CloudPakForIntegrationNonProduction** for non-production deployments suitable for basic development and test activities.
 - **CloudPakForIntegrationProduction** for production deployments.

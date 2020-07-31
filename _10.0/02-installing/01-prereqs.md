@@ -35,7 +35,7 @@ For production systems, it is recommended to have {{site.data.reuse.short_name}}
 Minimum resource requirements are as follows.
 Always ensure you have sufficient resources in your environment to deploy the {{site.data.reuse.short_name}} operator together with a development or a production {{site.data.reuse.short_name}} operand configuration.
 
-| Deployment                                          | CPU (cores) | Memory (Gi) | VPCs |
+| Deployment                                          | CPU (cores) | Memory (Gi) | VPCs (see [licensing](../planning/#licensing)) |
 | --------------------------------------------------- | ----------- | ----------- | ---- |
 | [Operator](#operator-requirements)                  | 1           | 1           | N/A  |
 | [Development](../planning/#development-deployments) | 8.8         | 9.1         | 0.5  |
@@ -43,7 +43,7 @@ Always ensure you have sufficient resources in your environment to deploy the {{
 
 **Note:** {{site.data.reuse.short_name}} provides samples to help you get started with deployments. The resource requirements for these specific samples are detailed in the [planning](../planning/#sample-deployments) section. If you do not have an {{site.data.reuse.short_name}} installation on your system yet, always ensure you include the resource requirements for the operator together with the intended {{site.data.reuse.short_name}} instance requirements (development or production).
 
-**Important:** Licensing is based on the number of Virtual Processing Cores (VPCs) used by your {{site.data.reuse.short_name}} instance. See [licensing considerations](#licensing-considerations) for more information.
+**Important:** Licensing is based on the number of Virtual Processing Cores (VPCs) used by your {{site.data.reuse.short_name}} instance. See [licensing considerations](../planning/#licensing) for more information. For a production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 1 VPC being used. For a non-production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 2 VPCs being used.
 
 {{site.data.reuse.short_name}} is a [Kubernetes operator-based](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/){:target="_blank"} release and uses custom resources to define your {{site.data.reuse.short_name}} configurations.
 The {{site.data.reuse.short_name}} operator uses the declared required state of your {{site.data.reuse.short_name}} in the custom resources to deploy and manage the entire lifecycle of your {{site.data.reuse.short_name}} instances. Custom resources are presented as YAML configuration documents that define instances of the `EventStreams` custom resource type.
@@ -94,29 +94,12 @@ The {{site.data.reuse.short_name}} [geo-replicator](../../georeplication/about/)
 
 To use this feature, ensure you have the following additional resources available. The following table shows the prerequisites for each geo-replicator node.
 
-| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs |
+| CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](../planning/#licensing)) |
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
 | 1.0                 | 2.0               | 2.0                 | 2.0               | 1.0  |
 
 For instructions about installing geo-replication, see [configuring](../configuring/#setting-geo-replication-nodes).
 
-## Licensing considerations
-
-Licensing is based on a Virtual Processing Cores (VPC) metric. To use {{site.data.reuse.short_name}} you must have a license for all of the virtual cores that are available to all of the following {{site.data.reuse.short_name}} components:
-- Kafka brokers
-- Geo-Replicator nodes
-- MirrorMaker2 nodes
-- Kafka Connect nodes hosted by {{site.data.reuse.short_name}}
-
-All other container types are pre-requisite components that are supported as part of {{site.data.reuse.short_name}}, and do not require additional licenses.
-
-If you are using one of the samples provided, see the [planning sample deployments section](../planning/#sample-deployments) for information about the number of VPCs required. The number of VPCs indicate the licenses required.
-
-If you add more Kafka replicas, geo-replicator nodes, MirrorMaker2 nodes, or Kafka Connect nodes, each one is an additional, separate chargeable unit. See [licensing](../planning/#licensing) to learn how you can find out more about the number of virtual cores used by your deployment.
-
-For a production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 1 VPC being used. For a non-production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 2 VPCs being used.
-
-To flag an installation of {{site.data.reuse.short_name}} as production or non-production, set the `spec.license.use` correctly during installation. See [licensing](../planning/#licensing) for more information about selecting the correct value.
 
 ## Red Hat OpenShift Security Context Constraints
 
