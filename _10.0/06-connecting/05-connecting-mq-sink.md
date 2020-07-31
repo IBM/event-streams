@@ -118,7 +118,7 @@ metadata:
     # set to true.
     eventstreams.ibm.com/cluster: <kafka_connect_name>
 spec:
-  class: com.ibm.eventstreams.connect.mqsource.MQSinkConnector
+  class: com.ibm.eventstreams.connect.mqsink.MQSinkConnector
   tasksMax: 1
   config:
     topics: TSINK
