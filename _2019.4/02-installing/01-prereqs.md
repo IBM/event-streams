@@ -10,11 +10,32 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ## Container environment
 
+### 2019.4.3
+
+{{site.data.reuse.long_name}} 2019.4.3 is supported on the following platforms and systems:
+
+- 2019.4.3 in [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_20.1/install/sysreqs.html){:target="_blank"}:
+
+| Container platform | Systems |
+| ------------------ | ------- ||  |
+| {{site.data.reuse.openshift}} 4.2 and 4.3 | - Linux® 64-bit (x86_64) systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS) |
+
+- 2019.4.3 in standalone:
+
+| Container platform | Systems |
+| ------------------ | ------- ||  |
+| {{site.data.reuse.openshift}} 3.11 with IBM cloud foundational services 3.2.1* | - Linux® 64-bit (x86_64) systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS)                                           |
+| {{site.data.reuse.icp}} 3.2.1                                                  | - Linux® 64-bit (x86_64) systems <br/>- Linux on IBM® z13 or later systems <br> - Microsoft Azure (IaaS) <br> - Amazon Web Services (IaaS) |
+
+*Provided by {{site.data.reuse.icp}}
+
+{{site.data.reuse.short_name}} 2019.4.3 has Helm chart version 1.4.2 and includes Kafka version 2.3.1. For an overview of supported component and platform versions, see the [support matrix](../../../support/#support-matrix).
+
 ### 2019.4.2
 
-![Event Streams 2019.4.2 icon](../../../images/2019.4.2.svg "In Event Streams 2019.4.2."){{site.data.reuse.long_name}} 2019.4.2 is supported on the following platforms and systems:
+{{site.data.reuse.long_name}} 2019.4.2 is supported on the following platforms and systems:
 
-- 2019.4.2 in [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_19.4/install/sysreqs.html){:target="_blank"}:
+- 2019.4.2 in [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_20.1/install/sysreqs.html){:target="_blank"}:
 
 | Container platform | Systems |
 | ------------------ | ------- ||  |
