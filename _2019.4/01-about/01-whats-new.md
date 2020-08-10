@@ -6,13 +6,15 @@ slug: whats-new
 toc: true
 ---
 
+## Release 2019.4.3
+
+{{site.data.reuse.short_name}} 2019.4.3 contains security and bug fixes.
+
+For more information about the bugs fixed in 2019.4.3, see the [issues page](https://github.com/IBM/event-streams/issues?utf8=%E2%9C%93&q=is:issue+label:bug+label:2019.4.3){:target="_blank"}.
+
 ## Release 2019.4.2
 
 Find out what is new in {{site.data.reuse.long_name}} version 2019.4.2.
-
-### Support for {{site.data.reuse.icp}} version 3.2.1
-
-{{site.data.reuse.short_name}} 2019.4.2 is supported on {{site.data.reuse.icp}} 3.2.1.
 
 ### Support for {{site.data.reuse.openshift}} 4.3
 
