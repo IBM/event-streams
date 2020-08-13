@@ -415,6 +415,8 @@ latestdocs:
         url: /troubleshooting/georeplication-version-error/
       - title: "Error when downloading Java dependencies for schema registry"
         url: /troubleshooting/schemaregistry-java-deps-download-error/
+      - title: "Failed to read 'log header' errors in Kafka logs"
+        url: /troubleshooting/failed-to-read-log/
 
 # Sidebar navigation for 2019.2.1 version documentation.
 
@@ -607,6 +609,8 @@ latestdocs:
         url: /troubleshooting/cannot-add-schemas-earlier-install/
       - title: "Redis latency due to Transparent Huge Pages"
         url: /troubleshooting/redis-latency-transparent-huge-pages/
+      - title: "Failed to read 'log header' errors in Kafka logs"
+        url: /troubleshooting/failed-to-read-log/
 
 # Sidebar navigation for 2019.1.1 version documentation.
 
@@ -769,6 +773,8 @@ latestdocs:
         url: /troubleshooting/rollback-fails/
       - title: "The UI cannot load data"
         url: /troubleshooting/problem-with-piping/
+      - title: "Failed to read 'log header' errors in Kafka logs"
+        url: /troubleshooting/failed-to-read-log/
 
 # Sidebar navigation for version 2018.3.1 documentation.
 
@@ -911,3 +917,5 @@ latestdocs:
         url: /troubleshooting/pods-apparmor-blocked/
       - title: "Kafka client apps unable to connect to cluster"
         url: /troubleshooting/client-connect-error/
+      - title: "Failed to read 'log header' errors in Kafka logs"
+        url: /troubleshooting/failed-to-read-log/
