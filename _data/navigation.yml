@@ -211,6 +211,8 @@ latestdocs:
         url: /troubleshooting/default-scc-issues/
       - title: "Not authorized error when building maven schema registry project"
         url: /troubleshooting/schema-registry-not-authorized-error/
+      - title: "Client receives AuthorizationException when communicating with brokers"
+        url: /troubleshooting/authorization-failed-exceptions/
 
 # Sidebar navigation for 2019.4 version documentation.
 
