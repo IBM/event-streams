@@ -14,7 +14,7 @@ The following tutorial shows an example of how to set up alert notifications to 
 ## Prerequisites
 
 - Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 2019.1.1 installed on {{site.data.reuse.icp}} 3.1.1, using the default master port 8443.
-- Ensure you have [Slack](https://slack.com/){:target="\_blank"} installed and ready to use. This tutorial is based on Slack version 3.3.8.
+- Ensure you have [Slack](https://slack.com/){:target="_blank"} installed and ready to use. This tutorial is based on Slack version 3.3.8.
 - You need to be a Workplace Administrator to add apps to a Slack channel.
 
 ## Preparing Slack
@@ -29,7 +29,7 @@ To send notifications from {{site.data.reuse.short_name}} to your Slack channel,
 6. Click **Add Incoming Webhooks integration**.
 7. Copy the URL in the **Webhook URL** field.
 
-For more information about incoming webhooks in Slack, see the [Slack documentation](https://api.slack.com/incoming-webhooks){:target="\_blank"}.
+For more information about incoming webhooks in Slack, see the [Slack documentation](https://api.slack.com/incoming-webhooks){:target="_blank"}.
 
 ## Selecting the metric to monitor
 
@@ -48,7 +48,7 @@ The examples in this tutorial show you how to set up monitoring for both of thes
 
 **Note:** Not all of the metrics that Kafka uses are published to Prometheus by default. The metrics that are published are controlled by a ConfigMap. You can publish metrics by adding them to the ConfigMap.
 
-For information about the different metrics, see [Monitoring Kafka](https://kafka.apache.org/documentation/#monitoring){:target="\_blank"}.
+For information about the different metrics, see [Monitoring Kafka](https://kafka.apache.org/documentation/#monitoring){:target="_blank"}.
 
 ## Setting the alert rule
 
@@ -257,7 +257,7 @@ under-replicated-partitions   true      1h    ibm-icpmonitoring-1.4.0   es-prod
 
 ## Defining the alert destination
 
-To define where to send the notifications triggered by the alert rule, specify Slack as a receiver by adding details about your Slack channel and the webhook you copied earlier to the `monitoring-prometheus-alertmanager` ConfigMap. For more information about Prometheus Alertmanager, see the [Prometheus documentation](https://prometheus.io/docs/alerting/configuration/){:target="\_blank"}.
+To define where to send the notifications triggered by the alert rule, specify Slack as a receiver by adding details about your Slack channel and the webhook you copied earlier to the `monitoring-prometheus-alertmanager` ConfigMap. For more information about Prometheus Alertmanager, see the [Prometheus documentation](https://prometheus.io/docs/alerting/configuration/){:target="_blank"}.
 
 By default, the list of receivers is empty. See the `data` section of the ConfigMap, for example:
 
@@ -298,9 +298,9 @@ Define the Slack channel as the receiver using the incoming webhook you copied e
 - `channel`: The Slack channel to send the notifications to.
 - `username`: The username that posts the alert notifications to the channel.
 
-For more information about the configuration settings to enter for Slack notifications, see the [Prometheus documentation](https://prometheus.io/docs/alerting/configuration/#slack_config){:target="\_blank"}.
+For more information about the configuration settings to enter for Slack notifications, see the [Prometheus documentation](https://prometheus.io/docs/alerting/configuration/#slack_config){:target="_blank"}.
 
-The content for the posts can be customized, see the following [blog](https://medium.com/quiq-blog/better-slack-alerts-from-prometheus-49125c8c672b){:target="\_blank"} for Slack alert examples from Prometheus.
+The content for the posts can be customized, see the following [blog](https://medium.com/quiq-blog/better-slack-alerts-from-prometheus-49125c8c672b){:target="_blank"} for Slack alert examples from Prometheus.
 
 For example, to set up Slack notifications for your alert rule created earlier:
 
@@ -426,4 +426,4 @@ When the cluster recovers, a new resolution alert is posted when the number of u
 
 ## Setting up other notifications
 
-You can use this example to set up alert notifications to other applications, including [HipChat](https://prometheus.io/docs/alerting/configuration/#hipchat_config){:target="\_blank"}, [PagerDuty](https://prometheus.io/docs/alerting/configuration/#pagerduty_config){:target="\_blank"}, [emails](https://prometheus.io/docs/alerting/configuration/#email_config){:target="\_blank"}, and so on. You can also use this technique to generate HTTP calls, which lets you customize alerts when defining a flow in tools like [Node-RED](https://nodered.org/){:target="\_blank"} or [IBM App Connect](https://developer.ibm.com/integration/docs/){:target="\_blank"}.
+You can use this example to set up alert notifications to other applications, including [HipChat](https://prometheus.io/docs/alerting/configuration/#hipchat_config){:target="_blank"}, [PagerDuty](https://prometheus.io/docs/alerting/configuration/#pagerduty_config){:target="_blank"}, [emails](https://prometheus.io/docs/alerting/configuration/#email_config){:target="_blank"}, and so on. You can also use this technique to generate HTTP calls, which lets you customize alerts when defining a flow in tools like [Node-RED](https://nodered.org/){:target="_blank"} or [IBM App Connect](https://developer.ibm.com/integration/docs/){:target="_blank"}.

@@ -10,7 +10,7 @@ toc: true
 
 For guidance about handling outages in a multizone setup, see [managing a multizone setup](../../administering/managing-multizone/).
 
-## Zone Awareness
+## Zone awareness
 
 Kubernetes uses zone-aware information to determine the zone location of each of its nodes in the cluster to enable scheduling of pod replicas in different zones.
 
@@ -31,7 +31,7 @@ If your Kubernetes cluster is not zone aware, all cluster nodes will need to be 
 
 The zone label is needed to set up rack awareness when [installing for multizone](../configuring/#applying-kafka-rack-awareness).
 
-## Kafka Rack Awareness
+## Kafka rack awareness
 
 In addition to zone awareness, Kafka rack awareness helps to spread the Kafka broker pods and Kafka topic replicas across different availability zones, and also sets the brokers' `broker.rack` configuration property for each Kafka broker.
 

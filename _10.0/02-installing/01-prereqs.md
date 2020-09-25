@@ -17,8 +17,8 @@ Version 10.0.0 is installed by the {{site.data.reuse.short_name}} operator 2.0.0
 Ensure you have the following set up for your environment:
 
 - A supported version of {{site.data.reuse.openshift_short}} [installed](https://docs.openshift.com/container-platform/4.4/welcome/index.html){:target="_blank"}. See the [support matrix](../../support/#support-matrix) for supported versions.
-- The {{site.data.reuse.openshift_short}} CLI [installed](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html){:target="\_blank"}.
-- The IBM Cloud Pak CLI (`cloudctl`) [installed](https://github.com/IBM/cloud-pak-cli/blob/master/README.md){:target="\_blank"}.
+- The {{site.data.reuse.openshift_short}} CLI [installed](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html){:target="_blank"}.
+- The IBM Cloud Pak CLI (`cloudctl`) [installed](https://github.com/IBM/cloud-pak-cli/blob/master/README.md){:target="_blank"}.
 
 ## Hardware requirements
 
@@ -115,7 +115,7 @@ If you use a custom SCC (for example, one that is more restrictive), or have an 
 
 ## Data storage requirements
 
-If you want to set up [persistent storage](../planning/#planning-for-persistent-storage), {{site.data.reuse.short_name}} requires block storage formatted by Kubernetes as ext4. The use of file storage (for example, NFS) is not recommended.
+If you want to set up [persistent storage](../planning/#planning-for-persistent-storage), {{site.data.reuse.short_name}} requires block storage configured to use the XFS or ext4 file system. The use of file storage (for example, NFS) is not recommended.
 
 For example, you can use one of the following systems:
 
