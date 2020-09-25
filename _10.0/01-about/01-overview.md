@@ -6,7 +6,7 @@ slug: overview
 toc: true
 ---
 
-{{site.data.reuse.long_name}} is an event-streaming platform based on the [Apache Kafka®](https://kafka.apache.org/){:target="_blank"} project and incorporates the open-source [Strimzi](https://strimzi.io){:target="_blank"} technology. {{site.data.reuse.short_name}} version 10.0.0 includes Strimzi release 0.18.0, ships Kafka release 2.5.0, and supports the use of all Kafka interfaces.
+{{site.data.reuse.long_name}} is an event-streaming platform based on the [Apache Kafka®](https://kafka.apache.org/){:target="_blank"} project and incorporates the open-source [Strimzi](https://strimzi.io){:target="_blank"} technology. {{site.data.reuse.short_name}} version 10.0.0 includes Kafka release 2.5.0, and supports the use of all Kafka interfaces.
 
 {{site.data.reuse.long_name}} uses Strimzi to deploy Apache Kafka in a resilient and manageable way, and provides a range of additional capabilities to extend the core functionality.
 
@@ -42,7 +42,7 @@ Strimzi uses Operators in this manner to facilitate the deployment of Kafka clus
 
 The following diagram shows the operators involved in an {{site.data.reuse.short_name}} deployment along with the resources they manage. {{site.data.reuse.short_name}} builds on the Strimzi core, and adds additional components to extend the base capabilities.
 
-![EventStreams Operator diagram.](../../images/operator_structure.png "Diagram that shows the operators involved in an {{site.data.reuse.short_name}} deployment.")
+![EventStreams Operator diagram.](../../../images/operator_structure.png "Diagram that shows the operators involved in an {{site.data.reuse.short_name}} deployment.")
 
 ### The EventStreams Cluster Operator
 
