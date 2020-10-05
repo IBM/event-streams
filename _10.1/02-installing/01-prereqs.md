@@ -90,6 +90,17 @@ The {{site.data.reuse.short_name}} operator will automatically deploy the requir
 
 **Important:** Before installing the {{site.data.reuse.short_name}} operator, ensure you meet the [prerequisites](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/installer/3.x.x/preparation.html){:target="_blank"} for installing {{site.data.reuse.cs}}.
 
+#### Cluster-scoped permissions required
+
+The {{site.data.reuse.short_name}} operator requires the following cluster-scoped permissions:
+
+- **Permission to list nodes in the cluster**: When the {{site.data.reuse.short_name}} operator is deploying a Kafka cluster that spans [multiple availability zones](../planning/#multiple-availability-zones), it needs to label the pods with zone information. The permission to list nodes in the cluster is required to retrieve the information for these labels.
+- **Permission to manage admission webhooks**: The {{site.data.reuse.short_name}} operator uses admission webhooks to provide immediate validation and feedback about the creation and modification of {{site.data.reuse.short_name}} instances. The permission to manage webhooks is required for the operator to register these actions.
+- **Permission to manage ConsoleYAMLSamples**: ConsoleYAMLSamples are used to provide samples for {{site.data.reuse.short_name}} resources in the {{site.data.reuse.openshift_short}} web console. The permission to manage ConsoleYAMLSamples is required for the operator to register the setting up of samples.
+- **Permission to view ConfigMaps**: {{site.data.reuse.short_name}} uses authentication services from {{site.data.reuse.icpcs}}. The status of these services is maintained in ConfigMaps, so the permission to view the contents of the ConfigMaps allows {{site.data.reuse.short_name}} to monitor the availability of the {{site.data.reuse.cs}} dependencies.
+- **Permission to list specific CustomResourceDefinitions**: This allows {{site.data.reuse.short_name}} to identify whether other optional dependencies have been installed into the cluster.
+- **Permission to list ClusterRoles and ClusterRoleBindings**: The {{site.data.reuse.short_name}} operator uses ClusterRoles created by the Operator Lifecycle Manager (OLM) as parents for supporting resources that the {{site.data.reuse.short_name}} operator creates. This is needed so that the supporting resources are correctly cleaned up when {{site.data.reuse.short_name}} is uninstalled. The permission to list ClusterRoles is required to allow the operator to identify the appropriate cluster role to use for this purpose.
+
 ### Adding {{site.data.reuse.short_name}} geo-replication to a deployment
 
 The {{site.data.reuse.short_name}} [geo-replicator](../../georeplication/about/) allows messages sent to a topic on one {{site.data.reuse.short_name}} cluster to be automatically replicated to another {{site.data.reuse.short_name}} cluster. This capability ensures messages are available on a separate system to form part of a disaster recovery plan.

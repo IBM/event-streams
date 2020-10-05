@@ -8,7 +8,7 @@ type: kafkaConnect
 icon: appIcon_mq.svg
 documentationURL: ../../connecting/mq/source
 download:
-  -  { type: 'Download', url: 'https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v1.3.0/kafka-connect-mq-source-1.3.0-jar-with-dependencies.jar' }
+  -  { type: 'Download', url: 'https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v1.3.1/kafka-connect-mq-source-1.3.1-jar-with-dependencies.jar' }
   -  { type: 'GitHub', url: 'https://github.com/ibm-messaging/kafka-connect-mq-source' }
 ---
 

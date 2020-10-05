@@ -142,6 +142,8 @@ The IBM Common Services Catalog source is added to the OperatorHub catalog, maki
 
 ## Install the {{site.data.reuse.short_name}} operator
 
+Ensure you have considered the {{site.data.reuse.short_name}} operator [requirements](../prerequisites/#operator-requirements), including resource requirements and the required cluster-scoped permissions.
+
 ### Choosing operator installation mode
 
 Before installing the {{site.data.reuse.short_name}} operator, decide if you want the operator to:

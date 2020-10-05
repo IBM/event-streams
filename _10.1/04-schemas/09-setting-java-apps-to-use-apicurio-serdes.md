@@ -240,7 +240,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 ```
 
-### Properties
+### Connection properties
 ```
 Properties props = new Properties();
 
@@ -330,3 +330,55 @@ The Kafka configuration property `value.serializer` is set to `io.apicurio.regis
 **Note:** Replace:
  - `<my_consumer_group>` with the name of the consumer group to use.
  - `<my_topic>` with the name of the topic to consume messages from.
+
+## Setting up Kafka Streams applications
+
+Kafka Streams applications can also use the Apicurio Registry `serdes` library to serialize and deserialize messages. In particular, the `io.apicurio.registry.utils.serde.AvroSerde` class can be used to provide the Apicurio Avro serializer and deserializer for the `"default.value.serde"` or `"default.key.serdes"` properties. Additionally, setting the `"apicurio.registry.use-specific-avro-reader"` property to `"true"` tells the Apicurio Registry `serdes` library to use specific schema classes that have been generated from your project Avro schema files. For example:
+
+```
+import io.apicurio.registry.utils.serde.AbstractKafkaSerDe;
+import io.apicurio.registry.utils.serde.AvroSerde;
+import io.apicurio.registry.utils.serde.avro.AvroDatumProvider;
+
+import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.streams.StreamsConfig;
+
+import java.util.Properties;
+
+
+...
+
+final Properties streamsConfiguration = new Properties();
+
+// URL for Apicurio Registry connection (including basic auth parameters)
+streamsConfiguration.put(AbstractKafkaSerDe.REGISTRY_URL_CONFIG_PARAM, "https://<username>:<password>@<Schema registry endpoint>");
+
+// Specify default serializer and deserializer for record keys and for record values.
+streamsConfiguration.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+streamsConfiguration.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, AvroSerde.class);
+
+// Specify using specific (generated) Avro schema classes
+streamsConfiguration.put(AvroDatumProvider.REGISTRY_USE_SPECIFIC_AVRO_READER_CONFIG_PARAM, "true");
+```
+
+## Setting up Kafka Connect connectors
+
+The Apicurio Registry `converter` library can be used in Kafka Connect to provide the converters that are required to convert between Kafka Connect's format and the Avro serialized format. Source connectors can use the converter to write Avro-formatted values, keys, and headers to Kafka. Sink connectors can use the converter to read Avro-formatted values, keys, and headers from Kafka. In particular, the `io.apicurio.registry.utils.converter.AvroConverter` class can be used to provide the Apicurio Avro converter for the `"key.converter"`, `"value.converter"`, or `"header.converter"` properties. For example:
+
+```
+key.converter=io.apicurio.registry.utils.converter.AvroConverter
+key.converter.apicurio.registry.url=https://<username>:<password>@<Schema registry endpoint>
+
+value.converter=io.apicurio.registry.utils.converter.AvroConverter
+value.converter.apicurio.registry.url=https://<username>:<password>@<Schema registry endpoint>
+```
+
+To use the Apicurio Registry  `converter` library, add the following dependency to your project Maven `pom.xml` file:
+
+```
+<dependency>
+    <groupId>io.apicurio</groupId>
+    <artifactId>apicurio-registry-utils-converter</artifactId>
+    <version>1.3.1.Final</version>
+</dependency>
+```
