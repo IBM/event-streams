@@ -70,7 +70,7 @@ When you create a new version of the schema, you simply add it to the registry a
 
 When a new version is used, you can deprecate the previous version. Deprecating means that producing and consuming applications still using the deprecated version are warned that a new version is available to upgrade to. When you upgrade your producers to use the new version, you can disable the older version so it can no longer be used, or you can remove it entirely from the schema registry.
 
-You can use the {{site.data.reuse.short_name}} UI or CLI to [manage the lifecycle](../manage-schema-lifecycle/) of schemas, including registering, versioning, deprecating, and so on.
+You can use the {{site.data.reuse.short_name}} UI or CLI to [manage the lifecycle](../manage-lifecycle/) of schemas, including registering, versioning, deprecating, and so on.
 
 ![Schemas: Avro format.](../../../images/Schema_Basics_6.svg "Diagram showing a representation of schema lifecycle stages.")
 

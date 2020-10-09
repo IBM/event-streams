@@ -174,7 +174,7 @@ output {
 }
 ```
 
-### Building the Docker images
+### Building the Docker image
 
 Build the Docker images as follows.
 

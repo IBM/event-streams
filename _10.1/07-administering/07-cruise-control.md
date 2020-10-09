@@ -53,13 +53,13 @@ Follow these steps to rebalance a cluster by using Cruise Control:
 
 ## Setting up optimization
 
-To rebalance a Kafka cluster, Cruise Control uses the [available](#configuring-cruise-control) optimization goals to generate optimization proposals, which you can approve or reject.
+To rebalance a Kafka cluster, Cruise Control uses the [available](../../installing/configuring/#enabling-and-configuring-cruise-control) optimization goals to generate optimization proposals, which you can approve or reject.
 
 ### Creating an optimization proposal
 
 To define the [goals](#optimization-goals) to use when rebalancing the cluster, use the `KafkaRebalance` custom resource. The goals defined in the custom resource determine how the cluster will be optimized during the calculation of the `KafkaRebalance` proposal.
 
-**Important:** The [hard goals](#hard-goals) that are configured in `spec.strimziOverrides.config["hard.goals"]` in the `EventStreams` custom resource must be satisfied, whereas the goals defined in the `KafkaRebalance` custom resource will be optimized if possible, but not at the cost of violating any of the hard goals.
+**Important:** The [hard goals](../../installing/configuring/#hard-goals) that are configured in `spec.strimziOverrides.config["hard.goals"]` in the `EventStreams` custom resource must be satisfied, whereas the goals defined in the `KafkaRebalance` custom resource will be optimized if possible, but not at the cost of violating any of the hard goals.
 
 To create a `KafkaRebalance` custom resource that creates a proposal that does not consider the hard goals set in `spec.strimziOverrides.cruiseControl.config["hard.goals"]` in the `EventStreams` custom resource, set `spec.skipHardGoalsCheck` to true in the `KafkaRebalance` custom resource.
 

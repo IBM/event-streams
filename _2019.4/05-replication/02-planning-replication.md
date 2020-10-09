@@ -7,7 +7,7 @@ toc: true
 ---
 
 Consider the following when planning for geo-replication:
-- If you want to use the CLI to set up geo-replication, ensure you have the [{{site.data.reuse.long_name}} CLI installed](../../installing/post-installation/#installing-the-cli).
+- If you want to use the CLI to set up geo-replication, ensure you have the [{{site.data.reuse.long_name}} CLI installed](../../installing/post-installation/#installing-the-command-line-interface-cli).
 -	[Prepare your destination cluster](#preparing-destination-clusters) by setting the number of geo-replication workers.
 - [Identify the topics](../about/#what-to-replicate) you want to create copies of. This depends on the data stored in the topics, its use, and how critical it is to your operations.
 -	Decide whether you want to include message history in the geo-replication, or only copy messages from the time of setting up geo-replication. By default, the message history is included in geo-replication. The amount of history is determined by the message retention option set when the topics were created on the origin cluster.

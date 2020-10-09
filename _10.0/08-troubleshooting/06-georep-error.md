@@ -8,13 +8,13 @@ toc: true
 
 ## Symptoms
 
-After providing a list of topic names when creating a geo-replicator, only the first topic successfully replicates data.  
+After providing a list of topic names when creating a geo-replicator, only the first topic successfully replicates data.
 
 The additional topics specified are either not displayed in the destination cluster UI **Topics** view, or are displayed as `<origin-release>.<topic-name>` but are not enabled for geo-replication.
 
 ## Causes
 
-When using the CLI to set up replication, the [list of topics to geo-replicate](../../georeplication/setting-up/#using-the-cli) included spaces between the topic names in the comma-separated list.
+When using the CLI to set up replication, the [list of topics to geo-replicate](../../georeplication/setting-up/#using-the-cli-1) included spaces between the topic names in the comma-separated list.
 
 ## Resolving the problem
 
