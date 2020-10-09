@@ -62,7 +62,7 @@ To use schemas in Kafka applications, import your schema definitions into the sc
 
 ## Adding new schema versions
 
-The {{site.data.reuse.short_name}} schema registry can store multiple versions of the same schema. As your applications and environments evolve, your schemas need to change to accommodate the requirements. You can import, manage, and use different versions of a schema. As your schemas change, consider the options for [managing their lifecycle](../manage-schema-lifecycle/).
+The {{site.data.reuse.short_name}} schema registry can store multiple versions of the same schema. As your applications and environments evolve, your schemas need to change to accommodate the requirements. You can import, manage, and use different versions of a schema. As your schemas change, consider the options for [managing their lifecycle](../manage-lifecycle/).
 
 **Note:** A new version of a schema must be compatible with previous versions. This means that messages that have been serialized with an earlier version of a schema can be deserialized with a later version. To be compatible, fields in later versions of a schema cannot be removed, and any new schema field must have a default value.
 
