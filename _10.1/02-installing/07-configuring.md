@@ -148,9 +148,9 @@ spec:
 
 ## Configuring UI security
 
-By default, accessing the {{site.data.reuse.short_name}} UI requires an {{site.data.reuse.icpcs}} Identity and Access Management (IAM) user with an `Administrator` Role or higher (see [Managing access](../../security/managing-access/#what-roles-can-i-assign) for details).
+By default, accessing the {{site.data.reuse.short_name}} UI requires an {{site.data.reuse.icpcs}} Identity and Access Management (IAM) user that has been assigned access to {{site.data.reuse.short_name}} (see [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli) for details).
 
-For a proof-of-concept environment, the login requirement for the UI is _disabled_ when all Kafka authentication and authorization is disabled. This is demonstrated by the [**Lightweight without security**](../planning/#development-deployments) sample.
+The login requirement for the UI is _disabled_ when all Kafka authentication and authorization is disabled. This is demonstrated by the proof-of-concept [**lightweight without security**](../planning/#development-deployments) sample.
 
 **Important:** When security is not configured, the **[Producers](../../administering/topic-health/)** and the **[Monitoring](../../administering/cluster-health/#viewing-the-preconfigured-dashboard)** dashboards are not available in the UI.
 

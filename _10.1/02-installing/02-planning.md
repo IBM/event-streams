@@ -228,7 +228,7 @@ Secure instances of {{site.data.reuse.short_name}} will make use of TLS to prote
 
 ### {{site.data.reuse.short_name}} UI Access
 
-As explained in the [Managing access](../../security/managing-access) section, the {{site.data.reuse.icpcs}} Identity and Access Management (IAM) is used to bind a role to an identity. By default, the secure {{site.data.reuse.short_name}} instance will require an `Administrator` or higher role to authorize access. To setup LDAP (Lightweight Directory Access Protocol), assign roles to LDAP users, and create teams, see the instructions about [configuring LDAP connections](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/iam/3.4.0/configure_ldap.html){:target="_blank"}.
+As explained in the [Managing access](../../security/managing-access) section, the {{site.data.reuse.icpcs}} Identity and Access Management (IAM) is used to bind a role to an identity. By default, the secure {{site.data.reuse.short_name}} instance will require an `Administrator` or higher role to authorize access. To setup LDAP (Lightweight Directory Access Protocol), assign roles to LDAP users, and create teams, see the instructions about [configuring LDAP connections](https://www.ibm.com/support/knowledgecenter/SSHKN6/iam/3.x.x/configure_ldap.html){:target="_blank"}.
 
 Whilst it is highly recommended to always configure {{site.data.reuse.short_name}} with security enabled, it is also possible to configure the {{site.data.reuse.short_name}} UI to not require a login, which can be useful for proof of concept (PoC) environments. For details, see [configuring {{site.data.reuse.short_name}} UI access](../configuring/#configuring-ui-security).
 
