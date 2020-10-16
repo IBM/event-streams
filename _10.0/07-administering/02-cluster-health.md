@@ -38,7 +38,7 @@ Create dashboards in the Grafana service to monitor your {{site.data.reuse.short
 
 To install {{site.data.reuse.short_name}} Grafana dashboards that will persist, use the following steps:
 
-1. Download the `monitoringdashboard` custom resource from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/grafana-dashboards).
+1. Download the `monitoringdashboard` custom resource from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/grafana-dashboards){:target="_blank"}.
 2. {{site.data.reuse.openshift_cli_login}}
 3. Apply the `monitoringdashboard` custom resource as follows:
 
