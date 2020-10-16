@@ -39,7 +39,7 @@ Before running the producer to test loads, you must specify the following detail
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `bootstrap.servers`                     | The URL used for bootstrapping knowledge about the rest of the cluster. You can find this address in the {{site.data.reuse.short_name}} UI as described [later](#obtaining-configuration-details).  |                                              |
 | `ssl.truststore.location`               | The location of the JKS keystore used to securley communicate with your {{site.data.reuse.long_name}} instance. You can downloaded the JKS keystore file from the {{site.data.reuse.short_name}} UI as described [later](#obtaining-configuration-details).        |
-| `sasl.jaas.config`                      | An API key is needed to authorize production to your topic, and must be added to the 'password' string. To generate API keys, go to the {{site.data.reuse.short_name}} UI as described [later](#obtaining-configuration-details).        |
+| `sasl.jaas.config`                      | Set to `org.apache.kafka.common.security.plain.PlainLoginModule required username="token" password="<password>";`, where `<password>` is replaced by an API key. This is needed to authorize production to your topic. To generate API keys, go to the {{site.data.reuse.short_name}} UI as described [later](#obtaining-configuration-details).        |
 
 ### Obtaining configuration details
 
