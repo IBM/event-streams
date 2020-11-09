@@ -91,6 +91,26 @@ To set up your Java applications to use the Apicurio Registry `serdes` library w
     - [Setting up producers to use schemas](#setting-up-producers-to-use-schemas)
     - [Setting up consumers to use schemas](#setting-up-consumers-to-use-schemas)
 
+## Additional configuration options for Apicurio `serdes` library
+
+The Apicurio `serdes` library supports the following configuration options that can be specified to change how data is serialized.
+
+| Key         | Value        | Description
+| apicurio.registry.use.headers  | true     | Use this option to store the schema ID in the header of the message rather than within the payload.
+| apicurio.avro.encoding | JSON or BINARY | Specify whether to use BINARY (default) or JSON encoding within the Avro serializer
+
+**Note:** If you are using headers to store the schema ID, you can override the keys used in the header with the following values:
+
+- `apicurio.key.artifactId.name`
+- `apicurio.value.artifactId.name`
+- `apicurio.key.version.name`
+- `apicurio.value.version.name`
+- `apicurio.key.globalId.name`
+- `apicurio.value.globalId.name`
+
+By setting these values you can change the name of the header that the Apicurio `serdes` library uses when adding headers for the `artifactId`, `version`, or `globalId` in the Kafka message.
+
+
 ## Setting up producers to use schemas
 
 1. Ensure you have [prepared](#preparing-the-setup) for the setup, including configuring connection settings, downloading Java dependencies if not using Maven, and copying code snippets for a producing application.
@@ -214,6 +234,22 @@ The Kafka configuration property `value.serializer` is set to `io.apicurio.regis
 **Note:** Replace:
  - `<my_topic>` with the name of the topic to produce messages to.
  - `<path_to_schema_file.avsc>` with the path to the Avro schema file.
+
+**Note:** If you want to retrieve the schema from the registry instead of loading the file locally, you can use the following code:
+
+```
+// Convert kafka connection properties to a Map
+Map<String, Object> config = (Map) props;
+// Create the client
+RegistryRestClient client = RegistryRestClientFactory.create(REGISTRY_URL, config);
+
+try {
+    // Get the schema from apicurio and convert to an avro schema
+    Schema schema = new Schema.Parser().parse(client.getLatestArtifact(artifactId));
+} catch (Exception e) {
+    e.printStackTrace();
+}
+```
 
 ## Setting up consumers to use schemas
 
@@ -381,4 +417,24 @@ To use the Apicurio Registry  `converter` library, add the following dependency 
     <artifactId>apicurio-registry-utils-converter</artifactId>
     <version>1.3.1.Final</version>
 </dependency>
+```
+Alternatively, if you are not building your connector, you can download the Apicurio converter artifacts from [Maven](https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/1.3.1.Final/apicurio-registry-distro-connect-converter-1.3.1.Final-converter.tar.gz){:target="_blank"}.
+
+After downloading, extract the `tar.gz` file and place the folder with all the JARs into a subdirectory within the folder where you are building your `KafkaConnectS2I` image.
+
+To enable Kafka properties to be pulled from a file, add the following to your `KafkaConnector` or `KafkaConnectS2I` custom resource definition:
+
+```
+config.providers: file
+config.providers.file.class: org.apache.kafka.common.config.provider.FileConfigProvider
+```
+
+Then reference the Kafka connection details in the `KafkaConnector` custom resource of your connector. For example, the following shows a value converter with SCRAM credentials specified in the custom resource:
+
+```
+value.converter.apicurio.registry.url: <username>:<password>@<Schema registry endpoint>
+value.converter.apicurio.registry.global-id: io.apicurio.registry.utils.serde.strategy.GetOrCreateIdStrategy
+value.converter.apicurio.registry.request.ssl.truststore.location: "${file:/tmp/strimzi-connect.properties:ssl.truststore.location}"
+value.converter.apicurio.registry.request.ssl.truststore.password: "${file:/tmp/strimzi-connect.properties:ssl.truststore.password}"
+value.converter.apicurio.registry.request.ssl.truststore.type: "${file:/tmp/strimzi-connect.properties:ssl.truststore.type}"
 ```

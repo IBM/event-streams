@@ -221,6 +221,8 @@ latestdocs:
         url: /troubleshooting/authorization-failed-exceptions/
       - title: "Operator is generating constant log output"
         url: /troubleshooting/operator-keeps-reconciling/
+      - title: "Operator upgrade causes Kafka pod errors"
+        url: /troubleshooting/operator-upgrade-issue/
 
 # Sidebar navigation for 10.0 version documentation.
 
