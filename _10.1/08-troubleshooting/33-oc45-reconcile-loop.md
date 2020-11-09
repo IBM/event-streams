@@ -18,4 +18,4 @@ The log file for the {{site.data.reuse.short_name}} operator pod shows constant 
 The {{site.data.reuse.short_name}} operator is notified that an instance of {{site.data.reuse.short_name}} has changed and needs to be reconciled. When the reconciliation is complete, the status update triggers a notification which causes a new reconciliation.
 
 ## Resolving the problem
-Please contact [IBM Support](../../support) to request a fix, and include issue number [ES-115](https://github.com/IBM/event-streams/issues/115){:target="_blank"} in your correspondence.
+Contact [IBM Support](../../support) to request a fix, and include issue number [ES-115](https://github.com/IBM/event-streams/issues/115){:target="_blank"} in your correspondence.
