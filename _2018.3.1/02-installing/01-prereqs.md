@@ -20,7 +20,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ![Event Streams 2018.3.0 icon](../../../images/2018.3.0.svg "Event Streams 2018.3.0.") has Helm chart version 1.0.0 and includes Kafka version 2.0.
 
-For an overview of supported component and platform versions, see the [support matrix](../../../support/#support-matrix).
+For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 
 Ensure you have the following set up for your {{site.data.reuse.icp}} environment:
   * Install [{{site.data.reuse.icp}}](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install.html). \\

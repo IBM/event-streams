@@ -59,7 +59,7 @@ The minimum footprint for {{site.data.reuse.short_name}} has been reduced. See t
 
 ## Technology Preview features
 
-Technology Preview features are available to evaluate potential upcoming features. Such features are intended for testing purposes only and not for production use. IBM does not support these features, but might help with any issues raised against them. IBM welcomes [feedback](../../support) on Technology Preview features to improve them. As the features are still under development, functions and interfaces can change, and it might not be possible to upgrade when updated versions become available.
+Technology Preview features are available to evaluate potential upcoming features. Such features are intended for testing purposes only and not for production use. IBM does not support these features, but might help with any issues raised against them. IBM welcomes [feedback]({{ 'support' | relative_url }}) on Technology Preview features to improve them. As the features are still under development, functions and interfaces can change, and it might not be possible to upgrade when updated versions become available.
 
 IBM offers no guarantee that Technology Preview features will be part of upcoming releases and as such become fully supported.
 

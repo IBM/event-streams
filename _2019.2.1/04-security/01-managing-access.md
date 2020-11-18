@@ -84,7 +84,7 @@ If you are using [{{site.data.reuse.icp}} teams](https://www.ibm.com/support/kno
 To add the namespace to your team, use the {{site.data.reuse.icp}} [administrator UI](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/user_management/add_resource.html){:target="_blank"} or run the following command:\\
 `cloudctl iam resource-add <team-id> -r crn:v1:icp:private:k8:mycluster:n/<namespace>:::`
 
-Running the `cloudctl es iam-add-release-to-team` command creates policies that grant access to resources based on the roles in the team. It is possible to refine user access to specific resources further and limit actions they can take against resources by using the {{site.data.reuse.icp}} APIs. If you require such granular settings for security, [contact us](../../../support).
+Running the `cloudctl es iam-add-release-to-team` command creates policies that grant access to resources based on the roles in the team. It is possible to refine user access to specific resources further and limit actions they can take against resources by using the {{site.data.reuse.icp}} APIs. If you require such granular settings for security, [contact us]({{ 'support' | relative_url }}).
 
 **Note:** It can take up to 10 minutes after assigning access before users can perform tasks associated with their permissions.
 

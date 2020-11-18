@@ -80,7 +80,7 @@ If you have not set up {{site.data.reuse.icp}} teams, the default  `admin` user 
 
 If you are using [{{site.data.reuse.icp}} teams](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/user_management/teams.html){:target="_blank"}, you must associate the team with the {{site.data.reuse.long_name}} instance to apply the team members' roles to the resources within the instance, including any users that have the Cluster Administrator role. You can do this by using the `cloudctl es iam-add-release-to-team` command.
 
-This command creates policies that grant access to resources based on the roles in the team. It is possible to refine user access to specific resources further and limit actions they can take against resources by using the {{site.data.reuse.icp}} APIs. If you require such granular settings for security, [contact us](../../../support).
+This command creates policies that grant access to resources based on the roles in the team. It is possible to refine user access to specific resources further and limit actions they can take against resources by using the {{site.data.reuse.icp}} APIs. If you require such granular settings for security, [contact us]({{ 'support' | relative_url }}).
 
 **Note:** It can take up to 10 minutes after assigning access before users can perform tasks associated with their permissions.
 

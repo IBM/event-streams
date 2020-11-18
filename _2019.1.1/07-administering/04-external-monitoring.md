@@ -10,6 +10,6 @@ You can use third-party monitoring tools to monitor the deployed {{site.data.reu
 
 You must [configure](../../installing/configuring/#configuring-external-monitoring-tools) your installation to set up access for external monitoring tools.
 
-For examples about setting up monitoring with external tools such as Datadog, Prometheus, and Splunk, see the [tutorials](../../../tutorials/) page.
+For examples about setting up monitoring with external tools such as Datadog, Prometheus, and Splunk, see the [tutorials]({{ 'tutorials' | relative_url }}) page.
 
-If you have a tool or service you want to use to monitor your clusters, you can [raise a request](../../../support/#suggest-a-feature).
+If you have a tool or service you want to use to monitor your clusters, you can [raise a request]({{ 'support/#suggest-a-feature' | relative_url }}).

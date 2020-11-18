@@ -55,4 +55,4 @@ Follow [these instructions](../installing/installing).
 
 {{site.data.reuse.long_name}} benefits from community support as well as IBM support. You can ask questions on our Slack channel, check discussions on Stack Overflow, and raise issues and feature requests in GitHub.
 
-[Find out more.](../support)
+[Find out more.]({{ 'support' | relative_url }})

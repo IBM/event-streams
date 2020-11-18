@@ -28,7 +28,7 @@ You can use the metrics as follows:
    9. Navigate to the Grafana homepage again and click on the `Home` icon again then find the Dashboard you have installed to view it.
 
    Ensure you select your namespace, release name, and other filters at the top of the dashboard to view the required information.
-- Create alerts so that metrics that meet predefined criteria are used to send notifications to emails, Slack, PagerDuty, and so on. For an example of how to use the metrics to trigger alert notifications, see how you can set up [notifications to Slack](../../../tutorials/monitoring-alerts/).
+- Create alerts so that metrics that meet predefined criteria are used to send notifications to emails, Slack, PagerDuty, and so on. For an example of how to use the metrics to trigger alert notifications, see how you can set up [notifications to Slack]({{ 'tutorials/monitoring-alerts/' | relative_url }}).
 - Create dashboards in the Kibana service that is provided in {{site.data.reuse.icp}}. You can download example Kibana dashboards for {{site.data.reuse.short_name}} from [GitHub](https://github.com/IBM/event-streams/tree/master/support/dashboards/kibana){:target="_blank"} to monitor for specific errors in the logs and set up alerts for when a number of errors over a period of time in your {{site.data.reuse.short_name}} instance.
 
    For more information about the logging capabilities provided in {{site.data.reuse.icp}}, including Kibana, see the {{site.data.reuse.icp}} [documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_metrics/logging_elk.html){:target="_blank"}.

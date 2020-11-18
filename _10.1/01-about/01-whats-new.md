@@ -16,7 +16,7 @@ The {{site.data.reuse.short_name}} schema registry provided in earlier versions 
 
 ## Support for Linux on IBM Z
 
-In addition to Linux® 64-bit (x86_64) systems, {{site.data.reuse.short_name}} 10.1.0 is also [supported](../../support/#support-matrix) on Linux on IBM® Z systems.
+In addition to Linux® 64-bit (x86_64) systems, {{site.data.reuse.short_name}} 10.1.0 is also [supported]({{ 'support/#support-matrix' | relative_url }}) on Linux on IBM® Z systems.
 
 ## Kafka version upgraded to 2.6.0
 
