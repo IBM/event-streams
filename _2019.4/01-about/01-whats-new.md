@@ -47,7 +47,7 @@ Find out what is new in {{site.data.reuse.long_name}} version 2019.4.1.
 
 ### Support for multiple availability zones
 
-{{site.data.reuse.short_name}} now supports running a single cluster that spans [multiple zones](../../installing/planning/#multizone-support).
+{{site.data.reuse.short_name}} now supports running a single cluster that spans [multiple zones]({{ 'support' | relative_url }}).
 
 ### Support for SSL client authentication when using the REST producer
 

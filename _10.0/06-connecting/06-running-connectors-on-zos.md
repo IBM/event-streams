@@ -21,7 +21,7 @@ Download Apache Kafka to a non-z/OS system to retrieve the `.tar` file that incl
 
 To download Kafka Connect and make it available to your z/OS system:
 1. Log in to a system that is not running IBM z/OS, for example, a Linux system.
-2. [Download](https://kafka.apache.org/downloads){:target="_blank"} Apache Kafka 2.0.0 or later to the system. {{site.data.reuse.long_name}} provides support for Kafka Connect if you are using a Kafka version listed in the **Kafka version shipped** column of the [Support matrix](../../../support/#support-matrix).
+2. [Download](https://kafka.apache.org/downloads){:target="_blank"} Apache Kafka 2.0.0 or later to the system. {{site.data.reuse.long_name}} provides support for Kafka Connect if you are using a Kafka version listed in the **Kafka version shipped** column of the [Support matrix]({{ 'support/#support-matrix' | relative_url }}).
 3. Extract the downloaded `.tgz` file, for example:\\
    `gunzip -k kafka_2.12-2.5.0.tgz`
 4. Copy the resulting `.tar` file to a directory on the z/OS Unix System Services.

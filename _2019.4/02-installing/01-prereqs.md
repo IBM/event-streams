@@ -29,7 +29,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 *Provided by {{site.data.reuse.icp}}
 
-{{site.data.reuse.short_name}} 2019.4.3 has Helm chart version 1.4.2 and includes Kafka version 2.3.1. For an overview of supported component and platform versions, see the [support matrix](../../../support/#support-matrix).
+{{site.data.reuse.short_name}} 2019.4.3 has Helm chart version 1.4.2 and includes Kafka version 2.3.1. For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 
 ### 2019.4.2
 
@@ -50,7 +50,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 *Provided by {{site.data.reuse.icp}}
 
-{{site.data.reuse.short_name}} 2019.4.2 has Helm chart version 1.4.1 and includes Kafka version 2.3.1. For an overview of supported component and platform versions, see the [support matrix](../../../support/#support-matrix).
+{{site.data.reuse.short_name}} 2019.4.2 has Helm chart version 1.4.1 and includes Kafka version 2.3.1. For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 
 ### 2019.4.1
 
@@ -71,7 +71,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 *Provided by {{site.data.reuse.icp}}
 
-{{site.data.reuse.short_name}} 2019.4.1 has Helm chart version 1.4.0 and includes Kafka version 2.3.0. For an overview of supported component and platform versions, see the [support matrix](../../support/#support-matrix).
+{{site.data.reuse.short_name}} 2019.4.1 has Helm chart version 1.4.0 and includes Kafka version 2.3.0. For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 
 ### Environment prerequisites
 
@@ -118,7 +118,7 @@ The following table lists the aggregate resource requirements of the {{site.data
 
 The table includes information about requirements for the following deployment options:
 - The requirements are different depending on whether you require [persistent storage](../planning/#persistent-storage) or not.
-- If you plan to set up a [multizone cluster](../planning/#multizone-support), certain pod resource requirements will be on a per zone basis.
+- If you plan to set up a [multizone cluster]({{ 'support' | relative_url }}), certain pod resource requirements will be on a per zone basis.
 
 For details about the requirements for each container within individual pods and any zone implications, see the individual tables in the sections following the summary table.
 

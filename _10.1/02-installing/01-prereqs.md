@@ -12,11 +12,11 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 {{site.data.reuse.long_name}} 10.1.0 is supported on the {{site.data.reuse.openshift}}.
 
-Version 10.1.0 is installed by the {{site.data.reuse.short_name}} operator 2.1.0, and includes Kafka version 2.6.0. For an overview of supported component and platform versions, see the [support matrix](../../support/#support-matrix).
+Version 10.1.0 is installed by the {{site.data.reuse.short_name}} operator 2.1.0, and includes Kafka version 2.6.0. For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 
 Ensure you have the following set up for your environment:
 
-- A supported version of {{site.data.reuse.openshift_short}} [installed](https://docs.openshift.com/container-platform/4.4/welcome/index.html){:target="_blank"}. See the [support matrix](../../support/#support-matrix) for supported versions.
+- A supported version of {{site.data.reuse.openshift_short}} [installed](https://docs.openshift.com/container-platform/4.4/welcome/index.html){:target="_blank"}. See the [support matrix]({{ 'support/#support-matrix' | relative_url }}) for supported versions.
 - The {{site.data.reuse.openshift_short}} CLI [installed](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html){:target="_blank"}.
 - The IBM Cloud Pak CLI (`cloudctl`) [installed](https://github.com/IBM/cloud-pak-cli/blob/master/README.md){:target="_blank"}.
 

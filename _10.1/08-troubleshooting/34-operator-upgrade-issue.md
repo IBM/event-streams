@@ -40,4 +40,4 @@ Due to a sequencing issue, some entries are missing from the Kafka ConfigMap (`<
 
 ## Resolving the problem
 
-Contact [IBM Support](../../support) to request help with fixing this issue.
+Contact [IBM Support]({{ 'support' | relative_url }}) to request help with fixing this issue.

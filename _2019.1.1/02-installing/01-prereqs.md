@@ -20,7 +20,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 *Provided by {{site.data.reuse.icp}}
 
-{{site.data.reuse.short_name}} 2019.1.1 has Helm chart version 1.2.0 and includes Kafka version 2.1.1. For an overview of supported component and platform versions, see the [support matrix](../../../support/#support-matrix).
+{{site.data.reuse.short_name}} 2019.1.1 has Helm chart version 1.2.0 and includes Kafka version 2.1.1. For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 
 Ensure you have the following set up for your environment:
   * If you are installing {{site.data.reuse.short_name}} on the {{site.data.reuse.openshift_short}}, ensure you have OpenShift [installed](https://docs.openshift.com/container-platform/3.10/getting_started/install_openshift.html){:target="_blank"}, and also ensure you [install and integrate](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/supported_environments/openshift/overview.html){:target="_blank"} {{site.data.reuse.icp}} version 3.1.2.\\
