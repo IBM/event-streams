@@ -48,7 +48,7 @@ Resource requirements for this deployment:
 
 | CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
-| 2.4                 | 8.2               | 5.5                 | 8.2               | 0.5  |
+| 2.4                 | 8.2               | 5.4                 | 8.2               | 0.5  |
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
 
@@ -69,7 +69,7 @@ Resource requirements for this deployment:
 
 | CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
-| 2.8                 | 12.2              | 6.0                 | 14.2              | 1.5  |
+| 2.8                 | 12.2              | 5.9                 | 14.2              | 1.5  |
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
 
@@ -114,7 +114,7 @@ Resource requirements for this deployment:
 
 | CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
-| 2.8                 | 12.2              | 6.0                 | 14.2              | 3.0  |
+| 2.8                 | 12.2              | 5.9                 | 14.2              | 3.0  |
 
 {{site.data.reuse.sample_select_note}}
 
@@ -134,7 +134,7 @@ Resource requirements for this deployment:
 
 | CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
-| 14.5                | 21.2              | 29.9                | 32.5              | 12.0 |
+| 14.5                | 21.2              | 29.3                | 31.9              | 12.0 |
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
 
@@ -154,7 +154,7 @@ Resource requirements for this deployment:
 
 | CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
-| 26.5                | 33.2              | 54.2                | 56.8              | 24.0 |
+| 26.5                | 33.2              | 53.0                | 55.6              | 24.0 |
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
 
@@ -177,7 +177,7 @@ Resource requirements for this deployment:
 
 | CPU request (cores) | CPU limit (cores) | Memory request (Gi) | Memory limit (Gi) | VPCs (see [licensing](#licensing))|
 | ------------------- | ----------------- | ------------------- | ----------------- | ---- |
-| 38.5                | 45.2              | 78.4                | 81.1              | 36.0 |
+| 38.5                | 45.2              | 76.7                | 79.3              | 36.0 |
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
 
