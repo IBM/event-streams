@@ -46,6 +46,9 @@ The cluster-level settings are [configured](../configuring/#applying-kafka-broke
 
 You can specify the cluster and topic-level configurations by using the [{{site.data.reuse.long_name}} CLI](../../administering/modifying-installation/#modifying-kafka-broker-configuration-settings). You can also set topic-level configuration when [setting up the topic](../../getting-started/creating-topics/) in the {{site.data.reuse.long_name}} UI (click **Create a topic**, and set **Show all available options** to **On**).
 
+**Note:** When using ephemeral storage, ensure you set retention limits for Kafka topics so that you do not run out of disk space.
+If [message retention](../../getting-started/creating-topics/) is set to long periods and the message volume is high, the storage requirements for the topics could impact the OpenShift nodes that host the Kafka pods, and cause the nodes to run out of allocated disk space, which could impact normal operation.
+
 ### Log cleanup by deletion
 
 If the topic-level configuration property `cleanup.policy` is set to `delete` (the default value), old log segments are discarded when the retention time or size limit is reached, as set by the following properties:
