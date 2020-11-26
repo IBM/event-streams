@@ -59,4 +59,4 @@ spec:
          num.io.threads: 24
 ```
 
-You can specify all the broker configuration options supported by Kafka except from those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported](https://strimzi.io/docs/operators/latest/using.html#ref-kafka-broker-configuration-deployment-configuration-kafka){:target="_blank"} configuration options.
+You can specify all the broker configuration options supported by Kafka except from those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported](https://strimzi.io/docs/operators/0.19.0/using.html#ref-kafka-broker-configuration-deployment-configuration-kafka){:target="_blank"} configuration options.

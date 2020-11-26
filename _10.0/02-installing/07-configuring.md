@@ -45,10 +45,14 @@ These settings are specified in the YAML configuration document that defines an 
 
 Complete the configuration by adding additional fields to these storage properties as follows:
 
-1. Specify the storage type in `storage.type` (for example, `"persistent-claim"`)
-2. Specify the storage size in `storage.size` (for example, `"100Gi"`)
-3. Optionally, specify the storage class in `storage.class` (for example, `"rook-ceph-block-internal"`)
-4. Optionally, specify the retention setting for the storage if the cluster is deleted in `storage.deleteClaim` (for example, `"true"`)
+1. Specify the storage type in `storage.type` (for example, `"ephemeral"` or `"persistent-claim"`).
+
+   **Note:** When using ephemeral storage, ensure you set retention limits for Kafka topics so that you do not run out of disk space.
+   If [message retention](../../getting-started/creating-topics/) is set to long periods and the message volume is high, the storage requirements for the topics could impact the OpenShift nodes that host the Kafka pods, and cause the nodes to run out of allocated disk space, which could impact normal operation.
+
+2. Specify the storage size in `storage.size` (for example, `"100Gi"`).
+3. Optionally, specify the storage class in `storage.class` (for example, `"rook-ceph-block-internal"`).
+4. Optionally, specify the retention setting for the storage if the cluster is deleted in `storage.deleteClaim` (for example, `"true"`).
 
 An example of these configuration options:
 
@@ -198,7 +202,7 @@ spec:
 
 This custom resource can be created using the `oc` command or the {{site.data.reuse.openshift_short}} web console under the **IBM Event Streams** operator page.
 
-You can specify all the broker configuration options supported by Kafka except from those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/latest/using.html#ref-kafka-broker-configuration-deployment-configuration-kafka).
+You can specify all the broker configuration options supported by Kafka except from those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/0.19.0/using.html#ref-kafka-broker-configuration-deployment-configuration-kafka){:target="_blank"}.
 
 After deployment, these settings can be [modified](../../administering/modifying-installation/#modifying-kafka-broker-configuration-settings) by updating the `EventStreams` custom resource.
 
