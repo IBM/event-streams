@@ -6,6 +6,12 @@ slug: whats-new
 toc: true
 ---
 
+## Release 2019.4.4
+
+{{site.data.reuse.short_name}} 2019.4.4 contains security and bug fixes.
+
+For more information about the bugs fixed in 2019.4.4, see the [issues page](https://github.com/IBM/event-streams/issues?utf8=%E2%9C%93&q=is:issue+label:bug+label:2019.4.4){:target="_blank"}.
+
 ## Release 2019.4.3
 
 {{site.data.reuse.short_name}} 2019.4.3 contains security and bug fixes.
