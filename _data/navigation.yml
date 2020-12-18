@@ -219,10 +219,6 @@ latestdocs:
         url: /troubleshooting/schema-registry-not-authorized-error/
       - title: "Client receives AuthorizationException when communicating with brokers"
         url: /troubleshooting/authorization-failed-exceptions/
-      - title: "Operator is generating constant log output"
-        url: /troubleshooting/operator-keeps-reconciling/
-      - title: "Operator upgrade causes Kafka pod errors"
-        url: /troubleshooting/operator-upgrade-issue/
 
 # Sidebar navigation for 10.1 version documentation.
 
@@ -405,6 +401,8 @@ latestdocs:
         url: /troubleshooting/required-value-error/
       - title: "Operator is generating constant log output"
         url: /troubleshooting/operator-keeps-reconciling/
+      - title: "Operator upgrade causes Kafka pod errors"
+        url: /troubleshooting/operator-upgrade-issue/
 
 # Sidebar navigation for 10.0 version documentation.
 
@@ -791,8 +789,6 @@ latestdocs:
         url: /troubleshooting/schemaregistry-java-deps-download-error/
       - title: "Failed to read 'log header' errors in Kafka logs"
         url: /troubleshooting/failed-to-read-log/
-      - title: "Operator is generating constant log output"
-        url: /troubleshooting/operator-keeps-reconcilling/
 
 # Sidebar navigation for 2019.2.1 version documentation.
 
