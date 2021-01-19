@@ -789,6 +789,10 @@ latestdocs:
         url: /troubleshooting/schemaregistry-java-deps-download-error/
       - title: "Failed to read 'log header' errors in Kafka logs"
         url: /troubleshooting/failed-to-read-log/
+      - title: "Operator is generating constant log output"
+        url: /troubleshooting/operator-keeps-reconcilling/
+      - title: "Kafka cluster is not accessible by using OpenShift routes"
+        url: /troubleshooting/openshift-route-incorrect/
 
 # Sidebar navigation for 2019.2.1 version documentation.
 
