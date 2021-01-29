@@ -43,7 +43,7 @@ Now the Operations Dashboard is ready to receive data from external applications
 ### Step 2 - Modify your application code to enable tracing
 The most convenient way to enable tracing in a Kafka application is to use the Kafka client integration which has been [contributed to the OpenTracing project](https://github.com/opentracing-contrib/java-kafka-client). Then you have a choice of configuring OpenTracing interceptors and using the regular KafkaProducer and KafkaConsumer classes, or using Tracing variants of the KafkaProducer and KafkaConsumer which wrap the real classes. The latter is more flexible but requires additional code changes to the application.
 
-There are [sample applications](https://github.com/IBM/cp4i-samples/tree/KafkaTracingDemo-update/EventStreams) which show you how to do this. You can clone the repository and build them yourself, or copy the techniques for your own applications.
+There are [sample applications](https://github.com/IBM/cp4i-samples/tree/master/EventStreams/KafkaTracingInterceptors) which show you how to do this. You can clone the repository and build them yourself, or copy the techniques for your own applications.
 
 ### Step 3 - Deploy your application with the agent and collector sidecar containers
 After it is built, you can deploy your application, complete with the Operations Dashboard agent and collector containers. Without these additional containers, your application will not be able to communicate with the Operations Dashboard Store and your tracing data will not appear. The sample applications include an example of the Kubernetes deployment that includes these containers.
