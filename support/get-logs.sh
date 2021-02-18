@@ -266,7 +266,7 @@ done
 # Assert that the required fields were supplied
 if [ -z "${NAMESPACE}" ] || [ -z "${RELEASE}" ]; then
     printRed "Both the namespace and release name must be specified to run this script."
-    printRed "Please re-run the script with these required arguements."
+    printRed "Please re-run the script with these required arguments."
     printRed "Example:"
     printRed "  ./get-logs.sh -n=myNamespace -r=myRelease"
     echo ""
@@ -547,7 +547,18 @@ check_pvc () {
 
 # Gather information about the namespaces as a whole - pods etc.
 echo -n "Gathering namespace overview information" | printAndLog
-${EXE} get pods -n "${NAMESPACE}" -o wide -L zone > "${LOGDIR}/es-pods.log"
+ES_PODS=$(${EXE} get pods -n "${NAMESPACE}" -o wide -L zone -l "${RELEASE_LABEL}" 2>&1)
+
+if [ "${ES_PODS}" == "No resources found in ${NAMESPACE} namespace." ]; then
+    echo ""
+    printRed "No pods were found for release ${RELEASE} in namespace ${NAMESPACE}"
+    printRed "Please re-run the script with correct release name or namespace."
+    echo ""
+    usage
+    exit 1
+fi
+
+echo "${ES_PODS}" > "${LOGDIR}/es-pods.log"
 ${EXE} get pods -n "${NAMESPACE}" -o json > "${LOGDIR}/es-pods-json.json"
 printDoneAndLog
 
@@ -679,7 +690,11 @@ done
 
 # Gather container logs/descriptions/manifests for ES components
 for COMPONENT_LABEL in ${COMPONENT_LABELS[@]}; do
+    echo "Processing ${COMPONENT_LABEL}" | printAndLog
     PODS=$(${EXE} get pods -n ${NAMESPACE} -l "${RELEASE_LABEL},${COMPONENT_LABEL}" --no-headers -o custom-columns=":metadata.name" | cleanOutput)
+    if [ -z "$PODS" ]; then
+        echo "  No Pods found for ${COMPONENT_LABEL}" | printAndLog
+    fi
     for POD in ${PODS[@]}; do
         get_pod_logs "${NAMESPACE}" "${POD}"
     done
@@ -708,7 +723,14 @@ for RESOURCE in ${RESOURCES[@]}; do
     RESOURCE_DIR="${LOGDIR}/${RESOURCE}"
     mkdir -p "${RESOURCE_DIR}"
 
-    ${EXE} get "${RESOURCE}" -n "${NAMESPACE}" -l "${RELEASE_LABEL}" -o wide > "${RESOURCE_DIR}/${RESOURCE}-get.log"
+    # If the resource we're checking is secrets, then we want to list all the secrets in the namespace, but don't want to 
+    # describe them all. 
+    if [ "${RESOURCE}" == "secrets" ]; then
+        ${EXE} get "${RESOURCE}" -n "${NAMESPACE}" -o wide > "${RESOURCE_DIR}/${RESOURCE}-get.log"
+    else 
+        ${EXE} get "${RESOURCE}" -n "${NAMESPACE}" -l "${RELEASE_LABEL}" -o wide > "${RESOURCE_DIR}/${RESOURCE}-get.log"
+    fi
+
     ITEM_NAMES=$(${EXE} get ${RESOURCE} -n ${NAMESPACE} -l ${RELEASE_LABEL} --no-headers -o custom-columns=":metadata.name" | cleanOutput)
 
     for ITEM_NAME in ${ITEM_NAMES[@]}; do
@@ -749,7 +771,7 @@ for SECRET in ${CERT_SECRETS[@]}; do
         NAME=$(cut -d ':' -f1 <<< ${DATUM})
         VALUE=$(cut -d ':' -f2 <<< ${DATUM})
         case ${NAME} in
-            *.crt|*.cert|*.cacert)
+            *.crt|*.cert|*.cacert|*.cluster)
                 echo -n "  Got encoded certificate: ${NAME}" | printAndLog
                 echo "${VALUE}" > "${CERT_DIR}/${NAME}"
                 printDoneAndLog
