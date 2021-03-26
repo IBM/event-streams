@@ -152,11 +152,11 @@ To install the operator by using the {{site.data.reuse.openshift_short}} web con
 2. Expand the **Operators** dropdown and select **OperatorHub** to open the **OperatorHub** dashboard.
 3. Select the project you want to deploy the {{site.data.reuse.short_name}} instance in.
 4. In the **All Items** search box enter `IBM Event Streams` to locate the operator title.
-5. Click the **IBM Event Streams** tile to open the install side panel.
+5. Click the **IBM Event Streams (Deprecated)** tile to open the install side panel.
 6. Click the **Install** button to open the **Create Operator Subscription** dashboard.
 7. Select the chosen [installation mode](#choosing-operator-installation-mode) that suits your requirements.
    If the installation mode is **A specific namespace on the cluster**, select the target namespace you created previously.
-8. Click **Install** to begin the installation (or click **Subscribe** if using an earlier version of OpenShift than 4.5).
+8. Click **Install** to begin the installation.
 
 The installation can take a few minutes to complete.
 
@@ -167,7 +167,7 @@ You can see the installed operator and check its status as follows:
 1. {{site.data.reuse.openshift_ui_login}}
 2. {{site.data.reuse.task_openshift_navigate_installed_operators}}
 3. {{site.data.reuse.task_openshift_select_operator}}
-4. Scroll down to the **ClusterServiceVersion Overview** section of the page.
+4. Scroll down to the **ClusterServiceVersion details** section of the page.
 5. Check the **Status** field. After the operator is successfully installed, this will change to `Succeeded`.
 
 In addition to the status, information about key events that occur can be viewed under the **Conditions** section of the same page. After a successful installation, a condition with the following message is displayed: `install strategy completed with no errors`.
