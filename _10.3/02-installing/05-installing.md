@@ -12,7 +12,6 @@ The following sections provide instructions about installing {{site.data.reuse.l
 
 When deploying in an air-gapped environment, ensure you have access to this documentation set, and see the instructions in the offline installation README that is provided as part of the downloaded package.
 
-{{site.data.reuse.short_name}} can also be installed as part of [{{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/SSGT7J_20.2/install/install_event_streams.html){:target="_blank"}.
 
 ## Overview
 
