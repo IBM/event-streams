@@ -228,9 +228,15 @@ collections:
     label: "10.2"
     output: true
     version: true
+    permalink: /:collection/:categories/:slug/
+    order: 7
+  "10.3":
+    label: "10.3"
+    output: true
+    version: true
     tag: Latest
     permalink: /:categories/:slug/
-    order: 7
+    order: 8
   "tutorials":
     output: true
     permalink: /:collection/:path/
@@ -403,6 +409,21 @@ defaults:
   - scope:
       path: ""
       type: "10.2"
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comment: false
+      version: true
+      latest: true
+      mastheadNavItem: Documentation
+      sidebar:
+        nav: "102docs"
+  # _10.3
+  - scope:
+      path: ""
+      type: "10.3"
     values:
       layout: single
       read_time: false
