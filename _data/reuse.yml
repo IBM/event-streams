@@ -16,6 +16,12 @@ icpcs: "IBM Cloud Platform Common Services"
 # {{site.data.reuse.cs}}
 cs: "Common Services"
 
+# {{site.data.reuse.icpfs}}
+icpfs: "IBM Cloud Pak foundational services"
+
+# {{site.data.reuse.fs}}
+fs: "foundational services"
+
 # {{site.data.reuse.icp_master_host}}
 icp_master_host: on the IBM Cloud Private [master host](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/cluster_endpoints.html#master)
 
@@ -170,6 +176,11 @@ helm_charts_note: "**Note:** Where `<charts.tgz>` is the name of the chart file 
 # Notes
 # {{site.data.reuse.ce_deprecated}}
 ce_deprecated: "IBM Event Streams Community Edition is no longer available from 1 May 2020. For information about trying out Kafka and Event Streams for free, see the [product pages](https://www.ibm.com/cloud/event-streams/get-started)."
+
+# {{site.data.reuse.es_deprecated}}
+es_deprecated: "**Note:** The Event Streams component in IBM Cloud Pak for Integration has been deprecated. Event Streams will continue to be supported but will no longer be enhanced (see [announcement](https://www-01.ibm.com/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_ca/2/877/ENUSZP21-0082/index.html)). For self-managed software solutions that require Apache Kafka, IBM recommends the Confluent Platform available as an add-on for Cloud Pak for Integration."
+
+
 # Icons
 
 # Event Streams 2018.3.0 only cueing graphic and text - example:
