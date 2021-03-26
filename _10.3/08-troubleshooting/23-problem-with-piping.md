@@ -18,4 +18,4 @@ The {{site.data.reuse.cp4i}} monitoring service might not be installed. In gener
 
 ## Resolving the problem
 
-Install the {{site.data.reuse.cp4i}} monitoring service from the [Catalog or CLI](https://www.ibm.com/support/knowledgecenter/en/SSGT7J_20.2/monitoring/1.7.0/monitoring_service.html#install_monitsrv){:target="_blank"}.
+Install the {{site.data.reuse.cp4i}} monitoring service from the [Catalog or CLI](https://www.ibm.com/support/knowledgecenter/en/SSGT7J_21.1/monitoring/1.7.0/monitoring_service.html#install_monitsrv){:target="_blank"}.
