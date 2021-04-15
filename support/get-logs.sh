@@ -159,6 +159,7 @@ declare -a OPERATOR_CERT_SECRETS=(
     "ibm-es-schema-cert"
     "ibm-es-metrics-cert"
     "cluster-ca-cert"
+    "clients-ca-cert"
     "kafka-brokers"
 )
 
