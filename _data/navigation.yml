@@ -221,6 +221,8 @@ latestdocs:
         url: /troubleshooting/authorization-failed-exceptions/
       - title: "504 timeout error when viewing consumer groups in the Event Streams UI"
         url: /troubleshooting/504-ui-consumer-groups/
+      - title: "Kafka exporter is not deployed"
+        url: /troubleshooting/kafka-exporter-not-deployed/
 
 # Sidebar navigation for 10.2 version documentation.
 
@@ -407,6 +409,8 @@ latestdocs:
         url: /troubleshooting/authorization-failed-exceptions/
       - title: "504 timeout error when viewing consumer groups in the Event Streams UI"
         url: /troubleshooting/504-ui-consumer-groups/
+      - title: "Kafka exporter is not deployed"
+        url: /troubleshooting/kafka-exporter-not-deployed/
 
 # Sidebar navigation for 10.1 version documentation.
 
@@ -593,6 +597,8 @@ latestdocs:
         url: /troubleshooting/operator-upgrade-issue/
       - title: "504 timeout error when viewing consumer groups in the Event Streams UI"
         url: /troubleshooting/504-ui-consumer-groups/
+      - title: "Kafka exporter is not deployed"
+        url: /troubleshooting/kafka-exporter-not-deployed/
 
 # Sidebar navigation for 10.0 version documentation.
 
@@ -777,6 +783,8 @@ latestdocs:
         url: /troubleshooting/operator-keeps-reconciling/
       - title: "504 timeout error when viewing consumer groups in the Event Streams UI"
         url: /troubleshooting/504-ui-consumer-groups/
+      - title: "Kafka exporter is not deployed"
+        url: /troubleshooting/kafka-exporter-not-deployed/
 
 # Sidebar navigation for 2019.4 version documentation.
 

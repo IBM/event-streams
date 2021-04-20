@@ -14,7 +14,7 @@ As the number of consumer groups increases it will reach a limit where the servi
 
 ## Resolving the problem
 
-Please contact [IBM Support]({{ 'support' | relative_url }}) to request a fix, and include issue number [ES-135](https://github.com/IBM/event-streams/issues/135){:target="_blank"} in your correspondence.
+Contact [IBM Support]({{ 'support' | relative_url }}) to request a fix, and include issue number [ES-135](https://github.com/IBM/event-streams/issues/135){:target="_blank"} in your correspondence.
 
 <!--
 When the issue is resolved, update this section to include:
