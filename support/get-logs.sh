@@ -160,6 +160,7 @@ declare -a OPERATOR_CERT_SECRETS=(
     "ibm-es-metrics-cert"
     "cluster-ca-cert"
     "kafka-brokers"
+    "zookeeper-nodes"
 )
 
 declare -a OPERATOR_CRDS=(
