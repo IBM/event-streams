@@ -547,7 +547,7 @@ When configuring Cruise Control, you can define the following settings in the `E
 - Hard goals in `spec.strimziOverrides.cruiseControl.config["hard.goals"]`
 - The capacity limits for broker resources, which Cruise Control uses to determine if resource-based optimization goals are being broken. The `spec.strimziOverrides.cruiseControl.brokerCapacity` property defines the Kafka broker resource capacities that Cruise Control will optimize around.
 
-Cruise Control includes a number of [configuration options](https://github.com/linkedin/cruise-control/wiki/Configurations#cruise-control-configurations){:target="_blank"}. You can modify these configuration options for {{site.data.reuse.short_name}}, except the options managed directly by [Strimzi](https://strimzi.io/docs/operators/master/full/using.html#ref-cruise-control-configuration-str){:target="_blank"}.
+Cruise Control includes a number of [configuration options](https://github.com/linkedin/cruise-control/wiki/Configurations#cruise-control-configurations){:target="_blank"}. You can modify these configuration options for {{site.data.reuse.short_name}}, except the options managed directly by [Strimzi](https://strimzi.io/docs/operators/0.19.0/using.html#ref-cruise-control-configuration-str){:target="_blank"}.
 
 When enabled, you can use Cruise Control and the `KafkaRebalance` custom resources to [optimize](../../administering/cruise-control/) your deployed {{site.data.reuse.short_name}} Kafka cluster.
 
@@ -712,7 +712,7 @@ The Kafka Exporter can be configured using a `regex` to expose metrics for a col
               prometheus.io/scrape: 'true'
 ```
 
-For more information about configuration options, see [configuring the Kafka Exporter](https://strimzi.io/docs/operators/latest/full/deploying.html#proc-kafka-exporter-configuring-str){:target="_blank"}.
+For more information about configuration options, see [configuring the Kafka Exporter](https://strimzi.io/docs/operators/0.19.0/deploying.html#proc-kafka-exporter-configuring-str){:target="_blank"}.
 
 ## Configuring the JMX Exporter
 
@@ -737,8 +737,8 @@ To enable the collection of all JMX metrics available on the Kafka brokers and Z
 
 For more information about configuration options, see the following documentation:
 
-- [Kafka and ZooKeeper JMX metrics configuration](https://strimzi.io/docs/operators/master/deploying.html#assembly-metrics-setup-str){:target="_blank"}
-- [Kafka JMX metrics configuration](https://strimzi.io/docs/operators/master/using.html#assembly-metrics-deployment-configuration-kafka-connect){:target="_blank"}
+- [Kafka and ZooKeeper JMX metrics configuration](https://strimzi.io/docs/operators/0.19.0/deploying.html#assembly-metrics-setup-str){:target="_blank"}
+- [Kafka JMX metrics configuration](https://strimzi.io/docs/operators/0.19.0/using.html#assembly-metrics-deployment-configuration-kafka-connect){:target="_blank"}
 
 ## Using your own certificates
 
@@ -760,9 +760,17 @@ All CAs in the chain should be configured as a CA with the X509v3 Basic Constrai
 
 **Note:** In the following instructions, the CA public certificate file is denoted `CA.crt` and the CA private key is denoted `CA.key`.
 
-As {{site.data.reuse.short_name}} also serves the `truststore` in PKCS12 format, the following command can be used to generate the required `.p12` file from the PEM format certificate and key: \\
+As {{site.data.reuse.short_name}} also serves the `truststore` in PKCS12 format, generate a `.p12` file containing the relevant CA Certificates. When generating your PKCS12 truststore, ensure that the truststore does not contain the CA private key. This is important because the `.p12` file will be available to download from the {{site.data.reuse.short_name}} UI and distributed to clients.
+
+The following is an example showing how to use the Java `keytool` utility to generate a PKCS12 truststore that does not contain a private key: \\
 \\
-`openssl pkcs12 -export -inkey CA.key -in CA.crt -out CA.p12`
+`keytool -import -file <ca.pem> -keystore ca.jks` \\
+`keytool -importkeystore -srckeystore ca.jks -srcstoretype JKS -deststoretype PKCS12 -destkeystore ca.p12`
+
+**Note:** Using OpenSSL PKCS12 commands to generate a truststore without private keys can break the cluster, because the resulting truststore is not compatible with Java runtimes.\\
+One way to test that the truststore is compatible and contains the correct certificates is to use the following java `keytool` utility command: \\
+\\
+`keytool -list -keystore ca.p12 -storepass <keystore password>`
 
 The cluster and/or clients certificates, and keys must be added to secrets in the namespace that the {{site.data.reuse.short_name}} instance is intended to be created in. The naming of the secrets and required labels must follow the conventions detailed in the following command templates.
 
