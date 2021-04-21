@@ -28,6 +28,6 @@ The minimum footprint for {{site.data.reuse.short_name}} has been reduced. See t
 
 ## Support for Cruise Control
 
-{{site.data.reuse.short_name}} supports the deployment and use of [Cruise Control](https://strimzi.io/docs/operators/master/using.html#cruise-control-concepts-str){:target="_blank"}.
+{{site.data.reuse.short_name}} supports the deployment and use of [Cruise Control](https://strimzi.io/docs/operators/0.19.0/using.html#cruise-control-concepts-str){:target="_blank"}.
 Use Cruise Control to optimize your Kafka brokers by rebalancing the Kafka cluster based on a set of defined goals.
 [Find out more](../../administering/cruise-control/) about Cruise Control with {{site.data.reuse.short_name}}.
