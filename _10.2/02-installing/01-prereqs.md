@@ -89,7 +89,7 @@ The {{site.data.reuse.short_name}} operator will automatically deploy the requir
 
 **Note:** If you are installing {{site.data.reuse.short_name}} in an existing {{site.data.reuse.cp4i}} deployment, the required {{site.data.reuse.cs}} might already be installed.
 
-**Important:** Before installing the {{site.data.reuse.short_name}} operator, ensure you meet the [prerequisites](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/installer/3.x.x/preparation.html){:target="_blank"} for installing {{site.data.reuse.cs}}.
+**Important:** Before installing the {{site.data.reuse.short_name}} operator, ensure you meet the [prerequisites](https://www.ibm.com/docs/en/cpfs?topic=operator-hardware-requirements-recommendations-foundational-services){:target="_blank"} for installing {{site.data.reuse.fs}} and review the steps for [preparing to install](https://www.ibm.com/docs/en/cpfs?topic=operator-preparing-install-foundational-services){:target="_blank"}.
 
 #### Cluster-scoped permissions required
 
