@@ -13,7 +13,7 @@ Upgrade your installation of {{site.data.reuse.long_name}} operator to 2.3.0 and
 ## Upgrade paths
 
 The following upgrade paths are available:
-- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.3.0 directly from versions 2.0.0, 2.0.1, 2.1.0, and 2.2.0.
+- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.3.0 directly from version 2.2.0 only.
 - You can upgrade the {{site.data.reuse.short_name}} operand to version 10.3.0 directly from version 10.0.0, 10.1.0, and 10.2.0-eus.
 - If you have an earlier version than 10.0.0, you must first upgrade your {{site.data.reuse.short_name}} version [to 10.0.0](../../10.0/installing/upgrading/), before upgrading to 10.3.0.
 
@@ -21,7 +21,7 @@ The following upgrade paths are available:
 
 - Ensure you have followed the [upgrade steps for {{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/en/SSGT7J_21.1/upgrade/upgrade.html){:target="_blank"} before upgrading {{site.data.reuse.short_name}}.
 
-   
+
 - To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
 
 ```
