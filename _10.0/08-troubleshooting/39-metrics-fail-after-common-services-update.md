@@ -1,6 +1,6 @@
 ---
 title: "Event Streams metrics unavailable"
-excerpt: "Event Streams metrics are unavailable after upgrading to Common Services 3.8"
+excerpt: "Event Streams metrics are unavailable after upgrading to foundational services 3.8"
 categories: troubleshooting
 slug: metrics-not-available
 toc: true
