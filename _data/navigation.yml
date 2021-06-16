@@ -225,6 +225,8 @@ latestdocs:
         url: /troubleshooting/kafka-exporter-not-deployed/
       - title: "Unable to override external listener route host"
         url: /troubleshooting/overriding-route-hostnames/
+      - title: "Event Streams metrics unavailable"
+        url: /troubleshooting/metrics-not-available/
 
 # Sidebar navigation for 10.2 version documentation.
 
@@ -415,6 +417,8 @@ latestdocs:
         url: /troubleshooting/kafka-exporter-not-deployed/
       - title: "Unable to override external listener route host"
         url: /troubleshooting/overriding-route-hostnames/
+      - title: "Event Streams metrics unavailable"
+        url: /troubleshooting/metrics-not-available/
 
 # Sidebar navigation for 10.1 version documentation.
 
@@ -605,6 +609,8 @@ latestdocs:
         url: /troubleshooting/kafka-exporter-not-deployed/
       - title: "Unable to override external listener route host"
         url: /troubleshooting/overriding-route-hostnames/
+      - title: "Event Streams metrics unavailable"
+        url: /troubleshooting/metrics-not-available/
 
 # Sidebar navigation for 10.0 version documentation.
 
@@ -793,6 +799,8 @@ latestdocs:
         url: /troubleshooting/kafka-exporter-not-deployed/
       - title: "Unable to override external listener route host"
         url: /troubleshooting/overriding-route-hostnames/
+      - title: "Event Streams metrics unavailable"
+        url: /troubleshooting/metrics-not-available/
 
 # Sidebar navigation for 2019.4 version documentation.
 
