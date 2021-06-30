@@ -31,7 +31,7 @@ If you are using Maven or Gradle to manage your project, you can use the followi
   <dependency>
       <groupId>org.apache.kafka</groupId>
       <artifactId>kafka-clients</artifactId>
-      <version>2.6.0</version>
+      <version>2.6.2</version>
   </dependency>
   <dependency>
       <groupId>org.slf4j</groupId>
@@ -46,7 +46,7 @@ If you are using Maven or Gradle to manage your project, you can use the followi
   ```
 - For Gradle, use the following snippet in the `dependencies{}` section of your `build.gradle` file:\\
   ```
-  implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.0'
+  implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.2'
   implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.26'
   implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.26'
   ```

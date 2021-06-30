@@ -227,6 +227,8 @@ latestdocs:
         url: /troubleshooting/overriding-route-hostnames/
       - title: "Event Streams metrics unavailable"
         url: /troubleshooting/metrics-not-available/
+      - title: "Event Streams installation reports failed status"
+        url: /troubleshooting/failed-status-during-cs-install/
 
 # Sidebar navigation for 10.2 version documentation.
 
