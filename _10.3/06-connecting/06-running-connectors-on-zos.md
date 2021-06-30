@@ -23,7 +23,7 @@ To download Kafka Connect and make it available to your z/OS system:
 1. Log in to a system that is not running IBM z/OS, for example, a Linux system.
 2. [Download](https://kafka.apache.org/downloads){:target="_blank"} Apache Kafka 2.0.0 or later to the system. {{site.data.reuse.long_name}} provides support for Kafka Connect if you are using a Kafka version listed in the **Kafka version shipped** column of the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 3. Extract the downloaded `.tgz` file, for example:\\
-   `gunzip -k kafka_2.12-2.6.0.tgz`
+   `gunzip -k kafka_2.13-2.6.2.tgz`
 4. Copy the resulting `.tar` file to a directory on the z/OS Unix System Services.
 
 ### Download IBM MQ connectors and configuration
@@ -53,7 +53,7 @@ Extract the Apache Kafka distribution:
 1. Log in to the IBM z/OS system and [access the Unix System Services](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.3.0/com.ibm.zos.v2r3.aioc000/unixss.htm){:target="_blank"}.
 2. Change to an empty directory that you want to use for the Apache Kafka distribution, and copy the `.tar` file to the new directory.
 3. Extract the `.tar` file, for example:\\
-   `tar -xvf kafka_2.12-2.6.0.tar`
+   `tar -xvf kafka_2.13-2.6.2.tar`
 4. Change to the resulting `kafka_<version>` directory.
 
 Convert the shell scripts:
