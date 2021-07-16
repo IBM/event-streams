@@ -229,6 +229,8 @@ latestdocs:
         url: /troubleshooting/metrics-not-available/
       - title: "Event Streams installation reports failed status"
         url: /troubleshooting/failed-status-during-cs-install/
+      - title: "KafkaConnectS2I build fails in an air-gapped installation"
+        url: /troubleshooting/kcs2i-airgapped/
 
 # Sidebar navigation for 10.2 version documentation.
 
