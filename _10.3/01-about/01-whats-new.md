@@ -12,7 +12,7 @@ Find out what is new in {{site.data.reuse.long_name}} version 10.3.x.
 
 ### Move to IBM Container Registry 
 
-Images for {{site.data.reuse.short_name}} release 10.3.1 and later are available in the [IBM Cloud Container Registry](https://icr.io). Images for earlier releases are are still available in the [Docker Container Registry](https://docker.io).
+All images for {{site.data.reuse.short_name}}, including the latest 10.3.1 release, are available in the [IBM Cloud Container Registry](https://icr.io). Images for earlier releases than 10.3.1 are also available in the [Docker Container Registry](https://docker.io).
 
 ### Support for {{site.data.reuse.openshift}} 4.8
 
