@@ -13,13 +13,15 @@ Upgrade your installation of {{site.data.reuse.long_name}} operator to 2.3.0 and
 ## Upgrade paths
 
 The following upgrade paths are available:
-- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.3.0 directly from version 2.2.0 only.
-- You can upgrade the {{site.data.reuse.short_name}} operand to version 10.3.0 directly from version 10.0.0, 10.1.0, and 10.2.0-eus.
-- If you have an earlier version than 10.0.0, you must first upgrade your {{site.data.reuse.short_name}} version [to 10.0.0](../../10.0/installing/upgrading/), before upgrading to 10.3.0.
+- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.3.1 directly from version 2.3.0 or 2.2.0.
+- You can upgrade the {{site.data.reuse.short_name}} operand to version 10.3.1 directly from version 10.3.0.
+- You can upgrade the {{site.data.reuse.short_name}} operand to version 10.3.x directly from version 10.0.0, 10.1.0, and 10.2.0-eus.
+- If you have an earlier version than 10.0.0, you must first upgrade your {{site.data.reuse.short_name}} version [to 10.0.0](../../10.0/installing/upgrading/), before upgrading to 10.3.x.
 
 ## Prerequisites
 
 - Ensure you have followed the [upgrade steps for {{site.data.reuse.cp4i}}](https://www.ibm.com/support/knowledgecenter/en/SSGT7J_21.1/upgrade/upgrade.html){:target="_blank"} before upgrading {{site.data.reuse.short_name}}.
+- The images for {{site.data.reuse.short_name}} release 10.3.1 are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
 
 
 - To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
@@ -40,7 +42,7 @@ spec:
 
 The upgrade process requires the upgrade of the {{site.data.reuse.short_name}} operator, and then the upgrade of your {{site.data.reuse.short_name}} instances. Complete the steps in the following sections to upgrade your {{site.data.reuse.short_name}} installation.
 
-### Upgrade the {{site.data.reuse.short_name}} operator to 2.3.0
+### Upgrade the {{site.data.reuse.short_name}} operator
 
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.\\
@@ -54,14 +56,14 @@ All {{site.data.reuse.short_name}} pods that need to be updated as part of the u
 
 **Note:** The number of containers in each Kafka broker will reduce from 2 to 1 as the TLS-sidecar container will be removed from each broker during the upgrade process.
 
-### Upgrade the {{site.data.reuse.short_name}} operand (instance) to 10.3.0
+### Upgrade the {{site.data.reuse.short_name}} operand (instance)
 
 1. Click **Installed Operators** from the navigation on the left to show the list of installed operators that includes the upgraded **{{site.data.reuse.long_name}}** operator.
 2. Select the **{{site.data.reuse.long_name}}** operator from the list of **Installed Operators**.
 3. Select the **{{site.data.reuse.short_name}}** tab. This lists the **{{site.data.reuse.short_name}}** operands.
 4. Find your instance in the **Name** column and click the link for the instance.
 5. Select the **YAML** tab. The **{{site.data.reuse.short_name}}** instance custom resource is shown.
-6. In the YAML, change the version field from 10.3.0.
+6. In the YAML, change the version field to the required version, for example, 10.3.1.
 7. Click the **Save** button.
 
 All {{site.data.reuse.short_name}} pods will gracefully roll again.
