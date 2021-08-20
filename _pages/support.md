@@ -14,17 +14,11 @@ sections:
 
 ## Support matrix
 
-{{site.data.reuse.es_deprecated}}
-
-The end of support (EoS) date for the latest {{site.data.reuse.long_name}} operator release (10.x) is 31 March 2023 (see [announcement letter](https://www-01.ibm.com/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_sm/9/872/ENUS5737-I89/index.html&lang=en&request_locale=en){:target="_blank"}).
-
-The end of support (EoS) date for the latest {{site.data.reuse.long_name}} Helm release (2019.x) is 30 April 2022 (see [announcement letter](https://www-01.ibm.com/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_ca/2/877/ENUSZP20-0232/index.html&lang=en&request_locale=en){:target="_blank"}).
-
 ### Supported Red Hat OpenShift platforms
 
 #### Operator-based releases
 
-**Important:** The end of support (EoS) date for the latest {{site.data.reuse.long_name}} operator release is 31 March 2023. For more information, see [announcement letter](https://www-01.ibm.com/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_sm/9/872/ENUS5737-I89/index.html&lang=en&request_locale=en){:target="_blank"}.
+**Note:** For information about end of support (EoS) dates for the {{site.data.reuse.long_name}} operator releases, see [announcement letter](https://www-01.ibm.com/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_sm/9/872/ENUS5737-I89/index.html&lang=en&request_locale=en){:target="_blank"}.
 
 {{site.data.reuse.short_name}} operand version | Operator version | Kafka version shipped | Container platform  | Systems | Data storage | EoS date
 -----------------------------------------------|------------------|-----------------------|---------------------|---------|--------------|---------------

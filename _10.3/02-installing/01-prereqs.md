@@ -6,7 +6,7 @@ slug: prerequisites
 toc: true
 ---
 
-{{site.data.reuse.es_deprecated}}
+
 
 Ensure your environment meets the following prerequisites before installing {{site.data.reuse.long_name}}.
 

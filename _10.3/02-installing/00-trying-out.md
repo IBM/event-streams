@@ -13,7 +13,7 @@ To try out {{site.data.reuse.short_name}}, you have the following options:
 
   {{site.data.reuse.short_name}} comes with a host of useful features such as a user interface (UI) to help get started with Kafka and help operate a production cluster, geo-replication of topics between clusters, a schema registry to enforce correct and consistent message formats, a connector catalog, and more.
 
-  {{site.data.reuse.es_deprecated}}
+  
 
 - Use [Strimzi](https://strimzi.io){:target="_blank"} if you want to install your own basic Kafka cluster on Kubernetes for testing and proof-of-concept purposes.
 

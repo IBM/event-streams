@@ -8,7 +8,7 @@ toc: true
 
 Upgrade your installation of {{site.data.reuse.long_name}} operator to 2.3.0 and operand to 10.3.0 as follows.
 
-{{site.data.reuse.es_deprecated}}
+
 
 ## Upgrade paths
 
