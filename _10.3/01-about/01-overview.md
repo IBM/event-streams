@@ -6,7 +6,7 @@ slug: overview
 toc: true
 ---
 
-{{site.data.reuse.es_deprecated}}
+
 
 {{site.data.reuse.long_name}} is an event-streaming platform based on the [Apache Kafka®](https://kafka.apache.org/){:target="_blank"} project and incorporates the open-source [Strimzi](https://strimzi.io){:target="_blank"} technology.
 

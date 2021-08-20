@@ -6,7 +6,7 @@ slug: installing
 toc: true
 ---
 
-{{site.data.reuse.es_deprecated}}
+
 
 The following sections provide instructions about installing {{site.data.reuse.long_name}} on the {{site.data.reuse.openshift}}. The instructions are based on using the {{site.data.reuse.openshift_short}} web console and `oc` command line utility.
 
@@ -152,7 +152,7 @@ To install the operator by using the {{site.data.reuse.openshift_short}} web con
 2. Expand the **Operators** dropdown and select **OperatorHub** to open the **OperatorHub** dashboard.
 3. Select the project you want to deploy the {{site.data.reuse.short_name}} instance in.
 4. In the **All Items** search box enter `IBM Event Streams` to locate the operator title.
-5. Click the **IBM Event Streams (Deprecated)** tile to open the install side panel.
+5. Click the **IBM Event Streams** tile to open the install side panel.
 6. Click the **Install** button to open the **Create Operator Subscription** dashboard.
 7. Select the chosen [installation mode](#choosing-operator-installation-mode) that suits your requirements.
    If the installation mode is **A specific namespace on the cluster**, select the target namespace you created previously.
