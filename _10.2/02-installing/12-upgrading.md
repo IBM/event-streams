@@ -11,15 +11,16 @@ Upgrade your installation of {{site.data.reuse.long_name}} operator to 2.2.0 and
 ## Upgrade paths
 
 The following upgrade paths are available:
-- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.2.0 directly from version 2.1.0 only.
-- You can upgrade the {{site.data.reuse.short_name}} operand to version 10.2.0-eus directly from version 10.0.0 and 10.1.0.
-- If you have an earlier version than 10.0.0, you must first upgrade your {{site.data.reuse.short_name}} version [to 10.0.0](../../10.0/installing/upgrading/), before upgrading to 10.2.0.
+- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.2.1 directly from version 2.2.0 or 2.1.0.
+- You can upgrade the {{site.data.reuse.short_name}} operand to version 10.2.1-eus directly from version 10.2.0-eus.
+- You can upgrade the {{site.data.reuse.short_name}} operand to version 10.2.x-eus directly from version 10.0.0, 10.1.0, and 10.2.0-eus.
+- If you have an earlier version than 10.0.0, you must first upgrade your {{site.data.reuse.short_name}} version [to 10.0.0](../../10.0/installing/upgrading/), before upgrading to 10.2.x.
 
 ## Prerequisites
 
-If you are upgrading {{site.data.reuse.short_name}} in an existing {{site.data.reuse.cp4i}} deployment, ensure that the {{site.data.reuse.cp4i}} operator has been upgraded from 2020.3.1 to [v2020.4.1](https://www.ibm.com/support/knowledgecenter/SSGT7J_20.4/upgrade/upgrade.html){:target="_blank"}. This adds the  {{site.data.reuse.long_name}} operator version 2.2.0 to the {{site.data.reuse.openshift_short}} OperatorHub catalog.
-
-To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
+- If you are upgrading {{site.data.reuse.short_name}} in an existing {{site.data.reuse.cp4i}} deployment, ensure that the {{site.data.reuse.cp4i}} operator has been upgraded from 2020.3.1 to [v2020.4.1](https://www.ibm.com/support/knowledgecenter/SSGT7J_20.4/upgrade/upgrade.html){:target="_blank"}. This adds the  {{site.data.reuse.long_name}} operator version 2.2.x to the {{site.data.reuse.openshift_short}} OperatorHub catalog.
+- The images for {{site.data.reuse.short_name}} release 10.2.1 are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
+- To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
 
 ```
 apiVersion: eventstreams.ibm.com/v1beta1
@@ -37,7 +38,7 @@ spec:
 
 The upgrade process requires the upgrade of the {{site.data.reuse.short_name}} operator, and then the upgrade of your {{site.data.reuse.short_name}} instances. Complete the steps in the following sections to upgrade your {{site.data.reuse.short_name}} installation.
 
-### Upgrade the {{site.data.reuse.short_name}} operator to 2.2.0
+### Upgrade the {{site.data.reuse.short_name}} operator
 
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.\\
@@ -51,7 +52,7 @@ All {{site.data.reuse.short_name}} pods that need to be updated as part of the u
 
 **Note:** The number of containers in each Kafka broker will reduce from 2 to 1 as the TLS-sidecar container will be removed from each broker during the upgrade process.
 
-### Upgrade the {{site.data.reuse.short_name}} operand (instance) to 10.2.0-eus
+### Upgrade the {{site.data.reuse.short_name}} operand (instance)
 
 1. Click **Installed Operators** from the navigation on the left to show the list of installed operators that includes the upgraded **{{site.data.reuse.long_name}}** operator.
 2. Select the **{{site.data.reuse.long_name}}** operator from the list of **Installed Operators**.
@@ -59,7 +60,7 @@ All {{site.data.reuse.short_name}} pods that need to be updated as part of the u
 4. Find your instance in the **Name** column and click the link for the instance. \\
    ![{{site.data.reuse.long_name}} > {{site.data.reuse.short_name}} > Instance](../../images/find_your_instance.png "Screen capture showing how to select your instance by {{site.data.reuse.long_name}} > {{site.data.reuse.short_name}} > Instance"){:height="100%" width="100%"}
 5. Select the **YAML** tab. The **{{site.data.reuse.short_name}}** instance custom resource is shown.
-6. In the YAML, change the version field from 10.1.0 to 10.2.0-eus.
+6. In the YAML, change the version field to the required version, for example, 10.2.1-eus.
 7. Click the **Save** button.
 
 All {{site.data.reuse.short_name}} pods will gracefully roll again.

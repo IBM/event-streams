@@ -6,7 +6,10 @@ slug: overview
 toc: true
 ---
 
-{{site.data.reuse.long_name}} is an event-streaming platform based on the [Apache Kafka®](https://kafka.apache.org/){:target="_blank"} project and incorporates the open-source [Strimzi](https://strimzi.io){:target="_blank"} technology. {{site.data.reuse.short_name}} version 10.2.0 includes Kafka release 2.6.0, and supports the use of all Kafka interfaces.
+{{site.data.reuse.long_name}} is an event-streaming platform based on the [Apache Kafka®](https://kafka.apache.org/){:target="_blank"} project and incorporates the open-source [Strimzi](https://strimzi.io){:target="_blank"} technology.
+
+- {{site.data.reuse.short_name}} version 10.2.1 includes Kafka release 2.6.2, and supports the use of all Kafka interfaces.
+- {{site.data.reuse.short_name}} version 10.2.0 includes Kafka release 2.6.0, and supports the use of all Kafka interfaces.
 
 {{site.data.reuse.long_name}} uses Strimzi to deploy Apache Kafka in a resilient and manageable way, and provides a range of additional capabilities to extend the core functionality.
 
