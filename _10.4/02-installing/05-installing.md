@@ -67,12 +67,12 @@ Ensure you use a namespace that is dedicated to a single instance of {{site.data
 
 The {{site.data.reuse.short_name}} UI requires the OpenShift Ingress CA certificate to read prometheus metrics.
 
-If you are installing {{site.data.reuse.short_name}} on {{site.data.reuse.openshift_short}} version 4.6, manually add the CA certificate to a ConfigMap called `kube-root-ca` in the project (namespace) where you are installing the {{site.data.reuse.short_name}} instance. In later {{site.data.reuse.openshift_short}} versions, the ConfigMap is automatically injected into the project (namespace).
+If you are installing {{site.data.reuse.short_name}} on {{site.data.reuse.openshift_short}} version 4.6, manually add the CA certificate to a ConfigMap called `kube-root-ca.crt` in the project (namespace) where you are installing the {{site.data.reuse.short_name}} instance. In later {{site.data.reuse.openshift_short}} versions, the ConfigMap is automatically injected into the project (namespace).
 
 To create the ConfigMap, run the following command:
 
 ```
-oc get cm default-ingress-cert --namespace=openshift-config-managed -o yaml | sed 's/name: default-ingress-cert/name: kube-root-ca/' | sed 's/namespace: openshift-config-managed/namespace: <target-namespace>/' | oc create -f -
+oc get cm default-ingress-cert --namespace=openshift-config-managed -o yaml | sed 's/name: default-ingress-cert/name: kube-root-ca.crt/' | sed 's/namespace: openshift-config-managed/namespace: <target-namespace>/' | oc create -f -
 ```
 
 ## Add the {{site.data.reuse.short_name}} operator to the catalog
