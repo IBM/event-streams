@@ -34,16 +34,21 @@ For production systems, it is recommended to have {{site.data.reuse.short_name}}
 
 {{site.data.reuse.short_name}} resource requirements depend on several factors. The following sections provide guidance about minimum requirements for a starter deployment, and options for initial production configurations.
 
-Minimum resource requirements are as follows.
+Installing {{site.data.reuse.short_name}} has two phases:
+
+1. Install the {{site.data.reuse.short_name}} operator. The operator will then be available to install and manage your {{site.data.reuse.short_name}} instances.
+2. Install one or more instances of {{site.data.reuse.short_name}} by applying configured custom resources. Sample configurations for development and production use cases are provided to get you started.
+
+Minimum resource requirements are as follows, and are based on the total of requests set for the deployment. You will require more resources to accommodate the limit settings (see more about "requests" and "limits" later).
 Always ensure you have sufficient resources in your environment to deploy the {{site.data.reuse.short_name}} operator together with a development or a production {{site.data.reuse.short_name}} operand configuration.
 
 | Deployment                                          | CPU (cores) | Memory (Gi) | VPCs (see [licensing](../planning/#licensing)) |
 | --------------------------------------------------- | ----------- | ----------- | ---- |
-| [Operator](#operator-requirements)                  | 1.0         | 1.0         | N/A  |
-| [Development](../planning/#development-deployments) | 8.2         | 8.2         | 0.5  |
-| [Production](../planning/#production-deployments)   | 12.2        | 14.2        | 3.0  |
+| [Operator](#operator-requirements)                  | 0.2         | 1.0         | N/A  |
+| [Development](../planning/#development-deployments) | 2.4         | 5.4         | 0.5  |
+| [Production](../planning/#production-deployments)   | 2.8         | 5.9         | 3.0  |
 
-**Note:** {{site.data.reuse.short_name}} provides samples to help you get started with deployments. The resource requirements for these specific samples are detailed in the [planning](../planning/#sample-deployments) section. If you do not have an {{site.data.reuse.short_name}} installation on your system yet, always ensure you include the resource requirements for the operator together with the intended {{site.data.reuse.short_name}} instance requirements (development or production).
+**Note:** {{site.data.reuse.short_name}} provides sample configurations to help you get started with deployments. The resource requirements for these specific samples are detailed in the [planning](../planning/#sample-deployments) section. If you do not have an {{site.data.reuse.short_name}} installation on your system yet, always ensure you include the resource requirements for the operator together with the intended {{site.data.reuse.short_name}} instance requirements (development or production).
 
 **Important:** Licensing is based on the number of Virtual Processing Cores (VPCs) used by your {{site.data.reuse.short_name}} instance. See [licensing considerations](../planning/#licensing) for more information. For a production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 1 VPC being used. For a non-production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 2 VPCs being used.
 
@@ -57,11 +62,6 @@ The provided samples define typical configuration settings for your {{site.data.
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service these requirements. Your {{site.data.reuse.short_name}} instance can be dynamically updated later through the configuration options provided in the custom resource.
 
-Installing {{site.data.reuse.short_name}} has two phases:
-
-1. Install the {{site.data.reuse.short_name}} operator: this will deploy the operator that will install and manage your {{site.data.reuse.short_name}} instances.
-2. Install one or more instances of {{site.data.reuse.short_name}} by applying configured custom resources.
-
 ### Operator requirements
 
 The {{site.data.reuse.short_name}} operator requires the following minimum resource requirements. Ensure you always include sufficient CPU capacity and physical memory in your environment to service the operator requirements.
@@ -71,8 +71,13 @@ The {{site.data.reuse.short_name}} operator requires the following minimum resou
 | 0.2                 | 1.0               | 1.0                 | 1.0               |
 
 
-The {{site.data.reuse.short_name}} operand will automatically deploy the required {{site.data.reuse.icpfs}} if not present. Ensure you include in your calculations the resource requirements for the following [{{site.data.reuse.fs}} components](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/installer/3.x.x/hardware_sizing_reqs.html){:target="_blank"}:
+**Important:** Before installing the {{site.data.reuse.short_name}} operator, ensure you meet the [prerequisites](https://www.ibm.com/docs/en/cpfs?topic=operator-hardware-requirements-recommendations-foundational-services){:target="_blank"} for installing {{site.data.reuse.icpfs}} and review the steps for [preparing to install](https://www.ibm.com/docs/en/cpfs?topic=operator-preparing-install-foundational-services){:target="_blank"}.
 
+The {{site.data.reuse.short_name}} operand will automatically deploy the required {{site.data.reuse.fs}} if not present. By default, the `starterset` profile is requested for new installations. If you are preparing for a production deployment, ensure you set a more suitable profile, for example, the [medium profile](https://www.ibm.com/docs/en/cpfs?topic=services-hardware-requirements-medium-profile){:target="_blank"} as described in [setting the hardware profile](https://www.ibm.com/docs/en/cpfs?topic=311-installing-foundational-services-by-using-console#profile){:target="_blank"}.
+
+**Note:** If you are installing {{site.data.reuse.short_name}} in an existing {{site.data.reuse.cp4i}} deployment, the required {{site.data.reuse.fs}} might already be installed due to other capabilities, and the dependencies required by {{site.data.reuse.short_name}} might already be satisfied with a profile other than the default `starterset`.
+
+If you plan to install other {{site.data.reuse.cp4i}} capabilities, ensure you meet the resource requirements for the whole profile. If you only want to deploy  {{site.data.reuse.short_name}} on the cluster, you can calculate more granular sizing requirements based on the following {{site.data.reuse.fs}} components that {{site.data.reuse.short_name}} uses:
 - Catalog UI
 - Certificate Manager
 - Common Web UI
@@ -83,10 +88,6 @@ The {{site.data.reuse.short_name}} operand will automatically deploy the require
 - Mongo DB
 - Monitoring Grafana
 - Platform API
-
-**Note:** If you are installing {{site.data.reuse.short_name}} in an existing {{site.data.reuse.cp4i}} deployment, the required {{site.data.reuse.fs}} might already be installed.
-
-**Important:** Before installing the {{site.data.reuse.short_name}} operator, ensure you meet the [prerequisites](https://www.ibm.com/docs/en/cpfs?topic=operator-hardware-requirements-recommendations-foundational-services){:target="_blank"} for installing {{site.data.reuse.fs}} and review the steps for [preparing to install](https://www.ibm.com/docs/en/cpfs?topic=operator-preparing-install-foundational-services){:target="_blank"}.
 
 #### Cluster-scoped permissions required
 
