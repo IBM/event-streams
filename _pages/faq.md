@@ -35,7 +35,7 @@ You can deploy multiple instances of {{site.data.reuse.long_name}} and use the i
 
 You can have a fully managed {{site.data.reuse.short_name}} service provided by IBM Cloud, or you can install and manage your own version in the {{site.data.reuse.openshift}}.
 
-To get started with {{site.data.reuse.long_name}} as a hosted service, see [the {{site.data.reuse.short_name}} for IBM Cloud documentation](https://cloud.ibm.com/docs/services/EventStreams?topic=eventstreams-getting_started#getting_started){:target="_blank"}.
+To get started with {{site.data.reuse.long_name}} as a hosted service, see [the {{site.data.reuse.short_name}} for IBM Cloud documentation](https://cloud.ibm.com/docs/EventStreams?topic=EventStreams-getting-started){:target="_blank"}.
 
 To get started with {{site.data.reuse.long_name}} in the {{site.data.reuse.openshift_short}}, see [this documentation](../).
 

@@ -30,7 +30,7 @@ gettingStarted:
     - icon: migrate.svg
   - link:
     - title: Getting started with Event Streams as a hosted service
-    - url: https://cloud.ibm.com/docs/services/EventStreams?topic=eventstreams-getting_started#getting_started
+    - url: https://cloud.ibm.com/docs/EventStreams?topic=EventStreams-getting-started
     - icon: install.svg
   - link:
     - title: Upgrading
