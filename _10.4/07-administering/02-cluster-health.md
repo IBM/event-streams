@@ -36,7 +36,7 @@ You can use dashboards in the Grafana service to monitor your {{site.data.reuse.
 
 To view the {{site.data.reuse.short_name}} Grafana dashboards, follow these steps:
 
-1. {{site.data.reuse.icpcs_ui_login}}
+1. {{site.data.reuse.icpfs_ui_login}}
 2. Navigate to the {{site.data.reuse.icpfs}} console homepage.
 3. Click the hamburger icon in the top left.
 4. Expand **Monitor Health**.

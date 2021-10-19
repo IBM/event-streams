@@ -57,6 +57,6 @@ Logging out of {{site.data.reuse.short_name}} does not log you out of your sessi
 
 To log out of {{site.data.reuse.short_name}}:
 
-1. {{site.data.reuse.icpcs_ui_login}}
+1. {{site.data.reuse.icpfs_ui_login}}
 2. Click the user icon in the upper-right corner of the window, and click **Log out**.
 3. Return to your {{site.data.reuse.short_name}} UI and click the user icon in the upper-right corner of the window, and click **Log out**.
