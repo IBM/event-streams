@@ -59,6 +59,9 @@ jmx-secret: <releasename>ibm-es-jmx-secret
 # Tasks Steps #
 ###############
 
+# {{site.data.reuse.icpfs_ui_login}}
+icpfs_ui_login: "Log in to your IBM Cloud Platform foundational services management console as an administrator. For more information, see the IBM Cloud Platform foundational services [documentation](https://www.ibm.com/docs/cpfs?topic=operator-accessing-cluster-console)."
+
 # {{site.data.reuse.icpcs_ui_login}}
 icpcs_ui_login: "Log in to your IBM Cloud Platform Common Services management console as an administrator. For more information, see the IBM Cloud Platform Common Services [documentation](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/common-web-ui/1.x.x/cfc_gui.html)."
 
