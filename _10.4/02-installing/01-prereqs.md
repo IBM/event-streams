@@ -12,7 +12,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ## Container environment
 
-{{site.data.reuse.long_name}} 10.3.x is supported on the {{site.data.reuse.openshift}}. Version 10.4.0 is installed by the {{site.data.reuse.short_name}} operator 2.4.0, and includes Kafka version 2.8.0.
+{{site.data.reuse.long_name}} 10.4.0 is supported on the {{site.data.reuse.openshift}}. Version 10.4.0 is installed by the {{site.data.reuse.short_name}} operator 2.4.0, and includes Kafka version 2.8.0.
 
 For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 
