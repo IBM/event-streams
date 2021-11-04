@@ -68,7 +68,7 @@ metadata:
   name: my-dest-cluster
   namespace: my-project
 spec:
-  version: 10.3.0
+  version: 10.4.0
   replicas: 3
 ```
   **Note:** The EventStreamsGeoReplicator `metadata.name` property and `eventstreams.ibm.com/cluster` label property must be set to the name of the destination {{site.data.reuse.long_name}} instance that you are geo-replicating to.

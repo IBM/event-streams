@@ -95,7 +95,7 @@ metadata:
 spec:
   license:
     accept: false
-  version: 10.3.0
+  version: 10.4.0
   adminApi: {}
   adminUI: {}
   apicurioRegistry: {}
