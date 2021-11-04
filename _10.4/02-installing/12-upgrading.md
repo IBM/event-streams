@@ -17,23 +17,25 @@ The following upgrade paths are available:
 
 ## Prerequisites
 
+- OpenShift 4.6 only: if you are upgrading {{site.data.reuse.short_name}} on {{site.data.reuse.openshift_short}} version 4.6, manually [add the CA certificate](../installing/#openshift-46-only-add-certificate-for-metrics) to a  ConfigMap to ensure the {{site.data.reuse.short_name}} UI can read prometheus metrics.
 - Ensure you have followed the [upgrade steps for {{site.data.reuse.cp4i}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.3?topic=upgrading){:target="_blank"} before upgrading {{site.data.reuse.short_name}}.
 - The images for {{site.data.reuse.short_name}} release 10.4.0 are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
 
 
 - To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
 
-```
-apiVersion: eventstreams.ibm.com/v1beta1
-kind: EventStreams
-metadata:
-  name: example-pre-upgrade
-  namespace: myproject
-spec:
-  strimziOverrides:
-    zookeeper:
-      replicas: 3
-```
+   ```
+   apiVersion: eventstreams.ibm.com/v1beta1
+   kind: EventStreams
+   metadata:
+     name: example-pre-upgrade
+     namespace: myproject
+   spec:
+     strimziOverrides:
+       zookeeper:
+         replicas: 3
+   ```
+
 
 ## Upgrade process
 
