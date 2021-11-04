@@ -8,10 +8,6 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}} version 10.4.
 
-## Support for {{site.data.reuse.openshift}} 4.9
-
-{{site.data.reuse.short_name}} 10.4.0 introduces support for {{site.data.reuse.openshift}} 4.9.
-
 ## Kafka version upgraded to 2.8.0
 
 {{site.data.reuse.short_name}} version 10.4.0 includes Kafka release 2.8.0, and supports the use of all Kafka interfaces.
