@@ -79,7 +79,7 @@ All {{site.data.reuse.short_name}} pods will gracefully roll again.
 
 ### Enable metrics for monitoring
 
-To display metrics in the monitoring dashboards of the {{site.data.reuse.short_name}} UI, ensure you [enable](../configuring/#configuring-monitoring-metrics) the {{site.data.reuse.openshift_short}} monitoring stack.
+To display metrics in the monitoring dashboards of the {{site.data.reuse.short_name}} UI, ensure you [enable](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.3?topic=administration-enabling-openshift-container-platform-monitoring){:target="_blank"} the {{site.data.reuse.openshift_short}} monitoring stack.
 
 ### Retrieve the new URL for the UI
 

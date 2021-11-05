@@ -419,11 +419,6 @@ template:
                 - myvalue
 ```
 
-## Configuring monitoring metrics
-
-The {{site.data.reuse.short_name}} UI includes dashboards for monitoring [Kafka health](../../administering/cluster-health/#viewing-the-preconfigured-dashboard) and  [topic health](../../administering/topic-health/). To provide metrics for these dashboards, ensure you enable the {{site.data.reuse.openshift_short}} monitoring stack as described in the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.3?topic=administration-enabling-openshift-container-platform-monitoring){:target="_blank"}.
-
-
 ## Configuring external monitoring through Prometheus
 
 Metrics provide information about the health and operation of the {{site.data.reuse.short_name}} instance.
