@@ -235,6 +235,8 @@ latestdocs:
         url: /troubleshooting/no-metrics-ui/
       - title: "Admin API pod does not start when using OpenShift 4.6"
         url: /troubleshooting/admin-api-mount-failure/
+      - title: "Client receives 'Failed to load SSL keystore' message when communicating with brokers"
+        url: /troubleshooting/pkcs12-keystore-java-client/
 
 # Sidebar navigation for 10.3 version documentation.
 
