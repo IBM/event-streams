@@ -6,11 +6,9 @@ slug: installing
 toc: true
 ---
 
-
-
 The following sections provide instructions about installing {{site.data.reuse.long_name}} on the {{site.data.reuse.openshift}}. The instructions are based on using the {{site.data.reuse.openshift_short}} web console and `oc` command line utility.
 
-When deploying in an air-gapped environment, ensure you have access to this documentation set, and see the instructions in the offline installation README that is provided as part of the downloaded package.
+When deploying in an air-gapped (also referred to as offline or disconnected) environment, ensure you have access to this documentation set, and see the [instructions in the {{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.2?topic=installing-in-air-gapped-environment){:target="_blank"}.
 
 
 ## Overview
@@ -220,7 +218,7 @@ To configure an `EventStreams` custom resource, do the following:
 
 1. Enter a name for the instance in the **Name** field.
 2. Click the license accept toggle to set it to **True**.
-   ![Accepting license toggle](../../images/license_accept_form.png "Screen capture showing how to toggle the license accept field to true"){:height="100%" width="100%"}
+   ![Accepting license toggle](../../../images/license_accept_form.png "Screen capture showing how to toggle the license accept field to true"){:height="100%" width="100%"}
 3. Ensure that the correct value is selected for the **Product use** from the dropdown. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 4. You can optionally configure other components such as **Kafka**, **ZooKeeper**, and **Security** to suit your [requirements](../configuring).
 5. Scroll down and click the **Create** button at the bottom of the page to deploy the {{site.data.reuse.short_name}} instance.
@@ -244,7 +242,7 @@ When modifying the sample configuration, the updated document can be exported fr
 
 **Important:** You must ensure that the `spec.license.accept` field in the custom resource YAML is set to `true` and that the correct value is selected for the `spec.license.use` field before deploying the {{site.data.reuse.short_name}} instance. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 
-![Accepting license](../../images/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
+![Accepting license](../../../images/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
 
 **Note:** If experimenting with {{site.data.reuse.short_name}} for the first time, the **Lightweight without security** sample is the smallest and simplest example that can be used to create an experimental deployment. For the smallest production setup, use the **Minimal production** sample configuration.
 
@@ -265,7 +263,7 @@ More information about these samples is available in the [planning](../planning/
 
 **Important:** You must ensure that the `spec.license.accept` field in the configuration is set to `true` and that the correct value is selected for the `spec.license.use` field before deploying the {{site.data.reuse.short_name}} instance. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 
-![Accepting license](../../images/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
+![Accepting license](../../../images/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
 
 **Note:** If experimenting with {{site.data.reuse.short_name}} for the first time, the **Lightweight without security** sample is the smallest and simplest example that can be used to create an experimental deployment. For the smallest production setup, use the **Minimal production** sample configuration.
 

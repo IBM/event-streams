@@ -1,7 +1,7 @@
 ---
 title: "Home"
 layout: splash
-permalink: /
+permalink: /:collection/
 mastheadNavItem: Documentation
 collection: 10.4
 quickLinks:

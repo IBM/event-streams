@@ -252,7 +252,7 @@ The resource objects used in ACL rules adhere to the following schema:
 | Property      | Type   | Description |
 |:--------------|:-------|:------------|
 | `type`        | string | Can be one of `cluster`, `group`, `topic` or `transactionalId`. |
-| `name`        | string | Name of the resource for which the ACL rule applies. Can be combined with the `patternType` field to use the prefix pattern. |
+| `name`        | string | Identifies the value that the ACL rule will authenticate against when receiving incoming requests, rejecting anything that does not match. For example, the `topic` that can be accessed based on the topic name, or the `transactionalId` that can be used by a client. The `name` value can be used in combination with the `patternType` value to use the prefix pattern. |
 | `patternType` | string | Describes the pattern used in the resource field. The supported types are `literal` and `prefix`. With literal pattern type, the resource field will be used as a definition of a full topic name. With prefix pattern type, the resource name will be used only as a prefix. <br> The default value is `literal`. |
 
 Using the information about schemas and resource-operations described in the previous tables, the `spec.authorization.acls` list for a `KafkaUser` can be created as follows:

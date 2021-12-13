@@ -18,7 +18,7 @@ It is common for all of the messages on a topic to use the same schema. The key 
 
 ## Schema registry
 
-Schemas are stored in internal Kafka topics by the [Apicurio Registry](https://www.apicur.io/registry/docs/apicurio-registry/index.html){:target="_blank"}, an open-source schema registry. In addition to storing a versioned history of schemas, Apicurio Registry provides an interface for retrieving them. Each {{site.data.reuse.short_name}} cluster has its own instance of Apicurio Registry providing schema registry functionality.
+Schemas are stored in internal Kafka topics by the [Apicurio Registry](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/index.html){:target="_blank"}, an open-source schema registry. In addition to storing a versioned history of schemas, Apicurio Registry provides an interface for retrieving them. Each {{site.data.reuse.short_name}} cluster has its own instance of Apicurio Registry providing schema registry functionality.
 
 Your producers and consumers validate the data against the specified schema stored in the schema registry. This is in addition to going through Kafka brokers. The schemas do not need to be transferred in the messages this way, meaning the messages are smaller than without using a schema registry.
 

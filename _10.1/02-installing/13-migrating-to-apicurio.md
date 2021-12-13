@@ -8,7 +8,7 @@ toc: true
 
 ## Overview
 
-The {{site.data.reuse.short_name}} schema registry for managing [schemas](../../schemas/overview/) is deprecated in version 10.1.0 and later. It is replaced by the [Apicurio Registry](https://www.apicur.io/registry/docs/apicurio-registry/index.html){:target="_blank"}, an open-source schema registry.
+The {{site.data.reuse.short_name}} schema registry for managing [schemas](../../schemas/overview/) is deprecated in version 10.1.0 and later. It is replaced by the [Apicurio Registry](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/index.html){:target="_blank"}, an open-source schema registry.
 
 This means that the registry for schemas is set by using the Apicurio Registry configuration option `spec.apicurioRegistry` in the `EventStreams` custom resource (instead of the deprecated `spec.schemaRegistry` setting).
 

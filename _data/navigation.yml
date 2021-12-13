@@ -36,9 +36,209 @@ connectorQuickLinks:
       - title: Find out more about Kafka Connect
       - url: /connecting/connectors/
 
-# Sidebar navigation for latest version documentation.
+# Sidebar navigation for latest version.
 
 latestdocs:
+  - title: About
+    children:
+      - title: "Introduction"
+        url: /about/overview/
+      - title: "What's new"
+        url: /about/whats-new/
+      - title: "Key concepts"
+        url: /about/key-concepts/
+      - title: "Producing messages"
+        url: /about/producing-messages/
+      - title: "Consuming messages"
+        url: /about/consuming-messages/
+      - title: "Partition leadership"
+        url: /about/partition-leadership/
+      - title: "Accessibility"
+        url: /about/accessibility/
+      - title: "Notices"
+        url: /about/notices/
+  - title: Installing and upgrading
+    children:
+      - title: "Trying out Event Streams"
+        url: /installing/trying-out/
+      - title: "Prerequisites"
+        url: /installing/prerequisites/
+      - title: "Planning your installation"
+        url: /installing/planning/
+      - title: "Performance and capacity planning"
+        url: /installing/capacity-planning/
+      - title: "Preparing for multizone clusters"
+        url: /installing/preparing-multizone/
+      - title: "Installing"
+        url: /installing/installing/
+      - title: "Configuring"
+        url: /installing/configuring/
+      - title: "Post-installation tasks"
+        url: /installing/post-installation/
+      - title: "Migrating from open-source Kafka"
+        url: /installing/moving-from-oss-kafka/
+      - title: "Uninstalling"
+        url: /installing/uninstalling/
+      - title: "Upgrading and migrating"
+        url: /installing/upgrading/
+      - title: "Migrating to Apicurio Registry"
+        url: /installing/migrating-to-apicurio/
+  - title: Getting started
+    children:
+      - title: "Logging in"
+        url: /getting-started/logging-in/
+      - title: "Creating a Kafka topic"
+        url: /getting-started/creating-topics/
+      - title: "Running a starter application"
+        url: /getting-started/generating-starter-app/
+      - title: "Creating and testing message loads"
+        url: /getting-started/testing-loads/
+      - title: "Creating Kafka client applications"
+        url: /getting-started/client/
+      - title: "Connecting clients"
+        url: /getting-started/connecting/
+      - title: "Using Apache Kafka console tools"
+        url: /getting-started/using-kafka-console-tools/
+  - title: Schemas
+    children:
+      - title: "Schemas overview"
+        url: /schemas/overview/
+      - title: "Creating and adding schemas"
+        url: /schemas/creating/
+      - title: "Managing schema lifecycle"
+        url: /schemas/manage-lifecycle/
+      - title: "Setting Java applications to use schemas"
+        url: /schemas/setting-java-apps/
+      - title: "Setting non-Java applications to use schemas"
+        url: /schemas/setting-nonjava-apps/
+      - title: "Migrating to Event Streams schema registry"
+        url: /schemas/migrating/
+      - title: "Using schemas with the REST producer API"
+        url: /schemas/using-with-rest-producer/
+      - title: "Setting Java applications to use schemas with the Apicurio Registry serdes library"
+        url: /schemas/setting-java-apps-apicurio-serdes/
+  - title: Security
+    children:
+      - title: "Managing access"
+        url: /security/managing-access/
+      - title: "Encrypting your data"
+        url: /security/encrypting-data/
+      - title: "Configuring secure JMX connections"
+        url: /security/secure-jmx-connections/
+      - title: "Network policies"
+        url: /security/network-policies/
+      - title: "Considerations for GDPR"
+        url: /security/gdpr-considerations/
+  - title: Geo-replication
+    children:
+      - title: "About geo-replication"
+        url: /georeplication/about/
+      - title: "Planning for geo-replication"
+        url: /georeplication/planning/
+      - title: "Setting up geo-replication"
+        url: /georeplication/setting-up/
+      - title: "Monitoring and managing geo-replication"
+        url: /georeplication/health/
+      - title: "Switching clusters"
+        url: /georeplication/failover/
+  - title: Connecting external systems
+    children:
+      - title: "Event Streams producer API"
+        url: /connecting/rest-api/
+      - title: "Kafka Connect and connectors"
+        url: /connecting/connectors/
+      - title: "Setting up and running connectors"
+        url: /connecting/setting-up-connectors/
+      - title: "Connecting to IBM MQ"
+        url: /connecting/mq/
+      - title: "Running the MQ source connector"
+        url: /connecting/mq/source/
+      - title: "Running the MQ sink connector"
+        url: /connecting/mq/sink/
+      - title: "Running connectors on IBM z/OS"
+        url: /connecting/mq/zos/
+  - title: Administering
+    children:
+      - title: "Monitoring deployment health"
+        url: /administering/deployment-health/
+      - title: "Monitoring Kafka cluster health"
+        url: /administering/cluster-health/
+      - title: "Monitoring topic health"
+        url: /administering/topic-health/
+      - title: "Monitoring consumer group lag"
+        url: /administering/consumer-lag/
+      - title: "Monitoring applications with distributed tracing"
+        url: /administering/tracing/
+      - title: "Monitoring with external tools"
+        url: /administering/external-monitoring/
+      - title: "Modifying installation settings"
+        url: /administering/modifying-installation/
+      - title: "Optimizing Kafka cluster with Cruise Control"
+        url: /administering/cruise-control/
+      - title: "Scaling"
+        url: /administering/scaling/
+      - title: "Setting client quotas"
+        url: /administering/quotas/
+      - title: "Managing a multizone setup"
+        url: /administering/managing-multizone/
+      - title: "Stopping and starting Event Streams"
+        url: /administering/stopping-starting/
+  - title: Troubleshooting
+    children:
+      - title: "Troubleshooting overview"
+        url: /troubleshooting/intro/
+      - title: "Gathering logs"
+        url: /troubleshooting/gathering-logs/
+      - title: "Resources not available"
+        url: /troubleshooting/resources-not-available/
+      - title: "Error when creating multiple geo-replicators"
+        url: /troubleshooting/georeplication-error/
+      - title: "TimeoutException when using standard Kafka producer"
+        url: /troubleshooting/kafka-producer-error/
+      - title: "Standard Kafka consumer hangs"
+        url: /troubleshooting/kafka-consumer-hangs/
+      - title: "Command 'cloudctl es' fails with 'not a registered command' error"
+        url: /troubleshooting/cloudctl-es-not-registered/
+      - title: "Command 'cloudctl es' produces 'FAILED' message"
+        url: /troubleshooting/cloudctl-es-fails/
+      - title: "UI does not open when using Chrome on Ubuntu"
+        url: /troubleshooting/chrome-ubuntu-issue/
+      - title: "Unable to remove destination cluster"
+        url: /troubleshooting/error-removing-destination/
+      - title: "403 error when signing in"
+        url: /troubleshooting/ui-403-error/
+      - title: "The UI cannot load data"
+        url: /troubleshooting/problem-with-piping/
+      - title: "UI shows black images in Firefox"
+        url: /troubleshooting/firefox-black-images/
+      - title: "Event Streams not installing due to Security Context Constraint (SCC) issues"
+        url: /troubleshooting/default-scc-issues/
+      - title: "Not authorized error when building maven schema registry project"
+        url: /troubleshooting/schema-registry-not-authorized-error/
+      - title: "Client receives AuthorizationException when communicating with brokers"
+        url: /troubleshooting/authorization-failed-exceptions/
+      - title: "504 timeout error when viewing consumer groups in the Event Streams UI"
+        url: /troubleshooting/504-ui-consumer-groups/
+      - title: "Kafka exporter is not deployed"
+        url: /troubleshooting/kafka-exporter-not-deployed/
+      - title: "Unable to override external listener route host"
+        url: /troubleshooting/overriding-route-hostnames/
+      - title: "Event Streams metrics unavailable"
+        url: /troubleshooting/metrics-not-available/
+      - title: "Event Streams installation reports failed status"
+        url: /troubleshooting/failed-status-during-cs-install/
+      - title: "KafkaConnectS2I build fails in an air-gapped installation"
+        url: /troubleshooting/kcs2i-airgapped/
+      - title: "Metrics do not display in operator Grafana dashboard"
+        url: /troubleshooting/no-metrics-ui/
+      - title: "Admin API pod does not start when using OpenShift 4.6"
+        url: /troubleshooting/admin-api-mount-failure/
+      - title: "Client receives 'Failed to load SSL keystore' message when communicating with brokers"
+        url: /troubleshooting/pkcs12-keystore-java-client/
+
+# Sidebar navigation for 10.4.
+
+104docs:
   - title: About
     children:
       - title: "Introduction"
@@ -238,7 +438,7 @@ latestdocs:
       - title: "Client receives 'Failed to load SSL keystore' message when communicating with brokers"
         url: /troubleshooting/pkcs12-keystore-java-client/
 
-# Sidebar navigation for 10.3 version documentation.
+# Sidebar navigation for 10.3.
 
 103docs:
   - title: About
@@ -434,7 +634,7 @@ latestdocs:
       - title: "KafkaConnectS2I build fails in an air-gapped installation"
         url: /troubleshooting/kcs2i-airgapped/
 
-# Sidebar navigation for 10.2 version documentation.
+# Sidebar navigation for 10.2.
 
 102docs:
   - title: About
@@ -626,7 +826,7 @@ latestdocs:
       - title: "Event Streams metrics unavailable"
         url: /troubleshooting/metrics-not-available/
 
-# Sidebar navigation for 10.1 version documentation.
+# Sidebar navigation for 10.1.
 
 101docs:
   - title: About
@@ -818,7 +1018,7 @@ latestdocs:
       - title: "Event Streams metrics unavailable"
         url: /troubleshooting/metrics-not-available/
 
-# Sidebar navigation for 10.0 version documentation.
+# Sidebar navigation for 10.0.
 
 100docs:
   - title: About
@@ -1008,7 +1208,7 @@ latestdocs:
       - title: "Event Streams metrics unavailable"
         url: /troubleshooting/metrics-not-available/
 
-# Sidebar navigation for 2019.4 version documentation.
+# Sidebar navigation for 2019.4.
 
 20194docs:
   - title: About
@@ -1215,8 +1415,10 @@ latestdocs:
         url: /troubleshooting/operator-keeps-reconcilling/
       - title: "Kafka cluster is not accessible by using OpenShift routes"
         url: /troubleshooting/openshift-route-incorrect/
+      - title: "UI is unable to display consumer groups for a topic"
+        url: /troubleshooting/invalid-negative-offset/
 
-# Sidebar navigation for 2019.2.1 version documentation.
+# Sidebar navigation for 2019.2.1.
 
 201921docs:
   - title: About
@@ -1410,7 +1612,7 @@ latestdocs:
       - title: "Failed to read 'log header' errors in Kafka logs"
         url: /troubleshooting/failed-to-read-log/
 
-# Sidebar navigation for 2019.1.1 version documentation.
+# Sidebar navigation for 2019.1.1.
 
 201911docs:
   - title: About
@@ -1574,7 +1776,7 @@ latestdocs:
       - title: "Failed to read 'log header' errors in Kafka logs"
         url: /troubleshooting/failed-to-read-log/
 
-# Sidebar navigation for version 2018.3.1 documentation.
+# Sidebar navigation for 2018.3.1.
 
 201831docs:
   - title: About

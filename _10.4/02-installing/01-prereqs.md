@@ -86,7 +86,6 @@ If you plan to install other {{site.data.reuse.cp4i}} capabilities, ensure you m
 - Installer
 - Management ingress
 - Mongo DB
-- Monitoring Grafana
 - Platform API
 
 #### Cluster-scoped permissions required

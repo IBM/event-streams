@@ -25,7 +25,7 @@ toc: true
 
 - A REST API for producing messages to {{site.data.reuse.short_name}} topics, expanding event source possibilities.
 
-- A schema registry to support the definition and enforcement of message formats between producers and consumers. {{site.data.reuse.short_name}} includes the open-source [Apicurio Registry](https://www.apicur.io/registry/docs/apicurio-registry/index.html){:target="_blank"} for managing schemas.
+- A schema registry to support the definition and enforcement of message formats between producers and consumers. {{site.data.reuse.short_name}} includes the open-source [Apicurio Registry](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/index.html){:target="_blank"} for managing schemas.
 
 - Health check information to help identify issues with your clusters and brokers.
 
@@ -45,7 +45,7 @@ Strimzi uses Operators in this manner to facilitate the deployment of Kafka clus
 
 The following diagram shows the operators involved in an {{site.data.reuse.short_name}} deployment along with the resources they manage. {{site.data.reuse.short_name}} builds on the Strimzi core, and adds additional components to extend the base capabilities.
 
-![EventStreams Operator diagram.](../../images/operator_structure.png "Diagram that shows the operators involved in an {{site.data.reuse.short_name}} deployment.")
+![EventStreams Operator diagram.](../../../images/operator_structure.png "Diagram that shows the operators involved in an {{site.data.reuse.short_name}} deployment.")
 
 ### The EventStreams Cluster Operator
 
