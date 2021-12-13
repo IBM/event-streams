@@ -10,7 +10,7 @@ Find out what is new in {{site.data.reuse.long_name}} version 10.1.0.
 
 ## Apicurio Registry
 
-{{site.data.reuse.short_name}} version 10.1.0 includes the open-source [Apicurio Registry](https://www.apicur.io/registry/docs/apicurio-registry/index.html){:target="_blank"} for managing [schemas](../../schemas/overview/).
+{{site.data.reuse.short_name}} version 10.1.0 includes the open-source [Apicurio Registry](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/index.html){:target="_blank"} for managing [schemas](../../schemas/overview/).
 
 The {{site.data.reuse.short_name}} schema registry provided in earlier versions is deprecated in version 10.1.0 and later. If you are upgrading to {{site.data.reuse.short_name}} version 10.1.0 from an earlier version, you can [migrate](../../installing/migrating-to-apicurio/) to the Apicurio Registry from the deprecated schema registry.
 

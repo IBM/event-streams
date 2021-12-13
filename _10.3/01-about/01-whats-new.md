@@ -24,7 +24,7 @@ All images for {{site.data.reuse.short_name}}, including the latest 10.3.1 relea
 
 ### Documentation: Highlighting differences between versions
 
-Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 10.3.1 compared to 10.3.0 or earlier is highlighted in this documentation using the following graphic: ![Event Streams 10.3.1 icon](../../images/10.3.1.svg "In Event Streams 10.3.1.")
+Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 10.3.1 compared to 10.3.0 or earlier is highlighted in this documentation using the following graphic: ![Event Streams 10.3.1 icon](../../../images/10.3.1.svg "In Event Streams 10.3.1.")
 
 ## Release 10.3.0
 
