@@ -6,12 +6,12 @@ slug: upgrading
 toc: true
 ---
 
-Upgrade your installation of {{site.data.reuse.long_name}} operator to 2.2.0 and operand to 10.2.0-eus as follows.
+Upgrade your {{site.data.reuse.long_name}} operator and operand instances as follows.
 
 ## Upgrade paths
 
 The following upgrade paths are available:
-- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.2.1 directly from version 2.2.0 or 2.1.0.
+- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.2.2 directly from version 2.2.1, 2.2.0, or 2.1.0.
 - You can upgrade the {{site.data.reuse.short_name}} operand to version 10.2.1-eus directly from version 10.2.0-eus.
 - You can upgrade the {{site.data.reuse.short_name}} operand to version 10.2.x-eus directly from version 10.0.0, 10.1.0, and 10.2.0-eus.
 - If you have an earlier version than 10.0.0, you must first upgrade your {{site.data.reuse.short_name}} version [to 10.0.0](../../10.0/installing/upgrading/), before upgrading to 10.2.x.
@@ -19,7 +19,7 @@ The following upgrade paths are available:
 ## Prerequisites
 
 - If you are upgrading {{site.data.reuse.short_name}} in an existing {{site.data.reuse.cp4i}} deployment, ensure that the {{site.data.reuse.cp4i}} operator has been upgraded from 2020.3.1 to [v2020.4.1](https://www.ibm.com/support/knowledgecenter/SSGT7J_20.4/upgrade/upgrade.html){:target="_blank"}. This adds the  {{site.data.reuse.long_name}} operator version 2.2.x to the {{site.data.reuse.openshift_short}} OperatorHub catalog.
-- The images for {{site.data.reuse.short_name}} release 10.2.1 are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
+- The images for {{site.data.reuse.short_name}} release 10.2.x are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
 - To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
 
 ```

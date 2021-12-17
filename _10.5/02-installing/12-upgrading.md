@@ -6,7 +6,7 @@ slug: upgrading
 toc: true
 ---
 
-Upgrade your installation of {{site.data.reuse.long_name}} operator to 2.5.0 and operand to 10.5.0 as follows.
+Upgrade your {{site.data.reuse.long_name}} operator and operand instances as follows.
 
 ## Upgrade paths
 
