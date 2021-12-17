@@ -6,6 +6,10 @@ slug: whats-new
 toc: true
 ---
 
+## Release 2019.4.5
+
+{{site.data.reuse.short_name}} 2019.4.5 contains security and bug fixes.
+
 ## Release 2019.4.4
 
 {{site.data.reuse.short_name}} 2019.4.4 contains security and bug fixes.
