@@ -12,6 +12,7 @@ Upgrade your installation to the latest version of {{site.data.reuse.long_name}}
 
 Complete the steps in the following sections to upgrade your {{site.data.reuse.short_name}} version to 2019.4.x. The following upgrade paths are available:
 
+- You can upgrade to {{site.data.reuse.short_name}} version 2019.4.6 directly from versions 2019.4.5, 2019.4.4, 2019.4.3, 2019.4.2, 2019.4.1 or 2019.2.1.
 - You can upgrade to {{site.data.reuse.short_name}} version 2019.4.5 directly from versions 2019.4.4, 2019.4.3, 2019.4.2, 2019.4.1 or 2019.2.1.
 - You can upgrade to {{site.data.reuse.short_name}} version 2019.4.4 directly from versions 2019.4.3, 2019.4.2, 2019.4.1 or 2019.2.1.
 - You can upgrade to {{site.data.reuse.short_name}} version 2019.4.3 directly from versions 2019.4.2, 2019.4.1 or 2019.2.1.
@@ -23,7 +24,7 @@ Complete the steps in the following sections to upgrade your {{site.data.reuse.s
 
 - Ensure you have {{site.data.reuse.icp}} version 3.2.1. If you are using the {{site.data.reuse.openshift_short}}, ensure you have version 3.11 or later. See the [prerequisites](../prerequisites/#container-environment) for supported container environments.
 - The minimum resource requirements have changed. Ensure you have the required [resources](../prerequisites/#helm-resource-requirements) available.
-- If upgrading to version 2019.4.2, 2019.4.3, 2019.4.4, or 2019.4.5, download the fix pack from [Fix Central](https://www.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm%7EOther%20software&product=ibm/Other+software/IBM+Event+Streams&release=2019.4.1&platform=All&function=all){:target="_blank"}.
+- If upgrading to version 2019.4.2, 2019.4.3, 2019.4.4, 2019.4.5, or 2019.4.6, download the fix pack from [Fix Central](https://www.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm%7EOther%20software&product=ibm/Other+software/IBM+Event+Streams&release=2019.4.1&platform=All&function=all){:target="_blank"}.
 - If upgrading to version 2019.4.1, download the package from [IBM Passport Advantage](https://www.ibm.com/software/passportadvantage/pao_customer.html){:target="_blank"} by searching for "{{site.data.reuse.long_name}}" and 2019.4.1. Download the images related to the part numbers for your platform.
 - Make the packages available to your {{site.data.reuse.icp}} instance as described in steps 2 to 4 of the [download task](../installing/#download-the-archive).
 - If you have [encryption between pods](../planning/#securing-communication-between-pods) enabled, then ensure you disable it before starting the upgrade. After the upgrade completes successfully, you can [enable](../../security/encrypting-data/#enabling-encryption-between-pods) the encryption again.
