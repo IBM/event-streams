@@ -256,8 +256,8 @@ The code snippet from the **Consumer code** section defines properties for the c
 ```
 
 // Set the value deserializer for consumed messages to use the Apicurio Avro deserializer
-props.put("key.serializer", StringDeserializer.class);
-props.put("value.serializer", AvroKafkaDeserializer.class);
+props.put("key.deserializer", StringDeserializer.class);
+props.put("value.deserializer", AvroKafkaDeserializer.class);
 
 // Set the consumer group ID in the properties
 props.put("group.id", <my_consumer_group>);
@@ -280,7 +280,7 @@ while(true) {
 }
 ```
 
-The Kafka configuration property `value.serializer` is set to `AvroKafkaDeserializer.class`, telling Kafka to use the Apicurio Registry Avro Kafka deserializer for message values when consuming messages. You can also use the Apicurio Registry Avro Kafka deserializer for message keys.
+The Kafka configuration property `value.deserializer` is set to `AvroKafkaDeserializer.class`, telling Kafka to use the Apicurio Registry Avro Kafka deserializer for message values when consuming messages. You can also use the Apicurio Registry Avro Kafka deserializer for message keys.
 
 For more information about the configuration keys and values to use with the Apicurio Registry `serdes` library, see the [Apicurio Registry documentation](https://www.apicur.io/registry/docs/apicurio-registry/1.3.3.Final/index.html){:target="_blank"}.
 
