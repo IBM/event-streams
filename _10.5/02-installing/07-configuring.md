@@ -321,7 +321,7 @@ spec:
 
 ### Kafka access
 
-All examples provided for {{site.data.reuse.short_name}} include an external listener for Kafka and varying internal listener types by default. The supported external listener is of type `route`. This indicates the use of an {{site.data.reuse.openshift_short}} route, and it can have either `tls` or `scram-sha-512` configured as the authentication mechanisms.
+Sample configurations  provided for {{site.data.reuse.short_name}} typically include an external listener for Kafka and varying internal listener types by default. The supported external listener is of type `route`. This indicates the use of an {{site.data.reuse.openshift_short}} route, and it can have either `tls` or `scram-sha-512` configured as the authentication mechanisms.
 
 The following example snippet defines an external listener that exposes the Kafka brokers using an {{site.data.reuse.openshift_short}} route with SCRAM-SHA-512 authentication enabled.
 
