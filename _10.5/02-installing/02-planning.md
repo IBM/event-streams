@@ -36,7 +36,7 @@ The following development samples are available:
 
 #### Example deployment: **Lightweight without security**
 
-Overview: A non-production deployment suitable for basic development, and test activities. For environments where minimum resource requirements, persistent storage, access control and encryption are not required.
+Overview: A non-production deployment suitable for basic development and test activities, with access to Kafka brokers only from within the same cluster (only internal listener configured). For environments where minimum resource requirements, persistent storage, access control and encryption are not required.
 
 **Note:** By default, this sample does not request the following [{{site.data.reuse.icpfs}}](../prerequisites/#operator-requirements), reducing the required minimum resources:
 - IAM
@@ -44,13 +44,13 @@ Overview: A non-production deployment suitable for basic development, and test a
 - Monitoring Grafana
 - Monitoring Prometheus Ext
 
-
-
 This example provides a starter deployment that can be used if you simply want to try {{site.data.reuse.short_name}} with a minimum resource footprint. It installs an {{site.data.reuse.short_name}} instance with the following characteristics:
 - A small single broker Kafka cluster and a single node ZooKeeper.
 - As there is only 1 broker, no message replication takes place between brokers, and the system topics (message offset and transaction state) are configured accordingly for this.
 - There is no encryption internally between containers.
-- External connections use TLS encryption, but no authentication to keep the configuration to a minimum, making it easy to experiment with the platform.
+- External connections use TLS encryption (for example, to the {{site.data.reuse.short_name}} UI), but no authentication to keep the configuration to a minimum, making it easy to experiment with the platform.
+- No external connections are configured for Kafka brokers. Only internal connections within the cluster can be used for producing and consuming messages.
+
 
 Resource requirements for this deployment:
 
