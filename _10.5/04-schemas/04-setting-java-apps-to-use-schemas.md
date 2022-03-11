@@ -150,7 +150,7 @@ Schema schema = schemaDefinitionParser.parse(
     new File("path/to/schema.avsc"));
 
 // Get a new Generic record based on the schema
-GenericRecord genericRecord = new GenericData.Record(schema.getSchema());
+GenericRecord genericRecord = new GenericData.Record(schema);
 
 // Add fields and values to the genericRecord, for example:
 // genericRecord.put("title", "this is the value for a title field");
