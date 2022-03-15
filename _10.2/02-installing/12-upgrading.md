@@ -11,7 +11,7 @@ Upgrade your {{site.data.reuse.long_name}} operator and operand instances as fol
 ## Upgrade paths
 
 The following upgrade paths are available:
-- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.2.3 directly from version 2.2.2, 2.2.1, 2.2.0, or 2.1.0.
+- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.2.4 directly from version 2.2.3, 2.2.2, 2.2.1, 2.2.0, or 2.1.0.
 - You can upgrade the {{site.data.reuse.short_name}} operand to version 10.2.1-eus directly from version 10.2.0-eus.
 - You can upgrade the {{site.data.reuse.short_name}} operand to version 10.2.x-eus directly from version 10.0.0, 10.1.0, and 10.2.0-eus.
 - If you have an earlier version than 10.0.0, you must first upgrade your {{site.data.reuse.short_name}} version [to 10.0.0](../../10.0/installing/upgrading/), before upgrading to 10.2.x.
