@@ -12,7 +12,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 ## Container environment
 
-{{site.data.reuse.long_name}} 10.5.0 is supported on the {{site.data.reuse.openshift}}. Version 10.5.0 is installed by the {{site.data.reuse.short_name}} operator versions 2.5.1 and 2.5.0, and includes Kafka version 2.8.1. Always use the latest operator revision (2.5.x) for the release to ensure you have all fixes applied.
+{{site.data.reuse.long_name}} 10.5.0 is supported on the {{site.data.reuse.openshift}}. Version 10.5.0 is installed by the {{site.data.reuse.short_name}} operator versions 2.5.2, 2.5.1, and 2.5.0, and includes Kafka version 2.8.1. Always use the latest operator revision (2.5.x) for the release to ensure you have all fixes applied.
 
 For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
 
