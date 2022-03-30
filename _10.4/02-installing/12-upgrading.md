@@ -47,8 +47,8 @@ The upgrade process requires the upgrade of the {{site.data.reuse.short_name}} o
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.\\
    ![Operators > Installed Operators](../../../images/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
 3. Locate the operator that manages your {{site.data.reuse.short_name}} instance in the namespace. It is called **{{site.data.reuse.long_name}}** in the **Name** column.
-4. Click the **{{site.data.reuse.long_name}}** link in the row and click the **Subscription** tab. This shows the **Subscription details** for the **{{site.data.reuse.short_name}}** operator.
-5. Select the version in the **Channel** section (for example, **v2.2-eus**). The **Change Subscription update channel** dialog is displayed, showing the channels that are available to upgrade to.
+4. Click the **{{site.data.reuse.long_name}}** link in the row and then click the **Subscription** tab. This shows the **Subscription details** for the **{{site.data.reuse.short_name}}** operator.
+5. Click the version number link in the **Update channel** section (for example, **v2.3**). The **Change Subscription update channel** dialog is displayed, showing the channels that are available to upgrade to.
 6. Select **v2.4** and click the **Save** button on the **Change Subscription Update Channel** dialog.
 
 All {{site.data.reuse.short_name}} pods that need to be updated as part of the upgrade will be gracefully rolled. Where required ZooKeeper pods will roll one at a time, followed by Kafka brokers rolling one at a time.
@@ -59,9 +59,9 @@ All {{site.data.reuse.short_name}} pods that need to be updated as part of the u
 
 1. Click **Installed Operators** from the navigation on the left to show the list of installed operators that includes the upgraded **{{site.data.reuse.long_name}}** operator.
 2. Select the **{{site.data.reuse.long_name}}** operator from the list of **Installed Operators**.
-3. Select the **{{site.data.reuse.short_name}}** tab. This lists the **{{site.data.reuse.short_name}}** operands.
+3. Click the **{{site.data.reuse.short_name}}** tab. This lists the **{{site.data.reuse.short_name}}** operands.
 4. Find your instance in the **Name** column and click the link for the instance.
-5. Select the **YAML** tab. The **{{site.data.reuse.short_name}}** instance custom resource is shown.
+5. Click the **YAML** tab. The **{{site.data.reuse.short_name}}** instance custom resource is shown.
 6. In the YAML, change the version field to the required version, for example, 10.4.0.
 7. Click the **Save** button.
 
@@ -72,7 +72,7 @@ All {{site.data.reuse.short_name}} pods will gracefully roll again.
 1. Wait for all {{site.data.reuse.short_name}} pods to complete the upgrade process. This is indicated by the `Running` state.
 2. {{site.data.reuse.openshift_cli_login}}
 3. To retrieve a list of {{site.data.reuse.short_name}} instances, run the following command:\\
-   `oc get es -n <namespace>`
+   `oc get eventstreams -n <namespace>`
 4. For the instance of {{site.data.reuse.short_name}} that you upgraded, check that the status returned by the command in the previous step is `Ready`.
 
 ## Post-upgrade tasks

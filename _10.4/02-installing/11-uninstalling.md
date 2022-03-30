@@ -42,7 +42,7 @@ For Kafka and ZooKeeper, this property can be found as follows:
 For other components, this property can be found as follows:
 - `spec.<component_name>.storage.deleteClaim`
 
-**Important:** This change will cause data to be removed during an upgrade. 
+**Important:** This change will cause data to be removed during an upgrade.
 
 For example, to configure automatic deletion for the Kafka storage when uninstalling:
 
@@ -93,7 +93,7 @@ You can delete an {{site.data.reuse.short_name}} installation using the `oc` com
 2. Ensure you are using the project where your {{site.data.reuse.short_name}} instance is located:
 `oc project <project_name>`
 2. Run the following command to display the {{site.data.reuse.short_name}} instances:
-`oc get es`
+`oc get eventstreams`
 4. Run the following command to delete your instance:
 `oc delete es --selector app.kubernetes.io/instance=<instance_name>`
 
@@ -128,7 +128,7 @@ For Kafka and ZooKeeper, this property can be found as follows:
 For other components, this property can be found as follows:
 - `spec.<component_name>.storage.deleteClaim`
 
-**Important:** This change will cause data to be removed during an upgrade. 
+**Important:** This change will cause data to be removed during an upgrade.
 
 For example, to configure automatic deletion for the Kafka storage when uninstalling:
 
