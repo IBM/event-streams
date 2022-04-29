@@ -93,7 +93,7 @@ You can delete an {{site.data.reuse.short_name}} installation using the `oc` com
 2. Ensure you are using the project where your {{site.data.reuse.short_name}} instance is located:
 `oc project <project_name>`
 2. Run the following command to display the {{site.data.reuse.short_name}} instances:
-`oc get es`
+`oc get eventstreams`
 4. Run the following command to delete your instance:
 `oc delete es --selector app.kubernetes.io/instance=<instance_name>`
 

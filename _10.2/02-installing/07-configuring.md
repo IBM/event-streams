@@ -17,7 +17,7 @@ toc: true
 
 You can modify the samples, save them, and apply custom configuration settings as well. See the following sections for guidance about configuring your instance of {{site.data.reuse.short_name}}.
 
-**Note:** The **Production 6 brokers** and **Production 9 brokers** samples are only available on [GitHub](http://ibm.biz/es-cr-samples). You can configure and apply them by using the [command line](../installing/#installing-an-instance-by-using-the-cli) or by dragging and dropping them onto the {{site.data.reuse.openshift_short}} [web console](../installing/#installing-by-using-the-yaml-view), and editing them.
+**Note:** The **Production 6 brokers** and **Production 9 brokers** samples are only available on [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"} (download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples). You can configure and apply them by using the [command line](../installing/#installing-an-instance-by-using-the-cli) or by dragging and dropping them onto the {{site.data.reuse.openshift_short}} [web console](../installing/#installing-by-using-the-yaml-view), and editing them.
 
 ## Checking configuration settings
 
@@ -95,7 +95,7 @@ metadata:
 spec:
   license:
     accept: false
-  version: 10.2.0-eus
+  version: 10.2.1-eus
   adminApi: {}
   adminUI: {}
   apicurioRegistry: {}

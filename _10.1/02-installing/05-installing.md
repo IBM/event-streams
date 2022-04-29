@@ -271,7 +271,7 @@ To deploy an {{site.data.reuse.short_name}} instance, use the following steps:
 
 To install an instance of {{site.data.reuse.short_name}} from the command line, you must first prepare an `EventStreams` custom resource configuration in a YAML file.
 
-A number of [sample configuration files](http://ibm.biz/es-cr-samples) have been provided on which you can base your deployment. These range from smaller deployments for non-production development or general experimentation to large scale clusters ready to handle a production workload.
+A number of [sample configuration files](http://ibm.biz/es-cr-samples){:target="_blank"} have been provided to base your deployment on (download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples). The sample configurations range from smaller deployments for non-production development or general experimentation to large scale clusters ready to handle a production workload.
 
 More information about these samples is available in the [planning](../planning/#sample-deployments) section. You can base your deployment on the sample that most closely reflects your requirements and apply [customizations](../configuring) on top as required.
 

@@ -24,7 +24,7 @@ A number of sample configurations are provided when [installing](../installing) 
  - [Development deployments](#development-deployments)
  - [Production deployments](#production-deployments)
 
- The sample configurations can be found in the {{site.data.reuse.openshift_short}} web console as explained in [installing](../installing/#installing-an-instance-by-using-the-web-console) or on [GitHub](http://ibm.biz/es-cr-samples).
+The sample configurations are available in the {{site.data.reuse.openshift_short}} web console as explained in [installing](../installing/#installing-an-instance-by-using-the-web-console), or on [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"}, from where you can download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples.
 
 ### Development deployments
 
@@ -160,7 +160,7 @@ Resource requirements for this deployment:
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
 
-**Important:** This sample is not provided in the {{site.data.reuse.openshift_short}} web console and can only be obtained through [GitHub](http://ibm.biz/es-cr-samples).
+**Important:** This sample is not provided in the {{site.data.reuse.openshift_short}} web console and can only be obtained through [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"} (download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples).
 
 {{site.data.reuse.sample_select_note}}
 
@@ -183,7 +183,7 @@ Resource requirements for this deployment:
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
 
-**Important:** This sample is not provided in the {{site.data.reuse.openshift_short}} web console and can only be acquired through [GitHub](http://ibm.biz/es-cr-samples).
+**Important:** This sample is not provided in the {{site.data.reuse.openshift_short}} web console and can only be obtained through [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"} (download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples).
 
 {{site.data.reuse.sample_select_note}}
 
