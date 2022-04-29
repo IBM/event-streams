@@ -26,7 +26,7 @@ Your producers and consumers validate the data against the specified schema stor
 
 If you are migrating to use {{site.data.reuse.short_name}} as your Kafka solution, and have been using a schema registry from a different provider, you can [migrate](../migrating/) to using {{site.data.reuse.short_name}} and the Apicurio Registry.
 
-The {{site.data.reuse.short_name}} schema registry provided in earlier versions is deprecated in version 10.1.0 and later. If you are upgrading to {{site.data.reuse.short_name}} version 10.2.0 from an earlier version, you can [migrate](../../installing/migrating-to-apicurio/) to the Apicurio Registry from the deprecated schema registry.
+The {{site.data.reuse.short_name}} schema registry provided in earlier versions is deprecated in version 10.1.0 and later. If you are upgrading to {{site.data.reuse.short_name}} version 10.2.x from an earlier version, you can [migrate](../../installing/migrating-to-apicurio/) to the Apicurio Registry from the deprecated schema registry.
 
 <!--The schema registry is used to hold the schemas. Each Event Streams cluster has its own schema registry.	It provides interfaces for storing and retrieving schemas. In most situations, the interfaces are used behind the scenes.-->
 

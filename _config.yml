@@ -246,9 +246,15 @@ collections:
     label: "10.5"
     output: true
     version: true
+    permalink: /:collection/:categories/:slug/
+    order: 10
+  "11.0":
+    label: "11.0"
+    output: true
+    version: true
     tag: Latest
     permalink: /:categories/:slug/
-    order: 10
+    order: 11
   "tutorials":
     output: true
     permalink: /:collection/:path/
@@ -466,6 +472,21 @@ defaults:
   - scope:
       path: ""
       type: "10.5"
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comment: false
+      version: true
+      latest: true
+      mastheadNavItem: Documentation
+      sidebar:
+        nav: "105docs"
+  # _11.0
+  - scope:
+      path: ""
+      type: "11.0"
     values:
       layout: single
       read_time: false

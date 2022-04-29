@@ -46,7 +46,7 @@ Use one of the following methods to obtain the bootstrap address for your connec
 7. The `kafkaListeners` field will contain one or more listeners each with a `bootstrapServers` property.
    Find the `type` of listener you want to connect to and use the `bootstrapServers` value from the entry.
 
-**Note:** if using the `external` Kafka listener, the OpenShift route is a HTTPS address so the port in use is 443.
+**Note:** If using an external Kafka listener, the OpenShift route is an HTTPS address, and the port in use is 443.
 
 ### Using the {{site.data.reuse.openshift_short}} CLI
 
@@ -55,7 +55,7 @@ Use one of the following methods to obtain the bootstrap address for your connec
    `oc get eventstreams <instance-name> -o=jsonpath='{range .status.kafkaListeners[*]}{.type} {.bootstrapServers}{"\n"}{end}'`\\
    Where `<instance-name>` is the name of your {{site.data.reuse.short_name}} instance.
 
-**Note:** if using the `external` Kafka listener, the OpenShift route is a HTTPS address so the port in use is 443.
+**Note:** If using an external Kafka listener, the OpenShift route is an HTTPS address, and the port in use is 443.
 
 ## Securing the connection
 

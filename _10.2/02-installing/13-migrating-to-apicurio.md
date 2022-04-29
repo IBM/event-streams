@@ -20,7 +20,7 @@ To migrate from the deprecated schema registry to the Apicurio Registry, you wil
 
 To migrate your schemas to the Apicurio Registry, use the following steps:
 
-1. Ensure that you have [upgraded](../../installing/upgrading/) your {{site.data.reuse.short_name}} version to 10.2.0.
+1. Ensure that you have [upgraded](../../installing/upgrading/) your {{site.data.reuse.short_name}} version to 10.2.x.
 2. Update the `EventStreams` custom resource to use the new Apicurio Registry configuration, ensuring not to delete the `spec.schemaRegistry` field. Deleting this field  will disrupt any clients currently using the schema registry and may result in schema data loss.
 
    The following is an example snippet showing how to add Apicurio in the custom resource:
