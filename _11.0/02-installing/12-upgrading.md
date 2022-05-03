@@ -17,7 +17,7 @@ The following upgrade paths are available for Continuous Delivery (CD) releases:
 - You can upgrade the {{site.data.reuse.short_name}} operand to the latest 11.0.0 version directly from versions 10.5.x and 10.4.x. If you have an earlier operand version than 10.4.0, you must first upgrade it [to 10.4.0](../../10.4/installing/upgrading/) before upgrading to 11.0.0.
 
 You can also upgrade to the latest {{site.data.reuse.short_name}} CD release from the {{site.data.reuse.short_name}} Extended Update Support (EUS) release (10.2.x) as follows:
-- Upgrade your {{site.data.reuse.short_name}} EUS release to the [latest EUS version](../../10.2/installing/upgrading/) (operator version 2.2.5 and operand version 10.2.2).
+- Upgrade your {{site.data.reuse.short_name}} [EUS release](../../10.2/installing/upgrading/) by upgrading the operator to 2.2.5. The latest operator revision for the EUS release ensures you have the latest updates and fixes applied.
 - Upgrade your {{site.data.reuse.icpfs}} from EUS version 3.6.x to the latest CD version, as described in the [{{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=upgrading-cloud-pak-foundational-services#eus-to-cd){:target="_blank"}.
 - Upgrade your {{site.data.reuse.short_name}} version to the latest CD release by following the instructions on this page (operator version 3.0.0 and operand version 11.0.0).
 
