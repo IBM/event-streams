@@ -127,7 +127,7 @@ spec:
         - name: tls
           port: 9094
           type: internal
-          tls: false
+          tls: true
           authentication:
             type: tls
       storage:
