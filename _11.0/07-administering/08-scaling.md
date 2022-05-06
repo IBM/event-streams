@@ -12,9 +12,13 @@ The [pre-requisite](../../installing/prerequisites/) guidance gives various exam
 
 If this testing shows that your system does not have the capacity needed for the workload, whether this results in excessive lag or delays, or more extreme errors such as `OutOfMemory` errors, then you can incrementally make the increases detailed in the following sections, re-testing after each change to identify a configuration that meets your specific requirements.
 
+A [performance report](../../pdfs/Performance Report 2019.4.1 v1.0.pdf){:target="_blank"} based on example case studies is also available to provide guidance for setting these values.
+
+**Note:** Although the testing for the report was based on Apache Kafka version 2.3.0, the performance numbers are broadly applicable to current versions of Kafka as well.
+
 ## Modifying the settings
 
-These settings are defined in the `EventStreams` custom resource under the `spec.strimziOverrides` property. For more information on modifying these settings see [modifying installation](../modifying-installation)
+These settings are defined in the `EventStreams` custom resource under the `spec.strimziOverrides` property. For more information on modifying these settings see [modifying installation](../modifying-installation).
 
 ## Increase the number of Kafka brokers in the cluster
 

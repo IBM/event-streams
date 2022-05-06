@@ -6,11 +6,12 @@ slug: modifying-installation
 toc: true
 ---
 
-You can modify the configuration settings for your existing {{site.data.reuse.short_name}} installation by using the {{site.data.reuse.openshift_short}} web console or the `oc` command line tool. The configuration changes are applied by updating the `EventStreams` custom resource
+You can modify the configuration settings for your existing {{site.data.reuse.short_name}} installation by using the {{site.data.reuse.openshift_short}} web console or the `oc` command line tool. The configuration changes are applied by updating the `EventStreams` custom resource.
 You can modify existing values and introduce new properties as outlined under [configuration settings](../../installing/configuring).
+
 **Note:** Some settings might cause affected components of your {{site.data.reuse.short_name}} instance to restart.
 
-For examples on changes you might want to make, see [scaling your {{site.data.reuse.short_name}} instance](../scaling/).
+For examples of changes you might want to make for performance reasons, see [scaling your {{site.data.reuse.short_name}} instance](../scaling/).
 
 ## Using the {{site.data.reuse.openshift_short}} web console
 
