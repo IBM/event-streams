@@ -10,7 +10,7 @@ toc: true
 
 Images in the {{site.data.reuse.short_name}} UI are rendered as a black-filled shape instead of the correct image as shown in the following example:
 
-!['Event Streams UI with black rendered images'](../../images/ff-black-images.png "Image showing a screenshot of the Event Streams UI with black rendered images")
+!['Event Streams UI with black rendered images'](../../../images/ff-black-images.png "Image showing a screenshot of the Event Streams UI with black rendered images")
 
 ## Causes
 
