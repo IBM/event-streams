@@ -42,7 +42,7 @@ To view the {{site.data.reuse.short_name}} Grafana dashboards, follow these step
 4. Expand **Monitor Health**.
 5. Click the **Monitoring** in the expanded menu to open the Grafana homepage.
 6. Click the user icon in the bottom left corner to open the user profile page.
-7. In the **Organizations** table, find the namespace where you installed the {{site.data.reuse.short_name}} `monitoringdashboard` custom resource, and switch the user profile to that namespace. If you have not installed persistent dashboards, follow the instructions for [installing persistent Grafana dashboards](#installing-persistent-grafana-dashboards).
+7. In the **Organizations** table, find the namespace where you installed the {{site.data.reuse.short_name}} `monitoringdashboard` custom resource, and switch the user profile to that namespace.
 8. Hover over the **Dashboards** on the left and click **Manage**.
 9. Click on the dashboard you want to view in the **Dashboard** table.
 
