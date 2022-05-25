@@ -125,6 +125,8 @@ latestdocs:
         url: /security/encrypting-data/
       - title: "Configuring secure JMX connections"
         url: /security/secure-jmx-connections/
+      - title: "Renewing certificates"
+        url: /security/renewing-certificates/
       - title: "Network policies"
         url: /security/network-policies/
       - title: "Considerations for GDPR"

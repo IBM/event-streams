@@ -62,10 +62,15 @@ To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these st
    **For {{site.data.reuse.icpfs}}**: {{site.reuse.data.icpcs_ui_login}} Click the hamburger icon in the top left and then expand **Monitor Health**. Then click **Logging** to open the Kibana homepage.
 
    **For {{site.data.reuse.openshift_short}} cluster logging stack**: {{site.data.reuse.openshift_ui_login}} Then follow the instructions to navigate to [cluster logging's Kibana homepage](https://docs.openshift.com/container-platform/4.8/logging/cluster-logging-visualizer.html#cluster-logging-visualizer){:target="_blank"}.
-3. Click the **Management** tab on the left.
-4. Click the **Saved Objects**.
-5. Click the **Import** icon and navigate to the JSON file that includes the example Kibana dashboards for {{site.data.reuse.short_name}} you have downloaded.
-6. Click the **Dashboard** tab on the left to view the downloaded dashboards.
+3. Click **Management** in the navigation on the left.
+4. Click **Index patterns**.
+5. Click **Creat index pattern**.
+6. Enter `app*` in the **Index pattern** field, and click **Next step**.
+7. Select `@timestamp` from the **Time Filter field name** list, and click **Create index pattern**.
+8. Click **Saved Objects**.
+9. Click the **Import** icon and navigate to the JSON file you downloaded earlier that includes the example Kibana dashboards for {{site.data.reuse.short_name}}.
+10. If an `Index Pattern Conflicts` warning is displayed, select the `app*` index pattern from the **New index pattern** list for each conflict, then click **Confirm all changes**.
+11. Click **Dashboard** in the navigation on the left to view the downloaded dashboards.
 
 ## Other Monitoring Tools
 

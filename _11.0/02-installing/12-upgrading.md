@@ -13,19 +13,20 @@ Upgrade your {{site.data.reuse.long_name}} operator and operand instances as fol
 You must first upgrade the {{site.data.reuse.short_name}} operator, and then upgrade your {{site.data.reuse.short_name}} instance (operand version).
 
 The following upgrade paths are available for Continuous Delivery (CD) releases:
-- You can upgrade the {{site.data.reuse.short_name}} operator to the latest 3.0.0 version directly from versions 2.5.x and 2.4.x. If you have an earlier operator version than 2.4.0, you must first upgrade it to 2.4.0 before upgrading to 3.0.0.
-- You can upgrade the {{site.data.reuse.short_name}} operand to the latest 11.0.0 version directly from versions 10.5.x and 10.4.x. If you have an earlier operand version than 10.4.0, you must first upgrade it [to 10.4.0](../../10.4/installing/upgrading/) before upgrading to 11.0.0.
+- You can upgrade the {{site.data.reuse.short_name}} operator to the latest 3.0.1 version directly from versions 3.0.0, 2.5.x, and 2.4.x. If you have an earlier operator version than 2.4.0, you must first upgrade it to 2.4.0 before upgrading to 3.0.x.
+- You can upgrade the {{site.data.reuse.short_name}} operand to the latest 11.0.1 version directly from versions 11.0.0, 10.5.x, and 10.4.x. If you have an earlier operand version than 10.4.0, you must first upgrade it [to 10.4.0](../../10.4/installing/upgrading/) before upgrading to 11.0.x.
 
 You can also upgrade to the latest {{site.data.reuse.short_name}} CD release from the {{site.data.reuse.short_name}} Extended Update Support (EUS) release (10.2.x) as follows:
-- Upgrade your {{site.data.reuse.short_name}} [EUS release](../../10.2/installing/upgrading/) by upgrading the operator to 2.2.5. The latest operator revision for the EUS release ensures you have the latest updates and fixes applied.
-- [Upgrade your {{site.data.reuse.icpfs}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=upgrading-cloud-pak-foundational-services#eus-to-cd){:target="_blank"} from EUS version 3.6.x to the latest CD version.
-- After successfully upgrading to the latest CD version of foundational services, ensure you [clean up the monitoring resources](https://www.ibm.com/docs/en/cpfs?topic=issues-monitoring-resources-not-cleaned-up){:target="_blank"} to avoid errors.
-- Upgrade your {{site.data.reuse.short_name}} version to the latest CD release by following the instructions on this page (operator version 3.0.0 and operand version 11.0.0).
+
+1. Upgrade your {{site.data.reuse.short_name}} [EUS release](../../10.2/installing/upgrading/) by upgrading to the latest EUS operator (2.2.x). The latest operator revision for the EUS release ensures you have the latest updates and fixes applied.
+2. [Upgrade your {{site.data.reuse.icpfs}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=upgrading-cloud-pak-foundational-services#eus-to-cd){:target="_blank"} from EUS version 3.6.x to the latest CD version.
+3. After successfully upgrading to the latest CD version of foundational services, ensure you [clean up the monitoring resources](https://www.ibm.com/docs/en/cpfs?topic=issues-monitoring-resources-not-cleaned-up){:target="_blank"} to avoid errors.
+4. Upgrade your {{site.data.reuse.short_name}} version to the latest CD release by following the instructions on this page (operator version 3.0.1 and operand version 11.0.1).
 
 ## Prerequisites
 
 - Ensure you have followed the [upgrade steps for {{site.data.reuse.cp4i}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=upgrading){:target="_blank"} before upgrading {{site.data.reuse.short_name}}.
-- The images for {{site.data.reuse.short_name}} release 11.0.0 are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
+- The images for {{site.data.reuse.short_name}} release 11.0.x are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
 
 
 - To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
@@ -61,7 +62,9 @@ The upgrade process requires the upgrade of the {{site.data.reuse.short_name}} o
 5. Click the version number link in the **Update channel** section (for example, **v2.5**). The **Change Subscription update channel** dialog is displayed, showing the channels that are available to upgrade to.
 6. Select **v3.0** and click the **Save** button on the **Change Subscription Update Channel** dialog.
 
-All {{site.data.reuse.short_name}} pods that need to be updated as part of the upgrade will be gracefully rolled. Where required ZooKeeper pods will roll one at a time, followed by Kafka brokers rolling one at a time.
+All {{site.data.reuse.short_name}} pods that need to be updated as part of the upgrade will be gracefully rolled. Where required, ZooKeeper pods will roll one at a time, followed by Kafka brokers rolling one at a time.
+
+**Important:** The Entity operator might display a `CrashLoopBackOff` error. You can ignore this error and continue with upgrading the {{site.data.reuse.short_name}} operand.
 
 **Note:** The number of containers in each Kafka broker will reduce from 2 to 1 as the TLS-sidecar container will be removed from each broker during the upgrade process.
 
@@ -72,7 +75,7 @@ All {{site.data.reuse.short_name}} pods that need to be updated as part of the u
 3. Click the **{{site.data.reuse.short_name}}** tab. This lists the **{{site.data.reuse.short_name}}** operands.
 4. Find your instance in the **Name** column and click the link for the instance.
 5. Click the **YAML** tab. The **{{site.data.reuse.short_name}}** instance custom resource is shown.
-6. In the YAML, change the version field to the required version, for example, 11.0.0.
+6. In the YAML, change the version field to the required version, for example, 11.0.1.
 7. Click the **Save** button.
 
 All {{site.data.reuse.short_name}} pods will gracefully roll again.
@@ -135,4 +138,4 @@ To display metrics in the monitoring dashboards of the {{site.data.reuse.short_n
 
 The previous schema registry in {{site.data.reuse.short_name}} was deprecated in version 10.1.0 and is not an available option for schemas in {{site.data.reuse.short_name}} version 10.5.0 and later.
 
-If you are upgrading to {{site.data.reuse.short_name}} version 11.0.0 from an earlier version and you are using the deprecated registry option previously used for schemas, you will need to move your schemas to use the Apicurio Registry and reconfigure any applications that use those schemas to connect to the new registry, as described in [migrating](../migrating-to-apicurio/).
+If you are upgrading to {{site.data.reuse.short_name}} version 11.0.x from an earlier version and you are using the deprecated registry option previously used for schemas, you will need to move your schemas to use the Apicurio Registry and reconfigure any applications that use those schemas to connect to the new registry, as described in [migrating](../migrating-to-apicurio/).

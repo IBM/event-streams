@@ -413,7 +413,7 @@ To configure OAuth authentication, configure a Kafka listener with type `oauth`,
 
 {{site.data.reuse.short_name}} supports 2 types of SASL mechanisms: `OAUTHBEARER` or `PLAIN`. By default, OAuth authentication uses `OAUTHBEARER` SASL mechanism, which is the most secure mechanism.
 
-**Important:** For clients that do not support the `OAUTHBEARER` authentication mechanism, you can configure the cluster to use the `PLAIN` mechanism by setting the `enableOauthBearer` property to `false` (default setting is `true` for `OAUTHBEARER`). For more information, see [OAuth 2.0 authentication mechanisms](https://strimzi.io/docs/operators/0.27.1/using.html#con-oauth-authentication-flow-str){:target="_blank"}.
+**Important:** For clients that do not support the `OAUTHBEARER` authentication mechanism, you can configure the cluster to use the `PLAIN` mechanism by setting the `enableOauthBearer` property to `false` (default setting is `true` for `OAUTHBEARER`). For more information, see [OAuth 2.0 authentication mechanisms](https://strimzi.io/docs/operators/0.28.0/configuring.html#con-oauth-authentication-flow-str){:target="_blank"}.
 
 #### Configuring OAuth to use fast local JWT validation
 
@@ -444,7 +444,7 @@ spec:
           type: route
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/latest/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/0.28.0/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
 
 #### Configuring OAuth to use token validation by using an introspection endpoint
 
@@ -481,7 +481,7 @@ spec:
 
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/latest/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/0.28.0/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
 
 
 ### Enable OAuth authorization
@@ -512,7 +512,7 @@ spec:
           - "kubeadmin"
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [configuring an OAuth 2.0 authorization server](https://strimzi.io/docs/operators/latest/configuring.html#proc-oauth-server-config-str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [configuring an OAuth 2.0 authorization server](https://strimzi.io/docs/operators/0.28.0/configuring.html#proc-oauth-server-config-str){:target="_blank"}.
 
 ## Configuring node affinity for components
 
@@ -586,7 +586,7 @@ spec:
 **Important:** Enabling the Kafka Proxy to gather producer metrics places an intermediary between your producing clients and your Kafka brokers. This adds latency to any traffic to your Kafka brokers. Consider the performance implications of having the proxy in front of your Kafka brokers. You can also leave the proxy disabled and gather producer metrics from the clients directly by using [JMX](https://kafka.apache.org/documentation/#monitoring){:target="_blank"}.
 
 
-In addition, to enable the collection and display of producer metrics, also ensure you set the `spec.strimziOverrides.kafka.config.interceptor.class.name` to `com.ibm.eventstreams.interceptors.metrics.ProducerMetricsInterceptor`, for example:
+In addition, to enable the collection and display of producer metrics in {{site.data.reuse.short_name}} 11.0.0, also ensure you set the `spec.strimziOverrides.kafka.config.interceptor.class.name` to `com.ibm.eventstreams.interceptors.metrics.ProducerMetricsInterceptor`, for example:
 
 ```
 apiVersion: eventstreams.ibm.com/v1beta2
@@ -601,6 +601,8 @@ spec:
           interceptor.class.names: com.ibm.eventstreams.interceptors.metrics.ProducerMetricsInterceptor
 # ...
 ```
+
+![Event Streams 11.0.1 icon](../../images/11.0.1.svg "In Event Streams 11.0.1.") **Important:** In {{site.data.reuse.short_name}} 11.0.1 and later, you do not have to set the `spec.strimziOverrides.kafka.config.interceptor.class.name`.
 
 ## Configuring external monitoring through Prometheus
 
@@ -703,7 +705,7 @@ spec:
 # ...
 ```
 
-To complement the default Kafka metrics, {{site.data.reuse.short_name}} can be configured to publish additional information about the {{site.data.reuse.short_name}} instance by setting the `spec.strimziOverrides.kafka.config.interceptor.class.name` to `com.ibm.eventstreams.interceptors.metrics.ProducerMetricsInterceptor`, for example:
+To complement the default Kafka metrics, you can configure {{site.data.reuse.short_name}} 11.0.0 to publish additional information about the {{site.data.reuse.short_name}} instance by setting the `spec.strimziOverrides.kafka.config.interceptor.class.name` to `com.ibm.eventstreams.interceptors.metrics.ProducerMetricsInterceptor`, for example:
 
 ```
 apiVersion: eventstreams.ibm.com/v1beta2
@@ -716,6 +718,17 @@ spec:
         config:
           # ...
           interceptor.class.names: com.ibm.eventstreams.interceptors.metrics.ProducerMetricsInterceptor
+# ...
+```
+
+![Event Streams 11.0.1 icon](../../images/11.0.1.svg "In Event Streams 11.0.1.") **Important:** In {{site.data.reuse.short_name}} 11.0.1 and later, publishing additional information is configured by adding the `spec.kafkaProxy` property to the `EventStreams` custom resource as follows (setting `spec.strimziOverrides.kafka.config.interceptor.class.name` is not required):
+
+```
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: EventStreams
+# ...
+spec:
+  kafkaProxy: {}
 # ...
 ```
 
@@ -1049,7 +1062,7 @@ One way to test that the truststore is compatible and contains the correct certi
 
 The cluster and/or clients certificates, and keys must be added to secrets in the namespace that the {{site.data.reuse.short_name}} instance is intended to be created in. The naming of the secrets and required labels must follow the conventions detailed in the following command templates.
 
-The following four commands can be used to create and label the secrets for custom certificates and keys. The templates demonstrate providing cluster certificates but the same commands can be re-used substituting `cluster` with `clients` in each secret name.
+The following commands can be used to create and label the secrets for custom certificates and keys. The templates demonstrate providing cluster certificates but the same commands can be re-used substituting `cluster` with `clients` in each secret name.
 
 For each command, provide the intended name and namespace for the {{site.data.reuse.short_name}} instance.
 
@@ -1057,9 +1070,15 @@ For each command, provide the intended name and namespace for the {{site.data.re
 
 `oc label --namespace <namespace> secret <instance-name>-cluster-ca eventstreams.ibm.com/kind=Kafka eventstreams.ibm.com/cluster=<instance-name>`
 
+`oc annotate --namespace <namespace> secret <instance-name>-cluster-ca ca-key-generation=0`
+
 `oc create --namespace <namespace> secret generic <instance-name>-cluster-ca-cert --from-file=ca.crt=CA.crt --from-file=ca.p12=CA.p12 --from-literal=ca.password='<CA_PASSWORD>'`
 
 `oc label --namespace <namespace> secret <instance-name>-cluster-ca-cert eventstreams.ibm.com/kind=Kafka eventstreams.ibm.com/cluster=<instance-name>`
+
+`oc annotate --namespace <namespace> secret <instance-name>-cluster-ca-cert ca-cert-generation=0`
+
+**Note:** The `ca-cert-generation` and `ca-key-generation` values identify whether certificates are being renewed or not. Only set 0 for these values if you have not installed an instance of {{site.data.reuse.short_name}} yet. For more information about when to amend these annotations, see [renewing certificates](../../security/renewing-certificates/).
 
 To make use of the provided secrets, {{site.data.reuse.short_name}} will require the following overrides to be added to the custom resource.
 
@@ -1076,7 +1095,7 @@ spec:
       generateCertificateAuthority: false
 ```
 
-It is also possible to configure the `renewalDays` (default 30) and `validityDays` (default 365) under the `spec.strimziOverrides.clusterCa` and `spec.strimziOverrides.clientsCa` keys. Validity periods are expressed as a number of days after certificate generation.
+For information about configuring the renewal settings for certificates, see [renewing certificates](../../security/renewing-certificates/).
 
 ### Providing listener certificates
 
