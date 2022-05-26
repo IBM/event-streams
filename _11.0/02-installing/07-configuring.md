@@ -19,6 +19,8 @@ You can modify the samples, save them, and apply custom configuration settings a
 
 **Note:** The **Production 6 brokers** and **Production 9 brokers** samples are only available on [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"} (download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples). You can configure and apply them by using the [command line](../installing/#installing-an-instance-by-using-the-cli) or by dragging and dropping them onto the {{site.data.reuse.openshift_short}} [web console](../installing/#installing-by-using-the-yaml-view), and editing them.
 
+**Note:** When applying custom Kafka configuration settings to your {{site.data.reuse.short_name}}, check the [Kafka documentation](https://kafka.apache.org/documentation) to ensure the new configuration settings are consistent and do not cause conflicts.
+
 ## Checking configuration settings
 
 This page gives information about many configuration options. To see further information about specific configuration options, or to see what options are available, you can use the `oc explain` command. To see information about a specific field, run the following:
