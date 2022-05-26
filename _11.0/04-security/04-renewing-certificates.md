@@ -10,12 +10,12 @@ toc: true
 
  Secret Name | Description  |
 --|--
-\<instance-name\>-cluster-ca | The secret containing the private key for the cluster CA certificate. This is used to generate the certificates presented at the Event Streams endpoints, and for internal Kafka to Zookeeper connections. |
-\<instance-name\>-cluster-ca-cert | The secret containing the public cluster certificate. This is used to generate the certificates presented at the Event Streams endpoints, and for internal Kafka to Zookeeper connections. |
-\<instance-name\>-clients-ca |  The secret containing the private key for the client's CA certificate. This is used to generate the `KafkaUser` Mutual TLS certificates used by clients connecting to Kafka. |
-\<instance-name\>-clients-ca-cert | The secret containing the public CA certificate. This is used to generate the `KafkaUser` Mutual TLS certificates used by clients connecting to Kafka. |
+\<instance-name\>-cluster-ca | The secret containing the cluster CA private key. This is used to generate the certificates presented at the Event Streams endpoints, and for internal Kafka to Zookeeper connections. |
+\<instance-name\>-cluster-ca-cert | The secret containing the  cluster CA certificate. This is used to generate the certificates presented at the Event Streams endpoints, and for internal Kafka to Zookeeper connections. |
+\<instance-name\>-clients-ca |  The secret containing the private key used to sign the Mutual TLS `KafkaUser` certificates. These are used by clients connecting to Kafka over a Mutual TLS authenticated listener. |
+\<instance-name\>-clients-ca-cert | The secret containing the  CA certificate used to sign the Mutual TLS `KafkaUser` certificates. These are used by clients connecting to Kafka over a Mutual TLS authenticated listener. |
 
-## Renewing auto generated self-signed CA certificates for existing installations
+## Renewing auto-generated self-signed CA certificates for existing installations
 
 By default, {{site.data.reuse.short_name}} uses self-signed CA certificates. These are automatically renewed when the default `renewalDays` (default is 30 days) and `validityDays` (default is 365 days) limits are met.
 
@@ -27,22 +27,22 @@ You can also use the `strimzi.io/force-renew` annotation to manually renew the c
 
 **Note:** The configuration settings for renewal periods and maintenance windows, and the annotation for manual renewal only apply to auto-generated self-signed certificates. If you provided your own CA certificates and keys, you must manually renew these certificates as described in the following sections.
 
-## Renewing CA public certificates for existing installations
+## Renewing your own CA certificates for existing installations
 
 ![Event Streams 11.0.1 icon](../../images/11.0.1.svg "In Event Streams 11.0.1.")In {{site.data.reuse.short_name}} 11.0.1 and later,
-if you provided your own CA certificates and keys, and need to renew only the CA public certificate, complete the following steps. The steps provided demonstrate renewing the cluster CA certificate, but the steps are identical for renewing the client's CA certificate, with the exception of the secret name.
+if you provided your own CA certificates and keys, and need to renew only the CA  certificate, complete the following steps. The steps provided demonstrate renewing the cluster CA certificate, but the steps are identical for renewing the clients CA certificate, with the exception of the secret name.
 
-1. Generate a new public `ca.crt` by using the existing CA private key. The new certificate must have an identical CN name to the certificate it is replacing. Optionally, create a PKCS12 truststore with the new certificate if required.
+1. Generate a new CA certificate by using the existing CA private key. The new certificate must have an identical CN name to the certificate it is replacing. Optionally, create a PKCS12 truststore with the new certificate if required.
 2. Replace the value of the `ca.crt` in the `<instance-name>-cluster-ca-cert` secret with a base64-encoded string of the new certificate. Optionally, replace the `ca.p12` and `ca.password` values with the base64-encoded strings if required.
 3. Increment the `ca-cert-generation` annotation value in the `<instance-name>-cluster-ca-cert` secret. If no annotation exists, add the annotation, and set the value to `1` with the following command:
 
    `oc annotate --namespace <namespace> secret <instance-name>-cluster-ca-cert ca-cert-generation=1`
 
-   When the cluster reconciles, the pods start to roll.
+   When the operator reconciles the next time, the pods roll to process the certificate renewal.
 
-## Renewing CA public certificates and Private Keys for existing installations
+## Renewing your own CA certificates and private keys for existing installations
 
-If you provided your own CA Certificates and keys, and need to renew both the CA public certificate and private key, complete the following steps. The steps provided demonstrate renewing the cluster CA certificate and key, but the steps are identical for renewing the client's CA certificate, with the exception of the secret name.
+If you provided your own CA Certificates and keys, and need to renew both the CA  certificate and private key, complete the following steps. The steps provided demonstrate renewing the cluster CA certificate and key, but the steps are identical for renewing the clients CA certificate, with the exception of the secret name.
 
 1. Pause the operator's reconcile loop by running the following command:
 
@@ -68,7 +68,7 @@ If you provided your own CA Certificates and keys, and need to renew both the CA
 
    `oc annotate Kafka <instance-name> strimzi.io/pause-reconciliation="false" --overwrite=true`
 
-10. When the cluster reconciles, the pods start to roll. The Kafka and ZooKeeper pods will roll multiple times during the renewal process.
+   When the operator reconciles the next time, the pods roll to process the certificate renewal. The pods might roll multiple times during the renewal process.
 
 ## Updating clients after certificate change
 
