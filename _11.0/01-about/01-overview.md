@@ -10,6 +10,7 @@ toc: true
 
 {{site.data.reuse.long_name}} is an event-streaming platform based on the [Apache Kafka®](https://kafka.apache.org/){:target="_blank"} project and incorporates the open-source [Strimzi](https://strimzi.io){:target="_blank"} technology.
 
+- {{site.data.reuse.short_name}} version 11.0.2 includes Kafka release 3.2.0, and supports the use of all Kafka interfaces.
 - {{site.data.reuse.short_name}} version 11.0.1 includes Kafka release 3.1.0, and supports the use of all Kafka interfaces.
 - {{site.data.reuse.short_name}} version 11.0.0 includes Kafka release 3.0.0, and supports the use of all Kafka interfaces.
 

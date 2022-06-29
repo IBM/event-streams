@@ -239,6 +239,10 @@ latestdocs:
         url: /troubleshooting/admin-api-mount-failure/
       - title: "Client receives 'Failed to load SSL keystore' message when communicating with brokers"
         url: /troubleshooting/pkcs12-keystore-java-client/
+      - title: "Schema details not accessible when upper-case letters are used in schema names"
+        url: /troubleshooting/upper-case-in-schema-names/
+      - title: "OpenShift upgrade: fixing scheduling on node and node degraded errors"
+        url: /troubleshooting/ocp-upgrade-fail/
 
 # Sidebar navigation for 10.5.
 

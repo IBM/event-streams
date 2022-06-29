@@ -8,6 +8,16 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}} version 11.0.x.
 
+## Release 11.0.2
+
+### Kafka version upgraded to 3.2.0
+
+{{site.data.reuse.short_name}} version 11.0.2 includes Kafka release 3.2.0, and supports the use of all Kafka interfaces.
+
+### Documentation: Highlighting differences between versions
+
+Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.0.2 compared to 11.0.1 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.0.2 icon](../../images/11.0.2.svg "In Event Streams 11.0.2.")
+
 ## Release 11.0.1
 
 ### Kafka version upgraded to 3.1.0
