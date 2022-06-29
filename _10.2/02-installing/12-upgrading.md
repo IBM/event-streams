@@ -11,7 +11,7 @@ Upgrade your {{site.data.reuse.long_name}} operator and operand instances as fol
 ## Upgrade paths
 
 The following upgrade paths are available:
-- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.2.5 directly from any 2.2.x version, or version 2.1.0.
+- You can upgrade the {{site.data.reuse.short_name}} operator to version 2.2.6 directly from any 2.2.x version, or version 2.1.0. Upgrading the operator to 2.2.6 also upgrades the Kafka version to 2.6.3.
 - You can upgrade the {{site.data.reuse.short_name}} operand to version 10.2.1-eus directly from any 10.2.x-eus version, or versions 10.1.0 and 10.0.0.
 - If you have an earlier version than 10.0.0, you must first upgrade your {{site.data.reuse.short_name}} version [to 10.0.0](../../10.0/installing/upgrading/), before upgrading to 10.2.x.
 

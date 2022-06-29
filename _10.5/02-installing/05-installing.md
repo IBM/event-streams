@@ -8,7 +8,7 @@ toc: true
 
 The following sections provide instructions about installing {{site.data.reuse.long_name}} on the {{site.data.reuse.openshift}}. The instructions are based on using the {{site.data.reuse.openshift_short}} web console and `oc` command line utility.
 
-When deploying in an air-gapped (also referred to as offline or disconnected) environment, ensure you have access to this documentation set, and see the [instructions in the {{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=installing-in-air-gapped-environment){:target="_blank"}.
+When deploying in an air-gapped (also referred to as offline or disconnected) environment, ensure you have access to this documentation set, and see the [instructions in the {{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=installing-adding-catalog-sources-air-gapped-openshift-cluster){:target="_blank"}.
 
 {{site.data.reuse.short_name}} can also be installed as part of [{{site.data.reuse.cp4i}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=runtimes-event-streams-deployment){:target="_blank"}.
 
@@ -78,9 +78,9 @@ oc get cm default-ingress-cert --namespace=openshift-config-managed -o yaml | se
 
 ## Add the {{site.data.reuse.short_name}} operator to the catalog
 
-Before you can install the {{site.data.reuse.short_name}} operator and use it to create instances of {{site.data.reuse.short_name}}, you must have the IBM Operator Catalog and the IBM Common Services Catalog available in your cluster.
+Before you can install the {{site.data.reuse.short_name}} operator and use it to create instances of {{site.data.reuse.short_name}}, you must have the IBM Operator Catalog and the {{site.data.reuse.icpfs}} Catalog available in your cluster.
 
-If you have other IBM products installed in your cluster, then you already have the IBM Operator Catalog available, and you can continue to [installing](#install-the-event-streams-operator) the {{site.data.reuse.short_name}} operator. Ensure you also have the IBM Common Services Catalog available, as described in the following steps.
+If you have other IBM products installed in your cluster, then you already have the IBM Operator Catalog available, and you can continue to [installing](#install-the-event-streams-operator) the {{site.data.reuse.short_name}} operator. Ensure you also have the {{site.data.reuse.icpfs}} Catalog available, as described in the following steps.
 
 If you are installing {{site.data.reuse.short_name}} as the first IBM product in your cluster, complete the following steps.
 
@@ -113,9 +113,9 @@ To add the IBM Operator Catalog:
 The IBM Operator Catalog source is added to the OperatorHub catalog, making the {{site.data.reuse.short_name}} operator available to install.
 
 
-To add the IBM Common Services Catalog:
+To add the {{site.data.reuse.icpfs}} Catalog:
 
-1. Create a file for the IBM Common Services Catalog source with the following content, and save as `IBMCSCatalogSource.yaml`:
+1. Create a file for the {{site.data.reuse.icpfs}} Catalog source with the following content, and save as `IBMCSCatalogSource.yaml`:
 
    ```
    apiVersion: operators.coreos.com/v1alpha1
@@ -138,7 +138,7 @@ To add the IBM Common Services Catalog:
 
    `oc apply -f IBMCSCatalogSource.yaml`
 
-The IBM Common Services Catalog source is added to the OperatorHub catalog, making the {{site.data.reuse.icpfs}} items available to install for {{site.data.reuse.short_name}}.
+The {{site.data.reuse.icpfs}} Catalog source is added to the OperatorHub catalog, making the {{site.data.reuse.icpfs}} items available to install for {{site.data.reuse.short_name}}.
 
 ## Install the {{site.data.reuse.short_name}} operator
 

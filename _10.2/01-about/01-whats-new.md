@@ -14,6 +14,12 @@ Find out what is new in {{site.data.reuse.long_name}} version 10.2.x.
 
 [Extended Update Support](https://access.redhat.com/support/policy/updates/openshift-eus){:target="_blank"} is available for Red Hat OpenShift 4.6, and means that Event Streams as part of [Cloud Pak for Integration 2020.4.1](https://sda-prod.mybluemix.net/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_ca/5/899/ENUSLP20-0545/index.html&request_locale=en&_ga=2.119248013.505703234.1607008036-2082956701.1571866332){:target="_blank"} benefits from defect support until March 31, 2022. This allows organizations to remain on the same release in order to maintain stable production environments for critical applications.
 
+## Release 10.2.1 with operator version 2.2.6
+
+### Kafka version upgraded to 2.6.3
+
+Upgrading to {{site.data.reuse.short_name}} operator version 2.2.6 adds Kafka release 2.6.3, and supports the use of all Kafka interfaces
+
 ## Release 10.2.1
 
 {{site.data.reuse.short_name}} release 10.2.1 contains security and bug fixes.

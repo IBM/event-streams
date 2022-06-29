@@ -26,7 +26,7 @@ The namespace in which the application runs must be registered with the Operatio
 
 ## Preparing your application to use tracing
 
-For detailed instructions about how to use Operations Dashboard with external applications, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=configuration-external-applications-tracing-data){:target="_blank"}.
+For detailed instructions about how to use Operations Dashboard with external applications, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=configuration-external-applications-tracing-data){:target="_blank"}.
 
 At a high level, the steps required are as follows.
 
@@ -52,7 +52,7 @@ Slightly unusually, when you deploy your application, you'll notice that it's ru
 
 ### Step 4 - Complete the registration process for the application
 
-The final stage is to use the Operations Dashboard Web Console for [registering the external application to Operations Dashboard](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=configuration-external-applications-tracing-data){:target="_blank"}.
+The final stage is to use the Operations Dashboard Web Console for [registering the external application to Operations Dashboard](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=configuration-external-applications-tracing-data){:target="_blank"}.
 
 To enable the Operations Dashboard to display tracing data from external applications:
 
@@ -67,4 +67,4 @@ To enable the Operations Dashboard to display tracing data from external applica
 
 You can use the {{site.data.reuse.cp4i}} Operations Dashboard to view tracing information and analyze [spans](https://opentracing.io/docs/overview/spans/){:target="_blank"}.
 
-For more information about setting up, using, and managing the dashboard, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=runtimes-transaction-tracing-deployment){:target="_blank"}.
+For more information about setting up, using, and managing the dashboard, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=capabilities-integration-tracing-deployment){:target="_blank"}.

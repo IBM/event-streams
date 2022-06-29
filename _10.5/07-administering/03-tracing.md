@@ -67,4 +67,4 @@ To enable the Operations Dashboard to display tracing data from external applica
 
 You can use the {{site.data.reuse.cp4i}} Operations Dashboard to view tracing information and analyze [spans](https://opentracing.io/docs/overview/spans/){:target="_blank"}.
 
-For more information about setting up, using, and managing the dashboard, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=runtimes-transaction-tracing-deployment){:target="_blank"}.
+For more information about setting up, using, and managing the dashboard, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2021.4?topic=capabilities-integration-tracing-deployment){:target="_blank"}.
