@@ -243,6 +243,8 @@ latestdocs:
         url: /troubleshooting/upper-case-in-schema-names/
       - title: "OpenShift upgrade: fixing scheduling on node and node degraded errors"
         url: /troubleshooting/ocp-upgrade-fail/
+      - title: "Pods enter ImagePullBackOff state after operator upgraded to 3.0.2"
+        url: /troubleshooting/instance-upgrade-fails/
 
 # Sidebar navigation for 10.5.
 
