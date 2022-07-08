@@ -46,7 +46,7 @@ Alternatively, you can also use the following steps:
 ### Using the CLI
 
 1. Go to your destination cluster. {{site.data.reuse.cp_cli_login}}
-2. {{site.data.reuse.es_cli_init}} 
+2. {{site.data.reuse.es_cli_init}}
 3. Run the following command to display the connection details for your destination cluster:\\
    `cloudctl es geo-cluster-connect`\\
     The command returns a base64 encoded string consisting of the API URL and the security credentials required for creating a destination cluster that should be used to configure geo-replication using the CLI.  If the connection details are to be used to configure geo-replication using the UI, add the `--json` option to return a JSON-formatted string.
@@ -82,29 +82,30 @@ For each topic that has geo-replication set up, a visual indicator is shown in t
 To set up replication by using the CLI:
 
 1. Go to your origin cluster. {{site.data.reuse.cp_cli_login}}
-2. {{site.data.reuse.es_cli_init}} 
+2. {{site.data.reuse.es_cli_init}}
 3. Choose a destination cluster to replicate to by listing all available destination clusters, making the ID of the clusters available to select and copy: `cloudctl es geo-clusters`
 4. Choose the topics you want to replicate by listing your topics, making their names available to select and copy: `cloudctl es topics`
 5. Specify the destination cluster to replicate to, and set the topics you want to replicate. Use the required destination cluster ID and topic names retrieved in the previous steps. List each topic you want to replicate by using a comma-separated list without spaces in between:\\
    `cloudctl es geo-replicator-create --destination <cluster-ID-from-step-3> --topics <comma-separated-list-of-topic-names-from-step-4>`\\
    Geo-replication starts automatically when the geo-replicator for the selected topics is set up successfully.
 
-**Note:** A prefix of the origin cluster name will be added to the name of the new replicated topic that is created on the destination cluster, resulting in replicated topics named such as `<origin-cluster>.<topic-name>`. 
+**Note:** A prefix of the origin cluster name will be added to the name of the new replicated topic that is created on the destination cluster, resulting in replicated topics named such as `<origin-cluster>.<topic-name>`.
 
 Message history is included in geo-replication. This means all available message data for the topic is copied. The amount of history is determined by the message retention option set when the topics were created on the origin cluster.
 
 ## Considerations
 
-{{site.data.reuse.long_name}} geo-replication uses Kafka's MirrorMaker 2.0 to replicate data from the origin cluster to the destination cluster. 
+{{site.data.reuse.long_name}} geo-replication uses Kafka's MirrorMaker 2.0 to replicate data from the origin cluster to the destination cluster.
 
 ### Replication Factor
 
 {{site.data.reuse.long_name}} sets the number of replicas of geo-replicated topics to 3, or if there are fewer brokers available then to the number of brokers in the destination cluster.
 
-If a different number of replicas are required on the destination topic, edit the value of the sourceConnector configuration property replication.factor on the MirrorMaker2 instance that is created by {{site.data.reuse.short_name}} for the geo-replication pairing. The change will apply to all new topics created by the geo-replicator on the destination cluster after the changes is made. It will not be applied to topics already configured for geo-replication
+If a different number of replicas are required on the destination topic, edit the value of the sourceConnector configuration property replication.factor on the MirrorMaker2 instance that is created by {{site.data.reuse.short_name}} for the geo-replication pairing. The change will apply to all new topics created by the geo-replicator on the destination cluster after the changes is made. It will not be applied to topics already configured for geo-replication.
+
 ### Topic configuration
 
-MirrorMaker 2.0 has a blacklist of topic properties that are not copied from the source cluster topic:
+MirrorMaker 2.0 has a list of topic properties that are not copied from the source cluster topic:
 
 * `follower.replication.throttled.replicas`
 * `leader.replication.throttled.replicas`
@@ -118,6 +119,6 @@ It is not possible to override the value of these properties using MirrorMaker 2
 To query the current values set on the destination cluster:
 
 1. Go to your destination cluster. {{site.data.reuse.cp_cli_login}}
-2. {{site.data.reuse.es_cli_init}} 
+2. {{site.data.reuse.es_cli_init}}
 3. List the broker configuration by using `cloudctl es broker 0`
 4. Update the [broker configuration](../../installing/configuring/#applying-kafka-broker-configuration-settings) to set these properties to the values if required before configuring geo-replication.
