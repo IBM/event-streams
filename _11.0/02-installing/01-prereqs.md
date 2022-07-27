@@ -134,10 +134,13 @@ If you want to set up [persistent storage](../planning/#planning-for-persistent-
 
 For example, you can use one of the following systems:
 
-- [Kubernetes local volumes](https://kubernetes.io/docs/concepts/storage/volumes/#local){:target="_blank"}
-- [Amazon Elastic Block Store (EBS)](https://kubernetes.io/docs/concepts/storage/volumes/#awselasticblockstore){:target="_blank"}
-- [Rook Ceph](https://rook.io/docs/rook/v1.3/ceph-storage.html){:target="_blank"}
-- [Red Hat OpenShift Container Storage](https://docs.openshift.com/container-platform/4.8/storage/persistent_storage/persistent-storage-ocs.html){:target="_blank"}
+- Red Hat OpenShift Data Foundation (previously OpenShift Container Storage) version 4.2 or later (block storage only)
+- IBM Cloud Block storage
+- IBM Storage Suite for IBM Cloud Paks: block storage from IBM Spectrum Virtualize, FlashSystem, or DS8K
+- Portworx Storage version 2.5.5 or later
+- Kubernetes local volumes
+- Amazon Elastic Block Store (EBS)
+- Rook Ceph
 
 ## {{site.data.reuse.long_name}} UI
 

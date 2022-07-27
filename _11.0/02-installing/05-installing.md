@@ -173,6 +173,8 @@ To install the operator by using the {{site.data.reuse.openshift_short}} web con
 
 The installation can take a few minutes to complete.
 
+**Important:** Only install one {{site.data.reuse.short_name}} operator on a cluster.
+
 #### Checking the operator status
 
 You can see the installed operator and check its status as follows:

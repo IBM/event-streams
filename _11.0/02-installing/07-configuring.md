@@ -441,7 +441,7 @@ spec:
             tlsTrustedCertificates:
               - certificate: <CA-certificate-secret-key>
                 secretName: <CA-certificate-secret-name>
-            userNameClaim: clientId
+            userNameClaim: preferred_username
             validIssuerUri: <OAuth-authentication-server-token-issuer-endpoint>
           type: route
 ```
@@ -474,7 +474,7 @@ spec:
               key: <secret-key-containing-client-password>
             validIssuerUri: <OAuth-authentication-server-token-issuer-endpoint>
             introspectionEndpointUri: <OAuth-authentication-server-token-introspection-endpoint>
-            userNameClaim: clientId
+            userNameClaim: preferred_username
             maxSecondsWithoutReauthentication: 3600
             tlsTrustedCertificates:
               - certificate: <CA-certificate-secret-key>
