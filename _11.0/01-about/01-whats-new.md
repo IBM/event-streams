@@ -8,6 +8,10 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}} version 11.0.x.
 
+## Release 11.0.3
+
+{{site.data.reuse.short_name}} release 11.0.3 contains security and bug fixes.
+
 ## Release 11.0.2
 
 ### Kafka version upgraded to 3.2.0

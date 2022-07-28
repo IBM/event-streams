@@ -14,6 +14,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 {{site.data.reuse.long_name}} 11.0.x is supported on the {{site.data.reuse.openshift}}.
 
+- Version 11.0.3 is installed by the {{site.data.reuse.short_name}} operator version 3.0.4, and includes Kafka version 3.2.0.
 - Version 11.0.2 is installed by the {{site.data.reuse.short_name}} operator versions 3.0.3 and 3.0.2, and includes Kafka version 3.2.0.
 - Version 11.0.1 is installed by the {{site.data.reuse.short_name}} operator version 3.0.1, and includes Kafka version 3.1.0.
 - Version 11.0.0 is installed by the {{site.data.reuse.short_name}} operator version 3.0.0, and includes Kafka version 3.0.0.
