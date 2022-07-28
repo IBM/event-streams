@@ -365,7 +365,7 @@ If you add more Kafka replicas, geo-replicator nodes, MirrorMaker2 nodes, or Kaf
 
 ### License usage
 
-The license usage of {{site.data.reuse.long_name}} is collected by the {{site.data.reuse.icpfs}} License Service which is automatically deployed with {{site.data.reuse.long_name}}. This provides the service that tracks the licensed containers and their resource usage based on the product use.
+The license usage of {{site.data.reuse.long_name}} is collected by the {{site.data.reuse.icpfs}} License Service, which provides the service that tracks the licensed containers and their resource usage based on the product use. Ensure you install the License Service as described in the [{{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=administering-deploying-license-service){:target="_blank"}. 
 
 When [creating an instance](../installing/#install-an-event-streams-instance) of {{site.data.reuse.short_name}}, ensure that you select the correct value for `spec.license.use` in the custom resource. This value is used for metering purposes and could result in inaccurate charging and auditing if set incorrectly. Select one of the following values based on the purpose of your deployment:
 
