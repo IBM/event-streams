@@ -46,8 +46,8 @@ To set up your Java applications to use the Apicurio Registry and the Apicurio R
     ```
     <dependency>
       <groupId>io.apicurio</groupId>
-      <artifactId>apicurio-registry-utils-serde</artifactId>
-      <version>1.3.2.Final</version>
+      <artifactId>apicurio-registry-serdes-avro-serde</artifactId>
+      <version>2.2.5.Final</version>
     </dependency>
     ```
 
@@ -75,9 +75,10 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
-import io.apicurio.registry.utils.serde.AbstractKafkaStrategyAwareSerDe;
-import io.apicurio.registry.utils.serde.AvroEncoding;
-import io.apicurio.registry.utils.serde.AvroKafkaSerializer;
+import io.apicurio.registry.serde.SerdeConfig;
+import io.apicurio.registry.serde.avro.AvroKafkaSerializer;
+import io.apicurio.registry.serde.avro.AvroKafkaSerdeConfig;
+import io.apicurio.rest.client.config.ApicurioClientConfig;
 
 ```
 
@@ -103,31 +104,26 @@ props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, <ca_p12_password>);
 //props.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, <user_p12_password>);
 
 // Apicurio Registry connection
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_URL_CONFIG_PARAM, "https://development-ibm-es-ac-reg-external-es.apps.fowler.cp.fyre.ibm.com");
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_LOCATION, <ca_p12_file_location>);
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, <ca_p12_password>);
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_TYPE, "PKCS12");
+props.put(SerdeConfig.REGISTRY_URL, <schema_registry_endpoint>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_LOCATION, <ca_p12_file_location>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_PASSWORD, <ca_p12_password>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_TYPE, "PKCS12");
 
 // SCRAM authentication properties - uncomment to connect to Apicurio Registry using Scram
-// String base64EncodedCredentials = Base64.getEncoder()
-//     .encodeToString(("<username>:<password>").getBytes());
-// props.put(
-//     AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_HEADERS_PREFIX + "Authorization",
-//     "Basic " + base64EncodedCredentials);
+//props.put(SerdeConfig.AUTH_USERNAME, <username>);
+//props.put(SerdeConfig.AUTH_PASSWORD, <password>);
 
 // Mutual authentication properties - uncomment to connect to Apicurio Registry
-// using Mutual auth
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_KEYSTORE_LOCATION,
-//    <user_p12_file_location>);
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_KEYSTORE_PASSWORD,
-//    <user_p12_password>);
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_KEYSTORE_TYPE, "PKCS12");
+// using Mutual authentication
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_LOCATION, <user_p12_file_location>)
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_PASSWORD, <user_p12_password>);
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_TYPE, "PKCS12");
 
 // Kafka connection
-props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "");
+props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, <kafka_bootstrap_address>);
 ```
 
-**Note:** Follow the instructions in the code snippet to uncomment lines. Replace `<ca_p12_file_location>` with the path to the Java truststore file you downloaded earlier, `<ca_p12_password>` with the truststore password which has the permissions needed for your application, `<Kafka listener>` with the bootstrap address (find out how to [obtain the address](../../getting-started/connecting/#obtaining-the-bootstrap-address)), and `<Schema registry endpoint>` with the endpoint address for Apicurio Registry in {{site.data.reuse.short_name}}. For SCRAM, replace the `<username>` and `<password>` with the SCRAM username and password. For Mutual authentication, replace `<user_p12_file_location>` with the path to the `user.p12` file extracted from the `.zip` file downloaded earlier and `<user_p12_password>` with the contents of the `user.password` file in the same `.zip` file.
+**Note:** Follow the instructions in the code snippet to uncomment lines. Replace `<ca_p12_file_location>` with the path to the Java truststore file you downloaded earlier, `<ca_p12_password>` with the truststore password which has the permissions needed for your application, `<kafka_bootstrap_address>` with the bootstrap address (find out how to [obtain the address](../../getting-started/connecting/#obtaining-the-bootstrap-address)), and `<schema_registry_endpoint>` with the endpoint address for Apicurio Registry in {{site.data.reuse.short_name}}. For SCRAM, replace the `<username>` and `<password>` with the SCRAM username and password. For Mutual authentication, replace `<user_p12_file_location>` with the path to the `user.p12` file extracted from the `.zip` file downloaded earlier and `<user_p12_password>` with the contents of the `user.password` file in the same `.zip` file.
 
 For more information about the configuration keys and values to use with the {{site.data.reuse.short_name}} `serdes` library, see the `SchemaRegistryConfig` class in the [schema API reference](../../schema-api/){:target="_blank"}.
 
@@ -139,7 +135,7 @@ props.put("key.serializer", StringSerializer.class);
 props.put("value.serializer", AvroKafkaSerializer.class);
 
 // Set the encoding type used by the message serializer
-props.put(AvroEncoding.AVRO_ENCODING, AvroEncoding.AVRO_BINARY);
+props.put(AvroKafkaSerdeConfig.AVRO_ENCODING, AvroKafkaSerdeConfig.AVRO_BINARY);
 
 // Get a new Generic KafkaProducer
 KafkaProducer<String, GenericRecord> producer = new KafkaProducer<>(props);
@@ -195,9 +191,9 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-import io.apicurio.registry.utils.serde.AbstractKafkaStrategyAwareSerDe;
-import io.apicurio.registry.utils.serde.AvroEncoding;
-import io.apicurio.registry.utils.serde.AvroKafkaDeserializer;
+import io.apicurio.registry.serde.SerdeConfig;
+import io.apicurio.registry.serde.avro.AvroKafkaDeserializer;
+import io.apicurio.rest.client.config.ApicurioClientConfig;
 
 ```
 
@@ -223,31 +219,26 @@ props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, <ca_p12_password>);
 //props.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, <user_p12_password>);
 
 // Apicurio Registry connection
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_URL_CONFIG_PARAM, "https://development-ibm-es-ac-reg-external-es.apps.fowler.cp.fyre.ibm.com");
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_LOCATION, <ca_p12_file_location>);
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, <ca_p12_password>);
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_TYPE, "PKCS12");
+props.put(SerdeConfig.REGISTRY_URL, <schema_registry_endpoint>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_LOCATION, <ca_p12_file_location>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_PASSWORD, <ca_p12_password>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_TYPE, "PKCS12");
 
 // SCRAM authentication properties - uncomment to connect to Apicurio Registry using Scram
-// String base64EncodedCredentials = Base64.getEncoder()
-//     .encodeToString(("<username>:<password>").getBytes());
-// props.put(
-//     AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_HEADERS_PREFIX + "Authorization",
-//     "Basic " + base64EncodedCredentials);
+//props.put(SerdeConfig.AUTH_USERNAME, <username>);
+//props.put(SerdeConfig.AUTH_PASSWORD, <password>);
 
 // Mutual authentication properties - uncomment to connect to Apicurio Registry
-// using Mutual auth
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_KEYSTORE_LOCATION,
-//    <user_p12_file_location>);
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_KEYSTORE_PASSWORD,
-//    <user_p12_password>);
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_KEYSTORE_TYPE, "PKCS12");
+// using Mutual authentication
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_LOCATION, <user_p12_file_location>)
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_PASSWORD, <user_p12_password>);
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_TYPE, "PKCS12");
 
 // Kafka connection
-props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "<Kafka listener>");
+props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, <kafka_bootstrap_address>);
 ```
 
-**Note:** Follow the instructions in the code snippet to uncomment lines. Replace `<ca_p12_file_location>` with the path to the Java truststore file you downloaded earlier, `<ca_p12_password>` with the truststore password which has the permissions needed for your application, `<Kafka listener>` with the bootstrap address (find out how to [obtain the address](../../getting-started/connecting/#obtaining-the-bootstrap-address)), and `<Schema registry endpoint>` with the endpoint address for Apicurio Registry in {{site.data.reuse.short_name}}. For SCRAM, replace the `<username>` and `<password>` with the SCRAM username and password. For Mutual authentication, replace `<user_p12_file_location>` with the path to the `user.p12` file extracted from the `.zip` file downloaded earlier and `<user_p12_password>` with the contents of the `user.password` file in the same `.zip` file.
+**Note:** Follow the instructions in the code snippet to uncomment lines. Replace `<ca_p12_file_location>` with the path to the Java truststore file you downloaded earlier, `<ca_p12_password>` with the truststore password which has the permissions needed for your application, `<kafka_bootstrap_address>` with the bootstrap address (find out how to [obtain the address](../../getting-started/connecting/#obtaining-the-bootstrap-address)), and `<schema_registry_endpoint>` with the endpoint address for Apicurio Registry in {{site.data.reuse.short_name}}. For SCRAM, replace the `<username>` and `<password>` with the SCRAM username and password. For Mutual authentication, replace `<user_p12_file_location>` with the path to the `user.p12` file extracted from the `.zip` file downloaded earlier and `<user_p12_password>` with the contents of the `user.password` file in the same `.zip` file.
 
 For more information about the configuration keys and values to use with the Apicurio Registry `serdes` library, see the [Apicurio Registry documentation](https://www.apicur.io/registry/docs/apicurio-registry/2.2.x/index.html){:target="_blank"}.
 

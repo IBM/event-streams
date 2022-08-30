@@ -63,8 +63,8 @@ To migrate a Kafka producer application that uses the Confluent Platform schema 
    You can also use the following code snippet for Java applications:
 
    ```
-   props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "https://<host name>:<API port>");
-   props.put(AbstractKafkaAvroSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "SASL_INHERIT");
+   props.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "https://<host name>:<API port>/apis/ccompat/v6");
+   props.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "SASL_INHERIT");
    ```
 
 4. Set the Java SSL truststore JVM properties to allow the Confluent Platform schema registry client library to make HTTPS calls to the the Apicurio Registry in {{site.data.reuse.short_name}}. For example:\\
@@ -85,14 +85,14 @@ To migrate a Kafka consumer application that uses the Confluent Platform schema 
 
    Property name        |  Property value
    ---------------------|----------------
-    `schema.registry.url` |  `https://<host name>:<API port>`
+    `schema.registry.url` |  `https://<schema_registry_endpoint>/apis/ccompat/v6`
     `basic.auth.credentials.source` |  `SASL_INHERIT`
 
    You can also use the following code snippet for Java applications:
 
    ```
-   props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "https://<host name>:<API port>");
-   props.put(AbstractKafkaAvroSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "SASL_INHERIT");
+   props.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "https://<schema_registry_endpoint>/apis/ccompat/v6");
+   props.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "SASL_INHERIT");
    ```
 
 4. Set the Java SSL truststore JVM properties to allow the Confluent Platform schema registry client library to make HTTPS calls to the Apicurio Registry in {{site.data.reuse.short_name}}. For example:\\
