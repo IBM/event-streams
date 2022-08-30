@@ -51,8 +51,8 @@ To set up your Java applications to use the Apicurio Registry `serdes` library w
     ```
     <dependency>
         <groupId>io.apicurio</groupId>
-        <artifactId>apicurio-registry-utils-serde</artifactId>
-        <version>1.3.2.Final</version>
+        <artifactId>apicurio-registry-serdes-avro-serde</artifactId>
+        <version>2.2.5.Final</version>
     </dependency>
     ```
 12. If you want to generate specific schema classes from your project Avro schema files, add the following Avro plugin to your project Maven `pom.xml` file, replacing `SCHEMA-FILE-NAME` with the name of your schema file.
@@ -109,17 +109,17 @@ If you are connecting to a bootstrap address that is configured to use [OAuth au
 The Apicurio `serdes` library supports the following configuration options that can be specified to change how data is serialized.
 
 | Key         | Value        | Description
-| apicurio.registry.use.headers  | true     | Use this option to store the schema ID in the header of the message rather than within the payload.
-| apicurio.avro.encoding | JSON or BINARY | Specify whether to use BINARY (default) or JSON encoding within the Avro serializer
+| apicurio.registry.headers.enabled  | false     | Use this option to store the schema ID in the payload of the message rather than within the header.
+| apicurio.registry.avro.encoding | JSON or BINARY | Specify whether to use BINARY (default) or JSON encoding within the Avro serializer
 
 **Note:** If you are using headers to store the schema ID, you can override the keys used in the header with the following values:
 
-- `apicurio.key.artifactId.name`
-- `apicurio.value.artifactId.name`
-- `apicurio.key.version.name`
-- `apicurio.value.version.name`
-- `apicurio.key.globalId.name`
-- `apicurio.value.globalId.name`
+- `apicurio.registry.headers.key.artifactId.name`
+- `apicurio.registry.headers.value.artifactId.name`
+- `apicurio.registry.headers.key.version.name`
+- `apicurio.registry.headers.value.version.name`
+- `apicurio.registry.headers.key.globalId.name`
+- `apicurio.registry.headers.value.globalId.name`
 
 By setting these values you can change the name of the header that the Apicurio `serdes` library uses when adding headers for the `artifactId`, `version`, or `globalId` in the Kafka message.
 
@@ -135,8 +135,9 @@ By setting these values you can change the name of the header that the Apicurio 
 import java.io.File;
 import java.util.Properties;
 
-import io.apicurio.registry.utils.serde.AbstractKafkaStrategyAwareSerDe;
-import io.apicurio.registry.utils.serde.AvroKafkaSerializer;
+import io.apicurio.registry.serde.SerdeConfig;
+import io.apicurio.registry.serde.avro.AvroKafkaSerdeConfig;
+import io.apicurio.rest.client.config.ApicurioClientConfig;
 
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
@@ -168,8 +169,9 @@ props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "<ca_p12_password>");
 //kafkaProps.putAll(props);
 
 // TLS Properties for Apicurio Registry connection
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_LOCATION, "<ca_p12_file_location>");
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, "<ca_p12_password>");
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_LOCATION, <ca_p12_file_location>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_PASSWORD, <ca_p12_password>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_TYPE, "PKCS12");
 
 // SCRAM authentication properties - uncomment to connect using Scram
 //props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
@@ -177,6 +179,10 @@ props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, 
 //String saslJaasConfig = "org.apache.kafka.common.security.scram.ScramLoginModule required "
 //+ "username=\"<username>\" password=\"<password>\";";
 //props.put(SaslConfigs.SASL_JAAS_CONFIG, saslJaasConfig);
+//
+// SCRAM authentication properties for Apicurio Registry connection
+//props.put(SerdeConfig.AUTH_USERNAME, <username>);
+//props.put(SerdeConfig.AUTH_PASSWORD, <password>);
 
 // OAuth authentication properties - uncomment to connect using OAuth
 //props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
@@ -192,9 +198,6 @@ props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, 
 //props.put(SaslConfigs.SASL_JAAS_CONFIG, saslJaasConfig);
 // You may need to provide a Callback Handler for OAuth. This example shows the Strimzi OAuth callback handler.
 //props.put(SaslConfigs.SASL_LOGIN_CALLBACK_HANDLER_CLASS, "io.strimzi.kafka.oauth.client.JaasClientOauthLoginCallbackHandler")
-//
-// URL for Apicurio Registry connection including basic auth parameters
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_URL_CONFIG_PARAM, "https://<username>:<password>@<Schema registry endpoint>");
 
 // Mutual authentication properties - uncomment to connect using Mutual authentication
 //props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
@@ -202,24 +205,25 @@ props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, 
 //props.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "<user_p12_password>");
 //
 // Mutual authentication properties for Apicurio Registry connection
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_KEYSTORE_LOCATION, "<user_p12_file_location>");
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_REQUEST_KEYSTORE_LOCATION, "<user_p12_file_location>");
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_LOCATION, <user_p12_file_location>)
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_PASSWORD, <user_p12_password>);
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_TYPE, "PKCS12");
 //
 // URL for Apicurio Registry connection
-//props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_URL_CONFIG_PARAM, "https://<Schema registry endpoint>");
+props.put(SerdeConfig.REGISTRY_URL, <schema_registry_endpoint>);
 
 // Set the ID strategy to use the fully-qualified schema name (including namespace)
-props.put(AbstractKafkaStrategyAwareSerDe.REGISTRY_ARTIFACT_ID_STRATEGY_CONFIG_PARAM, "io.apicurio.registry.utils.serde.strategy.RecordIdStrategy");
+props.put(SerdeConfig.ARTIFACT_RESOLVER_STRATEGY, "io.apicurio.registry.serde.avro.strategy.RecordIdStrategy");
 
 // Kafka connection
-props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "<Kafka listener>");
+props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "<kafka_bootstrap_address>");
 ```
 
 **Note:** Uncomment lines depending on your authentication settings. Replace:
  - `<ca_p12_file_location>` with the path to the Java truststore file you downloaded earlier.
  - `<ca_p12_password>` with the truststore password which has the permissions needed for your application.
- - `<Kafka listener>` with the bootstrap address (find out how to [obtain the address](../../getting-started/connecting/#obtaining-the-bootstrap-address))
- - `<Schema registry endpoint>` with the endpoint address for Apicurio Registry in {{site.data.reuse.short_name}}.
+ - `<kafka_bootstrap_address>` with the bootstrap address (find out how to [obtain the address](../../getting-started/connecting/#obtaining-the-bootstrap-address))
+ - `<schema_registry_endpoint>` with the endpoint address for Apicurio Registry in {{site.data.reuse.short_name}}.
  - For SCRAM, replace `<username>` and `<password>` with the SCRAM username and password.
  - For Mutual authentication, replace `<user_p12_file_location>` with the path to the `user.p12` file extracted from the `.zip` file downloaded earlier and `<user_p12_password>` with the contents of the `user.password` file in the same `.zip` file.
  - For OAuth, replace `<ca_p12_file_location>` with the path to the OAuth authentication server truststore file you downloaded earlier, `<ca_p12_password>` with the password for this truststore, `<oauth_username>` and `<oauth_password>` with the OAuth client credentials, and `<oauth_token_endpoint_uri>` with the OAuth servers token endpoint URI.
@@ -231,7 +235,7 @@ props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "<Kafka listener>");
 ```
 // Set the value serializer for produced messages to use the Apicurio Registry serializer
 props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-props.put("value.serializer", "io.apicurio.registry.utils.serde.AvroKafkaSerializer");
+props.put("value.serializer", "io.apicurio.registry.serde.avro.AvroKafkaSerializer;");
 
 // Get a new Generic KafkaProducer
 KafkaProducer<String, GenericRecord> producer = new KafkaProducer<>(props);
@@ -276,7 +280,7 @@ RegistryRestClient client = RegistryRestClientFactory.create(REGISTRY_URL, confi
 
 try {
     // Get the schema from apicurio and convert to an avro schema
-    Schema schema = new Schema.Parser().parse(client.getLatestArtifact(artifactId));
+    Schema schema = new Schema.Parser().parse(client.getLatestArtifact(null, artifactId));
 } catch (Exception e) {
     e.printStackTrace();
 }
@@ -294,7 +298,8 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
-import io.apicurio.registry.utils.serde.AbstractKafkaSerDe;
+import io.apicurio.registry.serde.SerdeConfig;
+import io.apicurio.rest.client.config.ApicurioClientConfig;
 
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
@@ -325,8 +330,9 @@ props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "<ca_p12_password>");
 //kafkaProps.putAll(props);
 
 // TLS Properties for Apicurio Registry connection
-props.put(AbstractKafkaSerDe.REGISTRY_REQUEST_TRUSTSTORE_LOCATION, "<ca_p12_file_location>");
-props.put(AbstractKafkaSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, "<ca_p12_password>");
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_LOCATION, <ca_p12_file_location>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_PASSWORD, <ca_p12_password>);
+props.put(ApicurioClientConfig.APICURIO_REQUEST_TRUSTSTORE_TYPE, "PKCS12");
 
 // SCRAM authentication properties - uncomment to connect using Scram
 //props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
@@ -335,8 +341,9 @@ props.put(AbstractKafkaSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, "<ca_p12_pass
 //+ "username=\"<username>\" password=\"<password>\";";
 //props.put(SaslConfigs.SASL_JAAS_CONFIG, saslJaasConfig);
 //
-// URL for Apicurio Registry connection including basic auth parameters
-//props.put(AbstractKafkaSerDe.REGISTRY_URL_CONFIG_PARAM, "https://<username>:<password>@<Schema registry endpoint>");
+// SCRAM authentication properties for Apicurio Registry connection
+//props.put(SerdeConfig.AUTH_USERNAME, <username>);
+//props.put(SerdeConfig.AUTH_PASSWORD, <password>);
 
 // Mutual authentication properties - uncomment to connect using Mutual authentication
 //props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
@@ -344,21 +351,22 @@ props.put(AbstractKafkaSerDe.REGISTRY_REQUEST_TRUSTSTORE_PASSWORD, "<ca_p12_pass
 //props.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "<user_p12_password>");
 //
 // Mutual authentication properties for Apicurio Registry connection
-//props.put(AbstractKafkaSerDe.REGISTRY_REQUEST_KEYSTORE_LOCATION, "<user_p12_file_location>");
-//props.put(AbstractKafkaSerDe.REGISTRY_REQUEST_KEYSTORE_LOCATION, "<user_p12_file_location>");
-//
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_LOCATION, <user_p12_file_location>)
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_PASSWORD, <user_p12_password>);
+//props.put(ApicurioClientConfig.APICURIO_REQUEST_KEYSTORE_TYPE, "PKCS12");
+
 // URL for Apicurio Registry connection
-//props.put(AbstractKafkaSerDe.REGISTRY_URL_CONFIG_PARAM, "https://<Schema registry endpoint>");
+props.put(SerdeConfig.REGISTRY_URL, <schema_registry_endpoint>);
 
 // Kafka connection
-props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "<Kafka listener>");
+props.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "<kafka_bootstrap_address>");
 ```
 
 **Note:** Uncomment lines depending on your authentication settings. Replace:
  - `<ca_p12_file_location>` with the path to the Java truststore file you downloaded earlier.
  - `<ca_p12_password>` with the truststore password which has the permissions needed for your application.
- - `<Kafka listener>` with the bootstrap address (find out how to [obtain the address](../../getting-started/connecting/#obtaining-the-bootstrap-address))
- - `<Schema registry endpoint>` with the endpoint address for Apicurio Registry in {{site.data.reuse.short_name}}.
+ - `<kafka_bootstrap_address>` with the bootstrap address (find out how to [obtain the address](../../getting-started/connecting/#obtaining-the-bootstrap-address))
+ - `<schema_registry_endpoint>` with the endpoint address for Apicurio Registry in {{site.data.reuse.short_name}}.
  - For SCRAM, replace `<username>` and `<password>` with the SCRAM username and password.
  - For Mutual authentication, replace `<user_p12_file_location>` with the path to the `user.p12` file extracted from the `.zip` file downloaded earlier and `<user_p12_password>` with the contents of the `user.password` file in the same `.zip` file.
 
@@ -403,8 +411,9 @@ The Kafka configuration property `value.serializer` is set to `io.apicurio.regis
 Kafka Streams applications can also use the Apicurio Registry `serdes` library to serialize and deserialize messages. In particular, the `io.apicurio.registry.utils.serde.AvroSerde` class can be used to provide the Apicurio Avro serializer and deserializer for the `"default.value.serde"` or `"default.key.serdes"` properties. Additionally, setting the `"apicurio.registry.use-specific-avro-reader"` property to `"true"` tells the Apicurio Registry `serdes` library to use specific schema classes that have been generated from your project Avro schema files. For example:
 
 ```
-import io.apicurio.registry.utils.serde.AbstractKafkaSerDe;
-import io.apicurio.registry.utils.serde.AvroSerde;
+import io.apicurio.registry.serde.SerdeConfig;
+import io.apicurio.registry.serde.avro.AvroSerde;
+import io.apicurio.registry.serde.avro.AvroKafkaSerdeConfig;
 import io.apicurio.registry.utils.serde.avro.AvroDatumProvider;
 
 import org.apache.kafka.common.serialization.Serdes;
@@ -418,14 +427,14 @@ import java.util.Properties;
 final Properties streamsConfiguration = new Properties();
 
 // URL for Apicurio Registry connection (including basic auth parameters)
-streamsConfiguration.put(AbstractKafkaSerDe.REGISTRY_URL_CONFIG_PARAM, "https://<username>:<password>@<Schema registry endpoint>");
+streamsConfiguration.put(SerdeConfig.REGISTRY_URL, <schema_registry_endpoint>);
 
 // Specify default serializer and deserializer for record keys and for record values.
 streamsConfiguration.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 streamsConfiguration.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, AvroSerde.class);
 
 // Specify using specific (generated) Avro schema classes
-streamsConfiguration.put(AvroDatumProvider.REGISTRY_USE_SPECIFIC_AVRO_READER_CONFIG_PARAM, "true");
+streamsConfiguration.put(AvroKafkaSerdeConfig.USE_SPECIFIC_AVRO_READER, "true");
 ```
 
 ## Setting up Kafka Connect connectors
@@ -446,10 +455,10 @@ To use the Apicurio Registry  `converter` library, add the following dependency 
 <dependency>
     <groupId>io.apicurio</groupId>
     <artifactId>apicurio-registry-utils-converter</artifactId>
-    <version>1.3.2.Final</version>
+    <version>2.2.5.Final</version>
 </dependency>
 ```
-Alternatively, if you are not building your connector, you can download the Apicurio converter artifacts from [Maven](https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/1.3.2.Final/apicurio-registry-distro-connect-converter-1.3.2.Final-converter.tar.gz){:target="_blank"}.
+Alternatively, if you are not building your connector, you can download the Apicurio converter artifacts from [Maven](https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.2.5.Final/apicurio-registry-distro-connect-converter-2.2.5.Final.tar.gz){:target="_blank"}.
 
 After downloading, extract the `tar.gz` file and place the folder with all the JARs into a subdirectory within the folder where you are building your `KafkaConnect` image.
 
@@ -464,7 +473,6 @@ Then reference the Kafka connection details in the `KafkaConnector` custom resou
 
 ```
 value.converter.apicurio.registry.url: <username>:<password>@<Schema registry endpoint>
-value.converter.apicurio.registry.global-id: io.apicurio.registry.utils.serde.strategy.GetOrCreateIdStrategy
 value.converter.apicurio.registry.request.ssl.truststore.location: "${file:/tmp/strimzi-connect.properties:ssl.truststore.location}"
 value.converter.apicurio.registry.request.ssl.truststore.password: "${file:/tmp/strimzi-connect.properties:ssl.truststore.password}"
 value.converter.apicurio.registry.request.ssl.truststore.type: "${file:/tmp/strimzi-connect.properties:ssl.truststore.type}"

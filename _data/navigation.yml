@@ -245,6 +245,8 @@ latestdocs:
         url: /troubleshooting/ocp-upgrade-fail/
       - title: "Pods enter ImagePullBackOff state after operator upgraded to 3.0.2"
         url: /troubleshooting/instance-upgrade-fails/
+      - title: "Foundational services 3.20 blocks upgrade to Event Streams 11.0.x"
+        url: /troubleshooting/foundational-services-320-upgrade-block/
 
 # Sidebar navigation for 10.5.
 
@@ -445,6 +447,8 @@ latestdocs:
         url: /troubleshooting/admin-api-mount-failure/
       - title: "Client receives 'Failed to load SSL keystore' message when communicating with brokers"
         url: /troubleshooting/pkcs12-keystore-java-client/
+      - title: "Foundational services 3.20 blocks upgrade to Event Streams 11.0.x"
+        url: /troubleshooting/foundational-services-320-upgrade-block/
 
 # Sidebar navigation for 10.4.
 
