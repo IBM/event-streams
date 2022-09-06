@@ -457,7 +457,7 @@ spec:
 # ...
 ```
 
-**Note:** For details about viewing metrics information, see the [cluster health](../administering/cluster-health) and [topic health](../administering/topic-health) sections.
+**Note:** For details about viewing metrics information, see the [cluster health](../../administering/cluster-health) and [topic health](../../administering/topic-health) sections.
 
 ## Configuring external monitoring through JMX
 

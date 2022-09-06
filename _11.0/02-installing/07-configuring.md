@@ -570,6 +570,23 @@ template:
                 - myvalue
 ```
 
+You can also configure architecture-based node affinity. For example, to configure a component to only deploy on `amd64` architecture, you can use the following settings:
+
+```
+# ...
+template:
+  pod:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+```
+
 ## Enabling collection of producer metrics
 
 Producer metrics provide information about the health of your Kafka topics through metrics gathered from producing applications. You can view the information in the [**Producers** dashboard](../../administering/topic-health/).
@@ -734,7 +751,7 @@ spec:
 # ...
 ```
 
-**Note:** For details about viewing metrics information, see the [cluster health](../administering/cluster-health) and [topic health](../administering/topic-health) sections.
+**Note:** For details about viewing metrics information, see the [cluster health](../../administering/cluster-health) and [topic health](../../administering/topic-health) sections.
 
 ## Configuring external monitoring through JMX
 
