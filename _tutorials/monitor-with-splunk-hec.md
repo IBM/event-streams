@@ -7,136 +7,58 @@ section: "Tutorials for IBM Event Streams"
 cardType: "large"
 ---
 
-You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export Kafka broker JMX metrics to external applications. This tutorial details how to deploy [jmxtrans](https://github.com/jmxtrans/jmxtrans/){:target="_blank"} into your {{site.data.reuse.icp}} cluster to export Kafka JMX metrics as graphite output, and then use [Logstash](https://www.elastic.co/products/logstash){:target="_blank"} to write the metrics to an external Splunk system as an HTTP Event Collector.
+You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export Kafka broker JMX metrics to external applications. This tutorial details how to export Kafka JMX metrics as graphite output, and then use [Logstash](https://www.elastic.co/products/logstash){:target="_blank"} to write the metrics to an external Splunk system as an HTTP Event Collector.
 
 ## Prequisites
 
-- Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 2019.1.1.
-- When installing {{site.data.reuse.short_name}}, ensure you select the **Enable secure JMX connections** check box in the [**Kafka broker settings**](../../2019.1.1/installing/configuring/#kafka-broker-settings). This is required to ensure that each Kafka broker’s JMX port is accessible to jmxtrans.
+- Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 11.0.0.
+- When installing {{site.data.reuse.short_name}}, ensure you configure your JMXTrans deployment as described in  [Configuring secure JMX connections](../../security/secure-jmx-connections/){:target="_blank"}.
 - Ensure you have a [Splunk](https://www.splunk.com/){:target="_blank"} Enterprise server installed or a Splunk Universal Forwarder that has network access to your {{site.data.resuse.icp}} cluster.
-- Ensure that you have an index to receive the data and an HTTP Event Collector configured on Splunk. Details can be found in the [Splunk documentation](https://docs.splunk.com/Documentation){:target="_blank"}
-- Ensure you have [configured access to the Docker registry](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_images/using_docker_cli.html){:target="_blank"} from the machine you will be using to deploy jmxtrans.
+- Ensure that you have an index to receive the data and an HTTP Event Collector configured on Splunk. Details can be found in the [Splunk documentation](https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector){:target="_blank"}
+- Ensure you have [configured access to the Docker registry](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_images/using_docker_cli.html){:target="_blank"} from the machine you will be using to deploy Logstash.
 
-## jmxtrans
+## JMXTrans
 
-Jmxtrans is a connector that reads JMX metrics and outputs a number of formats supporting a wide variety of logging, monitoring, and graphing applications. To deploy to your {{site.data.resuse.icp}} cluster, you must package jmxtrans into a Kubernetes solution.
-
-Release-specific credentials for establishing the connection between jmxtrans and the Kafka brokers are generated when {{site.data.reuse.short_name}} is installed with the **Enable secure JMX connections** selected. The credentials are stored in a Kubernetes secret inside the release namespace. See [secure JMX connections](../../2019.1.1/security/secure-jmx-connections/#providing-configuration-values) for information about the secret contents.
-
-If you are deploying jmxtrans in a different namespace to your {{site.data.reuse.short_name}} installation, copy the secret to the required namespace with the following command:
-
-`kubectl -n <release-namespace> get secret <release-name>-ibm-es-jmx-secret -o yaml --export | kubectl -n <target-namespace> create -f -`
-
-The command creates the secret `<release-name>-ibm-es-jmx-secret` in the target namespace, which can then be referenced in the `hec.yaml` file later.
+JMXTrans is a connector that reads JMX metrics and outputs a number of formats supporting a wide variety of logging, monitoring, and graphing applications. To deploy to your {{site.data.reuse.openshift}} cluster, you must configure JMXTrans in you {{site.data.reuse.short_name}} CR.
 
 ## Solution overview
 
 The tasks in this tutorial help achieve the following:
 
-1. Jmxtrans packaged into a Docker image, along with scripts to load configuration values and connection information.
-2. Docker image pushed to the {{site.data.reuse.icp}} cluster Docker registry into the namespace where Logstash and jmxtrans will be deployed.
-3. Logstash packaged into a Docker image to load configuration values and connection information.
-4. Docker image pushed to the {{site.data.reuse.icp}} cluster Docker registry into the namespace where Logstash and jmxtrans will be deployed.
-5. Kubernetes pod specification created that exposes the configuration to jmxtrans and Logstash via environment variables.
+1. Set up splunk with HTTP Event Collector.
+2. Logstash packaged into a Docker image to load configuration values and connection information.
+3. Docker image pushed to the {{site.data.reuse.openshift}} cluster Docker registry into the namespace where Logstash will be deployed.
+4. Utilize the `Kafka.spec.JMXTrans` parameter to configure a JMXTrans deployment.
 
-### Example Dockerfile.jmxtrans
+### Configure Splunk
 
-Create a Dockerfile called `Dockerfile.jmxtrans` as follows.
+**Tip:** You can configure Splunk with the [Splunk Operator for Kubernetes](https://splunk.github.io/splunk-operator/){:target="_blank"}.
 
-```
-FROM jmxtrans/jmxtrans
-COPY run.sh .
-ENTRYPOINT [ "./run.sh" ]
-```
+With the HTTP Event Collector (HEC), you can send data and application events to a Splunk deployment over the HTTP and Secure HTTP (HTTPS) protocols. HEC uses a token-based authentication model. For more information about setting up the HTTP Event Collector, see the [Splunk documentation](https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector){:target="_blank"}.
 
-### Example run.sh
+In this tutorial we will be configuring the HTTP Event Collector by using Splunk Web as follows:
 
-Create a `run.sh` script as follows. The script generates the JSON configuration file and substitute the release-specific connection values. It then runs jmxtrans.
+1. In the Splunk Web **click Settings** > **Add Data**.
+1. Click **Monitor**.
+1. Click **HTTP Event Collector**.
+1. In the **Name** field, enter a name for the token, we'll add the name `splunk-hec` for this demo.
+1. Click **Next**.
+1. Click **Review**.
+1. Confirm that all settings for the endpoint are what you want.
+1. If all settings are what you want, click **Submit**. Otherwise, click **<** to make changes.
+1. Copy the token value that Splunk Web displays and you can then use the token to send data to HEC.
 
-```
-#!/bin/sh
-cat <<EOF >> /var/lib/jmxtrans/config.json
-{
-  "servers": [
-    {
-      "port": 9999,
-      "host": "${JMX_HOST_0}",
-      "ssl": true,
-      "username": "${JMX_USER}",
-      "password": "${JMX_PASSWORD}",
-      "queries": [
-        {
-          "obj": "kafka.server:type=BrokerTopicMetrics,name=Bytes*PerSec",
-          "attr": [ "Count" ],
-          "outputWriters": [
-            {
-              "@class": "com.googlecode.jmxtrans.model.output.GraphiteWriterFactory",
-              "port": 9999,
-              "host": "localhost",
-              "typeNames": [ "name" ],
-              "flushDelayInSeconds": 5
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "port": 9999,
-      "host": "${JMX_HOST_1}",
-      "ssl": true,
-      "username": "${JMX_USER}",
-      "password": "${JMX_PASSWORD}",
-      "queries": [
-        {
-          "obj": "kafka.server:type=BrokerTopicMetrics,name=Bytes*PerSec",
-          "attr": [ "Count" ],
-          "outputWriters": [
-            {
-              "@class": "com.googlecode.jmxtrans.model.output.GraphiteWriterFactory",
-              "port": 9999,
-              "host": "localhost",
-              "typeNames": [ "name" ],
-              "flushDelayInSeconds": 5
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "port": 9999,
-      "host": "${JMX_HOST_2}",
-      "ssl": true,
-      "username": "${JMX_USER}",
-      "password": "${JMX_PASSWORD}",
-      "queries": [
-        {
-          "obj": "kafka.server:type=BrokerTopicMetrics,name=Bytes*PerSec",
-          "attr": [ "Count" ],
-          "outputWriters": [
-            {
-              "@class": "com.googlecode.jmxtrans.model.output.GraphiteWriterFactory",
-              "port": 9999,
-              "host": "localhost",
-              "typeNames": [ "name" ],
-              "flushDelayInSeconds": 5
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-EOF
+Your name for the token is included in the list of data input names for the HTTP Event Collector.
 
-exec /docker-entrypoint.sh start-without-jmx
-```
-After you have created the file, ensure that it has execution permission by running `chmod 755 run.sh`.
+![Splunk hec data inputs page](../../images/Splunk_hec_data_inputs.png "Screen capture showing the name splunk-hec listed in the Splunk data inputs page.")
 
-### Example Dockerfile.logstash
+### Configure and deploy Logstash
+
+#### Example Dockerfile.logstash
 
 Create a Dockerfile called `Dockerfile.logstash` as follows.
 
-```
+```conf
 FROM docker.elastic.co/logstash/logstash:<required-logstash-version>
 RUN /usr/share/logstash/bin/logstash-plugin install logstash-input-graphite
 RUN rm -f /usr/share/logstash/pipeline/logstash.conf
@@ -144,19 +66,19 @@ COPY pipeline/ /usr/share/logstash/pipeline/
 COPY config/ /usr/share/logstash/config/
 ```
 
-### Example logstash.yml
+#### Example logstash.yml
 
 Create a Logstash settings file called `logstash.yml` as follows.
 
-```
+```yaml
 path.config: /usr/share/logstash/pipeline/
 ```
 
-### Example logstash.conf
+#### Example logstash.conf
 
 Create a Logstash configuration file called `logstash.conf` as follows.
 
-```
+```conf
 input {
     graphite {
         host => "localhost"
@@ -167,14 +89,15 @@ input {
 output {
     http {
         http_method => "post"
-        url => "http://<splunk-host-name-or-ip-address>:<splunk-http-event-collector-port>/services/collector/event"
+        url => "https://<splunk-host-name-or-ip-address>:<splunk-http-event-collector-port>/services/collector/event"
         headers => ["Authorization", "Splunk <splunk-http-event-collector-token>"]
         mapping => {"event" => "%{message}"}
+        ssl_verification_mode => "none" # To skip ssl verification
     }
 }
 ```
 
-### Building the Docker image
+#### Building the Docker image
 
 Build the Docker images as follows.
 
@@ -184,126 +107,167 @@ Build the Docker images as follows.
 4. Edit `logstash.conf`, and replace `<splunk-host-name-or-ip-address>` with the external Splunk Enterprise, Splunk Universal forwarder, or Splunk Cloud host name or IP address.\\
    Replace `<splunk-http-event-collector-port>` with the HTTP Event Collector port number.\\
    Replace `<splunk-http-event-collector-token>` with the HTTP Event Collector token setup on the Splunk HTTP Event Collector Data input.
-4. Verify that your cluster IP is mapped to the `mycluster.icp` parameter by checking your system's host file: `cat /etc/hosts`\\
-   If it is not, change the value to your cluster by editing your system’s host file: `sudo vi /etc/hosts`
-5. Create a local directory, and copy the certificates file from the {{site.data.reuse.icp}} master node to the local machine:\\
-  `sudo mkdir -pv /etc/docker/certs.d/mycluster.icp\:8500/`\\
-  `sudo scp root@<Cluster Master Host>:/etc/docker/certs.d/mycluster.icp\:8500/ca.crt /etc/docker/certs.d/mycluster.icp\:8500/`
-6. On macOS only, run the following command:\\
-   `sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /etc/docker/certs.d/mycluster.icp\:8500/ca.crt`
-7. Restart Docker.
-8. Log in to Docker: `docker login mycluster.icp:8500`
-9. Create the jmxtrans image: `docker build -t mycluster.icp:8500/<target-namespace>/<jmxtrans-image-name>:<image-version> -f Dockerfile.jmxtrans .`
-10. Push the image to your {{site.data.reuse.icp}} cluster Docker registry: `docker push mycluster.icp:8500/<target-namespace>/<jmxtrans-image-name>:<image-version>`
-11. Create the logstash image: `docker build -t mycluster.icp:8500/<target-namespace>/<logstash-image-name>:<image-version> -f Dockerfile.logstash .`
-12. Push the image to your {{site.data.reuse.icp}} cluster Docker registry: `docker push mycluster.icp:8500/<target-namespace>/<logstash-image-name>:<image-version>`
+5. Create the logstash image: `docker build -t <registry url>/logstash:<tag> -f Dockerfile.logstash .`
+6. Push the image to your {{site.data.reuse.ocp}} cluster Docker registry: `docker push <registry url>/logstash:<tag>`
 
+#### Example Logstash deployment
 
-### Example Kubernetes deployment file
+The following is an example of a deployment YAML file that sets up a Logstash instance.
 
-Create a pod for jmxtrans and Logstash as follows.
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+  namespace: es
+spec:
+  selector:
+    matchLabels:
+      app: logstash
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+        - name: logstash
+          image: >-
+            <registry url>/logstash:<tag>
+          ports:
+            - containerPort: 9999
+```
 
-1. Copy the following into a file called `hec.yaml`.\\
-   ```
-   apiVersion: v1
-   kind: Pod
-   metadata:
-       name: jmxtrans-broker
-       labels:
-          app: jmxtrans-broker
-   spec:
-       containers:
-       - name: logstash
-         image: <full name of logstash docker image pushed to remote registry>
-       - name: jmxtrans
-         image: <full name of jmxtrans docker image pushed to remote registry>
-         volumeMounts:
-           - name: jmx-secret-volume
-             mountPath: /etc/jmx-secret
-         env:
-         - name: JMX_USER
-           valueFrom:
-             secretKeyRef:
-               name: <release-name>-ibm-es-jmx-secret
-               key: jmx_username
-         - name: JMX_PASSWORD
-           valueFrom:
-             secretKeyRef:
-               name: <release-name>-ibm-es-jmx-secret
-               key: jmx_password
-         - name: JMX_HOST_0
-           value: <release-name>-ibm-es-kafka-broker-svc-0.<release-namespace>.svc
-         - name: JMX_HOST_1
-           value: <release-name>-ibm-es-kafka-broker-svc-1.<release-namespace>.svc
-         - name: JMX_HOST_2
-           value: <release-name>-ibm-es-kafka-broker-svc-2.<release-namespace>.svc
-         - name: SSL_TRUSTSTORE
-           value: /etc/jmx-secret/store.jks
-         - name: SSL_TRUSTSTORE_PASSWORD
-           valueFrom:
-             secretKeyRef:
-               name: <release-name>-ibm-es-jmx-secret
-               key: trust_store_password
-         - name: JAVA_OPTS
-           value: -Djavax.net.ssl.trustStore=$(SSL_TRUSTSTORE) -Djavax.net.ssl.trustStorePassword=$(SSL_TRUSTSTORE_PASSWORD)
-         # The SECONDS_BETWEEN_RUNS is the scrape frequency of the JMX values. The default value is 60 seconds. Change it to a value to suit your requirements.
-         - name: SECONDS_BETWEEN_RUNS
-           value: "15"
-       volumes:
-           - name: jmx-secret-volume
-             secret:
-               secretName: <release-name>-ibm-es-jmx-secret
-               items:
-               - key: truststore.jks
-                 path: store.jks
-   ```
-2. Create the resources in your {{site.data.reuse.icp}} cluster with the following command:\\
-   `kubectl -n <target-namespace> apply -f hec.yaml`.
+#### Example Logstash service configuration
 
-Events start appearing in Splunk after running the command.
+Add a service that adds discovery and routing to the the newly formed pods after creating the Logstash instance. The following is an example of a service that uses a selector for a Logstash pod. In this example, 9999 is the port configured in `logstash.conf` we created earlier.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: <logstash-service-name>
+  namespace: es
+  labels:
+    app.kubernetes.io/name: logstash
+spec:
+  selector:
+    app: logstash
+  labels:
+  ports:
+    - protocol: TCP
+      port: 9999
+      targetPort: 9999
+```
+
+### Configure JMX for {{site.data.reuse.short_name}}
+
+o expose the JMX port within the cluster, set the `spec.strimziOverrides.kafka.jmxOptions` value to `{}` and enable JMXTrans.
+
+Example:
+
+```yaml
+#...
+spec:
+  #...
+  strimziOverrides:
+    #...
+    kafka:
+      #...
+      jmxOptions: {}
+    #...
+```
+
+**Tip:** The JMX port can be password-protected to prevent unauthorized pods from accessing it. For more information, see [Configuring secure JMX connections](../../security/secure-jmx-connections/){:target="_blank"}.
+
+The following example shows how to configure a JMXTrans deployment in the EventStreams custom resources.
+
+```yaml
+# ...
+spec:
+  # ...
+  strimziOverrides:
+    # ...
+    jmxTrans:
+      #...
+      kafkaQueries:
+        - targetMBean: "kafka.server:type=BrokerTopicMetrics,name=*"
+          attributes: ["Count"]
+          outputs: ["standardOut", "logstash"]
+      outputDefinitions:
+        - outputType: "com.googlecode.jmxtrans.model.output.StdOutWriter"
+          name: "standardOut"
+        - outputType: "com.googlecode.jmxtrans.model.output.GraphiteWriterFactory"
+          host: "<logstash-service-name>.<namespace>.svc"
+          port: 9999
+          flushDelayInSeconds: 5
+          name: "logstash"
+```
+
+Events start appearing in Splunk after we apply the `jmxTrans` option in the custom resource. The time it takes for events to appear in the Splunk index is determined by the scrape interval on JMXTrans and the size of the receive queue on Splunk.
+
+![Splunk Search](../../images/Splunk_hec_data_inputs_search.png "Screen capture showing JMXTrans metrics being displayed in Splunk.")
 
 ### Troubleshooting
 
-If metrics are not appearing in your external Splunk, check the logs for jmxtrans and for Logstash with the following commands:
+- If metrics are not appearing in your external Splunk, run the following command to examine the logs for JMXTrans:
 
-`kubectl -n <target-namespace> get logs jmxtrans-broker -c jmxtrans`
+   `kubectl -n <target-namespace> get logs <jmxtrans-pod-name>`
 
-`kubectl -n <target-namespace> get logs jmxtrans-broker -c logstash`
+- You can change the log level for JMXTrans by setting the required granularity value in `spec.strimziOverrides.jmxTrans.logLevel`. For example:
 
-To get debug-level logs from jmxtrans, use the following steps:
 
-1. Copy the following into a file called `logback.xml`.\\
+   ```yaml
+   # ...
+   spec:
+     # ...
+     strimziOverrides:
+       # ...
+       jmxTrans:
+         #...
+         logLevel: debug
    ```
-   <configuration debug="false">
-     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-       <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
-       <encoder>
-         <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
-       </encoder>
-     </appender>
 
-     <logger name="com.googlecode.jmxtrans" level="${logLevel}"/>
 
-     <root level="info">
-       <appender-ref ref="console" />
-     </root>
-   </configuration>
+
+- To check the logs from the Splunk pod, you can view the `splunkd.log` file as follows:
+
+   `tail -f $SPLUNK_HOME/var/log/splunk/splunkd.log`
+
+- If the Splunk Operator installation fails due to error **Bundle extract size limit**, install the Splunk Operator on {{site.data.reuse.openshift}} 4.9 or later.
+
+
+- If you require additional logs and `stdout` from Logstash, edit the `logstash.conf` file and add the `stdout` output. You can also modify `logstash.yml` to boost the log level.
+
+   Example `logstash.conf` file:
+
+   ```conf
+   input {
+       http { # input plugin for HTTP and HTTPS traffic
+           port => 5044 # port for incoming requests
+           ssl => false # HTTPS traffic processing
+       }
+       graphite {
+           host => "0.0.0.0"
+           port => 9999
+           mode => "server"
+       }
+   }
+   output {
+       http {
+           http_method => "post"
+           url => "https://<splunk-host-name-or-ip-address>:<splunk-http-event-collector-port>/services/collector/raw"
+           headers => ["Authorization", "Splunk <splunk-http-event-collector-token>"]
+           format => "json"
+           ssl_verification_mode => "none"
+       }
+       stdout {}
+   }
    ```
-2. Add the file to the same directory as the `Dockerfile` and `run.sh` files.
-3. Edit the `Dockerfile` to include the `logback.xml` file, for example:\\
+
+   Example `logstash.yml` file:
+   
+   ```yaml
+   path.config: /usr/share/logstash/pipeline/
+   log.level: trace
    ```
-   FROM jmxtrans/jmxtrans
-   COPY logback.xml /usr/share/jmxtrans/conf/logback.xml
-   COPY configure.sh .
-   ENTRYPOINT [ "./configure.sh" ]
-   ```
-4. Follow the instructions for [building the docker image](#building-the-docker-image).
-5. Add the following environment variable to the `hec.yaml` file after the `env:` property:\\
-   ```
-  {% raw %}-{% endraw %} name: JMXTRANS_OPTS
-       value: -Djmxtrans.log.level=debug
-   ```
-6. Delete jmxtrans with the following command: `kubectl -n <target-namespace> delete pod jmxtrans-broker`
-7. Check that it has been deleted with the following command `kubectl -n <target-namespace> get pods`
-8. When it has been deleted, create it again with the following command: `kubectl -n <target-namespace> apply -f hec.yaml`
-9. View the logs with the following command: `kubectl -n <target-namespace> get logs jmxtrans-broker -c jmxtrans`
