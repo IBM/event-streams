@@ -42,10 +42,62 @@ In addition to zone awareness, Kafka rack awareness helps to spread the Kafka br
 
 To set up Kafka rack awareness, Kafka brokers require a cluster role to provide permission to view which Kubernetes node they are running on.
 
-Before applying [Kafka rack awareness](../configuring/#applying-kafka-rack-awareness) to an {{site.data.reuse.short_name}} installation, apply a cluster role:
+Before applying [Kafka rack awareness](../configuring/#applying-kafka-rack-awareness) to an {{site.data.reuse.short_name}} installation, apply a cluster role and a cluster role binding:
 
-1. Download the cluster role YAML file from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/blob/master/cr-examples/cluster-role/eventstreams-kafka-broker.yaml){:target="_blank"}.
-2. {{site.data.reuse.openshift_cli_login}}
-2. Apply the cluster role by using the following command and the downloaded file:
+1. Create a file called `eventstreams-kafka-broker.yaml` and copy the following YAML content to create the cluster role:
+
+   ```
+   kind: ClusterRole
+   apiVersion: rbac.authorization.k8s.io/v1
+   metadata:
+   name: eventstreams-kafka-broker
+   labels:
+      app: eventstreams
+   rules:
+   - verbs:
+         - get
+         - create
+         - watch
+         - update
+         - delete
+         - list
+      apiGroups:
+         - rbac.authorization.k8s.io
+      resources:
+         - clusterrolebindings
+   - verbs:
+         - get
+         - create
+         - watch
+         - update
+         - delete
+         - list
+      apiGroups:
+         - ""
+      resources:
+         - nodes
+      ```
+2. Apply the cluster role by using the following command: 
 
    `oc apply -f eventstreams-kafka-broker.yaml`
+
+3. Create a file called `eventstreams-kafka-broker-crb.yaml` and copy the following YAML content to create the cluster role binding:
+
+   ```
+   kind: ClusterRoleBinding
+   apiVersion: rbac.authorization.k8s.io/v1
+   metadata:
+     name: eventstreams-kafka-broker
+   subjects:
+   - kind: ServiceAccount
+     name: eventstreams-cluster-operator-namespaced
+     namespace: <namespace>
+   roleRef:
+     apiGroup: rbac.authorization.k8s.io
+     kind: ClusterRole
+     name: eventstreams-kafka-broker
+   ```
+
+4. Apply the cluster role  binding by using the following command:
+
+   `oc apply -f eventstreams-kafka-broker-crb.yaml`

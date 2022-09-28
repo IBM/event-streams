@@ -13,8 +13,8 @@ The following tutorial shows an example of how to set up alert notifications to 
 
 ## Prerequisites
 
-- Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 2019.1.1 installed on {{site.data.reuse.icp}} 3.1.1, using the default master port 8443.
-- Ensure you have [Slack](https://slack.com/){:target="_blank"} installed and ready to use. This tutorial is based on Slack version 3.3.8.
+- Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 11.0.2 installed on {{site.data.reuse.openshift}} 4.8.43.
+- Ensure you have [Slack](https://slack.com/){:target="_blank"} installed and ready to use. This tutorial is based on Slack version 4.28.171.
 - You need to be a Workplace Administrator to add apps to a Slack channel.
 
 ## Preparing Slack
@@ -31,265 +31,167 @@ To send notifications from {{site.data.reuse.short_name}} to your Slack channel,
 
 For more information about incoming webhooks in Slack, see the [Slack documentation](https://api.slack.com/incoming-webhooks){:target="_blank"}.
 
-## Selecting the metric to monitor
+## Installing the Prometheus server
 
-To retrieve a list of available metrics, use an HTTP GET request on your ICP cluster URL as follows:
+In this tutorial, we will use the Prometheus Operator to launch the Prometheus server and install Prometheus Alertmanager. The Prometheus Operator will initially be implemented in the same namespace as {{site.data.reuse.short_name}}. The following resources are required to launch a Prometheus server after installing the Prometheus Operator.
 
-1. Log in to your IBM Cloud Private cluster management console from a supported web browser by using the URL `https://<Cluster Master Host>:8443`.
-2. Use the following request: `https://<Cluster Master Host>:8443/prometheus/api/v1/label/__name__/values`\\
-   The list of available metrics is displayed.
-3. Select a metric to monitor.
+- ClusterRole
+- ServiceAccount
+- ClusterRoleBinding
+- Prometheus
 
-For example, to test the triggering of alerts, you can monitor the total number of partitions for all topics by using the `kafka_server_replicamanager_partitioncount_value` metric. When topics are created, this metric can trigger notifications.
+The YAML file for installing these resources is available on [GitHub](https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/prometheus-install/prometheus.yaml){:target="_blank"}.
 
-For production environments, a good metric to monitor is the number of under-replicated partitions as it tells you about potential problems with your Kafka cluster, such as load or network problems where the cluster becomes overloaded and followers are not able to catch up on leaders. Under-replicated partitions might be a temporary problem, but if it continues for longer, it probably requires urgent attention. An example is to set up a notification trigger to your Slack channel if the number of under-replicated partitions is greater than 0 for more than a minute. You can do this with the `kafka_server_replicamanager_underreplicatedpartitions_value` metric.
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus-server
+  labels:
+    app: strimzi
+rules:
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - nodes/proxy
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups:
+      - extensions
+    resources:
+      - ingresses
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs: ["/metrics"]
+    verbs: ["get"]
 
-The examples in this tutorial show you how to set up monitoring for both of these metrics, with the purpose of testing notification triggers, and also to have a production environment example.
-
-**Note:** Not all of the metrics that Kafka uses are published to Prometheus by default. The metrics that are published are controlled by a ConfigMap. You can publish metrics by adding them to the ConfigMap.
-
-For information about the different metrics, see [Monitoring Kafka](https://kafka.apache.org/documentation/#monitoring){:target="_blank"}.
-
-## Setting the alert rule
-
-To set up the alert rule and define the trigger criteria, use the `monitoring-prometheus-alertrules` ConfigMap.
-
-By default, the list of rules is empty. See the `data` section of the ConfigMap, for example:
-
-```
-user$ kubectl get configmap -n kube-system monitoring-prometheus-alertrules -o yaml
-
+---
 apiVersion: v1
-data:
-  alert.rules: ""
-kind: ConfigMap
+kind: ServiceAccount
 metadata:
-  creationTimestamp: 2019-04-05T13:07:48Z
+  name: prometheus-server
   labels:
-    app: monitoring-prometheus
-    chart: ibm-icpmonitoring-1.2.0
-    component: prometheus
-    heritage: Tiller
-    release: monitoring
-  name: monitoring-prometheus-alertrules
-  namespace: kube-system
-  resourceVersion: "4564"
-  selfLink: /api/v1/namespaces/kube-system/configmaps/monitoring-prometheus-alertrules
-  uid: a87b5766-c89f-11e8-9f94-00000a3304c0
-```
+    app: strimzi
 
-### Example test setup
-
-As mentioned earlier, to test the triggering of alerts, you can monitor the total number of partitions for all topics by using the `kafka_server_replicamanager_partitioncount_value` metric.
-
-Define an alert rule that creates a notification if the number of partitions increases. To achieve this, add a new rule for `kafka_server_replicamanager_partitioncount_value`, and set the trigger conditions in the `data` section, for example:
-
-**Note:** In this example, we are setting a threshold value of 50 as the built-in consumer-offsets topic has 50 partitions by default already, and this topic is automatically created the first time a consumer application connects to the cluster. We will create a topic later with 10 partitions to [test](#testing) the firing of the alert and the subsequent notification to the Slack channel.
-
-```
-{% raw %}user$ kubectl edit configmap -n kube-system monitoring-prometheus-alertrules
-
-apiVersion: v1
-data:
-  sample.rules: |-
-    groups:
-    - name: alert.rules
-      #
-      # Each of the alerts you want to create will be listed here
-      rules:
-      # Posts an alert if the number of partitions increases
-      - alert: PartitionCount
-        expr: kafka_server_replicamanager_partitioncount_value > 50
-        for: 10s
-        labels:
-          # Labels should match the alert manager so that it is received by the Slack hook
-          severity: critical
-        # The contents of the Slack messages that are posted are defined here
-        annotations:
-          identifier: "Partition count"
-          description: "There are {{ $value }} partition(s) reported by broker {{ $labels.kafka }}"
-kind: ConfigMap
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: 2019-04-05T13:07:48Z
+  name: prometheus-server
   labels:
-    app: monitoring-prometheus
-    chart: ibm-icpmonitoring-1.2.0
-    component: prometheus
-    heritage: Tiller
-    release: monitoring
-  name: monitoring-prometheus-alertrules
-  namespace: kube-system
-  resourceVersion: "84156"
-  selfLink: /api/v1/namespaces/kube-system/configmaps/monitoring-prometheus-alertrules
-  uid: a87b5766-c89f-11e8-9f94-00000a3304c0{% endraw %}
-```
+    app: strimzi
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-server
+subjects:
+  - kind: ServiceAccount
+    name: prometheus-server
+    namespace: <namespace>
 
-**Important:** As noted in the prerequisites, this tutorial is based on {{site.data.reuse.icp}} 3.1.1. Setting up alert rules is different if you are using {{site.data.reuse.icp}} 3.1.2 or later, as each alert rule is a dedicated Kubernetes resource instead of being defined in a ConfigMap.
-
-This means that instead of adding alert rule entries to a ConfigMap, you create a separate alert rule resource for each alert you want to enable.
-
-In addition, the alert rules don't need to be in the `kube-system` namespace, they can be added to the namespace where your release is deployed. This also means you don't have to be a Cluster administrator to add alert rules.
-
-For example, to create the rule by using a dedicated alert rule, you can save it to a file as follows:
-
-```
-{% raw %}apiVersion: monitoringcontroller.cloud.ibm.com/v1
-kind: AlertRule
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
 metadata:
+  name: prometheus
   labels:
-    app: monitoring-prometheus
-    chart: ibm-icpmonitoring-1.4.0
-    component: prometheus
-    heritage: Tiller
-    release: RELEASENAME
-  name: partition-count
-  namespace: NAMESPACE
+    app: strimzi
 spec:
-  data: |-
-    groups:
-      - name: PartitionCount
-        rules:
-          - alert: PartitionCount
-            expr: kafka_server_replicamanager_partitioncount_value > 50
-            for: 10s
-            labels:
-              severity: critical
-            annotations:
-              identifier: 'Partition count'
-              description: 'There are {{ $value }} partition(s) reported by broker {{ $labels.kafka }}'
-  enabled: true{% endraw %}
+  replicas: 1
+  serviceAccountName: prometheus-server
+  podMonitorSelector:
+    matchLabels:
+      app: strimzi
+  serviceMonitorSelector: {}
+  resources:
+    requests:
+      memory: 400Mi
+  enableAdminAPI: false
+  ruleSelector:
+    matchLabels:
+      role: alert-rules
+      app: strimzi
+  alerting:
+    alertmanagers:
+    - namespace: <namespace>
+      name: alertmanager
+      port: alertmanager
 ```
 
-To review your alert rules set up this way, use the `kubectl get alertrules` command, for example:
+Replace `<namespace>` with the namespace where your {{site.data.reuse.short_name}} instance is installed. After applying this YAML, it will bring up a Prometheus server. You can access the Prometheus server by applying a route that points to the `prometheus-operated` service.
 
-```
-$ kubectl get alertrules
-NAME                          ENABLED   AGE   CHART                     RELEASE         ERRORS
-partition-count               true      1h    ibm-icpmonitoring-1.4.0   es-demo
-```
+The following is an example route to access the Prometheus server.
 
-### Example production setup
-
-As mentioned earlier, a good metric to monitor in production environments is the metric `kafka_server_replicamanager_underreplicatedpartitions_value`, for which we want to define an alert rule that creates a notification if the number of under-replicated partitions is greater than 0 for more than a minute. To achieve this, add a new rule for `kafka_server_replicamanager_underreplicatedpartitions_value`, and set the trigger conditions in the `data` section, for example:
-
-```
-user$ kubectl edit configmap -n kube-system monitoring-prometheus-alertrules
-
-apiVersion: v1
-data:
-  sample.rules: |-
-    groups:
-    - name: alert.rules
-      #
-      # Each of the alerts you want to create will be listed here
-      rules:
-      # Posts an alert if there are any under-replicated partitions
-      #  for longer than a minute
-      - alert: under_replicated_partitions
-        expr: kafka_server_replicamanager_underreplicatedpartitions_value > 0
-        for: 1m
-        labels:
-          # Labels should match the alert manager so that it is received by the Slack hook
-          severity: critical
-        # The contents of the Slack messages that are posted are defined here
-        annotations:
-          identifier: "Under-replicated partitions"
-          description: "There are {% raw %}{{ $value }}{% endraw %} under-replicated partition(s) reported by broker {% raw %}{{ $labels.kafka }}{% endraw %}"
-kind: ConfigMap
+```yaml
+kind: Route
+apiVersion: route.openshift.io/v1
 metadata:
-  creationTimestamp: 2019-04-05T13:07:48Z
-  labels:
-    app: monitoring-prometheus
-    chart: ibm-icpmonitoring-1.2.0
-    component: prometheus
-    heritage: Tiller
-    release: monitoring
-  name: monitoring-prometheus-alertrules
-  namespace: kube-system
-  resourceVersion: "84156"
-  selfLink: /api/v1/namespaces/kube-system/configmaps/monitoring-prometheus-alertrules
-  uid: a87b5766-c89f-11e8-9f94-00000a3304c0
-```
-
-**Important:** As noted in the prerequisites, this tutorial is based on {{site.data.reuse.icp}} 3.1.1. Setting up alert rules is different if you are using {{site.data.reuse.icp}} 3.1.2 or later, as each alert rule is a dedicated Kubernetes resource instead of being defined in a ConfigMap.
-
-This means that instead of adding alert rule entries to a ConfigMap, you create a separate alert rule resource for each alert you want to enable.
-
-In addition, the alert rules don't need to be in the `kube-system` namespace, they can be added to the namespace where your release is deployed. This also means you don't have to be a Cluster administrator to add alert rules.
-
-For example, to create the rule by using a dedicated alert rule, you can save it to a file as follows:
-
-```
-{% raw %}apiVersion: monitoringcontroller.cloud.ibm.com/v1
-kind: AlertRule
-metadata:
-  labels:
-    app: monitoring-prometheus
-    chart: ibm-icpmonitoring-1.4.0
-    component: prometheus
-    heritage: Tiller
-    release: RELEASENAME
-  name: under-replicated-partitions
-  namespace: NAMESPACE
+  name: prometheus
+  namespace: <namespace>
 spec:
-  data: |-
-    groups:
-      - name: UnderReplicatedPartitions
-        rules:
-          - alert: UnderReplicatedPartitions
-            expr: kafka_server_replicamanager_underreplicatedpartitions_value > 0
-            for: 1m
-            labels:
-              severity: critical
-            annotations:
-              identifier: 'Under-replicated partitions'
-              description: 'There are {{ $value }} under-replicated partition(s) reported by broker {{ $labels.kafka }}'
-  enabled: true{% endraw %}
+  path: /
+  to:
+    kind: Service
+    name: prometheus-operated
+    weight: 100
+  port:
+    targetPort: web
 ```
 
-To review your alert rules set up this way, use the `kubectl get alertrules` command, for example:
+## Installing Alertmanager
 
-```
-$ kubectl get alertrules
-NAME                          ENABLED   AGE   CHART                     RELEASE         ERRORS
-under-replicated-partitions   true      1h    ibm-icpmonitoring-1.4.0   es-prod
-```
+Alertmanager handles alerts sent by client applications such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integration, for example, email, PagerDuty, or Slack. It also takes care of silencing and inhibiting alerts. For more information about Prometheus Alertmanager, see the [Prometheus documentation](https://prometheus.io/docs/alerting/latest/configuration/){:target="_blank"}.
 
-## Defining the alert destination
+We will deploy an Alertmanager service in order to create a route to the Alertmanager user interface. The following example deploys an Alertmanager with port 9093 configured for the service.
 
-To define where to send the notifications triggered by the alert rule, specify Slack as a receiver by adding details about your Slack channel and the webhook you copied earlier to the `monitoring-prometheus-alertmanager` ConfigMap. For more information about Prometheus Alertmanager, see the [Prometheus documentation](https://prometheus.io/docs/alerting/configuration/){:target="_blank"}.
-
-By default, the list of receivers is empty. See the `data` section of the ConfigMap, for example:
-
-```
-user$ kubectl get configmap -n kube-system monitoring-prometheus-alertmanager -o yaml
-
-apiVersion: v1
-data:
-  alertmanager.yml: |-
-    global:
-    receivers:
-      - name: default-receiver
-    route:
-      group_wait: 10s
-      group_interval: 5m
-      receiver: default-receiver
-      repeat_interval: 3h
-kind: ConfigMap
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
 metadata:
-  creationTimestamp: 2019-04-05T13:07:48Z
+  name: alertmanager
   labels:
-    app: monitoring-prometheus
-    chart: ibm-icpmonitoring-1.2.0
-    component: alertmanager
-    heritage: Tiller
-    release: monitoring
-  name: monitoring-prometheus-alertmanager
-  namespace: kube-system
-  resourceVersion: "4565"
-  selfLink: /api/v1/namespaces/kube-system/configmaps/monitoring-prometheus-alertmanager
-  uid: a87bdb44-c89f-11e8-9f94-00000a3304c0
+    app: strimzi
+spec:
+  replicas: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager
+  labels:
+    app: strimzi
+spec:
+  ports:
+    - name: alertmanager
+      port: 9093
+      targetPort: 9093
+      protocol: TCP
+  selector:
+    alertmanager: alertmanager
+  type: ClusterIP
 ```
+
+The following route provides access to the Alertmanager user interface.
+
+```yaml
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: alertmanager
+  namespace: <namespace>
+spec:
+  path: /
+  to:
+    kind: Service
+    name: alertmanager-operated
+    weight: 100
+  port:
+    targetPort: web
+  wildcardPolicy: None
+```
+
+## Slack Integration
 
 Define the Slack channel as the receiver using the incoming webhook you copied earlier, and also set up the notification details such as the channel to post to, the content format, and criteria for the events to send to Slack. Settings to configure include the following:
 
@@ -304,88 +206,516 @@ The content for the posts can be customized, see the following [blog](https://me
 
 For example, to set up Slack notifications for your alert rule created earlier:
 
-```
-user$ kubectl edit configmap -n kube-system monitoring-prometheus-alertmanager
+```yaml
+{% raw %}
 apiVersion: v1
-data:
-  alertmanager.yml: |-
-    global:
-      # This is the URL for the Incoming Webhook you created in Slack
-      slack_api_url:  https://hooks.slack.com/services/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
-    receivers:
-      - name: default-receiver
-        #
-        # Adding a Slack channel integration to the default Prometheus receiver
-        #  see https://prometheus.io/docs/alerting/configuration/#slack_config
-        #  for details about the values to enter
-        slack_configs:
-        - send_resolved: true
-
-          # The name of the Slack channel that alerts should be posted to
-          channel: "#ibm-eventstreams-demo"
-
-          # The username to post alerts as
-          username: "IBM Event Streams"
-
-          # An icon for posts in Slack
-          icon_url: https://developer.ibm.com/messaging/wp-content/uploads/sites/18/2018/09/icon_dev_32_24x24.png
-
-          #
-          # The content for posts to Slack when alert conditions are fired
-          # Improves on the formatting from the default, with support for handling
-          #  alerts containing multiple events.
-          # (Modified from the examples in
-          #   https://medium.com/quiq-blog/better-slack-alerts-from-prometheus-49125c8c672b)
-          title: |-{% raw %}
-            [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if or (and (eq (len .Alerts.Firing) 1) (eq (len .Alerts.Resolved) 0)) (and (eq (len .Alerts.Firing) 0) (eq (len .Alerts.Resolved) 1)) }}{{ range .Alerts.Firing }} @ {{ .Annotations.identifier }}{{ end }}{{ range .Alerts.Resolved }} @ {{ .Annotations.identifier }}{{ end }}{{ end }}
-          text: |-
-            {{ if or (and (eq (len .Alerts.Firing) 1) (eq (len .Alerts.Resolved) 0)) (and (eq (len .Alerts.Firing) 0) (eq (len .Alerts.Resolved) 1)) }}
-            {{ range .Alerts.Firing }}{{ .Annotations.description }}{{ end }}{{ range .Alerts.Resolved }}{{ .Annotations.description }}{{ end }}
-            {{ else }}
-            {{ if gt (len .Alerts.Firing) 0 }}
-            *Alerts Firing:*
-            {{ range .Alerts.Firing }}- {{ .Annotations.identifier }}: {{ .Annotations.description }}
-            {{ end }}{{ end }}
-            {{ if gt (len .Alerts.Resolved) 0 }}
-            *Alerts Resolved:*
-            {{ range .Alerts.Resolved }}- {{ .Annotations.identifier }}: {{ .Annotations.description }}
-            {{ end }}{{ end }}
-            {{ end }}{% endraw %}
-    route:
-      group_wait: 10s
-      group_interval: 5m
-      receiver: default-receiver
-      repeat_interval: 3h
-      #
-      # The criteria for events that should go to Slack
-      routes:
-      - match:
-          severity: critical
-        receiver: default-receiver
-kind: ConfigMap
+kind: Secret
 metadata:
-  creationTimestamp: 2019-04-05T13:07:48Z
-  labels:
-    app: monitoring-prometheus
-    chart: ibm-icpmonitoring-1.2.0
-    component: alertmanager
-    heritage: Tiller
-    release: monitoring
-  name: monitoring-prometheus-alertmanager
-  namespace: kube-system
-  resourceVersion: "4565"
-  selfLink: /api/v1/namespaces/kube-system/configmaps/monitoring-prometheus-alertmanager
-  uid: a87bdb44-c89f-11e8-9f94-00000a3304c0
+  name: alertmanager-alertmanager
+type: Opaque
+stringData:
+  alertmanager.yaml: |
+    global:
+      slack_api_url: <slack_api_url>
+    route:
+      receiver: slack
+    receivers:
+    - name: slack
+      slack_configs:
+      - channel: "<channel>"
+        # The username to post alerts as
+        username: "<username>"
+
+        # An icon for posts in Slack
+        icon_url: https://ibm.github.io/event-streams/images/es_icon_light.png
+
+        #
+        # The content for posts to Slack when alert conditions are fired
+        # Improves on the formatting from the default, with support for handling
+        #  alerts containing multiple events.
+        # (Modified from the examples in
+        #   https://medium.com/quiq-blog/better-slack-alerts-from-prometheus-49125c8c672b)
+        title: |-{% raw %}
+          [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if or (and (eq (len .Alerts.Firing) 1) (eq (len .Alerts.Resolved) 0)) (and (eq (len .Alerts.Firing) 0) (eq (len .Alerts.Resolved) 1)) }}{{ range .Alerts.Firing }} @ {{ .Annotations.identifier }}{{ end }}{{ range .Alerts.Resolved }} @ {{ .Annotations.identifier }}{{ end }}{{ end }}
+        text: |-
+          {{ if or (and (eq (len .Alerts.Firing) 1) (eq (len .Alerts.Resolved) 0)) (and (eq (len .Alerts.Firing) 0) (eq (len .Alerts.Resolved) 1)) }}
+          {{ range .Alerts.Firing }}{{ .Annotations.description }}{{ end }}{{ range .Alerts.Resolved }}{{ .Annotations.description }}{{ end }}
+          {{ else }}
+          {{ if gt (len .Alerts.Firing) 0 }}
+          *Alerts Firing:*
+          {{ range .Alerts.Firing }}- {{ .Annotations.identifier }}: {{ .Annotations.description }}
+          {{ end }}{{ end }}
+          {{ if gt (len .Alerts.Resolved) 0 }}
+          *Alerts Resolved:*
+          {{ range .Alerts.Resolved }}- {{ .Annotations.identifier }}: {{ .Annotations.description }}
+          {{ end }}{{ end }}
+          {{ end }}
+        send_resolved: true
+        {% endraw %}
 ```
 
-To check that the new alert is set up, use the Prometheus UI as follows:
+## Selecting the metrics to monitor
 
-1. Log in to your IBM Cloud Private cluster management console from a supported web browser by using the URL `https://<Cluster Master Host>:8443`.
-2. Go to the Prometheus UI at `https://<Cluster Master Host>:8443/prometheus`, and click the **Alerts** tab to see the active alerts. You can also go to **Status > Rules** to view the defined alert rules.
+In the `EventStreams` custom resource, you can configure a ConfigMap path as the `metricsConfig`. In the configuration map, you can specify the metrics you want to monitor.
 
-For example:
+The following is an example of configuring the `metricsConfig` in the `EventStreams` custom resource:
+
+```yaml
+metricsConfig:
+  type: jmxPrometheusExporter
+  valueFrom:
+    configMapKeyRef:
+      key: kafka-metrics-config.yaml
+      name: metrics-config
+```
+
+The metrics are exported by means of the JMX Prometheus Exporter. For more information about the exporter, see the following [Github page](https://github.com/prometheus/jmx_exporter){:target="_blank"}.
+
+The following is an example of various metrics that can be collected from both ZooKeeper and Kafka.
+
+```yaml
+{% raw %}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kafka-metrics
+  labels:
+    app: strimzi
+data:
+  kafka-metrics-config.yaml: |
+    lowercaseOutputName: true
+    rules:
+    # Special cases and very specific rules
+    - pattern: kafka.server<type=(.+), name=(.+), clientId=(.+), topic=(.+), partition=(.*)><>Value
+      name: kafka_server_$1_$2
+      type: GAUGE
+      labels:
+       clientId: "$3"
+       topic: "$4"
+       partition: "$5"
+    - pattern: kafka.server<type=(.+), partition=(.+)><>Value
+      name: kafka_server_$1_partitioncount
+      type: GAUGE
+      labels:
+       partition: "$1"
+    - pattern: kafka.server<type=(.+), name=(.+), clientId=(.+), brokerHost=(.+), brokerPort=(.+)><>Value
+      name: kafka_server_$1_$2
+      type: GAUGE
+      labels:
+       clientId: "$3"
+       broker: "$4:$5"
+    - pattern: kafka.server<type=(.+), cipher=(.+), protocol=(.+), listener=(.+), networkProcessor=(.+)><>connections
+      name: kafka_server_$1_connections_tls_info
+      type: GAUGE
+      labels:
+        cipher: "$2"
+        protocol: "$3"
+        listener: "$4"
+        networkProcessor: "$5"
+    - pattern: kafka.server<type=(.+), clientSoftwareName=(.+), clientSoftwareVersion=(.+), listener=(.+), networkProcessor=(.+)><>connections
+      name: kafka_server_$1_connections_software
+      type: GAUGE
+      labels:
+        clientSoftwareName: "$2"
+        clientSoftwareVersion: "$3"
+        listener: "$4"
+        networkProcessor: "$5"
+    - pattern: "kafka.server<type=(.+), listener=(.+), networkProcessor=(.+)><>(.+):"
+      name: kafka_server_$1_$4
+      type: GAUGE
+      labels:
+       listener: "$2"
+       networkProcessor: "$3"
+    - pattern: kafka.server<type=(.+), listener=(.+), networkProcessor=(.+)><>(.+)
+      name: kafka_server_$1_$4
+      type: GAUGE
+      labels:
+       listener: "$2"
+       networkProcessor: "$3"
+    # Some percent metrics use MeanRate attribute
+    # Ex) kafka.server<type=(KafkaRequestHandlerPool), name=(RequestHandlerAvgIdlePercent)><>MeanRate
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)Percent\w*><>MeanRate
+      name: kafka_$1_$2_$3_percent
+      type: GAUGE
+    # Generic gauges for percents
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)Percent\w*><>Value
+      name: kafka_$1_$2_$3_percent
+      type: GAUGE
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)Percent\w*, (.+)=(.+)><>Value
+      name: kafka_$1_$2_$3_percent
+      type: GAUGE
+      labels:
+        "$4": "$5"
+    # Generic per-second counters with 0-2 key/value pairs
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)PerSec\w*, (.+)=(.+), (.+)=(.+)><>Count
+      name: kafka_$1_$2_$3_total
+      type: COUNTER
+      labels:
+        "$4": "$5"
+        "$6": "$7"
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)PerSec\w*, (.+)=(.+)><>Count
+      name: kafka_$1_$2_$3_total
+      type: COUNTER
+      labels:
+        "$4": "$5"
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)PerSec\w*><>Count
+      name: kafka_$1_$2_$3_total
+      type: COUNTER
+    # Generic gauges with 0-2 key/value pairs
+    - pattern: kafka.(\w+)<type=(.+), name=(.+), (.+)=(.+), (.+)=(.+)><>Value
+      name: kafka_$1_$2_$3
+      type: GAUGE
+      labels:
+        "$4": "$5"
+        "$6": "$7"
+    - pattern: kafka.(\w+)<type=(.+), name=(.+), (.+)=(.+)><>Value
+      name: kafka_$1_$2_$3
+      type: GAUGE
+      labels:
+        "$4": "$5"
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)><>Value
+      name: kafka_$1_$2_$3
+      type: GAUGE
+    # Emulate Prometheus 'Summary' metrics for the exported 'Histogram's.
+    # Note that these are missing the '_sum' metric!
+    - pattern: kafka.(\w+)<type=(.+), name=(.+), (.+)=(.+), (.+)=(.+)><>Count
+      name: kafka_$1_$2_$3_count
+      type: COUNTER
+      labels:
+        "$4": "$5"
+        "$6": "$7"
+    - pattern: kafka.(\w+)<type=(.+), name=(.+), (.+)=(.*), (.+)=(.+)><>(\d+)thPercentile
+      name: kafka_$1_$2_$3
+      type: GAUGE
+      labels:
+        "$4": "$5"
+        "$6": "$7"
+        quantile: "0.$8"
+    - pattern: kafka.(\w+)<type=(.+), name=(.+), (.+)=(.+)><>Count
+      name: kafka_$1_$2_$3_count
+      type: COUNTER
+      labels:
+        "$4": "$5"
+    - pattern: kafka.(\w+)<type=(.+), name=(.+), (.+)=(.*)><>(\d+)thPercentile
+      name: kafka_$1_$2_$3
+      type: GAUGE
+      labels:
+        "$4": "$5"
+        quantile: "0.$6"
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)><>Count
+      name: kafka_$1_$2_$3_count
+      type: COUNTER
+    - pattern: kafka.(\w+)<type=(.+), name=(.+)><>(\d+)thPercentile
+      name: kafka_$1_$2_$3
+      type: GAUGE
+      labels:
+        quantile: "0.$4"
+  zookeeper-metrics-config.yaml: |
+    lowercaseOutputName: true
+    rules:
+    # replicated Zookeeper
+    - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+)><>(\\w+)"
+      name: "zookeeper_$2"
+      type: GAUGE
+    - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+), name1=replica.(\\d+)><>(\\w+)"
+      name: "zookeeper_$3"
+      type: GAUGE
+      labels:
+        replicaId: "$2"
+    - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+), name1=replica.(\\d+), name2=(\\w+)><>(Packets\\w+)"
+      name: "zookeeper_$4"
+      type: COUNTER
+      labels:
+        replicaId: "$2"
+        memberType: "$3"
+    - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+), name1=replica.(\\d+), name2=(\\w+)><>(\\w+)"
+      name: "zookeeper_$4"
+      type: GAUGE
+      labels:
+        replicaId: "$2"
+        memberType: "$3"
+    - pattern: "org.apache.ZooKeeperService<name0=ReplicatedServer_id(\\d+), name1=replica.(\\d+), name2=(\\w+), name3=(\\w+)><>(\\w+)"
+      name: "zookeeper_$4_$5"
+      type: GAUGE
+      labels:
+        replicaId: "$2"
+        memberType: "$3"{% endraw %}
+```
+
+For example, to test the triggering of alerts, you can monitor the total number of partitions for all topics by using the `kafka_server_replicamanager_partitioncount_value` metric. When topics are created, this metric can trigger notifications.
+
+For production environments, a good metric to monitor is the number of under-replicated partitions as it tells you about potential problems with your Kafka cluster, such as load or network problems where the cluster becomes overloaded and followers are not able to catch up on leaders. Under-replicated partitions might be a temporary problem, but if it continues for longer, it probably requires urgent attention. An example is to set up a notification trigger to your Slack channel if the number of under-replicated partitions is greater than 0 for more than a minute. You can do this with the `kafka_server_replicamanager_underreplicatedpartitions_value` metric.
+
+The examples in this tutorial show you how to set up monitoring for a number of metrics, with the purpose of testing notification triggers, and also to have a production environment example.
+
+**Note:** Not all of the metrics that Kafka uses are published to Prometheus by default. The metrics that are published are controlled by a ConfigMap. You can publish metrics by adding them to the ConfigMap.
+
+For information about the different metrics, see [Monitoring Kafka](https://kafka.apache.org/documentation/#monitoring){:target="_blank"}.
+
+## Setting the alert rule
+
+To set up the alert rule and define the trigger criteria, use the `PrometheusRule` custom resource.
+
+The following YAML configuration will configure Prometheus rules to deliver various alerts to Slack; for example: `The zookeeper is running out of free storage space` or `The consumer group lag is too great`.
+
+```yaml
+{% raw %}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    role: alert-rules
+    app: strimzi
+  name: prometheus-k8s-rules
+spec:
+  groups:
+  - name: kafka
+    rules:
+    - alert: KafkaRunningOutOfSpace
+      expr: kubelet_volume_stats_available_bytes{persistentvolumeclaim=~"data(-[0-9]+)?-(.+)-kafka-[0-9]+"} * 100 / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~"data(-[0-9]+)?-(.+)-kafka-[0-9]+"} < 15
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Kafka is running out of free disk space'
+        description: 'There are only {{ $value }} percent available at {{ $labels.persistentvolumeclaim }} PVC'
+    - alert: UnderReplicatedPartitions
+      expr: kafka_server_replicamanager_underreplicatedpartitions > 0
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Kafka under replicated partitions'
+        description: 'There are {{ $value }} under replicated partitions on {{ $labels.kubernetes_pod_name }}'
+    - alert: AbnormalControllerState
+      expr: sum(kafka_controller_kafkacontroller_activecontrollercount) by (strimzi_io_name) != 1
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Kafka abnormal controller state'
+        description: 'There are {{ $value }} active controllers in the cluster'
+    - alert: OfflinePartitions
+      expr: sum(kafka_controller_kafkacontroller_offlinepartitionscount) > 0
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Kafka offline partitions'
+        description: 'One or more partitions have no leader'
+    - alert: UnderMinIsrPartitionCount
+      expr: kafka_server_replicamanager_underminisrpartitioncount > 0
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Kafka under min ISR partitions'
+        description: 'There are {{ $value }} partitions under the min ISR on {{ $labels.kubernetes_pod_name }}'
+    - alert: OfflineLogDirectoryCount
+      expr: kafka_log_logmanager_offlinelogdirectorycount > 0
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Kafka offline log directories'
+        description: 'There are {{ $value }} offline log directories on {{ $labels.kubernetes_pod_name }}'
+    - alert: ScrapeProblem
+      expr: up{kubernetes_namespace!~"openshift-.+",kubernetes_pod_name=~".+-kafka-[0-9]+"} == 0
+      for: 3m
+      labels:
+        severity: major
+      annotations:
+        summary: 'Prometheus unable to scrape metrics from {{ $labels.kubernetes_pod_name }}/{{ $labels.instance }}'
+        description: 'Prometheus was unable to scrape metrics from {{ $labels.kubernetes_pod_name }}/{{ $labels.instance }} for more than 3 minutes'
+    - alert: ClusterOperatorContainerDown
+      expr: count((container_last_seen{container="strimzi-cluster-operator"} > (time() - 90))) < 1 or absent(container_last_seen{container="strimzi-cluster-operator"})
+      for: 1m
+      labels:
+        severity: major
+      annotations:
+        summary: 'Cluster Operator down'
+        description: 'The Cluster Operator has been down for longer than 90 seconds'
+    - alert: KafkaBrokerContainersDown
+      expr: absent(container_last_seen{container="kafka",pod=~".+-kafka-[0-9]+"})
+      for: 3m
+      labels:
+        severity: major
+      annotations:
+        summary: 'All `kafka` containers down or in CrashLookBackOff status'
+        description: 'All `kafka` containers have been down or in CrashLookBackOff status for 3 minutes'
+    - alert: KafkaContainerRestartedInTheLast5Minutes
+      expr: count(count_over_time(container_last_seen{container="kafka"}[5m])) > 2 * count(container_last_seen{container="kafka",pod=~".+-kafka-[0-9]+"})
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'One or more Kafka containers restarted too often'
+        description: 'One or more Kafka containers were restarted too often within the last 5 minutes'
+    - alert: KafkaUnderreplicatedPartitions
+      expr: sum(kafka_server_replicamanager_underreplicatedpartitions_value) by (job) > 0
+      labels:
+        severity: warning
+      annotations:
+        summary: Kafka cluster {{$labels.job}} has underreplicated partitions
+        description: The Kafka cluster {{$labels.job}} has {{$value}} underreplicated partitions
+    - alert: KafkaOfflinePartitions
+      expr: sum(kafka_server_replicamanager_underreplicatedpartitions_value) by (job) > 0
+      labels:
+        severity: critical
+      annotations:
+        summary: Kafka cluster {{$labels.job}} has offline partitions
+        description: The Kafka cluster {{$labels.job}} has {{$value}} offline partitions
+  - name: zookeeper
+    rules:
+    - alert: AvgRequestLatency
+      expr: zookeeper_avgrequestlatency > 10
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Zookeeper average request latency'
+        description: 'The average request latency is {{ $value }} on {{ $labels.kubernetes_pod_name }}'
+    - alert: OutstandingRequests
+      expr: zookeeper_outstandingrequests > 10
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Zookeeper outstanding requests'
+        description: 'There are {{ $value }} outstanding requests on {{ $labels.kubernetes_pod_name }}'
+    - alert: ZookeeperRunningOutOfSpace
+      expr: kubelet_volume_stats_available_bytes{persistentvolumeclaim=~"data-(.+)-zookeeper-[0-9]+"} < 5368709120
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Zookeeper is running out of free disk space'
+        description: 'There are only {{ $value }} bytes available at {{ $labels.persistentvolumeclaim }} PVC'
+    - alert: ZookeeperContainerRestartedInTheLast5Minutes
+      expr: count(count_over_time(container_last_seen{container="zookeeper"}[5m])) > 2 * count(container_last_seen{container="zookeeper",pod=~".+-zookeeper-[0-9]+"})
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'One or more Zookeeper containers were restarted too often'
+        description: 'One or more Zookeeper containers were restarted too often within the last 5 minutes. This alert can be ignored when the Zookeeper cluster is scaling up'
+    - alert: ZookeeperContainersDown
+      expr: absent(container_last_seen{container="zookeeper",pod=~".+-zookeeper-[0-9]+"})
+      for: 3m
+      labels:
+        severity: major
+      annotations:
+        summary: 'All `zookeeper` containers in the Zookeeper pods down or in CrashLookBackOff status'
+        description: 'All `zookeeper` containers in the Zookeeper pods have been down or in CrashLookBackOff status for 3 minutes'{% endraw %}
+```
+
+
+### Example test setup
+
+As mentioned earlier, to test the triggering of alerts, you can monitor the total number of partitions for all topics by using the `kafka_server_replicamanager_partitioncount_value` metric.
+
+Define an alert rule that creates a notification if the number of partitions increases. To achieve this, add a new rule for `kafka_server_replicamanager_partitioncount_value`, and set the trigger conditions in the `expr` section, for example:
+
+**Note:** In this example, we are setting a threshold value of 50 as the built-in consumer-offsets topic has 50 partitions by default already, and this topic is automatically created the first time a consumer application connects to the cluster. We will create a topic later with 10 partitions to [test](#testing) the firing of the alert and the subsequent notification to the Slack channel.
+
+```yaml
+{% raw %}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    role: alert-rules
+    app: strimzi
+  name: partition-count
+  namespace: <namespace>
+spec:
+  groups:
+  - name: kafka
+    rules:
+      # Posts an alert if the number of partitions increases
+      - alert: PartitionCount
+        expr: kafka_server_replicamanager_partitioncount_value > 50
+        for: 10s
+        labels:
+          # Labels should match the alert manager so that it is received by the Slack hook
+          severity: critical
+        # The contents of the Slack messages that are posted are defined here
+        annotations:
+          identifier: "Partition count"
+          description: "There are {{ $value }} partition(s) reported by broker {{ $labels.kafka }}"
+{% endraw %}
+```
+
+**Important:** As noted in the prerequisites, this tutorial is based on {{site.data.reuse.openshift}} 4.8.43.
+
+To review your alert rules set up this way, use the `oc get PrometheusRules` command, for example:
+
+```bash
+$ oc get PrometheusRules
+NAME                   AGE
+prometheus-k8s-rules   1h
+partition-count        1h
+```
+
+### Example production setup
+
+As mentioned earlier, a good metric to monitor in production environments is the metric `kafka_server_replicamanager_underreplicatedpartitions_value`, for which we want to define an alert rule that creates a notification if the number of under-replicated partitions is greater than 0 for more than a minute. To achieve this, add a new rule for `kafka_server_replicamanager_underreplicatedpartitions_value`, and set the trigger conditions in the `data` section, for example:
+
+```yaml
+{% raw %}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    role: alert-rules
+    app: strimzi
+  name: monitoring-prometheus-alertrules
+  namespace: <namespace>
+spec:
+  groups:
+  - name: alert.rules
+    rules:
+      # Posts an alert if there are any under-replicated partitions
+      #  for longer than a minute
+      - alert: under_replicated_partitions
+        expr: kafka_server_replicamanager_underreplicatedpartitions_value > 0
+        for: 1m
+        labels:
+          # Labels should match the alert manager so that it is received by the Slack hook
+          severity: critical
+        # The contents of the Slack messages that are posted are defined here
+        annotations:
+          identifier: "Under-replicated partitions"
+          description: "There are {% raw %}{{ $value }}{% endraw %} under-replicated partition(s) reported by broker {% raw %}{{ $labels.kafka }}{% endraw %}"
+```
+
+**Important:** As noted in the prerequisites, this tutorial is based on {{site.data.reuse.openshift}} 4.8.43.
+
+To review your alert rules set up this way, use the `oc get PrometheusRules` command, for example:
+
+```bash
+$ oc get PrometheusRules
+NAME                          AGE
+Under-replicated partitions   1h
+```
+
+You can also see the list of alerts in both the Prometheus UI and the Alertmanager UI.
+
+The following are examples from both UIs.
+
+- Prometheus Alert Page:
+
+![Prometheus Alert Page](../../images/prometheus_alert_page.png "Prometheus alert page with list of alerts.")
+
+- Alertmanager Home Page:
+
+![Alertmanager Home Page](../../images/alertmanager_home_page.png "Alertmanager home page with list of alerts.")
+
+Prometheus Sample Alert Rule:
 
 ![Prometheus alert rules](../../images/alert_rules.png "Screen capture showing the alert rule for the under_replicated_partitions alert in the Prometheus UI.")
+
+Prometheus Sample Alert:
 
 ![Prometheus alert rules](../../images/alerts.png "Screen capture showing the details for the under_replicated_partitions alert in the Prometheus UI.")
 
@@ -427,3 +757,13 @@ When the cluster recovers, a new resolution alert is posted when the number of u
 ## Setting up other notifications
 
 You can use this example to set up alert notifications to other applications, including [HipChat](https://prometheus.io/docs/alerting/configuration/#hipchat_config){:target="_blank"}, [PagerDuty](https://prometheus.io/docs/alerting/configuration/#pagerduty_config){:target="_blank"}, [emails](https://prometheus.io/docs/alerting/configuration/#email_config){:target="_blank"}, and so on. You can also use this technique to generate HTTP calls, which lets you customize alerts when defining a flow in tools like [Node-RED](https://nodered.org/){:target="_blank"} or [IBM App Connect](https://developer.ibm.com/integration/docs/){:target="_blank"}.
+
+
+### Troubleshooting
+
+To obtain more log data, you can increase the logging level for the Alertmanager by modifying the `loglevel` custom resource as follows:
+
+```yaml
+spec:
+  logLevel: debug
+```

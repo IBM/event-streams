@@ -60,4 +60,4 @@ spec:
          num.io.threads: 24
 ```
 
-You can specify all the broker configuration options supported by Kafka except those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/0.27.1/using.html#type-KafkaClusterSpec-reference){:target="_blank"}.
+You can specify all the broker configuration options supported by Kafka except those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/0.30.0/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"}.

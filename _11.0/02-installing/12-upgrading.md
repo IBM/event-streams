@@ -15,8 +15,8 @@ You must first upgrade the {{site.data.reuse.short_name}} operator, and then upg
 ### Upgrade paths for CD releases
 
 The following upgrade paths are available for Continuous Delivery (CD) releases (2.x operators and 10.x operands and later, except for 2.2.x operators and 10.2.x operands):
-- You can upgrade the {{site.data.reuse.short_name}} operator to the latest 3.0.4 version directly from versions 3.0.x, 2.5.x, and 2.4.x. If you have an earlier operator version than 2.4.0, you must first upgrade it to 2.4.0 before upgrading to 3.0.x.
-- You can upgrade the {{site.data.reuse.short_name}} operand to the latest 11.0.3 version directly from versions 11.0.x, 10.5.x, and 10.4.x. If you have an earlier operand version than 10.4.0, you must first upgrade it [to 10.4.0](../../10.4/installing/upgrading/) before upgrading to 11.0.x.
+- You can upgrade the {{site.data.reuse.short_name}} operator to the latest 3.0.5 version directly from versions 3.0.x, 2.5.x, and 2.4.x. If you have an earlier operator version than 2.4.0, you must first upgrade it to 2.4.0 before upgrading to 3.0.x.
+- You can upgrade the {{site.data.reuse.short_name}} operand to the latest 11.0.4 version directly from versions 11.0.x, 10.5.x, and 10.4.x. If you have an earlier operand version than 10.4.0, you must first upgrade it [to 10.4.0](../../10.4/installing/upgrading/) before upgrading to 11.0.x.
 
 ### Upgrade paths for EUS releases
 
@@ -25,7 +25,7 @@ You can also upgrade to the latest {{site.data.reuse.short_name}} CD release fro
 1. Upgrade your {{site.data.reuse.short_name}} [EUS release](../../10.2/installing/upgrading/) by upgrading to the latest EUS operator (2.2.x). The latest operator revision for the EUS release ensures you have the latest updates and fixes applied, including updates to enable upgrading to the latest CD release.
 2. [Upgrade your {{site.data.reuse.icpfs}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=upgrading-cloud-pak-foundational-services){:target="_blank"} from EUS version 3.6.x to the latest CD version.
 3. After successfully upgrading to the latest CD version of foundational services, ensure you [clean up the monitoring resources](https://www.ibm.com/docs/en/cpfs?topic=issues-monitoring-resources-not-cleaned-up){:target="_blank"} to avoid errors.
-4. Upgrade your {{site.data.reuse.short_name}} version to the latest CD release by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.0.4 and operand version 11.0.3).
+4. Upgrade your {{site.data.reuse.short_name}} version to the latest CD release by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.0.5 and operand version 11.0.4).
 
 ## Prerequisites
 
@@ -52,7 +52,7 @@ You can also upgrade to the latest {{site.data.reuse.short_name}} CD release fro
    ```
 
 
-- If you previously added your own Kafka or Zookeeper metrics rules, then ensure you record these elsewhere to be added to the `metrics-config` ConfigMap [after upgrading](#update-metrics-rules).
+- If you have an {{site.data.reuse.short_name}} 11.0.3 or earlier installation, and you previously added your own Kafka or Zookeeper metrics rules, then ensure you record these elsewhere to be added to the `metrics-config` ConfigMap [after upgrading](#update-metrics-rules).
 
 
 ## Upgrading by using the UI
@@ -83,7 +83,7 @@ All {{site.data.reuse.short_name}} pods that need to be updated as part of the u
 3. Click the **{{site.data.reuse.short_name}}** tab. This lists the **{{site.data.reuse.short_name}}** operands.
 4. Find your instance in the **Name** column and click the link for the instance.
 5. Click the **YAML** tab. The **{{site.data.reuse.short_name}}** instance custom resource is shown.
-6. In the YAML, change the `spec.version` field to the required version, for example, 11.0.3.
+6. In the YAML, change the `spec.version` field to the required version, for example, 11.0.4.
 7. Click the **Save** button.
 
 All {{site.data.reuse.short_name}} pods will gracefully roll again.
@@ -94,7 +94,7 @@ Alternatively, you can also upgrade your {{site.data.reuse.short_name}} instance
    3. Expand **Administration** and click **Integration instances**.
       If an update is available for a runtime, the ![Information icon](../../images/icon_info.png) **Information icon** displays next to the runtime's current Version number.
    4. Click the ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options** in the row for the {{site.data.reuse.short_name}} instance, and then click **Change version**.
-   5. Select **11.0.3** from the **Select a new channel or version** list.
+   5. Select **11.0.4** from the **Select a new channel or version** list.
    6. Click **Change version** to save your selections and start the upgrade.
       In the runtimes table, the **Status** column for the runtime displays the `Upgrading` message. The upgrade is complete when the **Status** is `Ready` and the **Version** displays the new version number.
 
@@ -122,7 +122,7 @@ All {{site.data.reuse.short_name}} pods that need to be updated as part of the u
 
 ### Upgrade the {{site.data.reuse.short_name}} operand (instance)
 
-Upgrade the {{site.data.reuse.short_name}} instance to move to the required version, where `X.Y.Z` is the required version, for example, 11.0.3.
+Upgrade the {{site.data.reuse.short_name}} instance to move to the required version, where `X.Y.Z` is the required version, for example, 11.0.4.
 
   `oc patch eventstreams -n <namespace> <name-of-the-es-instance> --patch '{"spec":{"version":"X.Y.Z"}}' --type=merge`
 

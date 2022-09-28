@@ -327,7 +327,7 @@ You can use log data to investigate any problems affecting your [system health](
 
 ## Kafka static configuration properties
 
-You can set [Kafka broker configuration](https://strimzi.io/docs/operators/0.27.1/using.html#type-KafkaClusterSpec-reference){:target="_blank"} settings in your `EventStreams` custom resource under the property `spec.strimziOverrides.kafka`. These settings will override the default Kafka configuration defined by {{site.data.reuse.short_name}}.
+You can set [Kafka broker configuration](https://strimzi.io/docs/operators/0.30.0/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"} settings in your `EventStreams` custom resource under the property `spec.strimziOverrides.kafka`. These settings will override the default Kafka configuration defined by {{site.data.reuse.short_name}}.
 
 You can also use this configuration property to modify read-only Kafka broker settings for an existing {{site.data.reuse.long_name}} installation. Read-only parameters are defined by Kafka as settings that require a broker restart. Find out more about the [Kafka configuration options and how to modify them](../../administering/modifying-installation/#modifying-kafka-broker-configuration-settings) for an existing installation.
 
@@ -365,7 +365,7 @@ If you add more Kafka replicas, geo-replicator nodes, MirrorMaker2 nodes, or Kaf
 
 ### License usage
 
-The license usage of {{site.data.reuse.long_name}} is collected by the {{site.data.reuse.icpfs}} License Service, which provides the service that tracks the licensed containers and their resource usage based on the product use. Ensure you install the License Service as described in the [{{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=administering-deploying-license-service){:target="_blank"}. 
+The license usage of {{site.data.reuse.long_name}} is collected by the {{site.data.reuse.icpfs}} License Service, which provides the service that tracks the licensed containers and their resource usage based on the product use. Ensure you install the License Service as described in the [{{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=administering-deploying-license-service){:target="_blank"}.
 
 When [creating an instance](../installing/#install-an-event-streams-instance) of {{site.data.reuse.short_name}}, ensure that you select the correct value for `spec.license.use` in the custom resource. This value is used for metering purposes and could result in inaccurate charging and auditing if set incorrectly. Select one of the following values based on the purpose of your deployment:
 

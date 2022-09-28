@@ -126,7 +126,7 @@ If you have specific requirements, you can modify the JVM settings for the Kafka
 
 **Note:** Take care when modifying these settings as changes can have an impact on the functioning of the product.
 
-**Note:** Only a [selected subset](https://strimzi.io/docs/operators/0.27.1/using.html#con-common-configuration-jvm-reference){:target="_blank"} of the available JVM options can be configured.
+**Note:** Only a [selected subset](https://strimzi.io/docs/operators/0.30.0/configuring.html#con-common-configuration-jvm-reference){:target="_blank"} of the available JVM options can be configured.
 
 JVM settings for the Kafka brokers are defined in the `EventStreams` custom resource in the `spec.strimziOverrides.kafka.jvmOptions` propety. For example:
 
