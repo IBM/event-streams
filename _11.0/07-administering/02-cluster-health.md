@@ -72,6 +72,39 @@ To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these st
 10. If an `Index Pattern Conflicts` warning is displayed, select the `app*` index pattern from the **New index pattern** list for each conflict, then click **Confirm all changes**.
 11. Click **Dashboard** in the navigation on the left to view the downloaded dashboards.
 
+## Instana
+
+![Event Streams 11.0.4 icon](../../images/11.0.4.svg "In Event Streams 11.0.4.") Instana is an observability tool that can be used to monitor your {{site.data.reuse.short_name}} deployment.
+
+Instana also offers [Kafka-centric monitoring](https://www.instana.com/supported-technologies/apache-kafka-observability/){:target="_blank"} that can provide useful insights into the performance and the health of your Kafka cluster.
+
+For information about installing and configuring an Instana host agent on the {{site.data.reuse.openshift}}, see the [Instana documentation](https://www.ibm.com/docs/en/instana-observability/current?topic=requirements-installing-host-agent-openshift){:target="_blank"}.
+
+After installing, Instana can monitor all aspects of an {{site.data.reuse.short_name}} instance with no extra configuration required.
+
+**Note**: You might receive the following error message in the Instana dashboards when you check monitoring metrics for the {{site.data.reuse.short_name}} UI container:
+
+```
+Monitoring issue: nodejs_collector_not_installed
+
+The @instana/collector package is not installed in this Node.js application, or the @instana/collector package cannot announce itself to the host agent, for example due to networking issues.
+```
+
+If you require monitoring of the {{site.data.reuse.short_name}} UI, you can enable Instana to monitor the UI by setting the following in the `EventStreams` custom resource:
+
+```yaml
+  apiVersion: eventstreams.ibm.com/v1beta2
+  kind: EventStreams
+  # ...
+  spec:
+  # ...
+  adminUI:
+      env:
+      -  name: INSTANA_AGENT_HOST
+         valueFrom:
+               fieldRef:
+                  fieldPath: status.hostIP
+```
 ## Other Monitoring Tools
 
 You can also use [external monitoring tools](../external-monitoring/) to monitor the deployed {{site.data.reuse.short_name}} Kafka cluster.

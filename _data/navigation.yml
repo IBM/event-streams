@@ -227,13 +227,11 @@ latestdocs:
         url: /troubleshooting/kafka-exporter-not-deployed/
       - title: "Unable to override external listener route host"
         url: /troubleshooting/overriding-route-hostnames/
-      - title: "Event Streams metrics unavailable"
-        url: /troubleshooting/metrics-not-available/
       - title: "Event Streams installation reports failed status"
         url: /troubleshooting/failed-status-during-cs-install/
       - title: "KafkaConnectS2I build fails in an air-gapped installation"
         url: /troubleshooting/kcs2i-airgapped/
-      - title: "Metrics do not display in operator Grafana dashboard"
+      - title: "Metrics do not display properly in operator Grafana and the UI dashboard"
         url: /troubleshooting/no-metrics-ui/
       - title: "Admin API pod does not start when using OpenShift 4.6"
         url: /troubleshooting/admin-api-mount-failure/

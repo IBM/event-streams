@@ -8,6 +8,36 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}} version 11.0.x.
 
+## Release 11.0.4
+
+### Support for Instana
+
+{{site.data.reuse.short_name}} 11.0.4 introduces support for [Instana monitoring](../../administering/cluster-health/#instana) of your deployment and Kafka cluster.
+
+### Support for OpenShift on cloud platforms
+
+{{site.data.reuse.short_name}} 11.0.4 introduces support for the following managed OpenShift services on the following cloud platforms (PaaS):
+
+- Red Hat OpenShift on IBM Cloud
+- Azure Red Hat OpenShift
+- Red Hat OpenShift Service on AWS
+
+### Support for {{site.data.reuse.openshift}} 4.11
+
+{{site.data.reuse.short_name}} 11.0.4 introduces support for {{site.data.reuse.openshift}} 4.11.
+
+### Apicurio version upgraded to 2.2.5
+
+{{site.data.reuse.short_name}} 11.0.4 includes Apicurio Registry version 2.2.5 for [managing schemas](../../schemas/overview/#schema-registry).
+
+### Security and bug fixes
+
+{{site.data.reuse.short_name}} release 11.0.4 contains security and bug fixes.
+
+### Documentation: Highlighting differences between versions
+
+Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.0.4 compared to 11.0.3 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.0.4 icon](../../images/11.0.4.svg "In Event Streams 11.0.4.")
+
 ## Release 11.0.3
 
 {{site.data.reuse.short_name}} release 11.0.3 contains security and bug fixes.

@@ -122,7 +122,7 @@ spec:
 
 Events start appearing in Splunk after we apply the `jmxTrans` option in the custom resource. The time it takes for events to appear in the Splunk index is determined by the scrape interval on JMXTrans and the size of the receive queue on Splunk.
 
-You can increase or decrease the frequency of samples in JMXTrans and the size of the receive queue. To modify the receive queue on Splunk, create an inputs.conf file, and specify the queueSize and persistentQueueSize settings of the [tcp://<remote server>:<port>] stanza.
+You can increase or decrease the frequency of samples in JMXTrans and the size of the receive queue. To modify the receive queue on Splunk, create an inputs.conf file, and specify the queueSize and persistentQueueSize settings of the [`tcp://<remote server>:<port>`] stanza.
 
 Splunk search will begin to show metrics. The following is an example of how JMXTrans metrics are displayed when metrics are successfully received.
 
@@ -136,7 +136,6 @@ Splunk search will begin to show metrics. The following is an example of how JMX
 
 - You can change the log level for JMXTrans by setting the required granularity value in `spec.strimziOverrides.jmxTrans.logLevel`. For example:
 
-
    ```yaml
    # ...
    spec:
@@ -147,8 +146,6 @@ Splunk search will begin to show metrics. The following is an example of how JMX
          #...
          logLevel: debug
    ```
-
-
 
 - To check the logs from the Splunk pod, you can view the `splunkd.log` file as follows:
 
