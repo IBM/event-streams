@@ -9,7 +9,7 @@ cardType: "large"
 
 You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export Kafka broker JMX metrics to external applications. This tutorial details how to export Kafka JMX metrics as graphite output to an external Splunk system using a TCP data input.
 
-## Prequisites
+## Prerequisites
 
 - Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 11.0.0.
 - When installing {{site.data.reuse.short_name}}, ensure you configure your JMXTrans deployment as described in  [Configuring secure JMX connections](../../security/secure-jmx-connections/){:target="_blank"}.
@@ -83,15 +83,15 @@ To expose the JMX port within the cluster, set the `spec.strimziOverrides.kafka.
 For example:
 
 ```yaml
-#...
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: EventStreams
+# ...
 spec:
-  #...
+  # ...
   strimziOverrides:
-    #...
+    # ...
     kafka:
-      #...
       jmxOptions: {}
-    #...
 ```
 
 **Tip:** The JMX port can be password-protected to prevent unauthorized pods from accessing it. For more information, see [Configuring secure JMX connections](../../security/secure-jmx-connections/){:target="_blank"}.

@@ -682,7 +682,7 @@ data:
     rules:
     - attrNameSnakeCase: false
       name: kafka_controller_$1_$2_$3
-      pattern: kafka.controller<type=(\\w+), name=(\w+)><>(Count|Value|Mean)
+      pattern: kafka.controller<type=(\w+), name=(\w+)><>(Count|Value|Mean)
     - attrNameSnakeCase: false
       name: kafka_server_BrokerTopicMetrics_$1_$2
       pattern: kafka.server<type=BrokerTopicMetrics, name=(BytesInPerSec|BytesOutPerSec)><>(Count)

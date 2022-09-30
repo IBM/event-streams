@@ -9,7 +9,7 @@ cardType: "large"
 
 You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export Kafka broker JMX metrics to external applications. This tutorial details how to export Kafka JMX metrics as graphite output, and then use [Logstash](https://www.elastic.co/products/logstash){:target="_blank"} to write the metrics to an external Splunk system as an HTTP Event Collector.
 
-## Prequisites
+## Prerequisites
 
 - Ensure you have an {{site.data.reuse.short_name}} installation available. This tutorial is based on {{site.data.reuse.short_name}} version 11.0.0.
 - When installing {{site.data.reuse.short_name}}, ensure you configure your JMXTrans deployment as described in  [Configuring secure JMX connections](../../security/secure-jmx-connections/){:target="_blank"}.
@@ -162,20 +162,20 @@ spec:
 
 ### Configure JMX for {{site.data.reuse.short_name}}
 
-o expose the JMX port within the cluster, set the `spec.strimziOverrides.kafka.jmxOptions` value to `{}` and enable JMXTrans.
+To expose the JMX port within the cluster, set the `spec.strimziOverrides.kafka.jmxOptions` value to `{}` and enable JMXTrans.
 
-Example:
+For example:
 
 ```yaml
-#...
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: EventStreams
+# ...
 spec:
-  #...
+  # ...
   strimziOverrides:
-    #...
+    # ...
     kafka:
-      #...
       jmxOptions: {}
-    #...
 ```
 
 **Tip:** The JMX port can be password-protected to prevent unauthorized pods from accessing it. For more information, see [Configuring secure JMX connections](../../security/secure-jmx-connections/){:target="_blank"}.
@@ -266,7 +266,7 @@ Events start appearing in Splunk after we apply the `jmxTrans` option in the cus
    ```
 
    Example `logstash.yml` file:
-   
+
    ```yaml
    path.config: /usr/share/logstash/pipeline/
    log.level: trace

@@ -87,7 +87,7 @@ For example:
 >The words in these messages will be counted by the Streams app
 ```
 
-Another method to produce messages to the topic is by using the [{{site.data.reuse.short_name}} producer API](../../11.0/connecting/rest-producer-api/#producing-messages-using-rest).
+Another method to produce messages to the topic is by using the [{{site.data.reuse.short_name}} producer API](../../connecting/rest-producer-api/#producing-messages-using-rest).
 
 ## Running the application
 
