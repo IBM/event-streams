@@ -50,9 +50,9 @@ Before applying [Kafka rack awareness](../configuring/#applying-kafka-rack-aware
    kind: ClusterRole
    apiVersion: rbac.authorization.k8s.io/v1
    metadata:
-   name: eventstreams-kafka-broker
-   labels:
-      app: eventstreams
+     name: eventstreams-kafka-broker
+       labels:
+         app: eventstreams
    rules:
    - verbs:
          - get
@@ -61,9 +61,9 @@ Before applying [Kafka rack awareness](../configuring/#applying-kafka-rack-aware
          - update
          - delete
          - list
-      apiGroups:
+     apiGroups:
          - rbac.authorization.k8s.io
-      resources:
+     resources:
          - clusterrolebindings
    - verbs:
          - get
@@ -72,9 +72,9 @@ Before applying [Kafka rack awareness](../configuring/#applying-kafka-rack-aware
          - update
          - delete
          - list
-      apiGroups:
+     apiGroups:
          - ""
-      resources:
+     resources:
          - nodes
       ```
 2. Apply the cluster role by using the following command: 
@@ -91,7 +91,7 @@ Before applying [Kafka rack awareness](../configuring/#applying-kafka-rack-aware
    subjects:
    - kind: ServiceAccount
      name: eventstreams-cluster-operator-namespaced
-     namespace: <namespace>
+     namespace: <operator_namespace>
    roleRef:
      apiGroup: rbac.authorization.k8s.io
      kind: ClusterRole
