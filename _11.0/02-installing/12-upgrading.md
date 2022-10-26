@@ -63,7 +63,7 @@ The upgrade process requires the upgrade of the {{site.data.reuse.short_name}} o
 
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.\\
-   ![Operators > Installed Operators](../../images/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
+   ![Operators > Installed Operators](../../../images/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
 3. From the **Project** list, select the namespace (project) the instance is installed in.
 4. Locate the operator that manages your {{site.data.reuse.short_name}} instance in the namespace. It is called **{{site.data.reuse.long_name}}** in the **Name** column. Click the **{{site.data.reuse.long_name}}** link in the row.
 4. Click the **Subscription** tab to display the **Subscription details** for the {{site.data.reuse.short_name}} operator.
@@ -92,8 +92,8 @@ Alternatively, you can also upgrade your {{site.data.reuse.short_name}} instance
    1. Log in to the {{site.data.reuse.cp4i}} Platform UI.
    2. Click the **Navigation Menu** in the top left.
    3. Expand **Administration** and click **Integration instances**.
-      If an update is available for a runtime, the ![Information icon](../../images/icon_info.png) **Information icon** displays next to the runtime's current Version number.
-   4. Click the ![More options icon](../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options** in the row for the {{site.data.reuse.short_name}} instance, and then click **Change version**.
+      If an update is available for a runtime, the ![Information icon](../../../images/icon_info.png) **Information icon** displays next to the runtime's current Version number.
+   4. Click the ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options** in the row for the {{site.data.reuse.short_name}} instance, and then click **Change version**.
    5. Select **11.0.4** from the **Select a new channel or version** list.
    6. Click **Change version** to save your selections and start the upgrade.
       In the runtimes table, the **Status** column for the runtime displays the `Upgrading` message. The upgrade is complete when the **Status** is `Ready` and the **Version** displays the new version number.

@@ -252,9 +252,15 @@ collections:
     label: "11.0"
     output: true
     version: true
+    permalink: /:collection/:categories/:slug/
+    order: 11
+  "11.1":
+    label: "11.1"
+    output: true
+    version: true
     tag: Latest
     permalink: /:categories/:slug/
-    order: 11
+    order: 12
   "tutorials":
     output: true
     permalink: /:collection/:path/
@@ -497,8 +503,22 @@ defaults:
       latest: true
       mastheadNavItem: Documentation
       sidebar:
+        nav: "110docs"
+  # _11.1
+  - scope:
+      path: ""
+      type: "11.1"
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comment: false
+      version: true
+      latest: true
+      mastheadNavItem: Documentation
+      sidebar:
         nav: "latestdocs"
-
 
 # Sass/SCSS
 sass:

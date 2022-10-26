@@ -74,7 +74,7 @@ To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these st
 
 ## Instana
 
-![Event Streams 11.0.4 icon](../../images/11.0.4.svg "In Event Streams 11.0.4.") Instana is an observability tool that can be used to monitor your {{site.data.reuse.short_name}} deployment.
+![Event Streams 11.0.4 icon](../../../images/11.0.4.svg "In Event Streams 11.0.4.") Instana is an observability tool that can be used to monitor your {{site.data.reuse.short_name}} deployment.
 
 Instana also offers [Kafka-centric monitoring](https://www.instana.com/supported-technologies/apache-kafka-observability/){:target="_blank"} that can provide useful insights into the performance and the health of your Kafka cluster.
 
