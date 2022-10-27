@@ -36,7 +36,7 @@ Find out what is new in {{site.data.reuse.long_name}} version 11.0.x.
 
 ### Documentation: Highlighting differences between versions
 
-Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.0.4 compared to 11.0.3 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.0.4 icon](../../images/11.0.4.svg "In Event Streams 11.0.4.")
+Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.0.4 compared to 11.0.3 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.0.4 icon](../../../images/11.0.4.svg "In Event Streams 11.0.4.")
 
 ## Release 11.0.3
 
@@ -50,7 +50,7 @@ Any difference in features or behavior introduced by {{site.data.reuse.short_nam
 
 ### Documentation: Highlighting differences between versions
 
-Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.0.2 compared to 11.0.1 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.0.2 icon](../../images/11.0.2.svg "In Event Streams 11.0.2.")
+Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.0.2 compared to 11.0.1 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.0.2 icon](../../../images/11.0.2.svg "In Event Streams 11.0.2.")
 
 ## Release 11.0.1
 
@@ -60,11 +60,11 @@ Any difference in features or behavior introduced by {{site.data.reuse.short_nam
 
 ### Documentation: Highlighting differences between versions
 
-Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.0.1 compared to 11.0.0 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.0.1 icon](../../images/11.0.1.svg "In Event Streams 11.0.1.")
+Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.0.1 compared to 11.0.0 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.0.1 icon](../../../images/11.0.1.svg "In Event Streams 11.0.1.")
 
 ### Renewing certificates for existing deployments
 
-![Event Streams 11.0.1 icon](../../images/11.0.1.svg "In Event Streams 11.0.1."){{site.data.reuse.short_name}} 11.0.1 and later supports the [renewal of certificate authority (CA) certificates and keys](../../security/renewing-certificates/) for an existing deployment.
+![Event Streams 11.0.1 icon](../../../images/11.0.1.svg "In Event Streams 11.0.1."){{site.data.reuse.short_name}} 11.0.1 and later supports the [renewal of certificate authority (CA) certificates and keys](../../security/renewing-certificates/) for an existing deployment.
 
 ## Release 11.0.0
 
