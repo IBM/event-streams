@@ -16,7 +16,7 @@ If needed, you can [modify the selected sample configuration](../configuring) wh
 
 If required by your planned workload, you can further increase the number of Kafka brokers, and the amount of CPU and memory available to them. For changing such values, see the guidance about [scaling](../../administering/scaling/) {{site.data.reuse.short_name}}.
 
-A [performance report](../../pdfs/Performance Report 2019.4.1 v1.0.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
+A [performance report](../../pdfs/11.0.4 Performance Report_v3.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
 
 **Note:** Although the testing for the report was based on Apache Kafka version 2.3.0, the performance numbers are broadly applicable to current versions of Kafka as well.
 
