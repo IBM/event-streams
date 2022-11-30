@@ -196,7 +196,7 @@ spec:
 
 This allows a Kafka user that has been configured for SCRAM authentication to log in to the UI by using the username and password of that Kafka user (for more information about configuring Kafka users, see [managing access to Kafka resources](../../security/managing-access/#managing-access-to-kafka-resources)).
 
-A significant difference between IAM users and SCRAM users is that the Access Control List (ACL) that is configured for the user will determine which parts of the UI are available to the user to access (for more information, see [UI authorization mappings](../../security/managing-access/#managing-access-to-the-ui-using-scram)).
+A significant difference between IAM users and SCRAM users is that the Access Control List (ACL) that is configured for the user will determine which parts of the UI are available to the user to access (for more information, see [UI authorization mappings](../../security/managing-access/#managing-access-to-the-ui-with-scram)).
 
 You can also specifically configure the UI to authenticate with IAM by setting the `EventStreams` custom resource as follows:
 
@@ -847,6 +847,16 @@ spec:
   bootstrapServers: 'test.kafka-bootstrap.es-kafka-bridge:9093'
   http:
      port: 8080
+  template:
+    bridgeContainer:
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
 ```
 
 Depending on your setup and purpose of deployment, you can add more `replicas` which sets the number of Kafka Bridge instances to run. For production environments, for example, consider deploying more than one replica for resilience.

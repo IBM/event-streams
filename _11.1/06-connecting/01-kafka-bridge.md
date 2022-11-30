@@ -51,6 +51,16 @@ spec:
      trustedCertificates:
         - certificate: ca.crt
            secretName: <cluster-name>-cluster-ca-cert
+  template:
+    bridgeContainer:
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
 ```
 
 - The following example includes an {{site.data.reuse.short_name}} cluster that requires SCRAM-SHA-512 authentication for user access, and the user `<username>` was [created](../../security/managing-access/#managing-access-to-kafka-resources) for Kafka Bridge earlier. In addition, it includes TLS authentication for the connection between the {{site.data.reuse.short_name}} instance (called `development`) and the Kafka Bridge.
@@ -78,6 +88,16 @@ spec:
     trustedCertificates:
       - certificate: ca.crt
         secretName: <cluster-name>-cluster-ca-cert
+  template:
+    bridgeContainer:
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
 ```
 
 

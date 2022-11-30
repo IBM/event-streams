@@ -850,6 +850,16 @@ spec:
   bootstrapServers: 'test.kafka-bootstrap.es-kafka-bridge:9093'
   http:
      port: 8080
+  template:
+    bridgeContainer:
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
 ```
 
 Depending on your setup and purpose of deployment, you can add more `replicas` which sets the number of Kafka Bridge instances to run. For production environments, for example, consider deploying more than one replica for resilience.
