@@ -81,8 +81,6 @@ latestdocs:
         url: /installing/uninstalling/
       - title: "Upgrading and migrating"
         url: /installing/upgrading/
-      - title: "Migrating to Apicurio Registry"
-        url: /installing/migrating-to-apicurio/
   - title: Getting started
     children:
       - title: "Logging in"
@@ -211,32 +209,14 @@ latestdocs:
         url: /troubleshooting/error-removing-destination/
       - title: "403 error when signing in"
         url: /troubleshooting/ui-403-error/
-      - title: "The UI cannot load data"
-        url: /troubleshooting/problem-with-piping/
-      - title: "UI shows black images in Firefox"
-        url: /troubleshooting/firefox-black-images/
       - title: "Event Streams not installing due to Security Context Constraint (SCC) issues"
         url: /troubleshooting/default-scc-issues/
-      - title: "Not authorized error when building maven schema registry project"
-        url: /troubleshooting/schema-registry-not-authorized-error/
       - title: "Client receives AuthorizationException when communicating with brokers"
         url: /troubleshooting/authorization-failed-exceptions/
-      - title: "504 timeout error when viewing consumer groups in the Event Streams UI"
-        url: /troubleshooting/504-ui-consumer-groups/
-      - title: "Kafka exporter is not deployed"
-        url: /troubleshooting/kafka-exporter-not-deployed/
-      - title: "Unable to override external listener route host"
-        url: /troubleshooting/overriding-route-hostnames/
       - title: "Event Streams installation reports failed status"
         url: /troubleshooting/failed-status-during-cs-install/
-      - title: "KafkaConnectS2I build fails in an air-gapped installation"
-        url: /troubleshooting/kcs2i-airgapped/
-      - title: "Admin API pod does not start when using OpenShift 4.6"
-        url: /troubleshooting/admin-api-mount-failure/
       - title: "Client receives 'Failed to load SSL keystore' message when communicating with brokers"
         url: /troubleshooting/pkcs12-keystore-java-client/
-      - title: "Schema details not accessible when upper-case letters are used in schema names"
-        url: /troubleshooting/upper-case-in-schema-names/
       - title: "OpenShift upgrade: fixing scheduling on node and node degraded errors"
         url: /troubleshooting/ocp-upgrade-fail/
 
@@ -285,8 +265,6 @@ latestdocs:
         url: /installing/uninstalling/
       - title: "Upgrading and migrating"
         url: /installing/upgrading/
-      - title: "Migrating to Apicurio Registry"
-        url: /installing/migrating-to-apicurio/
   - title: Getting started
     children:
       - title: "Logging in"
@@ -421,8 +399,6 @@ latestdocs:
         url: /troubleshooting/firefox-black-images/
       - title: "Event Streams not installing due to Security Context Constraint (SCC) issues"
         url: /troubleshooting/default-scc-issues/
-      - title: "Not authorized error when building maven schema registry project"
-        url: /troubleshooting/schema-registry-not-authorized-error/
       - title: "Client receives AuthorizationException when communicating with brokers"
         url: /troubleshooting/authorization-failed-exceptions/
       - title: "504 timeout error when viewing consumer groups in the Event Streams UI"
@@ -433,8 +409,6 @@ latestdocs:
         url: /troubleshooting/overriding-route-hostnames/
       - title: "Event Streams installation reports failed status"
         url: /troubleshooting/failed-status-during-cs-install/
-      - title: "KafkaConnectS2I build fails in an air-gapped installation"
-        url: /troubleshooting/kcs2i-airgapped/
       - title: "Metrics do not display properly in operator Grafana and the UI dashboard"
         url: /troubleshooting/no-metrics-ui/
       - title: "Admin API pod does not start when using OpenShift 4.6"

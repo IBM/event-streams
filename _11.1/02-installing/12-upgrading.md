@@ -10,21 +10,23 @@ Upgrade your {{site.data.reuse.long_name}} installation as follows. The {{site.d
 
 ## Upgrade paths
 
-Read about the upgrade paths for Continuous Delivery (CD) releases and Extended Update Support (EUS) releases for your version.
+Understand the upgrade paths available for Continuous Delivery (CD) releases and Extended Update Support (EUS) releases.
 
 ### Upgrade paths for CD releases
 
-You can upgrade {{site.data.reuse.short_name}} to the latest 11.1.0 version directly from any 11.0.x version by using operator version 3.1.0. If you have an earlier {{site.data.reuse.short_name}} version than 11.0.x, you must first upgrade it to [version 11.0.x](../../11.0/installing/upgrading/) before upgrading to 11.1.0.
+You can upgrade {{site.data.reuse.short_name}} to the latest 11.1.1 version directly from any 11.0.x version by using operator version 3.1.1. If you have an earlier {{site.data.reuse.short_name}} version than 11.0.x, you must first upgrade it to [version 11.0.x](../../11.0/installing/upgrading/) before upgrading to 11.1.x.
+
+**Note:** If your operator upgrades are set to automatic, minor version upgrades are completed automatically. This means that the {{site.data.reuse.short_name}} operator is upgraded to 3.1.1 when it is available in the catalog, and your {{site.data.reuse.short_name}} instance is then also automatically upgraded, unless you [set a schedule for the upgrade](#scheduling-the-upgrade-of-an-instance) by pausing the reconciliation.
 
 ### Upgrade paths for EUS releases
 
-No direct upgrade from EUS to the latest version is supported. Upgrade to [CD version 11.0.x](../../11.0/installing/upgrading/) and then proceed to upgrade your {{site.data.reuse.short_name}} version to the latest by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.1.0).
+No direct upgrade from EUS to the latest version is supported. Upgrade to [CD version 11.0.x](../../11.0/installing/upgrading/) and then proceed to upgrade your {{site.data.reuse.short_name}} version to the latest by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.1.1).
 
 ## Prerequisites
 
 - Ensure you have followed the [upgrade steps for {{site.data.reuse.cp4i}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=upgrading){:target="_blank"} before upgrading {{site.data.reuse.short_name}}.
 
-- The images for {{site.data.reuse.short_name}} release 11.1.0 are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
+- The images for {{site.data.reuse.short_name}} release 11.1.x are available in the IBM Cloud Container Registry. Ensure you redirect your catalog source to use `icr.io/cpopen` as described in [Implementing ImageContentSourcePolicy to redirect to the IBM Container Registry](https://www.ibm.com/docs/en/cloud-paks/1.0?topic=clusters-migrating-from-docker-container-registry#implementing-imagecontentsourcepolicy-to-redirect-to-the ibm-container-registry){:target="_blank"}.
 
 
 - To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
@@ -44,7 +46,7 @@ No direct upgrade from EUS to the latest version is supported. Upgrade to [CD ve
 
 - If you [installed the {{site.data.reuse.short_name}} operator](../installing/#install-the-event-streams-operator) to manage instances of {{site.data.reuse.short_name}} in any namespace (one per namespace), then you might need to control when each of these instances is upgraded to the latest version. You can control the updates by pausing the reconciliation of the instance configuration as described in the following sections.
 
-### Pausing reconciliation of an instance
+### Scheduling the upgrade of an instance
 
 In 11.1.x and later, the {{site.data.reuse.short_name}} operator handles the upgrade of your {{site.data.reuse.short_name}} instance automatically after the operator is upgraded. No additional step is required to change the instance (product) version.
 
@@ -120,12 +122,11 @@ If you are using the OpenShift Container Platform web console, complete the step
 5. Click the version number link in the **Update channel** section (for example, **v3.0**). The **Change Subscription update channel** dialog is displayed, showing the channels that are available to upgrade to.
 6. Select **v3.1** and click the **Save** button on the **Change Subscription Update Channel** dialog.
 
-   **Important:** If you receive the following warning message in the status, remove it by changing the value of the `spec.version` field to `latest` in the YAML file:
+   **Important:** If you receive a warning message similar to the following in the status, remove it by changing the value of the `spec.version` field to `latest` in the YAML file:
 
    ```
-   Invalid version '11.0.4'. The only valid version is 'latest'. Edit spec.version to set the field to 'latest'.
+   Invalid value '11.0.4' set for spec.version. Your instance will be reconciled as 'latest', the only valid value for spec.version. Ensure you set spec.version to 'latest'.
    ```
-
 All {{site.data.reuse.short_name}} pods that need to be updated as part of the upgrade will be gracefully rolled. Where required, ZooKeeper pods will roll one at a time, followed by Kafka brokers rolling one at a time.
 
 **Note:** The number of containers in each Kafka broker will reduce from 2 to 1 as the TLS-sidecar container will be removed from each broker during the upgrade process.
@@ -146,9 +147,9 @@ If you are using the OpenShift command-line interface (CLI), the `oc` command, c
 
    `oc patch subscription -n <namespace> ibm-eventstreams --patch '{"spec":{"channel":"vX.Y"}}' --type=merge`
 
-   **Important:** You might receive the following warning message in the status:
+   **Important:** You might receive a warning message similar to the following in the status:
    ```
-   Invalid version '11.0.4'. The only valid version is 'latest'. Edit spec.version to set the field to 'latest'.
+   Invalid value '11.0.4' set for spec.version. Your instance will be reconciled as 'latest', the only valid value for spec.version. Ensure you set spec.version to 'latest'.
    ```
    To remove the warning, change the `spec.version` to `latest` by entering the following command:
 
@@ -162,10 +163,17 @@ All {{site.data.reuse.short_name}} pods that need to be updated as part of the u
 
 1. Wait for all {{site.data.reuse.short_name}} pods to complete the upgrade process. This is indicated by the `Running` state.
 2. {{site.data.reuse.openshift_cli_login}}
-3. To retrieve a list of {{site.data.reuse.short_name}} instances, run the following command:\\
+3. To retrieve a list of {{site.data.reuse.short_name}} instances, run the following command:
+
    `oc get eventstreams -n <namespace>`
-4. For the instance of {{site.data.reuse.short_name}} that you upgraded, check that the status returned by the following command is `Ready`.\\
+
+4. For the instance of {{site.data.reuse.short_name}} that you upgraded, check that the status returned by the following command is `Ready`.
+
    `oc get eventstreams -n <namespace> <name-of-the-es-instance> -o jsonpath="'{.status.phase}'"`
+
+5. To check the version of your {{site.data.reuse.short_name}} instance, run the following command:
+
+   `oc get eventstreams -n <namespace> <name-of-the-es-instance> -o jsonpath="'{.status.versions.reconciled}'"`
 
 
 ## Post-upgrade tasks

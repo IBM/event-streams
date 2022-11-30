@@ -183,9 +183,3 @@ The `metrics` configuration option for the `EventStreams` custom resource has be
 ### Enable metrics for monitoring
 
 To display metrics in the monitoring dashboards of the {{site.data.reuse.short_name}} UI, ensure you [enable](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=administering-enabling-openshift-container-platform-monitoring){:target="_blank"} the {{site.data.reuse.openshift_short}} monitoring stack.
-
-### Upgrade to use the Apicurio Registry
-
-The previous schema registry in {{site.data.reuse.short_name}} was deprecated in version 10.1.0 and is not an available option for schemas in {{site.data.reuse.short_name}} version 10.5.0 and later.
-
-If you are upgrading to {{site.data.reuse.short_name}} version 11.0.x from an earlier version and you are using the deprecated registry option previously used for schemas, you will need to move your schemas to use the Apicurio Registry and reconfigure any applications that use those schemas to connect to the new registry, as described in [migrating](../migrating-to-apicurio/).
