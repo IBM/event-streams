@@ -83,7 +83,6 @@ ways, primarily:
 
 - Public issue reporting and feature suggestions via {{site.data.reuse.long_name}} Git Hub portal
 - Private issue reporting via IBM Support
-- Public general comment via the {{site.data.reuse.long_name}} slack channel
 
 Typically, only the client name and email address are used to enable personal replies for the subject of the contact. The use of personal data conforms to the [IBM Online Privacy Statement](https://www.ibm.com/privacy/us/en/){:target="_blank"}.
 

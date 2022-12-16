@@ -90,7 +90,7 @@ Before applying [Kafka rack awareness](../configuring/#applying-kafka-rack-aware
      name: eventstreams-kafka-broker
    subjects:
    - kind: ServiceAccount
-     name: eventstreams-cluster-operator-namespaced
+     name: eventstreams-cluster-operator
      namespace: <operator_namespace>
    roleRef:
      apiGroup: rbac.authorization.k8s.io

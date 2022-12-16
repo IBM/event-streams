@@ -15,7 +15,7 @@ This tutorial provides instructions for installing an {{site.data.reuse.short_na
 
 This tutorial is based on the following software versions:
 - {{site.data.reuse.openshift_short}} version 4.10
-- {{site.data.reuse.short_name}} version 11.0.4
+- {{site.data.reuse.short_name}} version 11.1.2
 
 ## Labels on worker nodes
 
@@ -78,7 +78,7 @@ The operator does not have sufficient permissions to do a multizone installation
      name: eventstreams-kafka-broker
    subjects:
    - kind: ServiceAccount
-     name: eventstreams-cluster-operator-namespaced
+     name: eventstreams-cluster-operator
      namespace: <operator_namespace>
    roleRef:
      apiGroup: rbac.authorization.k8s.io
