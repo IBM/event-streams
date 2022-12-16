@@ -53,6 +53,6 @@ Follow [these instructions](../installing/installing).
 
 ## What support do I get?
 
-{{site.data.reuse.long_name}} benefits from community support as well as IBM support. You can ask questions on our Slack channel, check discussions on Stack Overflow, and raise issues and feature requests in GitHub.
+{{site.data.reuse.long_name}} benefits from community support as well as IBM support. You can ask questions and check discussions on Stack Overflow, and raise issues and feature requests in GitHub.
 
 [Find out more.]({{ 'support' | relative_url }})
