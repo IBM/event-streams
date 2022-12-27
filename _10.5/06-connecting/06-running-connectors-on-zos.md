@@ -176,7 +176,7 @@ cd kafka
 ./bin/connect-distributed.sh connect-distributed.properties
 ```
 
-To start an individual connector use the [Kafka Connect REST API](https://kafka.apache.org/documentation/#connect_rest). For example, given a configuration file `mq-source.json` with the following contents:
+To start an individual connector use the [Kafka Connect REST API](https://kafka.apache.org/28/documentation/#connect_rest). For example, given a configuration file `mq-source.json` with the following contents:
 ```
 {
     "name":"mq-source",

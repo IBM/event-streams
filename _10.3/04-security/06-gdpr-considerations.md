@@ -108,16 +108,16 @@ users may also wish to consider when ensuring compliance with GDPR.
 - Kubernetes activity logs for containers running within the Pods that make up the {{site.data.reuse.long_name}} deployment
 - Logs captured on the local file system for the Kafka container running in the Kakfa pod for each node
 
-By default, messages published to topics are retained for a week after their initial receipt, but this can be configured by modifying [Kafka broker settings](https://kafka.apache.org/documentation/#brokerconfigs){:target="_blank"}. These settings are [configured](../../installing/configuring/#applying-kafka-broker-configuration-settings) using the `EventStreams` custom resource.
+By default, messages published to topics are retained for a week after their initial receipt, but this can be configured by modifying [Kafka broker settings](https://kafka.apache.org/26/documentation/#brokerconfigs){:target="_blank"}. These settings are [configured](../../installing/configuring/#applying-kafka-broker-configuration-settings) using the `EventStreams` custom resource.
 
 ## Data Access
 
 The Kafka core APIs can be used to access message data within the {{site.data.reuse.long_name}} system:
 
-- [Producer](http://kafka.apache.org/documentation/#producerapi){:target="_blank"} API to allow data to be sent to a topic
-- [Consumer](http://kafka.apache.org/documentation/#consumerapi){:target="_blank"} API to allow data to be read from a topic
-- [Streams](http://kafka.apache.org/documentation/#streamsapi){:target="_blank"} API to allow transformation of data from an input topic to an output topic
-- [Connect](http://kafka.apache.org/documentation/#connectapi){:target="_blank"} API to allow connectors to continually move data in or out of a topic from an external system
+- [Producer](http://kafka.apache.org/26/documentation/#producerapi){:target="_blank"} API to allow data to be sent to a topic
+- [Consumer](http://kafka.apache.org/26/documentation/#consumerapi){:target="_blank"} API to allow data to be read from a topic
+- [Streams](http://kafka.apache.org/26/documentation/#streamsapi){:target="_blank"} API to allow transformation of data from an input topic to an output topic
+- [Connect](http://kafka.apache.org/26/documentation/#connectapi){:target="_blank"} API to allow connectors to continually move data in or out of a topic from an external system
 
 For more information about controlling access to data stored in {{site.data.reuse.long_name}}, see [managing access](../managing-access).
 

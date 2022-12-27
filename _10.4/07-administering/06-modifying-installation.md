@@ -37,7 +37,7 @@ To modify configuration settings by using the {{site.data.reuse.openshift_short}
 
 ## Modifying Kafka broker configuration settings
 
-Kafka supports a number of [key/value pair settings](http://kafka.apache.org/documentation/#brokerconfigs){:target="_blank"} for broker configuration, typically provided in a properties file.
+Kafka supports a number of [key/value pair settings](http://kafka.apache.org/28/documentation/#brokerconfigs){:target="_blank"} for broker configuration, typically provided in a properties file.
 
 In {{site.data.reuse.short_name}}, these settings are defined in an `EventStreams` custom resource under the `spec.strimziOverrides.kafka.config` property.
 

@@ -219,6 +219,12 @@ latestdocs:
         url: /troubleshooting/pkcs12-keystore-java-client/
       - title: "OpenShift upgrade: fixing scheduling on node and node degraded errors"
         url: /troubleshooting/ocp-upgrade-fail/
+      - title: "Missing navigation icons in the Event Streams UI"
+        url: /troubleshooting/es-ui-missing-navigation-icons/
+      - title: "502 Bad Gateway error when logging in to Event Streams UI"
+        url: /troubleshooting/502-bad-gateway/
+      - title: "Air-gapped installation of Event Streams 11.1.1 fails when trying to mirror the catalog"
+        url: /troubleshooting/11-1-1-airgap-fail/
 
 # Sidebar navigation for 11.0.
 
