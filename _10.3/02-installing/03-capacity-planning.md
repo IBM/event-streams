@@ -40,7 +40,7 @@ For each log segment, there are two index files called the time index and the of
 
 Log segments can be deleted or compacted, or both, to manage their size. The topic-level configuration property `cleanup.policy` determines the way the log segments for the topic are managed.
 
-For more information about these settings, see [the Kafka documentation](https://kafka.apache.org/documentation/#configuration){:target="_blank"}.
+For more information about these settings, see [the Kafka documentation](https://kafka.apache.org/26/documentation/#configuration){:target="_blank"}.
 
 The cluster-level settings are [configured](../configuring/#applying-kafka-broker-configuration-settings) in the `EventStreams` custom resource for an instance when it is first created and can be [modified](../../administering/modifying-installation/#modifying-kafka-broker-configuration-settings) at any time.
 

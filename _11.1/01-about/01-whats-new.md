@@ -8,6 +8,10 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}} version 11.1.x.
 
+## Release 11.1.3
+
+{{site.data.reuse.short_name}} release 11.1.3 contains security and bug fixes.
+
 ## Release 11.1.2
 
 {{site.data.reuse.short_name}} release 11.1.2 contains security and bug fixes.

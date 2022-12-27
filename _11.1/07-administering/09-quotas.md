@@ -18,7 +18,7 @@ After a client that has a quota defined reaches the maximum amount of data it ca
 
 By default, clients have unlimited quotas.
 
-For more information about quotas, see the [Kafka documentation](https://kafka.apache.org/documentation/#design_quotas){:target="_blank"}.
+For more information about quotas, see the [Kafka documentation](https://kafka.apache.org/32/documentation/#design_quotas){:target="_blank"}.
 
 ## Setting quotas
 
@@ -39,7 +39,7 @@ Decide what you want to limit by defining one or more of the following quota typ
 |:-----------------|:-----------------|:-----------------|
 | `producerByteRate` | integer        | This quota limits the number of bytes that a producer application is allowed to send per second. |
 | `consumerByteRate` | integer        | This quota limits the number of bytes that a consumer application is allowed to receive per second. |
-| `requestPercentage` | integer       | This quota limits all clients based on [thread utilisation](https://kafka.apache.org/documentation/#design_quotascpu){:target="_blank"}. |
+| `requestPercentage` | integer       | This quota limits all clients based on [thread utilisation](https://kafka.apache.org/32/documentation/#design_quotascpu){:target="_blank"}. |
 
 
 **Note:** Quotas can only be applied to individual `KafkaUser` instances. It is advised to apply a quota to an existing `KafkaUser`, as described in the following sections. You can [create](../../security/managing-access/#creating-a-kafkauser-in-the-event-streams-ui) a `Kafkauser` beforehand.

@@ -219,7 +219,7 @@ The login requirement for the UI is _disabled_ when all Kafka authentication and
 
 ## Applying Kafka broker configuration settings
 
-Kafka supports a number of [broker configuration settings](http://kafka.apache.org/documentation/#brokerconfigs), typically provided in a properties file.
+Kafka supports a number of [broker configuration settings](http://kafka.apache.org/32/documentation/#brokerconfigs), typically provided in a properties file.
 
 When creating an instance of {{site.data.reuse.short_name}}, these settings are defined in an `EventStreams` custom resource under a the `spec.strimziOverrides.kafka.config` property.
 
@@ -633,7 +633,7 @@ spec:
 # ...
 ```
 
-**Important:** Enabling the Kafka Proxy to gather producer metrics places an intermediary between your producing clients and your Kafka brokers. This adds latency to any traffic to your Kafka brokers. Consider the performance implications of having the proxy in front of your Kafka brokers. You can also leave the proxy disabled and gather producer metrics from the clients directly by using [JMX](https://kafka.apache.org/documentation/#monitoring){:target="_blank"}.
+**Important:** Enabling the Kafka Proxy to gather producer metrics places an intermediary between your producing clients and your Kafka brokers. This adds latency to any traffic to your Kafka brokers. Consider the performance implications of having the proxy in front of your Kafka brokers. You can also leave the proxy disabled and gather producer metrics from the clients directly by using [JMX](https://kafka.apache.org/32/documentation/#monitoring){:target="_blank"}.
 
 
 ## Configuring external monitoring through Prometheus

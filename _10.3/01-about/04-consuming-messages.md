@@ -34,7 +34,7 @@ max.poll.records  | The maximum number of records returned in a call to poll()  
 session.timeout.ms  | The number of milliseconds within which a consumer heartbeat must be received to maintain a consumer’s membership of a consumer group.  | 6000-300000  |10000 (10 seconds)
 max.poll.interval.ms  | The maximum time interval between polls before the consumer leaves the group.  |1,…   |300000 (5 minutes)
 
-Many more configuration settings are available, but ensure you read the [Apache Kafka documentation](http://kafka.apache.org/documentation/){:target="_blank"} thoroughly before experimenting with them.
+Many more configuration settings are available, but ensure you read the [Apache Kafka documentation](http://kafka.apache.org/26/documentation/){:target="_blank"} thoroughly before experimenting with them.
 
 ## Consumer groups
 

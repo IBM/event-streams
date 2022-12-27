@@ -11,7 +11,7 @@ You can integrate external systems with {{site.data.reuse.long_name}} by using t
 
 ## What is Kafka Connect?
 
-When connecting Apache Kafka and other systems, the technology of choice is the [Kafka Connect framework](https://kafka.apache.org/documentation/#connect){:target="_blank"}.
+When connecting Apache Kafka and other systems, the technology of choice is the [Kafka Connect framework](https://kafka.apache.org/32/documentation/#connect){:target="_blank"}.
 
 Use Kafka Connect to reliably move large amounts of data between your Kafka cluster and external systems. For example, it can ingest data from sources such as databases and make the data available for stream processing.
 
