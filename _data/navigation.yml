@@ -1029,6 +1029,8 @@ latestdocs:
         url: /troubleshooting/failed-status-during-cs-install/
       - title: "KafkaConnectS2I build fails in an air-gapped installation"
         url: /troubleshooting/kcs2i-airgapped/
+      - title: "Pulling images for Event Streams 10.3.0 fails"
+        url: /troubleshooting/dockerio-image-pull-fails/
 
 # Sidebar navigation for 10.2.
 
