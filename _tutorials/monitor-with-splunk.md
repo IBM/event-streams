@@ -29,7 +29,7 @@ The tasks in this tutorial help achieve the following goals:
 
 ### Configure Splunk
 
-**Tip:** You can configure Splunk with the [Splunk Operator for Kubernetes](https://splunk.github.io/splunk-operator/){:target="_blank"}.
+**Tip:** You can configure Splunk with the [Splunk Operator for Kubernetes](https://splunk.github.io/splunk-operator/){:target="_blank"}. This tutorial is based on the Splunk operator version `2.2.0`.
 
 You can add a new network input after Splunk has been installed in your namespace, as described in the [Splunk documentation](https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Monitornetworkports){:target="_blank"}.
 

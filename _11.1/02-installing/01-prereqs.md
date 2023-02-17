@@ -13,6 +13,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 ## Container environment
 
 {{site.data.reuse.long_name}} 11.1.x is supported on the {{site.data.reuse.openshift}}.
+- Version 11.1.4 is installed by the {{site.data.reuse.short_name}} operator version 3.1.4, and includes Kafka version 3.3.1.
 - Version 11.1.3 is installed by the {{site.data.reuse.short_name}} operator version 3.1.3, and includes Kafka version 3.2.3.
 - Version 11.1.2 is installed by the {{site.data.reuse.short_name}} operator version 3.1.2, and includes Kafka version 3.2.3.
 - Version 11.1.1 is installed by the {{site.data.reuse.short_name}} operator version 3.1.1, and includes Kafka version 3.2.3.
@@ -22,8 +23,8 @@ For an overview of supported component and platform versions, see the [support m
 
 Ensure you have the following set up for your environment:
 
-- A supported version of {{site.data.reuse.openshift_short}} [installed](https://docs.openshift.com/container-platform/4.11/welcome/index.html){:target="_blank"}. See the [support matrix]({{ 'support/#support-matrix' | relative_url }}) for supported versions.
-- The {{site.data.reuse.openshift_short}} CLI [installed](https://docs.openshift.com/container-platform/4.11/cli_reference/openshift_cli/getting-started-cli.html){:target="_blank"}.
+- A supported version of {{site.data.reuse.openshift_short}} [installed](https://docs.openshift.com/container-platform/4.12/installing/index.html#installation-overview_ocp-installation-overview){:target="_blank"}. See the [support matrix]({{ 'support/#support-matrix' | relative_url }}) for supported versions.
+- The {{site.data.reuse.openshift_short}} CLI [installed](https://docs.openshift.com/container-platform/4.12/cli_reference/openshift_cli/getting-started-cli.html){:target="_blank"}.
 - The IBM Cloud Pak CLI (`cloudctl`) [installed](https://github.com/IBM/cloud-pak-cli/blob/master/README.md){:target="_blank"}.
 - A supported version of the {{site.data.reuse.icpfs}} [installed](#ibm-cloud-pak-foundational-services){:target="_blank"}.
 
@@ -39,7 +40,7 @@ For production systems, it is recommended to have {{site.data.reuse.short_name}}
 
 Ensure you have installed a supported version of {{site.data.reuse.icpfs}} before installing {{site.data.reuse.short_name}}, as described in the [foundational services documentation](https://www.ibm.com/docs/en/cpfs?topic=installer){:target="_blank"}. {{site.data.reuse.short_name}} supports {{site.data.reuse.fs}} version 3.19.0 or later 3.x releases.
 
-{{site.data.reuse.short_name}} supports both the Continuous Delivery (CD) and the Long Term Service Release (LTSR) version of foundational services (for more information, see [release types](https://www.ibm.com/docs/en/cpfs?topic=about-release-types){:target="_blank"}). This provides more flexibility for compatibility with other Cloud Pak components (for more information, see [deploying with other Cloud Paks on the same cluster](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=requirements-deploying-other-cloud-paks-same-cluster){:target="_blank"}.
+{{site.data.reuse.short_name}} supports both the Continuous Delivery (CD) and the Long Term Service Release (LTSR) version of foundational services (for more information, see [release types](https://www.ibm.com/docs/en/cpfs?topic=about-release-types){:target="_blank"}). This provides more flexibility for compatibility with other Cloud Pak components (for more information, see [deploying with other Cloud Paks on the same cluster](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=requirements-deploying-other-cloud-paks-same-cluster){:target="_blank"}.
 
 <!---**Important:** Before installing {{site.data.reuse.icpfs}}, ensure you meet the [prerequisites](https://www.ibm.com/docs/en/cpfs?topic=operator-hardware-requirements-recommendations-foundational-services){:target="_blank"} for installing {{site.data.reuse.fs}}, and review the steps for [preparing to install](https://www.ibm.com/docs/en/cpfs?topic=operator-preparing-install-foundational-services){:target="_blank"}.--->
 
@@ -73,8 +74,8 @@ Always ensure you have sufficient resources in your environment to deploy the {{
 | Deployment                                          | CPU (cores) | Memory (Gi) | VPCs (see [licensing](../planning/#licensing)) |
 | --------------------------------------------------- | ----------- | ----------- | ---- |
 | [Operator](#operator-requirements)                  | 0.2         | 1.0         | N/A  |
-| [Development](../planning/#development-deployments) | 2.4         | 5.4         | 0.5  |
-| [Production](../planning/#production-deployments)   | 2.8         | 5.9         | 3.0  |
+| [Development](../planning/#sample-deployments) | 2.4         | 5.4         | 0.5  |
+| [Production](../planning/#sample-deployments)   | 2.8         | 5.9         | 3.0  |
 
 **Note:** {{site.data.reuse.short_name}} provides sample configurations to help you get started with deployments. The resource requirements for these specific samples are detailed in the [planning](../planning/#sample-deployments) section. If you do not have an {{site.data.reuse.short_name}} installation on your system yet, always ensure you include the resource requirements for the operator together with the intended {{site.data.reuse.short_name}} instance requirements (development or production).
 
@@ -125,7 +126,7 @@ For instructions about installing geo-replication, see [configuring](../configur
 
 ## Red Hat OpenShift Security Context Constraints
 
-{{site.data.reuse.short_name}} requires a [Security Context Constraint (SCC)](https://docs.openshift.com/container-platform/4.11/authentication/managing-security-context-constraints.html){:target="_blank"} to be bound to the target namespace prior to installation.
+{{site.data.reuse.short_name}} requires a [Security Context Constraint (SCC)](https://docs.openshift.com/container-platform/4.12/authentication/managing-security-context-constraints.html){:target="_blank"} to be bound to the target namespace prior to installation.
 
 By default, {{site.data.reuse.short_name}} uses the default `restricted` SCC that comes with the {{site.data.reuse.openshift_short}}.
 
@@ -159,13 +160,13 @@ The {{site.data.reuse.long_name}} user interface (UI) is supported on the follow
 
 ## {{site.data.reuse.long_name}} CLI
 
-The {{site.data.reuse.long_name}} command line interface (CLI) is supported on the following systems:
+The {{site.data.reuse.long_name}} command-line interface (CLI) is supported on the following systems:
 
 - Windows 10 or later
 - Linux® Ubuntu 16.04 or later
 - macOS 10.13 (High Sierra) or later
 
-See the post-installation tasks for information about [installing the CLI](../post-installation/#installing-the-event-streams-command-line-interface)
+See the post-installation tasks for information about [installing the CLI](../post-installation/#installing-the-event-streams-command-line-interface).
 
 
 ## Kafka clients
@@ -175,6 +176,6 @@ The Apache Kafka Java client included with {{site.data.reuse.long_name}} is supp
 - IBM Java 8 or later
 - Oracle Java 8 or later
 
-You can also use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}. If you encounter client-side issues, IBM can assist you to resolve those issues (see our [support policy](../../support#support-policy)).
+You can also use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}. If you encounter client-side issues, IBM can assist you to resolve those issues (see our [support policy]({{ 'support/#support-policy' | relative_url }}){:target="_blank"}).
 
-{{site.data.reuse.short_name}} is designed for use with clients based on the `librdkafka` [implementation](https://github.com/edenhill/librdkafka) of the Apache Kafka protocol.
+{{site.data.reuse.short_name}} is designed for use with clients based on the `librdkafka` [implementation](https://github.com/edenhill/librdkafka){:target="_blank"} of the Apache Kafka protocol.

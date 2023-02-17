@@ -12,7 +12,7 @@ The [pre-requisite](../../installing/prerequisites/) guidance gives various exam
 
 If this testing shows that your system does not have the capacity needed for the workload, whether this results in excessive lag or delays, or more extreme errors such as `OutOfMemory` errors, then you can incrementally make the increases detailed in the following sections, re-testing after each change to identify a configuration that meets your specific requirements.
 
-A [performance report](../../pdfs/11.0.4 Performance Report_v3.pdf){:target="_blank"} based on example case studies is also available to provide guidance for setting these values.
+A [performance report]({{ 'pdfs' | relative_url }}/11.0.4 Performance Report_v3.pdf){:target="_blank"} based on example case studies is also available to provide guidance for setting these values.
 
 **Note:** Although the testing for the report was based on Apache Kafka version 2.3.0, the performance numbers are broadly applicable to current versions of Kafka as well.
 
@@ -126,7 +126,7 @@ If you have specific requirements, you can modify the JVM settings for the Kafka
 
 **Note:** Take care when modifying these settings as changes can have an impact on the functioning of the product.
 
-**Note:** Only a [selected subset](https://strimzi.io/docs/operators/0.31.1/configuring.html#con-common-configuration-jvm-reference){:target="_blank"} of the available JVM options can be configured.
+**Note:** Only a [selected subset](https://strimzi.io/docs/operators/0.32.0/configuring.html#con-common-configuration-jvm-reference){:target="_blank"} of the available JVM options can be configured.
 
 JVM settings for the Kafka brokers are defined in the `EventStreams` custom resource in the `spec.strimziOverrides.kafka.jvmOptions` propety. For example:
 

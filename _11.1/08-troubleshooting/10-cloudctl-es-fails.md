@@ -17,7 +17,7 @@ FAILED
 
 ## Causes
 
-This error occurs when you have not logged in to the cluster and initialized the command line tool.
+This error occurs when you have not logged in to the cluster and initialized the command-line tool.
 
 ## Resolving the problem
 

@@ -8,6 +8,7 @@ toc: true
 
 If you have producer or consumer applications created in languages other than Java, use the following guidance to set them up to use schemas. You can also use the [REST producer API](../using-with-rest-producer) to send messages that are encoded with a schema.
 
+{{site.data.reuse.apicurio_note}}
 
 For a producer application:
 1. Retrieve the schema definition that you will be using from Apicurio Registry in {{site.data.reuse.short_name}} and save it in a local file.
@@ -20,8 +21,6 @@ For a consumer application:
 2. Consume a message from Kafka.
 3. Check the headers for the Kafka message to ensure they match the expected schema ID and schema version ID.
 4. Use the Apache Avro library for your programming language to read the schema definition from the local file and decode the Kafka message with it.
-
-
 
 ## Retrieving the schema definition from the schema registry
 

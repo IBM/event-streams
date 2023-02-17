@@ -8,6 +8,8 @@ toc: true
 
 If you are using the Confluent Platform schema registry, {{site.data.reuse.short_name}} provides a migration path for moving your Kafka consumers and producers over to use the Apicurio Registry in {{site.data.reuse.short_name}}.
 
+{{site.data.reuse.apicurio_note}}
+
 ## Migrating schemas to Apicurio Registry in {{site.data.reuse.short_name}}
 
 To migrate schemas, you can use schema auto-registration in your Kafka producer, or you can manually migrate schemas by downloading the schema definitions from the Confluent Platform schema registry and adding them to the Apicurio Registry in {{site.data.reuse.short_name}}.

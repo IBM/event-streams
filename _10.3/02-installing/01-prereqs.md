@@ -14,7 +14,7 @@ Ensure your environment meets the following prerequisites before installing {{si
 
 {{site.data.reuse.long_name}} 10.3.x is supported on the {{site.data.reuse.openshift}}.
 
-- Version 10.3.1 is installed by the {{site.data.reuse.short_name}} operator 2.3.1, and includes Kafka version 2.6.2. 
+- Version 10.3.1 is installed by the {{site.data.reuse.short_name}} operator 2.3.1, and includes Kafka version 2.6.2.
 - Version 10.3.0 is installed by the {{site.data.reuse.short_name}} operator 2.3.0, and includes Kafka version 2.6.0.
 
 For an overview of supported component and platform versions, see the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
@@ -166,6 +166,6 @@ The Apache Kafka Java client included with {{site.data.reuse.long_name}} is supp
 - IBM Java 8 or later
 - Oracle Java 8 or later
 
-You can also use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}. If you encounter client-side issues, IBM can assist you to resolve those issues (see our [support policy](../../support#support-policy)).
+You can also use other Kafka version 2.0 or later clients when connecting to {{site.data.reuse.short_name}}. If you encounter client-side issues, IBM can assist you to resolve those issues (see our [support policy]({{ 'support/#support-policy' | relative_url }}){:target="_blank"}).
 
 {{site.data.reuse.short_name}} is designed for use with clients based on the `librdkafka` [implementation](https://github.com/edenhill/librdkafka) of the Apache Kafka protocol.

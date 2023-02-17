@@ -134,7 +134,7 @@ spec:
     mq.message.builder: com.ibm.eventstreams.connect.mqsink.builders.DefaultMessageBuilder
 ```
 
-A list of all the possible flags can be found by running the command `cloudctl es connector-config-mq-sink --help`. Alternatively, See the [sample properties file](https://github.com/ibm-messaging/kafka-connect-mq-sink/tree/master/config) for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-sink){:target="_blank"} for all available configuration options.
+A list of all the possible flags can be found by running the command `cloudctl es connector-config-mq-sink --help`. Alternatively, See the [sample properties file](https://github.com/ibm-messaging/kafka-connect-mq-sink/tree/master/config) for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-sink#readme){:target="_blank"} for all available configuration options.
 
 ## Downloading the MQ Sink connector
 
@@ -180,4 +180,4 @@ Verify the message is on the queue:
 
 ## Advanced configuration
 
-For more details about the connector and to see all configuration options, see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-sink){:target="_blank"}.
+For more details about the connector and to see all configuration options, see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-sink#readme){:target="_blank"}.

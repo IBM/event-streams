@@ -135,7 +135,7 @@ spec:
     mq.record.builder: com.ibm.eventstreams.connect.mqsource.builders.DefaultRecordBuilder
 ```
 
-A list of all the possible flags can be found by running the command `cloudctl es connector-config-mq-source --help`. Alternatively, See the [sample properties file](https://github.com/ibm-messaging/kafka-connect-mq-source/tree/master/config) for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source){:target="_blank"} for all available configuration options.
+A list of all the possible flags can be found by running the command `cloudctl es connector-config-mq-source --help`. Alternatively, See the [sample properties file](https://github.com/ibm-messaging/kafka-connect-mq-source/tree/master/config) for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source#readme){:target="_blank"} for all available configuration options.
 
 ## Downloading the MQ Source connector
 
@@ -167,4 +167,4 @@ INFO Connection to MQ established
 
 ## Advanced configuration
 
-For more details about the connector and to see all configuration options, see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source){:target="_blank"}.
+For more details about the connector and to see all configuration options, see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source#readme){:target="_blank"}.

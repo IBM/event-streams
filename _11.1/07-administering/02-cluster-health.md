@@ -20,7 +20,7 @@ For an example of how to configure the JMX exporter, see [configuring the JMX Ex
 
 ## Kafka Exporter
 
-You can use {{site.data.reuse.short_name}} to export metrics to Prometheus. These metrics are otherwise only accessible through the Kafka command line tools. This allows topic metrics such as consumer group lag to be collected.
+You can use {{site.data.reuse.short_name}} to export metrics to Prometheus. These metrics are otherwise only accessible through the Kafka command-line tools. This allows topic metrics such as consumer group lag to be collected.
 
 For an example of how to configure a Kafka Exporter, see [configuring the Kafka Exporter](../../installing/configuring#configuring-the-kafka-exporter).
 
@@ -50,18 +50,18 @@ Ensure you select your namespace, cluster name, and other filters at the top of 
 
 ## Kibana
 
-Create dashboards in the Kibana service that is provided by the {{site.data.reuse.openshift_short}} [cluster logging](https://docs.openshift.com/container-platform/4.11/logging/cluster-logging.html){:target="_blank"}, and use the dashboards to monitor for specific errors in the logs and set up alerts for when a number of errors occur over a period of time in your {{site.data.reuse.short_name}} instance.
+Create dashboards in the Kibana service that is provided by the {{site.data.reuse.openshift_short}} [cluster logging](https://docs.openshift.com/container-platform/4.12/logging/cluster-logging.html){:target="_blank"}, and use the dashboards to monitor for specific errors in the logs and set up alerts for when a number of errors occur over a period of time in your {{site.data.reuse.short_name}} instance.
 
 To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these steps:
 
-1. Ensure you have [cluster logging](https://docs.openshift.com/container-platform/4.11/logging/cluster-logging-deploying.html){:target="_blank"} installed.
+1. Ensure you have [cluster logging](https://docs.openshift.com/container-platform/4.12/logging/cluster-logging-deploying.html){:target="_blank"} installed.
 2. Download the JSON file that includes the example Kibana dashboards for {{site.data.reuse.short_name}} from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/kibana-dashboards){:target="_blank"}.
 
 2. Navigate to the Kibana homepage on your cluster.
 
    **For {{site.data.reuse.icpfs}}**: {{site.reuse.data.icpcs_ui_login}} Click the hamburger icon in the top left and then expand **Monitor Health**. Then click **Logging** to open the Kibana homepage.
 
-   **For {{site.data.reuse.openshift_short}} cluster logging stack**: {{site.data.reuse.openshift_ui_login}} Then follow the instructions to navigate to [cluster logging's Kibana homepage](https://docs.openshift.com/container-platform/4.11/logging/cluster-logging-visualizer.html#cluster-logging-visualizer-kibana_cluster-logging-visualizer){:target="_blank"}.
+   **For {{site.data.reuse.openshift_short}} cluster logging stack**: {{site.data.reuse.openshift_ui_login}} Then follow the instructions to navigate to [cluster logging's Kibana homepage](https://docs.openshift.com/container-platform/4.12/logging/cluster-logging-visualizer.html#cluster-logging-visualizer-kibana_cluster-logging-visualizer){:target="_blank"}.
 3. Click **Management** in the navigation on the left.
 4. Click **Index patterns**.
 5. Click **Creat index pattern**.

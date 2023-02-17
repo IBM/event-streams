@@ -63,12 +63,29 @@ You will have a Kubernetes manifest for a `KafkaConnect`, a `Dockerfile`, and an
 
 Edit the downloaded `kafka-connect.yaml` file to enable Kafka Connect to connect to your {{site.data.reuse.openshift_short}} cluster. You can use the snippets in the {{site.data.reuse.short_name}} UI as guidance to configure Kafka Connect.
 
-* Choose a name for your Kafka Connect instance.
-* You can run more than one worker by increasing the `replicas` from 1.
-* Set `bootstrapServers` to connect the bootstrap server address of a listener. If using an internal listener, this will be the address of a service. If using an external listener, this will be the address of a route.
-* If you have fewer than 3 brokers in your {{site.data.reuse.short_name}} cluster, you must set `config.storage.replication.factor`, `offset.storage.replication.factor` and `status.storage.replication.factor` to 1.
-* Unless your {{site.data.reuse.short_name}} cluster has authentication turned off, you must provide authentication credentials in the `authentication` configuration.
-* If clients require a certificate to connect to your {{site.data.reuse.short_name}} cluster (as they will if you are connecting using a route), you must provide a certificate in the `tls` configuration.
+1. Choose a name for your Kafka Connect instance.
+2. You can run more than one worker by increasing the `replicas` from 1.
+3. Set `bootstrapServers` to connect the bootstrap server address of a listener. If using an internal listener, this will be the address of a service. If using an external listener, this will be the address of a route.
+4. If you have fewer than 3 brokers in your {{site.data.reuse.short_name}} cluster, you must set `config.storage.replication.factor`, `offset.storage.replication.factor` and `status.storage.replication.factor` to 1.
+5. If {{site.data.reuse.short_name}} has any form of authentication enabled, ensure you use the appropriate credentials in the Kafka Connect YAML configuration file.
+6. To connect to a listener that requires a certificate, provide a reference to the appropriate certificate in the `spec.tls.trustedCertificates` section of the `KafkaConnect` custom resource.
+
+For example, when connecting to a listener with `tls` authentication and  Mutual TLS encryption (`tls: true`), the Kafka Connect credentials will resemble the following:
+
+  ```
+  tls:
+    trustedCertificates:
+        - secretName: kafka-connect-user
+          certificate: ca.crt
+    authentication:
+      type: tls
+      certificateAndKey:
+        certificate: user.crt
+        key: user.key
+        secretName: kafka-connect-user
+  ```
+
+
 
 ## Adding connectors to your Kafka Connect environment
 

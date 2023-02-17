@@ -27,6 +27,7 @@ You can also upgrade to the latest {{site.data.reuse.short_name}} CD release fro
 3. After successfully upgrading to the latest CD version of foundational services, ensure you [clean up the monitoring resources](https://www.ibm.com/docs/en/cpfs?topic=issues-monitoring-resources-not-cleaned-up){:target="_blank"} to avoid errors.
 4. Upgrade your {{site.data.reuse.short_name}} version to the latest CD release by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.0.5 and operand version 11.0.4).
 
+
 ## Prerequisites
 
 - Ensure you have followed the [upgrade steps for {{site.data.reuse.cp4i}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=upgrading){:target="_blank"} before upgrading {{site.data.reuse.short_name}}.
@@ -51,9 +52,9 @@ You can also upgrade to the latest {{site.data.reuse.short_name}} CD release fro
          replicas: 3
    ```
 
-
 - If you have an {{site.data.reuse.short_name}} 11.0.3 or earlier installation, and you previously added your own Kafka or Zookeeper metrics rules, then ensure you record these elsewhere to be added to the `metrics-config` ConfigMap [after upgrading](#update-metrics-rules).
 
+**Important:** If you have configured custom certificates on any of the listeners in your {{site.data.reuse.short_name}} custom resource, there will be an outage when you upgrade the operand to any 11.0.x version until you reconfigure your listeners with your custom certificates. This is because the upgrade involves a migration of the listener format, which removes any reference to the custom certificates. To ensure you are prepared to quickly deal with this outage after a successful upgrade, review how you can [reconfigure your custom certificates](#reconfigure-listeners-with-custom-certificates).
 
 ## Upgrading by using the UI
 
@@ -63,7 +64,7 @@ The upgrade process requires the upgrade of the {{site.data.reuse.short_name}} o
 
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.\\
-   ![Operators > Installed Operators](../../../images/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
+   ![Operators > Installed Operators]({{ 'images' | relative_url }}/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
 3. From the **Project** list, select the namespace (project) the instance is installed in.
 4. Locate the operator that manages your {{site.data.reuse.short_name}} instance in the namespace. It is called **{{site.data.reuse.long_name}}** in the **Name** column. Click the **{{site.data.reuse.long_name}}** link in the row.
 4. Click the **Subscription** tab to display the **Subscription details** for the {{site.data.reuse.short_name}} operator.
@@ -92,8 +93,8 @@ Alternatively, you can also upgrade your {{site.data.reuse.short_name}} instance
    1. Log in to the {{site.data.reuse.cp4i}} Platform UI.
    2. Click the **Navigation Menu** in the top left.
    3. Expand **Administration** and click **Integration instances**.
-      If an update is available for a runtime, the ![Information icon](../../../images/icon_info.png) **Information icon** displays next to the runtime's current Version number.
-   4. Click the ![More options icon](../../../images/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options** in the row for the {{site.data.reuse.short_name}} instance, and then click **Change version**.
+      If an update is available for a runtime, the ![Information icon]({{ 'images' | relative_url }}/icon_info.png) **Information icon** displays next to the runtime's current Version number.
+   4. Click the ![More options icon]({{ 'images' | relative_url }}/more_options.png "Three vertical dots for the more options icon at end of each row."){:height="30px" width="15px"} **More options** in the row for the {{site.data.reuse.short_name}} instance, and then click **Change version**.
    5. Select **11.0.4** from the **Select a new channel or version** list.
    6. Click **Change version** to save your selections and start the upgrade.
       In the runtimes table, the **Status** column for the runtime displays the `Upgrading` message. The upgrade is complete when the **Status** is `Ready` and the **Version** displays the new version number.
@@ -139,6 +140,24 @@ All {{site.data.reuse.short_name}} pods will gracefully roll again.
 
 
 ## Post-upgrade tasks
+
+### Reconfigure listeners with custom certificates
+
+To enable your clients to connect with the upgraded {{site.data.reuse.short_name}} that uses custom certificates, add the certificate configuration again in the new format as follows:
+
+```
+      - name: external
+        type: route
+        port: 9092
+        authentication:
+          type: scram-sha-512
+        tls: true
+        configuration:
+          brokerCertChainAndKey:
+            certificate: my-listener-certificate.crt
+            key: my-listener-key.key
+            secretName: my-secret
+```
 
 ### Enable collection of producer metrics
 

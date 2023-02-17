@@ -19,14 +19,14 @@ To send tracing data to the {{site.data.reuse.cp4i}} Operations Dashboard, the K
 
 The Kafka client OpenTracing code runs as part of your application. It forwards tracing spans over UDP to the agent. The agent decides which spans are to be sampled and forwards those over TCP to the collector. The collector forwards the data securely to the Operations Dashboard Store in the Operations Dashboard namespace.
 
-![External application and Operations Dashboard](../../images/operations_dashboard_external_app.png "Diagram showing how an external application sends tracing data to the Operations Dashboard.")
+![External application and Operations Dashboard]({{ 'images' | relative_url }}/operations_dashboard_external_app.png "Diagram showing how an external application sends tracing data to the Operations Dashboard.")
 
 The namespace in which the application runs must be registered with the Operations Dashboard. The registration process creates a secret which is used by the collector to communicate securely with the Operations Dashboard Store.
 
 
 ## Preparing your application to use tracing
 
-For detailed instructions about how to use Operations Dashboard with external applications, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=configuration-external-applications-tracing-data){:target="_blank"}.
+For detailed instructions about how to use Operations Dashboard with external applications, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=configuration-external-applications-tracing-data){:target="_blank"}.
 
 At a high level, the steps required are as follows.
 
@@ -41,9 +41,9 @@ To enable the Operations Dashboard to display tracing data from external applica
 Now the Operations Dashboard is ready to receive data from external applications.
 
 ### Step 2 - Modify your application code to enable tracing
-The most convenient way to enable tracing in a Kafka application is to use the Kafka client integration which has been [contributed to the OpenTracing project](https://github.com/opentracing-contrib/java-kafka-client). Then you have a choice of configuring OpenTracing interceptors and using the regular KafkaProducer and KafkaConsumer classes, or using Tracing variants of the KafkaProducer and KafkaConsumer which wrap the real classes. The latter is more flexible but requires additional code changes to the application.
+The most convenient way to enable tracing in a Kafka application is to use the Kafka client integration which has been [contributed to the OpenTracing project](https://github.com/opentracing-contrib/java-kafka-client){:target="_blank"}. Then you have a choice of configuring OpenTracing interceptors and using the regular KafkaProducer and KafkaConsumer classes, or using Tracing variants of the KafkaProducer and KafkaConsumer which wrap the real classes. The latter is more flexible but requires additional code changes to the application.
 
-There are [sample applications](https://github.com/IBM/cp4i-samples/tree/master/EventStreams/KafkaTracingInterceptors) which show you how to do this. You can clone the repository and build them yourself, or copy the techniques for your own applications.
+There are [sample applications](https://github.com/IBM/cp4i-samples/tree/master/EventStreams/KafkaTracingInterceptors){:target="_blank"} which show you how to do this. You can clone the repository and build them yourself, or copy the techniques for your own applications.
 
 ### Step 3 - Deploy your application with the agent and collector sidecar containers
 After it is built, you can deploy your application, complete with the Operations Dashboard agent and collector containers. Without these additional containers, your application will not be able to communicate with the Operations Dashboard Store and your tracing data will not appear. The sample applications include an example of the Kubernetes deployment that includes these containers.
@@ -52,7 +52,7 @@ Slightly unusually, when you deploy your application, you'll notice that it's ru
 
 ### Step 4 - Complete the registration process for the application
 
-The final stage is to use the Operations Dashboard Web Console for [registering the external application to Operations Dashboard](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=configuration-external-applications-tracing-data){:target="_blank"}.
+The final stage is to use the Operations Dashboard Web Console for [registering the external application to Operations Dashboard](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=configuration-external-applications-tracing-data){:target="_blank"}.
 
 To enable the Operations Dashboard to display tracing data from external applications:
 
@@ -67,4 +67,4 @@ To enable the Operations Dashboard to display tracing data from external applica
 
 You can use the {{site.data.reuse.cp4i}} Operations Dashboard to view tracing information and analyze [spans](https://opentracing.io/docs/overview/spans/){:target="_blank"}.
 
-For more information about setting up, using, and managing the dashboard, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=capabilities-integration-tracing-deployment){:target="_blank"}.
+For more information about setting up, using, and managing the dashboard, see the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=capabilities-integration-tracing-deployment){:target="_blank"}.

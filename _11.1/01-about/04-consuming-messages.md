@@ -34,11 +34,11 @@ max.poll.records  | The maximum number of records returned in a call to poll()  
 session.timeout.ms  | The number of milliseconds within which a consumer heartbeat must be received to maintain a consumer’s membership of a consumer group.  | 6000-300000  |10000 (10 seconds)
 max.poll.interval.ms  | The maximum time interval between polls before the consumer leaves the group.  |1,…   |300000 (5 minutes)
 
-Many more configuration settings are available, but ensure you read the [Apache Kafka documentation](http://kafka.apache.org/32/documentation/){:target="_blank"} thoroughly before experimenting with them.
+Many more configuration settings are available, but ensure you read the [Apache Kafka documentation](http://kafka.apache.org/documentation/){:target="_blank"} thoroughly before experimenting with them.
 
 ## Consumer groups
 
-A _consumer group_ is a group of consumers cooperating to consume messages from one or more topics. The consumers in a group all use the same value for the `group.id` configuration. If you need more than one consumer to handle your workload, you can run multiple consumers in the same consumer group. Even if you only need one consumer, it\'s usual to also specify a value for `group.id`.
+A _consumer group_ is a group of consumers cooperating to consume messages from one or more topics. The consumers in a group all use the same value for the `group.id` configuration. If you need more than one consumer to handle your workload, you can run multiple consumers in the same consumer group. Even if you only need one consumer, it is usual to also specify a value for `group.id`.
 
 Each consumer group has a server in the cluster called the _coordinator_ responsible for assigning partitions to the consumers in the group. This responsibility is spread across the servers in the cluster to even the load. The assignment of partitions to consumers can change at every group rebalance.
 
@@ -59,7 +59,7 @@ If you have a consumer group that has rebalanced, be aware that any consumer tha
 
 Kafka automatically detects failed consumers so that it can reassign partitions to working consumers. It uses two mechanisms to achieve this: polling and heartbeating.
 
-If the batch of messages returned from `Consumer.poll(...)` is large or the processing is time-consuming, the delay before calling `poll()` again can be significant or unpredictable. In some cases, it\'s necessary to configure a long
+If the batch of messages returned from `Consumer.poll(...)` is large or the processing is time-consuming, the delay before calling `poll()` again can be significant or unpredictable. In some cases, it is necessary to configure a long
 maximum polling interval so that consumers do not get removed from their groups just because message processing is taking a while. If this were the only mechanism, it would mean that the time taken to detect a failed consumer would also be long.
 
 To make consumer liveness easier to handle, background heartbeating was added in Kafka 0.10.1. The group coordinator expects group members to send it regular heartbeats to indicate that they remain active. A background heartbeat thread runs in the consumer sending regular heartbeats to the coordinator. If the coordinator does not receive a heartbeat from a group member within the _session timeout_, the coordinator removes the member from the group and starts a rebalance of the group. The session timeout can be much shorter than the maximum polling interval so that the time taken to detect a failed consumer can be short even if message processing takes a long time.
@@ -68,7 +68,7 @@ You can configure the maximum polling interval using the `max.poll.interval.ms` 
 
 ### Managing offsets
 
-For each consumer group, Kafka maintains the committed offset for each partition being consumed. When a consumer processes a message, it doesn\'t remove it from the partition. Instead, it just updates its current offset using a process called committing the offset.
+For each consumer group, Kafka maintains the committed offset for each partition being consumed. When a consumer processes a message, it does not remove it from the partition. Instead, it just updates its current offset using a process called committing the offset.
 
 By default, {{site.data.reuse.long_name}} retains committed offset information for 7 days.
 
@@ -85,9 +85,9 @@ When committed offsets are saved in Kafka and the consumers are restarted, consu
 
 ### Committing offsets automatically
 
-The easiest way to commit offsets is to let the Kafka consumer do it automatically. This is simple but it does give less control than committing manually. By default, a consumer automatically commits offsets every 5 seconds. This default commit happens every 5 seconds, regardless of the progress the consumer is making towards processing the messages. In addition, when the consumer calls `poll()`, this also causes the latest offset returned from the previous call to `poll()` to be committed (because it\'s probably been processed).
+The easiest way to commit offsets is to let the Kafka consumer do it automatically. This is simple but it does give less control than committing manually. By default, a consumer automatically commits offsets every 5 seconds. This default commit happens every 5 seconds, regardless of the progress the consumer is making towards processing the messages. In addition, when the consumer calls `poll()`, this also causes the latest offset returned from the previous call to `poll()` to be committed (because it is probably been processed).
 
-If the committed offset overtakes the processing of the messages and there is a consumer failure, it\'s possible that some messages might not be processed. This is because processing restarts at the committed offset, which is later than the last message to be processed before the failure. For this reason, if reliability is more important than simplicity, it\'s usually best to commit offsets manually.
+If the committed offset overtakes the processing of the messages and there is a consumer failure, it is possible that some messages might not be processed. This is because processing restarts at the committed offset, which is later than the last message to be processed before the failure. For this reason, if reliability is more important than simplicity, it is usually best to commit offsets manually.
 
 ### Committing offsets manually
 
@@ -97,7 +97,7 @@ The committed offset is the offset of the messages from which processing is resu
 
 ### Consumer lag
 
-The consumer lag for a partition is the difference between the offset of the most recently published message and the consumer\'s committed offset. Although it\'s usual to have natural variations in the produce and consume rates, the consume rate should not be slower than the produce rate for an extended period.
+The consumer lag for a partition is the difference between the offset of the most recently published message and the consumer\'s committed offset. Although it is usual to have natural variations in the produce and consume rates, the consume rate should not be slower than the produce rate for an extended period.
 
 If you observe that a consumer is processing messages successfully but occasionally appears to jump over a group of messages, it could be a sign that the consumer is not able to keep up. For topics that are not using log compaction, the amount of log space is managed by periodically deleting old log segments. If a consumer has fallen so far behind that it is consuming messages in a log segment that is deleted, it will suddenly jump forwards to the start of the next log segment. If it is important that the consumer processes all of the messages, this behavior indicates message loss from the point of view of this consumer.
 
@@ -117,7 +117,7 @@ You could use a ConsumerRebalanceListener to manually commit offsets (if you are
 
 Any robust application that uses the Kafka client needs to handle exceptions for certain expected situations. In some cases, the exceptions are not thrown directly because some methods are asynchronous and deliver their results using a `Future` or a callback.
 
-Here\'s a list of exceptions that you should handle in your code:
+Here is a list of exceptions that you should handle in your code:
 
 **[org.apache.kafka.common.errors.WakeupException]** Thrown by `Consumer.poll(...)` as a result of `Consumer.wakeup()` being called. This is the standard way to interrupt the consumer\'s polling loop. The polling loop should exit and `Consumer.close()` should be called to disconnect cleanly.
 

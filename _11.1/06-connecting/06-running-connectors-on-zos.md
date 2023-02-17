@@ -140,7 +140,7 @@ As you are using the bindings connection mode for the connector to connect to th
    <path_to_MQ_installation>/mqm/<MQ_version>/java/lib
    ```
 
-The bindings connection mode is a configuration option for the connector as described in the [source connector GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source/blob/master/README.md#configuration){:target="_blank"} and in the [sink connector GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-sink/blob/master/README.md#configuration){:target="_blank"}.
+The bindings connection mode is a configuration option for the connector as described in the [source connector GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source/blob/master/README.md#configuration#readme){:target="_blank"} and in the [sink connector GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-sink/blob/master/README.md#configuration#readme){:target="_blank"}.
 
 ## Starting Kafka Connect on z/OS
 
@@ -176,7 +176,7 @@ cd kafka
 ./bin/connect-distributed.sh connect-distributed.properties
 ```
 
-To start an individual connector use the [Kafka Connect REST API](https://kafka.apache.org/32/documentation/#connect_rest). For example, given a configuration file `mq-source.json` with the following contents:
+To start an individual connector use the [Kafka Connect REST API](https://kafka.apache.org/documentation/#connect_rest){:target="_blank"}. For example, given a configuration file `mq-source.json` with the following contents:
 ```
 {
     "name":"mq-source",

@@ -78,12 +78,12 @@ spec:
 # ...
 ```
 
-If present, existing persistent volumes with the specified storage class are used after installation, or if a [dynamic provisioner](https://docs.openshift.com/container-platform/4.11/storage/dynamic-provisioning.html){:target="_blank"} is configured for the specified storage class, new persistent volumes are created.
+If present, existing persistent volumes with the specified storage class are used after installation, or if a [dynamic provisioner](https://docs.openshift.com/container-platform/4.12/storage/dynamic-provisioning.html){:target="_blank"} is configured for the specified storage class, new persistent volumes are created.
 
 Where optional values are not specified:
 
 - If no storage class is specified and a default storage class has been defined in the {{site.data.reuse.openshift_short}} settings, the default storage class will be used.
-- If no storage class is specified and no default storage class has been defined in the {{site.data.reuse.openshift_short}} settings, the deployment will use any [persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) that have at least the set size value.
+- If no storage class is specified and no default storage class has been defined in the {{site.data.reuse.openshift_short}} settings, the deployment will use any [persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/){:target="_blank"} that have at least the set size value.
 
    **Note:** An empty string is not the same as not specifying a value for a field. If you include the `class` field, the field value must be a valid storage class, it cannot be an empty string. An empty string will not be accepted by the operator.
 
@@ -213,13 +213,13 @@ If no authentication type is provided, IAM is the default authentication mechani
 
 **Note:** The {{site.data.reuse.short_name}} UI currently only supports the use of one authentication type for a single {{site.data.reuse.short_name}} instance. This means that you can only set one authentication type at the same time. The operator will issue an error message if more than one type is provided.
 
-The login requirement for the UI is _disabled_ when all Kafka authentication and authorization is disabled. This is demonstrated by the proof-of-concept [**lightweight without security**](../planning/#development-deployments) sample.
+The login requirement for the UI is _disabled_ when all Kafka authentication and authorization is disabled. This is demonstrated by the proof-of-concept [**lightweight without security**](../planning/#example-deployment-lightweight-without-security) sample.
 
 **Important:** When security is not configured, the **[Producers](../../administering/topic-health/)** and the **[Monitoring](../../administering/cluster-health/#viewing-the-preconfigured-dashboard)** dashboards are not available in the UI.
 
 ## Applying Kafka broker configuration settings
 
-Kafka supports a number of [broker configuration settings](http://kafka.apache.org/32/documentation/#brokerconfigs), typically provided in a properties file.
+Kafka supports a number of [broker configuration settings](http://kafka.apache.org/documentation/#brokerconfigs){:target="_blank"}, typically provided in a properties file.
 
 When creating an instance of {{site.data.reuse.short_name}}, these settings are defined in an `EventStreams` custom resource under a the `spec.strimziOverrides.kafka.config` property.
 
@@ -245,7 +245,7 @@ spec:
 
 This custom resource can be created using the `oc` command or the {{site.data.reuse.openshift_short}} web console under the **IBM Event Streams** operator page.
 
-You can specify all the broker configuration options supported by Kafka except those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/0.31.1/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"}.
+You can specify all the broker configuration options supported by Kafka except those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/0.32.0/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"}.
 
 After deployment, these settings can be [modified](../../administering/modifying-installation/#modifying-kafka-broker-configuration-settings) by updating the `EventStreams` custom resource.
 
@@ -446,7 +446,7 @@ To configure OAuth authentication, configure a Kafka listener with type `oauth`,
 
 {{site.data.reuse.short_name}} supports 2 types of SASL mechanisms: `OAUTHBEARER` or `PLAIN`. By default, OAuth authentication uses `OAUTHBEARER` SASL mechanism, which is the most secure mechanism.
 
-**Important:** For clients that do not support the `OAUTHBEARER` authentication mechanism, you can configure the cluster to use the `PLAIN` mechanism by setting the `enableOauthBearer` property to `false` (default setting is `true` for `OAUTHBEARER`). For more information, see [OAuth 2.0 authentication mechanisms](https://strimzi.io/docs/operators/0.31.1/configuring.html#con-oauth-authentication-flow-str){:target="_blank"}.
+**Important:** For clients that do not support the `OAUTHBEARER` authentication mechanism, you can configure the cluster to use the `PLAIN` mechanism by setting the `enableOauthBearer` property to `false` (default setting is `true` for `OAUTHBEARER`). For more information, see [OAuth 2.0 authentication mechanisms](https://strimzi.io/docs/operators/0.32.0/configuring.html#con-oauth-authentication-flow-str){:target="_blank"}.
 
 #### Configuring OAuth to use fast local JWT validation
 
@@ -477,7 +477,7 @@ spec:
           type: route
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/0.31.1/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/0.32.0/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
 
 #### Configuring OAuth to use token validation by using an introspection endpoint
 
@@ -514,7 +514,7 @@ spec:
 
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/0.31.1/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/0.32.0/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
 
 
 ### Enable OAuth authorization
@@ -545,7 +545,7 @@ spec:
           - "kubeadmin"
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [configuring an OAuth 2.0 authorization server](https://strimzi.io/docs/operators/0.31.1/configuring.html#proc-oauth-server-config-str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [configuring an OAuth 2.0 authorization server](https://strimzi.io/docs/operators/0.32.0/configuring.html#proc-oauth-server-config-str){:target="_blank"}.
 
 ## Configuring node affinity for components
 
@@ -633,7 +633,7 @@ spec:
 # ...
 ```
 
-**Important:** Enabling the Kafka Proxy to gather producer metrics places an intermediary between your producing clients and your Kafka brokers. This adds latency to any traffic to your Kafka brokers. Consider the performance implications of having the proxy in front of your Kafka brokers. You can also leave the proxy disabled and gather producer metrics from the clients directly by using [JMX](https://kafka.apache.org/32/documentation/#monitoring){:target="_blank"}.
+**Important:** Enabling the Kafka Proxy to gather producer metrics places an intermediary between your producing clients and your Kafka brokers. This adds latency to any traffic to your Kafka brokers. Consider the performance implications of having the proxy in front of your Kafka brokers. You can also leave the proxy disabled and gather producer metrics from the clients directly by using [JMX](https://kafka.apache.org/documentation/#monitoring){:target="_blank"}.
 
 
 ## Configuring external monitoring through Prometheus
@@ -796,7 +796,7 @@ The Kafka Exporter can be configured using a `regex` to expose metrics for a col
               prometheus.io/scrape: 'true'
 ```
 
-For more information about configuration options, see [configuring the Kafka Exporter](https://strimzi.io/docs/operators/0.31.1/deploying.html#proc-metrics-kafka-deploy-options-str){:target="_blank"}.
+For more information about configuration options, see [configuring the Kafka Exporter](https://strimzi.io/docs/operators/0.32.0/deploying.html#proc-metrics-kafka-deploy-options-str){:target="_blank"}.
 
 ## Configuring the JMX Exporter
 
@@ -826,8 +826,8 @@ To enable the collection of all JMX metrics available on the Kafka brokers and Z
 
 For more information about configuration options, see the following documentation:
 
-- [Kafka and ZooKeeper JMX metrics configuration](https://strimzi.io/docs/operators/0.31.1/deploying.html#assembly-metrics-str){:target="_blank"}
-- [Kafka JMX metrics configuration](https://strimzi.io/docs/operators/0.31.1/configuring.html#con-common-configuration-prometheus-reference){:target="_blank"}
+- [Kafka and ZooKeeper JMX metrics configuration](https://strimzi.io/docs/operators/0.32.0/deploying.html#assembly-metrics-str){:target="_blank"}
+- [Kafka JMX metrics configuration](https://strimzi.io/docs/operators/0.32.0/configuring.html#con-common-configuration-prometheus-reference){:target="_blank"}
 ## Enabling and configuring Kafka Bridge
 
 With [Kafka Bridge](https://strimzi.io/blog/2019/07/19/http-bridge-intro/){:target="_blank"}, you can connect client applications to your {{site.data.reuse.short_name}} Kafka cluster over HTTP, providing a standard web API connection to {{site.data.reuse.short_name}} rather than the custom Kafka protocol.
@@ -906,21 +906,21 @@ spec:
 When enabled, you can use the [default](#cruise-control-defaults) Cruise Control configuration to optimize your Kafka cluster. You can also specify your required configuration as described in the following sections.
 
 When configuring Cruise Control, you can define the following settings in the `EventStreams` custom resource:
-- Master optimization goals in `spec.strimziOverrides.cruiseControl.config.goals`
+- Main optimization goals in `spec.strimziOverrides.cruiseControl.config.goals`
 - Default optimization goals in `spec.strimziOverrides.cruiseControl.config["default.goals"]`
 
-   **Note:** If you do not set master optimization goals and default goals, then the [Cruise Control defaults](#cruise-control-defaults) are used.
+   **Note:** If you do not set main optimization goals and default goals, then the [Cruise Control defaults](#cruise-control-defaults) are used.
 
 - Hard goals in `spec.strimziOverrides.cruiseControl.config["hard.goals"]`
 - The capacity limits for broker resources, which Cruise Control uses to determine if resource-based optimization goals are being broken. The `spec.strimziOverrides.cruiseControl.brokerCapacity` property defines the Kafka broker resource capacities that Cruise Control will optimize around.
 
-Cruise Control includes a number of [configuration options](https://github.com/linkedin/cruise-control/wiki/Configurations#cruise-control-configurations){:target="_blank"}. You can modify these configuration options for {{site.data.reuse.short_name}}, except the options managed directly by [Strimzi](https://strimzi.io/docs/operators/0.31.1/configuring.html#property-cruise-control-config-reference){:target="_blank"}.
+Cruise Control includes a number of [configuration options](https://github.com/linkedin/cruise-control/wiki/Configurations#cruise-control-configurations){:target="_blank"}. You can modify these configuration options for {{site.data.reuse.short_name}}, except the options managed directly by [Strimzi](https://strimzi.io/docs/operators/0.32.0/configuring.html#property-cruise-control-config-reference){:target="_blank"}.
 
 When enabled, you can use Cruise Control and the `KafkaRebalance` custom resources to [optimize](../../administering/cruise-control/) your deployed {{site.data.reuse.short_name}} Kafka cluster.
 
 ### Cruise Control defaults
 
-{{site.data.reuse.short_name}} supports a subset of the Cruise Control goals. If the master optimization goals and default goals (`spec.strimziOverrides.cruiseControl.config.goals` and `spec.strimziOverrides.cruiseControl.config["default.goals"]`, respectively) are not set, then the Cruise Control configuration defaults to the following goals (in descending order of priority):
+{{site.data.reuse.short_name}} supports a subset of the Cruise Control goals. If the main optimization goals and default goals (`spec.strimziOverrides.cruiseControl.config.goals` and `spec.strimziOverrides.cruiseControl.config["default.goals"]`, respectively) are not set, then the Cruise Control configuration defaults to the following goals (in descending order of priority):
 
 - `com.linkedin.kafka.cruisecontrol.analyzer.goals.RackAwareGoal`
 - `com.linkedin.kafka.cruisecontrol.analyzer.goals.ReplicaCapacityGoal`
@@ -941,13 +941,13 @@ When enabled, you can use Cruise Control and the `KafkaRebalance` custom resourc
 
 For more information about the optimization goals, see the Cruise Control [documentation](https://github.com/linkedin/cruise-control/wiki/Pluggable-Components#goals){:target="_blank"}.
 
-### Master optimization goals
+### Main optimization goals
 
-The master optimization goals define the goals available to be used in Cruise Control operations. Goals not listed cannot be used.
+The main optimization goals define the goals available to be used in Cruise Control operations. Goals not listed cannot be used.
 
 The `spec.strimziOverrides.cruiseControl.config.goals` property defines the list of goals Cruise Control can use.
 
-The master optimization goals have [defaults](#cruise-control-defaults) if not configured.
+The main optimization goals have [defaults](#cruise-control-defaults) if not configured.
 
 For example, if you want Cruise Control to only consider using `com.linkedin.kafka.cruisecontrol.analyzer.goals.RackAwareGoal` and `com.linkedin.kafka.cruisecontrol.analyzer.goals.ReplicaCapacityGoal`, set values for `spec.strimziOverrides.cruiseControl.config.goals` property as follows:
 ```
@@ -969,7 +969,7 @@ spec:
 
 The default goals define the set of goals that you want your cluster to meet most often. They are set in the `spec.strimziOverrides.cruiseControl.config["default.goals"]` property. By default, every 15 minutes, Cruise Control will use the current state of your Kafka cluster to generate a cached optimization proposal by using the configured `default.goals` list.
 
-If no default goals are set, the master optimization goals are used as the [default](#cruise-control-defaults) optimization goals.
+If no default goals are set, the main optimization goals are used as the [default](#cruise-control-defaults) optimization goals.
 
 For example, if you want Cruise Control to always consider meeting `com.linkedin.kafka.cruisecontrol.analyzer.goals.NetworkInboundUsageDistributionGoal`, `com.linkedin.kafka.cruisecontrol.analyzer.goals.NetworkOutboundUsageDistributionGoal`, and `com.linkedin.kafka.cruisecontrol.analyzer.goals.CpuUsageDistributionGoal`, set values for the `spec.strimziOverrides.cruiseControl.config["default.goals"]` property as follows:
 
@@ -995,7 +995,7 @@ Hard goals define the list of goals that must be met by an optimization proposal
 
 Hard goals can be set by the `spec.strimziOverrides.cruiseControl.config["hard.goals"]` property.
 
-In Cruise Control, the following [master optimization goals](#cruise-control-defaults) are preset as hard goals:
+In Cruise Control, the following [main optimization goals](#cruise-control-defaults) are preset as hard goals:
 - `com.linkedin.kafka.cruisecontrol.analyzer.goals.RackAwareGoal`
 - `com.linkedin.kafka.cruisecontrol.analyzer.goals.ReplicaCapacityGoal`
 - `com.linkedin.kafka.cruisecontrol.analyzer.goals.DiskCapacityGoal`
@@ -1159,6 +1159,11 @@ spec:
 
 ## Unsupported settings
 
-This release of {{site.data.reuse.short_name}} does not support the `secretPrefix` configuration property. The `secretPrefix` property adds a prefix to the name of all Secrets created from the `KafkaUser` resource. This can cause problems with the normal operation of {{site.data.reuse.short_name}} in this release.
+This release of {{site.data.reuse.short_name}} does not support the following configuration properties:
+- `secretPrefix`: This property adds a prefix to the name of all secrets created from the `KafkaUser` resource. It can cause problems with the normal operation of {{site.data.reuse.short_name}}.
 
-Do not configure prefixes by setting the `EventStreams.spec.strimziOverrides.entityOperator.userOperator.secretPrefix` property.
+  Do not configure prefixes by setting the `EventStreams.spec.strimziOverrides.entityOperator.userOperator.secretPrefix` property.
+
+- `watchedNamespace`: This property sets the namespace in which the deployed `KafkaUser` Operator watches for `KafkaUser` resources. It can cause problems with the normal operation of {{site.data.reuse.short_name}} as multiple components rely on the Entity User Operator to be watching the currently installed namespace.
+
+  Do not configure the watched namespace by setting the `EventStreams.spec.strimziOverrides.entityOperator.userOperator.watchedNamespace` property.

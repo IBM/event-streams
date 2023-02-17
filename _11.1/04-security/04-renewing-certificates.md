@@ -19,11 +19,11 @@ toc: true
 
 By default, {{site.data.reuse.short_name}} uses self-signed CA certificates. These are automatically renewed when the default `renewalDays` (default is 30 days) and `validityDays` (default is 365 days) limits are met.
 
-To set exactly when certificates are renewed, you can configure the `renewalDays` and `validityDays` values under the `spec.strimziOverrides.clusterCa` and `spec.strimziOverrides.clientsCa` properties. Validity periods are expressed as a number of days after certificate generation. For more information, see [Certificate renewal and validity periods](https://strimzi.io/docs/operators/0.31.1/configuring.html#con-certificate-renewal-str){:target="_blank"}.
+To set exactly when certificates are renewed, you can configure the `renewalDays` and `validityDays` values under the `spec.strimziOverrides.clusterCa` and `spec.strimziOverrides.clientsCa` properties. Validity periods are expressed as a number of days after certificate generation. For more information, see [Certificate renewal and validity periods](https://strimzi.io/docs/operators/0.32.0/configuring.html#con-certificate-renewal-str){:target="_blank"}.
 
-You can define `maintenance windows` to ensure that the renewal of certificates are done at an appropriate time. For more information, see [Maintenance time windows for rolling update](https://strimzi.io/docs/operators/0.31.1/configuring.html#assembly-maintenance-time-windows-str){:target="_blank"}.
+You can define `maintenance windows` to ensure that the renewal of certificates are done at an appropriate time. For more information, see [Maintenance time windows for rolling update](https://strimzi.io/docs/operators/0.32.0/configuring.html#assembly-maintenance-time-windows-str){:target="_blank"}.
 
-You can also use the `strimzi.io/force-renew` annotation to manually renew the certificates. This can be necessary if you need to renew the certificates for security reasons outside of the defined renewal periods and maintenance windows. For more information, see [Manually renewing CA certificates](https://strimzi.io/docs/operators/0.31.1/configuring.html#proc-renewing-ca-certs-manually-str){:target="_blank"}.
+You can also use the `strimzi.io/force-renew` annotation to manually renew the certificates. This can be necessary if you need to renew the certificates for security reasons outside of the defined renewal periods and maintenance windows. For more information, see [Manually renewing CA certificates](https://strimzi.io/docs/operators/0.32.0/configuring.html#proc-renewing-ca-certs-manually-str){:target="_blank"}.
 
 **Note:** The configuration settings for renewal periods and maintenance windows, and the annotation for manual renewal only apply to auto-generated self-signed certificates. If you provided your own CA certificates and keys, you must manually renew these certificates as described in the following sections.
 

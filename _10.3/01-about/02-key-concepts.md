@@ -8,7 +8,7 @@ toc: true
 
 Apache Kafka® forms the reliable messaging core of {{site.data.reuse.long_name}}. It is a publish-subscribe messaging system designed to be fault-tolerant, providing a high-throughput and low-latency platform for handling real-time data feeds.
 
-![Kafka architecture diagram.](../../../images/kafka_overview.png "Diagram that shows a Kafka architecture. A producer is feeding into a Kafka topic over 3 partitions and the messages are then being subscribed to by consumers.")
+![Kafka architecture diagram.]({{ 'images' | relative_url }}/kafka_overview.png "Diagram that shows a Kafka architecture. A producer is feeding into a Kafka topic over 3 partitions and the messages are then being subscribed to by consumers.")
 
 The following are some key Kafka concepts.
 

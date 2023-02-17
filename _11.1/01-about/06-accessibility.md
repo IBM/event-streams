@@ -14,7 +14,7 @@ Accessibility features assist users who have a disability, such as restricted mo
 -   Keyboard-only operation
 -   Operations that use a screen reader
 
-{{site.data.reuse.long_name}} uses the latest W3C Standard, [WAI-ARIA 1.0](http://www.w3.org/TR/wai-aria/){:target="_blank"}, to ensure compliance with [US Section 508](http://www.access-board.gov/guidelines-and-standards/communications-and-it/about-the-section-508-standards/section-508-standards){:target="_blank"} and [Web Content Accessibility Guidelines \(WCAG\) 2.0](http://www.w3.org/TR/WCAG20/){:target="_blank"}. To take advantage of accessibility features, use the latest release of your screen reader and the latest web browser that is supported by {{site.data.reuse.long_name}}.
+{{site.data.reuse.long_name}} uses the latest W3C Standard, [WAI-ARIA 1.0](http://www.w3.org/TR/wai-aria/){:target="_blank"}, to ensure compliance with [US Section 508](https://www.access-board.gov/ict/){:target="_blank"} and [Web Content Accessibility Guidelines \(WCAG\) 2.0](http://www.w3.org/TR/WCAG20/){:target="_blank"}. To take advantage of accessibility features, use the latest release of your screen reader and the latest web browser that is supported by {{site.data.reuse.long_name}}.
 
 
 ## Keyboard navigation

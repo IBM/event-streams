@@ -32,7 +32,7 @@ The tasks in this tutorial help achieve the following:
 
 ### Configure Splunk
 
-**Tip:** You can configure Splunk with the [Splunk Operator for Kubernetes](https://splunk.github.io/splunk-operator/){:target="_blank"}.
+**Tip:** You can configure Splunk with the [Splunk Operator for Kubernetes](https://splunk.github.io/splunk-operator/){:target="_blank"}. This tutorial is based on the Splunk operator version `2.2.0`.
 
 With the HTTP Event Collector (HEC), you can send data and application events to a Splunk deployment over the HTTP and Secure HTTP (HTTPS) protocols. HEC uses a token-based authentication model. For more information about setting up the HTTP Event Collector, see the [Splunk documentation](https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector){:target="_blank"}.
 

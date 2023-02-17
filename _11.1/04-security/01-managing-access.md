@@ -56,12 +56,12 @@ The following table describes the UI panels and the permissions required to acce
 
 | UI Panel        | Permissions     | Additional Information |
 |:----------------|:----------------|:---------------------------|
-| **Topics**          | `topic.read` or `topic.describe` | - If the user also has either `topic.create` or `cluster.create` permissions, the **Topic Create** button is enabled. <br> - ![Event Streams 11.1.1 icon](../../images/11.1.1.svg "In Event Streams 11.1.1.")If the user has `topic.delete` permission, the **Topic Delete** button in the overflow menu is enabled. |
+| **Topics**          | `topic.read` or `topic.describe` | - If the user also has either `topic.create` or `cluster.create` permissions, the **Topic Create** button is enabled. <br> - ![Event Streams 11.1.1 icon]({{ 'images' | relative_url }}/11.1.1.svg "In Event Streams 11.1.1.")If the user has `topic.delete` permission, the **Topic Delete** button in the overflow menu is enabled. |
 | **Topic Producer**  |                 | This panel is disabled for SCRAM authentication. |
 | **Schema registry** | `schema.read`     | If the user also has `schema.alter` the **Add Schema** button is enabled. |
 | **Metrics**         |                 | This panel is disabled for SCRAM authentication. |
 | **Consumer groups** | `group.read`      |                    |
-| **Geo-replication**  | `cluster.alter` | ![Event Streams 11.1.1 icon](../../images/11.1.1.svg "In Event Streams 11.1.1.")Geo-replication is enabled for SCRAM authentication. |
+| **Geo-replication**  | `cluster.alter` | ![Event Streams 11.1.1 icon]({{ 'images' | relative_url }}/11.1.1.svg "In Event Streams 11.1.1.")Geo-replication is enabled for SCRAM authentication. |
 | **Starter application** | `topic.read` and `topic.write` | When generating the starter application, the current user ID and password will be configured in the properties. `topic.create` permission is required to create new topics within the Starter App wizard. |
 
 The following table describes the mapping of these permissions to the Kafka user ACL definitions.
@@ -74,7 +74,7 @@ The following table describes the mapping of these permissions to the Kafka user
 | `schema.alter`  [^2]  | topic             | ALTER         | prefix           | '\__schema\_'     |
 | `schema.read`  [^2]   | topic             | READ          | prefix           | '\__schema\_'     |
 | `topic.create` [^1]   | topic             | CREATE        | literal/prefix   | '*', \<topic prefix\> or \<topic name\> |
-|  `topic.delete` [^1] <br> ![Event Streams 11.1.1 icon](../../images/11.1.1.svg "In Event Streams 11.1.1.")| topic  | DELETE | literal/prefix | '*', \<topic prefix\> or \<topic name\> |
+|  `topic.delete` [^1] <br> ![Event Streams 11.1.1 icon]({{ 'images' | relative_url }}/11.1.1.svg "In Event Streams 11.1.1.")| topic  | DELETE | literal/prefix | '*', \<topic prefix\> or \<topic name\> |
 | `topic.describe` [^1] | topic             | DESCRIBE      | literal/prefix   | '*', \<topic prefix\> or \<topic name\> |
 | `topic.read` [^1]     | topic             | READ          | literal/prefix   | '*', \<topic prefix\> or \<topic name\> |
 | `topic.write` [^1]    | topic             | WRITE         | literal/prefix   | '*', \<topic prefix\> or \<topic name\> |

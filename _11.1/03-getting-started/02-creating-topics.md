@@ -33,7 +33,7 @@ To use Kafka topics to store events in {{site.data.reuse.long_name}}, create and
 
 **Note:** To view all configuration options you can set for topics, set **Show all available options** to **On**.
 
-**Note:** Kafka supports additional [topic configuration](https://kafka.apache.org/32/documentation/#topicconfigs) settings. Enable **Show all available options** to access more detailed configuration settings if required.
+**Note:** Kafka supports additional [topic configuration](https://kafka.apache.org/documentation/#topicconfigs){:target="_blank"} settings. Enable **Show all available options** to access more detailed configuration settings if required.
 
 ## Using the CLI
 
@@ -43,7 +43,7 @@ To use Kafka topics to store events in {{site.data.reuse.long_name}}, create and
 
 2. Run the following command to initialize the {{site.data.reuse.long_name}} CLI on the cluster:\\
    `cloudctl es init`
-   
+
 3. Run the following command to create a topic:
 
    `cloudctl es topic-create --name <topic-name> --partitions <number-of-partitions> --replication-factor <replication-factor>`
@@ -57,7 +57,7 @@ To use Kafka topics to store events in {{site.data.reuse.long_name}}, create and
 
 **Note:** To view all configuration options you can set for topics, use the help option as follows: `cloudctl es topic-create --help`
 
-Kafka supports additional [topic configuration](https://kafka.apache.org/32/documentation/#topicconfigs) settings. Extend the topic creation command with one or more `--config <property>=<value>` properties to apply additional configuration settings. The following additinal properties are currently supported:
+Kafka supports additional [topic configuration](https://kafka.apache.org/documentation/#topicconfigs){:target="_blank"} settings. Extend the topic creation command with one or more `--config <property>=<value>` properties to apply additional configuration settings. The following additional properties are currently supported:
 
 * cleanup.policy
 * compression.type

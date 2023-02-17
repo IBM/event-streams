@@ -40,7 +40,7 @@ If any of the components are not ready for an extended period of time, check the
 6. To filter only pods, deselect all resource types with the exception of **Pod**.
 7. Click the pod _not_ in the **Running** state to display information regarding the pod.
 8. In the **Overview**, resource usage, such as CPU and memory, can be viewed.
-   ![Example pod overview](../../../images/pod_overview.png "Example screen capture showing pod details with graphs for memory and CPU usage"){:height="100%" width="100%"}
+   ![Example pod overview]({{ 'images' | relative_url }}/pod_overview.png "Example screen capture showing pod details with graphs for memory and CPU usage"){:height="100%" width="100%"}
 9. Click on the **Logs** tab to search logs.
 
 **Tip:** You can also use the [cluster logging](https://docs.openshift.com/container-platform/4.8/logging/cluster-logging.html){:target="_blank"} provided by the {{site.data.reuse.openshift_short}} to collect, store, and visualize logs. The cluster logging components are based upon Elasticsearch, Fluentd, and Kibana (EFK). You can download and install the pre-configured {{site.data.reuse.short_name}} Kibana dashboards by following the instructions in [monitoring cluster health](../cluster-health/).

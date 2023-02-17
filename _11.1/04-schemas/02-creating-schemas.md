@@ -8,9 +8,11 @@ toc: true
 
 You can [create schemas](#creating-schemas) in Avro format and then use the {{site.data.reuse.short_name}} UI or CLI to [add them to the Apicurio Registry](#adding-schemas-to-the-registry).
 
+{{site.data.reuse.apicurio_note}}
+
 ## Creating schemas
 
-{{site.data.reuse.short_name}} supports Apache Avro schemas. Avro schemas are written in JSON to define the format of the messages. For more information about Avro schemas, see the [Avro documentation](http://avro.apache.org/docs/1.9.1/spec.html#schemas){:target="_blank"}.
+{{site.data.reuse.short_name}} supports Apache Avro schemas. Avro schemas are written in JSON to define the format of the messages. For more information about Avro schemas, see the [Avro documentation](http://avro.apache.org/docs/1.11.0/spec.html#schemas){:target="_blank"}.
 
 Apicurio Registry in {{site.data.reuse.short_name}} imports, stores, and uses Avro schemas to serialize and deserialize Kafka messages. Apicurio Registry supports Avro schemas using the `record` complex type. The `record` type can include multiple fields of any data type, primitive or complex.
 

@@ -35,7 +35,7 @@ ssl.truststore.location=<java_truststore_file_location>
 ssl.truststore.password=<java_truststore_password>
 ```
 
-Replace the `<kafka_bootstrap_route_url>` with the address of the [Kafka bootstrap route.](../../installing/post-installation/#connecting-clients)
+Replace the `<kafka_bootstrap_route_url>` with the address of the [Kafka bootstrap route.](../../getting-started/connecting/#obtaining-the-bootstrap-address)
 
 If you used SCRAM authentication for the external listener, replace `<username>` with the SCRAM user name and `<password>` with the SCRAM user's password.
 

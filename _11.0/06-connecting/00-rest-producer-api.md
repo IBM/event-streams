@@ -158,7 +158,7 @@ Where:
 - `<topic_name>` is the name of the topic you want to produce messages to.
 - `--cacert es-cert.pem` can be ommitted if the provided Producer API endpoint has TLS disabled
 
-For full details of the API, see the [API reference](../../api/){:target="_blank"}.
+For full details of the API, see the [API reference]({{ 'api' | relative_url }}){:target="_blank"}.
 
 ## Producing messages using REST with Mutual TLS authentication
 
@@ -218,4 +218,4 @@ Where:
 - `Path` is `/topics/<topic-name>/records`
 - `Certificate` is the label given to the client certificate when it was loaded into the key ring.
 
-For full details of the API, see the [API reference](../../api/){:target="_blank"}.
+For full details of the API, see the [API reference]({{ 'api' | relative_url }}){:target="_blank"}.
