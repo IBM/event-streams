@@ -18,7 +18,7 @@ Connectors are available for copying data in both directions.
  - [{{site.data.reuse.kafka-connect-mq-sink}}](../mq/sink/):\\
     You can use the {{site.data.reuse.kafka-connect-mq-sink-short}} to copy data from {{site.data.reuse.long_name}} or Apache Kafka into IBM MQ. The connector copies messages from a Kafka topic into a MQ queue.
 
-![Kafka Connect: MQ source and sink connectors](../../../images/mq_sink_and_source.png "Diagram showing a representation of how Event Streams and MQ can be connected by using the MQ source and MQ sink connectors.")
+![Kafka Connect: MQ source and sink connectors]({{ 'images' | relative_url }}/mq_sink_and_source.png "Diagram showing a representation of how Event Streams and MQ can be connected by using the MQ source and MQ sink connectors.")
 
  **Important:** If you want to use IBM MQ connectors on IBM z/OS, you must [prepare your setup first](../mq/zos/).
 

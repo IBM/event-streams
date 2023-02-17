@@ -29,7 +29,7 @@ You can also use the `strimzi.io/force-renew` annotation to manually renew the c
 
 ## Renewing your own CA certificates for existing installations
 
-![Event Streams 11.0.1 icon](../../../images/11.0.1.svg "In Event Streams 11.0.1.")In {{site.data.reuse.short_name}} 11.0.1 and later,
+![Event Streams 11.0.1 icon]({{ 'images' | relative_url }}/11.0.1.svg "In Event Streams 11.0.1.")In {{site.data.reuse.short_name}} 11.0.1 and later,
 if you provided your own CA certificates and keys, and need to renew only the CA  certificate, complete the following steps. The steps provided demonstrate renewing the cluster CA certificate, but the steps are identical for renewing the clients CA certificate, with the exception of the secret name.
 
 1. Generate a new CA certificate by using the existing CA private key. The new certificate must have an identical CN name to the certificate it is replacing. Optionally, create a PKCS12 truststore with the new certificate if required.

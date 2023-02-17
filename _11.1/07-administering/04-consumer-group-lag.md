@@ -62,6 +62,6 @@ my-topic   1           1000             1000         0            some-client   
 OK
 ```
 
-To view other Kafka-related metrics, consider configuring a [Kafka Exporter](../cluster-health/#kafka-exporter).
+To view other Kafka-related metrics, consider configuring a [Kafka Exporter](../../installing/configuring/#configuring-the-kafka-exporter).
 
 For information on how to monitor the general health of a particular topic, see [monitoring topic health](../topic-health).

@@ -10,6 +10,9 @@ If you have Kafka producer or consumer applications written in Java, use the fol
 
 **Note:** If you have Kafka clients written in other languages than Java, see the guidance about [setting up non-Java applications](../setting-nonjava-apps) to use schemas.
 
+{{site.data.reuse.apicurio_note}}
+
+
 ## Preparing the setup
 
 To use schemas stored in the Apicurio Registry in {{site.data.reuse.short_name}}, your client applications need to be able to serialize and deserialize messages based on schemas.
@@ -47,7 +50,7 @@ To set up your Java applications to use the Apicurio Registry and the Apicurio R
     <dependency>
       <groupId>io.apicurio</groupId>
       <artifactId>apicurio-registry-serdes-avro-serde</artifactId>
-      <version>2.2.5.Final</version>
+      <version>2.4.1.Final</version>
     </dependency>
     ```
 

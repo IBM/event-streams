@@ -46,7 +46,7 @@ To create a new EventStreamsGeoReplicator instance for geo-replication by using 
    - In the **metadata.labels** section, set the **eventstreams.ibm.com/cluster** property value to the name of your destination {{site.data.reuse.long_name}} instance.
    - Set the **metadata.name** property value to the name of your destination {{site.data.reuse.long_name}} instance.
    - Set the **spec.replicas** property value to the number of geo-replication workers you want to run.
-  ![Create EventStreamsGeoReplicator](../../images/georeplication_create_eventstreamsgeoreplicator_10.3.png "Screen capture showing the Create EventStreamsGeoReplicator page with completed YAML.")
+  ![Create EventStreamsGeoReplicator]({{ 'images' | relative_url }}/georeplication_create_eventstreamsgeoreplicator_10.3.png "Screen capture showing the Create EventStreamsGeoReplicator page with completed YAML.")
 7. Click **Create**.
 8. The new EventStreamsGeoReplicator instance is listed in the **Operator Details > EventStreamsGeoReplicator** page.
 
@@ -68,7 +68,7 @@ metadata:
   name: my-dest-cluster
   namespace: my-project
 spec:
-  version: 11.1.3
+  version: 11.1.4
   replicas: 3
 ```
   **Note:** The EventStreamsGeoReplicator `metadata.name` property and `eventstreams.ibm.com/cluster` label property must be set to the name of the destination {{site.data.reuse.long_name}} instance that you are geo-replicating to.

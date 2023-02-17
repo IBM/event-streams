@@ -19,7 +19,7 @@ To delete an {{site.data.reuse.short_name}} instance:
 2. {{site.data.reuse.task_openshift_navigate_installed_operators}}
 3. {{site.data.reuse.task_openshift_select_operator}}
 4. In the **Operator Details** panel, select the **Event Streams** tab to show the  {{site.data.reuse.short_name}} instances in the selected namespace.
-5. Click ![More options icon](../../../images/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** next to the instance to be deleted to open the actions menu.
+5. Click ![More options icon]({{ 'images' | relative_url }}/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** next to the instance to be deleted to open the actions menu.
 6. Click the **Delete EventStreams** menu option to open the confirmation panel.
 7. Check the namespace and instance name and click **Delete** to shutdown the associated pods and delete the instance.
 
@@ -42,7 +42,7 @@ For Kafka and ZooKeeper, this property can be found as follows:
 For other components, this property can be found as follows:
 - `spec.<component_name>.storage.deleteClaim`
 
-**Important:** This change will cause data to be removed during an upgrade. 
+**Important:** This change will cause data to be removed during an upgrade.
 
 For example, to configure automatic deletion for the Kafka storage when uninstalling:
 
@@ -71,7 +71,7 @@ Delete the Persistent Volume Claims (PVCs):
 3. In the **Project** dropdown select the required namespace.
 4. Click **Select All Filters** to display PVCs in any state.
 5. Enter the name of the {{site.data.reuse.short_name}} instance in the **Filter by name** box.
-6. For each PVC to be deleted, make a note of the **Persistent Volume** listed for that PVC and then click ![More options icon](../../../images/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** to open the actions menu.
+6. For each PVC to be deleted, make a note of the **Persistent Volume** listed for that PVC and then click ![More options icon]({{ 'images' | relative_url }}/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** to open the actions menu.
 7. Click the **Delete Persistent Volume Claim** menu option to open the confirmation panel.
 8. Check the PVC name and namespace, then click **Delete** to remove the PVC.
 
@@ -80,7 +80,7 @@ Delete remaining Persistent Volumes (PVs):
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand the **Storage** dropdown and select **Persistent Volumes** to open the **Persistent Volumes** page.
 3. In the **Project** dropdown select the required namespace.
-4. For each PV you made a note of when deleting PVCs, click ![More options icon](../../../images/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** to open the actions menu.
+4. For each PV you made a note of when deleting PVCs, click ![More options icon]({{ 'images' | relative_url }}/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** to open the actions menu.
 5. Click the **Delete Persistent Volume** menu option to open the confirmation panel.
 6. Check the PV name and click **Delete** to remove the PV.
 
@@ -128,7 +128,7 @@ For Kafka and ZooKeeper, this property can be found as follows:
 For other components, this property can be found as follows:
 - `spec.<component_name>.storage.deleteClaim`
 
-**Important:** This change will cause data to be removed during an upgrade. 
+**Important:** This change will cause data to be removed during an upgrade.
 
 For example, to configure automatic deletion for the Kafka storage when uninstalling:
 
@@ -173,7 +173,7 @@ To delete an {{site.data.reuse.short_name}} operator:
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** and click **Installed Operators**.
 3. In the **Project** dropdown select the required namespace. For cluster-wide operators, select the `openshift-operators` project.
-6. Click ![More options icon](../../../images/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** next to the {{site.data.reuse.long_name}} operator to be deleted to open the actions menu.
+6. Click ![More options icon]({{ 'images' | relative_url }}/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** next to the {{site.data.reuse.long_name}} operator to be deleted to open the actions menu.
 7. Click the **Uninstall Operator** menu option to open the confirmation panel.
 8. Check the namespace and operator name, then click **Remove** to uninstall the operator.
 
@@ -183,7 +183,7 @@ The {{site.data.reuse.short_name}} Custom Resource Definitions (CRDs) are not de
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Administration** and click **Custom Resource Definitions**.
 3. Enter `eventstreams` in the **Filter by name** box to filter the CRDs associated with {{site.data.reuse.short_name}}.
-4. Click ![More options icon](../../../images/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** next to the CRD to be deleted to open the actions menu.
+4. Click ![More options icon]({{ 'images' | relative_url }}/more_options.png "More options icon at end of each row."){:height="30px" width="15px"} **More options** next to the CRD to be deleted to open the actions menu.
 5. Click the **Delete Custom Resource Definition** menu option to open the confirmation panel.
 6. Check the name of the CRD and click **Delete** to remove the CRD.
 

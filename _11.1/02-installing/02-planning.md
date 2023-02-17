@@ -188,16 +188,16 @@ Ensure you have sufficient CPU capacity and physical memory in your environment 
 
 If you plan to have persistent volumes, [consider the disk space](../capacity-planning/#disk-space-for-persistent-volumes) required for storage.
 
-Both Kafka and ZooKeeper rely on fast write access to disks. Use separate dedicated disks for storing Kafka and ZooKeeper data. For more information, see the disks and filesystems guidance in the [Kafka documentation](https://kafka.apache.org/32/documentation/#diskandfs){:target="_blank"}, and the deployment guidance in the [ZooKeeper documentation](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_designing){:target="_blank"}.
+Both Kafka and ZooKeeper rely on fast write access to disks. Use separate dedicated disks for storing Kafka and ZooKeeper data. For more information, see the disks and filesystems guidance in the [Kafka documentation](https://kafka.apache.org/documentation/#diskandfs){:target="_blank"}, and the deployment guidance in the [ZooKeeper documentation](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_designing){:target="_blank"}.
 
 If persistence is enabled, each Kafka broker and ZooKeeper server requires one physical volume each. The number of Kafka brokers and ZooKeeper servers depends on your setup (for example, see the provided samples described in [resource requirements](../prerequisites/#resource-requirements)).
 
 You either need to create a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#static){:target="_blank"} for each physical volume, or specify a storage class that supports [dynamic provisioning](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#dynamic){:target="_blank"}. Each component can use a different storage class to control how physical volumes are allocated.
 
-See the {{site.data.reuse.openshift_short}} [documentation](https://docs.openshift.com/container-platform/4.11/storage/understanding-persistent-storage.html){:target="_blank"} for information about creating persistent volumes and creating a storage class that supports dynamic provisioning. For both, you must have the Cluster Administrator role.
+See the {{site.data.reuse.openshift_short}} [documentation](https://docs.openshift.com/container-platform/4.12/storage/understanding-persistent-storage.html){:target="_blank"} for information about creating persistent volumes and creating a storage class that supports dynamic provisioning. For both, you must have the Cluster Administrator role.
 
 - If these persistent volumes are to be created manually, this must be done by the system administrator before installing {{site.data.reuse.long_name}}. These will then be claimed from a central pool when the {{site.data.reuse.long_name}} instance is deployed. The installation will then claim the required number of persistent volumes from this pool.
-- If these persistent volumes are to be created automatically, ensure a [dynamic provisioner](https://docs.openshift.com/container-platform/4.11/storage/dynamic-provisioning.html){:target="_blank"} is configured for the storage class you want to use. See [data storage requirements](../prerequisites/#data-storage-requirements) for information about storage systems supported by {{site.data.reuse.short_name}}.
+- If these persistent volumes are to be created automatically, ensure a [dynamic provisioner](https://docs.openshift.com/container-platform/4.12/storage/dynamic-provisioning.html){:target="_blank"} is configured for the storage class you want to use. See [data storage requirements](../prerequisites/#data-storage-requirements) for information about storage systems supported by {{site.data.reuse.short_name}}.
 
 **Important:** When creating persistent volumes for each component, ensure the correct **Access mode** is set for the volumes as described in the following table.
 
@@ -255,7 +255,7 @@ If you are looking for a more resilient setup, or want plan for disaster recover
 
 Kafka is designed for high availability and fault tolerance.
 
-To reduce the impact of {{site.data.reuse.short_name}} Kafka broker failures, configure your installation with at least three brokers and spread them across several {{site.data.reuse.openshift}} [worker nodes](https://docs.openshift.com/container-platform/4.11/machine_management/adding-rhel-compute.html){:target="_blank"} by ensuring you have at least as many worker nodes as brokers. For example, for 3 Kafka brokers, ensure you have at least 3 worker nodes running on separate physical servers.
+To reduce the impact of {{site.data.reuse.short_name}} Kafka broker failures, configure your installation with at least three brokers and spread them across several {{site.data.reuse.openshift}} [worker nodes](https://docs.openshift.com/container-platform/4.12/machine_management/adding-rhel-compute.html){:target="_blank"} by ensuring you have at least as many worker nodes as brokers. For example, for 3 Kafka brokers, ensure you have at least 3 worker nodes running on separate physical servers.
 
 Kafka ensures that topic-partition replicas are spread across available brokers up to the replication factor specified. Usually, all of the replicas will be in-sync, meaning that they are all fully up-to-date, although some replicas can temporarily be out-of-sync, for example, when a broker has just been restarted.
 
@@ -311,7 +311,7 @@ You can set up {{site.data.reuse.short_name}} to use the following Cruise Contro
 
 ## Planning for log management
 
-{{site.data.reuse.short_name}} uses the [cluster logging](https://docs.openshift.com/container-platform/4.11/logging/cluster-logging.html){:target="_blank"} provided by the {{site.data.reuse.openshift_short}} to collect, store, and visualize logs. The cluster logging components are based upon Elasticsearch, Fluentd, and Kibana (EFK).
+{{site.data.reuse.short_name}} uses the [cluster logging](https://docs.openshift.com/container-platform/4.12/logging/cluster-logging.html){:target="_blank"} provided by the {{site.data.reuse.openshift_short}} to collect, store, and visualize logs. The cluster logging components are based upon Elasticsearch, Fluentd, and Kibana (EFK).
 
 You can use this EFK stack logging capability in your environment to help resolve problems with your deployment and aid general troubleshooting.
 
@@ -319,7 +319,7 @@ You can use log data to investigate any problems affecting your [system health](
 
 ## Kafka static configuration properties
 
-You can set [Kafka broker configuration](https://strimzi.io/docs/operators/0.31.1/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"} settings in your `EventStreams` custom resource under the property `spec.strimziOverrides.kafka`. These settings will override the default Kafka configuration defined by {{site.data.reuse.short_name}}.
+You can set [Kafka broker configuration](https://strimzi.io/docs/operators/0.32.0/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"} settings in your `EventStreams` custom resource under the property `spec.strimziOverrides.kafka`. These settings will override the default Kafka configuration defined by {{site.data.reuse.short_name}}.
 
 You can also use this configuration property to modify read-only Kafka broker settings for an existing {{site.data.reuse.long_name}} installation. Read-only parameters are defined by Kafka as settings that require a broker restart. Find out more about the [Kafka configuration options and how to modify them](../../administering/modifying-installation/#modifying-kafka-broker-configuration-settings) for an existing installation.
 
@@ -370,7 +370,7 @@ The following table shows number of VPCs and licenses required for different dep
 
 ### License usage
 
-The license usage of {{site.data.reuse.long_name}} is collected by the {{site.data.reuse.icpfs}} License Service, which provides the service that tracks the licensed containers and their resource usage based on the product use. Ensure you install the License Service as described in the [{{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=administering-deploying-license-service){:target="_blank"}.
+The license usage of {{site.data.reuse.long_name}} is collected by the {{site.data.reuse.icpfs}} License Service, which provides the service that tracks the licensed containers and their resource usage based on the product use. Ensure you install the License Service as described in the [{{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=administering-deploying-license-service){:target="_blank"}.
 
 When [creating an instance](../installing/#install-an-event-streams-instance) of {{site.data.reuse.short_name}}, ensure that you select the correct value for `spec.license.use` in the custom resource. This value is used for metering purposes and could result in inaccurate charging and auditing if set incorrectly. Select one of the following values based on the purpose of your deployment:
 
@@ -388,7 +388,7 @@ There are 3 APIs that can be viewed:
 In this example, the `metricQuantity` is 3 indicating that the peak VPC usage is 3.
 3. **Bundled products report (last 30 days)** This shows the breakdown of bundled products that are included in IBM Cloud Paks that are deployed on a cluster with the highest VPC usage within the requested period. For {{site.data.reuse.short_name}} this shows the peak number of VPCs in use, the conversion ratio and the number of licenses used. For example:
 ```
-[{"productName":"IBM Event Streams for Non Production","productId":"<product_id>","cloudpakId":"<cloudpak_id>","cloudpakVersion":"2020.2.1","metricName":"VIRTUAL_PROCESSOR_CORE","metricPeakDate":"2020-06-10","metricMeasuredQuantity":6,"metricConversion":"2:1","metricConvertedQuantity":3}]
+[{"productName":"IBM Event Streams for Non Production","productId":"<product_id>","cloudpakId":"<cloudpak_id>","metricName":"VIRTUAL_PROCESSOR_CORE","metricPeakDate":"2020-06-10","metricMeasuredQuantity":6,"metricConversion":"2:1","metricConvertedQuantity":3}]
 ```
 In this example, the `productName` shows the license metrics for a `IBM Event Streams for Non Production` deployment. The `metricMeasuredQuantity` is 6 VPCs, the `metricConversion` is 2:1 and `metricConvertedQuantity` is 3 VPCs so the license usage is 3.
 
@@ -402,7 +402,7 @@ If there are multiple production or non-production installations in a cluster, t
 
 If there are production and non-production {{site.data.reuse.long_name}} instances installed in the cluster, then the `metricConvertedQuantity` under `IBM Event Streams` and `IBM Event Streams for Non Production` will need to be added to determine the total license usage. For example:
 ```
-[{"productName":"IBM Event Streams for Non Production","productId":"<product_id>","cloudpakId":"<cloudpak_id>","cloudpakVersion":"2020.2.1","metricName":"VIRTUAL_PROCESSOR_CORE","metricPeakDate":"2020-06-10","metricMeasuredQuantity":6,"metricConversion":"2:1","metricConvertedQuantity":3},{"productName":"IBM Event Streams","productId":"<product_id>","cloudpakId":"<cloudpak_id>","cloudpakVersion":"2020.2.1","metricName":"VIRTUAL_PROCESSOR_CORE","metricPeakDate":"2020-06-11","metricMeasuredQuantity":8,"metricConversion":"1:1","metricConvertedQuantity":8}]
+[{"productName":"IBM Event Streams for Non Production","productId":"<product_id>","cloudpakId":"<cloudpak_id>","metricName":"VIRTUAL_PROCESSOR_CORE","metricPeakDate":"2020-06-10","metricMeasuredQuantity":6,"metricConversion":"2:1","metricConvertedQuantity":3},{"productName":"IBM Event Streams","productId":"<product_id>","cloudpakId":"<cloudpak_id>","metricName":"VIRTUAL_PROCESSOR_CORE","metricPeakDate":"2020-06-11","metricMeasuredQuantity":8,"metricConversion":"1:1","metricConvertedQuantity":8}]
 ```
 In this example there are {{site.data.reuse.short_name}} installations for non-production and for production. The non-production usage is 6 VPCs which converts to 3 licenses. The production usage is 8 VPCs which converts to 8 licenses. Therefore the total license usage is 11.
 

@@ -10,7 +10,7 @@ toc: true
 
 Java Management Extensions (JMX) is a way of retrieving metrics from your specific processes dynamically at runtime. This can be used to get metrics that are specific to Java operations on Kafka
 
-To manage resources, management beans (MBeans) are used. MBeans represent a resource in the JVM. There are specific [MBean attributes](https://kafka.apache.org/32/documentation/#remote_jmx) you can use with Kafka.
+To manage resources, management beans (MBeans) are used. MBeans represent a resource in the JVM. There are specific [MBean attributes](https://kafka.apache.org/documentation/#remote_jmx){:target="_blank"} you can use with Kafka.
 
 Metrics can be retrieved from applications running inside your {{site.data.reuse.openshift_short}} cluster by connecting to an exposed JMX port. The metrics can also be pushed in various formats to remote sinks inside or outside of the cluster by using JmxTrans.
 
@@ -107,7 +107,7 @@ spec:
       readOnly: true
 ```
 
-For more information, see [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-files-from-a-pod)
+For more information, see [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-files-from-a-pod){:target="_blank"}.
 
 If the connecting application is not installed inside the {{site.data.reuse.short_name}} namespace, it must be copied to the application namespace using the following command:
 
@@ -129,7 +129,7 @@ To configure a JmxTrans deployment, you will need to use the `spec.strimziOverri
 
 | Attribute    | Description                                                                                                                                                                                    |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `outputType` | The specified format you want to transform your query to. For a list of supported data formats, see the [OutputWriters documentation](https://github.com/jmxtrans/jmxtrans/wiki/OutputWriters) |
+| `outputType` | The specified format you want to transform your query to. For a list of supported data formats, see the [OutputWriters documentation](https://github.com/jmxtrans/jmxtrans/wiki/OutputWriters){:target="_blank"} |
 | `host`       | The target host address the data is pushed to.                                                                                                                                                 |
 | `port`       | The target port the data is pushed to.                                                                                                                                                         |
 | `flushDelay` | Number of seconds JmxTrans agent waits before pushing new data.                                                                                                                                |

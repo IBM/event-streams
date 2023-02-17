@@ -19,7 +19,7 @@ To send tracing data to the {{site.data.reuse.cp4i}} Operations Dashboard, the K
 
 The Kafka client OpenTracing code runs as part of your application. It forwards tracing spans over UDP to the agent. The agent decides which spans are to be sampled and forwards those over TCP to the collector. The collector forwards the data securely to the Operations Dashboard Store in the Operations Dashboard namespace.
 
-![External application and Operations Dashboard](../../../images/operations_dashboard_external_app.png "Diagram showing how an external application sends tracing data to the Operations Dashboard.")
+![External application and Operations Dashboard]({{ 'images' | relative_url }}/operations_dashboard_external_app.png "Diagram showing how an external application sends tracing data to the Operations Dashboard.")
 
 The namespace in which the application runs must be registered with the Operations Dashboard. The registration process creates a secret which is used by the collector to communicate securely with the Operations Dashboard Store.
 

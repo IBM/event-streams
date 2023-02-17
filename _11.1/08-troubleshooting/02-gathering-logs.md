@@ -6,7 +6,7 @@ slug: gathering-logs
 toc: true
 ---
 
-To help IBM Support troubleshoot any issues with your {{site.data.reuse.long_name}} instance, use the `oc adm must-gather` command to capture the [must gather logs](https://docs.openshift.com/container-platform/4.11/support/gathering-cluster-data.html){:target="_blank"}. The logs are stored in a folder in the current working directory.
+To help IBM Support troubleshoot any issues with your {{site.data.reuse.long_name}} instance, use the `oc adm must-gather` command to capture the [must gather logs](https://docs.openshift.com/container-platform/4.12/support/gathering-cluster-data.html){:target="_blank"}. The logs are stored in a folder in the current working directory.
 
 ## Online environments
 
@@ -37,18 +37,17 @@ To gather diagnostic logs in an air-gapped (also referred to as offline or disco
 1. Pull the {{site.data.reuse.short_name}} `must-gather` image as follows:
 
    `docker pull icr.io/cpopen/ibm-eventstreams-must-gather`
-
 2. Tag the image:
 
    `docker image -t icr.io/cpopen/ibm-eventstreams-must-gather <private-registry-image-address:tag>`
-
 3. Push the tagged image to the internal registry of your air-gapped environments:
 
    `docker push <private-registry-image-address:tag>`
 
+   **Note:** Automatic updates to the `must-gather` image are not supported in an air-gapped environment. Repeat the previous steps frequently to ensure you are gathering logs with the most recent image.
 4. {{site.data.reuse.openshift_cli_login}}
 5. Run the following command to capture the logs:
 
    `oc adm must-gather --image=<image-location-on-internal-registry> -- gather -m system,eventstreams -n <namespace>`
 
-   After completing successfully, the command will store the logs in an archive file in a folder in the current working directory.
+After completing successfully, the command will store the logs in an archive file in a folder in the current working directory.

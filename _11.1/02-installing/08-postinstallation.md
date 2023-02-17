@@ -87,7 +87,7 @@ Consider the following guidance about firewall and load balancer settings for yo
 
 ### Using {{site.data.reuse.openshift_short}} routes
 
-{{site.data.reuse.short_name}} uses OpenShift routes. Ensure your OpenShift [router](https://docs.openshift.com/container-platform/4.11/networking/routes/route-configuration.html){:target="_blank"} is set up as required.
+{{site.data.reuse.short_name}} uses OpenShift routes. Ensure your OpenShift [router](https://docs.openshift.com/container-platform/4.12/networking/routes/route-configuration.html){:target="_blank"} is set up as required.
 
 ## Connecting clients
 

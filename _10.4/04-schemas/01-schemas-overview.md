@@ -12,7 +12,7 @@ Schemas help producers create data that conforms to a predefined structure, defi
 
 It is common for all of the messages on a topic to use the same schema. The key and value of a message can each be described by a schema.
 
-![Schemas: key and value of a message diagram.](../../../images/Schema_Basics_1.svg "Diagram representing how a schema can help define a structure for the key and value pairs of a message.")
+![Schemas: key and value of a message diagram.]({{ 'images' | relative_url }}/Schema_Basics_1.svg "Diagram representing how a schema can help define a structure for the key and value pairs of a message.")
 
 <!-- A schema defines the structure of the data in a message. After the structure is described in a schema, it makes it much easier to ensure that producers and consumers use the correct structure.-->
 
@@ -22,7 +22,7 @@ Schemas are stored in internal Kafka topics by the [Apicurio Registry](https://w
 
 Your producers and consumers validate the data against the specified schema stored in the schema registry. This is in addition to going through Kafka brokers. The schemas do not need to be transferred in the messages this way, meaning the messages are smaller than without using a schema registry.
 
-![Schema architecture diagram.](../../../images/Schema_registry_arch.png "Diagram showing a schema registry architecture. A producer is sending messages and a consumer is reading messages, while both are retrieving the schema from the schema registry.")
+![Schema architecture diagram.]({{ 'images' | relative_url }}/Schema_registry_arch.png "Diagram showing a schema registry architecture. A producer is sending messages and a consumer is reading messages, while both are retrieving the schema from the schema registry.")
 
 If you are migrating to use {{site.data.reuse.short_name}} as your Kafka solution, and have been using a schema registry from a different provider, you can [migrate](../migrating/) to using {{site.data.reuse.short_name}} and the Apicurio Registry.
 
@@ -40,7 +40,7 @@ Avro has support for a wide range of data types, including primitive types (`nul
 
 Learn more about how you can [create schemas](../creating) in {{site.data.reuse.short_name}}.
 
-![Schemas: Avro format.](../../../images/Schema_Basics_3.svg "Diagram showing a representation of a message sent in Avro format.")
+![Schemas: Avro format.]({{ 'images' | relative_url }}/Schema_Basics_3.svg "Diagram showing a representation of a message sent in Avro format.")
 
 <!-- Apache Avro is an open-source data serialization technology. The schema registry uses Apache Avro data formats.	Apache Avro is commonly used with Apache Kafka. It provides an efficient data encoding format, either using the compact binary format or a more verbose but human-readable JSON format.-->
 
@@ -54,7 +54,7 @@ This process provides an efficient way of ensuring that data in messages conform
 
 Serializers and deserializers that automatically retrieve the schemas from the schema registry as required are provided by {{site.data.reuse.long_name}}. If you need to use schemas in an environment for which serializers or deserializers are not provided, you can [use the command line or UI](../setting-nonjava-apps/#retrieving-the-schema-definition-from-the-schema-registry) directly to retrieve the schemas.
 
-![Schemas: Serializer and deserializer.](../../../images/Schema_Basics_4.svg "Diagram showing a representation of where a serializer and a deserializer fits into the Event Streams architecture.")
+![Schemas: Serializer and deserializer.]({{ 'images' | relative_url }}/Schema_Basics_4.svg "Diagram showing a representation of where a serializer and a deserializer fits into the Event Streams architecture.")
 
 <!-- A producing application uses a serializer to produce messages conforming to a schema. A consuming application uses a deserializer to consume messages that have been serialized using a schema._
 
@@ -66,7 +66,7 @@ Whenever you add a schema, and any subsequent versions of the same schema, Apicu
 
 When you create a new version of the schema, you simply add it to the registry and version it. You can then set your producers and consumers that use the schema to start using the new version. Until they do, both producers and consumers are warned that a new version of the schema is available.
 
-![Schemas: versions.](../../../images/Schema_Basics_5.svg "Diagram showing a representation of schema versions.")
+![Schemas: versions.]({{ 'images' | relative_url }}/Schema_Basics_5.svg "Diagram showing a representation of schema versions.")
 
 ## Lifecycle
 
@@ -74,7 +74,7 @@ When a new version is used, you can deprecate the previous version. Deprecating 
 
 You can use the {{site.data.reuse.short_name}} UI or CLI to [manage the lifecycle](../manage-lifecycle/) of schemas, including registering, versioning, and deprecating.
 
-![Schemas: Avro format.](../../../images/Schema_Basics_6.svg "Diagram showing a representation of schema lifecycle stages.")
+![Schemas: Avro format.]({{ 'images' | relative_url }}/Schema_Basics_6.svg "Diagram showing a representation of schema lifecycle stages.")
 
 <!-- _Sometimes, the schema for a topic needs to change to accommodate new requirements. This can be achieved by creating a new version of the existing schema. The schema registry ensures that the new version is compatible with the existing version, meaning that producers and consumers using the existing version will not be broken by the new version._
 

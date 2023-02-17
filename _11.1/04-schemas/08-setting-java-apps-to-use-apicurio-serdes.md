@@ -10,6 +10,9 @@ If you have Kafka producer or consumer applications written in Java, use the fol
 
 **Note:** If you have Kafka clients written in other languages than Java, see the guidance about [setting up non-Java applications](../setting-nonjava-apps) to use schemas.
 
+{{site.data.reuse.apicurio_note}}
+
+
 ## Preparing the setup
 
 To use schemas stored in the Apicurio Registry in {{site.data.reuse.short_name}}, your client applications need to be able to serialize and deserialize messages based on schemas.
@@ -52,7 +55,7 @@ To set up your Java applications to use the Apicurio Registry `serdes` library w
     <dependency>
         <groupId>io.apicurio</groupId>
         <artifactId>apicurio-registry-serdes-avro-serde</artifactId>
-        <version>2.2.5.Final</version>
+        <version>2.4.1.Final</version>
     </dependency>
     ```
 12. If you want to generate specific schema classes from your project Avro schema files, add the following Avro plugin to your project Maven `pom.xml` file, replacing `SCHEMA-FILE-NAME` with the name of your schema file.
@@ -455,10 +458,10 @@ To use the Apicurio Registry  `converter` library, add the following dependency 
 <dependency>
     <groupId>io.apicurio</groupId>
     <artifactId>apicurio-registry-utils-converter</artifactId>
-    <version>2.2.5.Final</version>
+    <version>2.4.1.Final</version>
 </dependency>
 ```
-Alternatively, if you are not building your connector, you can download the Apicurio converter artifacts from [Maven](https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.2.5.Final/apicurio-registry-distro-connect-converter-2.2.5.Final.tar.gz){:target="_blank"}.
+Alternatively, if you are not building your connector, you can download the Apicurio converter artifacts from [Maven](https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.4.1.Final/apicurio-registry-distro-connect-converter-2.4.1.Final.tar.gz){:target="_blank"}.
 
 After downloading, extract the `tar.gz` file and place the folder with all the JARs into a subdirectory within the folder where you are building your `KafkaConnect` image.
 

@@ -166,7 +166,7 @@ status:
   sessionId: 03974f67-b208-4133-9f54-305d268a1a22
 ```
 
-For more information about optimization proposals, see the Strimzi [documentation](https://strimzi.io/docs/operators/0.31.1/configuring.html#con-optimization-proposals-str){:target="_blank"}.
+For more information about optimization proposals, see the Strimzi [documentation](https://strimzi.io/docs/operators/0.32.0/configuring.html#con-optimization-proposals-str){:target="_blank"}.
 
 ### Refreshing an optimization proposal
 
@@ -259,7 +259,7 @@ Use this goal to optimize the distribution of partitions amongst brokers based o
 
 Ensures that inbound network utilization of each broker is below the threshold set in the `spec.strimziOverrides.cruiseControl.brokerCapacity.inboundNetwork` property in the `EventStreams` custom resource.
 
-This is mainly affected by the number of producers producing and the size of produced messages. Use this goal to rebalance the partitions to optimize the distribution of the partitions on the inbound network traffic. This might not result in the inbound network being evenly distributed amongst brokers, it only ensures that the inbound network of each broker is under a given threshold. For even distribution of inbound network traffic amongst brokers, see [NetworkInboundDistributionUsageGoal](#networkinboundusagedistributiongoal)
+This is mainly affected by the number of producers producing and the size of produced messages. Use this goal to rebalance the partitions to optimize the distribution of the partitions on the inbound network traffic. This might not result in the inbound network being evenly distributed amongst brokers, it only ensures that the inbound network of each broker is under a given threshold. For even distribution of inbound network traffic amongst brokers, see [NetworkInboundDistributionUsageGoal](#networkinboundusagedistributiongoal).
 
 ### NetworkOutboundCapacityGoal
 

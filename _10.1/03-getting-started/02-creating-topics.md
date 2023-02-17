@@ -53,7 +53,7 @@ To use Kafka topics to store events in {{site.data.reuse.long_name}}, create and
 
 **Note:** To view all configuration options you can set for topics, use the help option as follows: `cloudctl es topic-create --help`
 
-Kafka supports additional [topic configuration](https://kafka.apache.org/documentation/#topicconfigs) settings. Extend the topic creation command with one or more `--config <property>=<value>` properties to apply additional configuration settings. The following additinal properties are currently supported:
+Kafka supports additional [topic configuration](https://kafka.apache.org/documentation/#topicconfigs) settings. Extend the topic creation command with one or more `--config <property>=<value>` properties to apply additional configuration settings. The following additional properties are currently supported:
 
 * cleanup.policy
 * compression.type

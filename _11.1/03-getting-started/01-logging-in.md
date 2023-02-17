@@ -16,31 +16,31 @@ You can use the {{site.data.reuse.openshift_short}} UI (web console) or CLI to r
 
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.\\
-   ![Operators > Installed Operators](../../images/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
+   ![Operators > Installed Operators]({{ 'images' | relative_url }}/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
 3. Locate the operator that manages your {{site.data.reuse.short_name}} instance in the namespace. It is called **{{site.data.reuse.long_name}}** in the **NAME** column.
 4. Click the **{{site.data.reuse.long_name}}** link in the row and click the **{{site.data.reuse.short_name}}** tab. This lists the **{{site.data.reuse.short_name}}** instances related to this operator.
 5. Find your instance in the **Name** column and click the link for the instance. \\
-   ![{{site.data.reuse.long_name}} > {{site.data.reuse.short_name}} > Instance](../../images/find_your_instance.png "Screen capture showing how to select your instance by {{site.data.reuse.long_name}} > {{site.data.reuse.short_name}} > Instance"){:height="100%" width="100%"}
+   ![{{site.data.reuse.long_name}} > {{site.data.reuse.short_name}} > Instance]({{ 'images' | relative_url }}/find_your_instance.png "Screen capture showing how to select your instance by {{site.data.reuse.long_name}} > {{site.data.reuse.short_name}} > Instance"){:height="100%" width="100%"}
 6. A link to the {{site.data.reuse.long_name}} UI is displayed under the label **Admin UI**. Click the link to open the {{site.data.reuse.long_name}} UI login page in your browser tab.
 7. Log in to your {{site.data.reuse.long_name}} UI from a supported [web browser](../../installing/prerequisites/#ibm-event-streams-ui). Use your credentials provided to you by your cluster administrator.
-   A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#assigning-access-to-users).
+   A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli).
    Enter your username and password to access the {{site.data.reuse.short_name}} UI.
 
 - Use the OpenShift web console to retrieve the URL for your {{site.data.reuse.short_name}} CLI as follows:
 
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Networking** in the navigation on the left, and click **Routes**.\\
-   ![Networking > Routes](../../images/rhocp_menu_routes.png "Screen capture showing how to select Networking > Routes from navigation menu"){:height="50%" width="50%"}
+   ![Networking > Routes]({{ 'images' | relative_url }}/rhocp_menu_routes.png "Screen capture showing how to select Networking > Routes from navigation menu"){:height="50%" width="50%"}
 3. Expand the **Project** at the top of the page and select **ibm-common-services**.
 
    The following is an example output, and you use the value from the **Location** column for the **cp-console** entry to log in to your CLI in a terminal window:\\
-   ![Project](../../images/find_cp_console_route.png "Screen capture showing how to select the CLI route")
+   ![Project]({{ 'images' | relative_url }}/find_cp_console_route.png "Screen capture showing how to select the CLI route")
 4. Enter the address on your login command in a terminal. For example:
    ```
    cloudctl login -a https://cp-console.apps.my-cluster.my-domain.com
    ```
 5. Use your credentials provided to you by your cluster administrator.
-   A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#assigning-access-to-users).
+   A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli).
    Enter your username and password to access the {{site.data.reuse.short_name}} CLI.
 6. Initialize the {{site.data.reuse.short_name}} plugin by running the following command:
    ```
@@ -69,7 +69,7 @@ You can use the {{site.data.reuse.openshift_short}} UI (web console) or CLI to r
    ```
    https://my-eventstreams-ibm-es-ui-myproject.apps.my-cluster.my-domain.com
    ```
-4. Log in to your {{site.data.reuse.long_name}} UI from a supported [web browser](../../installing/prerequisites/#ibm-event-streams-ui). Use your credentials provided to you by your cluster administrator. A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#assigning-access-to-users). Enter your username and password to access the {{site.data.reuse.short_name}} UI.
+4. Log in to your {{site.data.reuse.long_name}} UI from a supported [web browser](../../installing/prerequisites/#ibm-event-streams-ui). Use your credentials provided to you by your cluster administrator. A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli). Enter your username and password to access the {{site.data.reuse.short_name}} UI.
 
 - To retrieve the URL for your {{site.data.reuse.short_name}} CLI, use the following commands:
 
@@ -93,7 +93,7 @@ You can use the {{site.data.reuse.openshift_short}} UI (web console) or CLI to r
    cloudctl login -a https://cp-console.apps.my-cluster.my-domain.com
    ```
 4. Use your credentials provided to you by your cluster administrator.
-   A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#assigning-access-to-users).
+   A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli).
    Enter your username and password to access the {{site.data.reuse.short_name}} CLI.
 5. Initialize the {{site.data.reuse.short_name}} plugin by running the following command:
    ```

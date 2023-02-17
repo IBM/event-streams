@@ -6,7 +6,7 @@ slug: preparing-multizone
 toc: true
 ---
 
-{{site.data.reuse.long_name}} supports [multiple availability zones](../planning/#multiple-availability-zones) for your clusters. Multizone clusters add resilience to your {{site.data.reuse.short_name}} installation.
+To enable [multiple availability zones](../planning/#multiple-availability-zones) for {{site.data.reuse.long_name}}, ensure that your Kubernetes cluster is zone aware and that Kafka rack awareness is set up correctly. 
 
 For guidance about handling outages in a multizone setup, see [managing a multizone setup](../../administering/managing-multizone/).
 

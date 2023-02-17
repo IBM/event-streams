@@ -6,11 +6,11 @@ slug: installing
 toc: true
 ---
 
-The following sections provide instructions about installing {{site.data.reuse.long_name}} on the {{site.data.reuse.openshift}}. The instructions are based on using the {{site.data.reuse.openshift_short}} web console and `oc` command line utility.
+The following sections provide instructions about installing {{site.data.reuse.long_name}} on the {{site.data.reuse.openshift}}. The instructions are based on using the {{site.data.reuse.openshift_short}} web console and `oc` command-line utility.
 
-When deploying in an air-gapped (also referred to as offline or disconnected) environment, ensure you have access to this documentation set, and see the [instructions in the {{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=cluster-adding-catalog-sources-air-gapped-openshift){:target="_blank"}.
+When deploying in an air-gapped (also referred to as offline or disconnected) environment, ensure you have access to this documentation set, and see the [instructions in the {{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=installing-adding-catalog-sources-mirroring-images){:target="_blank"}.
 
-{{site.data.reuse.short_name}} can also be installed as part of [{{site.data.reuse.cp4i}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=capabilities-event-streams-deployment){:target="_blank"}.
+{{site.data.reuse.short_name}} can also be installed as part of [{{site.data.reuse.cp4i}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=capabilities-event-streams-deployment){:target="_blank"}.
 
 
 ## Overview
@@ -28,12 +28,12 @@ Installing {{site.data.reuse.short_name}} has two phases:
 - Ensure you have [installed](../prerequisites/#ibm-cloud-pak-foundational-services) a supported version of the {{site.data.reuse.icpfs}}.
 - Ensure you have [planned for your installation](../planning), such as preparing for persistent storage, considering security options, and considering adding resilience through multiple availability zones.
 - Obtain the connection details for your {{site.data.reuse.openshift_short}} cluster from your administrator.
-- The {{site.data.reuse.short_name}} UI includes dashboards for monitoring [Kafka health](../../administering/cluster-health/#viewing-the-preconfigured-dashboard) and [topic health](../../administering/topic-health/). To provide metrics for these dashboards, ensure you enable the {{site.data.reuse.openshift_short}} monitoring stack as described in the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=administering-enabling-openshift-container-platform-monitoring){:target="_blank"}.
+- The {{site.data.reuse.short_name}} UI includes dashboards for monitoring [Kafka health](../../administering/cluster-health/#viewing-the-preconfigured-dashboard) and [topic health](../../administering/topic-health/). To provide metrics for these dashboards, ensure you enable the {{site.data.reuse.openshift_short}} monitoring stack as described in the {{site.data.reuse.cp4i}} [documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=administering-enabling-openshift-container-platform-monitoring){:target="_blank"}.
    In addition, to provide metrics about topic health, [enable the Kafka Proxy](../../installing/configuring/#enabling-collection-of-producer-metrics).
 
 ## Create a project (namespace)
 
-Create a namespace into which the {{site.data.reuse.short_name}} instance will be installed by creating a [project](https://docs.openshift.com/container-platform/4.11/applications/projects/working-with-projects.html){:target="_blank"}.
+Create a namespace into which the {{site.data.reuse.short_name}} instance will be installed by creating a [project](https://docs.openshift.com/container-platform/4.12/applications/projects/working-with-projects.html){:target="_blank"}.
 When you create a project, a namespace with the same name is also created.
 
 Ensure you use a namespace that is dedicated to a single instance of {{site.data.reuse.short_name}}. This is required because {{site.data.reuse.short_name}} uses network security policies to restrict network connections between its internal components. A single namespace per instance also allows for finer control of user accesses.
@@ -227,7 +227,7 @@ To configure an `EventStreams` custom resource, do the following:
 
 1. Enter a name for the instance in the **Name** field.
 2. Click the license accept toggle to set it to **True**.
-   ![Accepting license toggle](../../images/license_accept_form.png "Screen capture showing how to toggle the license accept field to true"){:height="100%" width="100%"}
+   ![Accepting license toggle]({{ 'images' | relative_url }}/license_accept_form.png "Screen capture showing how to toggle the license accept field to true"){:height="100%" width="100%"}
 3. Ensure that the correct value is selected for the **Product use** from the dropdown. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 4. You can optionally configure other components such as **Kafka**, **ZooKeeper**, and **Security** to suit your [requirements](../configuring).
 5. Scroll down and click the **Create** button at the bottom of the page to deploy the {{site.data.reuse.short_name}} instance.
@@ -251,7 +251,7 @@ When modifying the sample configuration, the updated document can be exported fr
 
 **Important:** You must ensure that the `spec.license.accept` field in the custom resource YAML is set to `true` and that the correct value is selected for the `spec.license.use` field before deploying the {{site.data.reuse.short_name}} instance. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 
-![Accepting license](../../images/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
+![Accepting license]({{ 'images' | relative_url }}/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
 
 **Note:** If experimenting with {{site.data.reuse.short_name}} for the first time, the **Lightweight without security** sample is the smallest and simplest example that can be used to create an experimental deployment. For the smallest production setup, use the **Minimal production** sample configuration.
 
@@ -264,7 +264,7 @@ To deploy an {{site.data.reuse.short_name}} instance, use the following steps:
 
 ### Installing an instance by using the CLI
 
-To install an instance of {{site.data.reuse.short_name}} from the command line, you must first prepare an `EventStreams` custom resource configuration in a YAML file.
+To install an instance of {{site.data.reuse.short_name}} from the command-line, you must first prepare an `EventStreams` custom resource configuration in a YAML file.
 
 A number of [sample configuration files](http://ibm.biz/es-cr-samples){:target="_blank"} have been provided to base your deployment on (download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples). The sample configurations range from smaller deployments for non-production development or general experimentation to large scale clusters ready to handle a production workload.
 
@@ -272,7 +272,7 @@ More information about these samples is available in the [planning](../planning/
 
 **Important:** You must ensure that the `spec.license.accept` field in the configuration is set to `true` and that the correct value is selected for the `spec.license.use` field before deploying the {{site.data.reuse.short_name}} instance. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 
-![Accepting license](../../images/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
+![Accepting license]({{ 'images' | relative_url }}/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
 
 **Note:** If experimenting with {{site.data.reuse.short_name}} for the first time, the **Lightweight without security** sample is the smallest and simplest example that can be used to create an experimental deployment. For the smallest production setup, use the **Minimal production** sample configuration.
 

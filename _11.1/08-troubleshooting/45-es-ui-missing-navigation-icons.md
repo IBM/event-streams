@@ -16,4 +16,4 @@ The {{site.data.reuse.short_name}} operator has misconfigured the authorization 
 
 ## Resolving the problem
 
-[Upgrade](../../installing/upgrading/) your {{site.data.reuse.short_name}} instance to version 11.1.3 to resolve the issue.
+[Upgrade](../../installing/upgrading/) your {{site.data.reuse.short_name}} instance to version 11.1.3 or later to resolve the issue.

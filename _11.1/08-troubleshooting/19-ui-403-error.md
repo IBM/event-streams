@@ -16,4 +16,4 @@ To access the {{site.data.reuse.short_name}} UI, the user must either have the `
 
 ## Resolving the problem
 
-[Assign access to users](../../security/managing-access/#assigning-access-to-users) with an `Administrator` role by ensuring they are in a team with access to the correct namespace.
+[Assign access to users](../../security/managing-access/#accessing-the-event-streams-ui-and-cli) with an `Administrator` role by ensuring they are in a team with access to the correct namespace.

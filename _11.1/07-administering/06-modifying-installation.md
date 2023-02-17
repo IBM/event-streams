@@ -6,7 +6,7 @@ slug: modifying-installation
 toc: true
 ---
 
-You can modify the configuration settings for your existing {{site.data.reuse.short_name}} installation by using the {{site.data.reuse.openshift_short}} web console or the `oc` command line tool. The configuration changes are applied by updating the `EventStreams` custom resource.
+You can modify the configuration settings for your existing {{site.data.reuse.short_name}} installation by using the {{site.data.reuse.openshift_short}} web console or the `oc` command-line tool. The configuration changes are applied by updating the `EventStreams` custom resource.
 You can modify existing values and introduce new properties as outlined under [configuration settings](../../installing/configuring).
 
 **Note:** Some settings might cause affected components of your {{site.data.reuse.short_name}} instance to restart.
@@ -38,7 +38,7 @@ To modify configuration settings by using the {{site.data.reuse.openshift_short}
 
 ## Modifying Kafka broker configuration settings
 
-Kafka supports a number of [key/value pair settings](http://kafka.apache.org/32/documentation/#brokerconfigs){:target="_blank"} for broker configuration, typically provided in a properties file.
+Kafka supports a number of [key/value pair settings](http://kafka.apache.org/documentation/#brokerconfigs){:target="_blank"} for broker configuration, typically provided in a properties file.
 
 In {{site.data.reuse.short_name}}, these settings are defined in an `EventStreams` custom resource under the `spec.strimziOverrides.kafka.config` property.
 
@@ -60,4 +60,4 @@ spec:
          num.io.threads: 24
 ```
 
-You can specify all the broker configuration options supported by Kafka except those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/0.31.1/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"}.
+You can specify all the broker configuration options supported by Kafka except those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/0.32.0/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"}.

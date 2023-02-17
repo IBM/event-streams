@@ -8,7 +8,31 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}} version 11.1.x.
 
+## Release 11.1.4
+
+### Apicurio: set applications to use latest client libraries
+
+Support for Apicurio client libraries version 2.3.x and earlier is deprecated. Ensure all applications connecting to {{site.data.reuse.short_name}} that use the schema registry are using Apicurio client libraries version 2.4.1 or later.
+
+### Kafka version upgraded to 3.3.1
+
+{{site.data.reuse.short_name}} version 11.1.4 includes Kafka release 3.3.1, and supports the use of all Kafka interfaces.
+
+### Support for {{site.data.reuse.openshift}} 4.12
+
+{{site.data.reuse.short_name}} 11.1.4 introduces support for {{site.data.reuse.openshift}} 4.12.
+
+### Security and bug fixes
+
+{{site.data.reuse.short_name}} release 11.1.4 contains security and bug fixes.
+
 ## Release 11.1.3
+
+### Support for {{site.data.reuse.openshift}} 4.12
+
+{{site.data.reuse.short_name}} 11.1.3 includes support for {{site.data.reuse.openshift}} 4.12.
+
+### Security and bug fixes
 
 {{site.data.reuse.short_name}} release 11.1.3 contains security and bug fixes.
 

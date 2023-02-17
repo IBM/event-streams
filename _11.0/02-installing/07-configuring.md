@@ -621,7 +621,7 @@ spec:
 # ...
 ```
 
-![Event Streams 11.0.1 icon](../../../images/11.0.1.svg "In Event Streams 11.0.1.") **Important:** In {{site.data.reuse.short_name}} 11.0.1 and later, you do not have to set the `spec.strimziOverrides.kafka.config.interceptor.class.name`.
+![Event Streams 11.0.1 icon]({{ 'images' | relative_url }}/11.0.1.svg "In Event Streams 11.0.1.") **Important:** In {{site.data.reuse.short_name}} 11.0.1 and later, you do not have to set the `spec.strimziOverrides.kafka.config.interceptor.class.name`.
 
 ## Configuring external monitoring through Prometheus
 
@@ -740,7 +740,7 @@ spec:
 # ...
 ```
 
-![Event Streams 11.0.1 icon](../../../images/11.0.1.svg "In Event Streams 11.0.1.") **Important:** In {{site.data.reuse.short_name}} 11.0.1 and later, publishing additional information is configured by adding the `spec.kafkaProxy` property to the `EventStreams` custom resource as follows (setting `spec.strimziOverrides.kafka.config.interceptor.class.name` is not required):
+![Event Streams 11.0.1 icon]({{ 'images' | relative_url }}/11.0.1.svg "In Event Streams 11.0.1.") **Important:** In {{site.data.reuse.short_name}} 11.0.1 and later, publishing additional information is configured by adding the `spec.kafkaProxy` property to the `EventStreams` custom resource as follows (setting `spec.strimziOverrides.kafka.config.interceptor.class.name` is not required):
 
 ```
 apiVersion: eventstreams.ibm.com/v1beta2
@@ -1162,6 +1162,11 @@ spec:
 
 ## Unsupported settings
 
-This release of {{site.data.reuse.short_name}} does not support the `secretPrefix` configuration property. The `secretPrefix` property adds a prefix to the name of all Secrets created from the `KafkaUser` resource. This can cause problems with the normal operation of {{site.data.reuse.short_name}} in this release.
+This release of {{site.data.reuse.short_name}} does not support the following configuration properties:
+- `secretPrefix`: This property adds a prefix to the name of all secrets created from the `KafkaUser` resource. It can cause problems with the normal operation of {{site.data.reuse.short_name}}.
 
-Do not configure prefixes by setting the `EventStreams.spec.strimziOverrides.entityOperator.userOperator.secretPrefix` property.
+  Do not configure prefixes by setting the `EventStreams.spec.strimziOverrides.entityOperator.userOperator.secretPrefix` property.
+
+- `watchedNamespace`: This property sets the namespace in which the deployed `KafkaUser` Operator watches for `KafkaUser` resources. It can cause problems with the normal operation of {{site.data.reuse.short_name}} as multiple components rely on the Entity User Operator to be watching the currently installed namespace.
+
+  Do not configure the watched namespace by setting the `EventStreams.spec.strimziOverrides.entityOperator.userOperator.watchedNamespace` property.

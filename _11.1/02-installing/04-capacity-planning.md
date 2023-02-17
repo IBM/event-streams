@@ -16,7 +16,7 @@ If needed, you can [modify the selected sample configuration](../configuring) wh
 
 If required by your planned workload, you can further increase the number of Kafka brokers, and the amount of CPU and memory available to them. For changing such values, see the guidance about [scaling](../../administering/scaling/) {{site.data.reuse.short_name}}.
 
-A [performance report](../../pdfs/11.0.4 Performance Report_v3.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
+A [performance report]({{ 'pdfs' | relative_url }}/11.0.4 Performance Report_v3.pdf){:target="_blank"} based on example case studies is available to provide guidance for setting these values.
 
 **Note:** Although the testing for the report was based on Apache Kafka version 2.3.0, the performance numbers are broadly applicable to current versions of Kafka as well.
 
@@ -46,7 +46,7 @@ For each log segment, there are two index files called the time index and the of
 
 Log segments can be deleted or compacted, or both, to manage their size. The topic-level configuration property `cleanup.policy` determines the way the log segments for the topic are managed.
 
-For more information about these settings, see [the Kafka documentation](https://kafka.apache.org/32/documentation/#configuration){:target="_blank"}.
+For more information about these settings, see [the Kafka documentation](https://kafka.apache.org/documentation/#configuration){:target="_blank"}.
 
 The cluster-level settings are [configured](../configuring/#applying-kafka-broker-configuration-settings) in the `EventStreams` custom resource for an instance when it is first created and can be [modified](../../administering/modifying-installation/#modifying-kafka-broker-configuration-settings) at any time.
 

@@ -44,7 +44,7 @@ The upgrade process requires the upgrade of the {{site.data.reuse.short_name}} o
 
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.\\
-   ![Operators > Installed Operators](../../../images/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
+   ![Operators > Installed Operators]({{ 'images' | relative_url }}/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
 3. Locate the operator that manages your {{site.data.reuse.short_name}} instance in the namespace. It is called **{{site.data.reuse.long_name}}** in the **Name** column.
 4. Click the **{{site.data.reuse.long_name}}** link in the row and then click the **Subscription** tab. This shows the **Subscription details** for the **{{site.data.reuse.short_name}}** operator.
 5. Select the version in the **Channel** section (for example, **v2.2-eus**). The **Change Subscription update channel** dialog is displayed, showing the channels that are available to upgrade to.
