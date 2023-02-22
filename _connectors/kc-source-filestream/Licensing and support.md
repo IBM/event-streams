@@ -18,5 +18,5 @@ sections:
     type: "Community"
     description: "Support is provided by the community."
     buttons:
-      - { text: 'Get support', url: 'https://issues.apache.org/jira/projects/KAFKA/issues' }
+      - { text: 'Get support', url: 'https://github.com/apache/kafka/issues' }
 ---
