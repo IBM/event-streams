@@ -177,43 +177,43 @@ spec:
 # ...
 ```
 
-## Configuring UI security
+## Configuring UI and CLI security
 
-By default, accessing the {{site.data.reuse.short_name}} UI requires an {{site.data.reuse.icpfs}} Identity and Access Management (IAM) user that has been assigned access to {{site.data.reuse.short_name}} (see [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli) for details).
+By default, accessing the {{site.data.reuse.short_name}} UI and CLI requires an {{site.data.reuse.icpfs}} Identity and Access Management (IAM) user that has been assigned access to {{site.data.reuse.short_name}}.
 
-{{site.data.reuse.short_name}} also supports the Salted Challenge Response Authentication Mechanism (SCRAM) for UI access.
+{{site.data.reuse.short_name}} also supports the Salted Challenge Response Authentication Mechanism (SCRAM) for accessing the UI and CLI.
 
-You can choose to change the authentication type of the UI access from IAM to SCRAM-SHA-512 by setting the authentication type in the `EventStreams` custom resource as follows:
+For more information, see [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli) for details
 
-```
-...
-spec:
-  ...
-  adminUI:
-    authentication:
-      - type: scram-sha-512
-```
+- If no authentication type is provided, IAM is the default authentication type. You can also specifically configure IAM by setting the `adminUI` authentication type to `iam` in the `EventStreams` custom resource as follows:
 
-This allows a Kafka user that has been configured for SCRAM authentication to log in to the UI by using the username and password of that Kafka user (for more information about configuring Kafka users, see [managing access to Kafka resources](../../security/managing-access/#managing-access-to-kafka-resources)).
+   ```
+   ...
+   spec:
+     ...
+     adminUI:
+       authentication:
+         - type: iam
+   ```
 
-A significant difference between IAM users and SCRAM users is that the Access Control List (ACL) that is configured for the user will determine which parts of the UI are available to the user to access (for more information, see [UI authorization mappings](../../security/managing-access/#managing-access-to-the-ui-with-scram)).
+- You can change the authentication type from the default IAM to SCRAM by setting the `adminUI` authentication type to `scram-sha-512` in the `EventStreams` custom resource as follows:
 
-You can also specifically configure the UI to authenticate with IAM by setting the `EventStreams` custom resource as follows:
+   ```
+   ...
+   spec:
+     ...
+     adminUI:
+       authentication:
+         - type: scram-sha-512
+   ```
 
-```
-...
-spec:
-  ...
-  adminUI:
-    authentication:
-      - type: iam
-```
+This allows a Kafka user that has been configured for SCRAM authentication to log in to the {{site.data.reuse.short_name}} UI and CLI by using the username and password of that Kafka user. For more information about configuring Kafka users, see [managing access to Kafka resources](../../security/managing-access/#managing-access-to-kafka-resources).
 
-If no authentication type is provided, IAM is the default authentication mechanism.
+When using SCRAM, the Access Control List (ACL) that is configured for the user will determine which parts of the UI are available to the user to access and what CLI commands the user can run (for more information, see [permission mappings](../../security/managing-access/#managing-access-to-the-ui-and-cli-with-scram)).
 
-**Note:** The {{site.data.reuse.short_name}} UI currently only supports the use of one authentication type for a single {{site.data.reuse.short_name}} instance. This means that you can only set one authentication type at the same time. The operator will issue an error message if more than one type is provided.
+**Note:** The {{site.data.reuse.short_name}} UI and CLI only support the use of one authentication type for a single {{site.data.reuse.short_name}} instance. This means that you can only set one authentication type at the same time. The operator will issue an error message if more than one type is provided.
 
-The login requirement for the UI is _disabled_ when all Kafka authentication and authorization is disabled. This is demonstrated by the proof-of-concept [**lightweight without security**](../planning/#example-deployment-lightweight-without-security) sample.
+The login requirement for the UI is disabled when all Kafka authentication and authorization is disabled. This is demonstrated by the proof-of-concept [**lightweight without security**](../planning/#example-deployment-lightweight-without-security) sample.
 
 **Important:** When security is not configured, the **[Producers](../../administering/topic-health/)** and the **[Monitoring](../../administering/cluster-health/#viewing-the-preconfigured-dashboard)** dashboards are not available in the UI.
 
@@ -245,7 +245,7 @@ spec:
 
 This custom resource can be created using the `oc` command or the {{site.data.reuse.openshift_short}} web console under the **IBM Event Streams** operator page.
 
-You can specify all the broker configuration options supported by Kafka except those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/0.32.0/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"}.
+You can specify all the broker configuration options supported by Kafka except those managed directly by {{site.data.reuse.short_name}}. For further information, see the list of [supported configuration options](https://strimzi.io/docs/operators/latest/configuring.html#type-KafkaClusterSpec-reference){:target="_blank"}.
 
 After deployment, these settings can be [modified](../../administering/modifying-installation/#modifying-kafka-broker-configuration-settings) by updating the `EventStreams` custom resource.
 
@@ -306,7 +306,7 @@ spec:
 
 ## Configuring access
 
-External access using {{site.data.reuse.openshift_short}} routes is automatically configured for the following services if they are included in the {{site.data.reuse.short_name}} installation:
+If included in the {{site.data.reuse.short_name}} installation, external access is automatically configured for the following services by using {{site.data.reuse.openshift_short}} routes:
 
 - The {{site.data.reuse.short_name}} UI
 - The Apicurio Registry
@@ -446,7 +446,7 @@ To configure OAuth authentication, configure a Kafka listener with type `oauth`,
 
 {{site.data.reuse.short_name}} supports 2 types of SASL mechanisms: `OAUTHBEARER` or `PLAIN`. By default, OAuth authentication uses `OAUTHBEARER` SASL mechanism, which is the most secure mechanism.
 
-**Important:** For clients that do not support the `OAUTHBEARER` authentication mechanism, you can configure the cluster to use the `PLAIN` mechanism by setting the `enableOauthBearer` property to `false` (default setting is `true` for `OAUTHBEARER`). For more information, see [OAuth 2.0 authentication mechanisms](https://strimzi.io/docs/operators/0.32.0/configuring.html#con-oauth-authentication-flow-str){:target="_blank"}.
+**Important:** For clients that do not support the `OAUTHBEARER` authentication mechanism, you can configure the cluster to use the `PLAIN` mechanism by setting the `enableOauthBearer` property to `false` (default setting is `true` for `OAUTHBEARER`). For more information, see [OAuth 2.0 authentication mechanisms](https://strimzi.io/docs/operators/latest/configuring.html#con-oauth-authentication-flow-str){:target="_blank"}.
 
 #### Configuring OAuth to use fast local JWT validation
 
@@ -477,7 +477,7 @@ spec:
           type: route
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/0.32.0/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/latest/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
 
 #### Configuring OAuth to use token validation by using an introspection endpoint
 
@@ -514,7 +514,7 @@ spec:
 
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/0.32.0/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/latest/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
 
 
 ### Enable OAuth authorization
@@ -545,7 +545,7 @@ spec:
           - "kubeadmin"
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [configuring an OAuth 2.0 authorization server](https://strimzi.io/docs/operators/0.32.0/configuring.html#proc-oauth-server-config-str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [configuring an OAuth 2.0 authorization server](https://strimzi.io/docs/operators/latest/configuring.html#proc-oauth-server-config-str){:target="_blank"}.
 
 ## Configuring node affinity for components
 
@@ -796,7 +796,7 @@ The Kafka Exporter can be configured using a `regex` to expose metrics for a col
               prometheus.io/scrape: 'true'
 ```
 
-For more information about configuration options, see [configuring the Kafka Exporter](https://strimzi.io/docs/operators/0.32.0/deploying.html#proc-metrics-kafka-deploy-options-str){:target="_blank"}.
+For more information about configuration options, see [configuring the Kafka Exporter](https://strimzi.io/docs/operators/latest/deploying.html#proc-metrics-kafka-deploy-options-str){:target="_blank"}.
 
 ## Configuring the JMX Exporter
 
@@ -826,8 +826,8 @@ To enable the collection of all JMX metrics available on the Kafka brokers and Z
 
 For more information about configuration options, see the following documentation:
 
-- [Kafka and ZooKeeper JMX metrics configuration](https://strimzi.io/docs/operators/0.32.0/deploying.html#assembly-metrics-str){:target="_blank"}
-- [Kafka JMX metrics configuration](https://strimzi.io/docs/operators/0.32.0/configuring.html#con-common-configuration-prometheus-reference){:target="_blank"}
+- [Kafka and ZooKeeper JMX metrics configuration](https://strimzi.io/docs/operators/latest/deploying.html#assembly-metrics-str){:target="_blank"}
+- [Kafka JMX metrics configuration](https://strimzi.io/docs/operators/latest/configuring.html#con-common-configuration-prometheus-reference){:target="_blank"}
 ## Enabling and configuring Kafka Bridge
 
 With [Kafka Bridge](https://strimzi.io/blog/2019/07/19/http-bridge-intro/){:target="_blank"}, you can connect client applications to your {{site.data.reuse.short_name}} Kafka cluster over HTTP, providing a standard web API connection to {{site.data.reuse.short_name}} rather than the custom Kafka protocol.
@@ -914,7 +914,7 @@ When configuring Cruise Control, you can define the following settings in the `E
 - Hard goals in `spec.strimziOverrides.cruiseControl.config["hard.goals"]`
 - The capacity limits for broker resources, which Cruise Control uses to determine if resource-based optimization goals are being broken. The `spec.strimziOverrides.cruiseControl.brokerCapacity` property defines the Kafka broker resource capacities that Cruise Control will optimize around.
 
-Cruise Control includes a number of [configuration options](https://github.com/linkedin/cruise-control/wiki/Configurations#cruise-control-configurations){:target="_blank"}. You can modify these configuration options for {{site.data.reuse.short_name}}, except the options managed directly by [Strimzi](https://strimzi.io/docs/operators/0.32.0/configuring.html#property-cruise-control-config-reference){:target="_blank"}.
+Cruise Control includes a number of [configuration options](https://github.com/linkedin/cruise-control/wiki/Configurations#cruise-control-configurations){:target="_blank"}. You can modify these configuration options for {{site.data.reuse.short_name}}, except the options managed directly by [Strimzi](https://strimzi.io/docs/operators/latest/configuring.html#property-cruise-control-config-reference){:target="_blank"}.
 
 When enabled, you can use Cruise Control and the `KafkaRebalance` custom resources to [optimize](../../administering/cruise-control/) your deployed {{site.data.reuse.short_name}} Kafka cluster.
 

@@ -27,10 +27,8 @@ Use one of the following methods to obtain the bootstrap address for your connec
 
 **Note:** You can only use the {{site.data.reuse.short_name}} CLI to retrieve the address if your {{site.data.reuse.short_name}} instance has at least one external listener [configured](../../installing/configuring) in `spec.strimziOverrides.kafka.listeners`.
 
-1. {{site.data.reuse.cp_cli_login}}
-2. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
-3. Run the following command to initialize the {{site.data.reuse.long_name}} CLI on the cluster:\\
-   `cloudctl es init`\\
+1. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
+2. {{site.data.reuse.es_cli_init_111}}
    Make note of the **Event Streams bootstrap address** value. This is the Kafka bootstrap address that your application will use.
 
    **Note:** If you have multiple listeners defined in `spec.strimziOverrides.kafka.listeners`, only the external listener is displayed. If you only have internal listeners defined, nothing is displayed.
@@ -72,11 +70,9 @@ To connect client applications to a secured {{site.data.reuse.long_name}}, you m
 
 ### Obtaining the server-side public certificate from the {{site.data.reuse.short_name}} CLI
 
-1. {{site.data.reuse.cp_cli_login}}
-2. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
-3. Run the following command to initialize the {{site.data.reuse.long_name}} CLI on the cluster:\\
-   `cloudctl es init`
-4. Use the `certificates` command to download the cluster's public certificate in the required format:\\
+1. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
+2. {{site.data.reuse.es_cli_init_111}}
+3. Use the `certificates` command to download the cluster's public certificate in the required format:\\
    `cloudctl es certificates --format p12`\\
    The truststore password will be displayed in the output for the command. The following example has a truststore password of `mypassword`:
 

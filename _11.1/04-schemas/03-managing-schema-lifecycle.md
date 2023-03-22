@@ -42,10 +42,8 @@ You can re-activate a schema or its version by setting **Mark schema as deprecat
 
 ### Using the CLI
 
-1. {{site.data.reuse.cp_cli_login}}
-2. Run the following command to initialize the {{site.data.reuse.short_name}} CLI on the cluster:\\
-   `cloudctl es init`
-3. Run the following command to deprecate a schema version:\\
+1. {{site.data.reuse.es_cli_init_111}}
+2. Run the following command to deprecate a schema version:\\
    `cloudctl es schema-modify --deprecate --name <schema-name> --version <schema-version-id>`
 
    To deprecate an entire schema, do not specify the `--version <schema-version-id>` option.
@@ -78,10 +76,8 @@ When a schema is disabled, applications that want to use the schema receive an e
 
 ### Using the CLI
 
-1. {{site.data.reuse.cp_cli_login}}
-2. Run the following command to initialize the {{site.data.reuse.short_name}} CLI on the cluster:\\
-   `cloudctl es init`
-3. Run the following command to disable a schema version:\\
+1.  {{site.data.reuse.es_cli_init_111}}`
+2. Run the following command to disable a schema version:\\
    `cloudctl es schema-modify --disable --name <schema-name> --version <schema-version-id>`
 
    To disable an entire schema, do not specify the `--version <schema-version-id>` option.
@@ -117,10 +113,8 @@ If a schema version has not been used for a period of time, you can remove it fr
 
 ### Using the CLI
 
-1. {{site.data.reuse.cp_cli_login}}
-2. Run the following command to initialize the {{site.data.reuse.short_name}} CLI on the cluster:\\
-   `cloudctl es init`
-3. Run the following command to remove a schema version:\\
+1. {{site.data.reuse.es_cli_init_111}}
+2. Run the following command to remove a schema version:\\
    `cloudctl es schema-remove --name <schema-name> --version <schema-version-id>`
 
    To remove an entire schema, do not specify the `--version <schema-version-id>` option.

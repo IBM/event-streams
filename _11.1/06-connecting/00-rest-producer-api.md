@@ -70,11 +70,10 @@ By default the {{site.data.reuse.short_name}} REST Producer API endpoint require
 
 Using the CLI:
 1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-event-streams-command-line-interface).
-2. {{site.data.reuse.cp_cli_login}}
-3. Run the following command to initialize the {{site.data.reuse.short_name}} CLI: `cloudctl es init`.\\
+2. {{site.data.reuse.es_cli_init_111}}
    If you have more than one {{site.data.reuse.short_name}} instance installed, select the one where the topic you want to produce to is.\\
    Details of your {{site.data.reuse.short_name}} installation are displayed.
-4. Download the server certificate for {{site.data.reuse.short_name}}:\\
+3. Download the server certificate for {{site.data.reuse.short_name}}:\\
    `cloudctl es certificates --format pem` \\
    By default, the certificate is written to a file called `es-cert.pem`.
 
@@ -115,15 +114,14 @@ To create authentication credentials to use in an HTTP authorization header, you
 
 Using the CLI:
 1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-event-streams-command-line-interface).
-2. {{site.data.reuse.cp_cli_login}}
-3. Run the following command to initialize the {{site.data.reuse.short_name}} CLI: `cloudctl es init`.\\
+2. {{site.data.reuse.es_cli_init_111}}
    If you have more than one {{site.data.reuse.short_name}} instance installed, select the one where the topic you want to produce to is.\\
    Details of your {{site.data.reuse.short_name}} installation are displayed.
-4. Use the `kafka-user-create` command to create a KafkaUser that can produce to your topic:\\
+3. Use the `kafka-user-create` command to create a KafkaUser that can produce to your topic:\\
    ```
    cloudctl es kafka-user-create --topic <topic_name> --name <user_name> --producer --auth-type scram-sha-512
    ```
-5. Follow the steps in [managing access](../../security/managing-access/#retrieving-credentials-later) to retrieve the SCRAM SHA 512 username and password.
+4. Follow the steps in [managing access](../../security/managing-access/#retrieving-credentials-later) to retrieve the SCRAM SHA 512 username and password.
 
 Using the UI:
 1. {{site.data.reuse.es_ui_login_nonadmin}}
@@ -168,15 +166,14 @@ To create authentication credentials to use with Mutual TLS authentication, you 
 
 Using the CLI:
 1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-event-streams-command-line-interface).
-2. {{site.data.reuse.cp_cli_login}}
-3. Run the following command to initialize the {{site.data.reuse.short_name}} CLI: `cloudctl es init`.\\
+2. {{site.data.reuse.es_cli_init_111}}
    If you have more than one {{site.data.reuse.short_name}} instance installed, select the one where the topic you want to produce to is.\\
    Details of your {{site.data.reuse.short_name}} installation are displayed.
-4. Use the `kafka-user-create` command to create a KafkaUser that can produce to your topic:\\
+3. Use the `kafka-user-create` command to create a KafkaUser that can produce to your topic:\\
    ```
    cloudctl es kafka-user-create --topic <topic_name> --name <user_name> --producer --auth-type tls
    ```
-5. Follow the steps in [managing access](../../security/managing-access/#retrieving-credentials-later) to TLS certificates and keys.
+4. Follow the steps in [managing access](../../security/managing-access/#retrieving-credentials-later) to TLS certificates and keys.
 
 Using the UI:
 1. {{site.data.reuse.es_ui_login_nonadmin}}

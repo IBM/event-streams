@@ -23,7 +23,7 @@ icpfs: "IBM Cloud Pak foundational services"
 fs: "foundational services"
 
 # {{site.data.reuse.icp_master_host}}
-icp_master_host: on the IBM Cloud Private [master host](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/cluster_endpoints.html#master)
+icp_master_host: on the IBM Cloud Private [master host](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/cluster_endpoints.html#master){:target=\"_blank\"}
 
 # {{site.data.reuse.icp_foundation}}
 icp_foundation: "IBM Cloud Private Foundation"
@@ -60,13 +60,13 @@ jmx-secret: <releasename>ibm-es-jmx-secret
 ###############
 
 # {{site.data.reuse.icpfs_ui_login}}
-icpfs_ui_login: "Log in to your IBM Cloud Platform foundational services management console as an administrator. For more information, see the IBM Cloud Platform foundational services [documentation](https://www.ibm.com/docs/cpfs?topic=operator-accessing-cluster-console)."
+icpfs_ui_login: "Log in to your IBM Cloud Platform foundational services management console as an administrator. For more information, see the IBM Cloud Platform foundational services [documentation](https://www.ibm.com/docs/cpfs?topic=operator-accessing-cluster-console){:target=\"_blank\"}."
 
 # {{site.data.reuse.icpcs_ui_login}}
-icpcs_ui_login: "Log in to your IBM Cloud Platform Common Services management console as an administrator. For more information, see the IBM Cloud Platform Common Services [documentation](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/common-web-ui/1.x.x/cfc_gui.html)."
+icpcs_ui_login: "Log in to your IBM Cloud Platform Common Services management console as an administrator. For more information, see the IBM Cloud Platform Common Services [documentation](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/common-web-ui/1.x.x/cfc_gui.html){:target=\"_blank\"}."
 
 # {{site.data.reuse.icp_ui_login}}
-icp_ui_login: "Log in to your IBM Cloud Private cluster management console from a supported web browser by using the URL `https://<Cluster Master Host>:<Cluster Master API Port>`. The master host and port for your cluster are set during the installation of IBM Cloud Private. For more information, see the IBM Cloud Private [documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/cfc_gui.html)."
+icp_ui_login: "Log in to your IBM Cloud Private cluster management console from a supported web browser by using the URL `https://<Cluster Master Host>:<Cluster Master API Port>`. The master host and port for your cluster are set during the installation of IBM Cloud Private. For more information, see the IBM Cloud Private [documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/cfc_gui.html){:target=\"_blank\"}."
 
 # {{site.data.reuse.icp_cli_login321}}
 icp_cli_login321: "Log in to your cluster as an administrator by using the IBM Cloud Private CLI:<br /> `cloudctl login -a https://<cluster-address>:<cluster-router-https-port>`"
@@ -80,11 +80,14 @@ cp_cli_login: "Log in to your cluster as an administrator by using the IBM Cloud
 # {{site.data.reuse.es_cli_init}}
 es_cli_init: "Run the following command to initialize the IBM Event Streams CLI: `cloudctl es init`"
 
+# {{site.data.reuse.es_cli_init_111}}
+es_cli_init_111: "Initialize the Event Streams CLI by following the instructions in [logging in](../../getting-started/logging-in/)."
+
 # {{site.data.reuse.openshift_cli_login}}
-openshift_cli_login: "Log in to your Red Hat OpenShift Container Platform as a cluster administrator by using the [`oc` CLI](https://docs.openshift.com/container-platform/4.11/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands) (`oc login`)."
+openshift_cli_login: "Log in to your Red Hat OpenShift Container Platform as a cluster administrator by using the [`oc` CLI](https://docs.openshift.com/container-platform/4.11/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands){:target=\"_blank\"} (`oc login`)."
 
 # {{site.data.reuse.openshift_ui_login}}
-openshift_ui_login: "Log in to the OpenShift Container Platform [web console](https://docs.openshift.com/container-platform/4.11/web_console/web-console.html) using your login credentials."
+openshift_ui_login: "Log in to the OpenShift Container Platform [web console](https://docs.openshift.com/container-platform/4.11/web_console/web-console.html){:target=\"_blank\"} using your login credentials."
 
 # {{site.data.reuse.es_ui_login}}
 es_ui_login: "Log in to your Event Streams UI as an administrator from a supported web browser (see how to determine the [login URL](../../getting-started/logging-in/) for your Event Streams UI)."
@@ -96,7 +99,7 @@ es_ui_login_nonadmin: "Log in to the Event Streams UI from a supported web brows
 es_ui_login_nonadmin_mq: "Log in to the Event Streams UI from a supported web browser (see how to determine the [login URL](../../../getting-started/logging-in/) for your Event Streams UI)."
 
 # {{site.data.reuse.maven_prereq}}
-maven_prereq: "Ensure you have Java version 8. Also, ensure you have [Apache Maven](https://maven.apache.org/) installed on your system."
+maven_prereq: "Ensure you have Java version 8. Also, ensure you have [Apache Maven](https://maven.apache.org/){:target=\"_blank\"} installed on your system."
 
 # {{site.data.reuse.enter_install_details}}
 enter_install_details: "Enter a release name that identifies your Event Streams installation, select the target namespace you created previously, select a target cluster (for example, **local-cluster**), and accept the terms of the license agreement."
@@ -133,7 +136,7 @@ cli_options_short: "**Tip:** You can use short options instead of spelling out t
 replicator_origin_list: "**Note:** When logged in to the destination cluster, the origin cluster will not show up in the **Origin locations** section until you [define topics to replicate](#specifying-what-and-where-to-replicate), and the geo-replicator is created."
 
 # {{site.data.reuse.monitor_metrics_retention}}
-monitor_metrics_retention: "**Important:** By default, the metrics data used to provide monitoring information is only stored for a day. Modify the [time period](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_metrics/monitoring_service.html?view=kc#promlogs) for metric retention to be able to view monitoring data for longer time periods, such as 1 week or 1 month."
+monitor_metrics_retention: "**Important:** By default, the metrics data used to provide monitoring information is only stored for a day. Modify the [time period](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_metrics/monitoring_service.html?view=kc#promlogs){:target=\"_blank\"} for metric retention to be able to view monitoring data for longer time periods, such as 1 week or 1 month."
 
 # {{site.data.reuse.geo-rep_note}}
 geo-rep_note: "**Note:** Geo-replication is only available in the paid-for version of IBM Event Streams (not available in the Community Edition)."
@@ -173,18 +176,20 @@ ce_short: "Community Edition"
 # Task Steps
 
 # {{site.data.reuse.icp_ui_login321}}
-icp_ui_login321: "Log in to your IBM Cloud Private cluster management console as an administrator. For more information, see the IBM Cloud Private [documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/cfc_gui.html)."
+icp_ui_login321: "Log in to your IBM Cloud Private cluster management console as an administrator. For more information, see the IBM Cloud Private [documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/manage_cluster/cfc_gui.html){:target=\"_blank\"}."
 
 # {{site.data.reuse.helm_charts_note}}
 helm_charts_note: "**Note:** Where `<charts.tgz>` is the name of the chart file you used to install IBM Event Streams, including the full path to it if in a different directory. To run `helm upgrade` commands, [ensure you have the original chart file available](../../administering/helm-upgrade-command/)."
 
 # Notes
 # {{site.data.reuse.ce_deprecated}}
-ce_deprecated: "IBM Event Streams Community Edition is no longer available from 1 May 2020. For information about trying out Kafka and Event Streams for free, see the [product pages](https://www.ibm.com/cloud/event-streams/get-started)."
+ce_deprecated: "IBM Event Streams Community Edition is no longer available from 1 May 2020. For information about trying out Kafka and Event Streams for free, see the [product pages](https://www.ibm.com/cloud/event-streams/get-started){:target=\"_blank\"}."
 
 # {{site.data.reuse.es_deprecated}}
-es_deprecated: "**Note:** The Event Streams component in IBM Cloud Pak for Integration has been deprecated. Event Streams will continue to be supported but will no longer be enhanced (see [announcement](https://www-01.ibm.com/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_ca/2/877/ENUSZP21-0082/index.html)). For self-managed software solutions that require Apache Kafka, IBM recommends the Confluent Platform available as an add-on for Cloud Pak for Integration."
+es_deprecated: "**Note:** The Event Streams component in IBM Cloud Pak for Integration has been deprecated. Event Streams will continue to be supported but will no longer be enhanced (see [announcement](https://www-01.ibm.com/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_ca/2/877/ENUSZP21-0082/index.html){:target=\"_blank\"}). For self-managed software solutions that require Apache Kafka, IBM recommends the Confluent Platform available as an add-on for Cloud Pak for Integration."
 
+# {{site.data.reuse.jmx_deprecated}}
+jmx_deprecated: "**Note:** Support for JmxTrans in Event Streams version 11.1.5 and later is deprecated. For more information, see [Strimzi GitHub issue 7693](https://github.com/strimzi/strimzi-kafka-operator/issues/7693){:target=\"_blank\"}."
 
 # Icons
 

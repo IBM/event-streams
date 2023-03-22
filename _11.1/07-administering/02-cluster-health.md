@@ -24,9 +24,11 @@ You can use {{site.data.reuse.short_name}} to export metrics to Prometheus. Thes
 
 For an example of how to configure a Kafka Exporter, see [configuring the Kafka Exporter](../../installing/configuring#configuring-the-kafka-exporter).
 
-## JmxTrans
+## JmxTrans (deprecated)
 
 JmxTrans can be used to push JMX metrics from Kafka brokers to external applications or databases. For more information, see [configuring JmxTrans](../../security/secure-jmx-connections#configuring-a-jmxtrans-deployment).
+
+{{site.data.reuse.jmx_deprecated}}
 
 ## Grafana
 
@@ -72,7 +74,7 @@ To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these st
 10. If an `Index Pattern Conflicts` warning is displayed, select the `app*` index pattern from the **New index pattern** list for each conflict, then click **Confirm all changes**.
 11. Click **Dashboard** in the navigation on the left to view the downloaded dashboards.
 
-## Instana
+## IBM Instana
 
 Instana is an observability tool that can be used to monitor your {{site.data.reuse.short_name}} deployment.
 

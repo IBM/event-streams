@@ -32,7 +32,7 @@ For example, the installation of the instance called `development` is complete w
 `oc get eventstreams`
 An example output:
 
-```
+```shell
 $ oc get eventstreams
 >
 NAME             STATUS
@@ -56,30 +56,27 @@ To install the {{site.data.reuse.short_name}} CLI:
 
 1. Ensure you have the IBM Cloud Pak CLI (`cloudctl`) installed either by [retrieving the binary from your cluster](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/cloudctl/3.x.x/install_cli.html){:target="_blank"} or [downloading the binary from a release on the GitHub project](https://github.com/IBM/cloud-pak-cli/releases){:target="_blank"}.\\
    **Note:** Ensure you download the correct binary for your architecture and operating system.
-2. [Log in](../../getting-started/logging-in/) to your {{site.data.reuse.short_name}} instance as an administrator.
+2. [Log in](../../getting-started/logging-in/) to your {{site.data.reuse.short_name}} UI as an administrator.
 3. Click **Toolbox** in the primary navigation.
 4. Go to the **{{site.data.reuse.long_name}} command-line interface** section and click **Find out more**.
 5. Download the {{site.data.reuse.short_name}} CLI plug-in for your system by using the appropriate link.
-6. Install the plugin using the following command:\\
-   `cloudctl plugin install <path-to-plugin>`
+6. Install the plugin using the following command:
+   ```shell
+   cloudctl plugin install <path-to-plugin>
+   ```
 
 To start the {{site.data.reuse.short_name}} CLI and check all available command options in the CLI, use the `cloudctl es` command.
 For an exhaustive list of commands, you can run:
-
-`cloudctl es --help`
+```shell
+cloudctl es --help
+```
 
 To get help for a specific command, run:
+```shell
+cloudctl es <command> --help
+```
 
-`cloudctl es <command> --help`
-
-To use the {{site.data.reuse.short_name}} CLI against an {{site.data.reuse.openshift_short}} cluster, do the following:
-
-{{site.data.reuse.cp_cli_login}}
-
-To configure the CLI to connect to a specific {{site.data.reuse.short_name}} instance running a namespace:
-
-`cloudctl es init -n <namespace>`
-
+To run commands after installing, log in and initialize the CLI as described in [logging in](../../getting-started/logging-in/).
 
 ## Firewall and load balancer settings
 

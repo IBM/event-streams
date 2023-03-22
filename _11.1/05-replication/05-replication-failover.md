@@ -121,10 +121,8 @@ ConsumerRecords<byte[], byte[]> records = kafkaConsumer.poll(Duration.ofMillis(1
 If you want your client application to continue processing messages on the destination cluster from the point they reached on the topic on the origin cluster, or if you want your client application to start processing messages from the beginning of the topic, you can use the `cloudctl es group-reset` command.
 
 * To continue processing messages from the point they reached on the topic on the origin cluster, you can specify the offset for the consumer group that your client application is using:\\
-  1. {{site.data.reuse.cp_cli_login}}
-  2. Run the following command to initialize the {{site.data.reuse.short_name}} CLI on the cluster:\\
-  `cloudctl es init`
-  3. Run the `cloudctl es group-reset` command as follows:
+  1. {{site.data.reuse.es_cli_init_111}}
+  2. Run the `cloudctl es group-reset` command as follows:
   \\
   `cloudctl es group-reset --group <your-consumer-group-id> --topic <topic-name> --mode datetime --value <timestamp>`\\
   \\

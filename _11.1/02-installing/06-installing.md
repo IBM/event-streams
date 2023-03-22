@@ -185,6 +185,52 @@ When the {{site.data.reuse.short_name}} operator is installed, the following add
 - Operand Deployment Lifecycle Manager.
 - IBM Common Service Operator.
 
+### Technology Preview feature: KRaft
+
+Technology Preview features are available to evaluate potential upcoming features. Such features are intended for testing purposes only and not for production use. IBM does not support these features, but might help with any issues raised against them. IBM welcomes feedback on Technology Preview features to improve them. As the features are still under development, functions and interfaces can change, and it might not be possible to upgrade when updated versions become available.
+
+IBM offers no guarantee that Technology Preview features will be part of upcoming releases and as such become fully supported.
+
+![Event Streams 11.1.5 icon]({{ 'images' | relative_url }}/11.1.5.svg "In Event Streams 11.1.5"){{site.data.reuse.short_name}} version 11.1.5 includes [Apache Kafka Raft (KRaft)](https://cwiki.apache.org/confluence/display/KAFKA/KIP-500%3A+Replace+ZooKeeper+with+a+Self-Managed+Metadata+Quorum){:target="_blank"} as a Technology Preview feature.
+KRaft replaces ZooKeeper for managing metadata, moving the overall handling of metadata into Kafka itself.
+
+When the `UseKRaft` feature gate is enabled, the Kafka cluster is deployed without ZooKeeper. The `spec.strimziOverrides.zookeeper` properties in the `EventStreams` custom resource will be ignored, but still need to be present. The `UseKRaft` feature gate provides an API that configures Kafka cluster nodes and their roles. The API is still in development and is expected to change before the KRaft mode is production-ready.
+
+#### Limitations
+
+The KRaft mode in {{site.data.reuse.short_name}} has the following limitations:
+- Moving existing Kafka clusters deployed with ZooKeeper to use KRaft, or the other way around, is not supported.
+- Upgrading your Apache Kafka or {{site.data.reuse.short_name}} operator version, or reverting either one to an earlier version is not supported. To do so, you delete the cluster, upgrade the operator, and deploy a new Kafka cluster.
+- The Topic Operator is not supported. The `spec.entityOperator.topicOperator` property must be removed from the Kafka custom resource.
+- SCRAM-SHA-512 authentication is not supported. If required, use TLS authentication for secure communication.
+- You can only access the {{site.data.reuse.short_name}} UI by using {{site.data.reuse.icpfs}} Identity and Access Management (IAM).
+- JBOD storage is not supported. You can use `type: jbod` for storage, but the JBOD array can contain only one disk.
+- Liveness and readiness probes are disabled.
+- All Kafka nodes have both the controller and the broker KRaft roles. Kafka clusters with separate controller and broker nodes are not supported.
+
+#### Enabling KRaft
+
+To enable KRaft, ensure you enable both the `UseKRaft` and `StrimziPodSet` feature gates. After the {{site.data.reuse.short_name}} operator is installed and created, edit your `ClusterServiceVersion` object on the {{site.data.reuse.openshift_short}} by running the following command:
+
+**Note:** This command requires the [`yq` YAML](https://github.com/mikefarah/yq){:target="_blank"} parsing and editing tool.
+
+```shell
+oc get csv -n <namespace> ibm-eventstreams.v<operator_version> -oyaml | yq e "(.spec.install.spec.deployments[0].spec.template.spec.containers[0].env[] | select(.name==\"STRIMZI_FEATURE_GATES\")) .value=\"+UseStrimziPodSets,+UseKRaft\"" | oc apply -f
+```
+Alternatively, you can edit the `ClusterServiceVersion` in the {{site.data.reuse.openshift_short}} web console by locating the `STRIMZI_FEATURE_GATES` environmental variable and editing it to have the `value` of `+UseStrimziPodSets,+UseKRaft` as follows:
+```yaml
+                      - name: STRIMZI_FEATURE_GATES
+                        value: '+UseStrimziPodSets,+UseKRaft'
+```
+**Important:** An {{site.data.reuse.short_name}} instance in KRaft mode must use the `RunAsKRaftAuthorizer` custom authorizer class. When configuring your `EventStreams` custom resource, set `authorizerClass` as follows:
+```yaml
+         kafka:
+            replicas: 3
+            authorization:
+               type: custom
+               authorizerClass: com.ibm.eventstreams.runas.authorizer.RunAsKRaftAuthorizer
+               supportsAdminApi: true
+```
 
 ## Install an {{site.data.reuse.short_name}} instance
 
