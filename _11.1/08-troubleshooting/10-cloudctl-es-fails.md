@@ -21,11 +21,6 @@ This error occurs when you have not logged in to the cluster and initialized the
 
 ## Resolving the problem
 
-
-{{site.data.reuse.cp_cli_login}}
-
-Initialize the {{site.data.reuse.long_name}} CLI as follows:
-
-`cloudctl es init`
+{{site.data.reuse.es_cli_init_111}}
 
 Re-run the failed operation again.

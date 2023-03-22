@@ -95,17 +95,15 @@ Use the {{site.data.reuse.short_name}} UI to generate and download the `KafkaCon
 
 Use the {{site.data.reuse.short_name}} CLI to generate and download the `KafkaConnector` custom resource YAML file for your IBM MQ source connector. You can also use the CLI to generate a JSON file for distributed mode.
 
-1. {{site.data.reuse.cp_cli_login}}
-2. Run the following command to initialize the {{site.data.reuse.short_name}} CLI on the cluster:\\
-   `cloudctl es init`
-3. Run the `connector-config-mq-source` command to generate the configuration file for the `MQ Source` connector.\\
+1. {{site.data.reuse.es_cli_init_111}}
+2. Run the `connector-config-mq-source` command to generate the configuration file for the `MQ Source` connector.\\
    For example, to generate a configuration file for an instance of `MQ` with the following information: a queue manager called `QM1`, with a connection point of `localhost(1414)`, a channel name of `MYSVRCONN`, a queue of `MYQSOURCE` and connecting to the topic `TSOURCE`, run the following command:
    ```
    cloudctl es connector-config-mq-source --mq-queue-manager="QM1" --mq-connection-name-list="localhost(1414)" --mq-channel="MYSVRCONN" --mq-queue="MYQSOURCE" --topic="TSOURCE" --file="mq-source" --format yaml
    ```
    **Note**: Omitting the `--format yaml` flag will generate a `mq-source.properties` file which can be used for standalone mode. Specifying `--format json` will generate a `mq-source.json` file which can be used for distributed mode outside the {{site.data.reuse.openshift_short}}.
 
-4. Change the values of `mq.user.name` and `mq.password` to the username and password that you used to configure your instance of MQ. Also set the label `eventstreams.ibm.com/cluster` to the name of your Kafka Connect instance.
+3. Change the values of `mq.user.name` and `mq.password` to the username and password that you used to configure your instance of MQ. Also set the label `eventstreams.ibm.com/cluster` to the name of your Kafka Connect instance.
 
 The final configuration file will resemble the following:
 ```

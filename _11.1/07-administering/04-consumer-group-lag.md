@@ -35,12 +35,10 @@ This side panel will display a table containing [consumer group information](#co
 
 To access information about a consumer group in the {{site.data.reuse.short_name}} CLI, do the following:
 
-1. {{site.data.reuse.cp_cli_login}}
-2. Run the following command to initialize the {{site.data.reuse.short_name}} CLI on the cluster:\\
-   `cloudctl es init`
-3. To list all consumer groups on a cluster, run:\\
+1. {{site.data.reuse.es_cli_init_111}}
+2. To list all consumer groups on a cluster, run:\\
    `cloudctl es groups`
-4. To list information about a consumer group, run:\\
+3. To list information about a consumer group, run:\\
    `cloudctl es group --group <consumer-group-id>`\\
    where `<consumer-group-id>` is the name of the consumer group of interest.
 

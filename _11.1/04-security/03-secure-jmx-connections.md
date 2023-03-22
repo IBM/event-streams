@@ -14,6 +14,8 @@ To manage resources, management beans (MBeans) are used. MBeans represent a reso
 
 Metrics can be retrieved from applications running inside your {{site.data.reuse.openshift_short}} cluster by connecting to an exposed JMX port. The metrics can also be pushed in various formats to remote sinks inside or outside of the cluster by using JmxTrans.
 
+{{site.data.reuse.jmx_deprecated}}
+
 ## Exposing a JMX port on Kafka
 
 You can expose the JMX port (`9999`) of each Kafka broker to be accessible to secure connections from within the {{site.data.reuse.openshift_short}} cluster. This grants applications deployed inside the cluster (including JmxTrans) read-only access to Kafka metrics. To expose the JMX port, set the `spec.strimziOverrides.kafka.jmxOptions` value to `{}`. This will create an open JMX port allowing any pod to read from it.
@@ -67,9 +69,8 @@ In addition, when initiating the JMX connection, if the port is secured then cli
 
 #### Using the {{site.data.reuse.short_name}} CLI:
 
-1. {{site.data.reuse.cp_cli_login}}
-2. {{site.data.reuse.es_cli_init}}
-3. Run the command `cloudctl es certificates` to download the certificate. The password is displayed in the CLI.
+1. {{site.data.reuse.es_cli_init_111}}
+2. Run the command `cloudctl es certificates` to download the certificate. The password is displayed in the CLI.
 
 ### Retrieving the JMX username and password
 
@@ -115,13 +116,13 @@ If the connecting application is not installed inside the {{site.data.reuse.shor
 oc -n <instance_namespace> get secret {{site.data.reuse.jmx-secret}} -o yaml --export | oc -n <application_namespace> apply -f -
 ```
 
-## JmxTrans
+## JmxTrans (deprecated)
 
 The Kafka broker JMX ports are not exposed to applications outside of the cluster. However, a JmxTrans pod can be deployed that provides a mechanism to read JMX metrics from the Kafka brokers and push them to applications inside or outside the cluster.
 
 JmxTrans reads JMX metric data from the Kafka brokers and sends the data to applications in various data formats.
 
-## Configuring a JmxTrans deployment
+### Configuring a JmxTrans deployment
 
 To configure a JmxTrans deployment, you will need to use the `spec.strimziOverrides.jmxTrans` field to define the `outputDefinitions` and `kafkaQueries`.
 

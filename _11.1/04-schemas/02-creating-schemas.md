@@ -56,11 +56,9 @@ To use schemas in Kafka applications, import your schema definitions into the sc
 
 ### Using the CLI
 
-1. {{site.data.reuse.cp_cli_login}}
-2. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
-3. Run the following command to initialize the {{site.data.reuse.long_name}} CLI on the cluster:\\
-   `cloudctl es init`
-4. Run the following command to add a schema to the schema registry:\\
+1. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
+2. {{site.data.reuse.es_cli_init_111}}
+3. Run the following command to add a schema to the schema registry:\\
    `cloudctl es schema-add --name <schema-name> --version <schema-version> --file <path-to-schema-file>`
 
 ## Adding new schema versions
@@ -104,11 +102,9 @@ For example, the following Avro schema defines a new version of the `Book` recor
 
 ### Using the CLI
 
-1. {{site.data.reuse.cp_cli_login}}
-2. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
-3. Run the following command to initialize the {{site.data.reuse.long_name}} CLI on the cluster:\\
-   `cloudctl es init`
-4. Run the following command to list all schemas in the schema registry, and find the schema name you want to add a new version to:\\
+1. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
+2. {{site.data.reuse.es_cli_init_111}}
+3. Run the following command to list all schemas in the schema registry, and find the schema name you want to add a new version to:\\
    `cloudctl es schemas`
-5. Run the following command to add a new version of the schema to the registry:\\
+4. Run the following command to add a new version of the schema to the registry:\\
    `cloudctl es schema-add --name <schema-name-from-previous-step> --version <new-schema-version> --file <path-to-new-schema-file>`

@@ -147,11 +147,15 @@ The bindings connection mode is a configuration option for the connector as desc
 Kafka Connect is started using a bash script. If you do not already have bash installed on your z/OS system install it now.
 
 To install bash version 4.2.53 or later:
-1. Download the bash archive file from [Bash Version 4.2.53](https://www.rocketsoftware.com/product-categories/mainframe/bash-zos){:target="_blank"}
-2. Extract the archive file to get the .tar file:\\
+1. Download the bash archive file from [Bash Version 4.2.53](https://www.rocketsoftware.com/product-categories/mainframe/bash-zos){:target="_blank"}.
+
+   **Note:** You must [register](https://my.rocketsoftware.com/RocketCommunity/s/login/?ec=302&startURL=%2FRocketCommunity%2Fs%2F){:target="_blank"} before downloading the bash archive.
+2. Extract the archive file to get the .tar file:
+
     `gzip -d bash.tar.gz`
 3. FTP the .tar file to your z/OS USS directory such as `/bin`
-4. Extract the .tar file to install bash:\\
+4. Extract the .tar file to install bash:
+
    `tar -cvfo bash.tar`
 
 If bash on your z/OS system is not in /bin, you need to update the `kafka-run-class.sh` file. For example, if bash is located in `/usr/local/bin` update the first line of `kafka-run-class.sh` to have `#!/usr/local/bin/bash`

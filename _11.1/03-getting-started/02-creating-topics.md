@@ -37,14 +37,9 @@ To use Kafka topics to store events in {{site.data.reuse.long_name}}, create and
 
 ## Using the CLI
 
-1. {{site.data.reuse.cp_cli_login}}
+1. {{site.data.reuse.es_cli_init_111}}
 
-   Find out how to [retrieve the login URL](../logging-in) for your {{site.data.reuse.short_name}} CLI.
-
-2. Run the following command to initialize the {{site.data.reuse.long_name}} CLI on the cluster:\\
-   `cloudctl es init`
-
-3. Run the following command to create a topic:
+2. Run the following command to create a topic:
 
    `cloudctl es topic-create --name <topic-name> --partitions <number-of-partitions> --replication-factor <replication-factor>`
 

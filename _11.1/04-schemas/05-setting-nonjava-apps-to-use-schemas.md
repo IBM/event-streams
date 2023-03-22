@@ -34,14 +34,12 @@ For a consumer application:
 
 ### Using the CLI
 
-1. {{site.data.reuse.cp_cli_login}}
-2. Run the following command to initialize the {{site.data.reuse.short_name}} CLI on the cluster:\\
-    `cloudctl es init`
-3. Run the following command to list all the schemas in the schema registry:\\
+1. {{site.data.reuse.es_cli_init_111}}
+2. Run the following command to list all the schemas in the schema registry:\\
     `cloudctl es schemas`
-4. Select your schema from the list and run the following command to list all the versions of the schema:\\
+3. Select your schema from the list and run the following command to list all the versions of the schema:\\
     `cloudctl es schema <schema-name>`
-5. Select your version of the schema from the list and run the following command to retrieve the schema definition for the version and copy it into a new local file:\\
+4. Select your version of the schema from the list and run the following command to retrieve the schema definition for the version and copy it into a new local file:\\
     `cloudctl es schema <schema-name> --version <schema-version-id> > <schema-definition-file>.avsc`
 
 **Note:** `<schema-version-id>`is the integer ID that is displayed when listing schema versions using the following command:

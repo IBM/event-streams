@@ -166,7 +166,7 @@ status:
   sessionId: 03974f67-b208-4133-9f54-305d268a1a22
 ```
 
-For more information about optimization proposals, see the Strimzi [documentation](https://strimzi.io/docs/operators/0.32.0/configuring.html#con-optimization-proposals-str){:target="_blank"}.
+For more information about optimization proposals, see the Strimzi [documentation](https://strimzi.io/docs/operators/latest/configuring.html#con-optimization-proposals-str){:target="_blank"}.
 
 ### Refreshing an optimization proposal
 
