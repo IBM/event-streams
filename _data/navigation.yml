@@ -232,6 +232,8 @@ latestdocs:
         url: /troubleshooting/11-1-1-airgap-fail/
       - title: "Apicurio authentication errors due to User Operator watchedNamespace"
         url: /troubleshooting/watched-namespace/
+      - title: "Upgrade to 11.1.5 stuck in pending state"
+        url: /troubleshooting/missing-crds-block-upgrade/
 
 # Sidebar navigation for 11.0.
 
