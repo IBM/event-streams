@@ -8,6 +8,20 @@ toc: true
 
 Find out what is new in {{site.data.reuse.long_name}} version 11.1.x.
 
+## Release 11.1.6
+
+### Migration to latest Apicurio Registry
+
+{{site.data.reuse.short_name}} 11.1.6 includes support for Apicurio Registry 2.4.1. Ensure all applications connecting to {{site.data.reuse.short_name}} that use the schema registry are using Apicurio client libraries version 2.4.1 or later, then [migrate to the latest Apicurio](../../troubleshooting/upgrading-apicurio).
+
+### Security and bug fixes
+
+{{site.data.reuse.short_name}} release 11.1.6 contains security and bug fixes.
+
+### Documentation: Highlighting differences between versions
+
+Any difference in features or behavior introduced by {{site.data.reuse.short_name}} 11.1.6 compared to 11.1.5 or earlier is highlighted in this documentation by using the following graphic: ![Event Streams 11.1.6 icon]({{ 'images' | relative_url }}/11.1.6.svg "In Event Streams 11.1.6")
+
 ## Release 11.1.5
 
 ### Kafka version upgraded to 3.4.0

@@ -263,6 +263,8 @@ The replication factor controls how many replicas there are, and the minimum in-
 
 The combination of brokers spread across nodes together with the replication feature make a single {{site.data.reuse.short_name}} cluster highly available.
 
+You can also further ensure high availability for your environment by increasing the number of {{site.data.reuse.short_name}} [operator replicas](../installing/#scaling-the-operator-for-high-availability). 
+
 ### Multiple availability zones
 
 To add further resilience to your {{site.data.reuse.short_name}} cluster, you can split your servers across multiple data centers or zones, so that even if one zone experiences a failure, you still have a working system.

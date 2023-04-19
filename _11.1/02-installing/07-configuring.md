@@ -57,7 +57,7 @@ Complete the configuration by adding additional fields to these storage properti
 
 An example of these configuration options:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -92,7 +92,7 @@ Where optional values are not specified:
 
 The following example YAML document shows an example `EventStreams` custom resource with dynamically allocated storage provided using CephFS for Kafka and ZooKeeper. To try this deployment, set the required `namespace` and accept the license by changing the `spec.license.accept` value to `"true"`.
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 metadata:
@@ -163,7 +163,7 @@ Pod-to-Pod encryption is enabled by default for all {{site.data.reuse.short_name
 
 For example, the following YAML snippet disables encryption between pods:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 metadata:
@@ -187,7 +187,7 @@ For more information, see [managing access](../../security/managing-access/#acce
 
 - If no authentication type is provided, IAM is the default authentication type. You can also specifically configure IAM by setting the `adminUI` authentication type to `iam` in the `EventStreams` custom resource as follows:
 
-   ```
+   ```yaml
    ...
    spec:
      ...
@@ -198,7 +198,7 @@ For more information, see [managing access](../../security/managing-access/#acce
 
 - You can change the authentication type from the default IAM to SCRAM by setting the `adminUI` authentication type to `scram-sha-512` in the `EventStreams` custom resource as follows:
 
-   ```
+   ```yaml
    ...
    spec:
      ...
@@ -225,7 +225,7 @@ When creating an instance of {{site.data.reuse.short_name}}, these settings are 
 
 The following example uses Kafka broker settings to configure replication for system topics:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 metadata:
@@ -257,7 +257,7 @@ Kafka rack awareness is configured by setting the `rack` property in the `EventS
 
 The following example sets the `rack` topologyKey to `topology.kubernetes.io/zone`:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 metadata:
@@ -289,7 +289,7 @@ Ensure that the following properties match the name of the {{site.data.reuse.sho
 
 For example, to configure geo-replication with `2` replicas for an {{site.data.reuse.short_name}} instance called `sample-three` in the namespace `myproject`, create the following `EventStreamsGeoReplicator` configuration:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta1
 kind: EventStreamsGeoReplicator
 metadata:
@@ -335,8 +335,7 @@ The schema for REST endpoint configuration is described in the following table, 
 | `certOverrides.secretName`  | String                       | The name of the secret in the instance namespace that contains the encoded certificate and key to secure the endpoint with.                                                                                                 |
 | `host`                      | String (DNS rules apply)     | An optional override for the default host that an {{site.data.reuse.openshift_short}} route will generate.                                                                                                                  |
 
-```
-
+```yaml
 # ...
 spec:
   # ...
@@ -362,7 +361,7 @@ spec:
 
 The {{site.data.reuse.short_name}} REST components also allow for the default set of cipher suites to be overridden. Though not a recommended practice, it is possible to enable alternative cipher suites to facilitate connectivity of legacy systems. This capability is provided through the `CIPHER_SUITES` environment variable as shown in this example:
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -381,7 +380,7 @@ Any number of external listeners can be configured, each with any of the support
 
 The following example snippet defines 2 external listeners that expose the Kafka brokers using 2 {{site.data.reuse.openshift_short}} routes, one with SCRAM-SHA-512 authentication and one with Mutual TLS enabled.
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -406,7 +405,7 @@ spec:
 Internal listeners for Kafka can also be configured by setting the listener `type:` to `internal`. Each of these can be configured to have any of the authentication mechanism types (Mutual TLS, SCRAM-SHA-512, or OAuth). The following example shows 2 internal listeners configured: the first is set to use SCRAM authentication, while the second listener is set to use mutual TLS.
 
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -446,7 +445,7 @@ To configure OAuth authentication, configure a Kafka listener with type `oauth`,
 
 {{site.data.reuse.short_name}} supports 2 types of SASL mechanisms: `OAUTHBEARER` or `PLAIN`. By default, OAuth authentication uses `OAUTHBEARER` SASL mechanism, which is the most secure mechanism.
 
-**Important:** For clients that do not support the `OAUTHBEARER` authentication mechanism, you can configure the cluster to use the `PLAIN` mechanism by setting the `enableOauthBearer` property to `false` (default setting is `true` for `OAUTHBEARER`). For more information, see [OAuth 2.0 authentication mechanisms](https://strimzi.io/docs/operators/latest/configuring.html#con-oauth-authentication-flow-str){:target="_blank"}.
+**Important:** For clients that do not support the `OAUTHBEARER` authentication mechanism, you can configure the cluster to use the `PLAIN` mechanism by setting the `enableOauthBearer` property to `false` (default setting is `true` for `OAUTHBEARER`). For more information, see [OAuth 2.0 authentication mechanisms](https://strimzi.io/docs/operators/latest/deploying.html#con-oauth-authentication-flow-str){:target="_blank"}.
 
 #### Configuring OAuth to use fast local JWT validation
 
@@ -454,7 +453,7 @@ To configure an OAuth listener to use fast local JWT validation authentication, 
 - Add the respective URIs of the OAuth authentication server to the `jwksEndpointUri` and `validIssuerUri` properties.
 - Create a secret that contains the public CA certificate of the OAuth authentication Server, and reference this secret in the `tlsTrustedCertificates` property of the listener configuration. The `certificate` element in the `tlsTrustedCertificates` references the secret key that contains the CA certificate.
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -477,7 +476,7 @@ spec:
           type: route
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/latest/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/latest/deploying.html#assembly-oauth-authentication_str){:target="_blank"}.
 
 #### Configuring OAuth to use token validation by using an introspection endpoint
 
@@ -486,7 +485,7 @@ To configure an OAuth listener to use introspection endpoint token validation, a
 - Create a secret that contains the public CA certificate of the OAuth authentication Server, and reference this secret in the `tlsTrustedCertificates` property of the listener configuration. The `certificate` element in the `tlsTrustedCertificates` references the secret key that contains the CA certificate.
 - Create another secret that contains the secret value of the `userid` as defined in the `clientId` property of the configuration, and reference this secret in the `clientSecret` property of the configuration. In the `key` property, add the key from the Kuberenetes secret that contains the secret value for the `userid`.
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -514,7 +513,7 @@ spec:
 
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/latest/configuring.html#assembly-oauth-authentication_str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [Using OAuth 2.0 token-based authentication](https://strimzi.io/docs/operators/latest/deploying.html#assembly-oauth-authentication_str){:target="_blank"}.
 
 
 ### Enable OAuth authorization
@@ -525,7 +524,7 @@ To enable OAuth authorization for {{site.data.reuse.short_name}}, add the follow
 - Ensure you set the `delegateToKafkaAcls` property to `true`. If this property is set to `false`, some {{site.data.reuse.short_name}} components will not work as expected.
 - If you configure OAuth authorization, include in the `superUsers` property the user IDs of the Identity and Access Management (IAM) [admin users](../../security/managing-access/#accessing-the-event-streams-ui-and-cli) and Kubernetes Cluster admin users that administer {{site.data.reuse.short_name}} through the UI or the CLI. If you are not using OAuth authorization, you do not need to specify any `superUsers`.
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -545,7 +544,7 @@ spec:
           - "kubeadmin"
 ```
 
-The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [configuring an OAuth 2.0 authorization server](https://strimzi.io/docs/operators/latest/configuring.html#proc-oauth-server-config-str){:target="_blank"}.
+The snippet provided shows a configuration containing the most commonly used properties. For information about further OAuth properties, see [configuring an OAuth 2.0 authorization server](https://strimzi.io/docs/operators/latest/deploying.html#proc-oauth-server-config-str){:target="_blank"}.
 
 ## Configuring node affinity for components
 
@@ -553,7 +552,7 @@ You can configure {{site.data.reuse.short_name}} components to run on nodes with
 
 For REST services, you can configure affinity as follows:
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -569,7 +568,7 @@ where `<component>` is one of the following values: `adminApi`, `adminUI`, `rest
 
 For Kafka and ZooKeeper, you can configure affinity as follows:
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -624,7 +623,7 @@ Producer metrics provide information about the health of your Kafka topics throu
 
 Gathering producer metrics is done through a Kafka Proxy, and is not enabled by default. To enable metrics gathering and have the information displayed in the dashboard, enable the Kafka Proxy by adding the `spec.kafkaProxy` property to the `EventStreams` custom resource as follows:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -646,7 +645,7 @@ Metrics can be enabled for Kafka, ZooKeeper, geo-replicator, and Kafka Connect p
 
 Kafka metrics can be enabled by setting `spec.strimziOverrides.kafka.metricsConfig` in the `EventStreams` custom resource to point to the `metrics-config` ConfigMap. For example:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -665,7 +664,7 @@ spec:
 
 ZooKeeper metrics can be enabled by setting `spec.strimziOverrides.zookeeper.metricsConfig` in the `EventStreams` custom resource to point to the `metrics-config` ConfigMap. For example:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -713,7 +712,7 @@ data:
 
 Geo-replicator metrics can be enabled by setting `spec.metrics` to `{}` in the `KafkaMirrorMaker2` custom resource. For example:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1alpha1
 kind: KafkaMirrorMaker2
 # ...
@@ -727,7 +726,7 @@ spec:
 
 Kafka Connect metrics can be enabled by setting `spec.metrics` to `{}` in the `KafkaConnect` custom resource. For example:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: KafkaConnect
 # ...
@@ -739,7 +738,7 @@ spec:
 
 To complement the default Kafka metrics, you can configure {{site.data.reuse.short_name}} to publish additional information about your {{site.data.reuse.short_name}} instance by adding the `spec.kafkaProxy` property to the `EventStreams` custom resource as follows:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -756,7 +755,8 @@ You can use third-party monitoring tools to monitor the deployed {{site.data.reu
 
 - Have a third-party monitoring tool set up to be used within your {{site.data.reuse.openshift_short}} cluster.
 - Enable access to the broker JMX port by setting `spec.strimizOverrides.kafka.jmxOptions`.
-  ```
+  
+  ```yaml
   apiVersion: eventstreams.ibm.com/v1beta2
   kind: EventStreams
   # ...
@@ -767,6 +767,7 @@ You can use third-party monitoring tools to monitor the deployed {{site.data.reu
       kafka:
         jmxOptions: {}
   ```
+
 - Include any configuration settings for {{site.data.reuse.short_name}} as required by your monitoring tool. For example, Datadog's autodiscovery requires you to annotate Kafka broker pods (`strimziOverrides.kafka.template.statefulset.metadata.annotations`)
 - Configure your monitoring applications to [consume JMX metrics](../../security/secure-jmx-connections/).
 
@@ -774,26 +775,33 @@ You can use third-party monitoring tools to monitor the deployed {{site.data.reu
 
 You can configure the Kafka Exporter to expose additional metrics to Prometheus on top of the default ones. For example, you can obtain the consumer group lag information for each topic.
 
-The Kafka Exporter can be configured using a `regex` to expose metrics for a collection of topics and consumer groups that match the expression. For example, to enable JMX metrics collection for the topic `orders` and the group `buyers`, configure the `EventStreams` custom resource as follows:
+Kafka Exporter can be enabled by setting `spec.kafkaExporter` to `{}` in the `EventStreams` custom resource. For example:
 
-```
+```yaml
   apiVersion: eventstreams.ibm.com/v1beta2
   kind: EventStreams
   # ...
   spec:
-  # ...
-  strimziOverrides:
     # ...
-    kafkaExporter:
-      groupRegex: orders
-      topicRegex: buyers
-      template:
-        pod:
-          metadata:
-            annotations:
-              prometheus.io/port: '9404'
-              prometheus.io/scheme: https
-              prometheus.io/scrape: 'true'
+    strimziOverrides:
+      # ...
+      kafkaExporter: {}
+```
+
+
+You can also configure Kafka Exporter using a `regex` to expose metrics for a collection of topics and consumer groups that match the expression. For example, to enable JMX metrics collection for the topic `orders` and the group `buyers`, configure the `EventStreams` custom resource as follows:
+
+```yaml
+  apiVersion: eventstreams.ibm.com/v1beta2
+  kind: EventStreams
+  # ...
+  spec:
+    # ...
+    strimziOverrides:
+      # ...
+      kafkaExporter:
+        groupRegex: buyers
+        topicRegex: orders
 ```
 
 For more information about configuration options, see [configuring the Kafka Exporter](https://strimzi.io/docs/operators/latest/deploying.html#proc-metrics-kafka-deploy-options-str){:target="_blank"}.
@@ -804,7 +812,7 @@ You can configure the JMX Exporter to expose JMX metrics from Kafka brokers, Zoo
 
 To enable the collection of all JMX metrics available on the Kafka brokers and ZooKeeper nodes, configure the `EventStreams` custom resource as follows:
 
-```
+```yaml
   apiVersion: eventstreams.ibm.com/v1beta2
   kind: EventStreams
   # ...
@@ -836,7 +844,7 @@ To enable Kafka Bridge for {{site.data.reuse.short_name}}, create a `KafkaBridge
 
 For example, to enable Kafka Bridge for {{site.data.reuse.short_name}} in the namespace `es-kafka-bridge`, create the following `KafkaBridge` configuration, where `spec.bootstrapServers` is the address of your {{site.data.reuse.short_name}} Kafka cluster, and `spec.http.port` is the port number for Kafka Bridge to access your cluster (default is `8080`):
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: KafkaBridge
 metadata:
@@ -863,7 +871,7 @@ Depending on your setup and purpose of deployment, you can add more `replicas` w
 
 After enabling the Kafka Bridge, create an OpenShift route for the Kafka Bridge service. For example, in the OpenShift web concole, go to **Networking > Routes**, and click **Create Route**, then click **Edit YAML**, and add the following custom resource:
 
-```
+```yaml
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
@@ -890,7 +898,7 @@ For more information about Kafka Bridge, including further configuration options
 
 To enable Cruise Control, set the `spec.strimizOverrides.cruiseControl` property to `{}` in the `EventStreams` custom resource:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -950,7 +958,8 @@ The `spec.strimziOverrides.cruiseControl.config.goals` property defines the list
 The main optimization goals have [defaults](#cruise-control-defaults) if not configured.
 
 For example, if you want Cruise Control to only consider using `com.linkedin.kafka.cruisecontrol.analyzer.goals.RackAwareGoal` and `com.linkedin.kafka.cruisecontrol.analyzer.goals.ReplicaCapacityGoal`, set values for `spec.strimziOverrides.cruiseControl.config.goals` property as follows:
-```
+
+```yaml
 # ...
 spec:
   # ...
@@ -973,7 +982,7 @@ If no default goals are set, the main optimization goals are used as the [defaul
 
 For example, if you want Cruise Control to always consider meeting `com.linkedin.kafka.cruisecontrol.analyzer.goals.NetworkInboundUsageDistributionGoal`, `com.linkedin.kafka.cruisecontrol.analyzer.goals.NetworkOutboundUsageDistributionGoal`, and `com.linkedin.kafka.cruisecontrol.analyzer.goals.CpuUsageDistributionGoal`, set values for the `spec.strimziOverrides.cruiseControl.config["default.goals"]` property as follows:
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -1003,7 +1012,8 @@ In Cruise Control, the following [main optimization goals](#cruise-control-defau
 - `com.linkedin.kafka.cruisecontrol.analyzer.goals.NetworkOutboundCapacityGoal`
 
 For example, to configure Cruise Control to always consider `com.linkedin.kafka.cruisecontrol.analyzer.goals.NetworkInboundCapacityGoal` and `com.linkedin.kafka.cruisecontrol.analyzer.goals.NetworkOutboundCapacityGoal` in an optimization proposal, provide these goals as values in the `spec.strimziOverrides.cruiseControl.config["hard.goals"]` property as follows:
-```
+
+```yaml
 # ...
 spec:
   # ...
@@ -1038,7 +1048,7 @@ Use the `spec.strimziOverrides.cruiseControl.brokerCapacity` property to define 
 
 For example, to configure Cruise Control to optimize around having an inbound network byte rate of `1000` kilobytes per second and a cpu utilization of 80 percent, configure the `spec.strimziOverrides.cruiseControl.brokerCapacity` property as follows:
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -1108,7 +1118,7 @@ For each command, provide the intended name and namespace for the {{site.data.re
 
 To make use of the provided secrets, {{site.data.reuse.short_name}} will require the following overrides to be added to the custom resource.
 
-```
+```yaml
 spec:
   # ...
   strimziOverrides:
@@ -1142,7 +1152,7 @@ Create a secret containing the private key and server certificate:
 
 To make use of the secret, {{site.data.reuse.short_name}} will require the following overrides to be added to the custom resource.
 
-```
+```yaml
 spec:
   # ...
   strimziOverrides:

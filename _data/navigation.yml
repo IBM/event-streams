@@ -198,6 +198,8 @@ latestdocs:
         url: /troubleshooting/gathering-logs/
       - title: "Resources not available"
         url: /troubleshooting/resources-not-available/
+      - title: "Event Streams installation reports Blocked status"
+        url: /troubleshooting/es-install-fails/ 
       - title: "Error when creating multiple geo-replicators"
         url: /troubleshooting/georeplication-error/
       - title: "TimeoutException when using standard Kafka producer"
@@ -218,8 +220,6 @@ latestdocs:
         url: /troubleshooting/default-scc-issues/
       - title: "Client receives AuthorizationException when communicating with brokers"
         url: /troubleshooting/authorization-failed-exceptions/
-      - title: "Event Streams installation reports failed status"
-        url: /troubleshooting/failed-status-during-cs-install/
       - title: "Client receives 'Failed to load SSL keystore' message when communicating with brokers"
         url: /troubleshooting/pkcs12-keystore-java-client/
       - title: "OpenShift upgrade: fixing scheduling on node and node degraded errors"
@@ -232,8 +232,14 @@ latestdocs:
         url: /troubleshooting/11-1-1-airgap-fail/
       - title: "Apicurio authentication errors due to User Operator watchedNamespace"
         url: /troubleshooting/watched-namespace/
+      - title: "Clients using schemas fail with Apicurio 2.4.1 or later"
+        url: /troubleshooting/upgrade-apicurio/
+      - title: "Unable to find Kafka Exporter metrics in Prometheus"
+        url: /troubleshooting/kafkaexporter-error/
       - title: "Upgrade to 11.1.5 stuck in pending state"
         url: /troubleshooting/missing-crds-block-upgrade/
+      - title: "KafkaRebalance custom resource remains in PendingProposal state"
+        url: /troubleshooting/kafkarebalance-pendingproposal/
 
 # Sidebar navigation for 11.0.
 
@@ -440,6 +446,9 @@ latestdocs:
         url: /troubleshooting/foundational-services-320-upgrade-block/
       - title: "Apicurio authentication errors due to User Operator watchedNamespace"
         url: /troubleshooting/watched-namespace/
+      - title: "KafkaRebalance custom resource remains in PendingProposal state"
+        url: /troubleshooting/kafkarebalance-pendingproposal/
+
 
 # Sidebar navigation for 10.5.
 

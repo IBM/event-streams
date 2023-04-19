@@ -376,7 +376,8 @@ The resource objects used in ACL rules adhere to the following schema:
 | `patternType` | string | Describes the pattern used in the resource field. The supported types are `literal` and `prefix`. With literal pattern type, the resource field will be used as a definition of a full topic name. With prefix pattern type, the resource name will be used only as a prefix. <br> The default value is `literal`. |
 
 Using the information about schemas and resource-operations described in the previous tables, the `spec.authorization.acls` list for a `KafkaUser` can be created as follows:
-```
+
+```yaml
 # ...
 spec:
 # ...
@@ -390,6 +391,7 @@ spec:
           patternType: prefix
         operation: Write
 ```
+
 In this example, an application using this `KafkaUser` would be allowed to write to any topic beginning with **client-** (for example, **client-records** or **client-billing**) from any host machine.
 
 **Note:** The write operation also implicitly derives the required describe operation that Kafka clients require to understand the data model of a topic.

@@ -44,7 +44,7 @@ In {{site.data.reuse.short_name}}, these settings are defined in an `EventStream
 
 For example, to set the number of I/O threads to `24` you can add the `spec.strimziOverrides.kafka.config["num.io.threads"]` property:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 metadata:

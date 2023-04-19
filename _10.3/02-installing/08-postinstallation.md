@@ -29,8 +29,6 @@ To verify the status:
 2. Run the `oc get` command as follows: `oc get eventstreams`
 
 For example, the installation of the instance called `development` is complete when the `STATUS` returned by the `oc get` command displays `Ready`:
-`oc get eventstreams`
-An example output:
 
 ```
 $ oc get eventstreams

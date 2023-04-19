@@ -69,7 +69,8 @@ To migrate a Kafka producer application that uses the Confluent Platform schema 
    props.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "SASL_INHERIT");
    ```
 
-4. Set the Java SSL truststore JVM properties to allow the Confluent Platform schema registry client library to make HTTPS calls to the the Apicurio Registry in {{site.data.reuse.short_name}}. For example:\\
+4. Set the Java SSL truststore JVM properties to allow the Confluent Platform schema registry client library to make HTTPS calls to the the Apicurio Registry in {{site.data.reuse.short_name}}. For example:
+
 
    ```
    export KAFKA_OPTS="-Djavax.net.ssl.trustStore=/path/to/es-cert.jks \ 
@@ -97,7 +98,8 @@ To migrate a Kafka consumer application that uses the Confluent Platform schema 
    props.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "SASL_INHERIT");
    ```
 
-4. Set the Java SSL truststore JVM properties to allow the Confluent Platform schema registry client library to make HTTPS calls to the Apicurio Registry in {{site.data.reuse.short_name}}. For example:\\
+4. Set the Java SSL truststore JVM properties to allow the Confluent Platform schema registry client library to make HTTPS calls to the Apicurio Registry in {{site.data.reuse.short_name}}. For example:
+
 
    ```
    export KAFKA_OPTS="-Djavax.net.ssl.trustStore=/path/to/es-cert.jks \ 

@@ -22,7 +22,8 @@ Download Apache Kafka to a non-z/OS system to retrieve the `.tar` file that incl
 To download Kafka Connect and make it available to your z/OS system:
 1. Log in to a system that is not running IBM z/OS, for example, a Linux system.
 2. [Download](https://kafka.apache.org/downloads){:target="_blank"} Apache Kafka 2.0.0 or later to the system. {{site.data.reuse.long_name}} provides support for Kafka Connect if you are using a Kafka version listed in the **Kafka version shipped** column of the [support matrix]({{ 'support/#support-matrix' | relative_url }}).
-3. Extract the downloaded `.tgz` file, for example:\\
+3. Extract the downloaded `.tgz` file, for example:
+
    `gunzip -k kafka_2.13-2.8.1.tgz`
 4. Copy the resulting `.tar` file to a directory on the z/OS Unix System Services.
 
@@ -52,28 +53,34 @@ If you want to run a distributed Kafka Connect worker, convert the following she
 Extract the Apache Kafka distribution:
 1. Log in to the IBM z/OS system and [access the Unix System Services](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.3.0/com.ibm.zos.v2r3.aioc000/unixss.htm){:target="_blank"}.
 2. Change to an empty directory that you want to use for the Apache Kafka distribution, and copy the `.tar` file to the new directory.
-3. Extract the `.tar` file, for example:\\
+3. Extract the `.tar` file, for example:
+
    `tar -xvf kafka_2.13-2.8.1.tar`
 4. Change to the resulting `kafka_<version>` directory.
 
 Convert the shell scripts:
-1. Copy the `connect-standalone.sh` shell script (or `connect-distributed.sh` for a distributed setup) into the current directory, for example:\\
+1. Copy the `connect-standalone.sh` shell script (or `connect-distributed.sh` for a distributed setup) into the current directory, for example:
+
    `cp bin/connect-standalone.sh ./connect-standalone.sh.orig`
 2. Determine the codeset on the IBM z/OS system by running:\\
    `locale -k codeset`
 3. Convert the script to EBCDIC encoding and replace the original, for example for codeset IBM-1047:\\
    `iconv -f ISO8859-1 -t IBM-1047 ./connect-standalone.sh.orig > bin/connect-standalone.sh`
-4. Ensure the file permissions are set so that the script is executable, for example:\\
+4. Ensure the file permissions are set so that the script is executable, for example:
+
    `chmod +x bin/connect-standalone.sh`
-5. Copy the `kafka-run-class.sh` shell script into the current directory, for example:\\
+5. Copy the `kafka-run-class.sh` shell script into the current directory, for example:
+
    `cp bin/kafka-run-class.sh ./kafka-run-class.sh.orig`
 6. Convert the script to EBCDIC encoding and replace the original, for example for codeset IBM-1047:\\
    `iconv -f ISO8859-1 -t IBM-1047 ./kafka-run-class.sh.orig > bin/kafka-run-class.sh`
-7. Ensure the file permissions are set so that the script is executable, for example:\\
+7. Ensure the file permissions are set so that the script is executable, for example:
+
    `chmod +x bin/kafka-run-class.sh`
 
 Convert the configuration files:
-1. Copy the `connect-standalone.properties` file (or `connect-distributed.properties` for a distributed setup) into the current directory, for example:\\
+1. Copy the `connect-standalone.properties` file (or `connect-distributed.properties` for a distributed setup) into the current directory, for example:
+
    `cp config/connect-standalone.properties ./connect-standalone.properties.orig`
 2. Determine the codeset on the IBM z/OS system by running:\\
    `locale -k codeset`
@@ -81,7 +88,8 @@ Convert the configuration files:
    `iconv -f ISO8859-1 -t IBM-1047 ./connect-standalone.properties.orig > config/connect-standalone.properties`
 
 If running in **standalone mode**:
-1. Copy the MQ `.properties` file into the current directory, for example:\\
+1. Copy the MQ `.properties` file into the current directory, for example:
+
    `cp ./mq-source.properties ./mq-source.properties.orig`
 2. Determine the codeset on the IBM z/OS system by running:\\
    `locale -k codeset`

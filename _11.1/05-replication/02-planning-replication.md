@@ -59,7 +59,8 @@ To create a new EventStreamsGeoReplicator instance for geo-replication by using 
 2. Run the following command to select the project that contains the existing destination cluster:\\
    `oc project <project-name>`
 3. Define an EventStreamsGeoReplicator instance in a file. For example, the following YAML defines an EventStreamsGeoReplicator instance in the `my-project` project that is connected to the {{site.data.reuse.long_name}} instance named `my-dest-cluster` and has 3 geo-replication workers.
-```
+
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta1
 kind: EventStreamsGeoReplicator
 metadata:
@@ -68,9 +69,10 @@ metadata:
   name: my-dest-cluster
   namespace: my-project
 spec:
-  version: 11.1.5
+  version: 11.1.6
   replicas: 3
 ```
+
   **Note:** The EventStreamsGeoReplicator `metadata.name` property and `eventstreams.ibm.com/cluster` label property must be set to the name of the destination {{site.data.reuse.long_name}} instance that you are geo-replicating to.
 4. Run the following command to create the EventStreamsGeoReplicator instance:\\
    `oc create -f <path-to-your-eventstreamsgeoreplicator-file>`
