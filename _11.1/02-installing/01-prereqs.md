@@ -13,6 +13,8 @@ Ensure your environment meets the following prerequisites before installing {{si
 ## Container environment
 
 {{site.data.reuse.long_name}} 11.1.x is supported on the {{site.data.reuse.openshift}}.
+
+- Version 11.1.6 is installed by the {{site.data.reuse.short_name}} operator version 3.1.6, and includes Kafka version 3.4.0.
 - Version 11.1.5 is installed by the {{site.data.reuse.short_name}} operator version 3.1.5, and includes Kafka version 3.4.0.
 - Version 11.1.4 is installed by the {{site.data.reuse.short_name}} operator version 3.1.4, and includes Kafka version 3.3.1.
 - Version 11.1.3 is installed by the {{site.data.reuse.short_name}} operator version 3.1.3, and includes Kafka version 3.2.3.

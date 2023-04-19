@@ -22,7 +22,7 @@ You can expose the JMX port (`9999`) of each Kafka broker to be accessible to se
 
 The JMX port can be password-protected to prevent unauthorised pods from accessing it. It is good practice to secure the JMX port, as an unprotected port could allow a user to invoke an MBean operation on the Java JVM. To enable security for the JMX port, set the `spec.strimiziOverrrides.kafka.jmxOptions.authentication.type` field to `password`. For example:
 
-```
+```yaml
 #...
 spec:
   #...
@@ -89,7 +89,7 @@ These will output the `jmx_username` and `jmx_password` values into the respecti
 
 Mounting the secret will project the `jmx_username` and `jmx_password` values as files under the mount path folder.
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -138,7 +138,7 @@ To configure a JmxTrans deployment, you will need to use the `spec.strimziOverri
 
 The following is an example configuration pushing JMX data to `standardOut` in the JmxTrans logs and another pushing JMX data every 10 seconds in the Graphite format to a Logstash database at the address `mylogstash.com:31028`:
 
-```
+```yaml
 # ...
 spec:
   # ...
@@ -168,7 +168,7 @@ Note: Metrics are read from all Kafka brokers. There is no configuration option 
 
 The following is an example JmxTrans deployment that reads from all MBeans that match the pattern `kafka.server:type=BrokerTopicMetrics,name=*` and have `name` in the target MBeans name. From those MBeans, it obtains JMX metrics about the `Count` attribute, and pushes the metrics to a standard output as defined by the `outputs` attribute.
 
-```
+```yaml
 #...
 spec:
   #...

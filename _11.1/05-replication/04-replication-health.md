@@ -83,12 +83,17 @@ To stop an individual topic from being replicated and remove it from the geo-rep
 To view this information on the origin cluster by using the CLI:
 1. Go to your origin cluster. {{site.data.reuse.cp_cli_login}}
 2. {{site.data.reuse.es_cli_init}}
-3. Retrieve destination cluster IDs by using the following command:\\
+3. Retrieve destination cluster IDs by using the following command:
+
    `cloudctl es geo-clusters`
-4. Retrieve information about a destination cluster by running the following command and copying the required destination cluster ID from the previous step:\\
-   `cloudctl es geo-cluster --destination <destination-cluster-id>`\\
-   For example:\\
-   `cloudctl es geo-cluster --destination destination_byl6x`\\
+4. Retrieve information about a destination cluster by running the following command and copying the required destination cluster ID from the previous step:
+
+   `cloudctl es geo-cluster --destination <destination-cluster-id>`
+
+   For example:
+
+   `cloudctl es geo-cluster --destination destination_byl6x`
+
    The command returns the following information:
 
    ```
@@ -112,39 +117,58 @@ Each geo-replicator creates a MirrorSource connector and a MirrorCheckpoint conn
 To manage geo-replication on the origin cluster by using the CLI:
 1. Go to your origin cluster. {{site.data.reuse.cp_cli_login}}
 2. {{site.data.reuse.es_cli_init}}
-3. Run the following commands as required:\\
+3. Run the following commands as required:
 
-  - `cloudctl es geo-replicator-pause --destination <destination-cluster-id> --name "<replicator-name>"`\\
-     For example:\\
-     `cloudctl es geo-replicator-pause --destination destination_byl6x  --name "origin_es->destination-mm2connector"`\\
+   - `cloudctl es geo-replicator-pause --destination <destination-cluster-id> --name "<replicator-name>"`
+
+     For example:
+
+     `cloudctl es geo-replicator-pause --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
+
      This will pause both the MirrorSource connector and the MirrorCheckpoint connector for this geo-replicator.  Geo-replication for all topics that are part of this geo-replicator will be paused.
 
-  - `cloudctl es geo-replicator-resume --destination <destination-cluster-id> --name "<replicator-name>"`\\
-   For example:\\
-   `cloudctl es geo-replicator-resume --destination destination_byl6x  --name "origin_es->destination-mm2connector"`\\
-   This will resume both the MirrorSource connector and the MirrorCheckpoint connector for this geo-replicator after they have been paused. Geo-replication for all topics that are part of this geo-replicator will be resumed.
+   - `cloudctl es geo-replicator-resume --destination <destination-cluster-id> --name "<replicator-name>"`
 
-  - `cloudctl es geo-replicator-restart --destination <destination-cluster-id> --name "<replicator-name>" --connector <connector-name>`\\
-   For example:\\
-   `cloudctl es geo-replicator-restart --destination destination_byl6x  --name "origin_es->destination-mm2connector" --connector MirrorSourceConnector`\\
-   This will restart a failed geo-replicator MirrorSource connector.
+     For example:
 
-  - `cloudctl es geo-replicator-topics-remove --destination <destination-cluster-id> --name "<replicator-name>" --topics <comma-separated-topic-list>`\\
-    For example:\\
-    `cloudctl es geo-replicator-topics-remove --destination destination_byl6x  --name "origin_es->destination-mm2connector " --topics topic1,topic2`\\
-    This will remove the listed topics from this geo-replicator.
+     `cloudctl es geo-replicator-resume --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
 
-  - `cloudctl es geo-replicator-delete --destination <destination-cluster-id> --name "<replicator-name>"`\\
-   For example:\\
-   `cloudctl es geo-replicator-delete --destination destination_byl6x  --name "origin_es->destination-mm2connector"`\\
-   This will remove all MirrorSource and MirrorCheckpoint connectors for this geo-replicator.
+     This will resume both the MirrorSource connector and the MirrorCheckpoint connector for this geo-replicator after they have been paused. Geo-replication for all topics that are part of this geo-replicator will be resumed.
 
+   - `cloudctl es geo-replicator-restart --destination <destination-cluster-id> --name "<replicator-name>" --connector <connector-name>`
 
-  - `cloudctl es geo-cluster-remove --destination <destination-cluster-id>`\\
-   For example:\\
-   `cloudctl es geo-cluster-remove --destination destination_byl6x`\\
-   This will permanently remove a destination cluster.\\
-   **Note:** If you are unable to remove a destination cluster due to technical issues, you can use the `--force` option with the `geo-cluster-remove` command to remove the cluster.
+     For example:
+
+     `cloudctl es geo-replicator-restart --destination destination_byl6x  --name "origin_es->destination-mm2connector" --connector MirrorSourceConnector`
+
+     This will restart a failed geo-replicator MirrorSource connector.
+
+   - `cloudctl es geo-replicator-topics-remove --destination <destination-cluster-id> --name "<replicator-name>" --topics <comma-separated-topic-list>`
+
+     For example:
+
+     `cloudctl es geo-replicator-topics-remove --destination destination_byl6x  --name "origin_es->destination-mm2connector " --topics topic1,topic2`
+
+     This will remove the listed topics from this geo-replicator.
+
+   - `cloudctl es geo-replicator-delete --destination <destination-cluster-id> --name "<replicator-name>"`
+
+     For example:
+
+     `cloudctl es geo-replicator-delete --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
+
+     This will remove all MirrorSource and MirrorCheckpoint connectors for this geo-replicator.
+
+   - `cloudctl es geo-cluster-remove --destination <destination-cluster-id>`
+
+     For example:
+
+     `cloudctl es geo-cluster-remove --destination destination_byl6x`
+
+     This will permanently remove a destination cluster.
+
+     **Note:** If you are unable to remove a destination cluster due to technical issues, you can use the `--force` option with the `geo-cluster-remove` command to remove the cluster.
+
 
 
 ## Restarting a geo-replicator with Error status
@@ -183,7 +207,7 @@ Enable export of metrics in {{site.data.reuse.short_name}} geo-replication by ed
 7. Click the **YAML** tab.
 8. Add the `spec.metrics` property. For example:
 
-    ```
+    ```yaml
     # ...
     spec:
       metrics: {}
@@ -196,15 +220,18 @@ Enable export of metrics in {{site.data.reuse.short_name}} geo-replication by ed
 
 To modify the number of geo-replicator workers run the following using the oc tool:
 1. Go to where your destination cluster is installed. {{site.data.reuse.openshift_cli_login}}
-2. Run the following command to select the project that contains the existing destination cluster:\\
+2. Run the following command to select the project that contains the existing destination cluster:
+
    `oc project <project-name>`
-3. Run the following command to list your `KafkaMirrorMaker2` instances:\\
+3. Run the following command to list your `KafkaMirrorMaker2` instances:
+
    `oc get kafkamirrormaker2s`
-4. Run the following command to edit the custom resource for your `KafkaMirrorMaker2` instance:\\
+4. Run the following command to edit the custom resource for your `KafkaMirrorMaker2` instance:
+
    `oc edit kafkamirrormaker2 <instance-name>`
 5. Add the `spec.metrics` property. For example:
 
-   ```
+   ```yaml
    spec:
      metrics: {}
    ```

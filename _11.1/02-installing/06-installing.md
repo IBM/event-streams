@@ -81,7 +81,7 @@ To add the IBM Operator Catalog:
 
 1. Create a file for the IBM Operator Catalog source with the following content, and save as `IBMCatalogSource.yaml`:
 
-   ```
+   ```yaml
    apiVersion: operators.coreos.com/v1alpha1
    kind: CatalogSource
    metadata:
@@ -185,6 +185,18 @@ When the {{site.data.reuse.short_name}} operator is installed, the following add
 - Operand Deployment Lifecycle Manager.
 - IBM Common Service Operator.
 
+### Scaling the operator for high availability
+
+High availability (HA) is the elimination of single points of failure in an environment. In addition to setting up your [Kafka brokers](../planning/#kafka-high-availability) for high availability, you can also set the number of the {{site.data.reuse.short_name}} operator replicas to enable more resilience.
+
+By increasing the number of replicas to a value greater than 1, the operator can continue to function even if one of the operator pods it depends on fails. To ensure uptime in failure situations, the management of your {{site.data.reuse.short_name}} is delegated to the other available operator pods.
+
+To increase the number replicas, edit the replicas in the `ClusterServiceVersion` object  manually or by running the following command:
+
+```shell
+oc patch csv -n <NAMESPACE> ibm-eventstreams.v<CSV_VERSION> -p '[{"op":"replace","path":"/spec/install/spec/deployments/0/spec/replicas","value":3}]' --type json
+```
+
 ### Technology Preview feature: KRaft
 
 Technology Preview features are available to evaluate potential upcoming features. Such features are intended for testing purposes only and not for production use. IBM does not support these features, but might help with any issues raised against them. IBM welcomes feedback on Technology Preview features to improve them. As the features are still under development, functions and interfaces can change, and it might not be possible to upgrade when updated versions become available.
@@ -205,7 +217,6 @@ The KRaft mode in {{site.data.reuse.short_name}} has the following limitations:
 - SCRAM-SHA-512 authentication is not supported. If required, use TLS authentication for secure communication.
 - You can only access the {{site.data.reuse.short_name}} UI by using {{site.data.reuse.icpfs}} Identity and Access Management (IAM).
 - JBOD storage is not supported. You can use `type: jbod` for storage, but the JBOD array can contain only one disk.
-- Liveness and readiness probes are disabled.
 - All Kafka nodes have both the controller and the broker KRaft roles. Kafka clusters with separate controller and broker nodes are not supported.
 
 #### Enabling KRaft

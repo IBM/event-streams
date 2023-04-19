@@ -28,7 +28,7 @@ To configure authentication between Kafka Bridge and your Kafka cluster, use the
 
 - The following example includes an {{site.data.reuse.short_name}} cluster that requires TLS authentication for user access, and the user `<username>` was [created](../../security/managing-access/#managing-access-to-kafka-resources) for Kafka Bridge earlier. In addition, it includes TLS authentication for the connection between the {{site.data.reuse.short_name}} instance (called `development`) and the Kafka Bridge.
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: KafkaBridge
 metadata:
@@ -65,7 +65,7 @@ spec:
 
 - The following example includes an {{site.data.reuse.short_name}} cluster that requires SCRAM-SHA-512 authentication for user access, and the user `<username>` was [created](../../security/managing-access/#managing-access-to-kafka-resources) for Kafka Bridge earlier. In addition, it includes TLS authentication for the connection between the {{site.data.reuse.short_name}} instance (called `development`) and the Kafka Bridge.
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: KafkaBridge
 metadata:

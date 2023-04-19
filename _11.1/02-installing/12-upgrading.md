@@ -14,13 +14,13 @@ Understand the upgrade paths available for Continuous Delivery (CD) releases and
 
 ### Upgrade paths for CD releases
 
-You can upgrade {{site.data.reuse.short_name}} to the latest 11.1.5 version directly from any 11.1.x or 11.0.x version by using operator version 3.1.5. If you have an earlier {{site.data.reuse.short_name}} version than 11.0.x, you must first upgrade it to [version 11.0.x](../../11.0/installing/upgrading/) before upgrading to 11.1.x.
+You can upgrade {{site.data.reuse.short_name}} to the latest 11.1.6 version directly from any 11.1.x or 11.0.x version by using operator version 3.1.6. If you have an earlier {{site.data.reuse.short_name}} version than 11.0.x, you must first upgrade it to [version 11.0.x](../../11.0/installing/upgrading/) before upgrading to 11.1.x.
 
-**Note:** If your operator upgrades are set to automatic, minor version upgrades are completed automatically. This means that the {{site.data.reuse.short_name}} operator is upgraded to 3.1.5 when it is available in the catalog, and your {{site.data.reuse.short_name}} instance is then also automatically upgraded, unless you [set a schedule for the upgrade](#scheduling-the-upgrade-of-an-instance) by pausing the reconciliation.
+**Note:** If your operator upgrades are set to automatic, minor version upgrades are completed automatically. This means that the {{site.data.reuse.short_name}} operator is upgraded to 3.1.6 when it is available in the catalog, and your {{site.data.reuse.short_name}} instance is then also automatically upgraded, unless you [set a schedule for the upgrade](#scheduling-the-upgrade-of-an-instance) by pausing the reconciliation.
 
 ### Upgrade paths for EUS releases
 
-No direct upgrade from EUS to the latest version is supported. Upgrade to [CD version 11.0.x](../../11.0/installing/upgrading/) and then proceed to upgrade your {{site.data.reuse.short_name}} version to the latest by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.1.5).
+No direct upgrade from EUS to the latest version is supported. Upgrade to [CD version 11.0.x](../../11.0/installing/upgrading/) and then proceed to upgrade your {{site.data.reuse.short_name}} version to the latest by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.1.6).
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ No direct upgrade from EUS to the latest version is supported. Upgrade to [CD ve
 - To upgrade successfully, your {{site.data.reuse.short_name}} instance must have more than one ZooKeeper node or have persistent storage enabled. If you upgrade an {{site.data.reuse.short_name}} instance with a single ZooKeeper node that has ephemeral storage, all messages and all topics will be lost and both ZooKeeper and Kafka pods will move to an error state. To avoid this issue, increase the number of ZooKeeper nodes before upgrading as follows:
 
 
-   ```
+   ```yaml
    apiVersion: eventstreams.ibm.com/v1beta1
    kind: EventStreams
    metadata:
@@ -185,3 +185,18 @@ In {{site.data.reuse.long_name}} version 11.0.0 and later, a Kafka Proxy handles
 ### Enable metrics for monitoring
 
 To display metrics in the monitoring dashboards of the {{site.data.reuse.short_name}} UI, ensure you [enable](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=administering-enabling-openshift-container-platform-monitoring){:target="_blank"} the {{site.data.reuse.openshift_short}} monitoring stack.
+
+### Migrate to latest Apicurio Registry
+
+![Event Streams 11.1.6 icon]({{ 'images' | relative_url }}/11.1.6.svg "In Event Streams 11.1.6")Apicurio client libraries versions 2.3.1 and earlier use a [date format that is not compatible](../../troubleshooting/upgrade-apicurio) with Apicurio Registry server versions 2.4.1 or later. Apicurio Registry is only deployed when you update the {{site.data.reuse.short_name}} custom resource to use the latest version of Apicurio Registry included with {{site.data.reuse.short_name}}.
+
+Migrate your schema registry to use the latest Apicurio Registry as follows:
+
+1. Ensure all applications connecting to your instance of {{site.data.reuse.short_name}} that use the schema registry are using Apicurio client libraries version 2.4.1 or later before migrating.
+2. {{site.data.reuse.openshift_cli_login}}
+3. Add the `eventstreams.ibm.com/apicurio-registry-version='>=2.4'` annotation to your {{site.data.reuse.short_name}} custom resource with the following command:
+   ```shell
+   oc annotate --namespace <namespace> EventStreams <instance-name> eventstreams.ibm.com/apicurio-registry-version='>=2.4'
+      ```
+
+The {{site.data.reuse.short_name}} operator will update your schema registry to use the latest version of Apicurio Registry included with {{site.data.reuse.short_name}}.

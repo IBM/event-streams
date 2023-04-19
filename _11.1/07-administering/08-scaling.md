@@ -24,7 +24,7 @@ These settings are defined in the `EventStreams` custom resource under the `spec
 
 The number of Kafka brokers is defined in the `EventStreams` custom resource in the `spec.strimziOverrides.kafka.replicas` property. For example to configure {{site.data.reuse.short_name}} to use 6 Kafka brokers:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -42,7 +42,7 @@ spec:
 
 The CPU settings for the Kafka brokers are defined in the `EventStreams` custom resource in the `requests` and `limits` properties under `spec.strimziOverrides.kafka.resources`. For example to configure {{site.data.reuse.short_name}} Kafka brokers to have a CPU request set to 2 CPUs and limit set to 4 CPUs:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -70,7 +70,7 @@ The memory settings for the ZooKeeper nodes are defined in the `EventStreams` cu
 
 For example to configure {{site.data.reuse.short_name}} Kafka brokers and ZooKeeper nodes to have a memory request set to `4GB` and limit set to `8GB`:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -102,7 +102,7 @@ The syntax for these values can be found in the [Kubernetes documentation](https
 The resource settings for each supporting component are defined in the `EventStreams` custom resource in their corresponding component key the `requests` and `limits` properties under `spec.<component>.resources`.
 For example, to configure the Apicurio Registry to have a memory request set to `4GB` and limit set to `8GB`:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -130,7 +130,7 @@ If you have specific requirements, you can modify the JVM settings for the Kafka
 
 JVM settings for the Kafka brokers are defined in the `EventStreams` custom resource in the `spec.strimziOverrides.kafka.jvmOptions` propety. For example:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...
@@ -152,7 +152,7 @@ The Kafka brokers need sufficient storage to meet the retention requirements for
 
 The amount of storage made available to Kafka brokers is defined at the time of installation in the `EventStreams` custom resource in the `spec.strimziOverrides.kafka.storage.size` property. For example:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 # ...

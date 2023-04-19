@@ -170,7 +170,7 @@ oc describe kafkaconnect my-connect-cluster
 
 Create a YAML file for the connector configuration. For the MQ connectors, you can use the {{site.data.reuse.short_name}} UI or CLI to generate the YAML file. Alternatively, you can use the following template, taking care to replace `<kafka_connect_name>` with the name of the `KafkaConnect` instance:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: KafkaConnector
 metadata:

@@ -106,7 +106,8 @@ Use the {{site.data.reuse.short_name}} CLI to generate and download the `KafkaCo
 3. Change the values of `mq.user.name` and `mq.password` to the username and password that you used to configure your instance of MQ. Also set the label `eventstreams.ibm.com/cluster` to the name of your Kafka Connect instance.
 
 The final configuration file will resemble the following:
-```
+
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: KafkaConnector
 metadata:

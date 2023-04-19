@@ -29,8 +29,6 @@ To verify the status:
 2. Run the `oc get` command as follows: `oc get eventstreams`
 
 For example, the installation of the instance called `development` is complete when the `STATUS` returned by the `oc get` command displays `Ready`:
-`oc get eventstreams`
-An example output:
 
 ```shell
 $ oc get eventstreams
@@ -96,11 +94,11 @@ Secure your installation by [managing the access](../../security/managing-access
 
 For example, associate your {{site.data.reuse.icpfs}} teams with your {{site.data.reuse.short_name}} instance to grant access to resources based on roles.
 
-## Scaling
+## Scaling your Kafka Environment
 
 Depending on the size of the environment that you are installing, consider scaling and sizing options. You might also need to change scale and size settings for your services over time. For example, you might need to add additional Kafka brokers over time.
 
-See [how to scale your environment](../../administering/scaling).
+See [how to scale your Kafka environment](../../administering/scaling).
 
 ## Considerations for GDPR readiness
 

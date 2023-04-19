@@ -130,7 +130,8 @@ If you want your client application to continue processing messages on the desti
   \\
   `cloudctl es group-reset --group consumer-group-1 --topic GEOREPLICATED.TOPIC --mode datetime --value 2018-09-28T12:00:00+00:00 --execute`
 
-* To start processing messages from the beginning of the topic, you can use the `--mode earliest` option, for example:\\
+* To start processing messages from the beginning of the topic, you can use the `--mode earliest` option, for example:
+
   `cloudctl es group-reset --group consumer-group-1 --topic GEOREPLICATED.TOPIC --mode earliest --execute`
 
 These methods also avoid the need to make code changes to your client application.

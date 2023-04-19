@@ -46,7 +46,7 @@ For other components, this property can be found as follows:
 
 For example, to configure automatic deletion for the Kafka storage when uninstalling:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 ...
@@ -132,7 +132,7 @@ For other components, this property can be found as follows:
 
 For example, to configure automatic deletion for the Kafka storage when uninstalling:
 
-```
+```yaml
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: EventStreams
 ...

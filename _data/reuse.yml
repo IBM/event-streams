@@ -157,7 +157,7 @@ kafkaConnectStep2_content1_example: "For example:\n```\n plugin.path=/usr/local/
 kafkaConnectStep3_title: "Restart Kafka Connect to make the new connector available in the environment. <br> <br> For more information about how to set up a Kafka Connect environment, add connectors to it, and start the connectors, see how to [set up and run connectors](../../connecting/setting-up-connectors/)."
 
 # {{site.data.reuse.apicurio_note}}
-apicurio_note: "**Important:**  Support for Apicurio client libraries version 2.3.x and earlier is deprecated. Ensure all applications connecting to Event Streams that use the schema registry are using Apicurio client libraries version 2.4.1 or later."
+apicurio_note: "**Important:**  Support for Apicurio client libraries version 2.3.x and earlier is deprecated. Ensure all applications connecting to Event Streams that use the schema registry are using Apicurio client libraries version 2.4.1 or later, then [migrate to the latest Apicurio](../../troubleshooting/upgrading-apicurio)."
 #####################################################
 # DEPRECATED (USED IN OLDER DOCUMENTATION VERSIONS) #
 #####################################################

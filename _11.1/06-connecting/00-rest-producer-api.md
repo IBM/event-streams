@@ -92,7 +92,7 @@ The REST producer API has a configured limit for the key size (default is `4096`
 
 You can configure the key and message size limits at the time of [installation](../../installing/configuring/) or later as described in [modifying](../../administering/modifying-installation/) installation settings. The limits are configured by setting environment variables on the REST Producer component:
 
-```
+```yaml
 spec:
   restProducer:
     env:
