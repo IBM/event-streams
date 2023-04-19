@@ -12,7 +12,7 @@ Find out what is new in {{site.data.reuse.long_name}} version 11.1.x.
 
 ### Migration to latest Apicurio Registry
 
-{{site.data.reuse.short_name}} 11.1.6 includes support for Apicurio Registry 2.4.1. Ensure all applications connecting to {{site.data.reuse.short_name}} that use the schema registry are using Apicurio client libraries version 2.4.1 or later, then [migrate to the latest Apicurio](../../troubleshooting/upgrading-apicurio).
+{{site.data.reuse.short_name}} 11.1.6 includes support for Apicurio Registry 2.4.1. Ensure all applications connecting to {{site.data.reuse.short_name}} that use the schema registry are using Apicurio client libraries version 2.4.1 or later, then [migrate to the latest Apicurio](../../troubleshooting/upgrade-apicurio/).
 
 ### Security and bug fixes
 
