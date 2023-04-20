@@ -869,7 +869,7 @@ spec:
 
 Depending on your setup and purpose of deployment, you can add more `replicas` which sets the number of Kafka Bridge instances to run. For production environments, for example, consider deploying more than one replica for resilience.
 
-After enabling the Kafka Bridge, create an OpenShift route for the Kafka Bridge service. For example, in the OpenShift web concole, go to **Networking > Routes**, and click **Create Route**, then click **Edit YAML**, and add the following custom resource:
+After enabling the Kafka Bridge, create an OpenShift route for the Kafka Bridge service. For example, in the OpenShift web console, go to **Networking > Routes**, and click **Create Route**, then click **Edit YAML**, and add the following custom resource:
 
 ```yaml
 kind: Route
