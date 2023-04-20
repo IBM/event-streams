@@ -16,7 +16,6 @@ sections:
   - section:
     title: "Support"
     type: "Community"
-    description: "Support is provided by the community."
     buttons:
-      - { text: 'Get support', url: 'https://github.com/kaliy/kafka-connect-rss/issues' }
+      - { text: 'Raise issue', url: 'https://github.com/kaliy/kafka-connect-rss/issues' }
 ---
