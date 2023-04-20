@@ -7,14 +7,17 @@
   <div id="{{ isMobileContainer }}heroContainer" class="heroContainer pageSpacing">
     <div class="fadeContainer">
       <div class="intro">
-        <h1 class="hero small">
-          Welcome to the IBM Event Streams
-        </h1>
         <h1 class="hero connectorTitle">
           Connector catalog
         </h1>
         <p>Kafka Connect is a framework for connecting Kafka to external systems. It uses source connectors to move data into Kafka, and sink connectors to move data out of Kafka.</p>
-        <p>The Event Streams connector catalog contains a list of tried and tested connectors from both the community and IBM.</p>
+        <p>The connector catalog contains a list of connectors that are supported either by IBM or the community: 
+          <ul>
+            <li> <b>IBM supported:</b> Support is provided by IBM for customers with a support entitlement for IBM Cloud Pak for Integration. Raise any issues through the official 
+              <a href="https://www.ibm.com/support/home/">IBM support</a> channel. IBM will investigate, identify, and provide a fix when possible.</li>
+            <li><b>Community supported:</b> Each community connector is subject to its own set of license terms, which are not supported by IBM. Raise issues through the community support links provided for the connector.</li>
+          </ul>
+        </p>
       </div>
       <div class="keyTasks">
         {% for item in site.data.navigation.connectorQuickLinks %}

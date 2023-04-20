@@ -1,14 +1,16 @@
 ---
-title: "HTTP"
-sortTitle: "HTTP"
+title: HTTP
+sortTitle: HTTP
 connectorID: kc-sink-http
 direction: sink
 support: community
 type: kafkaConnect
 iconInitial: H
-iconGradient: 1
+iconGradient: 3
+documentationURL: https://github.com/aiven/http-connector-for-apache-kafka
 download:
-  -  { type: 'GitHub', url: 'https://github.com/thomaskwscott/kafka-connect-http' }
+  -  { type: 'Download', url: 'https://github.com/aiven/http-connector-for-apache-kafka/releases' }
+  -  { type: 'GitHub', url: 'https://github.com/aiven/http-connector-for-apache-kafka' }
 ---
+HTTP sink connector sends Kafka records over HTTP POST requests.
 
-The HTTP sink connector is a Kafka connector for invoking HTTP APIs with data from Apache Kafka.
