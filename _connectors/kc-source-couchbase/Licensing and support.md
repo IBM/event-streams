@@ -16,7 +16,6 @@ sections:
   - section:
     title: "Support"
     type: "Community"
-    description: "Support is provided by the community."
     buttons:
-      - { text: 'Get support', url: 'https://issues.couchbase.com/projects/KAFKAC' }
+      - { text: 'Raise issue', url: 'https://issues.couchbase.com/projects/KAFKAC' }
 ---

@@ -16,7 +16,6 @@ sections:
   - section:
     title: "Support"
     type: "IBM Support"
-    description: "Commercial support for this connector is available for customers with a support entitlement for IBM Cloud Pak for Integration."
     buttons:
-      - { text: 'Get support', url: '../../support/' }
+      - { text: 'Raise issue', url: '../../support/' }
 ---

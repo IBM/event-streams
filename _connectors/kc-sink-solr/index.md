@@ -1,15 +1,16 @@
 ---
-title: "Solr"
-sortTitle: "Solr"
+title: Solr
+sortTitle: Solr
 connectorID: kc-sink-solr
 direction: sink
 support: community
 type: kafkaConnect
-iconInitial: So
+iconInitial: S
 iconGradient: 1
-documentationURL: https://github.com/bkatwal/kafka-solr-sink-connector/blob/master/README.md
+documentationURL: https://github.com/jcustenborder/kafka-connect-solr
 download:
-  -  { type: 'GitHub', url: 'https://github.com/bkatwal/kafka-solr-sink-connector' }
+  -  { type: 'Download', url: 'https://github.com/jcustenborder/kafka-connect-solr/releases' }
+  -  { type: 'GitHub', url: 'https://github.com/jcustenborder/kafka-connect-solr' }
 ---
+Solr sink connector writes data from Kafka topics to Apache Solr.
 
-Kafka Connect sink connector for Solr takes plain JSON data from Kafka topics and pushes it to Solr.
