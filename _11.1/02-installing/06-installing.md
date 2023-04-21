@@ -189,7 +189,7 @@ When the {{site.data.reuse.short_name}} operator is installed, the following add
 
 High availability (HA) is the elimination of single points of failure in an environment. In addition to setting up your [Kafka brokers](../planning/#kafka-high-availability) for high availability, you can also set the number of the {{site.data.reuse.short_name}} operator replicas to enable more resilience.
 
-By increasing the number of replicas to a value greater than 1, the operator can continue to function even if one of the operator pods it depends on fails. To ensure uptime in failure situations, the management of your {{site.data.reuse.short_name}} is delegated to the other available operator pods.
+By increasing the number of replicas to a value greater than 1, you can ensure that the {{site.data.reuse.short_name}} operator continues to function in a wider range of outage scenarios. To ensure uptime in failure situations, the management of your {{site.data.reuse.short_name}} is delegated to the other available operator pods.
 
 To increase the number replicas, edit the replicas in the `ClusterServiceVersion` object  manually or by running the following command:
 
