@@ -13,12 +13,15 @@ Kafka Connect can be run in standalone or distributed mode. This document contai
 
 ## Prerequisites
 
-To follow these instructions, ensure you have the following available:
+To follow these instructions, ensure you have [IBM MQ](https://www.ibm.com/docs/en/ibm-mq/8.0){:target="_blank"} v8 or later installed.
 
-- [IBM MQ](https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.helphome.v80.doc/WelcomePagev8r0.htm){:target="_blank"} v8 or later installed.
-   **Note:** These instructions are for IBM MQ v9 running on Linux. If you're using a different version or platform, you might have to adjust some steps slightly.
+**Note:** These instructions are for [IBM MQ](https://www.ibm.com/docs/en/ibm-mq/9.3){:target="_blank"} v9 running on Linux. If you are using a different version or platform, you might have to adjust some steps slightly.
 
 ## Setting up the queue manager
+
+You can set up a queue manager by using the local operating system to authenticate, or by using the IBM MQ Operator.
+
+### By using local operating system to authenticate
 
 These sample instructions set up an IBM MQ queue manager that uses its local operating system to authenticate the user ID and password. The user ID and password you provide must already be created on the operating system where IBM MQ is running.
 
@@ -50,7 +53,8 @@ These sample instructions set up an IBM MQ queue manager that uses its local ope
 12. Stop the `runmqsc` tool by typing `END`.
 
 For example, for a queue manager called `QM1`, with user ID `alice`, creating a server-connection channel called `MYSVRCONN` and a queue called `MYQSOURCE`, you run the following commands in `runmqsc`:
-```
+
+```bash
 DEFINE CHANNEL(MYSVRCONN) CHLTYPE(SVRCONN)
 SET CHLAUTH(MYSVRCONN) TYPE(BLOCKUSER) USERLIST('nobody')
 SET CHLAUTH('*') TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(NOACCESS)
@@ -65,6 +69,51 @@ END
 
 The queue manager is now ready to accept connection from the connector and get messages from a queue.
 
+### By using the IBM MQ Operator
+
+You can also use the IBM MQ Operator to set up a queue manager. For more information about installing the IBM MQ Operator and setting up a queue manager, see the [IBM MQ documentation](https://www.ibm.com/docs/en/ibm-mq/9.3?topic=miccpi-using-mq-in-cloud-pak-integration-red-hat-openshift){:target="_blank"}.
+
+If you are using the IBM MQ Operator to set up a queue manager, you can use the following YAML file to create a queue manager with the required configuration:
+
+1. Create a file called `custom-source-mqsc-configmap.yaml` and copy the following YAML content into the file to create the ConfigMap that has the details for creating a server connection channel called `MYSVRCONN` and a queue called `MYQSOURCE`:
+
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+   name: custom-source-mqsc
+   data:
+   source.mqsc: |
+      DEFINE CHANNEL(MYSVRCONN) CHLTYPE(SVRCONN)
+      SET CHLAUTH(MYSVRCONN) TYPE(BLOCKUSER) USERLIST('nobody')
+      SET CHLAUTH('*') TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(NOACCESS)
+      SET CHLAUTH(MYSVRCONN) TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(CHANNEL) CHCKCLNT(REQUIRED)
+      ALTER AUTHINFO(SYSTEM.DEFAULT.AUTHINFO.IDPWOS) AUTHTYPE(IDPWOS) ADOPTCTX(YES)
+      REFRESH SECURITY TYPE(CONNAUTH)
+      DEFINE QLOCAL(MYQSOURCE)
+      SET AUTHREC OBJTYPE(QMGR) PRINCIPAL('alice') AUTHADD(CONNECT,INQ)
+      SET AUTHREC PROFILE(MYQSOURCE) OBJTYPE(QUEUE) PRINCIPAL('alice') AUTHADD(ALLMQI)
+   ```
+
+1. Create the ConfigMap by using the following command:
+
+   `oc apply -f custom-source-mqsc-configmap.yaml`
+
+1. To create a queue manager with the required configuration, update the `spec.queueManager` section of the `QueueManager` custom resource YAML file:
+
+   ```yaml
+   ...
+   queueManager:
+      ...
+      mqsc:
+      - configMap:
+         name: custom-source-mqsc
+         items:
+         - source.mqsc
+   ```
+
+The queue manager is now ready to accept connection from the connector and get messages from a queue.
+
 ## Configuring the connector to connect to MQ
 
 To connect to IBM MQ and to your {{site.data.reuse.long_name}} or Apache Kafka cluster, the connector requires configuration settings added to a `KafkaConnector` custom resource that represents the connector.
@@ -72,6 +121,7 @@ To connect to IBM MQ and to your {{site.data.reuse.long_name}} or Apache Kafka c
 For IBM MQ connectors, you can generate the `KafkaConnector` custom resource YAML file from either the {{site.data.reuse.short_name}} UI or the CLI. You can also use the CLI to generate a JSON file, which you can use in distributed mode where you supply the connector configuration through REST API calls.
 
 The connector connects to IBM MQ using a client connection. You must provide the following connection information for your queue manager (these configuration settings are added to the `spec.config` section of the `KafkaConnector` custom resource YAML):
+
 * The name of the target Kafka topic.
 * The name of the IBM MQ queue manager.
 * The connection name (one or more host and port pairs).

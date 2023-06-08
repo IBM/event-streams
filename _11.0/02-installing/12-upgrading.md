@@ -16,13 +16,13 @@ You must first upgrade the {{site.data.reuse.short_name}} operator, and then upg
 
 The following upgrade paths are available for Continuous Delivery (CD) releases (2.x operators and 10.x operands and later, except for 2.2.x operators and 10.2.x operands):
 - You can upgrade the {{site.data.reuse.short_name}} operator to the latest 3.0.5 version directly from versions 3.0.x, 2.5.x, and 2.4.x. If you have an earlier operator version than 2.4.0, you must first upgrade it to 2.4.0 before upgrading to 3.0.x.
-- You can upgrade the {{site.data.reuse.short_name}} operand to the latest 11.0.4 version directly from versions 11.0.x, 10.5.x, and 10.4.x. If you have an earlier operand version than 10.4.0, you must first upgrade it [to 10.4.0](../../10.4/installing/upgrading/) before upgrading to 11.0.x.
+- You can upgrade the {{site.data.reuse.short_name}} operand to the latest 11.0.4 version directly from versions 11.0.x, 10.5.x, and 10.4.x. If you have an earlier operand version than 10.4.0, you must first upgrade it [to 10.4.0]({{ '10.4' | relative_url }}/installing/upgrading/) before upgrading to 11.0.x.
 
 ### Upgrade paths for EUS releases
 
 You can also upgrade to the latest {{site.data.reuse.short_name}} CD release from the {{site.data.reuse.short_name}} Extended Update Support (EUS) release (2.2.x operators and 10.2.x operands) as follows:
 
-1. Upgrade your {{site.data.reuse.short_name}} [EUS release](../../10.2/installing/upgrading/) by upgrading to the latest EUS operator (2.2.x). The latest operator revision for the EUS release ensures you have the latest updates and fixes applied, including updates to enable upgrading to the latest CD release.
+1. Upgrade your {{site.data.reuse.short_name}} [EUS release]({{ '10.2' | relative_url }}/installing/upgrading/) by upgrading to the latest EUS operator (2.2.x). The latest operator revision for the EUS release ensures you have the latest updates and fixes applied, including updates to enable upgrading to the latest CD release.
 2. [Upgrade your {{site.data.reuse.icpfs}}](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=upgrading-cloud-pak-foundational-services){:target="_blank"} from EUS version 3.6.x to the latest CD version.
 3. After successfully upgrading to the latest CD version of foundational services, ensure you [clean up the monitoring resources](https://www.ibm.com/docs/en/cpfs?topic=issues-monitoring-resources-not-cleaned-up){:target="_blank"} to avoid errors.
 4. Upgrade your {{site.data.reuse.short_name}} version to the latest CD release by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.0.5 and operand version 11.0.4).
@@ -198,7 +198,7 @@ data:
 ### Deprecation warnings for metrics
 
 The `metrics` configuration option for the `EventStreams` custom resource has been deprecated. If you receive deprecation warnings about `spec.kafka.metrics:
-{}` or `spec.zookeeper.metrics:{}` after upgrading, then remove the `metrics: {}` line from the `EventStreams` [custom resource](../../10.5/installing/configuring/#configuring-external-monitoring-through-prometheus).
+{}` or `spec.zookeeper.metrics:{}` after upgrading, then remove the `metrics: {}` line from the `EventStreams` [custom resource]({{ '10.5' | relative_url }}/installing/configuring/#configuring-external-monitoring-through-prometheus).
 ### Enable metrics for monitoring
 
 To display metrics in the monitoring dashboards of the {{site.data.reuse.short_name}} UI, ensure you [enable](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.2?topic=administering-enabling-openshift-container-platform-monitoring){:target="_blank"} the {{site.data.reuse.openshift_short}} monitoring stack.

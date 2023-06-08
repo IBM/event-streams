@@ -55,7 +55,7 @@ Obtain the required credentials as follows:
 2. Click **Connect to this cluster** on the right.
 3. Go to the **Resources** tab.
 4. Scroll down to the **Kafka listener and credentials** section.
-5. Click the button next to the listener chosen as the `bootrap.servers` configuration. If present, the button will either be labelled **Generate SCRAM credentials** or **Generate TLS credentials**.
+5. Click the button next to the listener chosen as the `bootstrap.servers` configuration. If present, the button will either be labelled **Generate SCRAM credentials** or **Generate TLS credentials**.
 6. Select **Produce messages, consume messages and create topics and schemas** and click **Next**.
 7. Select **A specific topic**, enter the name of a topic to produce to and click **Next**.
 8. Select **All consumer groups** and click **Next**.
