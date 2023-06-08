@@ -1,9 +1,5 @@
-{%- if include.fromFeatureHero -%}
-    {% assign latestVersion =  site.collections | where:'tag', 'Latest' | first %}
-    {% assign thePageSource = site.[latestVersion.label] | where: 'layout', 'splash' | first %}
-{% else %}
+
 {% assign thePageSource = page %}  
-{%- endif -%}
 
 
 

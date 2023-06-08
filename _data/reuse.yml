@@ -55,6 +55,9 @@ kafka-connect-mq-sink-short: "MQ sink connector"
 # {{site.data.reuse.jmx-secret}}
 jmx-secret: <releasename>ibm-es-jmx-secret
 
+# {{site.data.reuse.jmx-secret-name}}
+jmx-secret-name: <clustername>-jmx
+
 ###############
 # Tasks Steps #
 ###############
@@ -80,14 +83,18 @@ cp_cli_login: "Log in to your cluster as an administrator by using the IBM Cloud
 # {{site.data.reuse.es_cli_init}}
 es_cli_init: "Run the following command to initialize the IBM Event Streams CLI: `cloudctl es init`"
 
+# {{site.data.reuse.es_cli_init_k8s}}
+es_cli_init_k8s: "Run the following command to initialize the IBM Event Streams CLI: `kubectl es init`"
+
+
 # {{site.data.reuse.es_cli_init_111}}
 es_cli_init_111: "Initialize the Event Streams CLI by following the instructions in [logging in](../../getting-started/logging-in/)."
 
 # {{site.data.reuse.openshift_cli_login}}
-openshift_cli_login: "Log in to your Red Hat OpenShift Container Platform as a cluster administrator by using the [`oc` CLI](https://docs.openshift.com/container-platform/4.11/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands){:target=\"_blank\"} (`oc login`)."
+openshift_cli_login: "Log in to your Red Hat OpenShift Container Platform as a cluster administrator by using the [`oc` CLI](https://docs.openshift.com/container-platform/4.12/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands){:target=\"_blank\"} (`oc login`)."
 
 # {{site.data.reuse.openshift_ui_login}}
-openshift_ui_login: "Log in to the OpenShift Container Platform [web console](https://docs.openshift.com/container-platform/4.11/web_console/web-console.html){:target=\"_blank\"} using your login credentials."
+openshift_ui_login: "Log in to the OpenShift Container Platform [web console](https://docs.openshift.com/container-platform/4.12/web_console/web-console.html){:target=\"_blank\"} using your login credentials."
 
 # {{site.data.reuse.es_ui_login}}
 es_ui_login: "Log in to your Event Streams UI as an administrator from a supported web browser (see how to determine the [login URL](../../getting-started/logging-in/) for your Event Streams UI)."
@@ -97,6 +104,9 @@ es_ui_login_nonadmin: "Log in to the Event Streams UI from a supported web brows
 
 # {{site.data.reuse.es_ui_login_nonadmin_mq}}
 es_ui_login_nonadmin_mq: "Log in to the Event Streams UI from a supported web browser (see how to determine the [login URL](../../../getting-started/logging-in/) for your Event Streams UI)."
+
+# {{site.data.reuse.cncf_cli_login}}
+cncf_cli_login: "Log in to your Kubernetes cluster as a cluster administrator by setting your [`kubectl` context](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/){:target=\"_blank\"}."
 
 # {{site.data.reuse.maven_prereq}}
 maven_prereq: "Ensure you have Java version 8. Also, ensure you have [Apache Maven](https://maven.apache.org/){:target=\"_blank\"} installed on your system."
@@ -124,7 +134,7 @@ task_openshift_select_routes: "Expand the **Networking** dropdown and select **R
 #########
 
 # {{site.data.reuse.sample_select_note}}
-sample_select_note: "You can select this sample to use when [installing](../installing) your instance. You can also use it to start out with your configuration, and change settings as required for your purposes. For ways to customize your setup, see [configuring](../configuring)."
+sample_select_note: "You can select this sample to use when [installing](../../installpagedivert) your instance. You can also use it to start out with your configuration, and change settings as required for your purposes. For ways to customize your setup, see [configuring](../configuring)."
 
 # {{site.data.reuse.prod_persistence_note}}
 prod_persistence_note: "**Important:** For production deployments, ensure you configure a storage solution by editing the sample as described in [enabling persistent storage](../configuring/#enabling-persistent-storage)."
@@ -157,7 +167,14 @@ kafkaConnectStep2_content1_example: "For example:\n```\n plugin.path=/usr/local/
 kafkaConnectStep3_title: "Restart Kafka Connect to make the new connector available in the environment. <br> <br> For more information about how to set up a Kafka Connect environment, add connectors to it, and start the connectors, see how to [set up and run connectors](../../connecting/setting-up-connectors/)."
 
 # {{site.data.reuse.apicurio_note}}
-apicurio_note: "**Important:**  Support for Apicurio client libraries version 2.3.x and earlier is deprecated. Ensure all applications connecting to Event Streams that use the schema registry are using Apicurio client libraries version 2.4.1 or later, then [migrate to the latest Apicurio](../../troubleshooting/upgrading-apicurio)."
+apicurio_note: "**Important:**  Support for Apicurio client libraries version 2.3.x and earlier is deprecated. Ensure all applications connecting to Event Streams that use the schema registry are using Apicurio client libraries version 2.4.1 or later, then [migrate to the latest Apicurio](../../troubleshooting/upgrade-apicurio)."
+
+# {{site.data.reuse.iam_note}}
+iam_note: '**Note:** Identity and Access Management (IAM) authentication is only available on the OpenShift Container Platform with IBM Cloud Pak foundational services. It is not supported on other Kubernetes platforms.'
+
+# {{site.data.reuse.es_cli_kafkauser_note}}
+es_cli_kafkauser_note: "**Note:** The Event Streams CLI `kafka-user` commands can be run only when the Event Streams CLI has access to Kubernetes resources, which can be provided by IAM authentication. If your Event Streams instance uses SCRAM-SHA-512 authentication, you can create a Kafka User by using the OpenShift web console or the Kubernetes CLI."
+
 #####################################################
 # DEPRECATED (USED IN OLDER DOCUMENTATION VERSIONS) #
 #####################################################

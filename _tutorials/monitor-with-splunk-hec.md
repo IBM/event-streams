@@ -21,6 +21,8 @@ You can configure {{site.data.reuse.short_name}} to allow JMX scrapers to export
 
 JMXTrans is a connector that reads JMX metrics and outputs a number of formats supporting a wide variety of logging, monitoring, and graphing applications. To deploy to your {{site.data.reuse.openshift}} cluster, you must configure JMXTrans in you {{site.data.reuse.short_name}} CR.
 
+**Note:** JMXTrans is not supported in {{site.data.reuse.short_name}} versions 11.2.0 and later. 
+
 ## Solution overview
 
 The tasks in this tutorial help achieve the following:
