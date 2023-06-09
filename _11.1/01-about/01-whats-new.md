@@ -34,9 +34,9 @@ Any difference in features or behavior introduced by {{site.data.reuse.short_nam
 
 Kafka users that have been configured to use SCRAM-SHA-512 authentication can log in to the {{site.data.reuse.short_name}} CLI and run commands based on the ACL permissions of the user. For more information, see [managing access to the UI and CLI with SCRAM](../../security/managing-access/#managing-access-to-the-ui-and-cli-with-scram).
 
-### JmxTrans is deprecated
+### JMXTrans is deprecated
 
-Support for JmxTrans in {{site.data.reuse.short_name}} version 11.1.5 and later is deprecated. For more information, see [Strimzi GitHub issue 7693](https://github.com/strimzi/strimzi-kafka-operator/issues/7693){:target="_blank"}.
+Support for JMXTrans in {{site.data.reuse.short_name}} version 11.1.5 and later is deprecated, as the JMXTrans tool is no longer maintained. For more information, see the [Strimzi proposal](https://github.com/strimzi/proposals/blob/main/043-deprecate-and-remove-jmxtrans.md){:target="_blank"} about deprecating JMXTrans.
 
 ### Support for OpenTelemetry with IBM Instana
 
