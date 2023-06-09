@@ -206,7 +206,7 @@ ce_deprecated: "IBM Event Streams Community Edition is no longer available from 
 es_deprecated: "**Note:** The Event Streams component in IBM Cloud Pak for Integration has been deprecated. Event Streams will continue to be supported but will no longer be enhanced (see [announcement](https://www-01.ibm.com/common/ssi/ShowDoc.wss?docURL=/common/ssi/rep_ca/2/877/ENUSZP21-0082/index.html){:target=\"_blank\"}). For self-managed software solutions that require Apache Kafka, IBM recommends the Confluent Platform available as an add-on for Cloud Pak for Integration."
 
 # {{site.data.reuse.jmx_deprecated}}
-jmx_deprecated: "**Note:** Support for JmxTrans in Event Streams version 11.1.5 and later is deprecated. For more information, see [Strimzi GitHub issue 7693](https://github.com/strimzi/strimzi-kafka-operator/issues/7693){:target=\"_blank\"}."
+jmx_deprecated: "**Note:** Support for JMXTrans in Event Streams version 11.1.5 and later is deprecated, as the JMXTrans tool is no longer maintained. For more information, see the [Strimzi proposal](https://github.com/strimzi/proposals/blob/main/043-deprecate-and-remove-jmxtrans.md){:target=\"_blank\"} about deprecating JMXTrans."
 
 # Icons
 
