@@ -20,7 +20,7 @@ In addition to the existing support for the {{site.data.reuse.openshift}}, {{sit
 
 ### Requirement for setting license ID 
 
-{{site.data.reuse.short_name}} 11.2.0 introduces the requirement to set a license ID (`spec.license.license`) that must be set correctly when [creating an instance]({{ 'installpagedivert' | relative_url }}) of {{site.data.reuse.short_name}}. For more information, see [planning](../installing/planning#license-usage).
+{{site.data.reuse.short_name}} 11.2.0 introduces the requirement to set a license ID (`spec.license.license`) that must be set correctly when [creating an instance]({{ 'installpagedivert' | relative_url }}) of {{site.data.reuse.short_name}}. For more information, see [planning](../../installing/planning#license-usage).
 
 ### Support for `StrimziPodSets`
 
