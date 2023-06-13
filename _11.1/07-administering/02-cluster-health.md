@@ -66,7 +66,7 @@ To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these st
    **For {{site.data.reuse.openshift_short}} cluster logging stack**: {{site.data.reuse.openshift_ui_login}} Then follow the instructions to navigate to [cluster logging's Kibana homepage](https://docs.openshift.com/container-platform/4.12/logging/cluster-logging-visualizer.html#cluster-logging-visualizer-kibana_cluster-logging-visualizer){:target="_blank"}.
 3. Click **Management** in the navigation on the left.
 4. Click **Index patterns**.
-5. Click **Creat index pattern**.
+5. Click **Create index pattern**.
 6. Enter `app*` in the **Index pattern** field, and click **Next step**.
 7. Select `@timestamp` from the **Time Filter field name** list, and click **Create index pattern**.
 8. Click **Saved Objects**.
