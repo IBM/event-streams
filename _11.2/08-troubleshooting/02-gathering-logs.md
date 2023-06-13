@@ -43,7 +43,7 @@ To gather logs from an online environment:
    Where:
    - `<instance-namespace>` is the namespace where your {{site.data.reuse.short_name}} instance is installed, and where the script gathers log data from.
    - `<gather-modules>` is a comma separated list of [modules](#gather-modules), where valid values are `eventstreams`, `kafka`, `schema`, `failure`, `overview` and `system`.
-   - `<image-address>` is the address of the image to use for gathering logs. If `<image-address>` is not specified, then the default image (`icr.io/cpopen/ibm-eventstreams-must-gather`) is set. You can set a different image if instructed by IBM Support.
+   - `<image-address>` is the address of the image to use for gathering logs. If `<image-address>` is not specified, then the default image (`icr.io/cpopen/ibm-events-must-gather`) is set. You can set a different image if instructed by IBM Support.
 
 The logs gathered are stored in an archive file called `ibm-events-must-gather-<timestamp>.tar.gz`, which is added to the current working directory.
 
@@ -53,11 +53,11 @@ To gather diagnostic logs in an air-gapped (also referred to as offline or disco
 
 1. Pull the {{site.data.reuse.short_name}} `must-gather` image as follows:
 
-   `docker pull icr.io/cpopen/ibm-eventstreams-must-gather`
+   `docker pull icr.io/cpopen/ibm-events-must-gather`
 
 2. Tag the image:
 
-   `docker image -t icr.io/cpopen/ibm-eventstreams-must-gather <private-registry-image-address>:<tag>`
+   `docker image -t icr.io/cpopen/ibm-events-must-gather <private-registry-image-address>:<tag>`
 
 3. Push the tagged image to the internal registry of your air-gapped environments:
 
