@@ -42,14 +42,6 @@ development      Ready
 
 **Note:** It might take several minutes for all the resources to be created and the `EventStreams` instance to become ready.
 
-### Check the status of the EventStreams instance through the {{site.data.reuse.openshift_short}} web console
-
-1. {{site.data.reuse.openshift_ui_login}}
-2. {{site.data.reuse.task_openshift_navigate_installed_operators}}
-3. {{site.data.reuse.task_openshift_select_operator}}
-4. {{site.data.reuse.task_openshift_select_instance}}
-5. The **Phase** field will display the current state of the EventStreams custom resource. When the {{site.data.reuse.short_name}} instance is ready, the phase will display `Ready`, meaning the deployment has completed
-
 ## Installing the {{site.data.reuse.short_name}} command-line interface
 
 The {{site.data.reuse.short_name}} CLI is a plugin for the `kubectl` and `cloudctl` CLI. Use the {{site.data.reuse.short_name}} CLI to manage your {{site.data.reuse.short_name}} instance from the command line.
