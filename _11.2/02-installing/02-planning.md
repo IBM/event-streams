@@ -3,6 +3,7 @@ title: "Planning your installation"
 excerpt: "Planning your installation of Event Streams."
 categories: installing
 slug: planning
+layout: redirects
 toc: true
 ---
 
@@ -28,9 +29,9 @@ A number of sample configurations are provided when [installing]({{ 'installpage
 - [Production 6 brokers](#example-deployment-production-6-brokers)
 - [Production 9 brokers](#example-deployment-production-9-brokers)
 
-If you are [installing](../installing/#installing-an-instance-by-using-the-web-console) on the {{site.data.reuse.openshift_short}}, you can view and apply the sample configurations in the web console. The sample configurations are also available in [GitHub](https://ibm.biz/ea-es-samples){:target="_blank"}, where you can select the GitHub tag for your {{site.data.reuse.short_name}} version to access the correct samples, and then go to `/openshift` to access the OpenShift samples.
+If you are [installing](../installing/#installing-an-instance-by-using-the-web-console) on the {{site.data.reuse.openshift_short}}, you can view and apply the sample configurations in the web console. The sample configurations are also available in [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"}, from where you can download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples.
 
-For other Kubernetes platforms, the custom resource samples are included in the Helm chart package. The sample configurations are also available in [GitHub](https://ibm.biz/ea-es-samples){:target="_blank"}, where you can select the GitHub tag for your {{site.data.reuse.short_name}} version to access the correct samples, and then go to `/kubernetes` to access the samples for other Kubernetes platforms.
+For other Kubernetes platforms, the custom resource samples are included in the Helm chart package.
 
 **Important:** For a production setup, the sample configuration values are for guidance only, and you might need to change them. Ensure you set your resource values as required to cope with the intended usage, and also consider important configuration options for your environment and {{site.data.reuse.short_name}} requirements as described in the rest of this planning section.
 
@@ -158,6 +159,8 @@ Resource requirements for this deployment:
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
 
+**Important:** This sample can only be obtained through [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"}: download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples.
+
 {{site.data.reuse.sample_select_note}}
 
 {{site.data.reuse.prod_persistence_note}}
@@ -178,6 +181,8 @@ Resource requirements for this deployment:
 | 38.5                | 45.2              | 76.7                | 79.3              | 36.0 |
 
 Ensure you have sufficient CPU capacity and physical memory in your environment to service at least the resource **request** values. The resource **limit** values constrain the amount of resource the {{site.data.reuse.short_name}} instance is able to consume.
+
+**Important:** This sample can only be obtained through [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"}: download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples.
 
 {{site.data.reuse.sample_select_note}}
 
@@ -270,7 +275,7 @@ The replication factor controls how many replicas there are, and the minimum in-
 
 The combination of brokers spread across nodes together with the replication feature make a single {{site.data.reuse.short_name}} cluster highly available.
 
-You can also further ensure high availability for your environment by increasing the number of {{site.data.reuse.short_name}} [operator replicas](../installing/#scaling-the-operator-for-high-availability).
+You can also further ensure high availability for your environment by increasing the number of {{site.data.reuse.short_name}} [operator replicas](../installing/#scaling-the-operator-for-high-availability). 
 
 ### Multiple availability zones
 
@@ -364,7 +369,7 @@ The number of VPCs required for a deployment depends on the resource limit provi
 
 **Note:** The number of licenses required for a configuration will depend on the environment. For a production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 1 VPC being used. For a non-production installation of {{site.data.reuse.short_name}}, the ratio is 1 license required for every 2 VPCs being used.
 
-To flag an installation of {{site.data.reuse.short_name}} with a specified license, set the `spec.license.license` correctly, and also specify its usage as production or non-production by setting the `spec.license.use` correctly during installation. See [license usage](#license-usage) for more information about selecting the correct value.
+To flag an installation of {{site.data.reuse.short_name}} as production or non-production, set the `spec.license.use` correctly during installation. See [license usage](#license-usage) for more information about selecting the correct value.
 
 If you add more Kafka replicas, geo-replicator nodes, MirrorMaker 2.0 nodes, or Kafka Connect nodes, each one is an additional, separate chargeable unit. See [license usage](#license-usage) to learn how you can find out more about the number of virtual cores used by your deployment.
 
@@ -387,23 +392,8 @@ The license usage of {{site.data.reuse.long_name}} is collected by the License S
 - For {{site.data.reuse.openshift_short}} with {{site.data.reuse.icpfs}}, see the [{{site.data.reuse.cp4i}} documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=administering-deploying-license-service){:target="_blank"}.
 - For OpenShift and other Kubernetes platforms running without {{site.data.reuse.fs}}, see the [{{site.data.reuse.icpfs}} documentation](https://www.ibm.com/docs/en/cpfs?topic=software-manual-installation-without-operator-lifecycle-manager-olm){:target="_blank"}.
 
-When [creating an instance]({{ 'installpagedivert' | relative_url }}) of {{site.data.reuse.short_name}}, ensure that you select the correct values for `spec.license.license` and `spec.license.use` in the custom resource. These values are used for metering purposes and could result in inaccurate charging and auditing if set incorrectly.
+When [creating an instance]({{ 'installpagedivert' | relative_url }}) of {{site.data.reuse.short_name}}, ensure that you select the correct value for `spec.license.use` in the custom resource. This value is used for metering purposes and could result in inaccurate charging and auditing if set incorrectly. Select one of the following values based on the purpose of your deployment:
 
-For `spec.license.license`, select one of the following license IDs based on the program that you purchased:
-- **L-YBXJ-ADJNSM** for [IBM Cloud Pak for Integration 2023.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-YBXJ-ADJNSM){:target="_blank"}
-- **L-PYRA-849GYQ** for [IBM Cloud Pak for Integration 2023.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-PYRA-849GYQ){:target="_blank"}
-- **L-RJON-CJR2RX** for [IBM Cloud Pak for Integration 2022.4.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CJR2RX){:target="_blank"}
-- **L-RJON-CJR2TC** for [IBM Cloud Pak for Integration 2022.4.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CJR2TC){:target="_blank"}
-- **L-RJON-CD3JKX** for [IBM Cloud Pak for Integration 2022.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CD3JKX){:target="_blank"}
-- **L-RJON-CD3JJU** for [IBM Cloud Pak for Integration 2022.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CD3JJU){:target="_blank"}
-- **L-RJON-C7QG3S** for [IBM Cloud Pak for Integration 2021.4.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C7QG3S){:target="_blank"}
-- **L-RJON-C7QFZX** for [IBM Cloud Pak for Integration 2021.4.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C7QFZX){:target="_blank"}
-- **L-RJON-C5CSNH** for [IBM Cloud Pak for Integration 2021.3.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C5CSNH){:target="_blank"}
-- **L-RJON-C5CSM2** for [IBM Cloud Pak for Integration 2021.3.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C5CSM2){:target="_blank"}
-- **L-RJON-BZFQU2** for [IBM Cloud Pak for Integration 2021.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-BZFQU2){:target="_blank"}
-- **L-RJON-BZFQSB** for [IBM Cloud Pak for Integration 2021.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-BZFQSB){:target="_blank"}
-
-For `spec.license.use`, select one of the following values depending on the purpose of your deployment:
 - **CloudPakForIntegrationNonProduction** for non-production deployments suitable for basic development and test activities.
 - **CloudPakForIntegrationProduction** for production deployments.
 

@@ -3,6 +3,7 @@ title: "What's new"
 excerpt: "Find out what is new in IBM Event Streams."
 categories: about
 slug: whats-new
+layout: redirects
 toc: true
 ---
 

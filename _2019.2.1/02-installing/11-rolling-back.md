@@ -3,6 +3,7 @@ title: "Rolling back"
 excerpt: "Revert to a previous version of Event Streams."
 categories: installing
 slug: rolling-back
+layout: redirects
 toc: true
 ---
 

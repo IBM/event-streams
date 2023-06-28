@@ -3,6 +3,7 @@ title: "Upgrading to 2018.3.1"
 excerpt: "Upgrade your installation to the latest version."
 categories: installing
 slug: upgrading
+layout: redirects
 toc: true
 ---
 

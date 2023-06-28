@@ -3,10 +3,13 @@ title: "Creating and adding schemas"
 excerpt: "Learn how to create schemas and add them to the schema registry."
 categories: schemas
 slug: creating
+layout: redirects
 toc: true
 ---
 
 You can [create schemas](#creating-schemas) in Avro format and then use the {{site.data.reuse.short_name}} UI or CLI to [add them to the Apicurio Registry](#adding-schemas-to-the-registry).
+
+{{site.data.reuse.openshift_only_note}}
 
 {{site.data.reuse.apicurio_note}}
 
@@ -60,7 +63,7 @@ To use schemas in Kafka applications, import your schema definitions into the sc
 1. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
 2. {{site.data.reuse.es_cli_init_111}}
 3. Run the following command to add a schema to the schema registry:\\
-   `kubectl es schema-add --name <schema-name> --version <schema-version> --file <path-to-schema-file>`
+   `cloudctl es schema-add --name <schema-name> --version <schema-version> --file <path-to-schema-file>`
 
 ## Adding new schema versions
 
@@ -106,6 +109,6 @@ For example, the following Avro schema defines a new version of the `Book` recor
 1. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
 2. {{site.data.reuse.es_cli_init_111}}
 3. Run the following command to list all schemas in the schema registry, and find the schema name you want to add a new version to:\\
-   `kubectl es schemas`
+   `cloudctl es schemas`
 4. Run the following command to add a new version of the schema to the registry:\\
-   `kubectl es schema-add --name <schema-name-from-previous-step> --version <new-schema-version> --file <path-to-new-schema-file>`
+   `cloudctl es schema-add --name <schema-name-from-previous-step> --version <new-schema-version> --file <path-to-new-schema-file>`

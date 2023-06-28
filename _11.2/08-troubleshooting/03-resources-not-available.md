@@ -3,6 +3,7 @@ title: "Resources not available"
 excerpt: "Reasons for IBM Event Streams resources not being available."
 categories: troubleshooting
 slug: resources-not-available
+layout: redirects
 toc: true
 ---
 
@@ -18,7 +19,7 @@ Common error messages in such cases include the following:
 - **`Insufficient memory`** - occurs when there are no nodes with enough available memory to support the limits provided at the time of installation.
 - **`Insufficient CPU`** - occurs when there are no nodes with enough available CPU to support the limits provided at the time of installation.
 
-To get detailed information on the cause of the error, check the events for the individual pods.
+To get detailed information on the cause of the error, check the events for the individual pods (not the logs at the stateful set level).
 
 Ensure that resource requests and limits do not exceed the total memory available. For example, if a system has 16 GB of memory available per node, then the broker memory requirements must be set to be less than 16 GB. This allows resources to be available for the other {{site.data.reuse.long_name}} components which might reside on the same node.
 

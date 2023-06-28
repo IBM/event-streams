@@ -3,6 +3,7 @@ title: "Exposing services for external access"
 excerpt: "Learn how to expose a service outside your cluster."
 categories: connecting
 slug: expose-service
+layout: redirects
 toc: true
 ---
 

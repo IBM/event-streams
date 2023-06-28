@@ -3,6 +3,7 @@ title: "Not authorized error when building Maven schema registry project"
 excerpt: "When building a Maven project that pulls dependencies from the Event Streams schema registry, a not authorized error is issued."
 categories: troubleshooting
 slug: schema-registry-not-authorized-error
+layout: redirects
 toc: true
 ---
 

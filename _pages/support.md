@@ -1,15 +1,16 @@
 ---
-layout: collection
+# layout: collection
+layout: redirects
 title: "Support"
-collection: support
+# collection: support
 permalink: /support/
 author_profile: false
 mastheadNavItem: Support
-sort_by: title
+#sort_by: title
 # toc: true
-sections:
-  - name: IBM Event Streams support
-    description: Let us know what you think about IBM Event Streams.
+#sections:
+ # - name: IBM Event Streams support
+  #  description: Let us know what you think about IBM Event Streams.
 ---
 
 ## Support matrix

@@ -3,6 +3,7 @@ title: "Scaling"
 excerpt: "Modify the capacity of your system by scaling it."
 categories: administering
 slug: scaling
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Upgrading and migrating"
 excerpt: "Upgrade your installation to the latest version."
 categories: installing
 slug: upgrading
+layout: redirects
 toc: true
 ---
 
@@ -17,13 +18,13 @@ Understand the upgrade paths available for Continuous Delivery (CD) releases and
 
 ### Upgrade paths for CD releases
 
-You can upgrade {{site.data.reuse.short_name}} to the latest 11.2.x version directly from any 11.1.x version by using operator version 3.2.0. If you have an earlier {{site.data.reuse.short_name}} version than 11.1.x, you must first upgrade it to [version 11.1.x]({{ '11.1' | relative_url }}/installing/upgrading/) before upgrading to 11.2.x.
+You can upgrade {{site.data.reuse.short_name}} to the latest 11.2.x version directly from any 11.1.x or 11.0.x version by using operator version 3.2.0. If you have an earlier {{site.data.reuse.short_name}} version than 11.0.x, you must first upgrade it to [version 11.0.x](../../11.0/installing/upgrading/) before upgrading to 11.2.x.
 
 **Note:** If your operator upgrades are set to automatic, minor version upgrades are completed automatically. This means that the {{site.data.reuse.short_name}} operator is upgraded to 3.2.0 when it is available in the catalog, and your {{site.data.reuse.short_name}} instance is then also automatically upgraded, unless you [set a schedule for the upgrade](#scheduling-the-upgrade-of-an-instance) by pausing the reconciliation.
 
 ### Upgrade paths for EUS releases
 
-No direct upgrade from EUS to the latest version is supported. Upgrade to [CD version 11.1.x]({{ '11.1' | relative_url }}/installing/upgrading/) and then proceed to upgrade your {{site.data.reuse.short_name}} version to the latest by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.2.0).
+No direct upgrade from EUS to the latest version is supported. Upgrade to [CD version 11.0.x](../../11.0/installing/upgrading/) and then proceed to upgrade your {{site.data.reuse.short_name}} version to the latest by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.2.0).
 
 ## Prerequisites
 
@@ -50,8 +51,6 @@ No direct upgrade from EUS to the latest version is supported. Upgrade to [CD ve
    ```
 
 - If you [installed the {{site.data.reuse.short_name}} operator]({{ 'installpagedivert' | relative_url }}) to manage instances of {{site.data.reuse.short_name}} in any namespace (one per namespace), then you might need to control when each of these instances is upgraded to the latest version. You can control the updates by pausing the reconciliation of the instance configuration as described in the following sections.
-
-- When upgrading to {{site.data.reuse.short_name}} 11.2.x from 11.1.x or earlier, you must [set a license ID](#set-the-license-id) after successfully completing the upgrade.
 
 ### Scheduling the upgrade of an instance
 
@@ -81,7 +80,7 @@ If your operator manages more than one instance of {{site.data.reuse.short_name}
    1. {{site.data.reuse.openshift_ui_login}}
    2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.
 
-      ![Operators > Installed Operators]({{ 'images' | relative_url }}/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
+      ![Operators > Installed Operators](../../images/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
 
    3. From the **Project** list, select the namespace (project) the instance is installed in.
    4. Locate the operator that manages your {{site.data.reuse.short_name}} instance in the namespace. It is called **{{site.data.reuse.long_name}}** in the **Name** column. Click the **{{site.data.reuse.long_name}}** link in the row.
@@ -130,9 +129,17 @@ If you are using the OpenShift command-line interface (CLI), the `oc` command, c
 
    `oc get packagemanifest ibm-eventstreams -o=jsonpath='{.status.channels[*].name}'`
 
-2. Change the subscription to move to the required update channel, where `vX.Y` is the required update channel (for example, `v3.2`):
+2. Change the subscription to move to the required update channel, where `vX.Y` is the required update channel (for example, `v3.0`):
 
    `oc patch subscription -n <namespace> ibm-eventstreams --patch '{"spec":{"channel":"vX.Y"}}' --type=merge`
+
+   **Important:** You might receive a warning message similar to the following in the status:
+   ```
+   Invalid value '11.0.4' set for spec.version. Your instance will be reconciled as 'latest', the only valid value for spec.version. Ensure you set spec.version to 'latest'.
+   ```
+   To remove the warning, change the `spec.version` to `latest` by entering the following command:
+
+   `oc patch eventstreams -n <namespace> <name-of-the-es-instance> --patch '{"spec":{"version":"latest"}}' --type=merge`
 
 
 All {{site.data.reuse.short_name}} pods that need to be updated as part of the upgrade will be gracefully rolled. Where required, ZooKeeper pods will roll one at a time, followed by Kafka brokers rolling one at a time.
@@ -144,20 +151,25 @@ If you are using the {{site.data.reuse.openshift_short_name}} web console, compl
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.
 
-   ![Operators > Installed Operators]({{ 'images' | relative_url }}/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
+   ![Operators > Installed Operators](../../images/rhocp_menu_installedoperators.png "Screen capture showing how to select Operators > Installed Operators from navigation menu"){:height="50%" width="50%"}
 3. From the **Project** list, select the namespace (project) the instance is installed in.
 4. Locate the operator that manages your {{site.data.reuse.short_name}} instance in the namespace. It is called **{{site.data.reuse.long_name}}** in the **Name** column. Click the **{{site.data.reuse.long_name}}** link in the row.
 4. Click the **Subscription** tab to display the **Subscription details** for the {{site.data.reuse.short_name}} operator.
-5. Click the version number link in the **Update channel** section (for example, **v3.1**). The **Change Subscription update channel** dialog is displayed, showing the channels that are available to upgrade to.
-6. Select **v3.2** and click the **Save** button on the **Change Subscription Update Channel** dialog.
+5. Click the version number link in the **Update channel** section (for example, **v3.0**). The **Change Subscription update channel** dialog is displayed, showing the channels that are available to upgrade to.
+6. Select **v3.1** and click the **Save** button on the **Change Subscription Update Channel** dialog.
 
+   **Important:** If you receive a warning message similar to the following in the status, remove it by changing the value of the `spec.version` field to `latest` in the YAML file:
+
+   ```
+   Invalid value '11.1.0' for spec.version. The only valid value is 'latest'. Edit spec.version to set the field to 'latest'.
+   ```
 All {{site.data.reuse.short_name}} pods that need to be updated as part of the upgrade will be gracefully rolled. Where required, ZooKeeper pods will roll one at a time, followed by Kafka brokers rolling one at a time.
 
 **Note:** The number of containers in each Kafka broker will reduce from 2 to 1 as the TLS-sidecar container will be removed from each broker during the upgrade process.
 
 <!--- Alternative steps for PlatformUI to be added. Sounds like CP4I don’t support our latest setting in this release, but might do in the next (or later).-->
 
-<!--- ## Upgrading on other Kubernetes platforms
+## Upgrading on other Kubernetes platforms
 
 If you are running {{site.data.reuse.short_name}} on Kubernetes platforms that support the Red Hat Universal Base Images (UBI) containers, you can upgrade {{site.data.reuse.short_name}} by using the Helm chart.
 
@@ -172,26 +184,25 @@ Where:
 - `<release-name>` is the name you provide to identify your operator.
 - `<namespace>` is the name of the namespace where you want to install the operator.
 - `watchAnyNamespace=<true/false>` determines whether the operator manages instances of {{site.data.reuse.short_name}} in any namespace or only a single namespace (default is `false` if not specified). For more information, see [choosing operator installation mode](../installing-on-kubernetes/#choosing-operator-installation-mode).
--->
+
+
+## Verifying the upgrade
+
+1. Wait for all {{site.data.reuse.short_name}} pods to reconcile. This is indicated by the `Running` state.
+2. {{site.data.reuse.cncf_cli_login}}
+3. To retrieve a list of {{site.data.reuse.short_name}} instances, run the following command:
+
+   `kubectl get eventstreams -n <namespace>`
+
+4. For the instance of {{site.data.reuse.short_name}} that you upgraded, check that the status returned by the following command is `Ready`.
+
+   `kubectl get eventstreams -n <namespace> <name-of-the-es-instance> -o jsonpath="{.status.phase}"`
+
+5. To check the version of your {{site.data.reuse.short_name}} instance, run the following command:
+
+   `kubectl get eventstreams -n <namespace> <name-of-the-es-instance> -o jsonpath="{.status.versions.reconciled}"`
 
 ## Post-upgrade tasks
-
-### Set the license ID
-
-After upgrading to {{site.data.reuse.short_name}} 11.2.x from 11.1.x or earlier, you must set a [valid license ID](../planning/#license-usage) value for the `spec.license.license` field based on the program that you purchased. The following example shows the license ID set as `L-YBXJ-ADJNSM`.
-
-```yaml
-apiVersion: eventstreams.ibm.com/v1beta2
-kind: EventStreams
-metadata:
-  name: example-license-upgrade
-  namespace: myproject
-spec:
-  license:
-    license: L-YBXJ-ADJNSM
-    use: CloudPakForIntegrationProduction
-    accept: true
-```
 
 ### Enable collection of producer metrics
 
@@ -219,28 +230,3 @@ Migrate your schema registry to use the latest Apicurio Registry as follows:
       ```
 
 The {{site.data.reuse.short_name}} operator will update your schema registry to use the latest version of Apicurio Registry included with {{site.data.reuse.short_name}}.
-
-### Remove JMXTrans
-
-JMXTrans is removed in {{site.data.reuse.short_name}} `11.2.0` and later. If your {{site.data.reuse.short_name}} custom resource uses `jmxTrans`, the following error is displayed:
-```
-Jmx Trans is now removed, remove the 'spec.strimziOverrides.jmxTrans' field.
-```
-
-To resolve this error, remove the `spec.strimziOverrides.jmxTrans` field and any related configurations within the `jmxTrans` field from your {{site.data.reuse.short_name}} custom resource.
-
-## Verifying the upgrade
-
-1. Wait for all {{site.data.reuse.short_name}} pods to reconcile. This is indicated by the `Running` state.
-2. {{site.data.reuse.cncf_cli_login}}
-3. To retrieve a list of {{site.data.reuse.short_name}} instances, run the following command:
-
-   `kubectl get eventstreams -n <namespace>`
-
-4. For the instance of {{site.data.reuse.short_name}} that you upgraded, check that the status returned by the following command is `Ready`.
-
-   `kubectl get eventstreams -n <namespace> <name-of-the-es-instance> -o jsonpath="{.status.phase}"`
-
-5. To check the version of your {{site.data.reuse.short_name}} instance, run the following command:
-
-   `kubectl get eventstreams -n <namespace> <name-of-the-es-instance> -o jsonpath="{.status.versions.reconciled}"`

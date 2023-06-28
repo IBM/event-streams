@@ -3,6 +3,7 @@ title: "Installing"
 excerpt: "Installing IBM Event Streams."
 categories: installing
 slug: installing
+layout: redirects
 toc: true
 ---
 

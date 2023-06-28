@@ -3,6 +3,7 @@ title: "Event Streams producer API"
 excerpt: "Use the Event Streams producer API to connect other systems to your Kafka cluster."
 categories: connecting
 slug: rest-api
+layout: redirects
 toc: true
 ---
 
@@ -74,6 +75,7 @@ By default the {{site.data.reuse.short_name}} REST Producer API endpoint require
 Using the CLI:
 1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-event-streams-command-line-interface).
 
+   {{site.data.reuse.openshift_only_note}}
 2. {{site.data.reuse.es_cli_init_111}}
    If you have more than one {{site.data.reuse.short_name}} instance installed, select the one where the topic you want to produce to is.
 
@@ -81,7 +83,7 @@ Using the CLI:
 3. Download the server certificate for {{site.data.reuse.short_name}}:
 
    ```shell
-   kubectl es certificates --format pem
+   cloudctl es certificates --format pem
    ```
 
    By default, the certificate is written to a file called `es-cert.pem`.
@@ -124,6 +126,8 @@ To create authentication credentials to use in an HTTP authorization header, you
 Using the CLI:
 1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-event-streams-command-line-interface).
 
+   {{site.data.reuse.openshift_only_note}}
+
 2. {{site.data.reuse.es_cli_init_111}}
    If you have more than one {{site.data.reuse.short_name}} instance installed, select the one where the topic you want to produce to is.
 
@@ -134,7 +138,6 @@ Using the CLI:
    cloudctl es kafka-user-create --topic <topic_name> --name <user_name> --producer --auth-type scram-sha-512
    ```
 
-   {{site.data.reuse.es_cli_kafkauser_note}}
 4. Follow the steps in [managing access](../../security/managing-access/#retrieving-credentials-later) to retrieve the SCRAM SHA 512 username and password.
 
 Using the UI:
@@ -180,6 +183,9 @@ To create authentication credentials to use with Mutual TLS authentication, you 
 
 Using the CLI:
 1. Ensure you have the {{site.data.reuse.short_name}} CLI [installed](../../installing/post-installation/#installing-the-event-streams-command-line-interface).
+
+   {{site.data.reuse.openshift_only_note}}
+
 2. {{site.data.reuse.es_cli_init_111}}
    If you have more than one {{site.data.reuse.short_name}} instance installed, select the one where the topic you want to produce to is.
 
@@ -189,8 +195,6 @@ Using the CLI:
    ```shell
    cloudctl es kafka-user-create --topic <topic_name> --name <user_name> --producer --auth-type tls
    ```
-
-   {{site.data.reuse.es_cli_kafkauser_note}}
 4. Follow the steps in [managing access](../../security/managing-access/#retrieving-credentials-later) to TLS certificates and keys.
 
 Using the UI:

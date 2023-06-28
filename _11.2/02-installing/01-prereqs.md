@@ -3,6 +3,7 @@ title: "Prerequisites"
 excerpt: "Prerequisites for installing IBM Event Streams."
 categories: installing
 slug: prerequisites
+layout: redirects
 toc: true
 ---
 
@@ -130,6 +131,8 @@ By default, {{site.data.reuse.short_name}} complies with the following:
 -  Kubernetes 1.24 and earlier complies with the `ibm-restricted-psp` [Pod Security Policy](https://github.com/IBM/cloud-pak/blob/master/spec/security/psp/ibm-restricted-psp.yaml){:target="_blank"}.
 -  Kubernetes 1.25 and later complies with the built-in `restricted` [Pod Security Standard](https://kubernetes.io/docs/concepts/security/pod-security-standards/){:target="_blank"}.
 
+**DRAFT COMMENT:** _Waiting for update on PSS troubleshooting topic._
+
 ## Network requirements
 
 {{site.data.reuse.long_name}} is supported for use with IPv4 networks only.
@@ -171,6 +174,8 @@ The {{site.data.reuse.long_name}} command-line interface (CLI) is supported on t
 - macOS 10.13 (High Sierra) or later
 
 See the post-installation tasks for information about [installing the CLI](../post-installation/#installing-the-event-streams-command-line-interface).
+
+{{site.data.reuse.openshift_only_note}}
 
 ## Kafka clients
 

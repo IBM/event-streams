@@ -3,6 +3,7 @@ title: "Gathering logs"
 excerpt: "To help IBM support troubleshoot any issues with your Event Streams installation, run the log gathering script."
 categories: troubleshooting
 slug: gathering-logs
+layout: redirects
 toc: false
 ---
 

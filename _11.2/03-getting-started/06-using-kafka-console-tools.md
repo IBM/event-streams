@@ -3,6 +3,7 @@ title: "Using Apache Kafka console tools"
 excerpt: "Using Apache Kafka console tools with IBM Event Streams."
 categories: getting-started
 slug: using-kafka-console-tools
+layout: redirects
 toc: true
 ---
 
@@ -10,35 +11,37 @@ Apache Kafka comes with a variety of console tools for simple administration and
 
 You can use many of them with {{site.data.reuse.long_name}}, although {{site.data.reuse.long_name}} does not permit connection to its ZooKeeper cluster. As Kafka has developed, many of the tools that previously required connection to ZooKeeper no longer have that requirement. {{site.data.reuse.long_name}} has its own [command-line interface (CLI)](../../installing/post-installation/#installing-the-event-streams-command-line-interface) and this offers many of the same capabilities as the Kafka tools in a simpler form.
 
+{{site.data.reuse.openshift_only_note}}
+
 The following table shows which Apache Kafka (release 2.0 or later) console tools work with {{site.data.reuse.long_name}} and whether there are CLI equivalents.
 
-| Console tool     | Works with {{site.data.reuse.long_name}}      | CLI equivalent  |
+| Console tool     | Works with {{site.data.reuse.long_name}}      | CLI equivalent  (only on OpenShift)  |
 |:-----------------|:-----------------|:-----------------|
 | `kafka-acls.sh`    | Yes | |
 | `kafka-broker-api-versions.sh` | Yes | |
-| `kafka-configs.sh --entity-type topics` | No | `kubectl es topic-update` |
-| `kafka-configs.sh --entity-type brokers` | No | `kubectl es broker-config` |
-| `kafka-configs.sh --entity-type brokers --entity-default` | No | `kubectl es cluster-config` |
+| `kafka-configs.sh --entity-type topics` | No | `cloudctl es topic-update` |
+| `kafka-configs.sh --entity-type brokers` | No | `cloudctl es broker-config` |
+| `kafka-configs.sh --entity-type brokers --entity-default` | No | `cloudctl es cluster-config` |
 | `kafka-configs.sh --entity-type clients` | No | No - see the `KafkaUser` [quota support](../../administering/quotas/) |
 | `kafka-configs.sh --entity-type users` | No | No |
 | `kafka-console-consumer.sh` | Yes | |
 | `kafka-console-producer.sh` | Yes | |
-| `kafka-consumer-groups.sh --list` | Yes | `kubectl es groups` |
-| `kafka-consumer-groups.sh --describe` | Yes | `kubectl es group` |
-| `kafka-consumer-groups.sh --reset-offsets` | Yes | `kubectl es group-reset` |
-| `kafka-consumer-groups.sh --delete` | Yes | `kubectl es group-delete` |
+| `kafka-consumer-groups.sh --list` | Yes | `cloudctl es groups` |
+| `kafka-consumer-groups.sh --describe` | Yes | `cloudctl es group` |
+| `kafka-consumer-groups.sh --reset-offsets` | Yes | `cloudctl es group-reset` |
+| `kafka-consumer-groups.sh --delete` | Yes | `cloudctl es group-delete` |
 | `kafka-consumer-perf-test.sh` | Yes | |
-| `kafka-delete-records.sh` | Yes | `kubectl es topic-delete-records` |
+| `kafka-delete-records.sh` | Yes | `cloudctl es topic-delete-records` |
 | `kafka-preferred-replica-election.sh` | No | |
 | `kafka-producer-perf-test.sh` | Yes | |
 | `kafka-streams-application-reset.sh` | Yes | |
-| `kafka-topics.sh --list` | Yes | `kubectl es topics` |
-| `kafka-topics.sh --describe` | Yes | `kubectl es topic` |
-| `kafka-topics.sh --create` | Yes | `kubectl es topic-create` |
-| `kafka-topics.sh --delete` | Yes | `kubectl es topic-delete` |
-| `kafka-topics.sh --alter --config` | Yes | `kubectl es topic-update` |
-| `kafka-topics.sh --alter --partitions` | Yes | `kubectl es topic-partitions-set` |
-| `kafka-topics.sh --alter --replica-assignment` | Yes | `kubectl es topic-partitions-set` |
+| `kafka-topics.sh --list` | Yes | `cloudctl es topics` |
+| `kafka-topics.sh --describe` | Yes | `cloudctl es topic` |
+| `kafka-topics.sh --create` | Yes | `cloudctl es topic-create` |
+| `kafka-topics.sh --delete` | Yes | `cloudctl es topic-delete` |
+| `kafka-topics.sh --alter --config` | Yes | `cloudctl es topic-update` |
+| `kafka-topics.sh --alter --partitions` | Yes | `cloudctl es topic-partitions-set` |
+| `kafka-topics.sh --alter --replica-assignment` | Yes | `cloudctl es topic-partitions-set` |
 | `kafka-verifiable-consumer.sh` | Yes | |
 | `kafka-verifiable-producer.sh` | Yes | |
 

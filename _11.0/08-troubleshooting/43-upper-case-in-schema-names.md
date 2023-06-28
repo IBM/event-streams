@@ -3,6 +3,7 @@ title: "Schema details not accessible when upper-case letters are used in schema
 excerpt: "If a schema name has upper-case letters, it is not accessible through Event Streams."
 categories: troubleshooting
 slug: upper-case-in-schema-names
+layout: redirects
 toc: true
 ---
 

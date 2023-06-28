@@ -3,6 +3,7 @@ title: "Cannot add schemas after installing earlier Event Streams version"
 excerpt: "Installing earlier Event Streams version in the same IBM Cloud Private causes authentication failures when attempting to use schemas."
 categories: troubleshooting
 slug: cannot-add-schemas-earlier-install
+layout: redirects
 toc: true
 ---
 

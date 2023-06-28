@@ -3,6 +3,7 @@ title: "Error when geo-replicating to an earlier version of Event Streams"
 excerpt: "Creating a destination topic fails when setting up geo-replication from a later version of Event Streams to an earlier version of Event Streams."
 categories: troubleshooting
 slug: georeplication-version-error
+layout: redirects
 toc: true
 ---
 

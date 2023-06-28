@@ -3,6 +3,7 @@ title: "Monitoring Kafka cluster health"
 excerpt: "Understand the health of your Kafka cluster at a glance."
 categories: administering
 slug: cluster-health
+layout: redirects
 toc: true
 ---
 
@@ -23,6 +24,12 @@ For an example of how to configure the JMX exporter, see [configuring the JMX Ex
 You can use {{site.data.reuse.short_name}} to export metrics to Prometheus. These metrics are otherwise only accessible through the Kafka command-line tools. This allows topic metrics such as consumer group lag to be collected.
 
 For an example of how to configure a Kafka Exporter, see [configuring the Kafka Exporter](../../installing/configuring#configuring-the-kafka-exporter).
+
+## JmxTrans (deprecated)
+
+JmxTrans can be used to push JMX metrics from Kafka brokers to external applications or databases. For more information, see [configuring JmxTrans](../../security/secure-jmx-connections#configuring-a-jmxtrans-deployment).
+
+{{site.data.reuse.jmx_deprecated}}
 
 ## Grafana
 
@@ -55,7 +62,7 @@ Create dashboards in the Kibana service that is provided by the {{site.data.reus
 To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these steps:
 
 1. Ensure you have [cluster logging](https://docs.openshift.com/container-platform/4.12/logging/cluster-logging-deploying.html){:target="_blank"} installed.
-2. Download the JSON file that includes the example Kibana dashboards for {{site.data.reuse.short_name}} from [GitHub](https://github.com/IBM/ibm-event-automation/tree/master/event-streams/kibana-dashboards){:target="_blank"}.
+2. Download the JSON file that includes the example Kibana dashboards for {{site.data.reuse.short_name}} from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/kibana-dashboards){:target="_blank"}.
 
 2. Navigate to the Kibana homepage on your cluster.
 
@@ -64,7 +71,7 @@ To install the {{site.data.reuse.short_name}} Kibana dashboards, follow these st
    **For {{site.data.reuse.openshift_short}} cluster logging stack**: {{site.data.reuse.openshift_ui_login}} Then follow the instructions to navigate to [cluster logging's Kibana homepage](https://docs.openshift.com/container-platform/4.12/logging/cluster-logging-visualizer.html#cluster-logging-visualizer-kibana_cluster-logging-visualizer){:target="_blank"}.
 3. Click **Management** in the navigation on the left.
 4. Click **Index patterns**.
-5. Click **Create index pattern**.
+5. Click **Creat index pattern**.
 6. Enter `app*` in the **Index pattern** field, and click **Next step**.
 7. Select `@timestamp` from the **Time Filter field name** list, and click **Create index pattern**.
 8. Click **Saved Objects**.

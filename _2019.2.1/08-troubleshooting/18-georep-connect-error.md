@@ -3,6 +3,7 @@ title: "Geo-replication fails to start with 'Could not connect to origin cluster
 excerpt: "When geo-replicating a topic to a destination cluster with 2 or more geo-replication worker nodes, the topic replication fails to start."
 categories: troubleshooting
 slug: georeplication-connect-error
+layout: redirects
 toc: true
 ---
 

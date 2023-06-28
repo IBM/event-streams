@@ -3,6 +3,7 @@ title: "UI shows black images in Firefox"
 excerpt: "When using Firefox browser the Event Streams UI shows black images."
 categories: troubleshooting
 slug: firefox-black-images
+layout: redirects
 toc: true
 ---
 

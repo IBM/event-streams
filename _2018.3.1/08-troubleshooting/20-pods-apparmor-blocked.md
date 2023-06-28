@@ -3,6 +3,7 @@ title: "Pods fail to start, status is blocked"
 excerpt: "Pods fail to start, status is blocked."
 categories: troubleshooting
 slug: pods-apparmor-blocked
+layout: redirects
 toc: true
 ---
 

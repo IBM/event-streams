@@ -3,6 +3,7 @@ title: "Event Streams not installing due to Security Context Constraint (SCC) is
 excerpt: "When the default Security Context Constraint (SCC) is updated by user or another operator, Event Streams does not install"
 categories: troubleshooting
 slug: default-scc-issues
+layout: redirects
 toc: true
 ---
 

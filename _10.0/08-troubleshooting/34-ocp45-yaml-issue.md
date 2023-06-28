@@ -3,6 +3,7 @@ title: "Required value error when installing on OpenShift 4.5.0-4.5.5"
 excerpt: "When installing Event Streams on OpenShift 4.5.0-4.5.5, a required value error stops the installation."
 categories: troubleshooting
 slug: required-value-error
+layout: redirects
 toc: true
 ---
 

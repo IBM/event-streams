@@ -3,6 +3,7 @@ title: "Diagnosing installation issues"
 excerpt: "To help troubleshoot installation issues, you can run diagnostics scripts."
 categories: troubleshooting
 slug: diagnosing-installation-issues
+layout: redirects
 toc: false
 ---
 

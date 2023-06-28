@@ -3,6 +3,7 @@ title: "Considerations for multizone deployments"
 excerpt: "Consider the following when planning for deploying Event Streams to a cluster with multiple availability zones."
 categories: installing
 slug: multizone-considerations
+layout: redirects
 toc: true
 ---
 

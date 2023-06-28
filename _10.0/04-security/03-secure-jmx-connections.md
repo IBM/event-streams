@@ -3,6 +3,7 @@ title: "Configuring secure JMX connections"
 excerpt: "Connecting securely to Kafka JMX ports"
 categories: security
 slug: secure-jmx-connections
+layout: redirects
 toc: true
 ---
 

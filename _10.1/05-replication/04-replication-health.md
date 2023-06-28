@@ -3,6 +3,7 @@ title: "Monitoring and managing geo-replication"
 excerpt: "Check the status of your geo-replication."
 categories: georeplication
 slug: health
+layout: redirects
 toc: true
 ---
 When you have geo-replication set up, you can monitor and manage your geo-replication, such as checking the status of your geo-replicators, pausing and resuming geo-replication, removing replicated topics from destination clusters, and so on.

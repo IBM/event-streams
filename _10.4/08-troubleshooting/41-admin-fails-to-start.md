@@ -3,6 +3,7 @@ title: "Admin API pod does not start when using OpenShift 4.6"
 excerpt: "The Admin API pod fails to start with an error stating that volume [kube-root-ca] cannot be mounted."
 categories: troubleshooting
 slug: admin-api-mount-failure
+layout: redirects
 toc: true
 ---
 

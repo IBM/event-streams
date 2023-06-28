@@ -3,6 +3,7 @@ title: "The UI cannot load data"
 excerpt: "The UI for monitoring services does not load."
 categories: troubleshooting
 slug: problem-with-piping
+layout: redirects
 toc: true
 ---
 

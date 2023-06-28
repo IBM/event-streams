@@ -3,6 +3,7 @@ title: "Setting Java applications to use schemas"
 excerpt: "Set up your Java applications to use schemas."
 categories: schemas
 slug: setting-java-apps
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Creating Kafka client applications"
 excerpt: "Create Kafka client applications to use with IBM Event Streams."
 categories: getting-started
 slug: client
+layout: redirects
 toc: true
 ---
 

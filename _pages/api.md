@@ -1,7 +1,8 @@
 ---
 title: "Rest Producer API"
 permalink: /api/
-layout: apiFrame
+layout: redirects
+# layout: apiFrame
 mastheadNavItem: APIs
 ---
 

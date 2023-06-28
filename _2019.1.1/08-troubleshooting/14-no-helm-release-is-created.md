@@ -3,6 +3,7 @@ title: "Chart deployment starts but no helm release is created"
 excerpt: "Chart deployment starts but the helm release and group of expected pods are not created."
 categories: troubleshooting
 slug: no-helm-release-is-created
+layout: redirects
 toc: true
 ---
 

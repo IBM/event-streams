@@ -3,6 +3,7 @@ title: "Kafka cluster is not accessible by using OpenShift routes"
 excerpt: "Kafka clients cannot connect to the cluster by using the OpenShift route created by the Event Streams installation."
 categories: troubleshooting
 slug: openshift-route-incorrect
+layout: redirects
 toc: true
 ---
 

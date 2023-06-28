@@ -4,6 +4,7 @@ title: "Running the MQ sink connector"
 excerpt: "Running MQ sink connector"
 categories: connecting/mq
 slug: sink
+layout: redirects
 toc: true
 ---
 

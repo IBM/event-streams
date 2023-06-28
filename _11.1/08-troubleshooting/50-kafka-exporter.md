@@ -3,6 +3,7 @@ title: "Unable to find Kafka Exporter metrics in Prometheus"
 excerpt: "Kafka Exporter metrics are not available in Prometheus"
 categories: troubleshooting
 slug: kafkaexporter-error
+layout: redirects
 toc: true
 ---
 

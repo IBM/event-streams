@@ -1,8 +1,9 @@
 ---
-title: "Event Streams CLI fails with 'not a registered command' error"
-excerpt: "Event Streams CLI command extension not registered."
+title: "Command 'cloudctl es' fails with 'not a registered command' error"
+excerpt: "Cloudctl es command extension not registered."
 categories: troubleshooting
 slug: cloudctl-es-not-registered
+layout: redirects
 toc: true
 ---
 
@@ -15,13 +16,6 @@ FAILED
 'es' is not a registered command. See 'cloudctl help'.
 ```
 
-A similar error message is displayed when running the `kubectl es` command:
-
-```
-FAILED
-'es' is not a registered command. See 'kubectl help'.
-```
-
 ## Causes
 
 This error occurs when you attempt to use the {{site.data.reuse.long_name}} CLI before it is installed.
@@ -29,3 +23,5 @@ This error occurs when you attempt to use the {{site.data.reuse.long_name}} CLI 
 ## Resolving the problem
 
 Log in to the {{site.data.reuse.long_name}} UI, and [install the CLI](../../installing/post-installation/#installing-the-event-streams-command-line-interface).
+
+{{site.data.reuse.openshift_only_note}}

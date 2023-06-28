@@ -3,6 +3,7 @@ title: "Connecting over HTTP with Kafka Bridge"
 excerpt: "Use Kafka Bridge to connect to your Event Streams Kafka cluster over HTTP."
 categories: connecting
 slug: kafka-bridge
+layout: redirects
 toc: true
 ---
 

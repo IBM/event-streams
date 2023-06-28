@@ -3,6 +3,7 @@ title: "Connecting to IBM MQ"
 excerpt: "Connecting to MQ."
 categories: connecting
 slug: mq
+layout: redirects
 toc: true
 ---
 

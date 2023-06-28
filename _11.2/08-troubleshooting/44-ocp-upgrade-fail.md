@@ -3,6 +3,7 @@ title: "OpenShift upgrade: fixing scheduling on node and node degraded errors"
 excerpt: "OpenShift upgrade for Event Streams installations: how to fix failed to schedule on nodes and node degraded errors."
 categories: troubleshooting
 slug: ocp-upgrade-fail
+layout: redirects
 toc: true
 ---
 

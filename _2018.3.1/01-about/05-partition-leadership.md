@@ -4,6 +4,7 @@ excerpt: "Each partition has one server in the cluster that acts as the
 partition's leader and other servers that act as the followers."
 categories: about
 slug: partition-leadership
+layout: redirects
 toc: false
 ---
 

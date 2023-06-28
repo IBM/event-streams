@@ -3,6 +3,7 @@ title: "Monitoring Kafka consumer group lag"
 excerpt: "Understand the health of your Kafka consumer clients through monitoring heuristics such as lag."
 categories: administering
 slug: consumer-lag
+layout: redirects
 toc: true
 ---
 
@@ -33,13 +34,15 @@ This side panel will display a table containing [consumer group information](#co
 
 ### Using the {{site.data.reuse.short_name}} CLI
 
+{{site.data.reuse.openshift_only_note}}
+
 To access information about a consumer group in the {{site.data.reuse.short_name}} CLI, do the following:
 
 1. {{site.data.reuse.es_cli_init_111}}
 2. To list all consumer groups on a cluster, run:\\
-   `kubectl es groups`
+   `cloudctl es groups`
 3. To list information about a consumer group, run:\\
-   `kubectl es group --group <consumer-group-id>`\\
+   `cloudctl es group --group <consumer-group-id>`\\
    where `<consumer-group-id>` is the name of the consumer group of interest.
 
 The CLI will print a table containing [consumer group information](#consumer-lag) for each partition of the topic.
@@ -47,7 +50,7 @@ The CLI will print a table containing [consumer group information](#consumer-lag
 The following example shows the information the command returns for a consumer group called `my-consumer`:
 
 ```
-$ kubectl es group --group my-consumer
+$ cloudctl es group --group my-consumer
 >
 Details for consumer group my-consumer
 Group ID            State

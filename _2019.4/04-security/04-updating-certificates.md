@@ -3,6 +3,7 @@ title: "Updating certificates"
 excerpt: "Learn about how to update the certificates in an existing Event Streams cluster."
 categories: security
 slug: updating-certificates
+layout: redirects
 toc: true
 ---
 

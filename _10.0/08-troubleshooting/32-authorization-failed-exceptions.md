@@ -3,6 +3,7 @@ title: "Client receives AuthorizationException when communicating with brokers"
 excerpt: "When connecting a client to Event Streams, operations return AuthorizationException errors when executing."
 categories: troubleshooting
 slug: authorization-failed-exceptions
+layout: redirects
 toc: true
 ---
 

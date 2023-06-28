@@ -3,6 +3,7 @@ title: "Monitoring and managing geo-replication"
 excerpt: "Check the status of your geo-replication."
 categories: georeplication
 slug: health
+layout: redirects
 toc: true
 ---
 When you have geo-replication set up, you can monitor and manage your geo-replication, such as checking the status of your geo-replicators, pausing and resuming geo-replication, removing replicated topics from destination clusters, and so on.
@@ -81,20 +82,22 @@ To stop an individual topic from being replicated and remove it from the geo-rep
 
 ### Using the CLI
 
+{{site.data.reuse.openshift_only_note}}
+
 To view this information on the origin cluster by using the CLI:
-1. Go to your origin cluster. {{site.data.reuse.cncf_cli_login}}
-2. {{site.data.reuse.es_cli_init_111}}
+1. Go to your origin cluster. {{site.data.reuse.cp_cli_login}}
+2. {{site.data.reuse.es_cli_init}}
 3. Retrieve destination cluster IDs by using the following command:
 
-   `kubectl es geo-clusters`
+   `cloudctl es geo-clusters`
 
 4. Retrieve information about a destination cluster by running the following command and copying the required destination cluster ID from the previous step:
 
-   `kubectl es geo-cluster --destination <destination-cluster-id>`
+   `cloudctl es geo-cluster --destination <destination-cluster-id>`
 
    For example:
 
-   `kubectl es geo-cluster --destination destination_byl6x`
+   `cloudctl es geo-cluster --destination destination_byl6x`
 
    The command returns the following information:
 
@@ -117,55 +120,55 @@ To view this information on the origin cluster by using the CLI:
 Each geo-replicator creates a MirrorSource connector and a MirrorCheckpoint connector. The MirrorSource connector replicates data from the origin to the destination cluster. You can use the MirrorCheckpoint connector during [failover](../failover/#updating-consumer-group-offsets-by-using-checkpoints) from the origin to the destination cluster.
 
 To manage geo-replication on the origin cluster by using the CLI:
-1. Go to your origin cluster. {{site.data.reuse.cncf_cli_login}}
-2. {{site.data.reuse.es_cli_init_111}}
+1. Go to your origin cluster. {{site.data.reuse.cp_cli_login}}
+2. {{site.data.reuse.es_cli_init}}
 3. Run the following commands as required:
 
-   - `kubectl es geo-replicator-pause --destination <destination-cluster-id> --name "<replicator-name>"`
+   - `cloudctl es geo-replicator-pause --destination <destination-cluster-id> --name "<replicator-name>"`
 
      For example:
 
-     `kubectl es geo-replicator-pause --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
+     `cloudctl es geo-replicator-pause --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
 
      This will pause both the MirrorSource connector and the MirrorCheckpoint connector for this geo-replicator.  Geo-replication for all topics that are part of this geo-replicator will be paused.
 
-   - `kubectl es geo-replicator-resume --destination <destination-cluster-id> --name "<replicator-name>"`
+   - `cloudctl es geo-replicator-resume --destination <destination-cluster-id> --name "<replicator-name>"`
 
      For example:
 
-     `kubectl es geo-replicator-resume --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
+     `cloudctl es geo-replicator-resume --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
 
      This will resume both the MirrorSource connector and the MirrorCheckpoint connector for this geo-replicator after they have been paused. Geo-replication for all topics that are part of this geo-replicator will be resumed.
 
-   - `kubectl es geo-replicator-restart --destination <destination-cluster-id> --name "<replicator-name>" --connector <connector-name>`
+   - `cloudctl es geo-replicator-restart --destination <destination-cluster-id> --name "<replicator-name>" --connector <connector-name>`
 
      For example:
 
-     `kubectl es geo-replicator-restart --destination destination_byl6x  --name "origin_es->destination-mm2connector" --connector MirrorSourceConnector`
+     `cloudctl es geo-replicator-restart --destination destination_byl6x  --name "origin_es->destination-mm2connector" --connector MirrorSourceConnector`
 
      This will restart a failed geo-replicator MirrorSource connector.
 
-   - `kubectl es geo-replicator-topics-remove --destination <destination-cluster-id> --name "<replicator-name>" --topics <comma-separated-topic-list>`
+   - `cloudctl es geo-replicator-topics-remove --destination <destination-cluster-id> --name "<replicator-name>" --topics <comma-separated-topic-list>`
 
      For example:
 
-     `kubectl es geo-replicator-topics-remove --destination destination_byl6x  --name "origin_es->destination-mm2connector " --topics topic1,topic2`
+     `cloudctl es geo-replicator-topics-remove --destination destination_byl6x  --name "origin_es->destination-mm2connector " --topics topic1,topic2`
 
      This will remove the listed topics from this geo-replicator.
 
-   - `kubectl es geo-replicator-delete --destination <destination-cluster-id> --name "<replicator-name>"`
+   - `cloudctl es geo-replicator-delete --destination <destination-cluster-id> --name "<replicator-name>"`
 
      For example:
 
-     `kubectl es geo-replicator-delete --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
+     `cloudctl es geo-replicator-delete --destination destination_byl6x  --name "origin_es->destination-mm2connector"`
 
      This will remove all MirrorSource and MirrorCheckpoint connectors for this geo-replicator.
 
-   - `kubectl es geo-cluster-remove --destination <destination-cluster-id>`
+   - `cloudctl es geo-cluster-remove --destination <destination-cluster-id>`
 
      For example:
 
-     `kubectl es geo-cluster-remove --destination destination_byl6x`
+     `cloudctl es geo-cluster-remove --destination destination_byl6x`
 
      This will permanently remove a destination cluster.
 
@@ -248,7 +251,7 @@ If you are using {{site.data.reuse.openshift_short}} with {{site.data.reuse.icpf
 
 To install {{site.data.reuse.short_name}} Grafana dashboards that will persist, use the following steps:
 
-1. Download the geo-replication `MonitoringDashboard` custom resource from [GitHub](https://github.com/IBM/ibm-event-automation/tree/master/event-streams/grafana-dashboards){:target="_blank"}.
+1. Download the geo-replication `MonitoringDashboard` custom resource from [GitHub](https://github.com/ibm-messaging/event-streams-operator-resources/tree/master/grafana-dashboards){:target="_blank"}.
 2. {{site.data.reuse.openshift_ui_login}}
 3. Apply the `MonitoringDashboard` custom resource as follows:
 

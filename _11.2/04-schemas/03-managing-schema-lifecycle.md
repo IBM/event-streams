@@ -3,6 +3,7 @@ title: "Managing schema lifecycle"
 excerpt: "Understand how to manage the lifecycle of schemas."
 categories: schemas
 slug: manage-lifecycle
+layout: redirects
 toc: true
 ---
 
@@ -17,6 +18,8 @@ The lifecycle is as follows:
 3. Deprecate version or entire schema
 4. Disable version or entire schema
 5. Remove version or entire schema
+
+{{site.data.reuse.openshift_only_note}}
 
 ## Deprecating
 
@@ -43,17 +46,17 @@ You can re-activate a schema or its version by setting **Mark schema as deprecat
 
 1. {{site.data.reuse.es_cli_init_111}}
 2. Run the following command to deprecate a schema version:\\
-   `kubectl es schema-modify --deprecate --name <schema-name> --version <schema-version-id>`
+   `cloudctl es schema-modify --deprecate --name <schema-name> --version <schema-version-id>`
 
    To deprecate an entire schema, do not specify the `--version <schema-version-id>` option.
 
    To re-activate a schema version:\\
-   `kubectl es schema-modify --activate --name <schema-name> --version <schema-version-id>`
+   `cloudctl es schema-modify --activate --name <schema-name> --version <schema-version-id>`
 
    To re-activate an entire schema, do not specify the `--version <schema-version-id>` option.
 
 **Note:** `<schema-version-id>` is the integer ID that is displayed when listing schema versions using the following command:
-`kubectl es schema <schema-name>`.
+`cloudctl es schema <schema-name>`.
 
 ## Disabling
 
@@ -77,17 +80,17 @@ When a schema is disabled, applications that want to use the schema receive an e
 
 1.  {{site.data.reuse.es_cli_init_111}}`
 2. Run the following command to disable a schema version:\\
-   `kubectl es schema-modify --disable --name <schema-name> --version <schema-version-id>`
+   `cloudctl es schema-modify --disable --name <schema-name> --version <schema-version-id>`
 
    To disable an entire schema, do not specify the `--version <schema-version-id>` option.
 
    To re-enable a schema version:\\
-   `kubectl es schema-modify --enable --name <schema-name> --version <schema-version-id>`
+   `cloudctl es schema-modify --enable --name <schema-name> --version <schema-version-id>`
 
    To re-enable an entire schema, do not specify the `--version <schema-version-id>` option.
 
 **Note:** `<schema-version-id>` is the integer ID that is displayed when listing schema versions using the following command:
-`kubectl es schema <schema-name>`.
+`cloudctl es schema <schema-name>`.
 
 
 ## Removing
@@ -114,11 +117,11 @@ If a schema version has not been used for a period of time, you can remove it fr
 
 1. {{site.data.reuse.es_cli_init_111}}
 2. Run the following command to remove a schema version:\\
-   `kubectl es schema-remove --name <schema-name> --version <schema-version-id>`
+   `cloudctl es schema-remove --name <schema-name> --version <schema-version-id>`
 
    To remove an entire schema, do not specify the `--version <schema-version-id>` option.
 
    **Important:** This action is permanent and cannot be reversed.
 
 **Note:** `<schema-version-id>` is the integer ID that is displayed when listing schema versions using the following command:
-`kubectl es schema <schema-name>`.
+`cloudctl es schema <schema-name>`.

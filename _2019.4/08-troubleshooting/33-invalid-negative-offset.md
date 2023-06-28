@@ -3,6 +3,7 @@ title: "UI is unable to display consumer groups for a topic"
 excerpt: "The Event Streams UI is unable to display consumer groups for a topic and the Admin REST component reports an invalid negative offset exception in the log."
 categories: troubleshooting
 slug: invalid-negative-offset
+layout: redirects
 toc: true
 ---
 

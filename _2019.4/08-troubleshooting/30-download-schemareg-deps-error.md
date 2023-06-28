@@ -3,6 +3,7 @@ title: "Error when downloading Java dependencies for schema registry in 2019.4.2
 excerpt: "The link to download the Java dependencies for working with the schema registry is broken."
 categories: troubleshooting
 slug: schemaregistry-java-deps-download-error
+layout: redirects
 toc: true
 ---
 

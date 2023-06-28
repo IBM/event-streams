@@ -3,6 +3,7 @@ title: "Setting Java applications to use schemas with the Apicurio Registry serd
 excerpt: "Set up your Java applications to use schemas with the Apicurio Registry serdes library."
 categories: schemas
 slug: setting-java-apps-apicurio-serdes
+layout: redirects
 toc: true
 ---
 

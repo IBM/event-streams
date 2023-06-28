@@ -3,6 +3,7 @@ title: "IBM Cloud Pak foundational services 3.20 blocks upgrade to Event Streams
 excerpt: "An Event Streams 10.5.0 instance cannot be upgraded to 11.0.x when IBM Cloud Pak foundational services has been upgraded to 3.20."
 categories: troubleshooting
 slug: foundational-services-320-upgrade-block
+layout: redirects
 toc: true
 ---
 

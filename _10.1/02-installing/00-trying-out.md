@@ -3,6 +3,7 @@ title: "Trying out Event Streams"
 excerpt: "Install a basic deployment to try out IBM Event Streams."
 categories: installing
 slug: trying-out
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Monitoring with external tools"
 excerpt: "You can use third-party monitoring tools to monitor your Event Streams Kafka cluster."
 categories: administering
 slug: external-monitoring
+layout: redirects
 toc: true
 ---
 

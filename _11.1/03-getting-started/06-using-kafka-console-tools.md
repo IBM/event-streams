@@ -3,6 +3,7 @@ title: "Using Apache Kafka console tools"
 excerpt: "Using Apache Kafka console tools with IBM Event Streams."
 categories: getting-started
 slug: using-kafka-console-tools
+layout: redirects
 toc: true
 ---
 

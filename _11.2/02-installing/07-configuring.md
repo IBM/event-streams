@@ -3,6 +3,7 @@ title: "Configuring"
 excerpt: "Configure your IBM Event Streams installation."
 categories: installing
 slug: configuring
+layout: redirects
 toc: true
 ---
 
@@ -17,7 +18,7 @@ toc: true
 
 You can modify the samples, save them, and apply custom configuration settings as well. See the following sections for guidance about configuring your instance of {{site.data.reuse.short_name}}.
 
-On OpenShift, you can configure and apply them by using the [command line](../installing/#installing-an-instance-by-using-the-cli) or by dragging and dropping them onto the {{site.data.reuse.openshift_short}} [web console](../installing/#installing-by-using-the-yaml-view), and editing them.
+**Note:** The **Production 6 brokers** and **Production 9 brokers** samples are only available on [GitHub](http://ibm.biz/es-cr-samples){:target="_blank"} (download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples). You can configure and apply them by using the [command line](../installing/#installing-an-instance-by-using-the-cli) or by dragging and dropping them onto the {{site.data.reuse.openshift_short}} [web console](../installing/#installing-by-using-the-yaml-view), and editing them.
 
 **Note:** When applying custom Kafka configuration settings to your {{site.data.reuse.short_name}}, check the [Kafka documentation](https://kafka.apache.org/documentation){:target="_blank"} to ensure the new configuration settings are consistent and do not cause conflicts.
 
@@ -182,6 +183,8 @@ spec:
 By default, accessing the {{site.data.reuse.short_name}} UI and CLI requires a user that has been assigned access to {{site.data.reuse.short_name}} (see [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli) for details).
 
 {{site.data.reuse.short_name}} supports the Salted Challenge Response Authentication Mechanism (SCRAM) and {{site.data.reuse.icpfs}} Identity and Access Management (IAM) for accessing the UI and CLI.
+
+{{site.data.reuse.openshift_only_note}}
 
 {{site.data.reuse.iam_note}}
 
@@ -841,7 +844,7 @@ You can use third-party monitoring tools to monitor the deployed {{site.data.reu
 
 - Have a third-party monitoring tool set up to be used within your {{site.data.reuse.openshift_short}} cluster.
 - Enable access to the broker JMX port by setting `spec.strimizOverrides.kafka.jmxOptions`.
-
+  
   ```yaml
   apiVersion: eventstreams.ibm.com/v1beta2
   kind: EventStreams
@@ -854,7 +857,7 @@ You can use third-party monitoring tools to monitor the deployed {{site.data.reu
         jmxOptions: {}
   ```
 
-- Include any configuration settings for {{site.data.reuse.short_name}} as required by your monitoring tool. For example, Datadog's autodiscovery requires you to annotate Kafka broker pods (`strimziOverrides.kafka.template.pod.metadata.annotations`)
+- Include any configuration settings for {{site.data.reuse.short_name}} as required by your monitoring tool. For example, Datadog's autodiscovery requires you to annotate Kafka broker pods (`strimziOverrides.kafka.template.statefulset.metadata.annotations`)
 - Configure your monitoring applications to [consume JMX metrics](../../security/secure-jmx-connections/).
 
 ## Configuring the Kafka Exporter

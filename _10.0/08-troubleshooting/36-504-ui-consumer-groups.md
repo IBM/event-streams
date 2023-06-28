@@ -3,6 +3,7 @@ title: "504 timeout error when viewing consumer groups in the Event Streams UI"
 excerpt: "When viewing consumer groups in the Event Streams UI a 504 timeout error is shown and the groups are not displayed"
 categories: troubleshooting
 slug: 504-ui-consumer-groups
+layout: redirects
 toc: true
 ---
 

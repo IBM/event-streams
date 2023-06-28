@@ -3,6 +3,7 @@ title: "Notices"
 excerpt: "Legal notices for IBM Event Streams."
 categories: about
 slug: notices
+layout: redirects
 toc: true
 ---
 

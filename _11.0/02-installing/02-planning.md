@@ -3,6 +3,7 @@ title: "Planning your installation"
 excerpt: "Planning your installation of Event Streams."
 categories: installing
 slug: planning
+layout: redirects
 toc: true
 ---
 

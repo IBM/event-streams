@@ -3,6 +3,7 @@ title: "Kafka client applications are unable to connect to the cluster. Users ar
 excerpt: "Client applications are unable to produce or consume messages, connection errors are reported. Users are unable to login to the UI."
 categories: troubleshooting
 slug: client-connect-error
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Error when creating multiple geo-replicators"
 excerpt: "No meaningful error message provided when specifying invalid topic list format."
 categories: troubleshooting
 slug: georeplication-error
+layout: redirects
 toc: true
 ---
 

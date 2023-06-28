@@ -3,6 +3,7 @@ title: "Post-installation tasks"
 excerpt: "Post-installation tasks after successfully installing IBM Event Streams."
 categories: installing
 slug: post-installation
+layout: redirects
 toc: true
 ---
 

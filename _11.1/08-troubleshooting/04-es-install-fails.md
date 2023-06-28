@@ -3,6 +3,7 @@ title: "Event Streams installation reports `Blocked` status"
 excerpt: "Installation of Event Streams instance reports a failed status when Foundational Services is not installed."
 categories: troubleshooting
 slug: es-install-fails
+layout: redirects
 toc: true
 ---
 

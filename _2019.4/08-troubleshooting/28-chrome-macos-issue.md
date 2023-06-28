@@ -3,6 +3,7 @@ title: "UI does not open when using Chrome on macOS Catalina"
 excerpt: "When using Google Chrome browser on the latest versions of macOS operating systems, the Event Streams UI does not open."
 categories: troubleshooting
 slug: chrome-macos-issue
+layout: redirects
 toc: true
 ---
 

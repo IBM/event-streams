@@ -1,5 +1,6 @@
 ---
-layout: connectorsAll
+#  layout: connectorsAll
+layout: redirects
 title: "Connectors"
 collection: connectors
 permalink: /connectors/

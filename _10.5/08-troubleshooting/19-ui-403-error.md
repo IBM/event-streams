@@ -3,6 +3,7 @@ title: "403 error when signing in to Event Streams UI"
 excerpt: "When signing into the Event Streams UI, the 403 Not Authorized page is displayed."
 categories: troubleshooting
 slug: ui-403-error
+layout: redirects
 toc: true
 ---
 

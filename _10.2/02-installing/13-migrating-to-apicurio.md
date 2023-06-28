@@ -3,6 +3,7 @@ title: "Migrating to Apicurio Registry"
 excerpt: "Migrating from the deprecated schema registry to Apicurio Registry."
 categories: installing
 slug: migrating-to-apicurio
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "502 Bad Gateway error when logging in to Event Streams UI"
 excerpt: "Logging in to the Event Streams 11.1.2 UI as an IAM user fails with a '502 Bad Gateway' error message."
 categories: troubleshooting
 slug: 502-bad-gateway
+layout: redirects
 toc: true
 ---
 

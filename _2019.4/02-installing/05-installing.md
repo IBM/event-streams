@@ -3,6 +3,7 @@ title: "Installing on IBM Cloud Private"
 excerpt: "Installing IBM Event Streams on IBM Cloud Private."
 categories: installing
 slug: installing
+layout: redirects
 toc: true
 ---
 

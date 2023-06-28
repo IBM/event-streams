@@ -3,6 +3,7 @@ title: "Installing on OpenShift Container Platform"
 excerpt: "Find out how to install IBM Event Streams on the OpenShift Container Platform."
 categories: installing
 slug: installing
+layout: redirects
 toc: true
 ---
 
@@ -220,17 +221,17 @@ The KRaft mode in {{site.data.reuse.short_name}} has the following limitations:
 
 #### Enabling KRaft
 
-To enable KRaft, ensure you enable the `UseKRaft` feature gate. After the {{site.data.reuse.short_name}} operator is installed and created, edit your `ClusterServiceVersion` object on the {{site.data.reuse.openshift_short}} by running the following command:
+To enable KRaft, ensure you enable both the `UseKRaft` and `StrimziPodSet` feature gates. After the {{site.data.reuse.short_name}} operator is installed and created, edit your `ClusterServiceVersion` object on the {{site.data.reuse.openshift_short}} by running the following command:
 
 **Note:** This command requires the [`yq` YAML](https://github.com/mikefarah/yq){:target="_blank"} parsing and editing tool.
 
 ```shell
-kubectl get csv -n <namespace> ibm-eventstreams.v<operator_version> -oyaml | yq e "(.spec.install.spec.deployments[0].spec.template.spec.containers[0].env[] | select(.name==\"STRIMZI_FEATURE_GATES\")) .value=\"+UseKRaft\"" | oc apply -f -
+oc get csv -n <namespace> ibm-eventstreams.v<operator_version> -oyaml | yq e "(.spec.install.spec.deployments[0].spec.template.spec.containers[0].env[] | select(.name==\"STRIMZI_FEATURE_GATES\")) .value=\"+UseStrimziPodSets,+UseKRaft\"" | oc apply -f
 ```
-Alternatively, you can edit the `ClusterServiceVersion` in the {{site.data.reuse.openshift_short}} web console by locating the `STRIMZI_FEATURE_GATES` environmental variable and editing it to have the `value` of `+UseKRaft` as follows:
+Alternatively, you can edit the `ClusterServiceVersion` in the {{site.data.reuse.openshift_short}} web console by locating the `STRIMZI_FEATURE_GATES` environmental variable and editing it to have the `value` of `+UseStrimziPodSets,+UseKRaft` as follows:
 ```yaml
                       - name: STRIMZI_FEATURE_GATES
-                        value: '+UseKRaft'
+                        value: '+UseStrimziPodSets,+UseKRaft'
 ```
 **Important:** An {{site.data.reuse.short_name}} instance in KRaft mode must use the `RunAsKRaftAuthorizer` custom authorizer class. When configuring your `EventStreams` custom resource, set `authorizerClass` as follows:
 ```yaml
@@ -284,26 +285,7 @@ To configure an `EventStreams` custom resource, do the following:
 1. Enter a name for the instance in the **Name** field.
 2. Click the license accept toggle to set it to **True**.
    ![Accepting license toggle]({{ 'images' | relative_url }}/license_accept_form.png "Screen capture showing how to toggle the license accept field to true"){:height="100%" width="100%"}
-3. Ensure that the [correct values](../planning/#license-usage) for **Product License** and **Product Use** are selected from the dropdowns.
-
-   For **Product License**, select one of the following license IDs based on the program that you purchased:
-   - **L-YBXJ-ADJNSM** for [IBM Cloud Pak for Integration 2023.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-YBXJ-ADJNSM){:target="_blank"}
-   - **L-PYRA-849GYQ** for [IBM Cloud Pak for Integration 2023.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-PYRA-849GYQ){:target="_blank"}
-   - **L-RJON-CJR2RX** for [IBM Cloud Pak for Integration 2022.4.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CJR2RX){:target="_blank"}
-   - **L-RJON-CJR2TC** for [IBM Cloud Pak for Integration 2022.4.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CJR2TC){:target="_blank"}
-   - **L-RJON-CD3JKX** for [IBM Cloud Pak for Integration 2022.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CD3JKX){:target="_blank"}
-   - **L-RJON-CD3JJU** for [IBM Cloud Pak for Integration 2022.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CD3JJU){:target="_blank"}
-   - **L-RJON-C7QG3S** for [IBM Cloud Pak for Integration 2021.4.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C7QG3S){:target="_blank"}
-   - **L-RJON-C7QFZX** for [IBM Cloud Pak for Integration 2021.4.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C7QFZX){:target="_blank"}
-   - **L-RJON-C5CSNH** for [IBM Cloud Pak for Integration 2021.3.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C5CSNH){:target="_blank"}
-   - **L-RJON-C5CSM2** for [IBM Cloud Pak for Integration 2021.3.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C5CSM2){:target="_blank"}
-   - **L-RJON-BZFQU2** for [IBM Cloud Pak for Integration 2021.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-BZFQU2){:target="_blank"}
-   - **L-RJON-BZFQSB** for [IBM Cloud Pak for Integration 2021.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-BZFQSB){:target="_blank"}
-
-   For **Product Use**, select one of the following values depending on the purpose of your deployment:
-   - **CloudPakForIntegrationNonProduction** for non-production deployments suitable for basic development and test activities.
-   - **CloudPakForIntegrationProduction** for production deployments.
-
+3. Ensure that the correct value is selected for the **Product use** from the dropdown. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 4. You can optionally configure other components such as **Kafka**, **ZooKeeper**, and **Security** to suit your [requirements](../configuring).
 5. Scroll down and click the **Create** button at the bottom of the page to deploy the {{site.data.reuse.short_name}} instance.
 6. Wait for the installation to complete.
@@ -324,25 +306,9 @@ More information about these samples is available in the [planning](../planning/
 
 When modifying the sample configuration, the updated document can be exported from the **Create EventStreams** panel by clicking the **Download** button and re-imported by dragging the resulting file back into the window.
 
-**Important:** Ensure that the `spec.license.accept` field in the custom resource YAML is set to `true`, and that the [correct values are selected](../planning/#license-usage) for the `spec.license.license` and `spec.license.use` fields before deploying the {{site.data.reuse.short_name}} instance.
+**Important:** You must ensure that the `spec.license.accept` field in the custom resource YAML is set to `true` and that the correct value is selected for the `spec.license.use` field before deploying the {{site.data.reuse.short_name}} instance. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 
-For `spec.license.license`, select one of the following license IDs based on the program that you purchased:
-- **L-YBXJ-ADJNSM** for [IBM Cloud Pak for Integration 2023.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-YBXJ-ADJNSM){:target="_blank"}
-- **L-PYRA-849GYQ** for [IBM Cloud Pak for Integration 2023.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-PYRA-849GYQ){:target="_blank"}
-- **L-RJON-CJR2RX** for [IBM Cloud Pak for Integration 2022.4.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CJR2RX){:target="_blank"}
-- **L-RJON-CJR2TC** for [IBM Cloud Pak for Integration 2022.4.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CJR2TC){:target="_blank"}
-- **L-RJON-CD3JKX** for [IBM Cloud Pak for Integration 2022.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CD3JKX){:target="_blank"}
-- **L-RJON-CD3JJU** for [IBM Cloud Pak for Integration 2022.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CD3JJU){:target="_blank"}
-- **L-RJON-C7QG3S** for [IBM Cloud Pak for Integration 2021.4.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C7QG3S){:target="_blank"}
-- **L-RJON-C7QFZX** for [IBM Cloud Pak for Integration 2021.4.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C7QFZX){:target="_blank"}
-- **L-RJON-C5CSNH** for [IBM Cloud Pak for Integration 2021.3.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C5CSNH){:target="_blank"}
-- **L-RJON-C5CSM2** for [IBM Cloud Pak for Integration 2021.3.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C5CSM2){:target="_blank"}
-- **L-RJON-BZFQU2** for [IBM Cloud Pak for Integration 2021.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-BZFQU2){:target="_blank"}
-- **L-RJON-BZFQSB** for [IBM Cloud Pak for Integration 2021.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-BZFQSB){:target="_blank"}
-
-For `spec.license.use`, select one of the following values depending on the purpose of your deployment:
-- **CloudPakForIntegrationNonProduction** for non-production deployments suitable for basic development and test activities.
-- **CloudPakForIntegrationProduction** for production deployments.
+![Accepting license]({{ 'images' | relative_url }}/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
 
 **Note:** If experimenting with {{site.data.reuse.short_name}} for the first time, the **Lightweight without security** sample is the smallest and simplest example that can be used to create an experimental deployment. For the smallest production setup, use the **Minimal production** sample configuration.
 
@@ -357,31 +323,13 @@ To deploy an {{site.data.reuse.short_name}} instance, use the following steps:
 
 To install an instance of {{site.data.reuse.short_name}} from the command-line, you must first prepare an `EventStreams` custom resource configuration in a YAML file.
 
-A number of sample configuration files are available in [GitHub](https://ibm.biz/ea-es-samples){:target="_blank"}, where you can select the GitHub tag for your {{site.data.reuse.short_name}} version to access the correct samples, and then go to `/openshift` to access the OpenShift samples.
-
-The sample configurations range from smaller deployments for non-production development or general experimentation to large scale clusters ready to handle a production workload.
+A number of [sample configuration files](http://ibm.biz/es-cr-samples){:target="_blank"} have been provided to base your deployment on (download and extract the resources for your {{site.data.reuse.short_name}} version, then go to `/cr-examples/eventstreams` to access the samples). The sample configurations range from smaller deployments for non-production development or general experimentation to large scale clusters ready to handle a production workload.
 
 More information about these samples is available in the [planning](../planning/#sample-deployments) section. You can base your deployment on the sample that most closely reflects your requirements and apply [customizations](../configuring) on top as required.
 
-**Important:** Ensure that the `spec.license.accept` field in the custom resource YAML is set to `true`, and that the [correct values are selected](../planning/#license-usage) for the `spec.license.license` and `spec.license.use` fields before deploying the {{site.data.reuse.short_name}} instance.
+**Important:** You must ensure that the `spec.license.accept` field in the configuration is set to `true` and that the correct value is selected for the `spec.license.use` field before deploying the {{site.data.reuse.short_name}} instance. Select **CloudPakForIntegrationNonProduction** for development and test deployments not intended for production use, and select **CloudPakForIntegrationProduction** for production deployments. See the [licensing](../planning/#licensing) section for more details about selecting the correct value.
 
-For `spec.license.license`, select one of the following license IDs based on the program that you purchased:
-- **L-YBXJ-ADJNSM** for [IBM Cloud Pak for Integration 2023.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-YBXJ-ADJNSM){:target="_blank"}
-- **L-PYRA-849GYQ** for [IBM Cloud Pak for Integration 2023.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-PYRA-849GYQ){:target="_blank"}
-- **L-RJON-CJR2RX** for [IBM Cloud Pak for Integration 2022.4.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CJR2RX){:target="_blank"}
-- **L-RJON-CJR2TC** for [IBM Cloud Pak for Integration 2022.4.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CJR2TC){:target="_blank"}
-- **L-RJON-CD3JKX** for [IBM Cloud Pak for Integration 2022.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CD3JKX){:target="_blank"}
-- **L-RJON-CD3JJU** for [IBM Cloud Pak for Integration 2022.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-CD3JJU){:target="_blank"}
-- **L-RJON-C7QG3S** for [IBM Cloud Pak for Integration 2021.4.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C7QG3S){:target="_blank"}
-- **L-RJON-C7QFZX** for [IBM Cloud Pak for Integration 2021.4.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C7QFZX){:target="_blank"}
-- **L-RJON-C5CSNH** for [IBM Cloud Pak for Integration 2021.3.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C5CSNH){:target="_blank"}
-- **L-RJON-C5CSM2** for [IBM Cloud Pak for Integration 2021.3.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-C5CSM2){:target="_blank"}
-- **L-RJON-BZFQU2** for [IBM Cloud Pak for Integration 2021.2.1](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-BZFQU2){:target="_blank"}
-- **L-RJON-BZFQSB** for [IBM Cloud Pak for Integration 2021.2.1 Reserved or limited](https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-RJON-BZFQSB){:target="_blank"}
-
-For `spec.license.use`, select one of the following values depending on the purpose of your deployment:
-- **CloudPakForIntegrationNonProduction** for non-production deployments suitable for basic development and test activities.
-- **CloudPakForIntegrationProduction** for production deployments.
+![Accepting license]({{ 'images' | relative_url }}/license_accept_10.2.png "Screen capture showing how to set the license accept field to true"){:height="50%" width="50%"}
 
 **Note:** If experimenting with {{site.data.reuse.short_name}} for the first time, the **Lightweight without security** sample is the smallest and simplest example that can be used to create an experimental deployment. For the smallest production setup, use the **Minimal production** sample configuration.
 

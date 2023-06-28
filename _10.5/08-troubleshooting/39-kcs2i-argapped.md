@@ -3,6 +3,7 @@ title: "KafkaConnectS2I build fails in an air-gapped installation"
 excerpt: "KafkaConnectS2I build fails in an air-gapped installation."
 categories: troubleshooting
 slug: kcs2i-airgapped
+layout: redirects
 toc: true
 ---
 

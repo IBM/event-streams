@@ -3,6 +3,7 @@ title: "Unable to connect to Kafka cluster"
 excerpt: "Error is displayed when trying to connect to your Kafka cluster."
 categories: troubleshooting
 slug: kafka-connection-issue
+layout: redirects
 toc: true
 ---
 

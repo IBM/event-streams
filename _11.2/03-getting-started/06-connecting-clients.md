@@ -3,6 +3,7 @@ title: "Connecting clients"
 excerpt: "Find out how to discover connection details to connect your client applications to Event Streams."
 categories: getting-started
 slug: connecting
+layout: redirects
 toc: true
 ---
 
@@ -39,6 +40,8 @@ Use one of the following methods to obtain the bootstrap address for your connec
 **Note:** You can only use the {{site.data.reuse.short_name}} CLI to retrieve the address if your {{site.data.reuse.short_name}} instance has at least one external listener [configured](../../installing/configuring) in `spec.strimziOverrides.kafka.listeners`.
 
 1. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
+   
+   {{site.data.reuse.openshift_only_note}}
 
 2. {{site.data.reuse.es_cli_init_111}}
    Make note of the **Event Streams bootstrap address** value. This is the Kafka bootstrap address that your application will use.
@@ -91,13 +94,15 @@ To extract the password for the certificate to a `ca.password` file, run the fol
 
 1. [Install the {{site.data.reuse.short_name}} CLI plugin](../../installing/post-installation/#installing-the-event-streams-command-line-interface) if not already installed.
 
+   {{site.data.reuse.openshift_only_note}}
+
 2. {{site.data.reuse.es_cli_init_111}}
 3. Use the `certificates` command to download the cluster's public certificate in the required format:\\
-   `kubectl es certificates --format p12`\\
+   `cloudctl es certificates --format p12`\\
    The truststore password will be displayed in the output for the command. The following example has a truststore password of `mypassword`:
 
    ```
-   $ kubectl es certificates --format p12
+   $ cloudctl es certificates --format p12
 
    Trustore password is mypassword
    Certificate successfully written to /es-cert.p12.
@@ -118,6 +123,22 @@ To extract the password for the certificate to a `ca.password` file, run the fol
 8. In the **Secret Overview** panel scroll down to the **Data** section. Then, click the copy button to transfer the `ca.p12` certificate to the clipboard. The password can be found under `ca.password`.
 
 **Note:** For a `PEM` certificate, click the copy button for `ca.crt` instead.
+
+### Obtaining the server-side public certificate from the {{site.data.reuse.openshift_short}} CLI
+
+- To extract the server-side public certificate to a `ca.p12` file, run the following command:
+
+   `oc extract secret/<instance-name>-cluster-ca-cert --keys=ca.p12`
+
+   Where `<instance-name>` is the name of your {{site.data.reuse.short_name}} instance.
+
+- To extract the password for the certificate to a `ca.password` file, run the following command:
+
+   `oc extract secret/<instance-name>-cluster-ca-cert --keys=ca.password`
+
+**Note:** If a `PEM` certificate is required, run the following command to extract the certificate to a `ca.crt` file:
+
+   `oc extract secret/<instance-name>-cluster-ca-cert --keys=ca.crt`
 
 ### Generating or Retrieving Client Credentials
 

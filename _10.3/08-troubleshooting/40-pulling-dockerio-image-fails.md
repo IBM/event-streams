@@ -3,6 +3,7 @@ title: "Pulling images for Event Streams 10.3.0 fails"
 excerpt: "Event Streams 10.3.0 installation fails: re-direct to pull images from to icr.io"
 categories: troubleshooting
 slug: dockerio-image-pull-fails
+layout: redirects
 toc: true
 ---
 

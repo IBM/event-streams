@@ -3,6 +3,7 @@ title: "Creating and testing message loads"
 excerpt: "Use the producer application as a workload generator to test message loads."
 categories: getting-started
 slug: testing-loads
+layout: redirects
 toc: true
 ---
 

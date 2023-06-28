@@ -4,6 +4,7 @@ title: "Running the MQ source connector"
 excerpt: "Running MQ source connector"
 categories: connecting/mq
 slug: source
+layout: redirects
 toc: true
 ---
 

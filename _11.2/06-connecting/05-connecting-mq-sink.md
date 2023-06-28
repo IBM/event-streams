@@ -4,6 +4,7 @@ title: "Running the MQ sink connector"
 excerpt: "Running MQ sink connector"
 categories: connecting/mq
 slug: sink
+layout: redirects
 toc: true
 ---
 
@@ -145,13 +146,14 @@ Use the {{site.data.reuse.short_name}} UI to generate and download the `KafkaCon
 
 Use the {{site.data.reuse.short_name}} CLI to generate and download the `KafkaConnector` custom resource YAML file for your IBM MQ sink connector. You can also use the CLI to generate a JSON file for distributed mode.
 
-1. {{site.data.reuse.es_cli_init_111}}
+{{site.data.reuse.openshift_only_note}}
+1. {{site.data.reuse.cp_cli_login}}
 2. Run the following command to initialize the {{site.data.reuse.short_name}} CLI on the cluster:\\
-   `kubectl es init`
+   `cloudctl es init`
 3. Run the `connector-config-mq-sink` command to generate the configuration file for the `MQ Sink` connector.\\
    For example, to generate a configuration file for an instance of `MQ` with the following information: a queue manager called `QM1`, with a connection point of `localhost(1414)`, a channel name of `MYSVRCONN`, a queue of `MYQSINK` and connecting to the topics `TSINK`, run the following command:
    ```
-   kubectl es connector-config-mq-sink --mq-queue-manager="QM1" --mq-connection-name-list="localhost(1414)" --mq-channel="MYSVRCONN" --mq-queue="MYQSINK" --topics="TSINK" --file="mq-sink" --format yaml
+   cloudctl es connector-config-mq-sink --mq-queue-manager="QM1" --mq-connection-name-list="localhost(1414)" --mq-channel="MYSVRCONN" --mq-queue="MYQSINK" --topics="TSINK" --file="mq-sink" --format yaml
    ```
    **Note**: Omitting the `--format yaml` flag will generate a `mq-sink.properties` file which can be used for standalone mode. Specifying `--format json` will generate a `mq-sink.json` file which can be used for distributed mode outside {{site.data.reuse.openshift_short}}.
 4. Change the values of `mq.user.name` and `mq.password` to the username and password that you used to configure your instance of MQ. Also set the label `eventstreams.ibm.com/cluster` to the name of your Kafka Connect instance.
@@ -184,7 +186,7 @@ spec:
     mq.message.builder: com.ibm.eventstreams.connect.mqsink.builders.DefaultMessageBuilder
 ```
 
-A list of all the possible flags can be found by running the command `kubectl es connector-config-mq-sink --help`. Alternatively, See the [sample properties file](https://github.com/ibm-messaging/kafka-connect-mq-sink/blob/master/config/mq-sink.properties){:target="_blank"} for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-sink#readme){:target="_blank"} for all available configuration options.
+A list of all the possible flags can be found by running the command `cloudctl es connector-config-mq-sink --help`. Alternatively, See the [sample properties file](https://github.com/ibm-messaging/kafka-connect-mq-sink/blob/master/config/mq-sink.properties){:target="_blank"} for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-sink#readme){:target="_blank"} for all available configuration options.
 
 ## Downloading the MQ Sink connector
 

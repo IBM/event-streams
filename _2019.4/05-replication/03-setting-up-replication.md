@@ -3,6 +3,7 @@ title: "Setting up geo-replication"
 excerpt: "Set up geo-replication for your clusters."
 categories: georeplication
 slug: setting-up
+layout: redirects
 toc: true
 ---
 

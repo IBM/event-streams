@@ -4,6 +4,7 @@ layout: splash
 permalink: /:collection/
 mastheadNavItem: Documentation
 collection: 10.4
+layout: redirects
 quickLinks:
   - link:
     - title: Introduction

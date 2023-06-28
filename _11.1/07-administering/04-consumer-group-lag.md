@@ -3,6 +3,7 @@ title: "Monitoring Kafka consumer group lag"
 excerpt: "Understand the health of your Kafka consumer clients through monitoring heuristics such as lag."
 categories: administering
 slug: consumer-lag
+layout: redirects
 toc: true
 ---
 

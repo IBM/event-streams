@@ -3,6 +3,7 @@ title: "Renewing certificates"
 excerpt: "Learn about how to renew the certificates and keys in an existing Event Streams cluster."
 categories: security
 slug: renewing-certificates
+layout: redirects
 toc: true
 ---
 
@@ -17,7 +18,7 @@ toc: true
 
 ## Renewing auto-generated self-signed CA certificates for existing installations
 
-By default, {{site.data.reuse.short_name}} uses self-signed CA certificates. These are automatically renewed when the default `renewalDays` (default is 60 days) and `validityDays` (default is 90 days) limits are met.
+By default, {{site.data.reuse.short_name}} uses self-signed CA certificates. These are automatically renewed when the default `renewalDays` (default is 30 days) and `validityDays` (default is 365 days) limits are met.
 
 To set exactly when certificates are renewed, you can configure the `renewalDays` and `validityDays` values under the `spec.strimziOverrides.clusterCa` and `spec.strimziOverrides.clientsCa` properties. Validity periods are expressed as a number of days after certificate generation. For more information, see [Certificate renewal and validity periods](https://strimzi.io/docs/operators/latest/deploying.html#con-certificate-renewal-str){:target="_blank"}.
 

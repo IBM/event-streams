@@ -3,6 +3,7 @@ title: "Accessibility"
 excerpt: "Accessibility features for IBM Event Streams."
 categories: about
 slug: accessibility
+layout: redirects
 toc: true
 ---
 Accessibility features assist users who have a disability, such as restricted mobility or limited vision, to use information technology content successfully.

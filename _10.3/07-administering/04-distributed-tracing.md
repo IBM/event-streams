@@ -3,6 +3,7 @@ title: "Monitoring applications with distributed tracing"
 excerpt: "Use the built-in tracing mechanism to monitor the flow of events, find performance issues, and pinpoint problems with applications using Event Streams."
 categories: administering
 slug: tracing
+layout: redirects
 toc: true
 ---
 

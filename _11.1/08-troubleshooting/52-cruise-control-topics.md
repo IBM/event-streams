@@ -3,6 +3,7 @@ title: "KafkaRebalance custom resource remains in PendingProposal state"
 excerpt: "KafkaRebalance custom resource remains in PendingProposal state due to incorrect Cruise Control topic configuration."
 categories: troubleshooting
 slug: kafkarebalance-pendingproposal
+layout: redirects
 toc: true
 ---
 

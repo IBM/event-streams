@@ -4,6 +4,7 @@ excerpt: "A consumer is an application that consumes streams of messages from
 Kafka topics."
 categories: about
 slug: consuming-messages
+layout: redirects
 toc: true
 ---
 

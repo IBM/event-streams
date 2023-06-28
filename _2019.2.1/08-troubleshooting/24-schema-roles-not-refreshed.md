@@ -3,6 +3,7 @@ title: "Cannot add schemas when using IBM Cloud Private 3.1.2"
 excerpt: "Cannot add schemas after a successful upgrade or installation."
 categories: troubleshooting
 slug: cannot-add-schemas-icp312
+layout: redirects
 toc: true
 ---
 

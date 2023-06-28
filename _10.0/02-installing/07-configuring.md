@@ -3,6 +3,7 @@ title: "Configuring"
 excerpt: "Configure your IBM Event Streams installation."
 categories: installing
 slug: configuring
+layout: redirects
 toc: true
 ---
 

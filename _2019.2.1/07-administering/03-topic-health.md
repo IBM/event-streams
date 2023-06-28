@@ -3,6 +3,7 @@ title: "Monitoring topic health"
 excerpt: "Understand the health of your topics at a glance."
 categories: administering
 slug: topic-health
+layout: redirects
 toc: false
 ---
 

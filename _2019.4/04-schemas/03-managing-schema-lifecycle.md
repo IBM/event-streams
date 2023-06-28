@@ -3,6 +3,7 @@ title: "Managing schema lifecycle"
 excerpt: "Understand how to manage the lifecycle of schemas."
 categories: schemas
 slug: manage-lifecycle
+layout: redirects
 toc: true
 ---
 

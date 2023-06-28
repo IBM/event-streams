@@ -3,6 +3,7 @@ title: "Performance and capacity planning"
 excerpt: "Consider the following when planning for the performance and capacity requirements of your installation."
 categories: installing
 slug: capacity-planning
+layout: redirects
 toc: true
 ---
 

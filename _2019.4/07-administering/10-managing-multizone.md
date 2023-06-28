@@ -3,6 +3,7 @@ title: "Managing a multizone setup"
 excerpt: "Find out more about managing multizone clusters, including what to do in the event of a failure."
 categories: administering
 slug: managing-multizone
+layout: redirects
 toc: true
 ---
 

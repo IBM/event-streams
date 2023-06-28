@@ -3,6 +3,7 @@ title: "Setting up geo-replication"
 excerpt: "Set up geo-replication for your clusters."
 categories: georeplication
 slug: setting-up
+layout: redirects
 toc: true
 ---
 
@@ -45,15 +46,17 @@ Alternatively, you can also use the following steps:
 
 ### Using the CLI
 
-1. Go to your destination cluster. {{site.data.reuse.cncf_cli_login}}
-2. {{site.data.reuse.es_cli_init_111}}
+{{site.data.reuse.openshift_only_note}}
+
+1. Go to your destination cluster. {{site.data.reuse.cp_cli_login}}
+2. {{site.data.reuse.es_cli_init}}
 3. Run the following command to display the connection details for your destination cluster:\\
-   `kubectl es geo-cluster-connect`\\
+   `cloudctl es geo-cluster-connect`\\
     The command returns a base64 encoded string consisting of the API URL and the security credentials required for creating a destination cluster that should be used to configure geo-replication using the CLI.  If the connection details are to be used to configure geo-replication using the UI, add the `--json` option to return a JSON-formatted string.
-4. Go to your origin cluster. {{site.data.reuse.cncf_cli_login}}
-5. {{site.data.reuse.es_cli_init_111}}
+4. Go to your origin cluster. {{site.data.reuse.cp_cli_login}}
+5. {{site.data.reuse.es_cli_init}}
 6. Run the following command to add the cluster as a destination to where you can replicate your topics to:\\
-   `kubectl es geo-cluster-add  --cluster-connect <base64-encoded-string-from-step-3>`
+   `cloudctl es geo-cluster-add  --cluster-connect <base64-encoded-string-from-step-3>`
 
 
 ## Specifying what and where to replicate
@@ -79,14 +82,16 @@ For each topic that has geo-replication set up, a visual indicator is shown in t
 
 ### Using the CLI
 
+{{site.data.reuse.openshift_only_note}}
+
 To set up replication by using the CLI:
 
-1. Go to your origin cluster. {{site.data.reuse.cncf_cli_login}}
-2. {{site.data.reuse.es_cli_init_111}}
-3. Choose a destination cluster to replicate to by listing all available destination clusters, making the ID of the clusters available to select and copy: `kubectl es geo-clusters`
-4. Choose the topics you want to replicate by listing your topics, making their names available to select and copy: `kubectl es topics`
+1. Go to your origin cluster. {{site.data.reuse.cp_cli_login}}
+2. {{site.data.reuse.es_cli_init}}
+3. Choose a destination cluster to replicate to by listing all available destination clusters, making the ID of the clusters available to select and copy: `cloudctl es geo-clusters`
+4. Choose the topics you want to replicate by listing your topics, making their names available to select and copy: `cloudctl es topics`
 5. Specify the destination cluster to replicate to, and set the topics you want to replicate. Use the required destination cluster ID and topic names retrieved in the previous steps. List each topic you want to replicate by using a comma-separated list without spaces in between:\\
-   `kubectl es geo-replicator-create --destination <cluster-ID-from-step-3> --topics <comma-separated-list-of-topic-names-from-step-4>`\\
+   `cloudctl es geo-replicator-create --destination <cluster-ID-from-step-3> --topics <comma-separated-list-of-topic-names-from-step-4>`\\
    Geo-replication starts automatically when the geo-replicator for the selected topics is set up successfully.
 
 **Note:** A prefix of the origin cluster name will be added to the name of the new replicated topic that is created on the destination cluster, resulting in replicated topics named such as `<origin-cluster>.<topic-name>`.
@@ -118,7 +123,9 @@ It is not possible to override the value of these properties using MirrorMaker 2
 
 To query the current values set on the destination cluster:
 
-1. Go to your destination cluster. {{site.data.reuse.cncf_cli_login}}
-2. {{site.data.reuse.es_cli_init_111}}
-3. List the broker configuration by using `kubectl es broker 0`
+{{site.data.reuse.openshift_only_note}}
+
+1. Go to your destination cluster. {{site.data.reuse.cp_cli_login}}
+2. {{site.data.reuse.es_cli_init}}
+3. List the broker configuration by using `cloudctl es broker 0`
 4. Update the [broker configuration](../../installing/configuring/#applying-kafka-broker-configuration-settings) to set these properties to the values if required before configuring geo-replication.
