@@ -3,6 +3,7 @@ title: "Chart deployment fails with 'no ImagePolicies' error"
 excerpt: "Chart deployment fails because of a missing image policy."
 categories: troubleshooting
 slug: no-image-policy
+layout: redirects
 toc: true
 ---
 

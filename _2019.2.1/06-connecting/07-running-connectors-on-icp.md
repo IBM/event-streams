@@ -4,6 +4,7 @@ title: "Running connectors on IBM Cloud Private"
 excerpt: "Set up your Kafka Connect workers to run on IBM Cloud Private."
 categories: connecting
 slug: icp
+layout: redirects
 toc: true
 ---
 

@@ -4,6 +4,7 @@ title: "Running the MQ source connector"
 excerpt: "Running MQ source connector"
 categories: connecting/mq
 slug: source
+layout: redirects
 toc: true
 ---
 
@@ -145,11 +146,13 @@ Use the {{site.data.reuse.short_name}} UI to generate and download the `KafkaCon
 
 Use the {{site.data.reuse.short_name}} CLI to generate and download the `KafkaConnector` custom resource YAML file for your IBM MQ source connector. You can also use the CLI to generate a JSON file for distributed mode.
 
+{{site.data.reuse.openshift_only_note}}
+
 1. {{site.data.reuse.es_cli_init_111}}
 2. Run the `connector-config-mq-source` command to generate the configuration file for the `MQ Source` connector.\\
    For example, to generate a configuration file for an instance of `MQ` with the following information: a queue manager called `QM1`, with a connection point of `localhost(1414)`, a channel name of `MYSVRCONN`, a queue of `MYQSOURCE` and connecting to the topic `TSOURCE`, run the following command:
    ```
-   kubectl es connector-config-mq-source --mq-queue-manager="QM1" --mq-connection-name-list="localhost(1414)" --mq-channel="MYSVRCONN" --mq-queue="MYQSOURCE" --topic="TSOURCE" --file="mq-source" --format yaml
+   cloudctl es connector-config-mq-source --mq-queue-manager="QM1" --mq-connection-name-list="localhost(1414)" --mq-channel="MYSVRCONN" --mq-queue="MYQSOURCE" --topic="TSOURCE" --file="mq-source" --format yaml
    ```
    **Note**: Omitting the `--format yaml` flag will generate a `mq-source.properties` file which can be used for standalone mode. Specifying `--format json` will generate a `mq-source.json` file which can be used for distributed mode outside the Kubernetes platform.
 
@@ -183,7 +186,7 @@ spec:
     mq.record.builder: com.ibm.eventstreams.connect.mqsource.builders.DefaultRecordBuilder
 ```
 
-A list of all the possible flags can be found by running the command `kubectl es connector-config-mq-source --help`. Alternatively, See the [sample properties file](https://github.com/ibm-messaging/kafka-connect-mq-source/blob/master/config/mq-source.properties){:target="_blank"} for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source#readme){:target="_blank"} for all available configuration options.
+A list of all the possible flags can be found by running the command `cloudctl es connector-config-mq-source --help`. Alternatively, See the [sample properties file](https://github.com/ibm-messaging/kafka-connect-mq-source/blob/master/config/mq-source.properties){:target="_blank"} for a full list of properties you can configure, and also see the [GitHub README](https://github.com/ibm-messaging/kafka-connect-mq-source#readme){:target="_blank"} for all available configuration options.
 
 ## Downloading the MQ Source connector
 

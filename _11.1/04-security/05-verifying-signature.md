@@ -3,6 +3,7 @@ title: "Verifying container image signatures"
 excerpt: "Verify your CISO image signatures."
 categories: security
 slug: verifying-signature
+layout: redirects
 toc: true
 ---
 

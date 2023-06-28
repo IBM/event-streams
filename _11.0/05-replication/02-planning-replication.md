@@ -3,6 +3,7 @@ title: "Planning for geo-replication"
 excerpt: "Plan geo-replication for your clusters."
 categories: georeplication
 slug: planning
+layout: redirects
 toc: true
 ---
 

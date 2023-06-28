@@ -3,6 +3,7 @@ title: "Creating and adding schemas"
 excerpt: "Learn how to create schemas and add them to the schema registry."
 categories: schemas
 slug: creating
+layout: redirects
 toc: true
 ---
 

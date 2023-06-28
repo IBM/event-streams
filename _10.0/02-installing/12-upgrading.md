@@ -3,6 +3,7 @@ title: "Upgrading and migrating"
 excerpt: "Upgrade your installation to the latest version."
 categories: installing
 slug: upgrading
+layout: redirects
 toc: true
 ---
 

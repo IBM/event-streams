@@ -3,6 +3,7 @@ title: "Encrypting your data"
 excerpt: "Encrypt your data to improve security."
 categories: security
 slug: encrypting-data
+layout: redirects
 toc: false
 ---
 

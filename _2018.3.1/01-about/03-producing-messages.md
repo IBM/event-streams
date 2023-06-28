@@ -4,6 +4,7 @@ excerpt: "A producer is an application that publishes streams of messages to Kaf
 topics."
 categories: about
 slug: producing-messages
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Apicurio authentication errors due to User Operator watchedNamespace"
 excerpt: "Apicurio authentication errors due to User Operator watchedNamespace being set."
 categories: troubleshooting
 slug: watched-namespace
+layout: redirects
 toc: true
 ---
 

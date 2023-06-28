@@ -1,9 +1,10 @@
 ---
 title: "Home"
-layout: splash
+# layout: splash
 permalink: /:collection/
 mastheadNavItem: Documentation
 collection: 2018.3.1
+layout: redirects
 quickLinks:
   - link:
     - title: Introduction

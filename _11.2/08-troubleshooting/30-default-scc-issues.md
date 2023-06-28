@@ -3,6 +3,7 @@ title: "Event Streams not installing due to Security Context Constraint (SCC) is
 excerpt: "When the default Security Context Constraint (SCC) is updated by user or another operator, Event Streams does not install"
 categories: troubleshooting
 slug: default-scc-issues
+layout: redirects
 toc: true
 ---
 
@@ -19,19 +20,12 @@ This could result in symptoms such as:
  pods "eventstreams-cluster-operator-55d6f4cdf7-" is forbidden: unable to validate against any security context constraint: [spec.volumes[0]: Invalid value: "secret": secret volumes are not allowed to be used spec.volumes[1]: Invalid value: "secret": secret volumes are not allowed to be used]
  ```
 
-- The installation of {{site.data.reuse.short_name}} instance is unsuccessful and the instance reports a `Failed` [status](../../installing/post-installation/).
+- Creating an instance of {{site.data.reuse.short_name}} is pending and eventually times out.
 
-    - The `conditions` field under status contains the following error message:
-    ```
-    Exceeded timeout of 300000ms while waiting for Pods resource
-    light-insecure-zookeeper-0 in namespace es-1 to be ready
-    ```
-
-    - The status of the `<name-of-the-es-instance>-zookeeper` StrimziPodSet resource contains the following error message under the `conditions` field:
-    ```
-    pods "light-insecure-zookeeper-0" is forbidden: unable to validate against any security context constraint: [provider "anyuid": 
-    Forbidden: not usable by user or serviceaccount, spec.volumes[3]: Invalid value: "secret": secret volumes are not allowed to be used,
-    ```       
+    - Navigating to the **Events** tab for the specific instance stateful set under **Workloads > Stateful Sets** displays a message similar to the following example:
+```
+create Pod quickstart-zookeeper-0 in StatefulSet quickstart-zookeeper failed error: pods "quickstart-zookeeper-0" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.readOnlyRootFilesystem: Invalid value: false: ReadOnlyRootFilesystem must be set to true]
+```
 
 - On a running instance of {{site.data.reuse.short_name}}, a pod that has bounced never comes back up.
 
@@ -42,13 +36,13 @@ is forbidden: unable to validate against any security context constraint: [spec.
 
 ## Causes
 
-{{site.data.reuse.short_name}} has been tested with the default `restricted-v2` Security Context Constraint (SCC) provided by the {{site.data.reuse.openshift_short}}.
+{{site.data.reuse.short_name}} has been tested with the default `restricted` Security Context Constraint (SCC) provided by the {{site.data.reuse.openshift_short}}.
 
 If a user or any other operator applies a custom SCC that removes permissions required by {{site.data.reuse.short_name}}, then this will cause issues.
 
 ## Resolving the problem
 
-Apply the custom Security Context Constraint (SCC) provided by [{{site.data.reuse.short_name}}](https://github.com/IBM/ibm-event-automation/tree/master/event-streams){:target="_blank"} to enable permissions required by the product.
+Apply the custom Security Context Constraint (SCC) provided by [{{site.data.reuse.short_name}}](https://github.com/ibm-messaging/event-streams-operator-resources/){:target="_blank"} to enable permissions required by the product.
 
 To do this, edit the `eventstreams-scc.yaml` file to add your namespace and apply it using `oc` tool as follows:
 

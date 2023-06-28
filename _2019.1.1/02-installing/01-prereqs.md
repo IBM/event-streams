@@ -3,6 +3,7 @@ title: "Pre-requisites"
 excerpt: "Pre-requisites for installing IBM Event Streams."
 categories: installing
 slug: prerequisites
+layout: redirects
 toc: true
 ---
 

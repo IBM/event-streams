@@ -3,6 +3,7 @@ title: "The UI cannot load data"
 excerpt: "test"
 categories: troubleshooting
 slug: problem-with-piping
+layout: redirects
 toc: true
 ---
 

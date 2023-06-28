@@ -3,6 +3,7 @@ title: "Switching clusters"
 excerpt: "Using geo-replication to recover when clusters become unavailable."
 categories: georeplication
 slug: failover
+layout: redirects
 toc: true
 ---
 

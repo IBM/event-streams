@@ -3,6 +3,7 @@ title: "Troubleshooting overview"
 excerpt: "To help troubleshoot issues with your installation, see the troubleshooting topics in this section."
 categories: troubleshooting
 slug: intro
+layout: redirects
 toc: false
 ---
 

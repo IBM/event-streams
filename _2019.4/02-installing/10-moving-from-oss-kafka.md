@@ -3,6 +3,7 @@ title: "Migrating from open-source Apache Kafka to Event Streams"
 excerpt: "Learn about the steps required to move from an open-source Kafka implementation to using Event Streams."
 categories: installing
 slug: moving-from-oss-kafka
+layout: redirects
 toc: true
 ---
 

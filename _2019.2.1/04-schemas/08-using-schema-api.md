@@ -3,6 +3,7 @@ title: "Using the schema API"
 excerpt: "Using the schema API."
 categories: schemas
 slug: schema-api
+layout: redirects
 toc: true
 ---
 

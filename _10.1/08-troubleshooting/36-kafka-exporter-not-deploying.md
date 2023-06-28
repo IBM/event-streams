@@ -3,6 +3,7 @@ title: "Kafka exporter is not deployed"
 excerpt: "When enabling the Kafka exporter the resource is not deployed"
 categories: troubleshooting
 slug: kafka-exporter-not-deployed
+layout: redirects
 toc: true
 ---
 

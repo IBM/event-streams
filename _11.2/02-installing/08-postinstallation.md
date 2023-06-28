@@ -3,6 +3,7 @@ title: "Post-installation tasks"
 excerpt: "Post-installation tasks after successfully installing IBM Event Streams."
 categories: installing
 slug: post-installation
+layout: redirects
 toc: true
 ---
 
@@ -42,12 +43,17 @@ development      Ready
 
 **Note:** It might take several minutes for all the resources to be created and the `EventStreams` instance to become ready.
 
+### Check the status of the EventStreams instance through the {{site.data.reuse.openshift_short}} web console
+
+1. {{site.data.reuse.openshift_ui_login}}
+2. {{site.data.reuse.task_openshift_navigate_installed_operators}}
+3. {{site.data.reuse.task_openshift_select_operator}}
+4. {{site.data.reuse.task_openshift_select_instance}}
+5. The **Phase** field will display the current state of the EventStreams custom resource. When the {{site.data.reuse.short_name}} instance is ready, the phase will display `Ready`, meaning the deployment has completed
+
 ## Installing the {{site.data.reuse.short_name}} command-line interface
 
-The {{site.data.reuse.short_name}} CLI is a plugin for the `kubectl` and `cloudctl` CLI. Use the {{site.data.reuse.short_name}} CLI to manage your {{site.data.reuse.short_name}} instance from the command line.
-
-**Note:** For completing tasks by using the {{site.data.reuse.short_name}} CLI, you can use `cloudctl es` commands if your deployment is on the {{site.data.reuse.openshift_short}} with {{site.data.reuse.fs}}. This documentation set includes instructions that use the `kubectl` command, except for cases where the task is specific to OpenShift with {{site.data.reuse.fs}}.
-
+The {{site.data.reuse.short_name}} CLI is a plugin for the `cloudctl` CLI. Use the {{site.data.reuse.short_name}} CLI to manage your {{site.data.reuse.short_name}} instance from the command line.
 Examples of management activities include:
 
 - Creating, deleting, and updating Kafka topics.
@@ -56,28 +62,23 @@ Examples of management activities include:
 - Managing geo-replication.
 - Displaying the cluster configuration and credentials.
 
-{{site.data.reuse.es_cli_kafkauser_note}}
+{{site.data.reuse.openshift_only_note}}
 
-### IBM Cloud Pak CLI plugin (`cloudctl es`)
+To install the {{site.data.reuse.short_name}} CLI:
 
-For {{site.data.reuse.openshift_short}} with {{site.data.reuse.icpfs}}, install the {{site.data.reuse.short_name}} CLI with the IBM Cloud Pak CLI (`cloudctl`) as follows:
-
-1. Ensure you have the IBM Cloud Pak CLI (`cloudctl`) installed either by [retrieving the binary from your cluster](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/cloudctl/3.x.x/install_cli.html){:target="_blank"} or [downloading the binary from a release on the GitHub project](https://github.com/IBM/cloud-pak-cli/releases){:target="_blank"}.
-
+1. Ensure you have the IBM Cloud Pak CLI (`cloudctl`) installed either by [retrieving the binary from your cluster](https://www.ibm.com/support/knowledgecenter/en/SSHKN6/cloudctl/3.x.x/install_cli.html){:target="_blank"} or [downloading the binary from a release on the GitHub project](https://github.com/IBM/cloud-pak-cli/releases){:target="_blank"}.\\
    **Note:** Ensure you download the correct binary for your architecture and operating system.
 2. [Log in](../../getting-started/logging-in/) to your {{site.data.reuse.short_name}} instance as an administrator.
 3. Click **Toolbox** in the primary navigation.
 4. Go to the **{{site.data.reuse.long_name}} command-line interface** section and click **Find out more**.
 5. Download the {{site.data.reuse.short_name}} CLI plug-in for your system by using the appropriate link.
 6. Install the plugin using the following command:
-
    ```shell
    cloudctl plugin install <path-to-plugin>
    ```
 
 To start the {{site.data.reuse.short_name}} CLI and check all available command options in the CLI, use the `cloudctl es` command.
 For an exhaustive list of commands, you can run:
-
 ```shell
 cloudctl es --help
 ```
@@ -85,35 +86,6 @@ cloudctl es --help
 To get help for a specific command, run:
 ```shell
 cloudctl es <command> --help
-```
-
-
-### Kubernetes plugin (`kubectl es`)
-
-For OpenShift and other Kubernetes platforms running without {{site.data.reuse.fs}}, install the {{site.data.reuse.short_name}} CLI with the Kubernetes command-line tool (`kubectl`) as follows:
-
-1. Ensure you have the Kubernetes command-line tool (`kubectl`) [installed](https://kubernetes.io/docs/tasks/tools/){:target="_blank"}.
-2. [Log in](../../getting-started/logging-in/) to your {{site.data.reuse.short_name}} instance as an administrator.
-3. Click **Toolbox** in the primary navigation.
-4. Go to the **{{site.data.reuse.long_name}} command-line interface** section and click **Find out more**.
-5. Download the {{site.data.reuse.short_name}} CLI plug-in for your system by using the appropriate link.
-6. Rename the plugin file to `kubectl-es` and move it into a directory on the user's PATH. For example, on Linux and MacOS, move and rename the plugin file by running the following command:
-
-   ```shell
-   sudo mv ./kubectl-es-plugin.bin /usr/local/bin/kubectl-es
-   ```
-
-For more information about `kubectl` plugins, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/){:target="_blank"}.
-
-To start the {{site.data.reuse.short_name}} CLI and check all available command options in the CLI, use the `kubectl es` command.
-For an exhaustive list of commands, you can run:
-```shell
-kubectl es --help
-```
-
-To get help for a specific command, run:
-```shell
-kubectl es <command> --help
 ```
 
 To run commands after installing, log in and initialize the CLI as described in [logging in](../../getting-started/logging-in/).

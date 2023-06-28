@@ -3,6 +3,7 @@ title: "Uninstalling"
 excerpt: "Uninstalling Event Streams."
 categories: installing
 slug: uninstalling
+layout: redirects
 toc: true
 ---
 

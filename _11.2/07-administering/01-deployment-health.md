@@ -3,6 +3,7 @@ title: "Monitoring deployment health"
 excerpt: "Understand the health of your deployment at a glance, and learn how to find information about problems."
 categories: administering
 slug: deployment-health
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Metrics do not display in operator Grafana dashboard"
 excerpt: "The Event Streams Operators Grafana dashboard does not display any information."
 categories: troubleshooting
 slug: no-metrics-ui
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Clients using schemas fail with Apicurio 2.4.1 or later"
 excerpt: "Clients using schemas fail when Apicurio Registry is migrated from 2.3.1 to 2.4.1 or later"
 categories: troubleshooting
 slug: upgrade-apicurio
+layout: redirects
 toc: true
 ---
 

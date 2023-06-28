@@ -3,6 +3,7 @@ title: "Helm commands fail when running as Team Administrator"
 excerpt: "helm-cli-team-administrator"
 categories: troubleshooting
 slug: helm-cli-team-administrator
+layout: redirects
 toc: true
 ---
 

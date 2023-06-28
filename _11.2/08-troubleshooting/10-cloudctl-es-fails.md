@@ -1,14 +1,15 @@
 ---
-title: "Event Streams CLI commands produces 'FAILED' message"
-excerpt: "Event Streams CLI commands responds with FAILED error."
+title: "Command 'cloudctl es' produces 'FAILED' message"
+excerpt: "Cloudctl es command extension responds with FAILED error."
 categories: troubleshooting
 slug: cloudctl-es-fails
+layout: redirects
 toc: true
 ---
 
 ## Symptoms
 
-When running the `cloudctl es` or `kubectl es` command, the following error message is displayed:
+When running the `cloudctl es` command, the following error message is displayed:
 
 ```
 FAILED

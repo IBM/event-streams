@@ -3,6 +3,7 @@ title: "Event Streams installation reports failed status"
 excerpt: "During the first installation of foundational services, the installation for the Event Streams instance reports a failed status."
 categories: troubleshooting
 slug: failed-status-during-cs-install
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Setting non-Java applications to use schemas"
 excerpt: "Set up your non-Java applications to use schemas."
 categories: schemas
 slug: setting-nonjava-apps
+layout: redirects
 toc: true
 ---
 

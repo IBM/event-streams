@@ -3,6 +3,7 @@ title: "Network policies"
 excerpt: "Learn about the network connections allowed for Event Streams each pod."
 categories: security
 slug: network-policies
+layout: redirects
 toc: true
 ---
 

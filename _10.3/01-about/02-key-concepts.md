@@ -3,6 +3,7 @@ title: "Key concepts"
 excerpt: "Read about the key concepts of the Apache Kafka technology."
 categories: about
 slug: key-concepts
+layout: redirects
 toc: true
 ---
 

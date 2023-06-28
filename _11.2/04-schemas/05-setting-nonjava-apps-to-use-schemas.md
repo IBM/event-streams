@@ -3,6 +3,7 @@ title: "Setting non-Java applications to use schemas"
 excerpt: "Set up your non-Java applications to use schemas."
 categories: schemas
 slug: setting-nonjava-apps
+layout: redirects
 toc: true
 ---
 
@@ -34,14 +35,15 @@ For a consumer application:
 
 ### Using the CLI
 
+{{site.data.reuse.openshift_only_note}}
+
 1. {{site.data.reuse.es_cli_init_111}}
 2. Run the following command to list all the schemas in the schema registry:\\
-    `kubectl es schemas`
+    `cloudctl es schemas`
 3. Select your schema from the list and run the following command to list all the versions of the schema:\\
-    `kubectl es schema <schema-name>`
+    `cloudctl es schema <schema-name>`
 4. Select your version of the schema from the list and run the following command to retrieve the schema definition for the version and copy it into a new local file:\\
-    `kubectl es schema <schema-name> --version <schema-version-id> > <schema-definition-file>.avsc`
+    `cloudctl es schema <schema-name> --version <schema-version-id> > <schema-definition-file>.avsc`
 
 **Note:** `<schema-version-id>`is the integer ID that is displayed when listing schema versions using the following command:
-`kubectl es schema <schema-name>`.
-
+`cloudctl es schema <schema-name>`.

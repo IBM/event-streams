@@ -3,6 +3,7 @@ title: "Setting client quotas"
 excerpt: "Setting quotas"
 categories: administering
 slug: quotas
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Event Streams producer API"
 excerpt: "Use the Event Streams producer API to connect other systems to your Kafka cluster."
 categories: connecting
 slug: rest-api
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Using schemas with the REST producer API"
 excerpt: "You can use schemas with the Event Streams REST producer API."
 categories: schemas
 slug: using-with-rest-producer
+layout: redirects
 toc: false
 ---
 
@@ -30,7 +31,7 @@ Using TLS Mutual Authentication:
 - `<avro-encoded-message>` with your avro encoded message.
 
 The `es-cert.pem` certificate is downloaded by running the following command:\\
-`kubectl es certificates --format pem`
+`cloudctl es certificates --format pem`
 
 The `user.key` and `user.crt` files are downloaded in a .zip file by clicking **Generate credentials** in the **Producer endpoint and credentials** section of **Connect to this cluster** or **Connect to this topic**, selecting **Mutual TLS certificate**, following the instructions in the wizard and clicking **Download certificates**.
 

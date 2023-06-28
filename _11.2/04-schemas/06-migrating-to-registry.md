@@ -3,6 +3,7 @@ title: "Migrating existing applications to the Event Streams schema registry"
 excerpt: "Read about how you can migrate to using the Event Streams schema registry."
 categories: schemas
 slug: migrating
+layout: redirects
 toc: true
 ---
 
@@ -43,9 +44,11 @@ For example, if you are using the `RecordNameStrategy` as your subject name stra
 ...
 ```
 
-If you are using the {{site.data.reuse.short_name}} CLI, run the following command when adding the schema:
+If you are using the {{site.data.reuse.short_name}} CLI on the {{site.data.reuse.openshift_short}}, run the following command when adding the schema:
 
-`kubectl es schema-add --create --name org.example.Book --version 1.0.0 --file /path/to/Book.avsc`
+`cloudctl es schema-add --create --name org.example.Book --version 1.0.0 --file /path/to/Book.avsc`
+
+{{site.data.reuse.openshift_only_note}}
 
 ## Migrating a Kafka producer application
 
@@ -53,7 +56,7 @@ To migrate a Kafka producer application that uses the Confluent Platform schema 
 
 1. Configure your producer application to [secure the connection](../../getting-started/connecting/#securing-the-connection) between the producer and {{site.data.reuse.short_name}}.
 2. Retrieve the full URL for the {{site.data.reuse.short_name}} [API endpoint](../../connecting/rest-api/#prerequisites), including the host name and port number by using the following command:\\
-  `kubectl es init`
+  `cloudctl es init`
 3. Ensure you add the following schema properties to your Kafka producers:
 
    Property name        |  Property value
@@ -81,7 +84,7 @@ To migrate a Kafka consumer application that uses the Confluent Platform schema 
 
 1. Configure your consumer application to [secure the connection](../../getting-started/connecting/#securing-the-connection) between the consumer and {{site.data.reuse.short_name}}.
 2. Retrieve the full URL for the {{site.data.reuse.short_name}} [API endpoint](../../connecting/rest-api/#prerequisites), including the host name and port number by using the following command:\\
-  `kubectl es init`
+  `cloudctl es init`
 3. Ensure you add the following schema properties to your Kafka producers:
 
    Property name        |  Property value

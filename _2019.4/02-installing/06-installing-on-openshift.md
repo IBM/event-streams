@@ -3,6 +3,7 @@ title: "Installing on OpenShift"
 excerpt: "Installing IBM Event Streams on OpenShift."
 categories: installing
 slug: installing-openshift
+layout: redirects
 toc: true
 ---
 

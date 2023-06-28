@@ -3,6 +3,7 @@ title: "Optimizing Kafka cluster with Cruise Control"
 excerpt: "Use Cruise Control to manage your brokers and topic partitions."
 categories: administering
 slug: cruise-control
+layout: redirects
 toc: true
 ---
 

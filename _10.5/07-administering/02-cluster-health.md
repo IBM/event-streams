@@ -3,6 +3,7 @@ title: "Monitoring Kafka cluster health"
 excerpt: "Understand the health of your Kafka cluster at a glance."
 categories: administering
 slug: cluster-health
+layout: redirects
 toc: true
 ---
 

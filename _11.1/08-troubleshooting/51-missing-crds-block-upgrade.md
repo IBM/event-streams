@@ -3,6 +3,7 @@ title: "Upgrade to 11.1.5 stuck in pending state"
 excerpt: "Longstanding Event Streams instances might be blocked from upgrading to 11.1.5 due to missing CRDs"
 categories: troubleshooting
 slug: missing-crds-block-upgrade
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Upgrading and migrating"
 excerpt: "Upgrade your installation to the latest version."
 categories: installing
 slug: upgrading
+layout: redirects
 toc: true
 ---
 
@@ -14,13 +15,13 @@ Understand the upgrade paths available for Continuous Delivery (CD) releases and
 
 ### Upgrade paths for CD releases
 
-You can upgrade {{site.data.reuse.short_name}} to the latest 11.1.6 version directly from any 11.1.x or 11.0.x version by using operator version 3.1.6. If you have an earlier {{site.data.reuse.short_name}} version than 11.0.x, you must first upgrade it to [version 11.0.x]({{ '11.0' | relative_url }}/installing/upgrading/) before upgrading to 11.1.x.
+You can upgrade {{site.data.reuse.short_name}} to the latest 11.1.6 version directly from any 11.1.x or 11.0.x version by using operator version 3.1.6. If you have an earlier {{site.data.reuse.short_name}} version than 11.0.x, you must first upgrade it to [version 11.0.x](../../11.0/installing/upgrading/) before upgrading to 11.1.x.
 
 **Note:** If your operator upgrades are set to automatic, minor version upgrades are completed automatically. This means that the {{site.data.reuse.short_name}} operator is upgraded to 3.1.6 when it is available in the catalog, and your {{site.data.reuse.short_name}} instance is then also automatically upgraded, unless you [set a schedule for the upgrade](#scheduling-the-upgrade-of-an-instance) by pausing the reconciliation.
 
 ### Upgrade paths for EUS releases
 
-No direct upgrade from EUS to the latest version is supported. Upgrade to [CD version 11.0.x]({{ '11.0' | relative_url }}/installing/upgrading/) and then proceed to upgrade your {{site.data.reuse.short_name}} version to the latest by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.1.6).
+No direct upgrade from EUS to the latest version is supported. Upgrade to [CD version 11.0.x](../../11.0/installing/upgrading/) and then proceed to upgrade your {{site.data.reuse.short_name}} version to the latest by following the instructions on this page starting with the [prerequisites](#prerequisites) (operator version 3.1.6).
 
 ## Prerequisites
 

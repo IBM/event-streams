@@ -3,6 +3,7 @@ title: "Rollback fails"
 excerpt: "Rollback fails with error, and users are unable to login to the UI."
 categories: troubleshooting
 slug: rollback-fails
+layout: redirects
 toc: true
 ---
 

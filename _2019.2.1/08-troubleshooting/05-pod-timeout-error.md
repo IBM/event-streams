@@ -3,6 +3,7 @@ title: "ConsumerTimeoutException when pods available"
 excerpt: "Pods are available, but timeout error received."
 categories: troubleshooting
 slug: pod-timeout-error
+layout: redirects
 toc: true
 ---
 

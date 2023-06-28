@@ -3,6 +3,7 @@ title: "Capacity planning"
 excerpt: "Consider the following when planning the capacity requirements of your installation."
 categories: installing
 slug: capacity-planning
+layout: redirects
 toc: true
 ---
 

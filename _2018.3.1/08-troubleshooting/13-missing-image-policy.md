@@ -3,6 +3,7 @@ title: "Chart deployment fails with 'no matching repositories in the ImagePolici
 excerpt: "Chart deployment fails because one or more required repositories are missing from the deployed image policies."
 categories: troubleshooting
 slug: image-policy-missing-repository
+layout: redirects
 toc: true
 ---
 

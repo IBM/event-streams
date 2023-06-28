@@ -3,6 +3,7 @@ title: "The Messages page is blank"
 excerpt: "The Messages page in the Event Streams UI is blank for both real and simulated topics."
 categories: troubleshooting
 slug: messages-page-blank
+layout: redirects
 toc: true
 ---
 

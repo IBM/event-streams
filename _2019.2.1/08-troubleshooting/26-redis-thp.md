@@ -3,6 +3,7 @@ title: "Redis latency due to Transparent Huge Pages"
 excerpt: "Redis containers in the access controller and UI pods are suffering from latency due to Transparent Huge Pages being enabled in the Linux kernel."
 categories: troubleshooting
 slug: redis-latency-transparent-huge-pages
+layout: redirects
 toc: true
 ---
 

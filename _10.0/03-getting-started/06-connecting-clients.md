@@ -3,6 +3,7 @@ title: "Connecting clients"
 excerpt: "Find out how to discover connection details to connect your client applications to Event Streams."
 categories: getting-started
 slug: connecting
+layout: redirects
 toc: true
 ---
 

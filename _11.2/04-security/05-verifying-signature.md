@@ -3,6 +3,7 @@ title: "Verifying container image signatures"
 excerpt: "Verify your CISO image signatures."
 categories: security
 slug: verifying-signature
+layout: redirects
 toc: true
 ---
 
@@ -15,7 +16,7 @@ You can use the signature to verify that the images came from IBM when they are 
 - Ensure that the following command-line tools are installed on your computer. On Linux systems, these images can typically be installed by using the package manager.
 
   - [The OpenShift Container Platform CLI](https://docs.openshift.com/container-platform/4.12/cli_reference/openshift_cli/getting-started-cli.html){:target="_blank"}
-  - [The IBM Catalog Management Plug-in for IBM Cloud Paks (ibm-pak)](https://github.com/IBM/ibm-pak-plugin/releases/latest){:target="_blank"}
+  - [The IBM Cloud Pak CLI (`cloudctl`)](https://github.com/IBM/cloud-pak-cli){:target="_blank"}
   - [GNU Privacy Guard (GnuPG) version 2](https://gnupg.org/){:target="_blank"}
   - [Skopeo](https://github.com/containers/skopeo){:target="_blank"}
 
@@ -100,16 +101,16 @@ Download the Container Application Software for Enterprises (CASE) archive. This
 Complete the following steps to download the CASE archive:
 
 1. {{site.data.reuse.openshift_cli_login}}
-2. Configure the internal repository for downloading the CASE archive:
+2. Create a local directory to save the CASE archive.
 
     ```shell
-    oc ibm-pak config repo 'default' -r "https://github.com/IBM/cloud-pak/raw/master/repo/case/" --enable
+    mkdir /tmp/cases
     ```
 
 3. Run the following command to download, validate, and extract the CASE archive.
 
     ```shell
-    oc ibm-pak get ibm-eventstreams
+    cloudctl case save --case <path-to-case-archive> --outputdir /tmp/cases
     ```
 
     Where `<path-to-case-archive>` is the location of the CASE archive. If you are running the command from the current location, set the path to the current directory (`.`).
@@ -121,7 +122,6 @@ Complete the following steps to download the CASE archive:
     Retrieving CASE version ...
     - Success
     Validating the CASE ...
-    Validating the signature for the ibm-eventstreams CASE...
     - Success
     Creating inventory ...
     - Success
@@ -130,33 +130,17 @@ Complete the following steps to download the CASE archive:
     Resolving inventory items ...
     Parsing inventory items
     - Success
-    Download of CASE: ibm-eventstreams, version: 1.7.3 is complete
     ```
 
 4. Verify that the CASE archive and images `.csv` files have been generated for the {{site.data.reuse.short_name}}. For example, ensure you have the following files generated for the {{site.data.reuse.short_name}} CASE.
 
     ```shell
-   $ tree ~/.ibm-pak
-
-    ├── config
-    │   └── config.yaml
-    ├── data
-    │   ├── cases
-    │   │   └── ibm-eventstreams
-    │   │       └── 1.7.3
-    │   │           ├── caseDependencyMapping.csv
-    │   │           ├── charts
-    │   │           ├── ibm-eventstreams-1.7.3-airgap-metadata.yaml
-    │   │           ├── ibm-eventstreams-1.7.3-charts.csv
-    │   │           ├── ibm-eventstreams-1.7.3-images.csv
-    │   │           ├── ibm-eventstreams-1.7.3.tgz
-    │   │           └── resourceIndexes
-    │   │               └── ibm-eventstreams-resourcesIndex.yaml
-    │   └── mirror
-    └── logs
-        └── oc-ibm_pak.log
-
-    9 directories, 8 files
+    $ ls /tmp/cases/
+    total 328
+    drwxr-xr-x  2 user  staff      64  5 Jun 10:57 charts
+    -rw-r--r--  1 user  staff      32  5 Jun 10:57 ibm-eventstreams-1.1.2-charts.csv
+    -rw-r--r--  1 user  staff    4842  5 Jun 13:34 ibm-eventstreams-1.1.2-images.csv
+    -rw-r--r--  1 user  staff  155586  5 Jun 10:57 ibm-eventstreams-1.1.2.tgz
     ```
 
 ### Obtain the files

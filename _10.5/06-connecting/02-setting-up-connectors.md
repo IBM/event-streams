@@ -3,6 +3,7 @@ title: "Setting up and running connectors"
 excerpt: "Event Streams helps you set up a Kafka Connect environment, add connectors to it, and run the connectors to help integrate external systems."
 categories: connecting
 slug: setting-up-connectors
+layout: redirects
 toc: true
 ---
 

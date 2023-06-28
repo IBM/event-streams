@@ -3,6 +3,7 @@ title: "Creating a Kafka topic"
 excerpt: "Create a Kafka topic to learn more about using Event Streams"
 categories: getting-started
 slug: creating-topics
+layout: redirects
 toc: true
 ---
 

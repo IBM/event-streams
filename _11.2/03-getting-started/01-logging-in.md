@@ -3,6 +3,7 @@ title: "Logging in"
 excerpt: "Log in to your IBM Event Streams installation."
 categories: getting-started
 slug: logging-in
+layout: redirects
 toc: true
 ---
 
@@ -71,7 +72,9 @@ To retrieve the URL for your {{site.data.reuse.short_name}} UI, use the followin
 You can retrieve the URL for accessing the {{site.data.reuse.short_name}} CLI:
 
 - By using the {{site.data.reuse.openshift_short}} web console.
-- By using the Kubernetes command-line tool (`kubectl`).
+- By using the OpenShift command-line tool (`oc`).
+
+{{site.data.reuse.openshift_only_note}}
 
 ### Using the {{site.data.reuse.openshift_short}} web console
 
@@ -87,21 +90,18 @@ Use the OpenShift web console to retrieve the URL for your {{site.data.reuse.sho
 
    ![Project](../../images/find_cp_console_route.png "Screen capture showing how to select the CLI route")
 4. Enter the address on your login command in a terminal. For example:
-
    ```shell
    cloudctl login -a https://cp-console.apps.my-cluster.my-domain.com
    ```
-
 5. Use your credentials provided to you by your cluster administrator.
    A cluster administrator can manage access rights by following the instructions in [managing access](../../security/managing-access/#accessing-the-event-streams-ui-and-cli).
    Enter your username and password to access the {{site.data.reuse.short_name}} CLI.
 6. Initialize the {{site.data.reuse.short_name}} plugin by running the following command:
-
    ```shell
    cloudctl es init -n <namespace>
    ```
 
-### Using the Kubernetes command-line tool (`kubectl`)
+### Using the OpenShift command-line tool (`oc`)
 
 The process for initializing the {{site.data.reuse.short_name}} CLI is different depending on the [configured authentication type](../../installing/configuring/#configuring-ui-and-cli-security):
 
@@ -114,11 +114,11 @@ The process for initializing the {{site.data.reuse.short_name}} CLI is different
 
 When you have the authentication type set to IAM, retrieve the login URL for the {{site.data.reuse.short_name}} CLI, then log in and initialize the CLI as follows:
 
-1. {{site.data.reuse.cncf_cli_login}}
+1. {{site.data.reuse.openshift_cli_login}}
 2. Run the following command:
 
    ```shell
-   kubectl get routes -n ibm-common-services -l app.kubernetes.io/name=management-ingress
+   oc get routes -n ibm-common-services -l app.kubernetes.io/name=management-ingress
    ```
 
    The following is an example output, and you use the value from the **HOST/PORT** column for the **cp-console** entry to log in to your CLI in a terminal:
@@ -155,7 +155,7 @@ When you have the authentication type set to SCRAM, obtain the required credenti
 2. Using the credentials and information you obtained earlier, initialize the {{site.data.reuse.short_name}} plugin by running the following command:
 
    ```shell
-   kubectl es init --auth-type scram-sha-512
+   cloudctl es init --auth-type scram-sha-512
    ```
 
    **Note:** For the {{site.data.reuse.short_name}} CLI plugin to be set up, ensure you add `auth-type` as `scram-sha-512`. If `auth-type` is not present, the cluster will set up IAM as the authentication type by default. For more information, see [configuring UI and CLI security](../../installing/configuring/#configuring-ui-and-cli-security).
@@ -165,7 +165,7 @@ When you have the authentication type set to SCRAM, obtain the required credenti
    Alternatively, instead of waiting for the prompt, you can also run the command with all the credentials and endpoints as additional arguments in one command as follows:
 
    ```shell
-   kubectl es init --auth-type scram-sha-512 --username <USERNAME> --password <PASSWORD> --api-url <ADMIN_API_URL> --schema-reg-url <SCHEMA_REGISTRY_URL>
+   cloudctl es init --auth-type scram-sha-512 --username <USERNAME> --password <PASSWORD> --api-url <ADMIN_API_URL> --schema-reg-url <SCHEMA_REGISTRY_URL>
    ```
 
 ## Logging out

@@ -3,6 +3,7 @@ title: "Command 'cloudctl es' produces 'FAILED' message"
 excerpt: "Cloudctl es command extension responds with FAILED error."
 categories: troubleshooting
 slug: cloudctl-es-fails
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Introduction"
 excerpt: "IBM Event Streams is an event-streaming platform based on the open-source Apache Kafka® project."
 categories: about
 slug: overview
+layout: redirects
 toc: false
 ---
 

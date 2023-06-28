@@ -3,6 +3,7 @@ title: "Stopping and starting Event Streams"
 excerpt: "Find out how to gracefully shut down your Event Streams cluster, for example, in preparation for maintenance."
 categories: administering
 slug: stopping-starting
+layout: redirects
 toc: true
 ---
 

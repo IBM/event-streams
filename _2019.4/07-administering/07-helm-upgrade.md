@@ -3,6 +3,7 @@ title: "Running Helm upgrade commands"
 excerpt: "To run helm upgrade commands, you must have a copy of the original Helm charts file that you used to install IBM Event Streams."
 categories: administering
 slug: helm-upgrade-command
+layout: redirects
 toc: false
 ---
 

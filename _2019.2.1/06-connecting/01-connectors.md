@@ -3,6 +3,7 @@ title: "Kafka Connect and connectors"
 excerpt: "Read about Kafka Connect and connectors."
 categories: connecting
 slug: connectors
+layout: redirects
 toc: true
 ---
 

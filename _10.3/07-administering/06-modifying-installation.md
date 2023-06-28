@@ -3,6 +3,7 @@ title: "Modifying installation settings"
 excerpt: "Modify your existing Event Streams installation."
 categories: administering
 slug: modifying-installation
+layout: redirects
 toc: true
 ---
 

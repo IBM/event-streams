@@ -3,6 +3,7 @@ title: "Using schemas with the REST producer API"
 excerpt: "You can use schemas with the Event Streams REST producer API."
 categories: schemas
 slug: using-with-rest-producer
+layout: redirects
 toc: false
 ---
 

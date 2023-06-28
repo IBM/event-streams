@@ -3,6 +3,7 @@ title: "Managing access"
 excerpt: "Managing access for users and applications."
 categories: security
 slug: managing-access
+layout: redirects
 toc: true
 ---
 

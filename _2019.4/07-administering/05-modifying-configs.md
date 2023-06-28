@@ -3,6 +3,7 @@ title: "Modifying Kafka broker configurations"
 excerpt: "Modify your Kafka broker configuration settings dynamically using a ConfigMap."
 categories: administering
 slug: modifying-configs
+layout: redirects
 toc: true
 ---
 

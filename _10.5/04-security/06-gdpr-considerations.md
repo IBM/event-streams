@@ -3,6 +3,7 @@ title: "Considerations for GDPR"
 excerpt: "Considerations for GDPR."
 categories: security
 slug: gdpr-considerations
+layout: redirects
 toc: true
 ---
 

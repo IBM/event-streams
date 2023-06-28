@@ -3,6 +3,7 @@ title: "Missing navigation icons in the Event Streams UI"
 excerpt: "When accessing the Event Streams 11.1.2 UI as an IAM user, some navigation icons are missing."
 categories: troubleshooting
 slug: es-ui-missing-navigation-icons
+layout: redirects
 toc: true
 ---
 

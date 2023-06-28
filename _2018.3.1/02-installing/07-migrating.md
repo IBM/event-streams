@@ -3,6 +3,7 @@ title: "Migrating from Community Edition"
 excerpt: "Migrate from the Community Edition to IBM Event Streams."
 categories: installing
 slug: migrating
+layout: redirects
 toc: false
 ---
 

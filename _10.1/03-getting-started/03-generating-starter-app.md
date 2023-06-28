@@ -3,6 +3,7 @@ title: "Running a starter application"
 excerpt: "Create a starter application to learn more about using Event Streams."
 categories: getting-started
 slug: generating-starter-app
+layout: redirects
 toc: true
 ---
 

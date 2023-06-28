@@ -4,6 +4,7 @@ title: "Running connectors on IBM z/OS"
 excerpt: "Set up your Kafka Connect workers to run on IBM z/OS."
 categories: connecting/mq
 slug: zos
+layout: redirects
 toc: true
 ---
 

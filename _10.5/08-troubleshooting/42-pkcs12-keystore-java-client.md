@@ -3,6 +3,7 @@ title: "Client receives 'Failed to load SSL keystore' message when communicating
 excerpt: "When connecting a client to Event Streams, operations return 'Failed to load SSL keystore' errors when executing."
 categories: troubleshooting
 slug: pkcs12-keystore-java-client
+layout: redirects
 toc: true
 ---
 

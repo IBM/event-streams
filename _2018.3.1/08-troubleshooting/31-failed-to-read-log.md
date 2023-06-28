@@ -3,6 +3,7 @@ title: "Failed to read 'log header' errors in Kafka logs"
 excerpt: "The Kafka logs show errors about failing to read 'log header' and about replicas potentially falling out of sync."
 categories: troubleshooting
 slug: failed-to-read-log
+layout: redirects
 toc: true
 ---
 

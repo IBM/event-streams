@@ -3,6 +3,7 @@ title: "Schemas overview"
 excerpt: "Learn about schemas and the schema registry, and understand how schemas can help manage your data more efficiently."
 categories: schemas
 slug: overview
+layout: redirects
 toc: true
 ---
 

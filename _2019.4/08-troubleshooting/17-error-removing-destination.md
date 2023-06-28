@@ -3,6 +3,7 @@ title: "Unable to remove destination cluster"
 excerpt: "Error is displayed when trying to remove a destination cluster."
 categories: troubleshooting
 slug: error-removing-destination
+layout: redirects
 toc: true
 ---
 

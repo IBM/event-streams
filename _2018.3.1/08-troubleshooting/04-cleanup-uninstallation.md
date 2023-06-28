@@ -3,6 +3,7 @@ title: "Full cleanup after uninstallation"
 excerpt: "Learn how to fully clean up after uninstallation."
 categories: troubleshooting
 slug: cleanup-uninstall
+layout: redirects
 toc: true
 ---
 

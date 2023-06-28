@@ -3,6 +3,7 @@ title: "TimeoutException when using standard Kafka producer"
 excerpt: "Standard Kafka producer fails when no security settings provided."
 categories: troubleshooting
 slug: kafka-producer-error
+layout: redirects
 toc: true
 ---
 

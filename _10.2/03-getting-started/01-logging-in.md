@@ -3,6 +3,7 @@ title: "Logging in"
 excerpt: "Log in to your IBM Event Streams installation."
 categories: getting-started
 slug: logging-in
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Unable to override external listener route host"
 excerpt: "When using a CR instance to override external listener route host the change is not applied"
 categories: troubleshooting
 slug: overriding-route-hostnames
+layout: redirects
 toc: true
 ---
 

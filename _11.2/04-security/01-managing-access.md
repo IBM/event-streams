@@ -3,6 +3,7 @@ title: "Managing access"
 excerpt: "Managing access for users and applications."
 categories: security
 slug: managing-access
+layout: redirects
 toc: true
 ---
 
@@ -22,29 +23,30 @@ When Kafka authentication is enabled, the {{site.data.reuse.short_name}} UI and 
 
 {{site.data.reuse.iam_note}} For other Kubernetes platforms, you can log in by using a Kafka user configured with SCRAM-SHA-512 authentication. You can create a Kafka user by applying a [`KafkaUser` custom resource](#creating-a-kafkauser-by-using-yaml).
 
+**Important:** Access to the [{{site.data.reuse.short_name}} CLI](../../installing/post-installation/#installing-the-event-streams-command-line-interface) always requires an {{site.data.reuse.icpfs}} Identity and Access Management (IAM) user to be supplied to the `cloudctl login` command, so the CLI is not affected by enabling Kafka authentication. (**DRAFT COMMENT:** this will be updated when ES CLI is updated for use with CNCF.)
 
-
-### Managing access to the UI and CLI with IAM
-
-Access for groups and users is managed through IAM teams. If you have not previously created any teams, the administrative user credentials can be used to [set up a team](https://www.ibm.com/support/knowledgecenter/SSHKN6/iam/3.x.x/teams.html){:target="_blank"}.
-
-Access to the {{site.data.reuse.short_name}} UI and CLI requires an IAM user with a role of `Cluster Administrator`, `CloudPakAdministrator`,  or `Administrator`. The role can be set for the user, or for the group the user is part of.
+{{site.data.reuse.openshift_only_note}}
 
 The default cluster administrator (admin) IAM user credentials are stored in a secret within the `ibm-common-services` namespace. To retrieve the username and password:
 
-1. {{site.data.reuse.openshift_cli_login}}
-2. Extract and decode the current {{site.data.reuse.icpfs}} admin username:
+1. {{site.data.reuse.openshift_cli_login}}  (**DRAFT COMMENT:** Updates required. To be updated in separate PR)
 
-  `oc --namespace ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode`
-
-3. Extract and decode the current {{site.data.reuse.icpfs}} admin password:
-  
-  `oc --namespace ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode`
+2. Extract and decode the current {{site.data.reuse.icpfs}} admin username:\\
+`oc --namespace ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode`
+2. Extract and decode the current {{site.data.reuse.icpfs}} admin password:\\
+`oc --namespace ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode`
 
 **Note:** The password is auto-generated in accordance with the default password rules for {{site.data.reuse.icpfs}}. To change the username or password of the admin user, see the instructions about [changing the cluster administrator access credentials](https://www.ibm.com/support/knowledgecenter/SSHKN6/iam/3.x.x/change_admin_passwd.html){:target="_blank"}.
 
 The admin user has the `Cluster Administrator` role granting full access to all resources within the cluster, including {{site.data.reuse.short_name}}.
 
+### Managing access to the UI and CLI with IAM
+
+Access for groups and users is managed through IAM teams. If you have not previously created any teams, the admin user credentials can be used to [set up a team](https://www.ibm.com/support/knowledgecenter/SSHKN6/iam/3.x.x/teams.html){:target="_blank"}.
+
+{{site.data.reuse.iam_note}}
+
+Access to the {{site.data.reuse.short_name}} UI and CLI requires an IAM user with a role of `Cluster Administrator` or `Administrator`. The role can be set for the user or for the group the user is part of.
 
 Any groups or users added to an IAM team with the `Cluster Administrator` role can log in to the {{site.data.reuse.short_name}} UI and CLI. Any groups or users with the `Administrator` role will not be able to log in until the namespace that contains the {{site.data.reuse.short_name}} cluster is [added as a resource](https://www.ibm.com/support/knowledgecenter/SSHKN6/iam/3.x.x/add_resource.html){:target="_blank"} for the IAM team.
 
@@ -63,10 +65,10 @@ The following table describes the UI panels and the permissions required to acce
 | UI Panel        | Permissions     | Additional Information |
 |:----------------|:----------------|:---------------------------|
 | **Topics**          | `topic.read` or `topic.describe` | - If the user also has either `topic.create` or `cluster.create` permissions, the **Topic Create** button is enabled. <br> - If the user has `topic.delete` permission, the **Topic Delete** button in the overflow menu is enabled. |
-| **Topic Producer**  |                  | This panel is disabled for SCRAM authentication. |
-| **Schema registry** | `schema.read`    | If the user also has the `schema.alter` permission, then the **Add Schema** button is enabled. |
-| **Metrics**         |                  | This panel is disabled for SCRAM authentication. |
-| **Consumer groups** | `group.read`     |                    |
+| **Topic Producer**  |                 | This panel is disabled for SCRAM authentication. |
+| **Schema registry** | `schema.read`     | If the user also has `schema.alter` the **Add Schema** button is enabled. |
+| **Metrics**         |                 | This panel is disabled for SCRAM authentication. |
+| **Consumer groups** | `group.read`      |                    |
 | **Geo-replication**  | `cluster.alter` | Geo-replication is enabled for SCRAM authentication. |
 | **Starter application** | `topic.read` and `topic.write` | When generating the starter application, the current user ID and password will be configured in the properties. `topic.create` permission is required to create new topics within the Starter App wizard. |
 
@@ -74,38 +76,39 @@ The following tables describe the CLI commands and the permissions required to r
 
 | Topic CLI command     | Permissions required |
 |:----------------------|:---------------------|
-| `kubectl es topics` | `topic.read` or `topic.describe` |
-| `kubectl es topic` |  `topic.read` and `topic.describeConfigs` |
-| `kubectl es topic-create` | `topic.create`     |
-| `kubectl es topic-partitions-set` | `topic.alter` and `topic.describeConfigs` |
-| `kubectl es topic-update` | `topic.alterConfigs` and `topic.describe` |
-| `kubectl es topic-delete` <br/>`kubectl es topic-delete-records` | `topic.delete` |
+| `cloudctl es topics` | `topic.read` or `topic.describe` |
+| `cloudctl es topic` |  `topic.read` and `topic.describeConfigs` |
+| `cloudctl es topic-create` | `topic.create`     |
+| `cloudctl es topic-partitions-set` | `topic.alter` and `topic.describeConfigs` |
+| `cloudctl es topic-update` | `topic.alterConfigs` and `topic.describe` |
+| `cloudctl es topic-delete` <br/>`cloudctl es topic-delete-records` | `topic.delete` |
 
 | Consumer group CLI command | Permissions required |
 |:---------------------------|:---------------------|
-| `kubectl es groups`       | `group.read`      |
-| `kubectl es group`        | `group.read` and `topic.describe`  |
-| `kubectl es group-reset`  | `group.read` and `topic.read`  |
-| `kubectl es group-delete` | `group.delete` |
+| `cloudctl es groups`       | `group.read`      |
+| `cloudctl es group`        | `group.read` and `topic.describe`  |
+| `cloudctl es group-reset`  | `group.read` and `topic.read`  |
+| `cloudctl es group-delete` | `group.delete` |
 
 | Schema CLI command | Permissions required |
 |:-------------------|:---------------------|
-| `kubectl es schemas` <br/>`kubectl es schema` <br/>`kubectl es schema-export` | `schema.read` |
-| `kubectl es schema-add` <br/>`kubectl es schema-verify` <br/>`kubectl es schema-modify` | `schema.read` and `schema.alter` |
-| `kubectl es schema-remove`  <br/>`kubectl es schema-import` | `schema.alter` |
+| `cloudctl es schemas` <br/>`cloudctl es schema` <br/>`cloudctl es schema-export` | `schema.read` |
+| `cloudctl es schema-add` <br/>`cloudctl es schema-verify` <br/>`cloudctl es schema-modify` | `schema.read` and `schema.alter` |
+| `cloudctl es schema-remove`  <br/>`cloudctl es schema-import` | `schema.alter` |
 
 | Geo-replication CLI command | Permissions required |
 |:----------------------------|:---------------------|
-| `kubectl es geo-cluster` <br/>`kubectl es geo-cluster-add` <br/>`kubectl es geo-cluster-connect` <br/>`kubectl es geo-cluster-remove` <br/>`kubectl es geo-clusters` <br/>`kubectl es geo-replicator-create` <br/>`kubectl es geo-replicator-delete` <br/>`kubectl es geo-replicator-pause` <br/>`kubectl es geo-replicator-restart` <br/>`kubectl es geo-replicator-resume` <br/>`kubectl es geo-replicator-topics-add` <br/>`kubectl es geo-replicator-topics-remove` | `cluster.alter` |
+| `cloudctl es geo-cluster` <br/>`cloudctl es geo-cluster-add` <br/>`cloudctl es geo-cluster-connect` <br/>`cloudctl es geo-cluster-remove` <br/>`cloudctl es geo-clusters` <br/>`cloudctl es geo-replicator-create` <br/>`cloudctl es geo-replicator-delete` <br/>`cloudctl es geo-replicator-pause` <br/>`cloudctl es geo-replicator-restart` <br/>`cloudctl es geo-replicator-resume` <br/>`cloudctl es geo-replicator-topics-add` <br/>`cloudctl es geo-replicator-topics-remove` | `cluster.alter` |
 
 | Broker or cluster CLI command | Permissions required |
 |:------------------------------|:---------------------|
-| `kubectl es acls` | `cluster.describe` |
-| `kubectl es broker` | `cluster.describe` and `cluster.describeConfigs` |
-| `kubectl es broker-config` <br/>`kubectl es cluster` <br/>`kubectl es cluster-config` | `cluster.describeConfigs` |
-| `kubectl es certificates`| No permissions required |
+| `cloudctl es acls` | `cluster.describe` |
+| `cloudctl es broker` | `cluster.describe` and `cluster.describeConfigs` |
+| `cloudctl es broker-config` <br/>`cloudctl es cluster` <br/>`cloudctl es cluster-config` | `cluster.describeConfigs` |
+| `cloudctl es certificates`| No permissions required |
 
-{{site.data.reuse.es_cli_kafkauser_note}}
+**Note** The `cloudctl es kafka-user` commands can only be run when the CLI has access to Kubernetes resources, which can be provided by running `cloudctl login` and does not require specific SCRAM authentication permissions.
+
 
 The following table describes the mapping of these permissions to the Kafka user ACL definitions.
 
@@ -144,7 +147,7 @@ You can create a `KafkaUser` by using the {{site.data.reuse.short_name}} UI or C
 
 To assist in generating compatible `KafkaUser` credentials, the {{site.data.reuse.short_name}} UI indicates which authentication mechanism is being configured for each Kafka listener.
 
-**Warning:** Do not use or modify the internal {{site.data.reuse.short_name}} `KafkaUsers` named `<cluster>-ibm-es-kafka-user`, `<cluster>-ibm-es-georep-source-user`, `<cluster>-ibm-es-iam-admin-kafka-user`, or `<cluster>-ibm-es-ac-reg`. These are reserved to be used internally within the {{site.data.reuse.short_name}} instance.
+**Warning:** Do not use or modify the internal {{site.data.reuse.short_name}} `KafkaUsers` named `<cluster>-ibm-es-kafka-user` and `<cluster>-ibm-es-georep-source-user`. These are reserved to be used internally within the {{site.data.reuse.short_name}} instance.
 
 ### Creating a `KafkaUser` in the {{site.data.reuse.short_name}} UI
 
@@ -162,11 +165,13 @@ The generated credential appears after the listener bootstrap address:
 * For SCRAM credentials, two tabs are displayed: **Username and password** and **Basic Authentication**. The SCRAM username and password combination is used by Kafka applications, while the Basic Authentication credential is for use as an HTTP authorization header.
 * For TLS credentials, a download button is displayed, providing a zip archive with the required certificates and keys.
 
+
+
 A `KafkaUser` will be created with the entered credential name.
 
-The cluster truststore is not part of the above credentials ZIP file archive. This certificate is required for all external connections, and is available to download from the **Cluster connection** panel under the **Certificates** heading within the {{site.data.reuse.openshift_short}} UI, or by running the command `kubectl es certificates`. Upon downloading the PKCS12 certificate, the certificate password will also be displayed.
+The cluster truststore is not part of the above credentials zip archive. This certificate is required for all external connections and is available to download from the **Cluster connection** panel under the **Certificates** heading. Upon downloading the PKCS12 certificate, the certificate password will also be displayed.
 
-Additionally, to retrieve endpoint details, view the `EventStreams` custom resource in the OpenShift web console as follows:
+Additionally, to retrieve endpoint details, view the `EventStreams`custom resource in the OpenShift web console as follows:
 
 1. {{site.data.reuse.openshift_ui_login}}
 2. Expand **Operators** in the navigation on the left, and click **Installed Operators**.
@@ -182,10 +187,9 @@ Additionally, to retrieve endpoint details, view the `EventStreams` custom resou
 
 ### Creating a `KafkaUser` in the {{site.data.reuse.short_name}} CLI
 
-{{site.data.reuse.es_cli_kafkauser_note}}
-
 1. {{site.data.reuse.cp_cli_login}}
-2. {{site.data.reuse.es_cli_init_111}}
+2. Initialize the {{site.data.reuse.short_name}} plugin specifying your namespace and choose your instance from the numbered list:\\
+  `cloudctl es init -n <namespace>`
 3. Use the `kafka-user-create` command to create a `KafkaUser` with the accompanying permissions.\\
 **Note:** If your cluster does not have authorization enabled, the permission choices will not have any effect.
 
@@ -205,8 +209,6 @@ cloudctl es kafka-user-create \
 
 For information about all options provided by the command, use the `--help` flag:\\
 `cloudctl es kafka-user-create --help`
-
-
 
 ### UI and CLI `KafkaUser` authorization
 
@@ -240,33 +242,45 @@ spec:
     acls:
       - resource:
           type: cluster
-        operations: 
-          - Alter
+        operation: Alter
       - resource:
           type: topic
           name: '*'
           patternType: literal
-        operations: 
-          - Create
-          - Delete
-          - Read
-          - Write
+        operation: Create
+      - resource:
+          type: topic
+          name: '*'
+          patternType: literal
+        operation: Read
+      - resource:
+          type: topic
+          name: '*'
+          patternType: literal
+        operation: Write
+      - resource:
+          type: topic
+          name: '*'
+          patternType: literal
+        operation: Delete
       - resource:
           type: topic
           name: __schema_
           patternType: prefix
-        operations: 
-          - Alter
-          - Read
+        operation: Alter
+      - resource:
+          type: topic
+          name: __schema_
+          patternType: prefix
+        operation: Read
       - resource:
           type: group
           name: '*'
           patternType: literal
-        operations:
-          - Read
+        operation: Read
 ```
 
-### Retrieving the credentials of a `KafkaUser`
+### Retrieving credentials
 
 When a `KafkaUser` custom resource is created, the Entity Operator within {{site.data.reuse.short_name}} will create the principal in ZooKeeper with appropriate ACL entries. It will also create a Kubernetes `Secret` that contains the Base64-encoded SCRAM password for the `scram-sha-512` authentication type, or the Base64-encoded certificates and keys for the `tls` authentication type.
 
@@ -278,7 +292,7 @@ You can retrieve the credentials by using the name of the `KafkaUser`. For examp
 
 
 2. {{site.data.reuse.cncf_cli_login}}
-3. Use the following command to retrieve the required `KafkaUser` data, adding the `KafkaUser` name and your chosen namespace: \\
+3. Use the following command retrieve the required `KafkaUser` data, adding the `KafkaUser` name and your chosen namespace: \\
   \\
   `kubectl get kafkauser <name> -o jsonpath='{"username: "}{.status.username}{"\nsecret-name: "}{.status.secret}{"\n"}'`\\
   \\
@@ -304,24 +318,24 @@ You can retrieve the credentials by using the name of the `KafkaUser`. For examp
        `kubectl get secret <secret-name> -o jsonpath='{.data.user\.password}' | base64 --decode`
 
 5. Additionally, you can also retrieve endpoint details such as the admin API URL and the schema registry URL by using the following commands:
-
+  
    - To retrieve the admin API URL from the `status.endpoints` list in the `EventStreams` custom resource, run the following command:
-
+  
      ```shell
      kubectl get eventstreams <instance-name> -n <namespace> -o jsonpath="{.status.endpoints[?(@.name=='admin')].uri}"
      ```
 
    - To retrieve the schema registry URL from the `status.endpoints` list in the `EventStreams` custom resource, run the following command:
-
+    
      ```shell
      kubectl get eventstreams <instance-name> -n <namespace> -o jsonpath="{.status.endpoints[?(@.name=='apicurioregistry')].uri}"
      ```
 
-The cluster truststore certificate is required for all external connections and is available to download from the **Cluster connection** panel under the **Certificates** heading, within the {{site.data.reuse.openshift_short}} UI, or by running the command `kubectl es certificates`. Upon downloading the PKCS12 certificate, the certificate password will also be displayed.
+The cluster truststore certificate is required for all external connections and is available to download from the **Cluster connection** panel under the **Certificates** heading. Upon downloading the PKCS12 certificate, the certificate password will also be displayed.
 
 Similarly, if you are using {{site.data.reuse.openshift_short}}, you can inspect these `KafkaUser` and `Secret` resources by using the web console.
 
-**Warning:** Do not use or modify the internal {{site.data.reuse.short_name}} `KafkaUsers` named `<cluster>-ibm-es-kafka-user`, `<cluster>-ibm-es-georep-source-user`, `<cluster>-ibm-es-iam-admin-kafka-user`, or `<cluster>-ibm-es-ac-reg`. These are reserved to be used internally within the {{site.data.reuse.short_name}} instance.
+**Warning:** Do not use or modify the internal {{site.data.reuse.short_name}} `KafkaUsers` named `<cluster>-ibm-es-kafka-user` and `<cluster>-ibm-es-georep-source-user`. These are reserved to be used internally within the {{site.data.reuse.short_name}} instance.
 
 ## Authorization
 
@@ -422,11 +436,11 @@ Access to resources is assigned to applications through an Access Control List (
 
 An ACL rule adheres to the following schema:
 
-| Property     | Type   | Description                                                                                  |
-|:-------------|:-------|:---------------------------------------------------------------------------------------------|
-| `host`       | string | The host from which the action described in the ACL rule is allowed.                         |
-| `operations` | array  | An array of strings that lists all the operations which will be allowed on the chosen resource. |
-| `resource`   | object | Indicates the resource for which the ACL rule applies.                                       |
+| Property    | Type   | Description                                                          |
+|:------------|:-------|:---------------------------------------------------------------------|
+| `host`      | string | The host from which the action described in the ACL rule is allowed. |
+| `operation` | string | The operation which will be allowed on the chosen resource.          |
+| `resource`  | object | Indicates the resource for which the ACL rule applies.               |
 
 The resource objects used in ACL rules adhere to the following schema:
 
@@ -449,8 +463,7 @@ spec:
           type: topic
           name: 'client-'
           patternType: prefix
-        operations: 
-          - Write
+        operation: Write
 ```
 In this example, an application using this `KafkaUser` would be allowed to write to any topic beginning with **client-** (for example, **client-records** or **client-billing**) from any host machine.
 
@@ -463,8 +476,7 @@ The following is an example ACL rule that provides access to read Schemas:
         type: topic
         name: '__schema_'
         patternType: prefix
-      operations:
-        - Read
+      operation: Read
 ```
 
 ### Using OAuth

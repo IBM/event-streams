@@ -3,6 +3,7 @@ title: "Migrating existing applications to the Event Streams schema registry"
 excerpt: "Read about how you can migrate to using the Event Streams schema registry."
 categories: schemas
 slug: migrating
+layout: redirects
 toc: true
 ---
 

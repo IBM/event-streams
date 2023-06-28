@@ -3,6 +3,7 @@ title: "Switching clusters"
 excerpt: "Using geo-replication to recover when clusters become unavailable."
 categories: georeplication
 slug: failover
+layout: redirects
 toc: true
 ---
 
@@ -105,7 +106,7 @@ Geo-replication uses the Kafka Mirror Maker 2.0 `MirrorCheckpointConnector` to a
 
 **Note**: Consumer offset checkpoint topics are internal topics that are not displayed in the UI and CLI. Run the following CLI command to include internal topics in the topic listing:
 
-   `kubectl es topics --internal`.
+   `cloudctl es topics --internal`.
 
 When processing messages from the destination cluster, you can use the checkpoints to start consuming from an offset that is equivalent to the last committed offset on the origin cluster. If your application is written in Java, Kafka's [`RemoteClusterUtils`](https://kafka.apache.org/25/javadoc/index.html?org/apache/kafka/connect/mirror/RemoteClusterUtils.html){:target="_blank"} class provides the `translateOffsets()` utility method to retrieve the destination cluster offsets for a consumer group from the checkpoints topic. You can then use the `KafkaConsumer.seek()` method to override the offsets that the consumer will use on the next `poll`.
 
@@ -129,22 +130,24 @@ ConsumerRecords<byte[], byte[]> records = kafkaConsumer.poll(Duration.ofMillis(1
 
 ### Updating consumer group offsets manually
 
-If you want your client application to continue processing messages on the destination cluster from the point they reached on the topic on the origin cluster, or if you want your client application to start processing messages from the beginning of the topic, you can use the `kubectl es group-reset` command.
+If you want your client application to continue processing messages on the destination cluster from the point they reached on the topic on the origin cluster, or if you want your client application to start processing messages from the beginning of the topic, you can use the `cloudctl es group-reset` command.
+
+{{site.data.reuse.openshift_only_note}}
 
 * To continue processing messages from the point they reached on the topic on the origin cluster, you can specify the offset for the consumer group that your client application is using:
 
   1. {{site.data.reuse.es_cli_init_111}}
-  2. Run the `kubectl es group-reset` command as follows:
+  2. Run the `cloudctl es group-reset` command as follows:
 
-     `kubectl es group-reset --group <your-consumer-group-id> --topic <topic-name> --mode datetime --value <timestamp>`
+     `cloudctl es group-reset --group <your-consumer-group-id> --topic <topic-name> --mode datetime --value <timestamp>`
 
      For example, the following command instructs the applications in consumer group `consumer-group-1` to start consuming messages with timestamps from after midday on 28th September 2018:
 
-     `kubectl es group-reset --group consumer-group-1 --topic GEOREPLICATED.TOPIC --mode datetime --value 2018-09-28T12:00:00+00:00 --execute`
+     `cloudctl es group-reset --group consumer-group-1 --topic GEOREPLICATED.TOPIC --mode datetime --value 2018-09-28T12:00:00+00:00 --execute`
 
 * To start processing messages from the beginning of the topic, you can use the `--mode earliest` option, for example:
 
-  `kubectl es group-reset --group consumer-group-1 --topic GEOREPLICATED.TOPIC --mode earliest --execute`
+  `cloudctl es group-reset --group consumer-group-1 --topic GEOREPLICATED.TOPIC --mode earliest --execute`
 
 These methods also avoid the need to make code changes to your client application.
 

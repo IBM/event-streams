@@ -3,6 +3,7 @@ title: "Resources not available"
 excerpt: "Reasons for IBM Event Streams resources not being available."
 categories: troubleshooting
 slug: resources-not-available
+layout: redirects
 toc: true
 ---
 

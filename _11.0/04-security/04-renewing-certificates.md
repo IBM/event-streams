@@ -3,6 +3,7 @@ title: "Renewing certificates"
 excerpt: "Learn about how to renew the certificates and keys in an existing Event Streams cluster."
 categories: security
 slug: renewing-certificates
+layout: redirects
 toc: true
 ---
 

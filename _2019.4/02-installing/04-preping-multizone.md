@@ -3,6 +3,7 @@ title: "Preparing for multizone clusters"
 excerpt: "Prepare for installing your Event Streams on multizone clusters."
 categories: installing
 slug: preparing-multizone
+layout: redirects
 toc: true
 ---
 

@@ -3,6 +3,7 @@ title: "Operator upgrade causes Kafka pod errors"
 excerpt: "Upgrading the Event Streams operator causes errors."
 categories: troubleshooting
 slug: operator-upgrade-issue
+layout: redirects
 toc: true
 ---
 
