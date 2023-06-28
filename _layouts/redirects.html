@@ -1,0 +1,30 @@
+---
+layout: collection
+---
+{% assign basicURL = page.url | replace: page.collection,"" | replace: "//","/" %}
+{% if basicURL contains "support" or "api"%}
+{% assign basicURL = "" %}
+{% endif %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="refresh" content="{{ page.delay | default: 5 }}; url=https://ibm.github.io/event-automation/es{{ basicURL }}">
+  <title>Redirecting...</title>
+</head>
+<body>
+    <div class="intro">Our site has been moved to include additional capabilities offered by IBM Event Automation. Redirecting to the new site in <span id="countdown">{{ page.delay | default: 5 }}</span> seconds...
+  <p>If you are not redirected, <a href="https://ibm.github.io/event-automation/es{{ basicURL }}">click here</a>.</p></div>
+  <script>
+    var countdown = {{ page.delay | default: 5 }};
+    var interval = setInterval(function() {
+      countdown--;
+      document.getElementById('countdown').innerHTML = countdown;
+      if (countdown === 0) {
+        clearInterval(interval);
+        window.location.href = "https://ibm.github.io/event-automation/es{{ basicURL }}";
+      }
+    }, 1000);
+  </script>  
+</body>
+</html>
