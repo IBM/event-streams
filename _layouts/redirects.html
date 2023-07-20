@@ -2,9 +2,12 @@
 layout: collection
 ---
 {% assign basicURL = page.url | replace: page.collection,"" | replace: "//","/" %}
-{% if basicURL contains "support" or "api"%}
-{% assign basicURL = "" %}
+{% assign basicURL = page.url | replace: page.collection, "" | replace: "//", "/" %}
+
+{% if page.url contains 'support' or page.url contains 'api' %}
+  {% assign basicURL = "" %}
 {% endif %}
+
 
 <!DOCTYPE html>
 <html>
