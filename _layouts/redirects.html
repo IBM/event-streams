@@ -1,11 +1,25 @@
 ---
 layout: collection
 ---
-{% assign basicURL = page.url | replace: page.collection,"" | replace: "//","/" %}
-{% assign basicURL = page.url | replace: page.collection, "" | replace: "//", "/" %}
+{% assign basicURL = "/es" | append: page.url | replace: page.collection, "" | replace: "//", "/" %}
 
-{% if page.url contains 'support' or page.url contains 'api' %}
-  {% assign basicURL = "" %}
+{% assign urlParts = page.url | split: '/' %}
+{% assign lastPart = urlParts | last %}
+
+{% if lastPart == 'api' %}
+{% assign basicURL = "/api/" %}
+{% endif %}
+
+{% if lastPart == 'support' %}
+{% assign basicURL = "/support/" %}
+{% endif %}
+
+{% if lastPart == 'connectors' %}
+{% assign basicURL = "/connectors/" %}
+{% endif %}
+
+{% if lastPart == 'tutorials' %}
+{% assign basicURL = "/tutorials/" %}
 {% endif %}
 
 
@@ -17,7 +31,22 @@ layout: collection
 </head>
 <body>
     <div class="intro">Our site has been moved to include additional capabilities offered by IBM Event Automation. Redirecting to the new site in <span id="countdown">{{ page.delay | default: 10 }}</span> seconds...
-  <p>If you are not redirected, <a href="https://ibm.github.io/event-automation/es{{ basicURL }}">click here</a>.</p></div>
+      {% if page.url contains 'support' %}
+      <p>If you are not redirected, <a href="https://ibm.github.io/event-automation/support">click here</a>.</p>
+      {% elsif page.url contains 'api' %}
+      <p>If you are not redirected, <a href="https://ibm.github.io/event-automation/api">click here</a>.</p>
+    
+       {% elsif page.url contains 'tutorials' %}
+      <p>If you are not redirected, <a href="https://ibm.github.io/event-automation/tutorials">click here</a>.</p>
+     
+      {% elsif basicURL == "/connectors" %}
+      <p>If you are not redirected, <a href="https://ibm.github.io/event-automation/connectors">click here</a>.</p>
+    
+      {% else %}
+      <p>If you are not redirected, <a href="https://ibm.github.io/event-automation{{ basicURL }}">click here</a>.</p>
+      {% endif %}
+
+</div>
   <script>
     var countdown = {{ page.delay | default: 10 }};
     var interval = setInterval(function() {
@@ -25,7 +54,7 @@ layout: collection
       document.getElementById('countdown').innerHTML = countdown;
       if (countdown === 0) {
         clearInterval(interval);
-        window.location.href = "https://ibm.github.io/event-automation/es{{ basicURL }}";
+        window.location.href = "https://ibm.github.io/event-automation{{ basicURL }}";
       }
     }, 1000);
   </script>  
