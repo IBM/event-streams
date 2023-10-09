@@ -1,7 +1,3 @@
-# event-streams
+# Archived repository for Event Streams documentation site
 
-This repository is used to track the feature requests and issues opened through our GitHub [support channel](https://ibm.github.io/event-streams/support/).
-
-To see the current feature requests and issues, go to the [issues tab](https://github.com/IBM/event-streams/issues).
-
-This repository also hosts the source files for the IBM Event Streams end-user [documentation site](https://ibm.github.io/event-streams/).
+This repository was used to host the source files for the IBM Event Streams end-user documentation site. Event Streams is now part of [IBM Event Automation](https://ibm.github.io/event-automation/).
